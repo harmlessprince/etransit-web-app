@@ -24,9 +24,9 @@ Auth::routes();
 
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::domain('app.' . env('SITE_URL'))->middleware('web')->group(function() {
-    Route::get('/admin-login' , [AdminLogin::class , 'showLoginForm']);
-    Route::post('/login-user' , [AdminLogin::class , 'loginAdmin']);
-    Route::get('/dashboard' , [Dashboard::class ,'dashboard'])->name('dashboard');
-});
+//Route::domain('app.' . env('SITE_URL'))->middleware('web')->group(function() {
+//    Route::get('/admin-login' , [AdminLogin::class , 'showLoginForm']);
+//    Route::post('/login-user' , [AdminLogin::class , 'loginAdmin']);
+//    Route::get('/dashboard' , [Dashboard::class ,'dashboard'])->name('dashboard');
+//});
 
