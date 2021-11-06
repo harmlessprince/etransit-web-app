@@ -1,6 +1,7 @@
 <?php
 
     use App\Http\Controllers\AdminLogin;
+use App\Http\Controllers\Schedule;
 use App\Http\Controllers\Terminal;
 use App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Vehicle;
@@ -26,5 +27,8 @@ use Illuminate\Support\Facades\Route;
         //manage terminal
         Route::get('manage/terminals',[Terminal::class , 'Terminals']);
         Route::post('add/terminal',[Terminal::class , 'AddTerminal']);
+
+        //schedule an event
+        Route::get('/event/{terminal_id}/schedule' ,[Schedule::class , 'scheduleEvent']);
 
     });

@@ -78,7 +78,7 @@
                     <h3>{{env('APP_NAME')}}</h3>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{url('/admin/manage/vehicle')}}"><i data-feather="home"></i></a></li>
-                        <li class="breadcrumb-item">Terminal Management</li>
+                        <li class="breadcrumb-item">{{$terminal->service->name}} Event </li>
                     </ol>
                 </div>
                 <div class="col-6">
@@ -124,27 +124,33 @@
         </div>
         <div class="card ">
             <div class="card-body">
+                <div style="display: flex; justify-content: center;">
+                        <h1>{{$terminal->terminal_name}}</h1>
+                </div>
+            </div>
+        </div>
+        <div class="card ">
+            <div class="card-body">
                 <div style="display: flex; justify-content: flex-end; margin-bottom: 20px;">
                     <div class="otn-group col-md-4" style="display: flex;" >
-                        <input type="text" name="search" placeholder="Search with Registration Number , Car Type or Model ..." id="search-box" class="form-control"/>
-                        <button class="btn btn-sm btn-primary">Search</button>
+                       <h1>{{$terminal->terminal_name}}</h1>
                     </div>
                 </div>
 
                 <div class="vehicle-box">
-                    @foreach($terminals as $terminal)
-                        <div class="card text-white terminal-card mb-3" style="max-width: 18rem;">
-                            <div class="card-header terminal-card" style="display: flex;justify-content: center;" >
-                                <h6>{{strtoupper($terminal->terminal_name)}}</h6>
-                            </div>
-                            <div class="card-body" style="display: flex;justify-content: center;">
-                                <h6 class="card-title"> {{Ucfirst($terminal->terminal_address)}}</h6>
-                            </div>
-                            <div class="card-footer terminal-card" style="display: flex;justify-content: center;">
-                                <a href="{{url('admin/event/'.$terminal->id.'/schedule')}}" class="btn schedule-button">Schedule Event</a>
-                            </div>
-                        </div>
-                    @endforeach
+{{--                    @foreach($terminals as $terminal)--}}
+{{--                        <div class="card text-white terminal-card mb-3" style="max-width: 18rem;">--}}
+{{--                            <div class="card-header terminal-card" style="display: flex;justify-content: center;" >--}}
+{{--                                <h6>{{strtoupper($terminal->terminal_name)}}</h6>--}}
+{{--                            </div>--}}
+{{--                            <div class="card-body" style="display: flex;justify-content: center;">--}}
+{{--                                <h6 class="card-title"> {{Ucfirst($terminal->terminal_address)}}</h6>--}}
+{{--                            </div>--}}
+{{--                            <div class="card-footer terminal-card" style="display: flex;justify-content: center;">--}}
+{{--                                <a href="{{url('admin/event/'.$terminal->id.'/schedule')}}" class="btn schedule-button">Schedule Event</a>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    @endforeach--}}
                 </div>
             </div>
         </div>

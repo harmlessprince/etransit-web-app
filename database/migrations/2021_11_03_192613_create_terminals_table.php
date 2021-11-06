@@ -15,8 +15,11 @@ class CreateTerminalsTable extends Migration
     {
         Schema::create('terminals', function (Blueprint $table) {
             $table->id();
-            $table->string('terminal_name');
+            $table->string('terminal_name')->index();
             $table->string('terminal_address');
+            $table->unsignedBigInteger('service_id');
+
+            $table->foreign('service_id')->references('id')->on('services')->onDelete('cascade');
             $table->timestamps();
         });
     }
