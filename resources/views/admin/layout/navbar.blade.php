@@ -65,13 +65,13 @@
                         <li><i data-feather="file-text"></i><span>Taskboard</span></li>
                         <li><i data-feather="settings"></i><span>Settings</span></li>
                         <li><i data-feather="log-in"> </i><span>
-                        <a href="{{ route('logout') }}"
+                        <a href="{{ route('admin.logout') }}"
                            onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                             {{ __('Logout') }}
                         </a>
 
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" class="d-none">
                             @csrf
                         </form>
                         </span></li>

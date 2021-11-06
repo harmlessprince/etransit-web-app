@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 class AdminLogin extends Controller
 {
     protected $redirectTo = '/dashboard';
+
     public function __construct()
     {
         $this->middleware('guest:admin')->except('logout');
@@ -26,19 +27,26 @@ class AdminLogin extends Controller
             'password' => 'required',
         ]);
 
-        $credentials = $request->only('email', 'password');
-        if (Auth::attempt($credentials)) {
-            return redirect()->intended('dashboard')
-                ->withSuccess('Signed in');
+        if(Auth::guard('admin')
+            ->attempt($request->only(['email', 'password'])))
+        {
+            return redirect()
+                ->route('dashboard');
         }
 
-        return redirect("login")->withSuccess('Login details are not valid');
+        return redirect()
+            ->back()
+            ->with('error', 'Invalid Credentials');
     }
 
-    public function username()
+    public function logout()
     {
-        return 'employee_id';
+        Auth::guard('admin')
+            ->logout();
+        return redirect()
+            ->route('admin.login');
     }
+
     protected function guard()
     {
         return Auth::guard('admin');

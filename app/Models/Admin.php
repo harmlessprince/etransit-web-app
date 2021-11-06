@@ -6,14 +6,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 //use Illuminate\Database\Eloquent\Model;
 //use Illuminate\Foundation\Auth\User as Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Notifications\Notifiable;
 
 
 class Admin extends Authenticatable
 {
-    use HasFactory;
+    use HasFactory ,Notifiable, HasRoles;
     protected $guarded = ['id'];
     protected $guard = 'admin';
-    
+
 
     protected $hidden = [
         'password',

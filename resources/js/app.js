@@ -22,8 +22,10 @@ import router from './router'
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('Navigation', require('./components/Navigation.vue').default);
- Vue.component('App', require('./components/App.vue').default);
- Vue.component('Homepage', require('./components/pages/Home.vue').default);
+Vue.component('App', require('./components/App.vue').default);
+Vue.component('Homepage', require('./components/pages/Home.vue').default);
+Vue.component('excel', require('./components/ExcelUpload.vue').default);
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

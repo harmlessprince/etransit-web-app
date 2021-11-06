@@ -27,7 +27,7 @@
                         <span class="fa fa-user-o"></span>
                     </div>
                     <h3 class="text-center mb-4">Sign In</h3>
-                    <form action="{{url('login-user')}}"  method="POST" class="login-form">
+                    <form action="{{url('/admin/login-user')}}"  method="POST" class="login-form">
                         @csrf
                         <div class="form-group">
                             <input type="text" class="form-control rounded-left" placeholder="Email" name="email" required>

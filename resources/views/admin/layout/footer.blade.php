@@ -41,3 +41,8 @@
 <!-- Theme js-->
 <script src="{{asset('assets/js/script.js')}}"></script>
 <script src="{{asset('assets/js/theme-customizer/customizer.js')}}"></script>
+
+<script src="{{ asset('js/app.js') }}" defer></script>
+@jquery
+@toastr_js
+@toastr_render
