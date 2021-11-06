@@ -56,79 +56,20 @@
     </div>
     <div class="container-fluid">
         <div class="button-box" >
-            <a href="{{url('/admin/export/vehicle')}}" class="btn btn-info btn-sm"  style="margin-right:10px;">Download Excel File</a>&nbsp;
-
+            <a href="{{url('/admin/export/vehicle')}}" class="btn btn-success btn-sm"  style="margin-right:10px;">Download Excel File</a>&nbsp;
         </div>
-
         <div class="card ">
             <div class="card-body">
-
                   <div id="app">
-                 <excel></excel>
+                      <excel-upload></excel-upload>
                   </div>
-
             </div>
         </div>
 
     </div>
-
-
     <script>
         function chooseFile() {
             $("#fileInput").click();
         }
     </script>
-    <script type="text/javascript">
-     const app = Vue.createApp({
-       template:'<h1>Hello World</h1>'
-     });
-     app.mount('#app2');
-    </script>
-
-    <!-- end modal box here -->
-{{--    <script type="text/javascript">--}}
-
-{{--        $.ajaxSetup({--}}
-{{--            headers: {--}}
-{{--                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')--}}
-{{--            }--}}
-{{--        });--}}
-
-{{--        $(".btn-submit").click(function(e){--}}
-{{--            e.preventDefault();--}}
-{{--            var bar = $('.bar');--}}
-{{--            var percent = $('.percent');--}}
-{{--            $.ajax({--}}
-{{--                type:'POST',--}}
-{{--                url: "/admin/add/vehicle",--}}
-{{--                // data:{car_type:car_type, car_model:car_model, car_registration:registration , wheels:wheels , seats:seats, Ac_status : status},--}}
-{{--                beforeSend: function() {--}}
-{{--                    var percentVal = '0%';--}}
-{{--                    bar.width(percentVal)--}}
-{{--                    percent.html(percentVal);--}}
-
-{{--                },--}}
-{{--                uploadProgress: function(event, position, total, percentComplete) {--}}
-{{--                    var percentVal = percentComplete + '%';--}}
-{{--                    bar.width(percentVal)--}}
-{{--                    percent.html(percentVal);--}}
-{{--                    console.log(percentVal)--}}
-{{--                },--}}
-{{--                success:function(data){--}}
-{{--                    if(data.success)--}}
-{{--                    {--}}
-{{--                        setTimeout(function(){--}}
-{{--                            location.reload(true);--}}
-{{--                        }, 3000);--}}
-{{--                    }--}}
-{{--                },--}}
-{{--                complete: function(xhr) {--}}
-
-{{--                }--}}
-{{--            });--}}
-
-{{--        });--}}
-{{--    </script>--}}
-
-
 @endsection

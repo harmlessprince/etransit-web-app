@@ -1,7 +1,8 @@
 <?php
 
     use App\Http\Controllers\AdminLogin;
-    use App\Http\Controllers\Dashboard;
+use App\Http\Controllers\Terminal;
+use App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Vehicle;
 use Illuminate\Support\Facades\Route;
 
@@ -21,5 +22,9 @@ use Illuminate\Support\Facades\Route;
         Route::get('import', [Vehicle::class, 'importExportView']);
         Route::get('export/vehicle', [Vehicle::class, 'exportVehicle'])->name('export.vehicle');
         Route::post('import/vehicle', [Vehicle::class, 'importVehicle'])->name('import.vehicle');
+
+        //manage terminal
+        Route::get('manage/terminals',[Terminal::class , 'Terminals']);
+        Route::post('add/terminal',[Terminal::class , 'AddTerminal']);
 
     });

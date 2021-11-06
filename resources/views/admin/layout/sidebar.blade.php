@@ -67,6 +67,17 @@
                     </li>
                     <li class="sidebar-title">
                         <div>
+                            <h6 >Terminal Management</h6>
+                            <p >Manage {{env('APP_NAME')}} Terminals</p>
+                        </div>
+                    </li>
+                    <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"></i><span>Terminals</span></a>
+                        <ul class="nav-submenu menu-content">
+                            <li><a href="{{url('/admin/manage/terminals')}}">All Terminals</a></li>
+                        </ul>
+                    </li>
+                    <li class="sidebar-title">
+                        <div>
                             <h6>Roles Management</h6>
                             <p>Roles management </p>
                         </div>

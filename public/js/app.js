@@ -2112,13 +2112,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "ExcelUpload",
   // using EXACTLY this name is essential
   data: function data() {
     return {
       error: {},
-      image: ''
+      image: '',
+      uploadPercentage: 0
     };
   },
   methods: {
@@ -2135,7 +2139,10 @@ __webpack_require__.r(__webpack_exports__);
       axios.post('/admin/import/vehicle', formData, {
         headers: {
           'content-type': 'multipart/form-data'
-        }
+        },
+        onUploadProgress: function (progressEvent) {
+          this.uploadPercentage = parseInt(Math.round(progressEvent.loaded / progressEvent.total * 100));
+        }.bind(this)
       }).then(function (response) {
         if (response.status === 200) {
           console.log('worked');
@@ -2326,7 +2333,7 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js"
 Vue.component('Navigation', __webpack_require__(/*! ./components/Navigation.vue */ "./resources/js/components/Navigation.vue")["default"]);
 Vue.component('App', __webpack_require__(/*! ./components/App.vue */ "./resources/js/components/App.vue")["default"]);
 Vue.component('Homepage', __webpack_require__(/*! ./components/pages/Home.vue */ "./resources/js/components/pages/Home.vue")["default"]);
-Vue.component('excel', __webpack_require__(/*! ./components/ExcelUpload.vue */ "./resources/js/components/ExcelUpload.vue")["default"]);
+Vue.component('excel-upload', __webpack_require__(/*! ./components/ExcelUpload.vue */ "./resources/js/components/ExcelUpload.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -6796,7 +6803,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.file-upload[data-v-8696d306]{\n    height:400px;\n    width: 100%;\n    border: 1px dotted #DC6513;;\n    border-radius: 20px;\n}\n.progress[data-v-8696d306] { position:relative; width:100%; padding: 10px;}\n.bar[data-v-8696d306] { background-color: #00ff00; width:0%; height:20px;\n}\n.percent[data-v-8696d306] { position:absolute; display:inline-block; left:50%; color: #040608;}\n.image-button[data-v-8696d306]{\n    display:flex;\n    justify-content: center;\n    margin-top: 100px;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.file-upload[data-v-8696d306]{\n    height:400px;\n    width: 100%;\n    border: 1px dotted #DC6513;;\n    border-radius: 20px;\n}\n.image-button[data-v-8696d306]{\n    display:flex;\n    justify-content: center;\n    margin-top: 100px;\n}\n.progress-bar-container[data-v-8696d306]{\n    display:flex;\n    justify-content: center;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -38634,7 +38641,14 @@ var render = function () {
         _vm._v(" "),
         _c("br"),
         _vm._v(" "),
-        _vm._m(0),
+        _c("div", { staticClass: "progress-bar-container" }, [
+          _c("progress", {
+            attrs: { max: "100" },
+            domProps: { value: _vm.uploadPercentage },
+          }),
+          _vm._v(" "),
+          _c("br"),
+        ]),
       ]),
       _vm._v(" "),
       _vm.image
@@ -38656,22 +38670,7 @@ var render = function () {
     ]),
   ])
 }
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "progress-bar-container" }, [
-      _c("div", { staticClass: "progress" }, [
-        _c("div", { staticClass: "bar" }),
-        _vm._v(" "),
-        _c("div", { staticClass: "percent" }, [_vm._v("0%")]),
-      ]),
-      _vm._v(" "),
-      _c("br"),
-    ])
-  },
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

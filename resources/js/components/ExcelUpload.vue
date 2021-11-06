@@ -8,10 +8,13 @@
                 <input name="file" type="file" class="form-control" v-on:change="onImageChange" ref="excel_file" id="fileInput" hidden >
                 <br/>
                 <div class="progress-bar-container">
-                    <div class="progress">
-                        <div class="bar"></div >
-                        <div class="percent">0%</div >
-                    </div>
+<!--                    <div class="progress">-->
+<!--                        <div class="bar"></div >-->
+<!--                        <div class="percent" >0%</div >-->
+<!--                      -->
+<!--                    </div>-->
+                    <progress max="100" :value.prop="uploadPercentage"></progress>
+
                     <br>
                 </div>
             </div>
@@ -29,7 +32,8 @@
         data(){
             return {
                 error: {},
-                image:''
+                image:'',
+                uploadPercentage: 0
             }
         },
         methods: {
@@ -43,7 +47,10 @@
             let formData = new FormData();
             formData.append('excel_file', this.image);
             axios.post('/admin/import/vehicle', formData, {
-                        headers: { 'content-type': 'multipart/form-data' }
+                        headers: { 'content-type': 'multipart/form-data' },
+                            onUploadProgress: function( progressEvent ) {
+                                this.uploadPercentage = parseInt( Math.round( ( progressEvent.loaded / progressEvent.total ) * 100 ) );
+                            }.bind(this)
                     }).then(response => {
                             if(response.status === 200) {
                                 console.log('worked')
@@ -54,6 +61,7 @@
                             this.error = error.response.data
                             console.log('check error: ', this.error)
                         });
+
             }
         }
     }
@@ -68,14 +76,16 @@
     border-radius: 20px;
 }
 
-.progress { position:relative; width:100%; padding: 10px;}
-.bar { background-color: #00ff00; width:0%; height:20px; }
-.percent { position:absolute; display:inline-block; left:50%; color: #040608;}
+
 .image-button{
     display:flex;
     justify-content: center;
     margin-top: 100px;
 
+}
+.progress-bar-container{
+    display:flex;
+    justify-content: center;
 }
 
 </style>
