@@ -6,17 +6,6 @@
         margin-bottom: 20px;
     }
 
-    #search-box{
-        border: 1px solid black;
-    }
-    .vehicle-box{
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr;
-    }
-    .terminal-card{
-        background: #021037 !important;
-        border-radius: 20px !important;
-    }
     .bulk-upload-button , .add-terminal-button{
         background: #021037 !important;
         cursor: pointer;
@@ -35,43 +24,12 @@
         width: 240px !important;
         cursor: pointer;
     }
-    .schedule-button {
-        background:  #021037 !important;
-        opacity: 0.8 !important;
-        border: 1px solid #DC6513 !important;
-        color: #fff !important;
-        border-radius: 5px !important;
-        width: 240px !important;
-        cursor: pointer;
-    }
-    .schedule-button:hover {
-        background: #DC6513 !important;
-        cursor: pointer;
-        opacity: 0.8 !important;
-        border: 1px solid  #DC6513 !important;
-        color: #fff !important;
-        border-radius: 5px !important;
-        width: 240px !important;
-    }
-    /*480px, 768px,*/
-    @media screen and (max-width: 480px) {
-        .vehicle-box{
-            display: grid;
-            grid-template-columns: auto auto;
-        }
-    }
-
-    @media screen and (max-width: 380px) {
-        .vehicle-box{
-            display: grid;
-            grid-template-columns: auto;
-        }
-    }
 
 
 </style>
 @section('content')
     <div class="container-fluid">
+        @toastr_css
         <div class="page-header">
             <div class="row">
                 <div class="col-6">
@@ -131,99 +89,133 @@
         </div>
         <div class="card ">
             <div class="card-body">
-                <div style="display: flex; justify-content: flex-end; margin-bottom: 20px;">
-                    <div class="otn-group col-md-4" style="display: flex;" >
-                       <h1>{{$terminal->terminal_name}}</h1>
-                    </div>
-                </div>
-
-                <div class="vehicle-box">
-{{--                    @foreach($terminals as $terminal)--}}
-{{--                        <div class="card text-white terminal-card mb-3" style="max-width: 18rem;">--}}
-{{--                            <div class="card-header terminal-card" style="display: flex;justify-content: center;" >--}}
-{{--                                <h6>{{strtoupper($terminal->terminal_name)}}</h6>--}}
-{{--                            </div>--}}
-{{--                            <div class="card-body" style="display: flex;justify-content: center;">--}}
-{{--                                <h6 class="card-title"> {{Ucfirst($terminal->terminal_address)}}</h6>--}}
-{{--                            </div>--}}
-{{--                            <div class="card-footer terminal-card" style="display: flex;justify-content: center;">--}}
-{{--                                <a href="{{url('admin/event/'.$terminal->id.'/schedule')}}" class="btn schedule-button">Schedule Event</a>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    @endforeach--}}
+                <div id="app">
+                    <div id='schedule_event_calender'></div>
                 </div>
             </div>
         </div>
-
     </div>
 
-
-    <!-- modal box -->
-
-    <div class="modal fade" id="vehicleModal" tabindex="-1" role="dialog" aria-labelledby="vehicleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Add Terminal</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                <div class="modal-body">
+                    <h4>Edit Appointment</h4>
+
+                    Start time:
+                    <br />
+                    <input type="text" class="form-control" name="start_time" id="start_time">
+
+                    End time:
+                    <br />
+                    <input type="text" class="form-control" name="finish_time" id="finish_time">
                 </div>
-                <form >
 
-                    <div class="modal-body">
-
-                        <div class="form-group">
-                            <label for="car_type">Terminal Name</label>
-                            <input type="text" class="form-control" name="terminal_name" id="terminal_name" required/>
-                        </div>
-
-                        <div>
-                            <label for="terminal_address">Terminal Address </label>
-                            <textarea class="form-control" name="terminal_address"   id="terminal_address" rows="5" ></textarea>
-                        </div>
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary btn-submit" >Save changes</button>
-                    </div>
-                </form>
-
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <input type="button" class="btn btn-primary" id="appointment_update" value="Save">
+                </div>
             </div>
         </div>
     </div>
 
 
-    <!-- end modal box here -->
-    <script type="text/javascript">
+    <script>
+        $(document).ready(function () {
 
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
+            var SITEURL = "{{ url('/admin') }}";
 
-        $(".btn-submit").click(function(e){
-            e.preventDefault();
-            var terminal_name       = $("input[name=terminal_name]").val();
-            var terminal_address    = $("#terminal_address").val();
-
-
-            $.ajax({
-                type:'POST',
-                url: "/admin/add/terminal",
-                data:{terminal_name:terminal_name, terminal_address:terminal_address},
-                success:function(data){
-                    if(data.success)
-                    {
-                        setTimeout(function(){
-                            location.reload(true);
-                        }, 3000);
-                    }
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
 
+            var calendar = $('#schedule_event_calender').fullCalendar({
+                editable: true,
+                editable: true,
+                events: SITEURL + "/schedule-event",
+                displayEventTime: true,
+                eventRender: function (event, element, view) {
+                    if (event.allDay === 'true') {
+                        event.allDay = true;
+                    } else {
+                        event.allDay = false;
+                    }
+                },
+                selectable: true,
+                selectHelper: true,
+                select: function (event_start, event_end, allDay) {
+                    var event_name = prompt('Event Name nnn:');
+                    if (event_name) {
+                        var event_start = $.fullCalendar.formatDate(event_start, "Y-MM-DD HH:mm:ss");
+                        var event_end = $.fullCalendar.formatDate(event_end, "Y-MM-DD HH:mm:ss");
+                        $.ajax({
+                            url: SITEURL + "/calendar-crud-ajax",
+                            data: {
+                                event_name: event_name,
+                                event_start: event_start,
+                                event_end: event_end,
+                                type: 'create'
+                            },
+                            type: "POST",
+                            success: function (data) {
+                                displayMessage("Event created.");
+
+                                calendar.fullCalendar('renderEvent', {
+                                    id: data.id,
+                                    title: event_name,
+                                    start: event_start,
+                                    end: event_end,
+                                    allDay: allDay
+                                }, true);
+                                calendar.fullCalendar('unselect');
+                            }
+                        });
+                    }
+                },
+                eventDrop: function (event, delta) {
+                    var event_start = $.fullCalendar.formatDate(event.start, "Y-MM-DD");
+                    var event_end = $.fullCalendar.formatDate(event.end, "Y-MM-DD");
+
+                    $.ajax({
+                        url: SITEURL + '/calendar-crud-ajax',
+                        data: {
+                            title: event.event_name,
+                            start: event_start,
+                            end: event_end,
+                            id: event.id,
+                            type: 'edit'
+                        },
+                        type: "POST",
+                        success: function (response) {
+                            displayMessage("Event updated");
+                        }
+                    });
+                },
+                eventClick: function (event) {
+                    var eventDelete = confirm("Are you sure?");
+                    if (eventDelete) {
+                        $.ajax({
+                            type: "POST",
+                            url: SITEURL + '/calendar-crud-ajax',
+                            data: {
+                                id: event.id,
+                                type: 'delete'
+                            },
+                            success: function (response) {
+                                calendar.fullCalendar('removeEvents', event.id);
+                                displayMessage("Event removed");
+                            }
+                        });
+                    }
+                }
+            });
         });
+
+        function displayMessage(message) {
+            toastr.success(message, 'Event');
+        }
+
     </script>
 @endsection

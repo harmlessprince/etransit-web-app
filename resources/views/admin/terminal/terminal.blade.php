@@ -72,6 +72,7 @@
 </style>
 @section('content')
     <div class="container-fluid">
+        @toastr_css
         <div class="page-header">
             <div class="row">
                 <div class="col-6">

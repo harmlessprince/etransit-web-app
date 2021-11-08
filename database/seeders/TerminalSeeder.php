@@ -16,27 +16,33 @@ class TerminalSeeder extends Seeder
     {
         Terminal::create([
             'terminal_name' => 'Ikeja Terminal',
-            'terminal_address' => '2 Church Street Ikeja '
+            'terminal_address' => '2 Church Street Ikeja ',
+            'service_id' => rand(1,4),
         ]);
         Terminal::create([
             'terminal_name' => 'Lekki Terminal',
-            'terminal_address' => '2 Church Street Ikeja '
+            'terminal_address' => '2 Church Street Ikeja ',
+            'service_id' => rand(1,4),
         ]);
         Terminal::create([
             'terminal_name' => 'Apapa Terminal',
-            'terminal_address' => '2 Church Street Ikeja '
+            'terminal_address' => '2 Church Street Ikeja ',
+            'service_id' => rand(1,4),
         ]);
         Terminal::create([
             'terminal_name' => 'Ajah Terminal',
-            'terminal_address' => '2 Church Street Ikeja '
+            'terminal_address' => '2 Church Street Ikeja ',
+            'service_id' => rand(1,4),
         ]);
         Terminal::create([
             'terminal_name' => 'Agege Terminal',
-            'terminal_address' => '2 Church Street Ikeja '
+            'terminal_address' => '2 Church Street Ikeja ',
+            'service_id' => rand(1,4),
         ]);
         Terminal::create([
             'terminal_name' => 'Berger Terminal',
-            'terminal_address' => '2 Church Street Ikeja '
+            'terminal_address' => '2 Church Street Ikeja ',
+            'service_id' => rand(1,4),
         ]);
     }
 }

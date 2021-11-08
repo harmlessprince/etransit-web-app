@@ -17,7 +17,7 @@
                 <div class="currency-block">
                     <span>NGN</span>
                     <span>English</span>
-                    <button class="login">Log In</button>
+                    <router-link to="/login-user" class="login"> Home </router-link>
                     <button class="sign-up">Sign Up</button>
                 </div>
             </div>
@@ -28,13 +28,13 @@
           </div>
           <div class="nav-menu">
               <ul>
-                  <li><router-link to="/"> Home </router-link></li>
-                  <li><router-link to="/"> About Us </router-link></li>
-                  <li><router-link to="/"> Tour Packages </router-link></li>
-                  <li><router-link to="/"> Boat Cruise </router-link></li>
-                  <li><router-link to="/"> Hotel Bookings </router-link></li>
-                  <li><router-link to="/"> Become A Partner </router-link></li>
-                  <li><router-link to="/"> Send Parcel </router-link></li>
+                  <li><router-link to="/" class="routerLink" active-link='active'> Home </router-link></li>
+                  <li><router-link to="/" class="routerLink" active-link='active'> About Us </router-link></li>
+                  <li><router-link to="/" class="routerLink" active-link='active'> Tour Packages </router-link></li>
+                  <li><router-link to="/" class="routerLink" active-link='active'> Boat Cruise </router-link></li>
+                  <li><router-link to="/" class="routerLink" active-link='active'> Hotel Bookings </router-link></li>
+                  <li><router-link to="/" class="routerLink" active-link='active'> Become A Partner </router-link></li>
+                  <li><router-link to="/" class="routerLink" active-link='active'> Send Parcel </router-link></li>
               </ul>
           </div>
         </nav>
@@ -49,7 +49,7 @@ export default {
 .navigation-header
 {
     background: #021037;
-    height: 60px;
+    height: 50px;
     opacity: 0.8;
     top:0;
     left:0;
@@ -85,7 +85,7 @@ export default {
     font-weight: bold;
     line-height: 2.6em !important;
     margin:10px;
-    font-size: 18px;
+    font-size: 15px;
     color: #FFFFFF;
 }
 .login{
@@ -108,7 +108,7 @@ export default {
 }
 .bottom-nav{
     background: #F2F2F2;
-    height: 79px;
+    height: 60px;
     display: flex;
     justify-content: space-around;
 }
@@ -128,5 +128,11 @@ export default {
     color:#828282;
 
 }
-
+.routerLink{
+    color: #828282;
+}
+.routerLink:hover{
+    color: #021037;
+    padding-bottom:10px;
+}
 </style>

@@ -19,7 +19,7 @@ class BusSeeder extends Seeder
             'car_registration' => 'LND 141 QR',
             'air_conditioning' => 1,
             'wheels' => 12,
-            'seater' => 18,
+            'seater' => 5,
         ]);
 
         Bus::create([

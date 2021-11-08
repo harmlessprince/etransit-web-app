@@ -30,5 +30,6 @@ use Illuminate\Support\Facades\Route;
 
         //schedule an event
         Route::get('/event/{terminal_id}/schedule' ,[Schedule::class , 'scheduleEvent']);
+        Route::post('/schedule/event', [Schedule::class , 'addEvent']);
 
     });

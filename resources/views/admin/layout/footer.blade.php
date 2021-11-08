@@ -10,6 +10,7 @@
         </div>
     </div>
 </footer>
+{{--<script src="{{ asset('js/app.js') }}" defer></script>--}}
 <script async="" defer="" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGCQvcXUsXwCdYArPXo72dLZ31WS3WQRw&amp;callback=initMap"></script>
 
 <!-- latest jquery-->
@@ -41,8 +42,17 @@
 <!-- Theme js-->
 <script src="{{asset('assets/js/script.js')}}"></script>
 <script src="{{asset('assets/js/theme-customizer/customizer.js')}}"></script>
+<script src="{{mix('/js/app.js')}}"></script>
 
-<script src="{{ asset('js/app.js') }}" defer></script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" defer></script>
+
+
+
 @jquery
 @toastr_js
 @toastr_render

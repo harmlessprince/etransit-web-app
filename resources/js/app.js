@@ -6,8 +6,17 @@
 
 require('./bootstrap');
 
+import Vuetify from 'vuetify';
+import 'vuetify/dist/vuetify.min.css';
+
 window.Vue = require('vue').default;
-import router from './router'
+import FullCalendar from 'vue-full-calendar';
+import router from './router';
+
+Vue.use(Vuetify);
+Vue.use(FullCalendar);
+
+
 
 
 /**
@@ -22,9 +31,13 @@ import router from './router'
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('Navigation', require('./components/Navigation.vue').default);
+Vue.component('Footer', require('./components/Footer.vue').default);
 Vue.component('App', require('./components/App.vue').default);
 Vue.component('Homepage', require('./components/pages/Home.vue').default);
+Vue.component('Login', require('./components/pages/Login.vue').default);
 Vue.component('excel-upload', require('./components/ExcelUpload.vue').default);
+Vue.component('schedule-event', require('./components/ScheduleEvent.vue').default);
+
 
 
 /**
@@ -35,5 +48,9 @@ Vue.component('excel-upload', require('./components/ExcelUpload.vue').default);
 
 const app = new Vue({
     el: '#app',
-    router
+    vuetify: new Vuetify(),
+    router,
+    linkActiveClass: "active",
+    linkExactActiveClass: "exact-active",
+
 });

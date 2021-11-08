@@ -6,6 +6,7 @@
     <link rel="icon" href="{{asset('assets/images/favicon.png')}}" type="image/x-icon">
     <link rel="shortcut icon" href="{{asset('assets/images/favicon.png')}}" type="image/x-icon">
     <title>{{env('APP_NAME')}}</title>
+{{--    <link href="{{ asset('css/app.css') }}" rel="stylesheet">--}}
     <!-- Google font-->
     <link href="https://fonts.googleapis.com/css?family=Rubik:400,400i,500,500i,700,700i&amp;display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900&amp;display=swap" rel="stylesheet">
@@ -33,12 +34,19 @@
     <!-- Responsive css-->
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/responsive.css')}}">
     <script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.css">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
+    {{-- javascript --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+
+
     <style>
         .customizer-links .nav-link .settings i{
             display: none !important;
         }
+        .page-main-header .main-header-right{
+            padding:11px 30px !important;
+        }
     </style>
-    @toastr_css
+
 </head>

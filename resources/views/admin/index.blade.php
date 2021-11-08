@@ -48,6 +48,7 @@
     </div>
     <!-- Container-fluid starts-->
     <div class="container-fluid">
+        @toastr_css
         <div class="row size-column">
             <div class="col-xl-7 box-col-12 xl-100">
                 <div class="row dash-chart">
