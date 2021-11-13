@@ -1,5 +1,9 @@
 @extends('admin.layout.app')
 <style>
+    .vehicle-cards{
+        background: #021037 !important;
+        border-radius: 20px !important;
+    }
     .button-box{
         display:flex;
         justify-content: flex-end;
@@ -12,6 +16,24 @@
     .vehicle-box{
         display: grid;
         grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+    .schedule-button {
+        background:  #021037 !important;
+        opacity: 0.8 !important;
+        border: 1px solid #DC6513 !important;
+        color: #fff !important;
+        border-radius: 5px !important;
+        width: 240px !important;
+        cursor: pointer;
+    }
+    .schedule-button:hover {
+        background: #DC6513 !important;
+        cursor: pointer;
+        opacity: 0.8 !important;
+        border: 1px solid  #DC6513 !important;
+        color: #fff !important;
+        border-radius: 5px !important;
+        width: 240px !important;
     }
     /*480px, 768px,*/
     @media screen and (max-width: 480px) {
@@ -94,15 +116,19 @@
 
                     <div class="vehicle-box">
                         @foreach($vehicles as $vehicle)
-                        <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
-                            <div class="card-header bg-primary"><h5>{{strtoupper($vehicle->car_registration)}}</h5></div>
+                        <div class="card text-white  mb-3 vehicle-cards"  style="max-width: 18rem;">
+                            <div class="card-header vehicle-cards"><h5>{{strtoupper($vehicle->car_registration)}}</h5></div>
                             <div class="card-body">
                                 <h6 class="card-title">Vehicle Type: {{Ucfirst($vehicle->car_model)}}</h6>
                                 <p class="card-text">Car Model : {{Ucfirst($vehicle->car_type)}}</p>
                                 <p class="card-text">Air Condition: {{$vehicle->air_conditioning == 1 ? 'True' : "False"}}</p>
                                 <p class="card-text">Passenger Seats : {{$vehicle->seater}}2</p>
                                 <p class="card-text">Wheels: {{$vehicle->wheels}}</p>
+                                <div class="" style="display: flex;justify-content: center;">
+                                    <a href="{{url('admin/event/'.$vehicle->id.'/schedule')}}" class="btn schedule-button">Schedule Event</a>
+                                </div>
                             </div>
+
                         </div>
                         @endforeach
                     </div>
@@ -183,11 +209,10 @@
 
                var car_type       = $("input[name=car_type]").val();
                var car_model      = $("input[name=car_model]").val();
-               var registration  = $("input[name=registration]").val();
-               var wheels        = $("input[name=wheels]").val();
-               var seats         = $("input[name=number_of_seats]").val();
-               var ac_status     = $("input[type='checkbox']").is(":checked");
-               console.log(registration)
+               var registration   = $("input[name=registration]").val();
+               var wheels         = $("input[name=wheels]").val();
+               var seats          = $("input[name=number_of_seats]").val();
+               var ac_status      = $("input[type='checkbox']").is(":checked");
 
                if( ac_status)
                {

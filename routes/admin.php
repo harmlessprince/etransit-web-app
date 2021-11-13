@@ -8,6 +8,7 @@ use App\Http\Controllers\Vehicle;
 use Illuminate\Support\Facades\Route;
 
 
+
     Route::get('/' , [AdminLogin::class , 'showLoginForm'])->name('admin.login');
 
     Route::post('/logout-admin',[AdminLogin::class , 'logout'] )->name('admin.logout');
@@ -29,7 +30,10 @@ use Illuminate\Support\Facades\Route;
         Route::post('add/terminal',[Terminal::class , 'AddTerminal']);
 
         //schedule an event
-        Route::get('/event/{terminal_id}/schedule' ,[Schedule::class , 'scheduleEvent']);
+        Route::get('/event/{bus_id}/schedule' ,[Schedule::class , 'scheduleEvent']);
         Route::post('/schedule/event', [Schedule::class , 'addEvent']);
+
+
+
 
     });

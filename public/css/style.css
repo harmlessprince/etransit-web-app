@@ -1,0 +1,1498 @@
+
+body{
+    background:#FDFCFC !important;
+}
+.hero-bg-section{
+    position: relative;
+}
+.hero-bg{
+    background-image: url("/images/bg/hero-bg.png");
+    width: 100%;
+    height:700px !important;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+.footer_bottom{
+    background-image: url("/images/bg/footer_bg.png");
+
+}
+.booking_bg{
+    /*background-image: url("/images/bg/booking_hero.png");*/
+    /*background-image: url('{{ asset('/images/bg/booking_hero.png') }}');*/
+
+}
+.hero-bg-text{
+    position:absolute;
+    /*top: -600px;*/
+    text-align: center;
+    left: 500px;
+    font-style: normal;
+    /* identical to box height */
+    letter-spacing: -0.02em;
+    color: #FFFFFF;
+    margin-top: 200px;
+}
+.hero-bg-text p{
+    font-weight: 600;
+    font-size: 19px;
+    line-height: 19px;
+    /* identical to box height */
+    letter-spacing: -0.02em;
+}
+.ticket-box-menu ul li a{
+
+    padding: 30px;
+    font-size: 30px;
+    color: #021037;
+}
+.ticket-box-menu ul li a:hover{
+    padding: 30px;
+    font-size: 30px;
+    background: #021037;
+    color: #DC6513;
+    text-decoration: none;
+
+}
+.hero-bg-text h1{
+    font-weight: 800;
+    font-size: 38px;
+    line-height: 38px;
+}
+
+.ticketing-section{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    height: 450px;
+
+}
+.ticketing-box {
+    padding:20px;
+    position: absolute;
+    top: 500px;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 30px rgba(187, 187, 187, 0.33);
+    border-radius: 15px;
+    width: 1024px;
+    height: 500px;
+
+
+}
+.bus-booking-box{
+    margin-top:20px;
+}
+.booking-trip-button button{
+    width:150px;
+    background: #F2F2F2;
+    height: 50px;
+    border: 1px solid #F2F2F2;
+    margin-top:20px;
+}
+.booking-trip-button button:hover{
+    width:150px;
+    background:  #03174C;
+    height: 50px;
+    border: 1px solid  #03174C;
+    color:#fff;
+}
+.bus-booking-departure-date , .departure_box{
+    display: flex;
+    justify-content: space-between;
+    margin-top:20px;
+}
+.bus-booking-departure-date .date_picker{
+    display:flex;
+    flex-direction: column;
+}
+.departure_count  , .departure_day  , .departure_label {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 12px;
+    color: #4F4F4F;
+
+}
+.departure_count{
+    margin-right:10px;
+}
+#departure , #destination{
+    width:350px;
+    margin-top:20px;
+    padding: 10px;
+    border: none;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 30px rgba(187, 187, 187, 0.33);
+    border-radius: 15px;
+    border-bottom:1px solid #E0E0E0;
+}
+#travelling_from{
+    width:350px;
+    margin-top:20px;
+    padding: 10px;
+    border: none;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 30px rgba(187, 187, 187, 0.33);
+    border-radius: 8px;
+    border-bottom:1px solid #E0E0E0;
+    margin-right: 15px;
+}
+#travelling_to{
+    width:350px;
+    margin-top:12px;
+    padding: 10px;
+    border: none;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 30px rgba(187, 187, 187, 0.33);
+    border-radius: 8px;
+    border-bottom:1px solid #E0E0E0;
+}
+#departure:hover , .departure_day_box:hover{
+    border-bottom:1px solid  #FFAB72;
+}
+.departure_day_box{
+    margin-top: 38px;
+    background: #fff;
+    padding: 8px;
+    box-shadow: 0px 4px 30px rgba(187, 187, 187, 0.33);
+    border-radius: 10px;
+    border-bottom:1px solid #E0E0E0;
+    width:250px !important;
+    text-align: center;
+    margin-left:10px;
+
+
+}
+.number_of_passengers{
+    display:flex;
+    flex-direction: column;
+    margin-top:20px;
+}
+.passengers{
+    margin-top: 30px;
+    background: #fff;
+    padding: 5px;
+    border: none;
+    box-shadow: 0px 4px 30px rgba(187, 187, 187, 0.33);
+    border-bottom:1px solid #E0E0E0;
+    width:100px !important;
+    text-align: center;
+}
+.travelling_select_box{
+    display:flex;
+    flex-direction: row;
+}
+.travelling_from_box , .travelling_to_box{
+    display: flex;
+    flex-direction: column;
+}
+.proceed_button{
+    background: #03174C;
+    border-radius: 5px;
+    color:white;
+    padding:10px;
+    width: 100px;
+    margin-top:20px;
+}
+.proceed_button_box{
+    display: flex;
+    justify-content: flex-end;
+}
+.about-us-box{
+    margin-top: 600px;
+}
+.about_us{
+    display:flex;
+    justify-content: center;
+}
+.about_us h1{
+    color: #03174C;
+    font-weight: bolder;
+}
+
+.about_us h4{
+    color: #333333;
+    margin-left: -20px;
+}
+.about_us_content{
+    display: flex;
+    margin-left:300px;
+    width: 200px;
+    margin-top: 30px;
+}
+.about_us_content h5{
+    width:200px;
+}
+.about_us_content .about_paragragh{
+    width: 443px;
+    height: 90px;
+    margin-left: 174px;
+}
+
+.about_us_img {
+    width: 500px !important;
+    margin-top: 30px;
+}
+.about_us_box{
+    display:flex;
+    justify-content:space-between;
+}
+.why_choose_us{
+    width: 443px;
+}
+.discount_bg{
+    margin-top: 40px;
+    background: #03174C;
+    display:flex;
+    justify-content: space-between;
+    height: 300px;
+}
+.discount_bus_img{
+    width: 400px !important;
+    margin-top:40px;
+}
+.discount_text{
+    margin-top: 30px;
+}
+.discount_text p{
+    color:#fff;
+    font-size:16px;
+
+}
+.discount_text h3{
+    color:#fff;
+    margin-top: -8px;
+    font-size:30px;
+}
+
+.discount_text span{
+    color:#fff;
+    margin-left: 15px;
+    font-size: 18px;
+}
+
+.discount_text p:first-child{
+    margin-left:5px;
+}
+.get_started_btn{
+    background: #DC6513;
+    color:#fff;
+    padding: 10px;
+    margin-left: -25px;
+    border-radius: 5px;
+}
+.discount_plane_img{
+    /*width:1000px !important;*/
+    width: 918px !important;
+}
+.trending_vehicle_items{
+    display:flex;
+}
+
+.trending_vehicle_section{
+    margin-top: 150px;
+}
+.trending_vehicle_items{
+    width: 1394px;
+    overflow: scroll;
+
+}
+.trending_header_text{
+    display: flex;
+    justify-content: center;
+}
+.trending_header_text p{
+    margin-left: -50px;
+}
+.trending_vehicle_item{
+    background: #fff !important;
+    box-shadow: 0px 3px 20px rgba(209, 209, 209, 0.38);
+    border-radius: 10px;
+    padding: 30px;
+    margin: 30px;
+}
+
+.trending_vehicle_item:hover{
+    border: 1px solid  #DC6513;
+}
+.vehicle_image img{
+    width: 350px !important;
+    height: 150px !important;
+}
+.vehicle_name{
+    margin-top: 15px;
+    font-weight: bold;
+    font-size: 20px;
+}
+.auto-icons{
+    width:20px !important;
+}
+.vehicle_function {
+    display: flex;
+    flex-direction: row;
+    margin-right:10px;
+}
+
+.vehicle_function img{
+    margin-right:20px;
+}
+.vehicle_functionalities{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 20px;
+
+}
+.client_section{
+    background: #F8F8F8;
+    margin-top: 50px;
+    padding: 40px;
+}
+.client_header_text{
+    display: flex;
+    justify-content: center;
+}
+.client_header_text h3{
+    margin-top:10px;
+}
+.client_img{
+    width: 150px !important;
+}
+.client_logo {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 20px;
+}
+.about_us_text{
+    width:300px;
+}
+#trip-btn button:hover , #round-trip-btn button:hover{
+    background: #03174C;
+    color:white;
+}
+
+/* mobile navigation */
+.navbar {
+    position: relative;
+    display: none !important;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 1rem;
+
+}
+#navbarSupportedContent1{
+    /*display:none;*/
+}
+/* screen for 1400px */
+@media screen and (max-width: 1400px) {
+
+    .discount_plane_img {
+        width: 760px !important;
+    }
+
+    .about_us_img {
+        width: 434px !important;
+        margin-top: 30px;
+    }
+    .about_us_content .about_paragragh {
+        width: 443px;
+        height: 90px;
+        margin-left: -22px;
+    }
+    .hero-bg-text {
+        left: 347px;
+    }
+}
+
+/* bus booking page styles */
+.booking_bg{
+    display:flex;
+    justify-content: center;
+position:relative;
+}
+.booking_hero_text{
+    margin-top:70px;
+}
+.booking_hero_icon img{
+
+}
+.booking_text{
+    margin-left:30px;
+}
+.booking_text h1 , .booking_text span {
+    color:white;
+}
+.booking_text span {
+    margin-left: -105px;
+}
+.booking_nav_box{
+    margin-top:30px;
+
+}
+.booking_nav_content{
+    background:#F2F2F2;
+    padding:10px;
+
+}
+.booking_nav_item{
+    display:flex;
+    justify-content: flex-end;
+}
+.nav_item_bookings{
+    margin-right:134px;
+}
+
+.booking_filters{
+    background:#fff;
+    border:1px solid rgba(219, 226, 241, 0.54);
+    width:350px;
+    margin-left:30px;
+    position:relative;
+    top: -31px;
+    border-radius:5px;
+    height:600px;
+    box-shadow: 1px 2px 1px 2px rgba(219, 226, 241, 0.54);
+}
+.listed_buses{
+    width:900px;
+    background:#fff;
+    border:1px solid #fff;
+    border-radius:10px;
+    height:150px;
+    padding:20px;
+    margin:20px;
+    box-shadow: 1px 2px 1px 2px rgba(219, 226, 241, 0.54);
+}
+.empty_data_res{
+    width:900px;
+    background:#fff;
+    border:1px solid #fff;
+    border-radius:10px;
+    height:450px !important;
+    padding:20px;
+    margin:20px;
+    box-shadow: 1px 2px 1px 2px rgba(219, 226, 241, 0.54);
+
+}
+.no_data_img img{
+    margin-left:200px;
+    margin-top:40px;
+}
+.bookings_content{
+    display:flex;
+    justify-content:space-around;
+}
+.listed_buses_items{
+    display:flex;
+    justify-content: space-between;
+}
+.bookings_terminal h6{
+    font-weight: bolder;
+}
+.view_seats button{
+    background:#03174C;
+    color:#fff;
+    padding:7px;
+    border-radius:2px;
+    border: 1px solid #03174C;
+    cursor:pointer;
+}
+.view_seats button:hover{
+    background:#FFAB72;
+    color:#03174C;
+    padding:7px;
+    border-radius:2px;
+    border: 1px solid #FFAB72;
+    cursor:pointer;
+}
+.transport_fare b{
+    font-weight:900;
+    font-size:20px;
+}
+.bookings_nav_text span{
+    font-weight: bolder;
+}
+
+/* end here bus boking page styles */
+
+
+/*** seat picker csss **/
+.seat_picker_nav{
+    /*height:10px;*/
+    background: #fff;
+    padding:20px;
+    box-shadow: 3px 2px 1px 2px rgba(219, 226, 241, 0.54);
+}
+.passenger_box{
+    margin-top:20px;
+}
+.passenger_input_field{
+    border-bottom: 1px solid gray;
+    width:450px;
+}
+.gender{
+    border-bottom: 1px solid gray;
+    width:250px;
+    margin-top:15px;
+}
+.passenger_name{
+    display:flex;
+    flex-direction: column;
+}
+.passenger_type{
+    display:flex;
+    margin-left:15px;
+}
+.gender_section{
+    display:flex;
+}
+.passenger_options{
+    margin:23px;
+}
+.passenger_box{
+    margin-bottom:40px;
+}
+.passenger_box h4{
+    margin-bottom:25px;
+}
+.passenger_form_container{
+    display:flex;
+    justify-content: space-between;
+}
+.passenger_seat_tracker_box{
+    width:500px;
+    background: #fff;
+    padding:20px;
+    box-shadow: 3px 3px 3px 3px rgba(219, 226, 241, 0.54);
+}
+.passenger_seat_picker_header{
+    display:flex;
+}
+.passenger_seat_picker_header span{
+    font-size:25px;
+    font-weight:bolder;
+    margin-right: 20px;
+}
+
+.passenger_seat_picker_header img {
+    margin-top:5px !important;
+}
+.seat_selector_indicator{
+    display:flex;
+    justify-content: space-between;
+    margin-top:20px;
+}
+.seat_selector_indicator .selected_indicator {
+    background: #4E6CBB;
+    width:20px;
+    height:20px;
+}
+.seat_selector_indicator .booked_indicator {
+    background: #E0E0E0;
+    width:20px;
+    height:20px;
+}
+.seat_selector_indicator .available_indicator {
+    background: #FFFFFF;
+    width:20px;
+    height:20px;
+    border:1px solid grey;
+}
+.passenger_seat_picker_bpdy{
+    margin-top:40px;
+
+}
+
+.passenger_selector_box{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    place-items: center;
+}
+
+.passenger_seat_picker_bpdy a {
+    border: 1px solid gray;
+    /*#E0E0E0;*/
+    background: #fff;
+        /*#E0E0E0;*/
+    width:40px;
+    height:40px;
+
+}
+.selected {
+    background:#4E6CBB !important;
+    color:#fff;
+    border:1px solid #E0E0E0;
+}
+.available {
+    background:#fff !important;
+    color:#000;
+    border: 1px solid #000;
+}
+.booked{
+    background:#E0E0E0 !important;
+    color:#000;
+    border:1px solid #E0E0E0 !important;
+}
+.continue_to_payment{
+    display:flex;
+    justify-content:center;
+    margin-top:40px;
+}
+.continue_to_payment button{
+    background: #03174C;
+    color:#fff;
+    padding:10px;
+    cursor:pointer;
+}
+.continue_to_payment button:hover{
+    border:1px solid #FFAB72;
+    background:#FFAB72;
+}
+/** seat picker css ends here **/
+/* payment page css */
+.payment-box{
+    display:grid;
+    grid-template-columns: repeat(14 , 1fr);
+
+
+}
+.payment{
+    grid-column: 1/8;
+    padding:10px;
+
+}
+.payment h3{
+    color:#03174C;
+    margin-left:30px;
+    margin-top:40px;
+    font-weight:bolder;
+}
+.payment h5{
+    color:#03174C;
+    margin-left:30px;
+    margin-top:40px;
+    font-weight:bolder;
+}
+.payment p{
+    color: #828282;
+    margin-left:30px;
+
+}
+.receipt-box{
+    background: #fff;
+    grid-column: 8/14;
+    box-shadow: 1px 2px 1px 2px rgba(219, 226, 241, 0.54);
+
+}
+.payment_options{
+    margin-left:30px;
+    margin-top:20px;
+}
+.receipt-box-content{
+    display:grid;
+    grid-template-rows: repeat(8,1fr);
+    margin:40px;
+    grid-auto-rows: minmax(20px , auto);
+}
+.receipt-destination-box{
+    grid-row: 1/3;
+    background:#F9F9F9;
+    box-shadow: 1px 2px 1px 2px rgba(219, 226, 241, 0.54);
+    padding:20px;
+
+}
+.receipt-destination-box{
+
+        /*rgba(219, 226, 241, 0.78);*/
+}
+.receipt-calc-box{
+    background:#fff;
+    grid-row:3/8;
+    box-shadow: 1px 2px 1px 2px rgba(219, 226, 241, 0.54);
+    padding:20px;
+
+}
+.receipt-header{
+    display:grid;
+    grid-template-columns: repeat(5, 1fr) ;
+}
+.receipt-header-image{
+    background:#FFAB72;
+    padding:20px;
+    height:70px;
+    width:70px;
+    border-radius:50%;
+}
+.receipt-header-terminal{
+    margin-top:10px;
+    grid-column: 2/5;
+}
+.receipt-header-terminal h6{
+    font-weight: bolder;
+}
+.orange-dot{
+background:#DC6513;
+    width:10px;
+    height:10px;
+    border-radius: 50%;
+    margin-top:20px;
+}
+.orange-outer-line{
+    background:transparent;
+    border:1px solid #DC6513;;
+    width:10px;
+    height:10px;
+    border-radius: 50%;
+    margin-top:20px;
+}
+.receipt-header-destination-box{
+    display:grid;
+    grid-template-columns: repeat(6 , 1fr);
+    margin-top:10px;
+}
+.liner{
+    border:1px solid #E0E0E0;
+}
+.arrow_up{
+    grid-column: 6;
+    margin-top: -23px;
+}
+.receipt_date{
+    display:grid;
+    grid-template-columns: repeat(5 , 1fr);
+}
+.pickup_date{
+    grid-column: 1/5;
+}
+.pickup_time {
+    align-self: end;
+}
+.passenger_details{
+    display:grid;
+    grid-template-columns: repeat(5 , 1fr);
+    margin-top:30px;
+}
+
+.passenger_details .passengers_payment{
+    grid-column: 1/5;
+}
+.passenger_details .transport_amount{
+    align-self: end;
+}
+.receipt_total{
+    display:grid;
+    grid-template-columns: repeat(5,1fr);
+}
+.receipt_total .trip_total{
+    grid-column: 1/5;
+}
+
+
+
+
+
+/* end of payment box **/
+/* responsivess for 1200px screeen */
+@media screen and (max-width: 1200px) {
+
+    .discount_plane_img {
+        width: 675px !important;
+    }
+    .trending_vehicle_items {
+        width: 1155px;
+        overflow: scroll;
+    }
+    .discount_bus_img {
+        width: 285px !important;
+        margin-top: 40px;
+    }
+    .about_us_img {
+        display: none !important;
+    }
+    .about_us_content .about_paragragh {
+        width: 526px;
+        height: 90px;
+        line-height: 2em;
+    }
+    .hero-bg-text {
+        left: 251px;
+    }
+}
+
+@media screen and (max-width: 992px) {
+
+    .ticketing-box {
+        padding: 20px;
+        position: absolute;
+        top: 500px;
+        background: #FFFFFF;
+        box-shadow: 0px 4px 30px rgb(187 187 187 / 33%);
+        border-radius: 15px;
+        width: 854px;
+        height: 500px;
+    }
+    .ticket-box-menu ul li a {
+        padding: 30px;
+        font-size: 24px;
+        color: #021037;
+    }
+    .about_us_box {
+        display: flex;
+        justify-content: flex-start;
+        margin-left: -133px;
+    }
+    .discount_plane_img {
+        width: 514px !important;
+    }
+    .discount_bus_img {
+        width: 237px !important;
+        margin-top: 40px;
+    }
+    .trending_vehicle_items {
+        width: 991px;
+        overflow: scroll;
+    }
+    .trending_vehicle_item {
+        background: #fff !important;
+        box-shadow: 0px 3px 20px rgb(209 209 209 / 38%);
+        border-radius: 10px;
+        /*padding: -8px;*/
+        margin: 30px;
+    }
+    .vehicle_image img {
+        width: 258px !important;
+        height: 73px !important;
+    }
+    .vehicle_function p{
+        font-size: 8px !important;
+    }
+    .vehicle_name p{
+        font-size: 13px;
+    }
+    .client_img{
+        width:150px !important;
+        margin-top:40px;
+    }
+    .hero-bg-text {
+        left: 126px;
+    }
+}
+@media screen and (max-width: 768px) {
+    .hero-bg-text {
+        left: 30px;
+    }
+
+    .ticketing-box {
+        padding: 20px;
+        position: absolute;
+        top: 500px;
+        background: #FFFFFF;
+        box-shadow: 0px 4px 30px rgb(187 187 187 / 33%);
+        border-radius: 15px;
+        width: 699px;
+        height: 500px;
+    }
+    .ticket-box-menu ul li a {
+        padding: 22px;
+        font-size: 20px;
+        color: #021037;
+    }
+    .ticket-box-menu ul li a:hover{
+        background: #021037;
+        color: #DC6513;
+        padding: 22px;
+        font-size: 20px;
+    }
+    #departure, #destination {
+        width: 227px;
+        margin-top: 20px;
+        padding: 10px;
+        border: none;
+        background: #FFFFFF;
+        box-shadow: 0px 4px 30px rgb(187 187 187 / 33%);
+        border-radius: 15px;
+        border-bottom: 1px solid #E0E0E0;
+    }
+    .departure_day_box {
+        margin-top: 41px;
+        background: #fff;
+        padding: 8px;
+        box-shadow: 0px 4px 30px rgb(187 187 187 / 33%);
+        border-radius: 10px;
+        border-bottom: 1px solid #E0E0E0;
+
+        width: 247px !important;
+        text-align: center;
+        margin-left: 10px;
+        margin-bottom: 26px;
+    }
+    #travelling_from {
+        width: 292px;
+        margin-top: 20px;
+        padding: 10px;
+        border: none;
+        background: #FFFFFF;
+        box-shadow: 0px 4px 30px rgb(187 187 187 / 33%);
+        border-radius: 8px;
+        border-bottom: 1px solid #E0E0E0;
+        margin-right: 15px;
+    }
+    .about_us_content .about_paragragh {
+        width: 413px;
+        height: 90px;
+        line-height: 2em;
+        margin-left: -48px;
+    }
+
+    .discount_plane_img {
+        width: 323px !important;
+        height: 255px;
+    }
+    .discount_bus_img {
+        width: 193px !important;
+        margin-top: 60px;
+        height: 227px;
+    }
+    .discount_bg {
+        margin-top: 40px;
+        background: #03174C;
+        display: flex;
+        justify-content: space-between;
+        height: 255px;
+    }
+
+    .discount_text h3 {
+        color: #fff;
+        margin-top: -7px;
+        font-size: 18px;
+        margin-left: 8px;
+    }
+    .discount_text .discount_text {
+        color: #fff;
+        margin-top: -7px;
+        font-size: 18px;
+        margin-left: -11px !important;
+    }
+    .discount_text  p{
+        font-size: 14px;
+    }
+    .discount_text span {
+        color: #fff;
+        margin-left: 15px;
+        font-size: 14px;
+    }
+    .trending_vehicle_items {
+        width: 756px;
+        overflow: scroll;
+    }
+    #travelling_from , #travelling_to {
+        width: 287px;
+    }
+    .routerLink {
+        font-size: 12px !important;
+    }
+}
+
+/* start of navigation header css */
+.navigation-header
+{
+    background: #021037;
+    height: 50px;
+    opacity: 0.8;
+    top:0;
+    left:0;
+}
+.nav-content{
+    display: flex;
+    justify-content: space-around;
+}
+.email-container span{
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 2.6em !important;
+    /* identical to box height */
+    color: #FFFFFF;
+}
+.social-icons img{
+    height:25px;
+    width: 15px;
+    margin-left:2px;
+    line-height: 2.6em !important;
+    margin-top:  15px;
+}
+.socials-block{
+    display:flex;
+}
+.breaker{
+    border: 1px solid #fff;
+    height: 20px;
+}
+.currency-block span  {
+    /*width: 28px;*/
+    font-weight: bold;
+    line-height: 2.6em !important;
+    margin:10px;
+    font-size: 15px;
+    color: #FFFFFF;
+}
+.login{
+
+    color: #fff;
+    background: #DC6513;
+    border-radius: 5px;
+    border: 1px solid #DC6513;
+    cursor:pointer;
+    width:90px;
+    margin-right:10px;
+}
+.login:hover{
+    color: #fff;
+    background: #021037;
+    border-radius: 5px;
+    border: 1px solid #DC6513;
+    cursor:pointer;
+    width:90px;
+    margin-right:10px;
+}
+.sign-up{
+    background: #021037;
+    opacity: 0.8;
+    border: 1px solid #DC6513;
+    color:#fff;
+    border-radius: 5px;
+    width:90px;
+}
+.sign-up:hover{
+    background: #DC6513;
+    opacity: 0.8;
+    border: 1px solid #DC6513;
+    color:#fff;
+    border-radius: 5px;
+    width:90px;
+}
+.bottom-nav{
+    background: #F2F2F2;
+    height: 60px;
+    display: flex;
+    justify-content: space-around;
+}
+.logo img{
+    margin-top: 10px;
+}
+.nav-menu ul{
+    list-style: none;
+    display:flex;
+}
+.nav-menu ul li {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    /*line-height: 21px;*/
+    margin: 15px  10px 0px 10px;
+    color:#828282;
+
+}
+.routerLink{
+    color: #828282;
+}
+.routerLink:hover{
+    color: #021037;
+    padding-bottom:10px;
+}
+/* end of navigation header css */
+.container, .container-fluid, .container-xl, .container-lg, .container-md, .container-sm{
+    padding:0px !important;
+}
+body{
+    background: #E5E5E5;
+}
+/* foooter css */
+.newsletter_box{
+    background: #fff !important;
+    padding: 50px;
+    display:flex;
+    justify-content: space-around;
+}
+.newsletter{
+    background:transparent;
+    border: none ;
+    width:400px !important;
+    padding: 10px;
+    border-bottom:1px solid grey;
+}
+.subscribe_button{
+    background: #DC6513;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+}
+.newsletter_form{
+    margin-top: 25px;
+}
+.footer_menus , .socials_menu{
+    display:flex;
+    justify-content: space-around;
+
+
+}
+.footer_bottom{
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height:700px;
+    margin-top: -28px;
+}
+
+.footer_menu_item h3{
+    font-weight: 800;
+    font-size: 30px;
+    line-height: 20px;
+    letter-spacing: -0.02em;
+    color: #DC6513;
+    margin-top: 120px !important;
+}
+
+.footer_menu_item h6{
+    color:white;
+}
+.sub_footer_menu ul {
+    font-size: 16px;
+    color: white;
+    list-style:none;
+    margin-bottom: 10px;
+}
+.sub_footer_menu ul li:first-child{
+    margin-top: 40px;
+}
+
+.sub_footer_menu ul li{
+    margin-bottom: 20px;
+    font-weight: bolder;
+}
+.footer_contacts h6:first-child{
+    margin-top: 40px;
+    font-size: 18px;
+}
+.footer_contacts span{
+    font-size: 18px;
+    color:white;
+}
+.socials_menu{
+    display:flex;
+    flex-direction: column;
+    margin-left: 210px;
+}
+.socials_menu h3{
+    color: white;
+    margin-buttom:30px;
+}
+.socials_icon{
+    margin-right:10px;
+}
+.copyright_section{
+    display: flex;
+    justify-content: space-between;
+
+}
+.copyright_section h5{
+    color:white;
+    margin-top: 180px;
+    margin-left:  70px;
+    margin-right:70px ;
+
+}
+
+.copyright_section h5 span{
+    color: #DC6513;
+
+}
+/* end footer css */
+/* navigation optimization for 992 */
+@media screen and (max-width: 992px) {
+    .routerLink{
+        font-size: 16px;
+    }
+    .routerLink:hover{
+        color: #021037;
+        padding-bottom:10px;
+    }
+    .sign-up {
+        background: #021037;
+        opacity: 0.8;
+        border: 1px solid #DC6513;
+        color: #fff;
+        border-radius: 5px;
+        width: 70px;
+    }
+    .login {
+        color: #fff;
+        background: #DC6513;
+        border-radius: 5px;
+        border: 1px solid #DC6513;
+        cursor: pointer;
+        width: 70px;
+        margin-right: 10px;
+    }
+
+    element.style {
+    }
+    .currency-block span {
+
+        font-weight: bold;
+        line-height: 2.6em !important;
+        margin: 10px;
+        font-size: 16px;
+        color: #FFFFFF;
+    }
+    .currency-block span {
+        line-height: 2.6em !important;
+        margin: 10px;
+        font-size: 17px;
+        color: #FFFFFF;
+    }
+    .socials_menu {
+        display: flex;
+        flex-direction: column;
+        margin-left: 84px !important;
+    }
+    .nav-menu ul {
+        list-style: none;
+
+    }
+
+}
+@media screen and (max-width: 768px) {
+    .navbar {
+        position: relative;
+        display: flex !important;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.5rem 1rem;
+    }
+    .nav-menu ul {
+        display:flex;
+        flex-direction: column;
+    }
+    .nav-menu ul  li:hover{
+        background: red;
+    }
+    .bottom-nav {
+        display: none !important;
+    }
+    .booking-trip-button button {
+        width: 100px;
+        background: #F2F2F2;
+        height: 45px;
+        border: 1px solid #F2F2F2;
+        margin-top: 20px;
+    }
+    .newsletter_box {
+        background: #fff !important;
+        padding: 50px;
+        display: flex;
+        justify-content: space-between;
+    }
+    .newsletter {
+        background: transparent;
+        border: none;
+        width: 204px !important;
+        padding: 10px;
+        border-bottom: 1px solid grey;
+    }
+    .subscribe_button {
+        background: #DC6513;
+        color: #fff;
+        padding: 11px !important;
+        border-radius: 5px;
+        font-size: 12px;
+    }
+    .more_update  h2{
+        font-size: 18px;
+        font-weight: bolder;
+        margin-top: 21px;
+    }
+    .more_update  p{
+        font-size: 16px;
+
+    }
+    .subscribe_button {
+        background: #DC6513;
+        color: #fff;
+        padding: 6px;
+        border-radius: 5px;
+    }
+    .footer_menu_item h3 {
+        font-weight: 800;
+        font-size: 21px;
+        line-height: 20px;
+        letter-spacing: -0.02em;
+        color: #DC6513;
+        margin-top: 120px !important;
+    }
+    .sub_footer_menu ul li {
+        margin-bottom: 20px;
+        font-weight: bolder;
+        font-size: 12px ;
+    }
+    .footer_contacts h6:first-child  {
+        margin-top: 40px;
+        font-size: 16px;
+    }
+    .footer_contacts span {
+        font-size: 16px;
+        color: white;
+    }
+    .socials_menu {
+        display: flex;
+        flex-direction: column;
+        margin-left: 55px !important;
+    }
+    .socials_menu h3{
+        font-size: 17px;
+    }
+
+    .copyright_section h5 {
+        color: white;
+        margin-top: 180px;
+        margin-left: 70px;
+        margin-right: 70px;
+        font-size: 12px;
+    }
+
+}
+@media screen and (max-width: 576px) {
+    .ticketing-box {
+        padding: 20px;
+        position: absolute;
+        top: 500px;
+        background: #FFFFFF;
+        box-shadow: 0px 4px 30px rgb(187 187 187 / 33%);
+        border-radius: 15px;
+        width: 573px;
+        height: 500px;
+    }
+    .hero-bg-text h1 {
+        font-weight: 800;
+        font-size: 22px;
+        line-height: 38px;
+    }
+    .hero-bg-text small{
+        font-size: 99%;
+    }
+    .hero-bg-text {
+        left: -4px;
+    }
+    .ticket-box-menu ul li a {
+        font-size: 15px;
+    }
+    .ticket-box-menu ul li a:hover{
+        font-size: 15px;
+    }
+    #departure, #destination {
+        width: 165px;
+    }
+    .departure_day_box {
+        width: 235px !important;
+    }
+    #travelling_from, #travelling_to {
+        width: 251px;
+    }
+    .about_us_content {
+        display: flex;
+        margin-left: 152px;
+        width: 56px;
+    }
+    .about_us h1 {
+        font-size: 21px;
+    }
+    .about_us h4 {
+        margin-left: -71px;
+    }
+    .about_us_content {
+        display: flex;
+        margin-left: 152px;
+        width: 56px;
+        flex-direction: column;
+    }
+    .about_us_box {
+        display: flex;
+        justify-content: center;
+        margin-left: -264px;
+    }
+    .about_us_content .about_paragragh {
+        width: 413px;
+        height: 90px;
+        line-height: 2em;
+        margin-left: -111px;
+    }
+    .about_us_content .about_paragragh {
+        width: 413px;
+        height: 90px;
+        line-height: 2em;
+        margin-left: -111px;
+        margin-bottom: 40px;
+    }
+    .discount_bg {
+        margin-top: 100px;
+        background: #03174C;
+        display: flex;
+        justify-content: space-between;
+        height: 255px;
+    }
+    .discount_plane_img {
+        width: 238px !important;
+        height: 206px;
+        height: 255px;
+
+
+
+    }
+    .discount_bus_img {
+        width: 168px !important;
+        margin-top: 103px;
+        height: 201px;
+    }
+    .discount_text {
+        margin-top: 30px;
+        margin-left: 20px;
+    }
+    .trending_vehicle_items {
+        width: 569px;
+        overflow: scroll;
+    }
+    .client_logo{
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        place-items: center;
+    }
+    .more_update h2 {
+        font-size: 14px;
+    }
+    .more_update p {
+        font-size: 7px;
+    }
+    .newsletter {
+        width: 177px !important;
+    }
+    .subscribe_button {
+        font-size: 9px;
+    }
+    .socials_menu {
+        display: flex;
+        flex-direction: column;
+        margin-left: 27px !important;
+    }
+    .socials_menu h3 {
+        font-size: 15px;
+    }
+    .copyright_section h5 {
+        color: white;
+        font-size: 9px;
+    }
+
+}
+

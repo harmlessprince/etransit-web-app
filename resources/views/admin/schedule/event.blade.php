@@ -24,7 +24,14 @@
         width: 240px !important;
         cursor: pointer;
     }
+.checkbox_box{
+    display:flex;
+    justify-content: space-between;
+}
+#editModal{
 
+    height: 700px !important;
+}
 
 </style>
 @section('content')
@@ -36,7 +43,7 @@
                     <h3>{{env('APP_NAME')}}</h3>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{url('/admin/manage/vehicle')}}"><i data-feather="home"></i></a></li>
-                        <li class="breadcrumb-item">{{$terminal->service->name}} Event </li>
+                        <li class="breadcrumb-item">Schedule Event </li>
                     </ol>
                 </div>
                 <div class="col-6">
@@ -77,13 +84,13 @@
     </div>
     <div class="container-fluid">
         <div class="button-box" >
-            <a href="{{url('/admin/import')}}" class="btn bulk-upload-button btn-sm"  style="margin-right:10px;">Bulk Import Vehicle</a>&nbsp;
-            <button class="btn s add-terminal-button btn-sm"  data-toggle="modal" data-target="#vehicleModal">Add Terminal</button>
+            <a href="{{url('/admin/import')}}" class="btn bulk-upload-button btn-sm"  style="margin-right:10px;">Bulk Import Event</a>&nbsp;
+            <button class="btn s add-terminal-button btn-sm"  data-toggle="modal" data-target="#vehicleModal">View Schedule Event</button>
         </div>
         <div class="card ">
             <div class="card-body">
                 <div style="display: flex; justify-content: center;">
-                        <h1>{{$terminal->terminal_name}}</h1>
+                        <h1>{{strtoupper($bus->car_type)}}  - {{strtoupper($bus->car_registration)}}</h1>
                 </div>
             </div>
         </div>
@@ -97,23 +104,54 @@
     </div>
 
     <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modalBody" role="document" >
             <div class="modal-content">
                 <div class="modal-body">
-                    <h4>Edit Appointment</h4>
+                    <h3>Schedule Events</h3>
+                    <br>
+                    <input type="hidden" value="{{$bus->id}}" name="bus_id" id="busId"/>
+                    <div class="form-group">
+                        <label for="pick_up">Pick Up</label>
+                        <select class="form-control" name="pickup" id="pick_up">
+                            @foreach($locations as $location)
+                            <option value="{{$location->id}}" >{{$location->location}}</option>
+                            @endforeach
+                        </select>
+                    </div>
 
-                    Start time:
-                    <br />
-                    <input type="text" class="form-control" name="start_time" id="start_time">
+                    <div class="form-group">
+                        <label for="pick_up">Destination</label>
+                        <select class="form-control" naame="destination" id="destination">
+                            @foreach($locations as $location)
+                                <option value="{{$location->id}}" >{{$location->location}}</option>
+                            @endforeach
+                        </select>
+                    </div>
 
-                    End time:
-                    <br />
-                    <input type="text" class="form-control" name="finish_time" id="finish_time">
+                    <div class="form-group">
+                        <label for="terminal">Terminal</label>
+                        <select class="form-control" name="terminal" id="terminal">
+                            @foreach($terminals as $terminal)
+                                <option value="{{$terminal->id}}" >{{$terminal->terminal_name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="departure_time">Departure Time</label>
+                        <input type="time" name="departure_time" id="departure_time" class="form-control" required/>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="t_fare">Transportation Fee</label>
+                        <input type="text" name="t_fare" class="form-control" id="Tfare" required/>
+                    </div>
+
                 </div>
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <input type="button" class="btn btn-primary" id="appointment_update" value="Save">
+                    <input type="button" class="btn btn-primary btn-submit" id="appointment_update" value="Save">
                 </div>
             </div>
         </div>
@@ -134,7 +172,7 @@
             var calendar = $('#schedule_event_calender').fullCalendar({
                 editable: true,
                 editable: true,
-                events: SITEURL + "/schedule-event",
+                events: SITEURL + "/event/" + {{$bus->id}} +"/schedule",
                 displayEventTime: true,
                 eventRender: function (event, element, view) {
                     if (event.allDay === 'true') {
@@ -145,77 +183,61 @@
                 },
                 selectable: true,
                 selectHelper: true,
-                select: function (event_start, event_end, allDay) {
-                    var event_name = prompt('Event Name nnn:');
-                    if (event_name) {
-                        var event_start = $.fullCalendar.formatDate(event_start, "Y-MM-DD HH:mm:ss");
-                        var event_end = $.fullCalendar.formatDate(event_end, "Y-MM-DD HH:mm:ss");
-                        $.ajax({
-                            url: SITEURL + "/calendar-crud-ajax",
-                            data: {
-                                event_name: event_name,
-                                event_start: event_start,
-                                event_end: event_end,
-                                type: 'create'
-                            },
-                            type: "POST",
-                            success: function (data) {
-                                displayMessage("Event created.");
+                select: function (event_start, event_end, allDay ) {
+                   var modalOpen = $("#editModal").modal('show');
 
-                                calendar.fullCalendar('renderEvent', {
-                                    id: data.id,
-                                    title: event_name,
-                                    start: event_start,
-                                    end: event_end,
-                                    allDay: allDay
-                                }, true);
-                                calendar.fullCalendar('unselect');
-                            }
+                    if (modalOpen) {
+                        var event_start  = $.fullCalendar.formatDate(event_start, "Y-MM-DD HH:mm:ss");
+                        $(".btn-submit").click(function(e){
+                            var busId             = $("input[name=bus_id]").val();
+                            var departureTime     = $("input[name=departure_time]").val();
+                            var Tfare             = $("input[name=t_fare]").val();
+                            var pickUp            =  $("#pick_up").val();
+                            var terminal          = $("#terminal").val();
+                            var destination       = $("#destination").val();
+
+                            $.ajax({
+                                url: SITEURL + '/schedule/event',
+                                data: {
+                                    busId         : busId,
+                                    departureTime : departureTime ,
+                                    Tfare         : Tfare,
+                                    pickUp        : pickUp,
+                                    terminal      : terminal,
+                                    destination   : destination ,
+                                    eventDate     : event_start,
+                                },
+                                type: "POST",
+                                success: function (response) {
+                                    console.log(response)
+                                    if(response.success){
+                                        displaySuccessMessage(response.message);
+                                    }else{
+                                        displayErrorMessage(response.message);
+                                    }
+                                    setTimeout(function(){ location.reload(); }, 3000);
+                                },
+                                error: function(xhr, textStatus, error){
+                                    displayErrorMessage("An error occured");
+                                }
+                            });
+
                         });
                     }
                 },
-                eventDrop: function (event, delta) {
-                    var event_start = $.fullCalendar.formatDate(event.start, "Y-MM-DD");
-                    var event_end = $.fullCalendar.formatDate(event.end, "Y-MM-DD");
-
-                    $.ajax({
-                        url: SITEURL + '/calendar-crud-ajax',
-                        data: {
-                            title: event.event_name,
-                            start: event_start,
-                            end: event_end,
-                            id: event.id,
-                            type: 'edit'
-                        },
-                        type: "POST",
-                        success: function (response) {
-                            displayMessage("Event updated");
-                        }
-                    });
-                },
-                eventClick: function (event) {
-                    var eventDelete = confirm("Are you sure?");
-                    if (eventDelete) {
-                        $.ajax({
-                            type: "POST",
-                            url: SITEURL + '/calendar-crud-ajax',
-                            data: {
-                                id: event.id,
-                                type: 'delete'
-                            },
-                            success: function (response) {
-                                calendar.fullCalendar('removeEvents', event.id);
-                                displayMessage("Event removed");
-                            }
-                        });
-                    }
-                }
             });
         });
 
-        function displayMessage(message) {
-            toastr.success(message, 'Event');
+        function displaySuccessMessage(message) {
+            toastr.success(message, 'Successful');
         }
 
+        function displayErrorMessage(message) {
+            toastr.error(message, 'Error');
+        }
+
+
+
     </script>
+
 @endsection

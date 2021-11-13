@@ -18,7 +18,7 @@ class CreateSeatTrackersTable extends Migration
             $table->unsignedBigInteger('schedule_id');
             $table->unsignedBigInteger('bus_id');
             $table->unsignedBigInteger('seat_position');
-            $table->unsignedBigInteger('booked_status')->comment('0 = false , 1 = True');
+            $table->unsignedBigInteger('booked_status')->default(0)->comment('0 = false , 1 = selected  , 2 = booked');
             $table->timestamps();
 
             $table->foreign('schedule_id')->references('id')->on('schedules')->onDelete('cascade');

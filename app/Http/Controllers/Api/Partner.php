@@ -11,7 +11,7 @@ class Partner extends Controller
     public function store(Request $request)
     {
             $data   =  request()->validate([
-                        'name' => 'required',
+                        'full_name' => 'required',
                         'email' => 'required|email',
                         'company_name' => 'required',
                         'phone_number' => 'required'
@@ -19,7 +19,7 @@ class Partner extends Controller
 
             try {
                 $partners = new OurPartners();
-                $partners->name = $data['name'];
+                $partners->full_name = $data['full_name'];
                 $partners->email  = $data['email'];
                 $partners->company_name = $data['company_name'];
                 $partners->phone_number = $data['phone_number'];

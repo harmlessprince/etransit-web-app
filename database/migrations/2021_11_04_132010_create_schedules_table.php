@@ -23,9 +23,9 @@ class CreateSchedulesTable extends Migration
             $table->double('fare_adult')->comment("Transportation fare for adult");;
             $table->double('fare_children')->nullable()->comment("Set Transportation fare for children if any");
             $table->date('departure_date');
-            $table->date('return_date');
+            $table->date('return_date')->nullable();
             $table->time('departure_time');
-            $table->time('return_time');
+            $table->time('return_time')->nullable();
             $table->unsignedBigInteger('seats_available')->comment("Numbers of seat available");;
             $table->timestamps();
 

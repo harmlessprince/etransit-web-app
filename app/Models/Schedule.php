@@ -34,5 +34,10 @@ class Schedule extends Model
         return $this->belongsTo(Service::class , 'service_id');
     }
 
+    public function seatTracker()
+    {
+        return $this->belongsTo(SeatTracker::class);
+    }
+
 
 }

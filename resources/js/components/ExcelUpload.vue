@@ -8,13 +8,7 @@
                 <input name="file" type="file" class="form-control" v-on:change="onImageChange" ref="excel_file" id="fileInput" hidden >
                 <br/>
                 <div class="progress-bar-container">
-<!--                    <div class="progress">-->
-<!--                        <div class="bar"></div >-->
-<!--                        <div class="percent" >0%</div >-->
-<!--                      -->
-<!--                    </div>-->
                     <progress max="100" :value.prop="uploadPercentage"></progress>
-
                     <br>
                 </div>
             </div>

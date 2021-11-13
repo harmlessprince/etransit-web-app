@@ -55,4 +55,22 @@ class Booking extends Controller
 
              return  response()->json(['success'=>true ,'data' => compact('checkSchedule')]);
     }
+
+
+    public function selectSeat($schedule_id)
+    {
+
+        $seats = \App\Models\SeatTracker::where('schedule_id' , $schedule_id)->get();
+
+        return response()->json(['success' => true  , 'data' => compact('seats')]);
+    }
+
+    public function selectorTracker(Request $request)
+    {
+           $data = request()->validate([
+                'seat_id' => 'required|array'
+            ]);
+
+           return count($data['seat_id']);
+    }
 }

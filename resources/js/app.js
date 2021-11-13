@@ -11,7 +11,7 @@ import 'vuetify/dist/vuetify.min.css';
 
 window.Vue = require('vue').default;
 import FullCalendar from 'vue-full-calendar';
-import router from './router';
+// import router from './router';
 
 Vue.use(Vuetify);
 Vue.use(FullCalendar);
@@ -49,7 +49,7 @@ Vue.component('schedule-event', require('./components/ScheduleEvent.vue').defaul
 const app = new Vue({
     el: '#app',
     vuetify: new Vuetify(),
-    router,
+    // router,
     linkActiveClass: "active",
     linkExactActiveClass: "exact-active",
 

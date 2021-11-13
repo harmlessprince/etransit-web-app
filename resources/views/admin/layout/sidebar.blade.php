@@ -1,9 +1,9 @@
 <header class="main-nav">
-    <div class="logo-wrapper"><a href="index.html"><img class="img-fluid for-light" src="{{asset('assets/images/logo/logo.png')}}" alt=""><img class="img-fluid for-dark" src="../assets/images/logo/logo_dark.png" alt=""></a>
+    <div class="logo-wrapper"><a href="index.html"><img class="img-fluid for-light" src="{{asset('/images/logo/et-logo.png')}}" alt=""><img class="img-fluid for-dark" src="../assets/images/logo/logo_dark.png" alt=""></a>
         <div class="back-btn"><i class="fa fa-angle-left"></i></div>
         <div class="toggle-sidebar"><i class="status_toggle middle" data-feather="grid" id="sidebar-toggle"> </i></div>
     </div>
-    <div class="logo-icon-wrapper"><a href="index.html"><img class="img-fluid" src="{{asset('assets/images/logo/logo-icon.png')}}" alt=""></a></div>
+    <div class="logo-icon-wrapper"><a href="index.html"><img class="img-fluid" src="{{asset('/images/logo/et-logo.png')}}" alt=""></a></div>
     <nav>
         <div class="main-navbar">
             <div class="left-arrow" id="left-arrow"><i data-feather="arrow-left"></i></div>
@@ -27,12 +27,12 @@
                         </ul>
                     </li>
 
-                    <li class="sidebar-title">
-                        <div>
-                            <h6 >Service Management</h6>
-                            <p >Manage {{env('APP_NAME')}} services</p>
-                        </div>
-                    </li>
+{{--                    <li class="sidebar-title">--}}
+{{--                        <div>--}}
+{{--                            <h6 >Service Management</h6>--}}
+{{--                            <p >Manage {{env('APP_NAME')}} services</p>--}}
+{{--                        </div>--}}
+{{--                    </li>--}}
                     <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"></i><span>Services</span></a>
                         <ul class="nav-submenu menu-content">
                             <li><a href="projects.html">Manage Bus Ticketing</a></li>
@@ -42,46 +42,46 @@
                             <li><a href="projectcreate.html">Manage Plane Ticketing</a></li>
                         </ul>
                     </li>
-                    <li class="sidebar-title">
-                        <div>
-                            <h6>Schedule</h6>
-                            <p>Services schedule </p>
-                        </div>
-                    </li>
+{{--                    <li class="sidebar-title">--}}
+{{--                        <div>--}}
+{{--                            <h6>Schedule</h6>--}}
+{{--                            <p>Services schedule </p>--}}
+{{--                        </div>--}}
+{{--                    </li>--}}
                     <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"></i><span>Bus Schedules</span></a>
                         <ul class="nav-submenu menu-content">
                             <li><a href="state-color.html">Schedules</a></li>
 
                         </ul>
                     </li>
-                    <li class="sidebar-title">
-                        <div>
-                            <h6 >Vehicle Management</h6>
-                            <p >Manage {{env('APP_NAME')}} vehicles</p>
-                        </div>
-                    </li>
+{{--                    <li class="sidebar-title">--}}
+{{--                        <div>--}}
+{{--                            <h6 >Vehicle Management</h6>--}}
+{{--                            <p >Manage {{env('APP_NAME')}} vehicles</p>--}}
+{{--                        </div>--}}
+{{--                    </li>--}}
                     <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"></i><span>Vehicles</span></a>
                         <ul class="nav-submenu menu-content">
                             <li><a href="{{url('/admin/manage/vehicle')}}">Manage Vehicles</a></li>
                         </ul>
                     </li>
-                    <li class="sidebar-title">
-                        <div>
-                            <h6 >Terminal Management</h6>
-                            <p >Manage {{env('APP_NAME')}} Terminals</p>
-                        </div>
-                    </li>
+{{--                    <li class="sidebar-title">--}}
+{{--                        <div>--}}
+{{--                            <h6 >Terminal Management</h6>--}}
+{{--                            <p >Manage {{env('APP_NAME')}} Terminals</p>--}}
+{{--                        </div>--}}
+{{--                    </li>--}}
                     <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"></i><span>Terminals</span></a>
                         <ul class="nav-submenu menu-content">
                             <li><a href="{{url('/admin/manage/terminals')}}">All Terminals</a></li>
                         </ul>
                     </li>
-                    <li class="sidebar-title">
-                        <div>
-                            <h6>Roles Management</h6>
-                            <p>Roles management </p>
-                        </div>
-                    </li>
+{{--                    <li class="sidebar-title">--}}
+{{--                        <div>--}}
+{{--                            <h6>Roles Management</h6>--}}
+{{--                            <p>Roles management </p>--}}
+{{--                        </div>--}}
+{{--                    </li>--}}
                     <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="file-text"></i><span>Roles</span></a>
                         <ul class="nav-submenu menu-content">
                             <li><a class="" href="#">All Roles</a> </li>
