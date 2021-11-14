@@ -686,13 +686,28 @@ position:relative;
     box-shadow: 1px 2px 1px 2px rgba(219, 226, 241, 0.54);
 
 }
-.payment_options{
+.payment_options , .payment_button{
     margin-left:30px;
     margin-top:20px;
 }
+.payment_button{
+    background:#DC6513;
+    padding:10px;
+    color:white;
+    border:1px solid #DC6513;
+    width:250px;
+    border-radius:5px;
+    text-align:center;
+    cursor:pointer;
+}
+.payment_button:hover{
+    background:#021037;
+    border:1px solid #DC6513;
+
+}
 .receipt-box-content{
     display:grid;
-    grid-template-rows: repeat(8,1fr);
+    grid-template-rows: repeat(6,1fr);
     margin:40px;
     grid-auto-rows: minmax(20px , auto);
 }
@@ -703,13 +718,10 @@ position:relative;
     padding:20px;
 
 }
-.receipt-destination-box{
 
-        /*rgba(219, 226, 241, 0.78);*/
-}
 .receipt-calc-box{
     background:#fff;
-    grid-row:3/8;
+    grid-row:3/6;
     box-shadow: 1px 2px 1px 2px rgba(219, 226, 241, 0.54);
     padding:20px;
 
@@ -783,12 +795,36 @@ background:#DC6513;
 }
 .receipt_total{
     display:grid;
-    grid-template-columns: repeat(5,1fr);
+    grid-template-columns: repeat(10,1fr);
+}
+.trip_total h6{
+    color:#03174C;
+    font-weight:bolder;
+}
+.seat_order{
+    color:#03174C;
+    font-weight:bolder;
+    grid-column: 8/10;
+    margin-right: -61px;
+
 }
 .receipt_total .trip_total{
-    grid-column: 1/5;
+    grid-column: 1/8;
 }
+.barcode_receipt{
+    display:grid;
+    grid-template-columns: repeat(5,1fr);
+    justify-self:center;
 
+}
+.barcode_receipt .barcode_img{
+   margin-left:100px;
+}
+.receipt_validity{
+    margin-left:100px;
+    margin-top:10px;
+    color:#828282;
+}
 
 
 

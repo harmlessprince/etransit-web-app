@@ -16,7 +16,7 @@ class CreatePassengersTable extends Migration
         Schema::create('passengers', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('schedule_id');
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('user_id')->comment('user that used his / her account to book');
             $table->unsignedBigInteger('seat_tracker_id');
             $table->string('full_name');
             $table->string('gender');

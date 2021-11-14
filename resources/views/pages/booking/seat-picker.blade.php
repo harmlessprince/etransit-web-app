@@ -28,7 +28,8 @@
                         </div>
                         <div class="gender_section">
                             <div class="gender_box">
-                                <select name="gender[]" class="gender">
+                                <select name="gender[]" class="gender" required>
+                                    <option value="">Select gender</option>
                                     <option value="male">MALE</option>
                                     <option value="female">FEMALE</option>
                                 </select>
@@ -36,11 +37,11 @@
                             <div class="passenger_type radio-group">
                                 <div class="passenger_options">
                                     <label for="adult">Adult</label>
-                                    <input type="radio" name="passenger_option[]" id="adult" />
+                                    <input type="checkbox" name="passenger_option[]" value="adult" id="adult"  />
                                 </div>
                                 <div class="passenger_options">
                                     <label for="children">Children</label>
-                                    <input type="radio" name="passenger_option[]"  id="children"/>
+                                    <input type="checkbox" name="passenger_option[]" value="children" id="children" />
                                 </div>
                             </div>
                         </div>
@@ -55,19 +56,20 @@
                         </div>
                         <div class="gender_section">
                             <div class="gender_box">
-                                <select name="gender[]" class="gender">
-                                    <option>MALE</option>
-                                    <option>FEMALE</option>
+                                <select name="gender[]" class="gender" required>
+                                    <option value="">Select gender</option>
+                                    <option value="male">MALE</option>
+                                    <option value="female">FEMALE</option>
                                 </select>
                             </div>
                             <div class="passenger_type radio-group">
                                 <div class="passenger_options">
                                     <label for="adult">Adult</label>
-                                    <input type="radio" name="passenger_option[]" id="adult" />
+                                    <input type="checkbox" name="passenger_option[]" value="adult" id="adult" />
                                 </div>
                                 <div class="passenger_options">
                                     <label for="children">Children</label>
-                                    <input type="radio" name="passenger_option[]"  id="children"/>
+                                    <input type="checkbox" name="passenger_option[]" value="children" id="children" />
                                 </div>
                             </div>
                         </div>
@@ -82,19 +84,20 @@
                         </div>
                         <div class="gender_section">
                             <div class="gender_box">
-                                <select name="gender[]" class="gender[]">
-                                    <option>MALE</option>
-                                    <option>FEMALE</option>
+                                <select name="gender[]" class="gender" required>
+                                    <option value="">Select gender</option>
+                                    <option value="male">MALE</option>
+                                    <option value="female">FEMALE</option>
                                 </select>
                             </div>
                             <div class="passenger_type radio-group">
                                 <div class="passenger_options">
                                     <label for="adult">Adult</label>
-                                    <input type="radio" name="passenger_option[]" id="adult" />
+                                    <input type="checkbox" name="passenger_option[]" value="adult" id="adult" />
                                 </div>
                                 <div class="passenger_options">
-                                    <label for="children">Children</label>
-                                    <input type="radio" name="passenger_option[]"  id="children"/>
+                                    <label for="children2">Children</label>
+                                    <input type="checkbox" name="passenger_option[]" value="children" id="children" />
                                 </div>
                             </div>
                         </div>

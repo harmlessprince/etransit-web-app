@@ -106,6 +106,7 @@ class Booking extends Controller
 
          $passengerArray = [];
          $passengers = $request->full_name;
+
          foreach($passengers as $passenger)
          {
              if($passenger != null)
@@ -114,11 +115,16 @@ class Booking extends Controller
              }
          }
 
+         $passenger_options = $request['passenger_option'];
+         $passengerOptionCount = count($passenger_options);
          $passengerCount = count($passengerArray);
          //find if the seats selected matches the number of passengers listed
          $selectedSeat = \App\Models\SeatTracker::where('schedule_id',$schedule_id)
                                                             ->where('user_id',auth()->user()->id)
                                                             ->where('booked_status', 1)->get();
+
+
+         $fetchScheduleDetails = \App\Models\Schedule::where('id',$schedule_id)->with('service','bus','destination','pickup','terminal')->first();
 
         if($passengerCount != count($selectedSeat))
         {
@@ -133,7 +139,55 @@ class Booking extends Controller
             return 'number of seat selected is more than the passenger count';
         }
 
-        return view('pages.payment.payment-page');
+        if($passengerCount != $passengerOptionCount)
+        {
+
+            foreach($selectedSeat as $unbookedseat)
+            {
+                $unbookedseat->update([
+                    'booked_status' => 0,
+                    'user_id' => null
+                ]);
+            }
+            return 'The gender option count should not be more than  the passengers count ';
+        }else{
+
+            $adult = [];
+            $children = [];
+            foreach($passenger_options as $passenger_option)
+            {
+                if(strtolower($passenger_option) == 'adult')
+                {
+                    array_push($adult , $passenger_option);
+                }elseif (strtolower($passenger_option) == 'children')
+                {
+                    array_push($children , $passenger_option);
+                }
+
+            }
+        }
+
+        $adultCount = count($adult);
+        $childrenCount = count($children);
+
+        for($i = 0 ; $i < $passengerOptionCount ; $i++)
+        {
+            $createPassenger                        = new \App\Models\Passenger();
+            $createPassenger->full_name             = $request->full_name[$i];
+            $createPassenger->gender                = $request->gender[$i];
+            $createPassenger->passenger_age_range   = $request->passenger_option[$i];
+            $createPassenger->schedule_id           = $schedule_id;
+            $createPassenger->user_id               = auth()->user()->id;
+            $createPassenger->seat_tracker_id       = $selectedSeat[$i]->id;
+            $createPassenger->save();
+        }
+
+
+        $totalFare = (double)  $fetchScheduleDetails->fare_adult * (int) $adultCount +  (double) $fetchScheduleDetails->fare_children * (int) $childrenCount;
+
+        return view('pages.payment.payment-page',
+            compact('childrenCount','fetchScheduleDetails','adultCount',
+                'childrenCount','totalFare','selectedSeat'));
 
     }
 }

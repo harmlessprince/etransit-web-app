@@ -5,6 +5,7 @@ use App\Http\Controllers\Booking;
 use App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Login;
 use App\Http\Controllers\Page;
+use App\Http\Controllers\Payment;
 use Illuminate\Support\Facades\Route;
 
 
@@ -22,6 +23,8 @@ Route::get('/', [Page::class ,'index']);
 
 Route::get('/login',[Login::class , 'login']);
 Route::get('/register',[Login::class, 'register']);
+// The callback url after a payment
+Route::get('/rave/callback', [Payment::class, 'callback'])->name('callback');
 
 Route::post('/bus/bookings' , [Booking::class , 'bookingRequest'])->name('bus.booking');
 
@@ -30,6 +33,9 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('/seat-selector-tracker/',[Booking::class ,'selectorTracker']);
     Route::post('/deselect-seat' ,[Booking::class , 'deselectSeat']);
     Route::post('/book/trip/{schedule_id}',[Booking::class , 'bookTrip']);
+    // The route that the button calls to initialize payment
+    Route::post('/pay', [Payment::class, 'initialize'])->name('pay');
+
 });
 
 
