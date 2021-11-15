@@ -21,7 +21,12 @@ class Booking extends Controller
         ]);
 
 
+
+        //ensure the query does not return a data if the date the user picked has passed
+        //to avoid booking a ride that has already passed or left
+
         (int)  $data['trip_type'] ==  1  ? $checkSchedule =  Schedule::where('departure_date', $data['departure_date'])
+//            ->whereDate('departure_date','>=', $data['departure_date'])
             ->where('pickup_id', $data['destination_from'])
             ->where('destination_id',$data['destination_to'])
             ->where('seats_available' , '>=', $data['number_of_passengers'])
