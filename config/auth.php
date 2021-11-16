@@ -17,6 +17,10 @@ return [
         'guard' => 'web',
         'passwords' => 'users',
     ],
+    'admin' => [
+        'guard'=> 'eloquent',
+        'model'=> App\Models\Admin::class,
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -41,9 +45,14 @@ return [
             'provider' => 'users',
         ],
         'admin' => [
-            'redirectTo' => 'dashboard',
+            'redirectTo' => '/admin/dashboard',
             'driver' => 'session',
-            'provider' => 'admin',
+            'provider' => 'admins',
+        ],
+        'api' => [
+            'driver' => 'jwt',
+            'provider' => 'users',
+            'hash' => false,
         ],
     ],
 
@@ -69,7 +78,7 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
-        'admin' => [
+        'admins' => [
             'driver' => 'eloquent',
              'model' => App\Models\Admin::class,
         ],
@@ -101,6 +110,10 @@ return [
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,
+        ],
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Admin::class,
         ],
     ],
 

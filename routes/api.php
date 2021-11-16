@@ -30,7 +30,8 @@ Route::group(['prefix' => 'v1'], function() {
     Route::get('/rave/callback', [Payment::class, 'callback'])->name('callback');
     //store partners
     Route::post('/partners/create' , [Partner::class , 'store']);
-    Route::group(['middleware' => ['jwt.verify']], function() {
+
+    Route::group(['middleware' => 'jwt.verify'], function() {
 
         Route::get('/services' , [Service::class , 'services']);
         Route::post('/search/services' , [Service::class , 'searchServices']);

@@ -65,5 +65,9 @@
                 <div> <h5>Powered By: <span>MyAppSpace</span></h5></div>
             </div>
         </div>
+        @jquery
+        @toastr_js
+        @toastr_render
     </footer>
+
 

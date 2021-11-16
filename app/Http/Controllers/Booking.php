@@ -125,8 +125,8 @@ class Booking extends Controller
          $passengerCount = count($passengerArray);
          //find if the seats selected matches the number of passengers listed
          $selectedSeat = \App\Models\SeatTracker::where('schedule_id',$schedule_id)
-                                                            ->where('user_id',auth()->user()->id)
-                                                            ->where('booked_status', 1)->get();
+                                                    ->where('user_id',auth()->user()->id)
+                                                    ->where('booked_status', 1)->get();
 
 
          $fetchScheduleDetails = \App\Models\Schedule::where('id',$schedule_id)->with('service','bus','destination','pickup','terminal')->first();
@@ -141,7 +141,8 @@ class Booking extends Controller
                     'user_id' => null
                 ]);
             }
-            return 'number of seat selected is more than the passenger count';
+            toastr()->error('Number of seats selected must match the passenger count');
+            return  back();
         }
 
         if($passengerCount != $passengerOptionCount)
@@ -154,7 +155,8 @@ class Booking extends Controller
                     'user_id' => null
                 ]);
             }
-            return 'The gender option count should not be more than  the passengers count ';
+            toastr()->error('Please ensure the gender option is not more than the number of passenger intended for booking');
+            return  back();
         }else{
 
             $adult = [];

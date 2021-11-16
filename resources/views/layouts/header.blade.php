@@ -46,6 +46,7 @@
                     <li><a href="/" class="routerLink" active-link='active'> About Us </a></li>
                     <li><a href="/" class="routerLink" active-link='active'> Tour Packages </a></li>
                     <li><a href="/" class="routerLink" active-link='active'> Boat Cruise </a></li>
+                    <li><a href="{{url('car-hire')}}" class="routerLink" active-link='active'> Car Hire </a></li>
                     <li><a href="/" class="routerLink" active-link='active'> Hotel Bookings </a></li>
                     <li><a href="/" class="routerLink" active-link='active'> Become A Partner </a></li>
                     <li><a href="/" class="routerLink" active-link='active'> Send Parcel </a></li>

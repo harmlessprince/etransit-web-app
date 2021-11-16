@@ -22,6 +22,7 @@ class CreateTransactionsTable extends Migration
             $table->unsignedBigInteger('schedule_id');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('passenger_count')->nullable();
+            $table->string('description');
             $table->timestamps();
         });
     }

@@ -1,15 +1,15 @@
 <header class="main-nav">
-    <div class="logo-wrapper"><a href="index.html"><img class="img-fluid for-light" src="{{asset('/images/logo/et-logo.png')}}" alt=""><img class="img-fluid for-dark" src="../assets/images/logo/logo_dark.png" alt=""></a>
+    <div class="logo-wrapper"><a href="{{url('/admin/dashboard')}}"><img class="img-fluid for-light" src="{{asset('/images/logo/et-logo.png')}}" alt=""><img class="img-fluid for-dark" src="../assets/images/logo/logo_dark.png" alt=""></a>
         <div class="back-btn"><i class="fa fa-angle-left"></i></div>
         <div class="toggle-sidebar"><i class="status_toggle middle" data-feather="grid" id="sidebar-toggle"> </i></div>
     </div>
-    <div class="logo-icon-wrapper"><a href="index.html"><img class="img-fluid" src="{{asset('/images/logo/et-logo.png')}}" alt=""></a></div>
+    <div class="logo-icon-wrapper"><a href="{{url('/admin/dashboard')}}"><img class="img-fluid" src="{{asset('/images/logo/et-logo.png')}}" alt=""></a></div>
     <nav>
         <div class="main-navbar">
             <div class="left-arrow" id="left-arrow"><i data-feather="arrow-left"></i></div>
             <div id="mainnav">
                 <ul class="nav-menu custom-scrollbar">
-                    <li class="back-btn"><a href="index.html"><img class="img-fluid" src="{{asset('assets/images/logo/logo-icon.png')}}" alt=""></a>
+                    <li class="back-btn"><a href="{{url('/admin/dashboard')}}"><img class="img-fluid" src="{{asset('assets/images/logo/logo-icon.png')}}" alt=""></a>
                         <div class="mobile-back text-right"><span>Back</span><i class="fa fa-angle-right pl-2" aria-hidden="true"></i></div>
                     </li>
                     <li class="sidebar-title">
@@ -35,11 +35,12 @@
 {{--                    </li>--}}
                     <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"></i><span>Services</span></a>
                         <ul class="nav-submenu menu-content">
-                            <li><a href="projects.html">Manage Bus Ticketing</a></li>
+                            <li><a href="{{url('/admin/manage/vehicle')}}">Manage Bus Ticketing</a></li>
                             <li><a href="projectcreate.html">Manage Train Ticketing</a></li>
                             <li><a href="projectcreate.html">Manage Car Hire</a></li>
                             <li><a href="projectcreate.html">Manage Train Ticketing</a></li>
                             <li><a href="projectcreate.html">Manage Plane Ticketing</a></li>
+                            <li><a href="projectcreate.html">Manage Car Hiring</a></li>
                         </ul>
                     </li>
 {{--                    <li class="sidebar-title">--}}
@@ -60,9 +61,19 @@
 {{--                            <p >Manage {{env('APP_NAME')}} vehicles</p>--}}
 {{--                        </div>--}}
 {{--                    </li>--}}
-                    <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"></i><span>Vehicles</span></a>
+                    <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"></i><span>Bus Management</span></a>
                         <ul class="nav-submenu menu-content">
-                            <li><a href="{{url('/admin/manage/vehicle')}}">Manage Vehicles</a></li>
+                            <li><a href="{{url('/admin/manage/vehicle')}}">Manage Buses</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"></i><span>Car Hire Management</span></a>
+                        <ul class="nav-submenu menu-content">
+                            <li><a href="{{url('/admin/manage/cars')}}">Manage Car Hiring </a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"></i><span>Transactions</span></a>
+                        <ul class="nav-submenu menu-content">
+                            <li><a href="{{url('/admin/transactions')}}">Manage Transactions</a></li>
                         </ul>
                     </li>
 {{--                    <li class="sidebar-title">--}}

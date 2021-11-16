@@ -43,8 +43,8 @@
         .customizer-links .nav-link .settings i{
             display: none !important;
         }
-        .page-main-header .main-header-right{
-            padding:11px 30px !important;
+        .page-main-header .main-header-right {
+            padding: 1px 30px !important;
         }
     </style>
 

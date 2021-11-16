@@ -1,17 +1,17 @@
 @extends('layouts.app')
-<style>
-    .toast {
-        flex-basis: 350px;
-        max-width: 350px;
-        font-size: 0.875rem;
-        background-color: rgb(155 32 32 / 85%) !important;
-        background-clip: padding-box;
-        border: 1px solid rgb(155 32 32 / 85%) !important;
-        box-shadow: 0 0.25rem 0.75rem rgb(0 0 0 / 10%) !important;
-        opacity: 0;
-        border-radius: 0.25rem;
-    }
-</style>
+{{--<style>--}}
+{{--    .toast {--}}
+{{--        flex-basis: 350px;--}}
+{{--        max-width: 350px;--}}
+{{--        font-size: 0.875rem;--}}
+{{--        background-color: rgb(155 32 32 / 85%) !important;--}}
+{{--        background-clip: padding-box;--}}
+{{--        border: 1px solid rgb(155 32 32 / 85%) !important;--}}
+{{--        box-shadow: 0 0.25rem 0.75rem rgb(0 0 0 / 10%) !important;--}}
+{{--        opacity: 0;--}}
+{{--        border-radius: 0.25rem;--}}
+{{--    }--}}
+{{--</style>--}}
 @section('content')
     <div class="seat_picker_nav"></div>
     <div class="container passenger_box">

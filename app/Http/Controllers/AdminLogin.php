@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Hash;
 use Session;
@@ -22,7 +23,7 @@ class AdminLogin extends Controller
 
     public function loginAdmin(Request $request)
     {
-        $request->validate([
+       $credentials =  $request->validate([
             'email' => 'required',
             'password' => 'required',
         ]);
@@ -33,11 +34,13 @@ class AdminLogin extends Controller
             return redirect()
                 ->route('dashboard');
         }
-
         return redirect()
-            ->back()
-            ->with('error', 'Invalid Credentials');
-    }
+              ->back()
+              ->with('error', 'Invalid Credentials');
+
+
+
+ }
 
     public function logout()
     {

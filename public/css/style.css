@@ -622,7 +622,7 @@ position:relative;
 }
 .selected {
     background:#4E6CBB !important;
-    color:#fff;
+    color:#fff !important;
     border:1px solid #E0E0E0;
 }
 .available {

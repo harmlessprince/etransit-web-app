@@ -92,12 +92,14 @@ class Payment extends Controller
               $transactions->reference        = Reference::generateTrnxRef();
               $transactions->trx_ref           = $data['data']['tx_ref'];
               $transactions->amount           =  $data['data']['amount'];
-              $transactions->status           = 'Fraud Detected';
+              $transactions->status           = 'fraud-detected';
               $transactions->schedule_id      =  $scheduleId ;
               $transactions->description      = $data['data']['meta']['description'];
               $transactions->user_id          = $data['data']['meta']['user_id'];
               $transactions->passenger_count  = $adultCount + $childrenCount;
               $transactions->save();
+              toastr()->success('Payment made successfully');
+              return redirect()->intended('/');;
               DB::commit();
           }else{
               DB::beginTransaction();
@@ -134,7 +136,10 @@ class Payment extends Controller
 
 
               }
+
               DB::commit();
+              toastr()->success('Payment made successfully');
+              return redirect()->intended('/');;
           }
 
         }

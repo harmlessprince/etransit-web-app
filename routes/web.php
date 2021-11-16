@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminLogin;
 use App\Http\Controllers\Booking;
+use App\Http\Controllers\Car;
 use App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Login;
 use App\Http\Controllers\Page;
@@ -25,8 +26,8 @@ Route::get('/login',[Login::class , 'login']);
 Route::get('/register',[Login::class, 'register']);
 // The callback url after a payment
 Route::get('/rave/callback', [Payment::class, 'callback'])->name('callback');
-
 Route::post('/bus/bookings' , [Booking::class , 'bookingRequest'])->name('bus.booking');
+Route::get('/car-hire', [Car::class , 'carList']);
 
 Route::group(['middleware' => ['auth']], function() {
     Route::get('/seat-picker/{schedule_id}', [Booking::class, 'seatSelector']);

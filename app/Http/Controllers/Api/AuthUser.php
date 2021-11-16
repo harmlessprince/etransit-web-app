@@ -24,9 +24,10 @@ class AuthUser extends Controller
         } catch (JWTException $e) {
             return response()->json(['error' => 'could_not_create_token'], 500);
         }
+        
+         $token = $this->createNewToken($token);
 
-        $user = User::where('email', $request['email'])->firstorfail();
-        return response()->json(compact('token','user'));
+        return response()->json(['success' , true , compact('token',)]);
     }
 
     /* user Registration */
@@ -85,5 +86,21 @@ class AuthUser extends Controller
         }
 
         return response()->json(compact('user'));
+    }
+
+    /**
+     * Get the token array structure.
+     *
+     * @param  string $token
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    protected function createNewToken($token){
+        return response()->json([
+            'access_token' => $token,
+            'token_type' => 'bearer',
+//            'expires_in' => auth()->factory()->getTTL() * 60,
+            'user' => auth()->user()
+        ]);
     }
 }

@@ -49,5 +49,9 @@ class Schedule extends Model
         return $this->belongsTo(SeatTracker::class);
     }
 
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
+    }
 
 }
