@@ -7,15 +7,22 @@ use Illuminate\Http\Request;
 use Hash;
 use Session;
 use App\Models\Admin;
-use Illuminate\Support\Facades\Auth;
+use Auth;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
+
 class AdminLogin extends Controller
 {
-    protected $redirectTo = '/dashboard';
+    use AuthenticatesUsers;
+
+
+
+//    protected $redirectTo = '/admin/dashboard';
 
 //    public function __construct()
 //    {
 //        $this->middleware('guest:admin')->except('logout');
 //    }
+
     public function showLoginForm()
     {
         return view('admin.auth.login');
@@ -23,6 +30,7 @@ class AdminLogin extends Controller
 
     public function loginAdmin(Request $request)
     {
+
        $credentials =  $request->validate([
             'email' => 'required',
             'password' => 'required',
@@ -31,9 +39,10 @@ class AdminLogin extends Controller
         if(Auth::guard('admin')
             ->attempt($request->only(['email', 'password'])))
         {
-            return redirect()
-                ->route('admin.dashboard');
+
+            return redirect()->intended(route('admin.dashboard'));
         }
+
         return redirect()
               ->back()
               ->with('error', 'Invalid Credentials');

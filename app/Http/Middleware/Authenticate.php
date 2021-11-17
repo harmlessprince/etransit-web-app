@@ -7,24 +7,6 @@ use Illuminate\Support\Facades\Route;
 
 class Authenticate extends Middleware
 {
-//    /**
-//     * Get the path the user should be redirected to when they are not authenticated.
-//     *
-//     * @param  \Illuminate\Http\Request  $request
-//     * @return string|null
-//     */
-//    protected function redirectTo($request)
-//    {
-//        if (! $request->expectsJson()) {
-//
-//            if(Route::is('admin.*')){
-//                return url('/admin/login');
-//            }
-//
-//            return url('/login');
-//        }
-//
-//    }
     /**
      * Get the path the user should be redirected to when they are not authenticated.
      *
@@ -33,10 +15,29 @@ class Authenticate extends Middleware
      */
     protected function redirectTo($request)
     {
-        if (! $request->expectsJson()) {
-            return route('login');
 
+        if (! $request->expectsJson()) {
+
+            if(Route::is('admin.*')){
+                return  url('/admin/dashboard');
+            }
+            return route('login');
         }
+
     }
+//    /**
+//     * Get the path the user should be redirected to when they are not authenticated.
+//     *
+//     * @param  \Illuminate\Http\Request  $request
+//     * @return string|null
+//     */
+//    protected function redirectTo($request)
+//    {
+//        dd($request);
+//        if (! $request->expectsJson()) {
+//            return route('login');
+//
+//        }
+//    }
 
 }

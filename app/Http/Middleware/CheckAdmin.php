@@ -19,7 +19,7 @@ class CheckAdmin
     {
         if( !Auth::guard('admin'))
         {
-            return redirect()->route('admin.login')->with('error', 'You dont have permission to have access to this resource');
+            return redirect()->route('admin')->with('error', 'You dont have permission to have access to this resource');
 
         }
         return $next($request);

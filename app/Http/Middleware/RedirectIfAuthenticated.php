@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 class RedirectIfAuthenticated
 {
+
     /**
      * Handle an incoming request.
      *
@@ -17,18 +18,44 @@ class RedirectIfAuthenticated
      * @param  string|null  ...$guards
      * @return mixed
      */
-    public function handle(Request $request, Closure $next, ...$guards)
+    public function handle($request, Closure $next, $guard = null)
     {
-        $guards = empty($guards) ? [null] : $guards;
 
-        foreach ($guards as $guard) {
-            if (Auth::guard($guard)->check()) {
-                return redirect(RouteServiceProvider::HOME);
-            }
+        switch ($guard) {
+            case 'admin':
+                if (Auth::guard($guard)->check()) {
+                    return redirect()->route('admin.dashboard');
+                }
 
+            default:
+                if (Auth::guard($guard)->check()) {
+                    return redirect('/');
+                }
+                break;
         }
         return $next($request);
+
     }
+//    /**
+//     * Handle an incoming request.
+//     *
+//     * @param  \Illuminate\Http\Request  $request
+//     * @param  \Closure  $next
+//     * @param  string|null  ...$guards
+//     * @return mixed
+//     */
+//    public function handle(Request $request, Closure $next, ...$guards)
+//    {
+//        $guards = empty($guards) ? [null] : $guards;
+//
+//        foreach ($guards as $guard) {
+//            if (Auth::guard($guard)->check()) {
+//                return redirect(RouteServiceProvider::HOME);
+//            }
+//
+//        }
+//        return $next($request);
+//    }
 //    /**
 //     * Handle an incoming request.
 //     *

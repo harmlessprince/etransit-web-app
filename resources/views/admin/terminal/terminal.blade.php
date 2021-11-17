@@ -120,7 +120,7 @@
     </div>
     <div class="container-fluid">
         <div class="button-box" >
-            <a href="{{url('/admin/import')}}" class="btn bulk-upload-button btn-sm"  style="margin-right:10px;">Bulk Import Vehicle</a>&nbsp;
+            <a href="{{url('/admin/import-terminal')}}" class="btn bulk-upload-button btn-sm"  style="margin-right:10px;">Bulk Import Terminal</a>&nbsp;
             <button class="btn s add-terminal-button btn-sm"  data-toggle="modal" data-target="#vehicleModal">Add Terminal</button>
         </div>
         <div class="card ">
