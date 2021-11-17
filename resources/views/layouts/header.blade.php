@@ -25,12 +25,12 @@
                         <button class="sign-up">Sign Up</button>
                     </a>
                     @else
-                        <a href="{{ route('logout') }}"  onclick="event.preventDefault();
+                        <a href="{{ url('/logout') }}"  onclick="event.preventDefault();
                           document.getElementById('logout-form').submit();">
                         <button class="sign-up">Sign Out</button>
                         </a>
                     @endif
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    <form id="logout-form" action="{{ url('/logout') }}" method="POST" class="d-none">
                         @csrf
                     </form>
                 </div>

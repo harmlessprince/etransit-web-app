@@ -17,7 +17,7 @@
                             <h6>Dashboard</h6>
                         </div>
                     </li>
-                    <li ><a class="nav-link" href="{{url('/admin/dashboard')}}"><i data-feather="home"></i><span>Dashboard</span></a>
+                    <li ><a class="nav-link" href="{{route('admin.dashboard')}}"><i data-feather="home"></i><span>Dashboard</span></a>
 
                     </li>
                     <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="airplay"></i><span class="lan-6">Widgets</span></a>

@@ -1,5 +1,14 @@
 @extends('layouts.app')
-
+<style>
+    .booking-trip-button button{
+        text-decoration:none;
+        color:#000 !important;
+    }
+    .booking-trip-button button:hover{
+        text-decoration:none;
+        color:#fff !important;
+    }
+</style>
 @section('content')
 
     <div  class="container-fluid hero-bg ">
@@ -28,8 +37,8 @@
                                     <form method="POST" action="{{url('/bus/bookings')}}">
                                         @csrf
                                         <div class="booking-trip-button">
-                                            <button id="trip-btn" >One Way</button>
-                                            <button id="round-trip-btn">Round Trip</button>
+                                            <button id="trip-btn" class="toggle-single-trip-btn"  >One Way</button>
+                                            <button id="round-trip-btn" class="toggle-round-trip-btn" name="round_trip">Round Trip</button>
                                         </div>
                                         <div class="departure_box">
                                             <div class="bus-booking-departure-date">
@@ -37,13 +46,17 @@
                                                     <label for="departure" class="departure_label">Departure Date</label>
                                                     <input type="date" name="departure_date" id="departure" required/>
                                                 </div>
-                                                <div class="departure_day_box">
-                                                    <span class="departure_day">TODAY | TOMORROW </span>
+                                                <div class="date_picker return_date" style="display:none;">
+                                                    <label for="return_date" class="departure_label">Return Date</label>
+                                                    <input type="date" name="return_date" id="departure" />
                                                 </div>
+{{--                                                <div class="departure_day_box">--}}
+{{--                                                    <span class="departure_day">TODAY | TOMORROW </span>--}}
+{{--                                                </div>--}}
                                             </div>
-                                            <input type="hidden" name="service_id" value="{{$busService->id}}" />
-                                            <input type="hidden" name="trip_type" id="trip-form" value="1" />
-{{--                                            <input type="hidden" name="trip_type" id="round-trip=form" value="2"/>--}}
+                                            <input type="hidden" name="service_id"  value="{{$busService->id}}" />
+                                            <input type="hidden" name="trip_type" class="one-way-trip-input" id="trip-form" value="1"  disabled/>
+                                            <input type="hidden" name="trip_type" class="round-way-trip-input" id="round-trip=form" value="2" disabled/>
                                             <div class="form-group number_of_passengers">
                                                 <label for="number_of_persons" class="departure_count">NUMBER OF PERSONS</label>
                                                 <select id="number_of_persons" class="passengers" name="number_of_passengers" required>
@@ -58,7 +71,7 @@
                                         <div>
                                             <div class="travelling_select_box">
                                                 <div class="travelling_from_box">
-                                                    <label for="travelling_from" class="departure_label">Travelling Frome</label>
+                                                    <label for="travelling_from" class="departure_label">Travelling From</label>
                                                     <select name="destination_from" id="travelling_from">
                                                         @foreach($locations as $location)
                                                         <option value="{{$location->id}}">{{$location->location}}</option>
@@ -269,7 +282,9 @@
             </div>
         </div>
 
-
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" defer></script>
         <script type="text/javascript">
             document.getElementById("trip-btn").addEventListener("click", function(event){
                 event.preventDefault()
@@ -289,5 +304,37 @@
                 document.getElementById("trip-btn").style.backgroundColor = "#F2F2F2";
                 document.getElementById("trip-btn").style.color = "black";
             });
+        </script>
+        <script>
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+
+            $(".toggle-single-trip-btn").click(function(e){
+                e.preventDefault();
+                $('.one-way-trip-input').removeAttr('disabled');
+                $('.round-way-trip-input').attr('disabled', 'disabled');
+                $(".return_date").hide();
+
+            });
+
+            $(".toggle-round-trip-btn").click(function(e){
+                e.preventDefault();
+                $('.round-way-trip-input').removeAttr('disabled');
+                $('.one-way-trip-input').attr('disabled', 'disabled');
+                $(".return_date").show();
+                // $(".return_date").css("display", "block");
+            });
+
+
+
+
+            function displayErrorMessage(message) {
+                toastr.error(message, 'Error');
+            }
+
         </script>
 @endsection

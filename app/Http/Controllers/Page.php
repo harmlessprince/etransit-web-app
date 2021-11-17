@@ -11,8 +11,10 @@ class Page extends Controller
 
         $busService = \App\Models\Service::where('id' , 1)->first();
         $locations = \App\Models\Destination::all();
+        $tripTypes = \App\Models\TripType::all();
 
 
-        return view('pages.index',compact('busService','locations'));
+
+        return view('pages.index',compact('busService','locations','tripTypes'));
     }
 }

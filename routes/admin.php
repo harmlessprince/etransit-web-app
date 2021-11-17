@@ -11,14 +11,14 @@ use Illuminate\Support\Facades\Route;
 
 
 
-    Route::get('/' , [AdminLogin::class , 'showLoginForm'])->name('admin.login');
+    Route::get('/' , [AdminLogin::class , 'showLoginForm'])->name('admin');
 
     Route::post('/logout-admin',[AdminLogin::class , 'logout'] )->name('admin.logout');
-    Route::post('/login-user' , [AdminLogin::class , 'loginAdmin']);
+    Route::post('/login-user' , [AdminLogin::class , 'loginAdmin'])->name('admin.login');
 
-    Route::group(['middleware' => ['auth:admin']], function() {
+    Route::group(['middleware' => ['admin']], function() {
 
-        Route::get('/dashboard', [Dashboard::class, 'dashboard'])->name('dashboard');
+        Route::get('/dashboard', [Dashboard::class, 'dashboard'])->name('admin.dashboard');
 
         //vehicle management
         Route::get('/manage/vehicle', [Vehicle::class, 'manage'])->name('manage.vehicle');

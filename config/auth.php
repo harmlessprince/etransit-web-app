@@ -45,7 +45,6 @@ return [
             'provider' => 'users',
         ],
         'admin' => [
-            'redirectTo' => '/admin/dashboard',
             'driver' => 'session',
             'provider' => 'admins',
         ],
@@ -112,8 +111,10 @@ return [
             'throttle' => 60,
         ],
         'admins' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\Admin::class,
+            'provider' => 'users',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
         ],
     ],
 

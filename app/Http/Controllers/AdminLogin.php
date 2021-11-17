@@ -12,10 +12,10 @@ class AdminLogin extends Controller
 {
     protected $redirectTo = '/dashboard';
 
-    public function __construct()
-    {
-        $this->middleware('guest:admin')->except('logout');
-    }
+//    public function __construct()
+//    {
+//        $this->middleware('guest:admin')->except('logout');
+//    }
     public function showLoginForm()
     {
         return view('admin.auth.login');
@@ -32,7 +32,7 @@ class AdminLogin extends Controller
             ->attempt($request->only(['email', 'password'])))
         {
             return redirect()
-                ->route('dashboard');
+                ->route('admin.dashboard');
         }
         return redirect()
               ->back()
@@ -47,7 +47,7 @@ class AdminLogin extends Controller
         Auth::guard('admin')
             ->logout();
         return redirect()
-            ->route('admin.login');
+            ->route('admin');
     }
 
     protected function guard()

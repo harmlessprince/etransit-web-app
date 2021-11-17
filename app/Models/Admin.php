@@ -15,6 +15,7 @@ class Admin extends Authenticatable
     use HasFactory ,Notifiable, HasRoles;
     protected $guarded = ['id'];
     protected $guard = 'admin';
+    protected $guard_name = 'admin';
 
 
     protected $hidden = [

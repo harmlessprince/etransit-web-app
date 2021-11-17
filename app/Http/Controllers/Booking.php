@@ -17,38 +17,47 @@ class Booking extends Controller
             'destination_from'     => 'required|integer',
             'destination_to'       => 'required|integer',
             'number_of_passengers' => 'required',
-            'trip_type'            => 'required'
+            'trip_type'            => 'required',
         ]);
 
 
+        $data['return_date'] != null ? $request->session()->put('return_date', $data['return_date']) : $returnDate = null;
 
         //ensure the query does not return a data if the date the user picked has passed
         //to avoid booking a ride that has already passed or left
 
-        (int)  $data['trip_type'] ==  1  ? $checkSchedule =  Schedule::where('departure_date', $data['departure_date'])
-//            ->whereDate('departure_date','>=', $data['departure_date'])
-            ->where('pickup_id', $data['destination_from'])
-            ->where('destination_id',$data['destination_to'])
-            ->where('seats_available' , '>=', $data['number_of_passengers'])
-            ->with('terminal','bus','destination','pickup','service')->get()
+//        (int)  $data['trip_type'] ==  1  ? $checkSchedule =  Schedule::where('departure_date', $data['departure_date'])
+////            ->whereDate('departure_date','>=', $data['departure_date'])
+//            ->where('pickup_id', $data['destination_from'])
+//            ->where('destination_id',$data['destination_to'])
+//            ->where('seats_available' , '>=', $data['number_of_passengers'])
+//            ->with('terminal','bus','destination','pickup','service')->get()
+//
+//            : $checkSchedule =  Schedule::where('departure_date',$data['departure_date'])
+//            ->where('return_date',$data['return_date'])
+//            ->where('destination_id', $data['destination_from'])
+//            ->where('seats_available' , '>=', $data['number_of_passengers'])
+//            ->where('pickup_id',$data['destination_to'])->get();
 
-            : $checkSchedule =  Schedule::where('departure_date',$data['departure_date'])
-            ->where('return_date',$data['return_date'])
-            ->where('destination_id', $data['destination_from'])
-            ->where('seats_available' , '>=', $data['number_of_passengers'])
-            ->where('pickup_id',$data['destination_to'])->get();
-
+        $checkSchedule =  Schedule::where('departure_date', $data['departure_date'])
+                                            ->where('pickup_id', $data['destination_from'])
+                                            ->where('destination_id',$data['destination_to'])
+                                            ->where('seats_available' , '>=', $data['number_of_passengers'])
+                                            ->with('terminal','bus','destination','pickup','service')->get();
 
         //fetch destination and pick up
         $pickUp = \App\Models\Destination::where('id',$data['destination_from'])->select('location')->first();
         $destination = \App\Models\Destination::where('id',$data['destination_to'])->select('location')->first();
 
-        //fetch trip type
-        $tripType = \App\Models\TripType::where('id',$data['trip_type'])->select('type')->first();
+        //find the type of trip
+         $tripType = \App\Models\TripType::where('id',$data['trip_type'])->select('type','id')->first();
 
-        $service = \App\Models\Service::where('id',$data['service_id'])->select('name')->first();
+        !$tripType ? abort(404) : $request->session()->put('tripType', $data['trip_type']);
 
-        return view('pages.booking.booking', compact('checkSchedule','data' ,'tripType', 'service' ,'destination' ,'pickUp'));
+         $service = \App\Models\Service::where('id',$data['service_id'])->select('name')->first();
+
+        return view('pages.booking.booking', compact('checkSchedule','data' ,'tripType',
+            'service' ,'destination' ,'pickUp'));
     }
 
 
@@ -56,7 +65,6 @@ class Booking extends Controller
     {
         $fetchSeats = \App\Models\SeatTracker::where('schedule_id' ,$schedule_id)
                                         ->select('seat_position','id','booked_status')->get();
-
 
         return view('pages.booking.seat-picker' , compact('fetchSeats' ,'schedule_id'));
     }
@@ -119,14 +127,31 @@ class Booking extends Controller
                  array_push($passengerArray ,$passenger);
              }
          }
+        //find if the seats selected matches the number of passengers listed
+        $selectedSeat = \App\Models\SeatTracker::where('schedule_id',$schedule_id)
+            ->where('user_id',auth()->user()->id)
+            ->where('booked_status', 1)->get();
 
          $passenger_options = $request['passenger_option'];
-         $passengerOptionCount = count($passenger_options);
-         $passengerCount = count($passengerArray);
-         //find if the seats selected matches the number of passengers listed
-         $selectedSeat = \App\Models\SeatTracker::where('schedule_id',$schedule_id)
-                                                    ->where('user_id',auth()->user()->id)
-                                                    ->where('booked_status', 1)->get();
+
+         if(is_null($passenger_options))
+         {
+
+             foreach($selectedSeat as $unbookedseat)
+             {
+                 $unbookedseat->update([
+                     'booked_status' => 0,
+                     'user_id' => null
+                 ]);
+             }
+             toastr()->error('Please select passenger age range option');
+             return back();
+         }
+
+
+        $passengerOptionCount = count($passenger_options);
+        $passengerCount = count($passengerArray);
+
 
 
          $fetchScheduleDetails = \App\Models\Schedule::where('id',$schedule_id)->with('service','bus','destination','pickup','terminal')->first();
@@ -189,12 +214,22 @@ class Booking extends Controller
             $createPassenger->save();
         }
 
+        $returnDate = request()->session()->get('return_date');
+        $tripType = request()->session()->get('tripType');
 
-        $totalFare = (double)  $fetchScheduleDetails->fare_adult * (int) $adultCount +  (double) $fetchScheduleDetails->fare_children * (int) $childrenCount;
+        $totalFare = ((double)  $fetchScheduleDetails->fare_adult * (int) $adultCount +
+                     (double) $fetchScheduleDetails->fare_children * (int) $childrenCount) * (int) $tripType;
+
+        if((int) $tripType == 2 )
+        {
+            $returnDate  = date('d:M:Y ',strtotime($returnDate)) ;
+        } else{
+            $returnDate = null;
+        }
 
         return view('pages.payment.payment-page',
             compact('childrenCount','fetchScheduleDetails','adultCount',
-                'childrenCount','totalFare','selectedSeat'));
+                'childrenCount','totalFare','selectedSeat','returnDate'));
 
     }
 }

@@ -82,8 +82,15 @@ class Payment extends Controller
                   !$tripSchedule ? abort('404') : '';
                   $adultFare      =   (double) $tripSchedule->fare_adult;
                   $childrenFare   =   (double) $tripSchedule->fare_children;
-                  $ExpectedPay    =   $adultFare * $adultCount + $childrenFare * $childrenCount;
+                  $tripType = request()->session()->get('tripType');
 
+                  if((int) $tripType == 2)
+                  {
+                      $type = 2;
+                  }else{
+                      $type = 1;
+                  }
+                  $ExpectedPay    =  ($adultFare * $adultCount + $childrenFare * $childrenCount)* $type ;
 
           if( $ExpectedPay  !=  $data['data']['amount'])
           {
@@ -136,7 +143,7 @@ class Payment extends Controller
 
 
               }
-
+              $this->flushSession();
               DB::commit();
               toastr()->success('Payment made successfully');
               return redirect()->intended('/');;
@@ -150,6 +157,11 @@ class Payment extends Controller
             //Put desired action/code after transaction has failed here
         }
 
+    }
 
+    public function flushSession()
+    {
+        request()->session()->forget('return_date');
+        request()->session()->forget('tripType');
     }
 }

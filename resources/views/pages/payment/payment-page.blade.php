@@ -1,5 +1,14 @@
 @extends('layouts.app')
+<style>
+    /*.round_trip{*/
+    /*    display:grid;*/
+    /*    grid-template-columns: repeat(5 , 1fr);*/
 
+    /*}*/
+    /*.round_trip .trip_type{*/
+    /*    grid-column:1/5;*/
+    /*}*/
+</style>
 @section('content')
     <div class="payment-box container">
        <div class="payment">
@@ -73,6 +82,18 @@
                            <small>{{$fetchScheduleDetails->departure_time}}</small>
                        </div>
                    </div>
+                   @if(!is_null($returnDate))
+                     <div class="round_trip">
+                         <div class="trip_type">
+                             <h6>Type</h6>
+                             <small>Round Trip</small>
+                         </div>
+                         <div>
+                             <h6>Date</h6>
+                             <small>{{$returnDate}}</small>
+                         </div>
+                     </div>
+                   @endif
                    <div class="passenger_details">
                        <div class="passengers_payment">
                            <h6>PASSENGERS</h6>
