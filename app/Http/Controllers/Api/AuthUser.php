@@ -19,19 +19,11 @@ class AuthUser extends BaseController
 
     public function authenticate(Request $request)
     {
-        $credentials = $request->only('email', 'password');
-
-        //valid credential
-        $validator = Validator::make($request->all(), [
+        request()->validate( [
             'email'    => 'required|email',
             'password' => 'required|string|min:6|max:50'
         ]);
-
-
-        //Send failed response if request is not valid
-        if ($validator->fails()) {
-            return response()->json(['error' => $validator->messages()], 200);
-        }
+        $credentials = $request->only('email', 'password');
 
         //Request is validated
         //Crean token
@@ -61,19 +53,17 @@ class AuthUser extends BaseController
     public function register(Request $request)
     {
 
-        $validator = Validator::make($request->all(), [
-            'full_name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
-            'address' => 'sometimes',
-            'username' => 'required|string|max:40|unique:users',
-            'phone_number' => 'required'
+        request()->validate(
+            [
+                'full_name' => 'required|string|max:255',
+                'email' => 'required|string|email|max:255|unique:users',
+                'password' => 'required|string|min:6|confirmed',
+                'address' => 'sometimes',
+                'username' => 'required|string|max:40|unique:users',
+                'phone_number' => 'required'
                 //|regex:/(01)[0-9]{9}/',
-        ]);
-
-        if($validator->fails()){
-            return response()->json($validator->errors()->toJson(), 400);
-        }
+            ]
+        );
 
         $user = User::create([
             'full_name' => $request->get('full_name'),

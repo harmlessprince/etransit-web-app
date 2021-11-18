@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Route;
 
 
 //
-//    Route::get('/' , [AdminLogin::class , 'showLoginForm'])->name('admin');
+//    Route::get('/' , [AdminLogin::class , 'showLoginForm'])->name('admin.login.page');
 //
 //    Route::post('/logout-admin',[AdminLogin::class , 'logout'] )->name('admin.logout');
 //    Route::post('/login-user' , [AdminLogin::class , 'loginAdmin'])->name('admin.login');
