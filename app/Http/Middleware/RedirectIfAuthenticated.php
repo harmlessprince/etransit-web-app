@@ -18,65 +18,19 @@ class RedirectIfAuthenticated
      * @param  string|null  ...$guards
      * @return mixed
      */
+
     public function handle($request, Closure $next, $guard = null)
     {
 
-        switch ($guard) {
-            case 'admin':
-                if (Auth::guard($guard)->check()) {
-                    return redirect()->route('admin.dashboard');
-                }
-
-            default:
-                if (Auth::guard($guard)->check()) {
-                    return redirect('/');
-                }
-                break;
+        if ($guard == "admin" && Auth::guard($guard)->check()) {
+//            return redirect()->route('admin.dashboard');
+         return  redirect(RouteServiceProvider::ADMIN_HOME);
         }
-        return $next($request);
 
+        if (Auth::guard($guard)->check()) {
+            return redirect('/');
+        }
+
+        return $next($request);
     }
-//    /**
-//     * Handle an incoming request.
-//     *
-//     * @param  \Illuminate\Http\Request  $request
-//     * @param  \Closure  $next
-//     * @param  string|null  ...$guards
-//     * @return mixed
-//     */
-//    public function handle(Request $request, Closure $next, ...$guards)
-//    {
-//        $guards = empty($guards) ? [null] : $guards;
-//
-//        foreach ($guards as $guard) {
-//            if (Auth::guard($guard)->check()) {
-//                return redirect(RouteServiceProvider::HOME);
-//            }
-//
-//        }
-//        return $next($request);
-//    }
-//    /**
-//     * Handle an incoming request.
-//     *
-//     * @param  \Illuminate\Http\Request  $request
-//     * @param  \Closure  $next
-//     * @param  string|null  $guard
-//     * @return mixed
-//     */
-//    public function handle(Request $request, Closure $next, $guard = null)
-//    {
-//        if (Auth::guard($guard)->check()) {
-//
-//            if($guard == "admin"){
-//                //user was authenticated with admin guard.
-//                return redirect()->route('admin.dashboard');
-//            } else {
-//                //default guard.
-//                return redirect()->route('home');
-//            }
-//        }
-//
-//        return $next($request);
-//    }
 }

@@ -9,6 +9,11 @@ use App\Http\Controllers\Page;
 use App\Http\Controllers\Payment;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Schedule;
+use App\Http\Controllers\Terminal;
+use App\Http\Controllers\Transaction;
+use App\Http\Controllers\Vehicle;
+
 
 
 /*
@@ -33,7 +38,7 @@ Auth::routes();
 
 Route::get('/car-hire', [Car::class , 'carList']);
 
-Route::group(['middleware' => ['auth']], function() {
+Route::group(['middleware' => ['auth','prevent-back-history']], function() {
     Route::get('/seat-picker/{schedule_id}', [Booking::class, 'seatSelector']);
     Route::post('/seat-selector-tracker/',[Booking::class ,'selectorTracker']);
     Route::post('/deselect-seat' ,[Booking::class , 'deselectSeat']);
@@ -44,48 +49,45 @@ Route::group(['middleware' => ['auth']], function() {
 });
 
 
+Route::prefix('admin')->name('admin.')->group(function(){
 
+    Route::get('' , [AdminLogin::class , 'showLoginForm'])->name('login.page');
 
-//Route::any('{slug}' , function(){
-//    return view('welcome');
-//})->where('any','.*');
+    Route::post('/logout-admin',[AdminLogin::class , 'logout'] )->name('logout');
+    Route::post('/login-user' , [AdminLogin::class , 'loginAdmin'])->name('login');
 
+    Route::group(['middleware' => ['admin','prevent-back-history']], function() {
 
+        Route::get('/dashboard', [Dashboard::class, 'dashboard'])->name('dashboard');
+        //vehicle management
+        Route::get('/manage/vehicle', [Vehicle::class, 'manage'])->name('manage.vehicle');
+        Route::post('/add/vehicle', [Vehicle::class, 'addVehicle'])->name('add.vehicle');
 
+        //bulk import buses
+        Route::get('import', [Vehicle::class, 'importExportView']);
+        Route::get('export/vehicle', [Vehicle::class, 'exportVehicle'])->name('export.vehicle');
+        Route::post('import/vehicle', [Vehicle::class, 'importVehicle'])->name('import.vehicle');
 
+        //manage terminal
+        Route::get('manage/terminals',[Terminal::class , 'Terminals']);
+        Route::post('add/terminal',[Terminal::class , 'AddTerminal']);
 
+        //bulk import terminals
+        Route::get('import-terminal', [Terminal::class, 'importExportViewTerminal']);
+        Route::get('export/terminal', [Terminal::class, 'exportTerminal'])->name('export.terminal');
+        Route::post('import/terminal', [Terminal::class, 'importTerminal'])->name('import.terminal');
 
-//Route::group(['prefix' => 'admin'], function() {
-//
-//    Auth::routes([ 'register' => false  ]);
-//
-//    Route::group(['middleware' => ['auth:admin']] , function () {
-//            Route::get('/dashboard', [Dashboard::class, 'dashboard'])->name('admin.dashboard');
-//
-//            //vehicle management
-//            Route::get('/manage/vehicle', [Vehicle::class, 'manage'])->name('manage.vehicle');
-//            Route::post('/add/vehicle', [Vehicle::class, 'addVehicle'])->name('add.vehicle');
-//
-//            Route::get('import', [Vehicle::class, 'importExportView']);
-//            Route::get('export/vehicle', [Vehicle::class, 'exportVehicle'])->name('export.vehicle');
-//            Route::post('import/vehicle', [Vehicle::class, 'importVehicle'])->name('import.vehicle');
-//
-//            //manage terminal
-//            Route::get('manage/terminals',[Terminal::class , 'Terminals']);
-//            Route::post('add/terminal',[Terminal::class , 'AddTerminal']);
-//
-//            //schedule an event
-//            Route::get('/event/{bus_id}/schedule' ,[Schedule::class , 'scheduleEvent']);
-//            Route::post('/schedule/event', [Schedule::class , 'addEvent']);
-//
-//            //manage transactions
-//            Route::get('/transactions' , [Transaction::class , 'allTransactions']);
-//
-//            //manage car hiring module route
-//            Route::get('/manage/cars' , [Car::class ,'allCars']);
-//            Route::post('add/cars', [Car::class, 'addCars']);
-//
-//
-//    });
-//
-//});
+        //schedule an event
+        Route::get('/event/{bus_id}/schedule' ,[Schedule::class , 'scheduleEvent']);
+        Route::post('/schedule/event', [Schedule::class , 'addEvent']);
+
+        //manage transactions
+        Route::get('/transactions' , [Transaction::class , 'allTransactions']);
+
+        //manage car hiring module route
+        Route::get('/manage/cars' , [Car::class ,'allCars']);
+        Route::post('add/cars', [Car::class, 'addCars']);
+
+    });
+});
+

@@ -27,7 +27,7 @@
                         <span class="fa fa-user-o"></span>
                     </div>
                     <h3 class="text-center mb-4">Sign In</h3>
-                    <form action="{{url('admin/login-user')}}"  method="POST" class="login-form">
+                    <form action="{{route('admin.login')}}"  method="POST" class="login-form">
                         @csrf
                         <input type="hidden" name="type" value="admin">
                         <div class="form-group">

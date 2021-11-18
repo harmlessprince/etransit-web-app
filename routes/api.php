@@ -31,7 +31,7 @@ Route::group(['prefix' => 'v1'], function() {
     //store partners
     Route::post('/partners/create' , [Partner::class , 'store']);
 
-    Route::middleware('auth:sanctum')->group( function () {
+    Route::middleware('jwt.verify')->group( function () {
 
         Route::get('/services' , [Service::class , 'services']);
         Route::post('/search/services' , [Service::class , 'searchServices']);

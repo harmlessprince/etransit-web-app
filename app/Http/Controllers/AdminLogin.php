@@ -5,23 +5,19 @@ namespace App\Http\Controllers;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Hash;
+use Illuminate\Support\Facades\Auth;
 use Session;
 use App\Models\Admin;
-use Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class AdminLogin extends Controller
 {
     use AuthenticatesUsers;
 
-
-
-//    protected $redirectTo = '/admin/dashboard';
-
-//    public function __construct()
-//    {
-//        $this->middleware('guest:admin')->except('logout');
-//    }
+    public function __construct()
+    {
+        $this->middleware('guest:admin')->except('logout');
+    }
 
     public function showLoginForm()
     {
@@ -30,37 +26,32 @@ class AdminLogin extends Controller
 
     public function loginAdmin(Request $request)
     {
-
-       $credentials =  $request->validate([
-            'email' => 'required',
-            'password' => 'required',
+        $this->validate($request, [
+            'email'   => 'required|email',
+            'password' => 'required|min:6'
         ]);
 
-        if(Auth::guard('admin')
-            ->attempt($request->only(['email', 'password'])))
-        {
+        if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) {
 
-            return redirect()->intended(route('admin.dashboard'));
+            return redirect()->intended('/admin');
         }
-
-        return redirect()
-              ->back()
-              ->with('error', 'Invalid Credentials');
+        return back()->withInput($request->only('email', 'remember'));
+    }
 
 
-
- }
 
     public function logout()
     {
         Auth::guard('admin')
             ->logout();
         return redirect()
-            ->route('admin');
+            ->route('admin.login.page');
     }
 
     protected function guard()
     {
         return Auth::guard('admin');
     }
+
+
 }
