@@ -60,7 +60,7 @@ class AuthUser extends BaseController
                 'password' => 'required|string|min:6|confirmed',
                 'address' => 'sometimes',
                 'username' => 'required|string|max:40|unique:users',
-                'phone_number' => 'required'
+                'phone_number' => 'required|string|unique:users'
                 //|regex:/(01)[0-9]{9}/',
             ]
         );
