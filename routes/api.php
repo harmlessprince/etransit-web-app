@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\Booking;
 use App\Http\Controllers\Api\Partner;
 use App\Http\Controllers\Api\PasswordReset;
 use App\Http\Controllers\Api\Payment;
+use App\Http\Controllers\Api\Profile;
 use App\Http\Controllers\Api\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -43,6 +44,10 @@ Route::group(['prefix' => 'v1'], function() {
 
         // The route that the button calls to initialize payment
         Route::post('/pay', [Payment::class, 'initialize'])->name('pay');
+
+        //profile update
+        Route::get('/get-user-profile',[Profile::class,'getUserProfile']);
+        Route::post('/profile/update',[Profile::class,'profileUpdate']);
 
     });
 
