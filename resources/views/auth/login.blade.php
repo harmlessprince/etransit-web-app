@@ -38,7 +38,7 @@
                                 <form method="POST" action="{{ route('login') }}" >
                                     @csrf
                                     <div for="email" class="form-group">
-                                        <input type="email" placeholder="EMAIL" class="form-control login_form_input @error('email')is-invalid @enderror" id="enail" name="email" required/>
+                                        <input type="email" placeholder="EMAIL" class="form-control login_form_input @error('email')is-invalid @enderror" id="enail" name="email"  value="{{ old('email') }}"  required/>
                                         @error('email')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>

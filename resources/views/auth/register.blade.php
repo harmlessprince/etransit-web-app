@@ -191,7 +191,7 @@
                             <form action="{{ route('register') }}" method="POST">
                                 @csrf
                                 <div class="form-group">
-                                    <input type="text" placeholder="FULL NAME"  class="form-control login_form_input @error('full_name')is-invalid @enderror"   name="full_name" required/>
+                                    <input type="text" placeholder="FULL NAME"  class="form-control login_form_input @error('full_name')is-invalid @enderror"  value="{{ old('full_name') }}"   name="full_name" required/>
                                     @error('full_name')
                                     <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -199,7 +199,7 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <input type="address" placeholder="ADDRESS"  class="form-control login_form_input @error('address')is-invalid @enderror"   name="address" required/>
+                                    <input type="address" placeholder="ADDRESS"  class="form-control login_form_input @error('address')is-invalid @enderror"  value="{{ old('address') }}"   name="address" required/>
                                     @error('address')
                                     <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -207,7 +207,7 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" placeholder="PHONE NUMBER"  class="form-control login_form_input @error('phone_number')is-invalid @enderror"   name="phone_number" required/>
+                                    <input type="text" placeholder="PHONE NUMBER"  class="form-control login_form_input @error('phone_number')is-invalid @enderror"  value="{{ old('phone_number') }}"    name="phone_number" required/>
                                     @error('phone_number')
                                     <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -215,7 +215,7 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <input type="email" placeholder="EMAIL" class="form-control login_form_input @error('email')is-invalid @enderror"   name="email" required/>
+                                    <input type="email" placeholder="EMAIL" class="form-control login_form_input @error('email')is-invalid @enderror"  value="{{ old('email') }}"   name="email" required/>
                                         @error('email')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -223,7 +223,7 @@
                                        @enderror
                                 </div>
                                 <div class="form-group">
-                                    <input type="TEXT" placeholder="USERNAME" class="form-control login_form_input @error('username')is-invalid @enderror" name="username" required/>
+                                    <input type="TEXT" placeholder="USERNAME" class="form-control login_form_input @error('username')is-invalid @enderror" value="{{ old('username') }}"  name="username" required/>
                                     @error('username')
                                     <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
