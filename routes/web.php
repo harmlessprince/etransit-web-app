@@ -66,6 +66,11 @@ Route::prefix('admin')->name('admin.')->group(function(){
     Route::get('export/terminal', [Terminal::class, 'exportTerminal'])->name('export.terminal');
     Route::post('import/terminal', [Terminal::class, 'importTerminal'])->name('import.terminal');
 
+    //bulk import hired-cars
+    Route::get('import-terminal-cars', [Car::class, 'importExportViewTerminal']);
+    Route::get('export/cars', [Car::class, 'exportCar'])->name('export.car');
+    Route::post('import/car', [Terminal::class, 'importCar'])->name('import.car');
+
 
     Route::group(['middleware' => ['admin','prevent-back-history']], function() {
 
