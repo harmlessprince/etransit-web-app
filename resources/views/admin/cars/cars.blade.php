@@ -152,7 +152,7 @@
                                     <h6 class="card-title"> {{Ucfirst($car->car_type)}}</h6>
                                 </div>
                                 <div class="card-footer terminal-card" style="display: flex;justify-content: center;">
-                                    <a href="{{url('admin/event/'.$car->id.'/schedule')}}" class="btn schedule-button">View Car Historyt</a>
+                                    <a href="{{url('/admin/car/'.$car->id.'/history')}}" class="btn schedule-button">View Car History</a>
                                 </div>
                             </div>
                         @endforeach
@@ -178,7 +178,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Car Specifications</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Add Vehicle</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -186,32 +186,47 @@
                 <form >
 
                     <div class="modal-body">
-                        <div class="form-group">
-                            <label for="car_name">Car NAme</label>
-                            <input type="text" class="form-control" name="car_name" id="car_name" required/>
-                        </div>
-
-                        <div class="form-group">
+                        <br>
+                        <div>
                             <label for="car_type">Car Type</label>
                             <input type="text" class="form-control" name="car_type" id="car_type" required/>
                         </div>
-{{--                        <div class="form-group">--}}
-{{--                            <label for="iamge">Image</label>--}}
-{{--                            <input type="text" class="form-control" name="image" id="image" required/>--}}
-{{--                        </div>--}}
-                        <div class="form-group">
-                            <label for="mielage">Mielage</label>
-                            <input type="text" class="form-control" name="mileage" id="mileage" required/>
-                        </div>
-                        <div class="form-group">
-                            <label for="capacity">Capacity</label>
-                            <input type="number" class="form-control" name="capacity" id="capacity" required/>
-                        </div>
-
+                        <br>
                         <div>
-                            <label for="description">Car Description </label>
-                            <textarea class="form-control" name="description"   id="description" rows="5" ></textarea>
+                            <label for="car_class">Car Class </label>
+                            <input type="text" class="form-control" name="car_class" id="car_class" required/>
                         </div>
+                        <br>
+                        <div>
+                            <label for="daily_rentals">Daily Rentals</label>
+                            <input type="text" class="form-control" name="daily_rentals" id="daily_rentals" required/>
+                        </div>
+                        <br>
+                        <div>
+                            <label for="extra_hour">Extra Hour</label>
+                            <input type="text" class="form-control" name="extra_hour" id="extra_hour" required/>
+                        </div>
+                        <br>
+                        <div>
+                            <label for="sw_region_fare">SW Region (Fare)r</label>
+                            <input type="text" class="form-control" name="sw_region_fare" id="sw_region_fare" required/>
+                        </div>
+                        <br>
+                        <div>
+                            <label for="se_region_fare">SE Region (Fare)</label>
+                            <input type="text" class="form-control" name="se_region_fare" id="se_region_fare" required/>
+                        </div>
+                        <br>
+                        <div>
+                            <label for="ss_region_fare">SS Region (Fare)</label>
+                            <input type="text" class="form-control" name="ss_region_fare" id="ss_region_fare" required/>
+                        </div>
+                        <br>
+                        <div>
+                            <label for="nc_region_fare">NC Region (Fare)</label>
+                            <input type="text" class="form-control" name="nc_region_fare" id="nc_region_fare" required/>
+                        </div>
+                        <br>
 
                     </div>
                     <div class="modal-footer">
@@ -235,27 +250,38 @@
         $(".btn-submit").click(function(e){
             e.preventDefault();
 
-            var car_name       = $("input[name=car_name]").val();
-            var car_type       = $("input[name=car_type]").val();
-            var description    = $('#description').val();
-            var capacity       = $("input[name=capacity]").val();
-            var mileage        = $("input[name=mileage]").val();
+            var car_class         = $("input[name=car_class]").val();
+            var car_type          = $("input[name=car_type]").val();
+            var daily_rentals     = $("input[name=daily_rentals]").val();
+            var extra_hour        = $("input[name=extra_hour]").val();
+            var sw_fare           = $("input[name=sw_region_fare]").val();
+            var ss_fare           = $("input[name=ss_region_fare]").val();
+            var se_fare           = $("input[name=se_region_fare]").val();
+            var nc_fare           = $("input[name=nc_region_fare]").val();
+
+
 
             $.ajax({
                 type:'POST',
                 url: "/admin/add/cars",
-                data:{car_name, car_type, description , capacity , mileage },
+                data:{"_token": "{{ csrf_token() }}",car_class, car_type,daily_rentals , extra_hour , sw_fare , ss_fare , se_fare, nc_fare},
                 success:function(data){
                     if(data.success)
                     {
+                        displaySuccessMessage(data.message)
                         setTimeout(function(){
                             location.reload(true);
-                        }, 3000);
+                        }, 2000);
                     }
                 }
             });
 
         });
+
+        function displaySuccessMessage(message) {
+            toastr.success(message, 'Success');
+        }
+
     </script>
 
 @endsection

@@ -16,7 +16,7 @@
             <div class="hero-bg-text">
                 <p>Our 24 Hour's Service</p>
                 <h1>EASY , SAFE AND CONVENIENT </h1>
-                <small>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. <br> Richard McClintock, a Latin professor at Hampden-Sydney College i</small>
+                <small class="hero-sm-text">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. <br> Richard McClintock, a Latin professor at Hampden-Sydney College i</small>
             </div>
         </div>
         <div class="ticketing-section">
@@ -106,14 +106,14 @@
           <div class="about_us">
               <div>
                   <h1>ABOUT US</h1>
-                  <h4>WELCOME TO E-TRANSIT</h4>
+                  <h4 class="about_us_welcome_header">WELCOME TO E-TRANSIT</h4>
               </div>
           </div>
           <div class="about_us_box">
               <div>
                   <div class="about_us_content about_us_text">
                       <div>
-                          <h5>ABOUT <br/> E-TRANSIT</h5>
+                          <h5 class="about_e_transit_header">ABOUT <br/> <span class="about_e_transit"> E-TRANSIT </span></h5>
                       </div>
                       <div>
                           <p class="about_paragragh">
@@ -130,7 +130,7 @@
                   </div>
                   <div class="about_us_content">
                       <div>
-                          <h5>WHY <br/> CHOOSE US ?</h5>
+                          <h5 class="why_choose_us_header">WHY <br/><span class="why_choose_us_header_text"> CHOOSE US ? </span> </h5>
                       </div>
                       <div class="about_us_text about_paragragh">
                           <h6>SAVE MORE</h6>
@@ -163,7 +163,7 @@
                 </div>
             </div>
             <div>
-                <img src="{{asset('images/discount/discount_plane.png')}}" alt="about-us-image" class="discount_plane_img" height="300px" />
+                <img src="{{asset('images/discount/discount_plane.png')}}" alt="about-us-image" class="discount_plane_img plane_img" height="300px" />
             </div>
         </div>
         <div class="trending_vehicle_section">
@@ -288,12 +288,14 @@
         <script type="text/javascript">
             document.getElementById("trip-btn").addEventListener("click", function(event){
                 event.preventDefault()
+
+
                 document.getElementById("trip-btn").style.backgroundColor = "#03174C";
-                document.getElementById("trip-btn").style.color = "#fff";
+                document.getElementById("trip-btn").style.color = "#ffffff";
                 document.getElementById("trip-form").style.display = "block";
 
                 document.getElementById("round-trip-btn").style.backgroundColor = "#F2F2F2";
-                document.getElementById(" round-trip-btn").style.color = "black";
+                document.getElementById("round-trip-btn").style.color = "black";
                 document.getElementById("round-trip-form").style.display = "none";
             });
 

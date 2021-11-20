@@ -1,6 +1,8 @@
 
 body{
     background:#FDFCFC !important;
+    margin:0;
+    padding:0;
 }
 .hero-bg-section{
     position: relative;
@@ -91,6 +93,7 @@ body{
     border: 1px solid #F2F2F2;
     margin-top:20px;
 }
+
 .booking-trip-button button:hover{
     width:150px;
     background: #03174C;
@@ -387,26 +390,7 @@ body{
 #navbarSupportedContent1{
     /*display:none;*/
 }
-/* screen for 1400px */
-@media screen and (max-width: 1400px) {
 
-    .discount_plane_img {
-        width: 760px !important;
-    }
-
-    .about_us_img {
-        width: 434px !important;
-        margin-top: 30px;
-    }
-    .about_us_content .about_paragragh {
-        width: 443px;
-        height: 90px;
-        margin-left: -22px;
-    }
-    .hero-bg-text {
-        left: 347px;
-    }
-}
 
 /* bus booking page styles */
 .booking_bg{
@@ -831,11 +815,264 @@ background:#DC6513;
     color:#828282;
 }
 
+/* start of navigation header css */
+.navigation-header
+{
+    background: #021037;
+    height: 50px;
+    opacity: 0.8;
+    top:0;
+    left:0;
+}
+.nav-content{
+    display: flex;
+    justify-content: space-around;
+}
+.email-container span{
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 2.6em !important;
+    /* identical to box height */
+    color: #FFFFFF;
+}
+.social-icons img{
+    height:25px;
+    width: 15px;
+    margin-left:2px;
+    line-height: 2.6em !important;
+    margin-top:  15px;
+}
+.socials-block{
+    display:flex;
+}
+.breaker{
+    border: 1px solid #fff;
+    height: 20px;
+}
+.currency-block span  {
+    /*width: 28px;*/
+    font-weight: bold;
+    line-height: 2.6em !important;
+    margin:10px;
+    font-size: 15px;
+    color: #FFFFFF;
+}
+.login{
 
+    color: #fff;
+    background: #DC6513;
+    border-radius: 5px;
+    border: 1px solid #DC6513;
+    cursor:pointer;
+    width:90px;
+    margin-right:10px;
+}
+.login:hover{
+    color: #fff;
+    background: #021037;
+    border-radius: 5px;
+    border: 1px solid #DC6513;
+    cursor:pointer;
+    width:90px;
+    margin-right:10px;
+}
+.sign-up{
+    background: #021037;
+    opacity: 0.8;
+    border: 1px solid #DC6513;
+    color:#fff;
+    border-radius: 5px;
+    width:90px;
+}
+.sign-up:hover{
+    background: #DC6513;
+    opacity: 0.8;
+    border: 1px solid #DC6513;
+    color:#fff;
+    border-radius: 5px;
+    width:90px;
+}
+.bottom-nav{
+    background: #F2F2F2;
+    height: 60px;
+    display: flex;
+    justify-content: space-around;
+}
+.logo img{
+    margin-top: 10px;
+}
+.nav-menu ul{
+    list-style: none;
+    display:flex;
+}
+.nav-menu ul li {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    /*line-height: 21px;*/
+    margin: 15px  10px 0px 10px;
+    color:#828282;
+
+}
+.routerLink{
+    color: #828282;
+}
+.routerLink:hover{
+    color: #021037;
+    padding-bottom:10px;
+}
+/* end of navigation header css */
+.container, .container-fluid, .container-xl, .container-lg, .container-md, .container-sm{
+    padding:0px !important;
+}
+
+/* foooter css */
+.newsletter_box{
+    background: #fff !important;
+    padding: 50px;
+    display:flex;
+    justify-content: space-around;
+}
+.newsletter{
+    background:transparent;
+    border: none ;
+    width:400px !important;
+    padding: 10px;
+    border-bottom:1px solid grey;
+}
+.subscribe_button{
+    background: #DC6513;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+}
+.newsletter_form{
+    margin-top: 25px;
+}
+.footer_menus , .socials_menu{
+    display:flex;
+    justify-content: space-around;
+
+
+}
+.footer_bottom{
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height:700px;
+    margin-top: -28px;
+}
+
+.footer_menu_item h3{
+    font-weight: 800;
+    font-size: 30px;
+    line-height: 20px;
+    letter-spacing: -0.02em;
+    color: #DC6513;
+    margin-top: 120px !important;
+}
+
+.footer_menu_item h6{
+    color:white;
+}
+.sub_footer_menu ul {
+    font-size: 16px;
+    color: white;
+    list-style:none;
+    margin-bottom: 10px;
+}
+.sub_footer_menu ul li:first-child{
+    margin-top: 40px;
+}
+
+.sub_footer_menu ul li{
+    margin-bottom: 20px;
+    font-weight: bolder;
+}
+.footer_contacts h6:first-child{
+    margin-top: 40px;
+    font-size: 18px;
+}
+.footer_contacts span{
+    font-size: 18px;
+    color:white;
+}
+.socials_menu{
+    display:flex;
+    flex-direction: column;
+    margin-left: 210px;
+}
+.socials_menu h3{
+    color: white;
+    margin-buttom:30px;
+}
+.socials_icon{
+    margin-right:10px;
+}
+.copyright_section{
+    display: flex;
+    justify-content: space-between;
+
+}
+.copyright_section h5{
+    color:white;
+    margin-top: 180px;
+    margin-left:  70px;
+    margin-right:70px ;
+
+}
+
+.copyright_section h5 span{
+    color: #DC6513;
+
+}
 
 
 /* end of payment box **/
 /* responsivess for 1200px screeen */
+@media screen and (max-width: 1600px) {
+    .about_us_box {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 68px;
+    }
+    .about_us_content .about_paragragh {
+        width: 443px;
+        height: 90px;
+        margin-left: 77px;
+    }
+
+}
+/*@media screen and (min-width: 1024px) {*/
+
+/*    .about_us_content .about_paragragh {*/
+/*        width: 400px;*/
+/*        height: 90px;*/
+/*        line-height: 24px;*/
+/*        !* justify-content: space-between; *!*/
+/*    }*/
+/*}*/
+/* screen for 1400px */
+@media screen and (max-width: 1400px) {
+
+    .discount_plane_img {
+        width: 760px !important;
+    }
+
+    .about_us_img {
+        width: 434px !important;
+        margin-top: 30px;
+    }
+    .about_us_content .about_paragragh {
+        width: 443px;
+        height: 90px;
+        margin-left: -22px;
+    }
+    .hero-bg-text {
+        left: 347px;
+    }
+}
 @media screen and (max-width: 1200px) {
 
     .discount_plane_img {
@@ -859,6 +1096,15 @@ background:#DC6513;
     }
     .hero-bg-text {
         left: 251px;
+    }
+    .about_us_box {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 153px;
+        font-size: 13px;
+    }
+    .about_us_content {
+        margin-left: 238px;
     }
 }
 
@@ -1036,222 +1282,14 @@ background:#DC6513;
     }
 }
 
-/* start of navigation header css */
-.navigation-header
-{
-    background: #021037;
-    height: 50px;
-    opacity: 0.8;
-    top:0;
-    left:0;
-}
-.nav-content{
-    display: flex;
-    justify-content: space-around;
-}
-.email-container span{
-    font-style: normal;
-    font-weight: 600;
-    font-size: 18px;
-    line-height: 2.6em !important;
-    /* identical to box height */
-    color: #FFFFFF;
-}
-.social-icons img{
-    height:25px;
-    width: 15px;
-    margin-left:2px;
-    line-height: 2.6em !important;
-    margin-top:  15px;
-}
-.socials-block{
-    display:flex;
-}
-.breaker{
-    border: 1px solid #fff;
-    height: 20px;
-}
-.currency-block span  {
-    /*width: 28px;*/
-    font-weight: bold;
-    line-height: 2.6em !important;
-    margin:10px;
-    font-size: 15px;
-    color: #FFFFFF;
-}
-.login{
 
-    color: #fff;
-    background: #DC6513;
-    border-radius: 5px;
-    border: 1px solid #DC6513;
-    cursor:pointer;
-    width:90px;
-    margin-right:10px;
-}
-.login:hover{
-    color: #fff;
-    background: #021037;
-    border-radius: 5px;
-    border: 1px solid #DC6513;
-    cursor:pointer;
-    width:90px;
-    margin-right:10px;
-}
-.sign-up{
-    background: #021037;
-    opacity: 0.8;
-    border: 1px solid #DC6513;
-    color:#fff;
-    border-radius: 5px;
-    width:90px;
-}
-.sign-up:hover{
-    background: #DC6513;
-    opacity: 0.8;
-    border: 1px solid #DC6513;
-    color:#fff;
-    border-radius: 5px;
-    width:90px;
-}
-.bottom-nav{
-    background: #F2F2F2;
-    height: 60px;
-    display: flex;
-    justify-content: space-around;
-}
-.logo img{
-    margin-top: 10px;
-}
-.nav-menu ul{
-    list-style: none;
-    display:flex;
-}
-.nav-menu ul li {
-    font-style: normal;
-    font-weight: bold;
-    font-size: 18px;
-    /*line-height: 21px;*/
-    margin: 15px  10px 0px 10px;
-    color:#828282;
-
-}
-.routerLink{
-    color: #828282;
-}
-.routerLink:hover{
-    color: #021037;
-    padding-bottom:10px;
-}
-/* end of navigation header css */
-.container, .container-fluid, .container-xl, .container-lg, .container-md, .container-sm{
-    padding:0px !important;
-}
-body{
-    background: #E5E5E5;
-}
-/* foooter css */
-.newsletter_box{
-    background: #fff !important;
-    padding: 50px;
-    display:flex;
-    justify-content: space-around;
-}
-.newsletter{
-    background:transparent;
-    border: none ;
-    width:400px !important;
-    padding: 10px;
-    border-bottom:1px solid grey;
-}
-.subscribe_button{
-    background: #DC6513;
-    color: #fff;
-    padding: 10px;
-    border-radius: 5px;
-}
-.newsletter_form{
-    margin-top: 25px;
-}
-.footer_menus , .socials_menu{
-    display:flex;
-    justify-content: space-around;
-
-
-}
-.footer_bottom{
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    height:700px;
-    margin-top: -28px;
-}
-
-.footer_menu_item h3{
-    font-weight: 800;
-    font-size: 30px;
-    line-height: 20px;
-    letter-spacing: -0.02em;
-    color: #DC6513;
-    margin-top: 120px !important;
-}
-
-.footer_menu_item h6{
-    color:white;
-}
-.sub_footer_menu ul {
-    font-size: 16px;
-    color: white;
-    list-style:none;
-    margin-bottom: 10px;
-}
-.sub_footer_menu ul li:first-child{
-    margin-top: 40px;
-}
-
-.sub_footer_menu ul li{
-    margin-bottom: 20px;
-    font-weight: bolder;
-}
-.footer_contacts h6:first-child{
-    margin-top: 40px;
-    font-size: 18px;
-}
-.footer_contacts span{
-    font-size: 18px;
-    color:white;
-}
-.socials_menu{
-    display:flex;
-    flex-direction: column;
-    margin-left: 210px;
-}
-.socials_menu h3{
-    color: white;
-    margin-buttom:30px;
-}
-.socials_icon{
-    margin-right:10px;
-}
-.copyright_section{
-    display: flex;
-    justify-content: space-between;
-
-}
-.copyright_section h5{
-    color:white;
-    margin-top: 180px;
-    margin-left:  70px;
-    margin-right:70px ;
-
-}
-
-.copyright_section h5 span{
-    color: #DC6513;
-
-}
 /* end footer css */
 /* navigation optimization for 992 */
+/*@media screen and (max-width: 1024px) {*/
+/*   .nav-menu ul li a {*/
+/*       font-size:19px !important;*/
+/*    }*/
+/*}*/
 @media screen and (max-width: 992px) {
     .routerLink{
         font-size: 16px;
@@ -1276,9 +1314,6 @@ body{
         cursor: pointer;
         width: 70px;
         margin-right: 10px;
-    }
-
-    element.style {
     }
     .currency-block span {
 
@@ -1317,9 +1352,12 @@ body{
     .nav-menu ul {
         display:flex;
         flex-direction: column;
+        padding:20px;
     }
     .nav-menu ul  li:hover{
-        background: red;
+        background: #021037;
+        color:#fff;
+
     }
     .bottom-nav {
         display: none !important;
@@ -1413,7 +1451,7 @@ body{
         background: #FFFFFF;
         box-shadow: 0px 4px 30px rgb(187 187 187 / 33%);
         border-radius: 15px;
-        width: 573px;
+        width: 535px;
         height: 500px;
     }
     .hero-bg-text h1 {
@@ -1428,13 +1466,34 @@ body{
         left: -4px;
     }
     .ticket-box-menu ul li a {
-        font-size: 15px;
+        font-size: 13px;
     }
     .ticket-box-menu ul li a:hover{
-        font-size: 15px;
+        font-size: 13px;
+    }
+    .passengers {
+        margin-top: 19px;
+        padding:5px;
     }
     #departure, #destination {
         width: 165px;
+    }
+    .about_e_transit{
+        margin-left: -17px;
+    }
+    .why_choose_us_header_text{
+        margin-left: -42px;
+    }
+    .about_us_content h5 {
+        width: 200px;
+        margin-left: 28px;
+    }
+
+    .about_us {
+        margin-left: 66px;
+    }
+    .about_us h1 {
+        font-size: 29px;
     }
 
     .departure_day_box {
@@ -1534,6 +1593,75 @@ body{
     .copyright_section h5 {
         color: white;
         font-size: 9px;
+    }
+
+}
+@media screen and (max-width: 375px) {
+    .ticketing-box {
+        width: 364px;
+    }
+    #travelling_from, #travelling_to {
+        width: 145px;
+
+    }
+    .ticket-box-menu ul li a {
+        font-size: 7px;
+    }
+    .ticket-box-menu ul li a:hover{
+        font-size: 8px;
+    }
+
+    #departure, #destination {
+        width: 116px;
+        margin-bottom: 20px;
+    }
+    .trending_vehicle_items {
+        width: 20px !important;
+
+    }
+    .hero-sm-text{
+        font-size:10px !important;
+    }
+    .plane_img , .discount_bus_img{
+        display:none;
+    }
+    .about_us_content .about_paragragh {
+        width: 349px;
+    }
+    .email-container{
+        display:none;
+    }
+    .client_img {
+        width: 96px !important;
+        margin-top: 40px;
+    }
+    .newsletter {
+        width: 112px !important;
+    }
+    .footer_menu_item h3 {
+        font-size: 13px !important;
+        margin-left:10px;
+    }
+    .sub_footer_menu ul li {
+        font-size: 7px;
+        margin-left:15px;
+    }
+    .footer_contacts h6:first-child {
+        margin-top: 40px;
+        font-size: 10px;
+        margin-left:15px;
+    }
+
+    .footer_contacts span {
+        font-size: 12px;
+        color: white;
+        margin-left:15px;
+    }
+    .socials_menu h3 {
+        font-size: 12px;
+    }
+    .socials_menu {
+        margin-left: 21px !important;
     }
 
 }

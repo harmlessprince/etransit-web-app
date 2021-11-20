@@ -1,11 +1,20 @@
 @extends('layouts.app')
+<style>
+    .booking_hero_text{
+        display:grid;
+        grid-template-columns: repeat(3 , 1fr);
+    }
+    .booking_hero_icon{
+        margin-top:20px;
+    }
+</style>
 
 @section('content')
     <div class="bookings_box">
         <div class="booking_bg"  style="background-image: url('{{ asset('/images/bg/booking_hero.png')}}'); height:200px;" >
             <div class="booking_hero_text">
                 <div class="booking_hero_icon">
-                    {{-- <img src="{{asset('/images/icons/arrow_left.png')}}">--}}
+                     <img src="{{asset('/images/icons/arrow_left_2.png')}}">
                 </div>
                 <div class="booking_text">
                     <h1>{{$service->name}}</h1>

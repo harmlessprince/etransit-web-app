@@ -31,25 +31,35 @@
                         @csrf
                         <input type="hidden" name="type" value="admin">
                         <div class="form-group">
-                            <input type="text" class="form-control rounded-left" placeholder="Email" name="email" required>
+                            <input type="text" class="form-control rounded-left @error('email')is-invalid @enderror" placeholder="Email" name="email" >
+                            @error('email')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
-                        <div class="form-group d-flex">
-                            <input type="password" class="form-control rounded-left" placeholder="Password" name="password" required>
+                        <div class="form-group">
+                            <input type="password" class="form-control rounded-left @error('password')is-invalid @enderror" placeholder="Password" name="password"/>
+                            @error('password')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <button type="submit" class="form-control btn btn-primary rounded submit px-3">Login</button>
                         </div>
-                        <div class="form-group d-md-flex">
-                            <div class="w-50">
-                                <label class="checkbox-wrap checkbox-primary">Remember Me
-                                    <input type="checkbox" checked>
-                                    <span class="checkmark"></span>
-                                </label>
-                            </div>
-                            <div class="w-50 text-md-right">
-                                <a href="#">Forgot Password</a>
-                            </div>
-                        </div>
+{{--                        <div class="form-group d-md-flex">--}}
+{{--                            <div class="w-50">--}}
+{{--                                <label class="checkbox-wrap checkbox-primary">Remember Me--}}
+{{--                                    <input type="checkbox" checked>--}}
+{{--                                    <span class="checkmark"></span>--}}
+{{--                                </label>--}}
+{{--                            </div>--}}
+{{--                            <div class="w-50 text-md-right">--}}
+{{--                                <a href="#">Forgot Password</a>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
                     </form>
                 </div>
             </div>

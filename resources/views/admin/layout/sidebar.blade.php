@@ -66,7 +66,7 @@
                             <li><a href="{{url('/admin/manage/vehicle')}}">Manage Buses</a></li>
                         </ul>
                     </li>
-                    <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"></i><span>Car Hire Management</span></a>
+                    <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"></i><span>Car Hire </span></a>
                         <ul class="nav-submenu menu-content">
                             <li><a href="{{url('/admin/manage/cars')}}">Manage Car Hiring </a></li>
                         </ul>

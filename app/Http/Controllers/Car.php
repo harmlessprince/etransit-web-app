@@ -17,21 +17,26 @@ class Car extends Controller
     public function addCars(Request $request)
     {
            $data  = request()->validate([
-                            'car_name' => 'required',
                             'car_type' => 'required',
-                            'description' => 'required',
-                            'capacity' => 'required',
-                            'mileage' => 'required'
+                            'car_class' => 'required',
+                            'daily_rentals' => 'required',
+                            'extra_hour' => 'required',
+                            'sw_fare' => 'required',
+                            'ss_fare' => 'required',
+                            'se_fare' => 'required',
+                            'nc_fare' => 'required'
                         ]);
 
-           $car                = new HiredCars();
-           $car->car_name      = $data['car_name'];
-           $car->car_type      = $data['car_type'];
-           $car->description   = $data['description'];
-           $car->capacity      = (int)  $data['capacity'];
-           $car->mileage       = $data['mileage'];
-
-           $car->save();
+               $car                  = new HiredCars();
+               $car->car_class       = $data['car_class'];
+               $car->car_type        = $data['car_type'];
+               $car->daily_rentals   = $data['daily_rentals'];
+               $car->extra_hour      = $data['extra_hour'];
+               $car->sw_fare         = $data['sw_fare'];
+               $car->ss_fare         = $data['ss_fare'];
+               $car->se_fare         = $data['se_fare'];
+               $car->nc_fare         = $data['nc_fare'];
+               $car->save();
 
              return   response()->json(['success' => 'true', 'message' => 'Data saved successfully']);
 
@@ -43,5 +48,14 @@ class Car extends Controller
         $cars = HiredCars::all();
 
         return view('pages.car-hire.hire', compact('cars'));
+    }
+
+
+    public function carHistory($car_id)
+    {
+
+        $carHistory = HiredCars::where('id',$car_id)->firstorfail();
+
+        return view('admin.cars.history', compact('carHistory'));
     }
 }

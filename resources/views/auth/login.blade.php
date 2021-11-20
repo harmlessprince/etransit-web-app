@@ -23,41 +23,44 @@
 
 </head>
 <body>
-<div >
-    <nav >
-        <div class="container-fluid">
-            @include('layouts.header')
-             <div class="login_bg">
-                    <div class="login_box_section">
-                        <div class="login_box">
-                                <div class="login_box_text">
-                                  <div>
-                                      <h4>LOG IN</h4>
-                                      <p> Don't have an account ? <span class="reg_text"><a href="{{url('/register')}}">Sign Up</a></span></p>
-                                  </div>
-                                </div>
-                                <div class="form_box">
-                                    <form method="POST" action="{{ route('login') }}" >
-                                        @csrf
-                                        <div for="email" class="form-group">
-                                            <input type="email" placeholder="EMAIL" class="form-control login_form_input" id="enail" name="email"/>
-                                        </div>
-                                        <div  for="password" class="form-group">
-                                            <input type="password" placeholder="PASSWORD"  class="form-control login_form_input" id="password"  name="password"/>
-                                        </div>
-                                        <div class="login_button_action">
-                                            <button class="login_btn" type="submit">LOGIN</button>
-                                        </div>
-                                    </form>
-                                </div>
+    <div class="container-fluid">
+        @include('layouts.header')
+         <div class="login_bg">
+                <div class="login_box_section">
+                    <div class="login_box">
+                            <div class="login_box_text">
+                              <div>
+                                  <h4>LOG IN</h4>
+                                  <p> Don't have an account ? <span class="reg_text"><a href="{{url('/register')}}">Sign Up</a></span></p>
+                              </div>
+                            </div>
+                            <div class="form_box">
+                                <form method="POST" action="{{ route('login') }}" >
+                                    @csrf
+                                    <div for="email" class="form-group">
+                                        <input type="email" placeholder="EMAIL" class="form-control login_form_input @error('email')is-invalid @enderror" id="enail" name="email" required/>
+                                        @error('email')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    </div>
+                                    <div  for="password" class="form-group">
+                                        <input type="password" placeholder="PASSWORD"  class="form-control login_form_input @error('password')is-invalid @enderror" id="password"  name="password"/>
+                                        @error('password')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    </div>
+                                    <div class="login_button_action">
+                                        <button class="login_btn" type="submit">LOGIN</button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
-             </div>
-        </div>
-    </nav>
-
-
-</div>
+                </div>
+     </div>
 </body>
 </html>

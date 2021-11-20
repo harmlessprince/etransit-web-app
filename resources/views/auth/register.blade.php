@@ -191,25 +191,60 @@
                             <form action="{{ route('register') }}" method="POST">
                                 @csrf
                                 <div class="form-group">
-                                    <input type="text" placeholder="FULL NAME"  class="form-control login_form_input"   name="full_name"/>
+                                    <input type="text" placeholder="FULL NAME"  class="form-control login_form_input @error('full_name')is-invalid @enderror"   name="full_name" required/>
+                                    @error('full_name')
+                                    <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
-                                    <input type="address" placeholder="ADDRESS"  class="form-control login_form_input"   name="address"/>
+                                    <input type="address" placeholder="ADDRESS"  class="form-control login_form_input @error('address')is-invalid @enderror"   name="address" required/>
+                                    @error('address')
+                                    <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" placeholder="PHONE NUMBER"  class="form-control login_form_input"   name="phone_number"/>
+                                    <input type="text" placeholder="PHONE NUMBER"  class="form-control login_form_input @error('phone_number')is-invalid @enderror"   name="phone_number" required/>
+                                    @error('phone_number')
+                                    <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
-                                    <input type="email" placeholder="EMAIL" class="form-control login_form_input" name="email"/>
+                                    <input type="email" placeholder="EMAIL" class="form-control login_form_input @error('email')is-invalid @enderror"   name="email" required/>
+                                        @error('email')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                       @enderror
                                 </div>
                                 <div class="form-group">
-                                    <input type="TEXT" placeholder="USERNAME" class="form-control login_form_input" name="username"/>
+                                    <input type="TEXT" placeholder="USERNAME" class="form-control login_form_input @error('username')is-invalid @enderror" name="username" required/>
+                                    @error('username')
+                                    <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" placeholder="PASSWORD"  class="form-control login_form_input"   name="password"/>
+                                    <input type="password" placeholder="PASSWORD"  class="form-control login_form_input @error('password')is-invalid @enderror"   name="password" required/>
+                                    @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" placeholder="CONFIRM PASSWORD"  class="form-control login_form_input"   name="password_confirmation"/>
+                                    <input type="password" placeholder="CONFIRM PASSWORD"  class="form-control login_form_input @error('password_confirmation')is-invalid @enderror"   name="password_confirmation" required/>
+                                    @error('password_confirmation')
+                                    <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                    @enderror
                                 </div>
 
                                 <div class="login_button_action">

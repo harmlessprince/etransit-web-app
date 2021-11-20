@@ -36,13 +36,75 @@
     .booking_nav_content{
         position:relative;
     }
+    .cars_hire_body_box{
+        display:grid;
+        grid-template-columns: repeat(12 , 1fr);
+        margin-top: 20px;
+    }
+    .cars_hire_body_box   .car_list{
+        grid-column: 6/12;
+        background:#FFFFFF;
+        padding:10px;
+        margin:10px 0 10px 0;
+        box-shadow: 5px 5px 5px 5px rgba(209, 209, 209, 0.38);
+        border-radius:10px;
+    }
+    .car_name_function_box .car_name{
+        color:black;
+    }
+    .car_list_content{
+        display:grid;
+        grid-template-columns: repeat(12 , 1fr);
+        /*grid-column-gap: 10px;*/
+
+    }
+      .car_img{
+        grid-column: 1/2;
+        margin-top: 40px;
+    }
+     .car_name_function_box{
+        grid-column: 3/8;
+    }
+     .car_functionality{
+         display:grid;
+         grid-template-columns: 1fr 1fr;
+     }
+    .car_booking_button{
+        grid-column: 9/12;
+
+    }
+    .car_booking_button  button{
+         background: #03174C;
+         color: #fff;
+         padding:5px;
+         border: 1px solid #03174C;
+        margin-top: 170px;
+        cursor:pointer;
+
+
+     }
+    .car_booking_button  button:hover{
+        background: #DC6513;
+        color: #fff;
+        padding:5px;
+        border: 1px solid #DC6513;
+        cursor:pointer
+
+    }
+    .booking_hero_text{
+        display:grid;
+        grid-template-columns: repeat(3 , 1fr);
+    }
+    .booking_hero_icon{
+        margin-top:20px;
+    }
 </style>
 @section('content')
     <div class="bookings_box">
         <div class="booking_bg"  style="background-image: url('{{ asset('/images/bg/booking_hero.png')}}'); height:200px;" >
             <div class="booking_hero_text">
                 <div class="booking_hero_icon">
-                    {{-- <img src="{{asset('/images/icons/arrow_left.png')}}">--}}
+                     <img src="{{asset('/images/icons/arrow_left_2.png')}}">
                 </div>
                 <div class="booking_text">
                     <h1>Car Hire</h1>
@@ -96,6 +158,7 @@
                     </div>
                 </div>
             </div>
+
                <div class="car_hire_container">
                     <div class="car_hire_filter_box">
                       <div class="filter_header">
@@ -109,8 +172,42 @@
                         <hr>
                     </div>
                </div>
+            @for($i = 0 ; $i < 3 ; $i++)
+            <div class="cars_hire_body_box">
+               <div class="car_list">
+                   <div class="car_list_content">
+                       <div class="car_img">
+                           <img src="{{asset('/images/trending/vehicle.png')}}" alt="about-us-image"   />
+                       </div>
+                       <div class="car_name_function_box">
+                           <div class="car_name"><h5>Lexus Rx 360</h5></div>
+                           <div class="car_description">
+                               <p>lorem ipsum <br>remaining essentially unchanged.
+                                   It was popularised in the 1960s with the release of
+                                   including versions of Lorem Ipsum.</p>
+                           </div>
+                           <div class="car_functionality">
+                               <div>
+                                  <img src="{{asset('/images/icons/seat_2.png')}}" alt="about-us-image"   />  389m
+                               </div>
+                              <div>
+                                  <img src="{{asset('/images/icons/functional_2.png')}}" alt="about-us-image"   />  Functional
+                              </div>
+                               <div>
+                                   <img src="{{asset('/images/icons/seat_2.png')}}" alt="about-us-image"   /> 7 adults
+                               </div>
+                           </div>
+                       </div>
+                       <div class="car_booking_button">
+                           <button>Book Now</button>
+                       </div>
+                   </div>
+               </div>
+            </div>
+            @endfor
             </div>
         </div>
+
     </div>
 
 @endsection
