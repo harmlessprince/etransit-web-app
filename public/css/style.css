@@ -85,7 +85,7 @@ body{
     box-shadow: 0px 4px 30px rgba(187, 187, 187, 0.33);
     border-radius: 15px;
     width: 1024px;
-    height: 500px;
+    /*height: 500px;*/
 
 
 }
@@ -187,7 +187,7 @@ body{
     border: none;
     box-shadow: 0px 4px 30px rgba(187, 187, 187, 0.33);
     border-bottom:1px solid #E0E0E0;
-    width:100px !important;
+    width:100px;
     text-align: center;
 }
 .travelling_select_box{
@@ -1143,7 +1143,7 @@ background:#DC6513;
         box-shadow: 0px 4px 30px rgb(187 187 187 / 33%);
         border-radius: 15px;
         width: 854px;
-        height: 500px;
+        /*height: 500px;*/
     }
     .ticket-box-menu ul li a {
         padding: 30px;
@@ -1207,7 +1207,7 @@ background:#DC6513;
         box-shadow: 0px 4px 30px rgb(187 187 187 / 33%);
         border-radius: 15px;
         width: 699px;
-        height: 500px;
+        /*height: 500px;*/
     }
     .ticket-box-menu ul li a {
         padding: 21px;
@@ -1361,11 +1361,7 @@ background:#DC6513;
     .socials_menu {
         display: flex;
         flex-direction: column;
-        margin-left: 84px !important;
-    }
-    .nav-menu ul {
-        list-style: none;
-
+        margin-left: 84px;
     }
 
 }
@@ -1457,7 +1453,7 @@ background:#DC6513;
     .socials_menu {
         display: flex;
         flex-direction: column;
-        margin-left: 55px !important;
+        margin-left: 55px ;
     }
     .socials_menu h3{
         font-size: 17px;
@@ -1481,7 +1477,7 @@ background:#DC6513;
         box-shadow: 0px 4px 30px rgb(187 187 187 / 33%);
         border-radius: 15px;
         width: 535px;
-        height: 500px;
+        /*height: 500px;*/
     }
     .hero-bg-text h1 {
         font-weight: 800;
@@ -1611,7 +1607,7 @@ background:#DC6513;
     .socials_menu {
         display: flex;
         flex-direction: column;
-        margin-left: 27px !important;
+        margin-left: 27px;
     }
     .socials_menu h3 {
         font-size: 15px;
@@ -1652,6 +1648,123 @@ background:#DC6513;
         width: 186px;
         height: 255px;
     }
+}
+@media screen and (max-width: 414px) {
+    #travelling_from, #travelling_to {
+        width: 178px;
+    }
+    .ticketing-box {
+        width: 407px;
+        /*height: 500px;*/
+    }
+     .discount_bus_img {
+      display:none;
+    }
+    .trending_vehicle_items {
+        width: 406px;
+    }
+    .email-container span{
+        display:none;
+    }
+    .currency-block span{
+        display:none;
+    }
+    .login {
+        margin-top: 10px;
+        width:100px;
+        padding:2px;
+    }
+    .sign-up {
+        margin-top: 10px;
+        width:100px;
+        padding:2px;
+        margin-right: -58px;
+    }
+    .about_us_dot {
+      display:none;
+    }
+    .abouts_header_2_box {
+        margin-left: 113px;
+    }
+    .why_etransit_2 {
+        margin-top: 41px;
+    }
+    .plane_img{
+        display:none;
+    }
+    .footer_menu_item h3 {
+        font-weight: 800;
+        font-size: 14px;
+    }
+    .sub_footer_menu ul li {
+        font-size: 7px;
+    }
+    .footer_contacts h6:first-child {
+        margin-top: 40px;
+        font-size: 11px;
+    }
+    .footer_contacts span {
+        font-size: 12px;
+        color: white;
+    }
+    .socials_menu {
+        display: flex;
+        flex-direction: column;
+        margin-left: 19px;
+    }
+    .nav-menu ul {
+        list-style: none;
+    }
+    #departure, #destination {
+        width: 370px;
+    }
+    .departure_box{
+        display:grid;
+        grid-template-columns: repeat(1 , 1fr);
+    }
+    .bus-booking-departure-date{
+        display:grid;
+        grid-template-columns: repeat(1 , 1fr);
+    }
+    .passengers {
+        width: 366px;
+    }
+    .departure_count{
+        font-size:14px;
+    }
+    .ticketing-box {
+        width: 407px;
+        /*height: 610px;*/
+    }
+    .return_date{
+        margin-top:20px;
+    }
+    .header_text{
+        margin-top: 780px;
+    }
+    .get_started_btn {
+        margin-left: -36px;
+    }
+    .trending_header_text{
+        display:flex;
+        justify-content:center;
+        margin-left: 35px;
+    }
+    .trending_header_text h3{
+        font-size:16px;
+    }
+    .trending_header_text p{
+        font-size:10px;
+    }
+    .newsletter {
+        width: 259px;
+    }
+    .newsletter_box {
+        padding: 35px;
+        display:grid;
+    }
+
+
 }
 @media screen and (max-width: 375px) {
     .ticketing-box {

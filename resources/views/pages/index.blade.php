@@ -156,13 +156,6 @@
 
 }
 
-
-
-
-
-
-
-
 </style>
 @section('content')
 
@@ -196,6 +189,9 @@
                                         <div class="booking-trip-button">
                                             <button id="trip-btn" class="toggle-single-trip-btn"  >One Way</button>
                                             <button id="round-trip-btn" class="toggle-round-trip-btn" name="round_trip">Round Trip</button>
+                                            <input type="hidden" name="service_id"  value="{{$busService->id}}" />
+                                            <input type="hidden" name="trip_type" class="one-way-trip-input" id="trip-form" value="1"  disabled/>
+                                            <input type="hidden" name="trip_type" class="round-way-trip-input" id="round-trip=form" value="2" disabled/>
                                         </div>
                                         <div class="departure_box">
                                             <div class="bus-booking-departure-date">
@@ -207,13 +203,7 @@
                                                     <label for="return_date" class="departure_label">Return Date</label>
                                                     <input type="date" name="return_date" id="departure" />
                                                 </div>
-{{--                                                <div class="departure_day_box">--}}
-{{--                                                    <span class="departure_day">TODAY | TOMORROW </span>--}}
-{{--                                                </div>--}}
                                             </div>
-                                            <input type="hidden" name="service_id"  value="{{$busService->id}}" />
-                                            <input type="hidden" name="trip_type" class="one-way-trip-input" id="trip-form" value="1"  disabled/>
-                                            <input type="hidden" name="trip_type" class="round-way-trip-input" id="round-trip=form" value="2" disabled/>
                                             <div class="form-group number_of_passengers">
                                                 <label for="number_of_persons" class="departure_count">NUMBER OF PERSONS</label>
                                                 <select id="number_of_persons" class="passengers" name="number_of_passengers" required>
