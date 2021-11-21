@@ -62,7 +62,7 @@
             </div>
             <div class="copyright_section">
                 <div> <h5>Copyright 2021 by E-Transit Africa</h5> </div>
-                <div> <h5>Powered By: <span>MyAppSpace</span></h5></div>
+                <div> <h5 class="powered_by">Powered By: <span>MyAppSpace</span></h5></div>
             </div>
         </div>
         @jquery

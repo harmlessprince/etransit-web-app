@@ -8,6 +8,161 @@
         text-decoration:none;
         color:#fff !important;
     }
+
+    .about_us_header{
+        margin-top: 580px;
+
+    }
+
+    .header_text{
+        margin-top: 607px;
+        display:flex;
+        justify-content: center;
+    }
+    .header_text_2{
+        display:flex;
+        justify-content: center;
+        color:#03174C;
+        font-weight: bolder;
+    }
+    .about_us_box_2{
+        display:grid;
+        grid-template-columns: repeat(14, 1fr);
+        /*height:200px;*/
+
+    }
+    .abouts_header_2_box{
+        grid-column: 2/4;
+        display:grid;
+        grid-template-rows: repeat(4,1fr);
+    }
+    .why_etransit_2{
+        grid-row:3/4;
+    }
+    .round_dot{
+        border-radius: 50%;
+        background:#E0E0E0;
+        height: 20px;
+        width:20px;
+        grid-row: 1/4;
+
+    }
+   .round_inner_dot{
+       border-radius: 50%;
+       background:#DC6513;
+       height: 20px;
+       width:20px;
+   }
+   .about_us_dot{
+       display:grid;
+       grid-template-rows: repeat(6, 1fr);
+
+   }
+   .content{
+       grid-column: 5/9;
+   }
+   .about_img_2{
+       grid-column: 10/13;
+   }
+    .about_img_2 img{
+        height:400px;
+    }
+    .about_img_2 img {
+        height: 349px;
+    }
+
+   .about_etransit_2{
+       grid-column: 1/3;
+   }
+.content_text{
+    grid-row: 20px;
+}
+.save_more_box{
+    margin-top: 55px;
+}
+
+@media screen and (max-width: 1400px) {
+    .about_img_2 img {
+        height: 349px;
+    }
+}
+@media screen and (max-width: 1200px) {
+    .about_us_box_2 {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+
+    }
+    .abouts_header_2_box{
+        grid-column: 2/;
+        display:grid;
+        grid-template-rows: repeat(4,1fr);
+    }
+    .content{
+        grid-column: 3/;
+       margin-right:10px;
+    }
+    .about_img_2{
+        grid-column: 5/;
+    }
+    .about_img_2 img{
+        height:300px;
+    }
+}
+@media screen and (max-width: 1024px) {
+        .trending_vehicle_items {
+            width: 1004px;
+        }
+        .discount_plane_img {
+            width: 482px;
+        }
+        .about_img_2 img {
+            height: 237px;
+        }
+    }
+@media screen and (max-width: 992px) {
+    .abouts_header_2_box {
+        grid-column: 3;
+        display: grid;
+        grid-template-rows: repeat(4,1fr);
+    }
+    .about_us_dot {
+        margin-left: 36px;
+    }
+
+}
+@media screen and (max-width: 576px) {
+       .about_img_2{
+           display:none;
+       }
+    .trending_vehicle_items {
+        width: 571px;
+    }
+    .abouts_header_2_box {
+        margin-left: 46px;
+    }
+
+}
+@media screen and (max-width: 375px) {
+    .about_us_dot {
+        display:none;
+    }
+    .abouts_header_2_box {
+        margin-left: 136px;
+    }
+    .why_etransit_2 {
+        margin-top: 56px;
+    }
+
+
+}
+
+
+
+
+
+
+
+
 </style>
 @section('content')
 
@@ -16,7 +171,9 @@
             <div class="hero-bg-text">
                 <p>Our 24 Hour's Service</p>
                 <h1>EASY , SAFE AND CONVENIENT </h1>
-                <small class="hero-sm-text">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. <br> Richard McClintock, a Latin professor at Hampden-Sydney College i</small>
+                <small class="hero-sm-text">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots
+                    in a piece of classical Latin literature from 45 BC, making it over 2000 years old.
+                    <br> Richard McClintock, a Latin professor at Hampden-Sydney College i</small>
             </div>
         </div>
         <div class="ticketing-section">
@@ -102,51 +259,107 @@
                 </div>
             </div>
         </div>
-        <div class="about-us-box">
-          <div class="about_us">
-              <div>
-                  <h1>ABOUT US</h1>
-                  <h4 class="about_us_welcome_header">WELCOME TO E-TRANSIT</h4>
-              </div>
-          </div>
-          <div class="about_us_box">
-              <div>
-                  <div class="about_us_content about_us_text">
-                      <div>
-                          <h5 class="about_e_transit_header">ABOUT <br/> <span class="about_e_transit"> E-TRANSIT </span></h5>
-                      </div>
-                      <div>
-                          <p class="about_paragragh">
-                              Etransit Africa is an African-focused transportation service company that exists to provide individuals
-                              and cooperate bodies with satisfactory  transportation services on a timely and consistent basis.
-                          </p>
-                          <p class="about_paragragh"> The company started operations in 2019 as an interstate transport company in Nigeria but projects
-                              to provide transportation services across Africa. Our team of highly trained professionals are always
-                              working towards making each travel experience worth every penny.
-                              Read more
-                          </p>
-                      </div>
+{{--        <div class="about-us-box">--}}
+{{--          <div class="about_us">--}}
+{{--              <div>--}}
+{{--                  <h1>ABOUT US</h1>--}}
+{{--                  <h4 class="about_us_welcome_header">WELCOME TO E-TRANSIT</h4>--}}
+{{--              </div>--}}
+{{--          </div>--}}
+{{--          <div class="about_us_box">--}}
+{{--              <div>--}}
+{{--                  <div class="about_us_content about_us_text">--}}
+{{--                      <div>--}}
+{{--                          <h5 class="about_e_transit_header">ABOUT <br/> <span class="about_e_transit"> E-TRANSIT </span></h5>--}}
+{{--                      </div>--}}
+{{--                      <div>--}}
+{{--                          <p class="about_paragragh">--}}
+{{--                              Etransit Africa is an African-focused transportation service company that exists to provide individuals--}}
+{{--                              and cooperate bodies with satisfactory  transportation services on a timely and consistent basis.--}}
+{{--                          </p>--}}
+{{--                          <p class="about_paragragh"> The company started operations in 2019 as an interstate transport company in Nigeria but projects--}}
+{{--                              to provide transportation services across Africa. Our team of highly trained professionals are always--}}
+{{--                              working towards making each travel experience worth every penny.--}}
+{{--                              Read more--}}
+{{--                          </p>--}}
+{{--                      </div>--}}
 
-                  </div>
-                  <div class="about_us_content">
-                      <div>
-                          <h5 class="why_choose_us_header">WHY <br/><span class="why_choose_us_header_text"> CHOOSE US ? </span> </h5>
-                      </div>
-                      <div class="about_us_text about_paragragh">
-                          <h6>SAVE MORE</h6>
-                          <p class="why_choose_us">Get the best affordable rates. Book your trips with us today</p>
-                          <h6>RELIABLE</h6>
-                          <p class="why_choose_us"> Don’t get stuck with the rest, journey with the best.</p>
-                          <h6>GREAT FEEDBACK</h6>
-                          <p class="why_choose_us">Your safety and comfort is our number one priority</p>
-                      </div>
-                  </div>
-              </div>
-              <div>
-                  <div> <img src="{{asset('images/about-us/about-us.png')}}" alt="about-us-image"  class="about_us_img" height="400px"/></div>
-              </div>
-          </div>
-      </div>
+{{--                  </div>--}}
+{{--                  <div class="about_us_content">--}}
+{{--                      <div>--}}
+{{--                          <h5 class="why_choose_us_header">WHY <br/><span class="why_choose_us_header_text"> CHOOSE US ? </span> </h5>--}}
+{{--                      </div>--}}
+{{--                      <div class="about_us_text about_paragragh">--}}
+{{--                          <h6>SAVE MORE</h6>--}}
+{{--                          <p class="why_choose_us">Get the best affordable rates. Book your trips with us today</p>--}}
+{{--                          <h6>RELIABLE</h6>--}}
+{{--                          <p class="why_choose_us"> Don’t get stuck with the rest, journey with the best.</p>--}}
+{{--                          <h6>GREAT FEEDBACK</h6>--}}
+{{--                          <p class="why_choose_us">Your safety and comfort is our number one priority</p>--}}
+{{--                      </div>--}}
+{{--                  </div>--}}
+{{--              </div>--}}
+{{--              <div>--}}
+{{--                  <div> <img src="{{asset('images/about-us/about-us.png')}}" alt="about-us-image"  class="about_us_img" height="400px"/></div>--}}
+{{--              </div>--}}
+{{--          </div>--}}
+{{--      </div>--}}
+        <div class="header_text">
+            <div><h3>ABOUT US</h3></div>
+        </div>
+        <div class="header_text_2">
+            <div><p>WELCOME TO E-TRANSIT </p></div>
+        </div>
+
+        <div class="about_us_box">
+
+            <div class="about_us_box_2">
+                <div class="abouts_header_2_box">
+                    <div class="about_etransit_2">
+                        <div><h6>About</h6></div>
+                        <div><h6>E-TRANSIT</h6></div>
+                    </div>
+                    <div class="why_etransit_2">
+                        <div><h6>WHY</h6></div>
+                        <div><h6>CHOOSE US ?</h6></div>
+                    </div>
+                </div>
+                <div class="about_us_dot">
+                    <div class="round_dot"></div>
+                    <div class="round_inner_dot"></div>
+                </div>
+                <div class="content">
+                    <div class="content_text">
+                        <p>Etransit Africa is an African-focused transportation service company that exists to provide
+
+                            individuals and cooperate bodies with satisfactory transportation services on a timely and
+
+                            consistent basis.
+
+                            The company started operations in 2019 as an interstate transport company in Nigeria but projects
+
+                            to provide transportation services across Africa. Our team of highly trained professionals are always
+
+                            working towards making each travel experience worth every penny.
+
+                            Read more</p>
+                    </div>
+                    <div class="save_more_box">
+                        <h6>SAVE MORE</h6>
+                        <P>Get the best affordable rates. Book your trips with us today</P>
+                        <h6>RELIABLE</h6>
+                        <P>Don’t get stuck with the rest, journey with the best.</P>
+                        <h6>GREAT FEEDBACK</h6>
+                        <P>Your safety and comfort is our number one priority</P>
+                    </div>
+                </div>
+                <div class="about_img_2">
+                    <div> <img src="{{asset('images/about-us/about-us.png')}}" alt="about-us-image"  /></div>
+                </div>
+
+            </div>
+        </div>
+
         <div class="discount_bg">
             <div>
                 <img src="{{asset('images/discount/discount_bus.png')}}" alt="about-us-image" class="discount_bus_img" height="350px"/>
@@ -340,3 +553,5 @@
 
         </script>
 @endsection
+
+

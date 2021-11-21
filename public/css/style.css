@@ -4,6 +4,11 @@ body{
     margin:0;
     padding:0;
 }
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
 .hero-bg-section{
     position: relative;
 }
@@ -68,6 +73,7 @@ body{
     display: flex;
     justify-content: center;
     height: 450px;
+
 
 }
 
@@ -289,7 +295,7 @@ body{
 }
 .discount_plane_img{
     /*width:1000px !important;*/
-    width: 918px !important;
+    width: 918px;
 }
 .trending_vehicle_items{
     display:flex;
@@ -937,7 +943,7 @@ background:#DC6513;
 .newsletter{
     background:transparent;
     border: none ;
-    width:400px !important;
+    width:400px ;
     padding: 10px;
     border-bottom:1px solid grey;
 }
@@ -1013,13 +1019,17 @@ background:#DC6513;
 .copyright_section{
     display: flex;
     justify-content: space-between;
+    height: 200px;
+    padding-bottom: 20px;
+    align-items: flex-end;
+    padding: 0px 4%;
 
 }
 .copyright_section h5{
     color:white;
-    margin-top: 180px;
+    /* margin-top: 180px;
     margin-left:  70px;
-    margin-right:70px ;
+    margin-right:70px ; */
 
 }
 
@@ -1057,7 +1067,7 @@ background:#DC6513;
 @media screen and (max-width: 1400px) {
 
     .discount_plane_img {
-        width: 760px !important;
+        width: 760px;
     }
 
     .about_us_img {
@@ -1074,10 +1084,9 @@ background:#DC6513;
     }
 }
 @media screen and (max-width: 1200px) {
-
     .discount_plane_img {
-        width: 675px !important;
-    }
+        width: 632px;
+     }
     .trending_vehicle_items {
         width: 1155px;
         overflow: scroll;
@@ -1107,7 +1116,23 @@ background:#DC6513;
         margin-left: 238px;
     }
 }
+@media screen and (max-width: 1024px) {
 
+    .nav-menu ul li {
+        font-size: 15px;
+    }
+    .discount_plane_img {
+        width: 525px;
+    }
+    .socials_menu {
+        margin-left: 87px;
+    }
+    .trending_vehicle_items {
+        width: 1009px;
+
+    }
+
+}
 @media screen and (max-width: 992px) {
 
     .ticketing-box {
@@ -1131,16 +1156,16 @@ background:#DC6513;
         margin-left: -133px;
     }
     .discount_plane_img {
-        width: 514px !important;
+        width: 514px;
     }
     .discount_bus_img {
         width: 237px !important;
         margin-top: 40px;
     }
-    .trending_vehicle_items {
-        width: 991px;
-        overflow: scroll;
-    }
+    /*.trending_vehicle_items {*/
+    /*    width: 991px;*/
+    /*    overflow: scroll;*/
+    /*}*/
     .trending_vehicle_item {
         background: #fff !important;
         box-shadow: 0px 3px 20px rgb(209 209 209 / 38%);
@@ -1164,6 +1189,9 @@ background:#DC6513;
     }
     .hero-bg-text {
         left: 126px;
+    }
+    .trending_vehicle_items {
+        width: 988px;
     }
 }
 @media screen and (max-width: 768px) {
@@ -1234,7 +1262,7 @@ background:#DC6513;
     }
 
     .discount_plane_img {
-        width: 323px !important;
+        width: 323px;
         height: 255px;
     }
     .discount_bus_img {
@@ -1271,9 +1299,10 @@ background:#DC6513;
         font-size: 14px;
     }
     .trending_vehicle_items {
-        width: 756px;
+        width: 765px;
         overflow: scroll;
     }
+
     #travelling_from , #travelling_to {
         width: 287px;
     }
@@ -1378,7 +1407,7 @@ background:#DC6513;
     .newsletter {
         background: transparent;
         border: none;
-        width: 204px !important;
+        width: 204px ;
         padding: 10px;
         border-bottom: 1px solid grey;
     }
@@ -1545,11 +1574,8 @@ background:#DC6513;
         height: 255px;
     }
     .discount_plane_img {
-        width: 238px !important;
-        height: 206px;
+        width: 238px;
         height: 255px;
-
-
 
     }
     .discount_bus_img {
@@ -1577,7 +1603,7 @@ background:#DC6513;
         font-size: 7px;
     }
     .newsletter {
-        width: 177px !important;
+        width: 177px;
     }
     .subscribe_button {
         font-size: 9px;
@@ -1594,7 +1620,38 @@ background:#DC6513;
         color: white;
         font-size: 9px;
     }
+    .copyright_section{
+        display: flex;
+        /* justify-content: space-between; */
+        flex-direction: column;
+        /*height: 250px;*/
+        justify-content: flex-end;
+        /*padding-bottom: 20px;*/
+        /* align-items: flex-end; */
+        padding: 0px 4%;
 
+    }
+    .copyright_section h5{
+        margin-bottom: -106px;
+    }
+
+    .copyright_section  .powered_by{
+        margin-top: 60px;
+
+    }
+
+}
+@media screen and (max-width: 540px) {
+    .trending_vehicle_items {
+        width: 536px;
+    }
+    .copyright_section {
+        height: 154px;
+    }
+    .discount_plane_img {
+        width: 186px;
+        height: 255px;
+    }
 }
 @media screen and (max-width: 375px) {
     .ticketing-box {
@@ -1616,8 +1673,7 @@ background:#DC6513;
         margin-bottom: 20px;
     }
     .trending_vehicle_items {
-        width: 20px !important;
-
+        width: 332px;
     }
     .hero-sm-text{
         font-size:10px !important;
@@ -1635,9 +1691,7 @@ background:#DC6513;
         width: 96px !important;
         margin-top: 40px;
     }
-    .newsletter {
-        width: 112px !important;
-    }
+
     .footer_menu_item h3 {
         font-size: 13px !important;
         margin-left:10px;
@@ -1661,8 +1715,30 @@ background:#DC6513;
         font-size: 12px;
     }
     .socials_menu {
-        margin-left: 21px !important;
+        margin-left: 21px;
     }
+    .trending_header_text{
+        display:flex;
+        justify-content:center;
+        margin-left:52px;
+    }
+    .trending_header_text h3{
+        font-size:17px;
+    }
+    .trending_header_text p {
+       font-size:12px;
+    }
+    .client_header_text h3 {
+        font-size: 17px;
+    }
+    .newsletter {
+        width: 219px;
+    }
+    .newsletter_box {
+        padding: 37px;
+        display:grid;
+    }
+
 
 }
 
