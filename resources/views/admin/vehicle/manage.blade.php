@@ -225,7 +225,7 @@
                $.ajax({
                    type:'POST',
                    url: "/admin/add/vehicle",
-                   data:{car_type:car_type, car_model:car_model, car_registration:registration , wheels:wheels , seats:seats, Ac_status : status},
+                   data:{"_token": "{{ csrf_token() }}",car_type:car_type, car_model:car_model, car_registration:registration , wheels:wheels , seats:seats, Ac_status : status},
                    success:function(data){
                        if(data.success)
                        {

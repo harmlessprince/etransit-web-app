@@ -208,7 +208,7 @@
             $.ajax({
                 type:'POST',
                 url: "/admin/add/terminal",
-                data:{terminal_name:terminal_name, terminal_address:terminal_address},
+                data:{"_token": "{{ csrf_token() }}",terminal_name:terminal_name, terminal_address:terminal_address},
                 success:function(data){
                     if(data.success)
                     {
