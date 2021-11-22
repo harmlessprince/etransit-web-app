@@ -23,9 +23,14 @@ class RedirectIfAuthenticated
     {
 
         if ($guard == "admin" && Auth::guard($guard)->check()) {
-//            return redirect()->route('admin.dashboard');
          return  redirect(RouteServiceProvider::ADMIN_HOME);
         }
+
+        if($guard == 'e-ticket' && Auth::guard($guard)->check())
+        {
+            return  redirect(RouteServiceProvider::TICKET_HOME);
+        }
+
 
         if (Auth::guard($guard)->check()) {
             return redirect('/');

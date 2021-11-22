@@ -164,9 +164,9 @@
             <div class="hero-bg-text">
                 <p>Our 24 Hour's Service</p>
                 <h1>EASY , SAFE AND CONVENIENT </h1>
-                <small class="hero-sm-text">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots
-                    in a piece of classical Latin literature from 45 BC, making it over 2000 years old.
-                    <br> Richard McClintock, a Latin professor at Hampden-Sydney College i</small>
+                <small class="hero-sm-text"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                   </small>
+
             </div>
         </div>
         <div class="ticketing-section">

@@ -68,7 +68,7 @@ class Booking extends Controller
     public function selectorTracker(Request $request)
     {
            $data = request()->validate([
-                'seat_id' => 'required|array'
+                'seat_id' => 'required'
             ]);
 
         $seat = \App\Models\SeatTracker::where('id' ,$data['seat_id'])->first();
@@ -77,7 +77,7 @@ class Booking extends Controller
         {
             $seat->update([
                 'booked_status' => 1,
-                'user_id' => $request->user_id
+                'user_id' => auth()->user()->id,
             ]);
             return response()->json(['success' => true , 'message' => 'Seat Selected successfully']);
         }
@@ -91,7 +91,12 @@ class Booking extends Controller
             'seat_id' => 'required'
         ]);
 
-        $seat = \App\Models\SeatTracker::where('id' ,$data['seat_id'])->where('user_id',$request->user_id)->first();
+        $seat = \App\Models\SeatTracker::where('id' ,$data['seat_id'])->where('user_id',auth()->user()->id)->first();
+
+        if(is_null($seat))
+        {
+            return response()->json(['success' => false , 'message' => 'You can only unselect already selected seat']);
+        }
 
         if($seat->booked_status != 2)
         {

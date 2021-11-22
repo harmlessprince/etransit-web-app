@@ -21,6 +21,10 @@ return [
         'guard'=> 'eloquent',
         'model'=> App\Models\Admin::class,
     ],
+    'e-ticket' => [
+        'guard'=> 'eloquent',
+        'model'=> App\Models\Eticket::class,
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -47,6 +51,10 @@ return [
         'admin' => [
             'driver' => 'session',
             'provider' => 'admins',
+        ],
+        'e-ticket' => [
+            'driver' => 'session',
+            'provider' => 'e-tickets',
         ],
         'api' => [
             'driver' => 'jwt',
@@ -81,6 +89,10 @@ return [
             'driver' => 'eloquent',
              'model' => \App\Models\Admin::class,
         ],
+        'e-tickets' => [
+            'driver' => 'eloquent',
+            'model' => \App\Models\Eticket::class,
+        ],
 
 
         // 'users' => [
@@ -114,6 +126,10 @@ return [
         'admins' => [
             'driver' => 'eloquent',
             'model' => App\Models\Admin::class,
+        ],
+        'e-tickets' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Eticket::class,
         ],
     ],
 

@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminLogin;
 use App\Http\Controllers\Booking;
 use App\Http\Controllers\Car;
 use App\Http\Controllers\Dashboard;
+use App\Http\Controllers\Eticket\AuthLogin;
 use App\Http\Controllers\Login;
 use App\Http\Controllers\Page;
 use App\Http\Controllers\Payment;
@@ -98,3 +99,16 @@ Route::prefix('admin')->name('admin.')->group(function(){
     });
 });
 
+Route::prefix('e-ticket')->name('e-ticket.')->group(function(){
+
+    Route::get('', [AuthLogin::class , 'eticketLogin'])->name('login-page');
+    Route::post('/user',[AuthLogin::class,'fetchUser'])->name('user');
+    Route::post('/logout-tenant',[AuthLogin::class , 'logout'] )->name('logout');
+    Route::post('/login-tenant' , [AuthLogin::class , 'loginTenant'])->name('login');
+
+    Route::group(['middleware' => ['tenant','prevent-back-history']], function() {
+        Route::get('/dashboard' , [AuthLogin::class , 'dashboard'])->name('dashboard');
+    });
+
+
+});

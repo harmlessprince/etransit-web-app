@@ -307,6 +307,10 @@ body{
 .trending_vehicle_items{
     width: 1394px;
     overflow: scroll;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
 
 }
 .trending_header_text{

@@ -29,7 +29,7 @@ class AdminLogin extends Controller
     {
         request()->validate([
             'email'   => 'required|email|exists:admins',
-            'password' => 'required|min:6'
+            'password' => 'required'
         ]);
 
         if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) {
