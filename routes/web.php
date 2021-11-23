@@ -27,6 +27,8 @@ use App\Http\Controllers\Vehicle;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+//normal  user routes
 Route::get('/', [Page::class ,'index'])->name('home');
 
 //Route::get('/login',[Login::class , 'login']);
@@ -50,6 +52,7 @@ Route::group(['middleware' => ['auth','prevent-back-history']], function() {
 });
 
 
+//admin routes only
 Route::prefix('admin')->name('admin.')->group(function(){
 
     Route::get('' , [AdminLogin::class , 'showLoginForm'])->name('login.page');
@@ -68,9 +71,9 @@ Route::prefix('admin')->name('admin.')->group(function(){
     Route::post('import/terminal', [Terminal::class, 'importTerminal'])->name('import.terminal');
 
     //bulk import hired-cars
-    Route::get('import-terminal-cars', [Car::class, 'importExportViewTerminal']);
+    Route::get('import-export-cars', [Car::class, 'importExportViewCars']);
     Route::get('export/cars', [Car::class, 'exportCar'])->name('export.car');
-    Route::post('import/car', [Terminal::class, 'importCar'])->name('import.car');
+    Route::post('import/cars', [Car::class, 'importCars'])->name('import.car');
 
 
     Route::group(['middleware' => ['admin','prevent-back-history']], function() {
@@ -98,6 +101,9 @@ Route::prefix('admin')->name('admin.')->group(function(){
 
     });
 });
+
+
+//to manage the tenants
 
 Route::prefix('e-ticket')->name('e-ticket.')->group(function(){
 

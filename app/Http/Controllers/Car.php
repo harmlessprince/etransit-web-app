@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+
+use App\Exports\CarsExport;
+use App\Imports\CarsImport;
 use Illuminate\Http\Request;
 use App\Models\Car as HiredCars;
+use Maatwebsite\Excel\Facades\Excel;
 
 class Car extends Controller
 {
@@ -24,7 +28,9 @@ class Car extends Controller
                             'sw_fare' => 'required',
                             'ss_fare' => 'required',
                             'se_fare' => 'required',
-                            'nc_fare' => 'required'
+                            'nc_fare' => 'required',
+                            'description'=> 'required',
+                            'capacity' => 'required'
                         ]);
 
                $car                  = new HiredCars();
@@ -36,6 +42,8 @@ class Car extends Controller
                $car->ss_fare         = $data['ss_fare'];
                $car->se_fare         = $data['se_fare'];
                $car->nc_fare         = $data['nc_fare'];
+               $car->description     = $data['description'];
+               $car->capacity        = $data['capacity'];
                $car->save();
 
              return   response()->json(['success' => 'true', 'message' => 'Data saved successfully']);
@@ -45,7 +53,8 @@ class Car extends Controller
 
     public function carList()
     {
-        $cars = HiredCars::all();
+        $cars = HiredCars::where('functional',1)->get();
+
 
         return view('pages.car-hire.hire', compact('cars'));
     }
@@ -57,5 +66,39 @@ class Car extends Controller
         $carHistory = HiredCars::where('id',$car_id)->firstorfail();
 
         return view('admin.cars.history', compact('carHistory'));
+    }
+
+    public function importExportViewCars()
+    {
+        return view('admin.cars.import');
+    }
+
+    /**
+     * @return \Illuminate\Support\Collection
+     */
+    public function exportCar()
+    {
+        $cars = HiredCars::select('id','car_type','car_class','daily_rentals'
+                                ,'extra_hour','sw_fare','ss_fare','se_fare','nc_fare','description','capacity' )->get();
+
+        return Excel::download(new CarsExport($cars), 'cars.xlsx');
+
+    }
+
+    /**
+     * @return \Illuminate\Support\Collection
+     */
+    public function importCars(Request $request)
+    {
+
+        $request->validate([
+            'excel_file' => 'required|file|mimes:xls,xlsx,csv'
+        ]);
+
+        Excel::import(new CarsImport,request()->file('excel_file'));
+
+        toastr()->success('Data saved successfully');
+
+        return response()->json(['message' => 'uploaded successfully'], 200);
     }
 }

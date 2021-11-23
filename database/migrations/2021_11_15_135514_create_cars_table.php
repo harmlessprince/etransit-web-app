@@ -23,6 +23,7 @@ class CreateCarsTable extends Migration
             $table->double('ss_fare')->comment('ss region');
             $table->double('se_fare')->comment('se region');
             $table->double('nc_fare')->comment('nc region');
+            $table->integer('capacity')->comment('the seat capacity');
             $table->string('image_url')->nullable();
             $table->longText('description')->nullable();
             $table->unsignedBigInteger('functional')->default(1)->comment('0 = false , 1 = true');

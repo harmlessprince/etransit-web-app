@@ -78,10 +78,8 @@
          color: #fff;
          padding:5px;
          border: 1px solid #03174C;
-        margin-top: 170px;
-        cursor:pointer;
-
-
+         margin-top: 170px;
+         cursor:pointer;
      }
     .car_booking_button  button:hover{
         background: #DC6513;
@@ -89,7 +87,6 @@
         padding:5px;
         border: 1px solid #DC6513;
         cursor:pointer
-
     }
     .booking_hero_text{
         display:grid;
@@ -97,6 +94,10 @@
     }
     .booking_hero_icon{
         margin-top:20px;
+    }
+    .empty_img_box{
+        display:flex;
+        justify-content: center;
     }
 </style>
 @section('content')
@@ -172,7 +173,8 @@
                         <hr>
                     </div>
                </div>
-            @for($i = 0 ; $i < 3 ; $i++)
+            @if(count($cars) >  0)
+            @foreach($cars as $car)
             <div class="cars_hire_body_box">
                <div class="car_list">
                    <div class="car_list_content">
@@ -180,11 +182,11 @@
                            <img src="{{asset('/images/trending/vehicle.png')}}" alt="about-us-image"   />
                        </div>
                        <div class="car_name_function_box">
-                           <div class="car_name"><h5>Lexus Rx 360</h5></div>
+                           <div class="car_name"><h5>{{Ucfirst($car->car_type)}}</h5></div>
                            <div class="car_description">
-                               <p>lorem ipsum <br>remaining essentially unchanged.
-                                   It was popularised in the 1960s with the release of
-                                   including versions of Lorem Ipsum.</p>
+                               <p>
+                                   {{ \Illuminate\Support\Str::limit($car->description, $limit = 150, $end = '...') }}
+                               </p>
                            </div>
                            <div class="car_functionality">
                                <div>
@@ -194,7 +196,7 @@
                                   <img src="{{asset('/images/icons/functional_2.png')}}" alt="about-us-image"   />  Functional
                               </div>
                                <div>
-                                   <img src="{{asset('/images/icons/seat_2.png')}}" alt="about-us-image"   /> 7 adults
+                                   <img src="{{asset('/images/icons/seat_2.png')}}" alt="about-us-image"   /> {{$car->capacity}} adults
                                </div>
                            </div>
                        </div>
@@ -204,7 +206,18 @@
                    </div>
                </div>
             </div>
-            @endfor
+            @endforeach
+            @else
+                <div class="cars_hire_body_box">
+                    <div class="car_list">
+                        <div class="empty_img_box">
+                            <div class="empty_img">
+                                <img src="{{asset('/images/illustrations/empty.jpg')}}" alt="about-us-image"  width="500" height="500"  />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif
             </div>
         </div>
 

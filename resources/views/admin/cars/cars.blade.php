@@ -53,6 +53,36 @@
         border-radius: 5px !important;
         width: 240px !important;
     }
+
+    .send-btn{
+        background: #021037;
+        color:white !important;
+        padding:10px;
+        border-radius:2px;
+        border:1px solid #021037;
+    }
+    .send-btn:hover{
+        background: #DC6513;
+        color:white !important;
+        padding:8px;
+        border-radius:2px;
+        border:1px solid #DC6513;
+
+    }
+    .btn-close{
+        background:#e70c0c;
+        /*#021037;*/
+        color:white !important;
+        padding:10px;
+        border-radius:2px;
+        border:1px solid #e70c0c;
+    }
+    .btn-close:hover{
+        background:#e70c0c;
+        color:white !important;
+        padding:8px;
+        border-radius:2px;
+    }
     /*480px, 768px,*/
     @media screen and (max-width: 480px) {
         .vehicle-box{
@@ -129,7 +159,7 @@
 
     <div class="container-fluid">
         <div class="button-box" >
-            <a href="{{url('/admin/import')}}" class="btn bulk-upload-button btn-sm"  style="margin-right:10px;">Bulk Import Cars</a>&nbsp;
+            <a href="{{url('/admin/import-export-cars')}}" class="btn bulk-upload-button btn-sm"  style="margin-right:10px;">Bulk Import Cars</a>&nbsp;
             <button class="btn s add-terminal-button btn-sm"  data-toggle="modal" data-target="#vehicleModal">Add Cars</button>
         </div>
         <div class="card ">
@@ -146,7 +176,7 @@
                         @foreach($cars as $car)
                             <div class="card text-white terminal-card mb-3" style="max-width: 18rem;">
                                 <div class="card-header terminal-card" style="display: flex;justify-content: center;" >
-                                    <h6>{{strtoupper($car->car_name)}}</h6>
+                                    <h6>{{Ucfirst($car->car_class)}}</h6>
                                 </div>
                                 <div class="card-body" style="display: flex;justify-content: center;">
                                     <h6 class="card-title"> {{Ucfirst($car->car_type)}}</h6>
@@ -178,7 +208,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Add Vehicle</h5>
+                    <h2 class="modal-title" id="exampleModalLabel" >Add Car</h2>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -187,51 +217,61 @@
 
                     <div class="modal-body">
                         <br>
-                        <div>
+                        <div class="form-group">
                             <label for="car_type">Car Type</label>
                             <input type="text" class="form-control" name="car_type" id="car_type" required/>
                         </div>
-                        <br>
-                        <div>
+
+                        <div class="form-group">
+                            <label for="capacity">Seat Capacity</label>
+                            <input type="number" class="form-control" name="capacity" id="capacity" required/>
+                        </div>
+
+                        <div class="form-group">
                             <label for="car_class">Car Class </label>
                             <input type="text" class="form-control" name="car_class" id="car_class" required/>
                         </div>
-                        <br>
-                        <div>
+
+                        <div class="form-group">
                             <label for="daily_rentals">Daily Rentals</label>
                             <input type="text" class="form-control" name="daily_rentals" id="daily_rentals" required/>
                         </div>
-                        <br>
-                        <div>
+
+                        <div class="form-group">
                             <label for="extra_hour">Extra Hour</label>
                             <input type="text" class="form-control" name="extra_hour" id="extra_hour" required/>
                         </div>
-                        <br>
-                        <div>
+
+                        <div class="form-group">
                             <label for="sw_region_fare">SW Region (Fare)r</label>
                             <input type="text" class="form-control" name="sw_region_fare" id="sw_region_fare" required/>
                         </div>
-                        <br>
-                        <div>
+
+                        <div class="form-group">
                             <label for="se_region_fare">SE Region (Fare)</label>
                             <input type="text" class="form-control" name="se_region_fare" id="se_region_fare" required/>
                         </div>
-                        <br>
-                        <div>
+
+                        <div class="form-group">
                             <label for="ss_region_fare">SS Region (Fare)</label>
                             <input type="text" class="form-control" name="ss_region_fare" id="ss_region_fare" required/>
                         </div>
-                        <br>
-                        <div>
+
+                        <div class="form-group">
                             <label for="nc_region_fare">NC Region (Fare)</label>
                             <input type="text" class="form-control" name="nc_region_fare" id="nc_region_fare" required/>
                         </div>
-                        <br>
+
+                        <div class="form-group">
+                            <label for="description">Description</label>
+                            <textarea class="form-control" name="description" id="description" rows="10" cols="20" required></textarea>
+                        </div>
+
 
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary btn-submit" >Save changes</button>
+                        <button type="button" class="btn-close" data-dismiss="modal">Close</button>
+                        <button type="button" class="send-btn  btn-submit" id="send-btn">Save changes</button>
                     </div>
                 </form>
 
@@ -253,18 +293,21 @@
             var car_class         = $("input[name=car_class]").val();
             var car_type          = $("input[name=car_type]").val();
             var daily_rentals     = $("input[name=daily_rentals]").val();
+            var capacity          = $("input[name=capacity]").val();
             var extra_hour        = $("input[name=extra_hour]").val();
             var sw_fare           = $("input[name=sw_region_fare]").val();
             var ss_fare           = $("input[name=ss_region_fare]").val();
             var se_fare           = $("input[name=se_region_fare]").val();
             var nc_fare           = $("input[name=nc_region_fare]").val();
+            var description       = $("#description").val();
 
 
+            $("#send-btn").prop('disabled', true);
 
             $.ajax({
                 type:'POST',
                 url: "/admin/add/cars",
-                data:{"_token": "{{ csrf_token() }}",car_class, car_type,daily_rentals , extra_hour , sw_fare , ss_fare , se_fare, nc_fare},
+                data:{"_token": "{{ csrf_token() }}",car_class, car_type,daily_rentals , extra_hour , sw_fare , ss_fare , se_fare, nc_fare , capacity ,description},
                 success:function(data){
                     if(data.success)
                     {

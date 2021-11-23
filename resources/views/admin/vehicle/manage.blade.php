@@ -35,6 +35,36 @@
         border-radius: 5px !important;
         width: 240px !important;
     }
+    .send-btn{
+        background: #021037;
+        color:white !important;
+        padding:10px;
+        border-radius:2px;
+        border:1px solid #021037;
+    }
+    .send-btn:hover{
+        background: #DC6513;
+        color:white !important;
+        padding:8px;
+        border-radius:2px;
+        border:1px solid #DC6513;
+
+    }
+  .btn-close{
+      background:#e70c0c;
+      /*#021037;*/
+      color:white !important;
+      padding:10px;
+      border-radius:2px;
+      border:1px solid #e70c0c;
+  }
+    .btn-close:hover{
+        background:#e70c0c;
+        color:white !important;
+        padding:8px;
+        border-radius:2px;
+    }
+
     /*480px, 768px,*/
     @media screen and (max-width: 480px) {
         .vehicle-box{
@@ -186,8 +216,10 @@
                            </div>
                        </div>
                        <div class="modal-footer">
-                           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                           <button type="button" class="btn btn-primary btn-submit" >Save changes</button>
+                           <button type="button" class="btn-close" data-dismiss="modal">Close</button>
+                           <button type="button" class="send-btn btn-submit" id="send-btn" >
+                               Save changes
+                           </button>
                        </div>
                    </form>
 
@@ -221,14 +253,17 @@
                }else{
                    var status = 0;
                }
+               $("#send-btn").prop('disabled', true);
 
                $.ajax({
                    type:'POST',
                    url: "/admin/add/vehicle",
                    data:{"_token": "{{ csrf_token() }}",car_type:car_type, car_model:car_model, car_registration:registration , wheels:wheels , seats:seats, Ac_status : status},
+
                    success:function(data){
                        if(data.success)
                        {
+                           displaySuccessMessage(data.message)
                            setTimeout(function(){
                                location.reload(true);
                            }, 3000);
@@ -237,5 +272,8 @@
                });
 
            });
+           function displaySuccessMessage(message) {
+               toastr.success(message, 'Success');
+           }
        </script>
 @endsection

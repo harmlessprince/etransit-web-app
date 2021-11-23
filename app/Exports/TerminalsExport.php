@@ -5,8 +5,11 @@ namespace App\Exports;
 use App\Models\Terminal;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Events\AfterSheet;
+use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\WithEvents;
 
-class TerminalsExport implements FromCollection
+
+class TerminalsExport implements FromCollection , WithHeadings, WithEvents
 {
     protected $data;
 

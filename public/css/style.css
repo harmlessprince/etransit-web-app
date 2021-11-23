@@ -310,8 +310,6 @@ body{
     -webkit-overflow-scrolling: touch;
     -ms-overflow-style: none;
     scrollbar-width: none;
-
-
 }
 .trending_header_text{
     display: flex;
@@ -1854,6 +1852,12 @@ background:#DC6513;
     .newsletter_box {
         padding: 37px;
         display:grid;
+    }
+    .passengers {
+        width: 333px;
+    }
+    .sign-up {
+        margin-right: -48px;
     }
 
 
