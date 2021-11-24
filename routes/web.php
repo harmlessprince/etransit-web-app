@@ -48,52 +48,44 @@ Route::group(['middleware' => ['auth','prevent-back-history']], function() {
     Route::post('/book/trip/{schedule_id}',[Booking::class , 'bookTrip']);
     // The route that the button calls to initialize payment
     Route::post('/pay', [Payment::class, 'initialize'])->name('pay');
-
 });
 
 
 //admin routes only
 Route::prefix('admin')->name('admin.')->group(function(){
-
     Route::get('' , [AdminLogin::class , 'showLoginForm'])->name('login.page');
-
     Route::post('/logout-admin',[AdminLogin::class , 'logout'] )->name('logout');
     Route::post('/login-user' , [AdminLogin::class , 'loginAdmin'])->name('login');
-
     //bulk import buses
     Route::get('import', [Vehicle::class, 'importExportView']);
     Route::get('export/vehicle', [Vehicle::class, 'exportVehicle'])->name('export.vehicle');
     Route::post('import/vehicle', [Vehicle::class, 'importVehicle'])->name('import.vehicle');
-
     //bulk import terminals
     Route::get('import-terminal', [Terminal::class, 'importExportViewTerminal']);
     Route::get('export/terminal', [Terminal::class, 'exportTerminal'])->name('export.terminal');
     Route::post('import/terminal', [Terminal::class, 'importTerminal'])->name('import.terminal');
-
     //bulk import hired-cars
     Route::get('import-export-cars', [Car::class, 'importExportViewCars']);
     Route::get('export/cars', [Car::class, 'exportCar'])->name('export.car');
     Route::post('import/cars', [Car::class, 'importCars'])->name('import.car');
-
+    //bulk import schedule
+    Route::get('import-export-schedule', [Schedule::class, 'importExportViewSchedule']);
+    Route::get('export/schedule', [Schedule::class, 'exportSchedule'])->name('export.schedule');
+    Route::post('import/schedule', [Schedule::class, 'importSchedule'])->name('import.schedule');
 
     Route::group(['middleware' => ['admin','prevent-back-history']], function() {
-
         Route::get('/dashboard', [Dashboard::class, 'dashboard'])->name('dashboard');
         //vehicle management
         Route::get('/manage/vehicle', [Vehicle::class, 'manage'])->name('manage.vehicle');
         Route::post('/add/vehicle', [Vehicle::class, 'addVehicle'])->name('add.vehicle');
-
         //manage terminal
         Route::get('manage/terminals',[Terminal::class , 'Terminals']);
         Route::post('add/terminal',[Terminal::class , 'AddTerminal']);
-
         //schedule an event
         Route::get('/event/{bus_id}/schedule' ,[Schedule::class , 'scheduleEvent']);
         Route::post('/schedule/event', [Schedule::class , 'addEvent']);
-
         //manage transactions
         Route::get('/transactions' , [Transaction::class , 'allTransactions']);
-
         //manage car hiring module route
         Route::get('/manage/cars' , [Car::class ,'allCars']);
         Route::post('add/cars', [Car::class, 'addCars']);

@@ -99,7 +99,23 @@
         display:flex;
         justify-content: center;
     }
+    .my-active span{
+        background-color: #021037 !important;
+        color: white !important;
+        border-color: #021037 !important;
+    }
+    .pagination_box{
+        display:flex;
+        justify-content: flex-end;
+        margin-top:40px;
+        margin-right:150px;
+    }
+
 </style>
+@push('css')
+
+@endpush
+
 @section('content')
     <div class="bookings_box">
         <div class="booking_bg"  style="background-image: url('{{ asset('/images/bg/booking_hero.png')}}'); height:200px;" >
@@ -220,7 +236,11 @@
             @endif
             </div>
         </div>
-
+        <div class="pagination_box">
+           <div>
+               {{ $cars->links('vendor.pagination.custom') }}
+           </div>
+        </div>
     </div>
 
 @endsection

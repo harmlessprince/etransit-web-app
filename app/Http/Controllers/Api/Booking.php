@@ -16,10 +16,10 @@ class Booking extends Controller
        !$service ? abort(404) : $serviceID = $service['id'];
 
        $tripTypes = TripType::all();
-
        $destinations = Destination::all();
+       $pickups = \App\Models\Pickup::all();
 
-       return response()->json(['success' => true , 'data' => compact('serviceID','tripTypes','destinations')]);
+       return response()->json(['success' => true , 'data' => compact('serviceID','tripTypes','destinations','pickups')]);
     }
 
 

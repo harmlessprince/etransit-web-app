@@ -53,7 +53,7 @@ class Car extends Controller
 
     public function carList()
     {
-        $cars = HiredCars::where('functional',1)->get();
+        $cars = HiredCars::where('functional',1)->paginate(10);
 
 
         return view('pages.car-hire.hire', compact('cars'));

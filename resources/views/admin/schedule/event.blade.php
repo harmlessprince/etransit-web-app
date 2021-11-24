@@ -33,6 +33,33 @@
     height: 700px !important;
 }
 
+    .send-btn{
+        background: #021037;
+        color:white !important;
+        padding:10px;
+        border-radius:2px;
+        border:1px solid #021037;
+    }
+    .send-btn:hover{
+        background: #DC6513;
+        color:white !important;
+        padding:8px;
+        border-radius:2px;
+        border:1px solid #DC6513;
+
+    }
+    .btn-close{
+        background:#e70c0c;
+        /*#021037;*/
+        color:white !important;
+        padding:10px;
+        border-radius:2px;
+        border:1px solid #e70c0c;
+    }
+    .btn-close:hover{
+        padding:8px;
+    }
+
 </style>
 @section('content')
     <div class="container-fluid">
@@ -42,7 +69,7 @@
                 <div class="col-6">
                     <h3>{{env('APP_NAME')}}</h3>
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{url('/admin/manage/vehicle')}}"><i data-feather="home"></i></a></li>
+                        <li class="breadcrumb-item"><a href="{{url('/admin/')}}"><i data-feather="home"></i></a></li>
                         <li class="breadcrumb-item">Schedule Event </li>
                     </ol>
                 </div>
@@ -84,7 +111,7 @@
     </div>
     <div class="container-fluid">
         <div class="button-box" >
-            <a href="{{url('/admin/import')}}" class="btn bulk-upload-button btn-sm"  style="margin-right:10px;">Bulk Import Event</a>&nbsp;
+            <a href="{{url('/admin/import-export-schedule')}}" class="btn bulk-upload-button btn-sm"  style="margin-right:10px;">Bulk Import Event</a>&nbsp;
             <button class="btn s add-terminal-button btn-sm"  data-toggle="modal" data-target="#vehicleModal">View Schedule Event</button>
         </div>
         <div class="card ">
@@ -113,7 +140,7 @@
                     <div class="form-group">
                         <label for="pick_up">Pick Up</label>
                         <select class="form-control" name="pickup" id="pick_up">
-                            @foreach($locations as $location)
+                            @foreach($pickups as $location)
                             <option value="{{$location->id}}" >{{$location->location}}</option>
                             @endforeach
                         </select>
@@ -143,15 +170,20 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="t_fare">Transportation Fee</label>
+                        <label for="t_fare">Transportation Fee (Adult)</label>
                         <input type="text" name="t_fare" class="form-control" id="Tfare" required/>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="t_fare_child">Transportation Fee (Child)</label>
+                        <input type="text" name="t_fare_child" class="form-control" id="TfareChild" required/>
                     </div>
 
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <input type="button" class="btn btn-primary btn-submit" id="appointment_update" value="Save">
+                    <button type="button" class="btn-close" data-dismiss="modal">Close</button>
+                    <input type="button" class="send-btn btn-submit" id="appointment_update" value="Save">
                 </div>
             </div>
         </div>
@@ -192,6 +224,8 @@
                             var busId             = $("input[name=bus_id]").val();
                             var departureTime     = $("input[name=departure_time]").val();
                             var Tfare             = $("input[name=t_fare]").val();
+                            var TfareChild        = $("input[name=t_fare_child]").val();
+
                             var pickUp            =  $("#pick_up").val();
                             var terminal          = $("#terminal").val();
                             var destination       = $("#destination").val();
@@ -206,6 +240,7 @@
                                     terminal      : terminal,
                                     destination   : destination ,
                                     eventDate     : event_start,
+                                    TfareChild    : TfareChild,
                                 },
                                 type: "POST",
                                 success: function (response) {

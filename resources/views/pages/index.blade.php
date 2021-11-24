@@ -220,7 +220,7 @@
                                                 <div class="travelling_from_box">
                                                     <label for="travelling_from" class="departure_label">Travelling From</label>
                                                     <select name="destination_from" id="travelling_from">
-                                                        @foreach($locations as $location)
+                                                        @foreach($pickups as $location)
                                                         <option value="{{$location->id}}">{{$location->location}}</option>
                                                         @endforeach
                                                     </select>

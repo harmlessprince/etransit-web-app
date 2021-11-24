@@ -40,6 +40,7 @@ body{
     letter-spacing: -0.02em;
     color: #FFFFFF;
     margin-top: 200px;
+    margin-left:100px ;
 }
 .hero-bg-text p{
     font-weight: 600;
@@ -404,7 +405,7 @@ body{
 .booking_bg{
     display:flex;
     justify-content: center;
-position:relative;
+    position:relative;
 }
 .booking_hero_text{
     margin-top:70px;
@@ -909,6 +910,7 @@ background:#DC6513;
 }
 .logo img{
     margin-top: 10px;
+    margin-left: -351px;
 }
 .nav-menu ul{
     list-style: none;
@@ -1029,17 +1031,15 @@ background:#DC6513;
 }
 .copyright_section h5{
     color:white;
-    /* margin-top: 180px;
-    margin-left:  70px;
-    margin-right:70px ; */
-
 }
 
 .copyright_section h5 span{
     color: #DC6513;
 
 }
-
+.logo img {
+    margin-left: -174px;
+}
 
 /* end of payment box **/
 /* responsivess for 1200px screeen */
@@ -1053,6 +1053,9 @@ background:#DC6513;
         width: 443px;
         height: 90px;
         margin-left: 77px;
+    }
+    .hero-bg-text{
+        margin-left:28px ;
     }
 
 }
@@ -1081,9 +1084,13 @@ background:#DC6513;
         height: 90px;
         margin-left: -22px;
     }
-    .hero-bg-text {
-        left: 347px;
+    .hero-bg-text{
+        margin-left:-75px ;
     }
+    .logo img {
+        margin-left: -71px;
+    }
+
 }
 @media screen and (max-width: 1200px) {
     .discount_plane_img {
@@ -1105,8 +1112,8 @@ background:#DC6513;
         height: 90px;
         line-height: 2em;
     }
-    .hero-bg-text {
-        left: 251px;
+    .hero-bg-text{
+        margin-left:-187px ;
     }
     .about_us_box {
         display: flex;
@@ -1116,6 +1123,9 @@ background:#DC6513;
     }
     .about_us_content {
         margin-left: 238px;
+    }
+    .logo img {
+        margin-left: -18px;
     }
 }
 @media screen and (max-width: 1024px) {
@@ -1133,6 +1143,14 @@ background:#DC6513;
         width: 1009px;
 
     }
+    .hero-bg-text{
+        margin-left:-269px ;
+    }
+    .logo img {
+        margin-left: -12px;
+    }
+
+
 
 }
 @media screen and (max-width: 992px) {
@@ -1190,15 +1208,20 @@ background:#DC6513;
         margin-top:40px;
     }
     .hero-bg-text {
-        left: 126px;
+        left: 469px;
     }
     .trending_vehicle_items {
         width: 988px;
     }
+    .header_text {
+        margin-top: 672px;
+
+    }
 }
 @media screen and (max-width: 768px) {
+
     .hero-bg-text {
-        left: 30px;
+        left: 363px;
     }
 
     .ticketing-box {
@@ -1365,7 +1388,9 @@ background:#DC6513;
         flex-direction: column;
         margin-left: 84px;
     }
-
+    .nav-menu ul li{
+        font-size:10px;
+    }
 }
 @media screen and (max-width: 768px) {
     .navbar {
@@ -1468,6 +1493,9 @@ background:#DC6513;
         margin-right: 70px;
         font-size: 12px;
     }
+    .logo img {
+        margin-left: -346px;
+    }
 
 }
 @media screen and (max-width: 576px) {
@@ -1490,8 +1518,12 @@ background:#DC6513;
         font-size: 99%;
     }
     .hero-bg-text {
-        left: -4px;
+        left: 261px;
     }
+    .logo img {
+        margin-left: -174px;
+    }
+
     .ticket-box-menu ul li a {
         font-size: 13px;
     }
