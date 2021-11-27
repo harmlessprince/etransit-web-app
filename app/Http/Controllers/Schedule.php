@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exports\ScheduleExport;
+use App\Imports\ScheduleImport;
 use Illuminate\Http\Request;
 use App\Models\Bus;
 use App\Models\Schedule as EventSchedule;
@@ -86,21 +87,32 @@ class Schedule extends Controller
 
     public function exportSchedule()
     {
-//        $schedules = EventSchedule::with('terminal','bus',
-//            'pickup','destination','service')->select('terminal_id',
-//            'pickup_id','destination_id','service_id','fare_adult','fare_children'
-//            ,'departure_date','departure_time')->get();
 
-     $schedules =   DB::table('schedules')->select('terminal_name','name','car_type','pickups.location as pickup','destinations.location','fare_adult','fare_children','departure_date','departure_time')
-         ->join('terminals', 'schedules.terminal_id', '=', 'terminals.id')
-         ->join('services', 'schedules.service_id', '=', 'services.id')
-         ->join('buses', 'schedules.bus_id', '=', 'buses.id')
-         ->join('pickups', 'schedules.pickup_id', '=', 'pickups.id')
-         ->join('destinations', 'schedules.destination_id', '=', 'destinations.id')
-         ->get();
-
+     $schedules =   DB::table('schedules')
+                        ->select('terminal_name','name','car_registration','pickups.location as pickup'
+                        ,'destinations.location','fare_adult','fare_children','departure_date','departure_time')
+                         ->join('terminals', 'schedules.terminal_id', '=', 'terminals.id')
+                         ->join('services', 'schedules.service_id', '=', 'services.id')
+                         ->join('buses', 'schedules.bus_id', '=', 'buses.id')
+                         ->join('pickups', 'schedules.pickup_id', '=', 'pickups.id')
+                         ->join('destinations', 'schedules.destination_id', '=', 'destinations.id')
+                         ->get();
 
         return Excel::download(new ScheduleExport( $schedules), 'schedule.xlsx');
+    }
+
+
+    public function importSchedule(Request $request)
+    {
+        $request->validate([
+            'excel_file' => 'required|file|mimes:xls,xlsx,csv'
+        ]);
+
+        Excel::import(new ScheduleImport,request()->file('excel_file'));
+
+        toastr()->success('Data saved successfully');
+
+        return response()->json(['message' => 'uploaded successfully'], 200);
     }
 
 }

@@ -42,11 +42,11 @@
             </div>
             <div class="nav-menu">
                 <ul>
-                    <li><a  href="/" class="routerLink" active-link='active'> Home </a></li>
+                    <li><a  href="/" class="routerLink {{ (request()->is('/')) ? 'active-text' : '' }}" active-link='active'> Home </a><span class="{{ (request()->is('/')) ? 'active-nav' : '' }}"></span></li>
                     <li><a href="/" class="routerLink" active-link='active'> About Us </a></li>
                     <li><a href="/" class="routerLink" active-link='active'> Tour Packages </a></li>
                     <li><a href="/" class="routerLink" active-link='active'> Boat Cruise </a></li>
-                    <li><a href="{{url('car-hire')}}" class="routerLink" active-link='active'> Car Hire </a></li>
+                    <li><a href="{{url('car-hire')}}" class="routerLink {{ (request()->is('car-hire')) ? 'active-text' : '' }}" active-link='active'> Car Hire </a> <span class="{{ (request()->is('car-hire')) ? 'active-nav' : '' }}"></span></li>
                     <li><a href="/" class="routerLink" active-link='active'> Hotel Bookings </a></li>
                     <li><a href="/" class="routerLink" active-link='active'> Become A Partner </a></li>
                     <li><a href="/" class="routerLink" active-link='active'> Send Parcel </a></li>

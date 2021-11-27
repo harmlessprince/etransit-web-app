@@ -25,10 +25,11 @@ class Booking extends Controller
 
     public function bookTrip(Request $request)
     {
+
         $data = request()->validate([
                             'service_id'           => 'required',
-                            'return_date'          => 'sometimes',
-                            'departure_date'       => 'required',
+                            'return_date'          => 'sometimes|date',
+                            'departure_date'       => 'required|date',
                             'destination_from'     => 'required|integer',
                             'destination_to'       => 'required|integer',
                             'number_of_passengers' => 'required',

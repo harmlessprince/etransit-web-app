@@ -99,7 +99,7 @@ class Payment extends Controller
               $transactions->reference        = Reference::generateTrnxRef();
               $transactions->trx_ref           = $data['data']['tx_ref'];
               $transactions->amount           =  $data['data']['amount'];
-              $transactions->status           = 'fraud-detected';
+              $transactions->status           = 'Likely Fraud';
               $transactions->schedule_id      =  $scheduleId ;
               $transactions->description      = $data['data']['meta']['description'];
               $transactions->user_id          = $data['data']['meta']['user_id'];

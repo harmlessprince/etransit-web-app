@@ -43,24 +43,12 @@
                             <li><a href="projectcreate.html">Manage Car Hiring</a></li>
                         </ul>
                     </li>
-{{--                    <li class="sidebar-title">--}}
-{{--                        <div>--}}
-{{--                            <h6>Schedule</h6>--}}
-{{--                            <p>Services schedule </p>--}}
-{{--                        </div>--}}
-{{--                    </li>--}}
                     <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"></i><span>Bus Schedules</span></a>
                         <ul class="nav-submenu menu-content">
-                            <li><a href="state-color.html">Schedules</a></li>
+                            <li><a href="{{url('admin/import-export-schedule')}}">Schedules</a></li>
 
                         </ul>
                     </li>
-{{--                    <li class="sidebar-title">--}}
-{{--                        <div>--}}
-{{--                            <h6 >Vehicle Management</h6>--}}
-{{--                            <p >Manage {{env('APP_NAME')}} vehicles</p>--}}
-{{--                        </div>--}}
-{{--                    </li>--}}
                     <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"></i><span>Bus Management</span></a>
                         <ul class="nav-submenu menu-content">
                             <li><a href="{{url('/admin/manage/vehicle')}}">Manage Buses</a></li>
@@ -76,23 +64,11 @@
                             <li><a href="{{url('/admin/transactions')}}">Manage Transactions</a></li>
                         </ul>
                     </li>
-{{--                    <li class="sidebar-title">--}}
-{{--                        <div>--}}
-{{--                            <h6 >Terminal Management</h6>--}}
-{{--                            <p >Manage {{env('APP_NAME')}} Terminals</p>--}}
-{{--                        </div>--}}
-{{--                    </li>--}}
                     <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"></i><span>Terminals</span></a>
                         <ul class="nav-submenu menu-content">
                             <li><a href="{{url('/admin/manage/terminals')}}">All Terminals</a></li>
                         </ul>
                     </li>
-{{--                    <li class="sidebar-title">--}}
-{{--                        <div>--}}
-{{--                            <h6>Roles Management</h6>--}}
-{{--                            <p>Roles management </p>--}}
-{{--                        </div>--}}
-{{--                    </li>--}}
                     <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="file-text"></i><span>Roles</span></a>
                         <ul class="nav-submenu menu-content">
                             <li><a class="" href="#">All Roles</a> </li>

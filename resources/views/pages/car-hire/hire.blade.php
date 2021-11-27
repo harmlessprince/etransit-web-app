@@ -217,7 +217,9 @@
                            </div>
                        </div>
                        <div class="car_booking_button">
-                           <button>Book Now</button>
+                           <a href="{{url('select/car-plan/'.$car->id)}}">
+                               <button>Book Now</button>
+                           </a>
                        </div>
                    </div>
                </div>

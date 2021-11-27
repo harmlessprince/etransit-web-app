@@ -45,7 +45,7 @@ class ScheduleExport implements FromCollection , WithHeadings, WithEvents
         return [
             'Terminal',
             'Service',
-            'Bus',
+            'Bus Registration',
             'PickUp Location',
             'Destination',
             'Fare (Adult)',

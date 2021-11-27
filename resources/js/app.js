@@ -39,6 +39,7 @@ Vue.component('excel-upload', require('./components/ExcelUpload.vue').default);
 Vue.component('terminal', require('./components/TerminalUpload.vue').default);
 Vue.component('schedule-event', require('./components/ScheduleEvent.vue').default);
 Vue.component('car-upload', require('./components/CarImport.vue').default);
+Vue.component('bus-schedules-upload', require('./components/BulkImportBusSchedules.vue').default);
 
 
 

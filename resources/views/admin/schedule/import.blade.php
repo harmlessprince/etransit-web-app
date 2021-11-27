@@ -62,7 +62,7 @@
         <div class="card ">
             <div class="card-body">
                 <div id="app">
-                    <terminal></terminal>
+                    <bus-schedules-upload></bus-schedules-upload>
                 </div>
             </div>
         </div>

@@ -9,4 +9,16 @@ class Car extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
+
+    public function plans()
+    {
+        return $this->HasMany(CarPlan::class );
+    }
+
+    public function service()
+    {
+        return $this->belongsTo(Service::class);
+    }
+
+
 }

@@ -42,17 +42,26 @@ Auth::routes();
 Route::get('/car-hire', [Car::class , 'carList']);
 
 Route::group(['middleware' => ['auth','prevent-back-history']], function() {
+
     Route::get('/seat-picker/{schedule_id}', [Booking::class, 'seatSelector']);
     Route::post('/seat-selector-tracker/',[Booking::class ,'selectorTracker']);
     Route::post('/deselect-seat' ,[Booking::class , 'deselectSeat']);
     Route::post('/book/trip/{schedule_id}',[Booking::class , 'bookTrip']);
     // The route that the button calls to initialize payment
     Route::post('/pay', [Payment::class, 'initialize'])->name('pay');
+
+    //book a car
+    Route::get('select/car-plan/{car_id}' , [Car::class , 'selectPlan']);
+    Route::get('/select/plan/{plan_id}/',[Car::class , 'pickPlan']);
+    Route::get('/pick-date' ,[Car::class ,'pickDate']);
+    Route::post('/plan/{plan_id}',[Car::class , 'proceedToPaymentPlan']);
+    Route::get('car-hire/cash/payment/{history_id}/method',[Car::class , 'makePayment']);
 });
 
 
 //admin routes only
 Route::prefix('admin')->name('admin.')->group(function(){
+
     Route::get('' , [AdminLogin::class , 'showLoginForm'])->name('login.page');
     Route::post('/logout-admin',[AdminLogin::class , 'logout'] )->name('logout');
     Route::post('/login-user' , [AdminLogin::class , 'loginAdmin'])->name('login');
@@ -74,6 +83,7 @@ Route::prefix('admin')->name('admin.')->group(function(){
     Route::post('import/schedule', [Schedule::class, 'importSchedule'])->name('import.schedule');
 
     Route::group(['middleware' => ['admin','prevent-back-history']], function() {
+
         Route::get('/dashboard', [Dashboard::class, 'dashboard'])->name('dashboard');
         //vehicle management
         Route::get('/manage/vehicle', [Vehicle::class, 'manage'])->name('manage.vehicle');

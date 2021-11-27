@@ -18,4 +18,6 @@ class Service extends Model
     {
         return $this->hasMany(Terminal::class);
     }
+
+
 }

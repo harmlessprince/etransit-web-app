@@ -67,7 +67,8 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+//    'timezone' => 'UTC',
+    'timezone' => 'Africa/Lagos',
 
     /*
     |--------------------------------------------------------------------------
@@ -180,6 +181,7 @@ return [
         Maatwebsite\Excel\ExcelServiceProvider::class,
         KingFlamez\Rave\RaveServiceProvider::class,
         Milon\Barcode\BarcodeServiceProvider::class,
+        Yoeunes\Toastr\ToastrServiceProvider::class
 
     ],
 

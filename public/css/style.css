@@ -526,11 +526,13 @@ body{
 .passenger_input_field{
     border-bottom: 1px solid gray;
     width:450px;
+    outline:none;
 }
 .gender{
     border-bottom: 1px solid gray;
     width:250px;
     margin-top:15px;
+    outline:none;
 }
 .passenger_name{
     display:flex;
@@ -915,15 +917,32 @@ background:#DC6513;
 .nav-menu ul{
     list-style: none;
     display:flex;
+    height:100%;
 }
 .nav-menu ul li {
     font-style: normal;
     font-weight: bold;
     font-size: 18px;
-    /*line-height: 21px;*/
-    margin: 15px  10px 0px 10px;
+    height:100%;
+    position:relative;
+    padding: 15px  10px 0px 10px;
     color:#828282;
 
+}
+
+.active-nav{
+    display:flex;
+    height:3px;
+    position:absolute;
+    width:70%;
+    transform: translateX(-50%);
+    left:50%;
+    border-radius:40px;
+    background:#021037;
+    bottom:5px;
+}
+.active-text{
+    color:#021037 !important;
 }
 .routerLink{
     color: #828282;
@@ -931,6 +950,7 @@ background:#DC6513;
 .routerLink:hover{
     color: #021037;
     padding-bottom:10px;
+    text-decoration:none;
 }
 /* end of navigation header css */
 .container, .container-fluid, .container-xl, .container-lg, .container-md, .container-sm{

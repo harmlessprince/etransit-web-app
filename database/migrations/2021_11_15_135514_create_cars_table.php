@@ -17,12 +17,7 @@ class CreateCarsTable extends Migration
             $table->id();
             $table->string('car_type');
             $table->string('car_class');
-            $table->double('daily_rentals');
-            $table->double('extra_hour');
-            $table->double('sw_fare')->comment('sw region');
-            $table->double('ss_fare')->comment('ss region');
-            $table->double('se_fare')->comment('se region');
-            $table->double('nc_fare')->comment('nc region');
+            $table->unsignedBigInteger('service_id');
             $table->integer('capacity')->comment('the seat capacity');
             $table->string('image_url')->nullable();
             $table->longText('description')->nullable();

@@ -249,51 +249,6 @@
                 </div>
             </div>
         </div>
-{{--        <div class="about-us-box">--}}
-{{--          <div class="about_us">--}}
-{{--              <div>--}}
-{{--                  <h1>ABOUT US</h1>--}}
-{{--                  <h4 class="about_us_welcome_header">WELCOME TO E-TRANSIT</h4>--}}
-{{--              </div>--}}
-{{--          </div>--}}
-{{--          <div class="about_us_box">--}}
-{{--              <div>--}}
-{{--                  <div class="about_us_content about_us_text">--}}
-{{--                      <div>--}}
-{{--                          <h5 class="about_e_transit_header">ABOUT <br/> <span class="about_e_transit"> E-TRANSIT </span></h5>--}}
-{{--                      </div>--}}
-{{--                      <div>--}}
-{{--                          <p class="about_paragragh">--}}
-{{--                              Etransit Africa is an African-focused transportation service company that exists to provide individuals--}}
-{{--                              and cooperate bodies with satisfactory  transportation services on a timely and consistent basis.--}}
-{{--                          </p>--}}
-{{--                          <p class="about_paragragh"> The company started operations in 2019 as an interstate transport company in Nigeria but projects--}}
-{{--                              to provide transportation services across Africa. Our team of highly trained professionals are always--}}
-{{--                              working towards making each travel experience worth every penny.--}}
-{{--                              Read more--}}
-{{--                          </p>--}}
-{{--                      </div>--}}
-
-{{--                  </div>--}}
-{{--                  <div class="about_us_content">--}}
-{{--                      <div>--}}
-{{--                          <h5 class="why_choose_us_header">WHY <br/><span class="why_choose_us_header_text"> CHOOSE US ? </span> </h5>--}}
-{{--                      </div>--}}
-{{--                      <div class="about_us_text about_paragragh">--}}
-{{--                          <h6>SAVE MORE</h6>--}}
-{{--                          <p class="why_choose_us">Get the best affordable rates. Book your trips with us today</p>--}}
-{{--                          <h6>RELIABLE</h6>--}}
-{{--                          <p class="why_choose_us"> Don’t get stuck with the rest, journey with the best.</p>--}}
-{{--                          <h6>GREAT FEEDBACK</h6>--}}
-{{--                          <p class="why_choose_us">Your safety and comfort is our number one priority</p>--}}
-{{--                      </div>--}}
-{{--                  </div>--}}
-{{--              </div>--}}
-{{--              <div>--}}
-{{--                  <div> <img src="{{asset('images/about-us/about-us.png')}}" alt="about-us-image"  class="about_us_img" height="400px"/></div>--}}
-{{--              </div>--}}
-{{--          </div>--}}
-{{--      </div>--}}
         <div class="header_text">
             <div><h3>ABOUT US</h3></div>
         </div>
