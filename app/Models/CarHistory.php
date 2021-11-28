@@ -19,8 +19,15 @@ class CarHistory extends Model
         'date' => 'date',
     ];
 
-    public function carplans()
+
+
+    public function carplan()
     {
-        return $this->hasMany(CarPlan::class ,'car_plan_id');
+        return $this->belongsTo(CarPlan::class ,'car_plan_id');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class );
     }
 }

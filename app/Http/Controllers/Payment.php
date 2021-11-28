@@ -70,7 +70,7 @@ class Payment extends Controller
         if ($status ==  'successful') {
 
                   $transactionID = Flutterwave::getTransactionIDFromCallback();
-                  $data = Flutterwave::verifyTransaction($transactionID);
+                  $data          = Flutterwave::verifyTransaction($transactionID);
 
                   //check if the maount paid is correct
                   $childrenCount  = (int)   $data['data']['meta']['childrenCount'];

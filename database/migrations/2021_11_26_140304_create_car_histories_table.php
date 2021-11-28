@@ -24,6 +24,7 @@ class CreateCarHistoriesTable extends Migration
             $table->double('amount_to_remit_after_delayed_trip')->nullable()->comment('This start counting after 12 hours of delay and keeps increasing hourly');
             $table->date('date')->comment('pickup date');
             $table->time('time')->comment('pick up time');
+            $table->enum('isConfirmed',['True', 'False'])->default('False');
             $table->timestamps();
 
             $table->foreign('car_id')->references('id')->on('cars')->onDelete('cascade');

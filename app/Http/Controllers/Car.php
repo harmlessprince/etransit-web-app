@@ -6,12 +6,17 @@ namespace App\Http\Controllers;
 use App\Classes\Reference;
 use App\Exports\CarsExport;
 use App\Imports\CarsImport;
+use App\Mail\CarHireRecept;
 use App\Models\CarHistory;
+use PDF;
 use Illuminate\Http\Request;
 use App\Models\Car as HiredCars;
+use Illuminate\Support\Facades\Mail;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Models\CarPlan;
 use App\Models\Transaction;
+
+
 
 
 class Car extends Controller
@@ -103,7 +108,10 @@ class Car extends Controller
 
         $carHistory = HiredCars::where('id',$car_id)->firstorfail();
 
-        return view('admin.cars.history', compact('carHistory'));
+        $histories = CarHistory::where('car_id',$car_id)->with('carplan','user')->orderby('created_at','desc')->get();
+
+
+        return view('admin.cars.history', compact('carHistory','histories'));
     }
 
     public function importExportViewCars()
@@ -170,18 +178,21 @@ class Car extends Controller
               $currentTime = \Carbon\Carbon::now()->format('H:i');
 
 
-              if( $data['date'] >= $currentDate && $data['time'] >= $currentTime)
+              if( $data['date'] >= $currentDate  && $data['time'] >= $currentTime )
               {
+
                   $plan =  CarPlan::where('id' , $plan_id)->with('car')->firstorfail();
 
 
                   //find if the car is already un-available
                   //check if the car wont be available on the day selected
 
-
                   //so check if the date selected does not match any date  already booked to be used
                   $findCarHistroryForThisDate = CarHistory::where('id', $plan->car->id)
-                      ->where('payment_status','!=','Unpaid')->where('date','=',$data['date'])->first();
+                                                      ->where('payment_status','!=','Unpaid')
+                                                      ->where('date','=',$data['date'])
+                                                      ->orderby('created_at','asc')->first();
+
 
                 IF(is_null($findCarHistroryForThisDate))
                 {
@@ -216,18 +227,33 @@ class Car extends Controller
        $fetchService_id    =  HiredCars::where('id', $carHistory->car_id)->select('service_id')->first();
        $checkServicePlan   =  CarPlan::where('id' , $carHistory->car_plan_id)->first();
 
+
        $carHistory->update(['payment_status' => 'cash payment']);
 
 
-       $transaction                   = new Transaction();
-       $transaction->reference        = Reference::generateTrnxRef();
+       $transaction                   =  new Transaction();
+       $transaction->reference        =  Reference::generateTrnxRef();
        $transaction->amount           =  $checkServicePlan->amount;
        $transaction->status           = 'Cash payment';
        $transaction->service_id       =  $fetchService_id->service_id;
        $transaction->transaction_type = 'cash';
-       $transaction->user_id          = auth()->user()->id;
+       $transaction->user_id          =  auth()->user()->id;
        $transaction->description      = 'A cash payment for made successfully';
        $transaction->save();
+
+
+        $data["email"] = auth()->user()->email;
+        $data["title"] = env('APP_NAME').' Car Hire Receipt';
+        $data["body"] = "This is Demo";
+
+        $pdf = PDF::loadView('pdf.car-hire', $data);
+
+        Mail::send('pdf.car-hire', $data, function($message)use($data, $pdf) {
+            $message->to($data["email"], $data["email"])
+                ->subject($data["title"])
+                ->attachData($pdf->output(), "receipt.pdf");
+        });
+
 
         toastr()->success('Cash Payment Made successfully');
 

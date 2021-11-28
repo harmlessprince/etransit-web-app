@@ -111,12 +111,12 @@ class Booking extends Controller
     }
 
 
-    public  function bookAtrip(Request $request , $schedule_id)
+    public  function bookTripForPassenger(Request $request , $schedule_id)
     {
         request()->validate([
             'full_name' => 'required|array',
             'gender' => 'required|array',
-//                            'passenger_options' => 'required|array'
+            'passenger_option' => 'required|array'
         ]);
 
         $passengerArray = [];

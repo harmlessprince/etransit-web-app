@@ -181,7 +181,8 @@ return [
         Maatwebsite\Excel\ExcelServiceProvider::class,
         KingFlamez\Rave\RaveServiceProvider::class,
         Milon\Barcode\BarcodeServiceProvider::class,
-        Yoeunes\Toastr\ToastrServiceProvider::class
+        Yoeunes\Toastr\ToastrServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
 
     ],
 
@@ -242,6 +243,7 @@ return [
         'Rave' => KingFlamez\Rave\Facades\Rave::class,
         'DNS1D' => Milon\Barcode\Facades\DNS1DFacade::class,
         'DNS2D' => Milon\Barcode\Facades\DNS2DFacade::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class,
 
     ],
 
