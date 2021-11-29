@@ -25,6 +25,7 @@
                     <input type="hidden" name="phone" type="tel" value="{{auth()->user()->phone_number}}" placeholder="Phone number" />
                     <input type="hidden" name="amount" value="{{$totalFare}}"/>
                     <input type="hidden" name="service" value="{{$fetchScheduleDetails->service->name}}" />
+                    <input type="hidden" name="service_id" value="{{$fetchScheduleDetails->service->id}}" />
                     <input type="hidden" name="schedule_id" value="{{$fetchScheduleDetails->id}}" />
                     <input type="hidden" name="childrenCount" value="{{$childrenCount}}"/>
                     <input type="hidden" name="adultCount" value="{{$adultCount}}"/>

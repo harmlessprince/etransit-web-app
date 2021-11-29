@@ -79,14 +79,14 @@
                 <form method="POST" action="{{ route('pay') }}" id="paymentForm">
                     {{ csrf_field() }}
 
-{{--                    <input type="hidden" name="name" value="{{auth()->user()->full_name}}" placeholder="Name" />--}}
-{{--                    <input type="hidden" name="email" type="email" value="{{auth()->user()->email}}" placeholder="Your Email" />--}}
-{{--                    <input type="hidden" name="phone" type="tel" value="{{auth()->user()->phone_number}}" placeholder="Phone number" />--}}
-{{--                    <input type="hidden" name="amount" value="{{$totalFare}}"/>--}}
-{{--                    <input type="hidden" name="service" value="{{$fetchScheduleDetails->service->name}}" />--}}
-{{--                    <input type="hidden" name="schedule_id" value="{{$fetchScheduleDetails->id}}" />--}}
-{{--                    <input type="hidden" name="childrenCount" value="{{$childrenCount}}"/>--}}
-{{--                    <input type="hidden" name="adultCount" value="{{$adultCount}}"/>--}}
+                    <input type="hidden" name="name" value="{{auth()->user()->full_name}}" placeholder="Name" />
+                    <input type="hidden" name="email" type="email" value="{{auth()->user()->email}}" placeholder="Your Email" />
+                    <input type="hidden" name="phone" type="tel" value="{{auth()->user()->phone_number}}" placeholder="Phone number" />
+                    <input type="hidden" name="amount" value="{{$plan->amount}}"/>
+                    <input type="hidden" name="plan_id" value="{{$plan->id}}"/>
+                    <input type="hidden" name="service" value="{{$service->name}}" />
+                    <input type="hidden" name="service_id" value="{{$service->id}}" />
+                    <input type="hidden" name="carhistory_id" value="{{$recordOperation->id}}" />
                     <input type="submit" value="Buy Ticket Online" />
                 </form>
             </div>
@@ -135,7 +135,7 @@
                     <div class="receipt_date">
                         <div class="pickup_date">
                             <h6>DATE</h6>
-                            <small>{{ $recordOperation->date->format('d M Y')}}</small>
+{{--                            <small>{{ $recordOperation->date->format('d M Y')}}</small>--}}
                         </div>
                         <div class="pickup_time">
                             <h6>TIME</h6>

@@ -15,9 +15,9 @@ class CarHistory extends Model
      *
      * @var array
      */
-    protected $casts = [
-        'date' => 'date',
-    ];
+//    protected $casts = [
+//        'date' => 'date',
+//    ];
 
 
 

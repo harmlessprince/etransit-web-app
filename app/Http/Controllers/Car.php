@@ -182,17 +182,21 @@ class Car extends Controller
               {
 
                   $plan =  CarPlan::where('id' , $plan_id)->with('car')->firstorfail();
+                  $service = \App\Models\Service::where('id' , $plan->car->service_id)->firstorfail();
+
 
 
                   //find if the car is already un-available
                   //check if the car wont be available on the day selected
 
                   //so check if the date selected does not match any date  already booked to be used
-                  $findCarHistroryForThisDate = CarHistory::where('id', $plan->car->id)
-                                                      ->where('payment_status','!=','Unpaid')
-                                                      ->where('date','=',$data['date'])
-                                                      ->orderby('created_at','asc')->first();
+                  $findCarHistroryForThisDate = CarHistory::where('payment_status','!=','Unpaid')
+                                                              ->where('date','=',$data['date'])
+                                                              ->where('isConfirmed' ,'=','True')
+                                                              ->first();
 
+
+//dd($findCarHistroryForThisDate );
 
                 IF(is_null($findCarHistroryForThisDate))
                 {
@@ -200,11 +204,11 @@ class Car extends Controller
                     $recordOperation->car_id        =  $plan->car->id;
                     $recordOperation->car_plan_id   =  $plan->id;
                     $recordOperation->user_id       =  auth()->user()->id;
-                    $recordOperation->date          =  $currentDate;
-                    $recordOperation->time          =  $currentTime;
+                    $recordOperation->date          =  $data['date'];
+                    $recordOperation->time          =  $data['time'];
                     $recordOperation->save();
 
-                    return view('pages.car-hire.payment',compact('recordOperation','plan'));
+                    return view('pages.car-hire.payment',compact('recordOperation','plan','service'));
                 }else{
 
                     toastr()->error('This car is not available for this period , please select another date ');
@@ -228,8 +232,7 @@ class Car extends Controller
        $checkServicePlan   =  CarPlan::where('id' , $carHistory->car_plan_id)->first();
 
 
-       $carHistory->update(['payment_status' => 'cash payment']);
-
+       $carHistory->update(['payment_status' => 'cash payment','isConfirmed' => 'True']);
 
        $transaction                   =  new Transaction();
        $transaction->reference        =  Reference::generateTrnxRef();
@@ -239,6 +242,7 @@ class Car extends Controller
        $transaction->transaction_type = 'cash';
        $transaction->user_id          =  auth()->user()->id;
        $transaction->description      = 'A cash payment for made successfully';
+
        $transaction->save();
 
 
@@ -249,7 +253,7 @@ class Car extends Controller
         $pdf = PDF::loadView('pdf.car-hire', $data);
 
         Mail::send('pdf.car-hire', $data, function($message)use($data, $pdf) {
-            $message->to($data["email"], $data["email"])
+            $message->to($data["email"])
                 ->subject($data["title"])
                 ->attachData($pdf->output(), "receipt.pdf");
         });
