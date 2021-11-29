@@ -18,13 +18,13 @@ class CreateCarHistoriesTable extends Migration
             $table->unsignedBigInteger('car_id');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('car_plan_id');
-            $table->enum('payment_status',['Unpaid','cash payment','paid'])->default('Unpaid');
+            $table->enum('payment_status',['Unpaid','cash payment','Pending','paid'])->default('Unpaid');
             $table->enum('available_status',['Off Trip','On Trip'])->default('Off Trip')->comment('On trip when in use off trip when the user returned');
             $table->time('delayed_trip_in_minutes')->nullable()->comment('This start counting after 12 hours of delay and keeps increasing hourly');
             $table->double('amount_to_remit_after_delayed_trip')->nullable()->comment('This start counting after 12 hours of delay and keeps increasing hourly');
             $table->date('date')->comment('pickup date');
             $table->time('time')->comment('pick up time');
-            $table->enum('isConfirmed',['True', 'False'])->default('False');
+            $table->enum('isConfirmed',['True', 'False'])->default('False')->comment('confirmation is the ride is already book for the date');
             $table->timestamps();
 
             $table->foreign('car_id')->references('id')->on('cars')->onDelete('cascade');

@@ -18,9 +18,11 @@ class CreateTransactionsTable extends Migration
             $table->string('reference');
             $table->string('trx_ref')->nullable();
             $table->double('amount',);
-            $table->enum('status',['Successful','Pending','Cash payment','Likely Fraud']);
+            $table->enum('status',['Successful','Pending','Likely Fraud']);
             $table->unsignedBigInteger('service_id');
-            $table->enum('transaction_type',['cash','online'])->default('online');
+            $table->unsignedBigInteger('car_history_id')->nullable();
+//            $table->unsignedBigInteger('car_plan_id')->nullable();
+            $table->enum('transaction_type',['cash payment','online'])->default('online');
             $table->unsignedBigInteger('schedule_id')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('passenger_count')->nullable();

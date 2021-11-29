@@ -176,7 +176,8 @@
                                     <tr>
                                         <th scope="col">#</th>
                                         <th scope="col">Payment Type</th>
-                                        <th scope="col">Availability Status</th>
+                                        <th scope="col">Trip Status</th>
+                                        <th scope="col">Booked</th>
                                         <th scope="col">Hired By</th>
                                         <th scope="col">Plan Amount</th>
                                         <th scope="col">Plan</th>
@@ -184,7 +185,7 @@
                                         <th scope="col">Extra Hour (Minutes)</th>
                                         <th scope="col">Pick up Date</th>
                                         <th scope="col">Pick up time</th>
-                                        <th scope="col">Payment Confirmation</th>
+
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -205,6 +206,17 @@
                                                 </span>
                                             @endif
                                         </td>
+                                        <td>
+                                            @if($history->isConfirmed ==  'True')
+                                                <span class="trip-status_on">
+                                                 {{$history->isConfirmed}}
+                                               </span>
+                                            @else
+                                                <span class="trip-status_off">
+                                                 {{$history->isConfirmed}}
+                                                </span>
+                                            @endif
+                                        </td>
                                         <td>{{$history->user->email}}</td>
                                         <td>{{number_format($history->carplan->amount)}}</td>
                                         <td>{{$history->carplan->plan}}</td>
@@ -212,7 +224,7 @@
                                         <td>{{$history->delayed_trip_in_minutes ?? 'Nil'}}</td>
                                         <td>{{$history->date->format('d M Y')}}</td>
                                         <td>{{$history->time}}</td>
-                                        <td>{{$history->isConfirmed}}</td>
+
                                     </tr>
                                     @endforeach
 

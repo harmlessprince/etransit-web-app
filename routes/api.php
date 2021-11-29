@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\AuthUser;
 use App\Http\Controllers\Api\Booking;
+use App\Http\Controllers\Api\FlutterWavePayment;
 use App\Http\Controllers\Api\Partner;
 use App\Http\Controllers\Api\PasswordReset;
 use App\Http\Controllers\Api\Payment;
@@ -31,6 +32,8 @@ Route::group(['prefix' => 'v1'], function() {
     Route::get('/rave/callback', [Payment::class, 'callback'])->name('callback');
     //store partners
     Route::post('/partners/create' , [Partner::class , 'store']);
+    Route::post('/rave/callback', [FlutterWavePayment::class, 'callback'])->name('callback');
+
 
     Route::middleware('jwt.verify')->group( function () {
 
@@ -48,6 +51,8 @@ Route::group(['prefix' => 'v1'], function() {
         //profile update
         Route::get('/get-user-profile',[Profile::class,'getUserProfile']);
         Route::post('/profile/update',[Profile::class,'profileUpdate']);
+
+        Route::post('/initialise-pay', [FlutterWavePayment::class, 'initialize'])->name('api.pay');
 
     });
 

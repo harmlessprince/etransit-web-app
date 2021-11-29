@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Mail;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Models\CarPlan;
 use App\Models\Transaction;
+use DateTime;
+
 
 
 
@@ -229,19 +231,25 @@ class Car extends Controller
        $checkServicePlan   =  CarPlan::where('id' , $carHistory->car_plan_id)->first();
 
 
+       //update status to confirm so u wont allow other user to book the same date to avoid class
+        //a cron job will be set to check payment confirmation from admin
+        //after an hour the status will set to pending  and the booking date will be available to other
+        // users if payment is not confirmed  within an hour
+
        $carHistory->update(['payment_status' => 'cash payment','isConfirmed' => 'True']);
 
        $transaction                   =  new Transaction();
        $transaction->reference        =  Reference::generateTrnxRef();
        $transaction->amount           =  $checkServicePlan->amount;
-       $transaction->status           = 'Cash payment';
+       $transaction->status           = 'Pending';
        $transaction->service_id       =  $fetchService_id->service_id;
-       $transaction->transaction_type = 'cash';
+       $transaction->transaction_type = 'cash payment';
        $transaction->user_id          =  auth()->user()->id;
+//       $transaction->car_plan_id      =  $carHistory->car_plan_id;
+       $transaction->car_history_id   =  $history_id;
        $transaction->description      = 'A cash payment for made successfully';
 
-       $transaction->save();
-
+        $transaction->save();
 
         $data["email"] = auth()->user()->email;
         $data["title"] = env('APP_NAME').' Car Hire Receipt';
@@ -260,9 +268,6 @@ class Car extends Controller
 
         return redirect('/car-hire');
     }
-
-
-
 
 
 }

@@ -19,4 +19,9 @@ class Transaction extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function carhistory()
+    {
+        return $this->belongsTo(CarHistory::class ,'car_history_id');
+    }
 }
