@@ -195,9 +195,6 @@ class Car extends Controller
                                                               ->where('isConfirmed' ,'=','True')
                                                               ->first();
 
-
-//dd($findCarHistroryForThisDate );
-
                 IF(is_null($findCarHistroryForThisDate))
                 {
                     $recordOperation                =  new CarHistory();

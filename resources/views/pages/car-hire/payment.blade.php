@@ -135,7 +135,7 @@
                     <div class="receipt_date">
                         <div class="pickup_date">
                             <h6>DATE</h6>
-{{--                            <small>{{ $recordOperation->date->format('d M Y')}}</small>--}}
+                            <small>{{ $recordOperation->date->format('d M Y')}}</small>
                         </div>
                         <div class="pickup_time">
                             <h6>TIME</h6>
