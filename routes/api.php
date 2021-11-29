@@ -32,7 +32,7 @@ Route::group(['prefix' => 'v1'], function() {
     Route::get('/rave/callback', [Payment::class, 'callback'])->name('callback');
     //store partners
     Route::post('/partners/create' , [Partner::class , 'store']);
-    Route::post('/rave/callback', [FlutterWavePayment::class, 'callback'])->name('callback');
+    Route::post('/rave/callback', [FlutterWavePayment::class, 'callback'])->name('api.callback');
 
 
     Route::middleware('jwt.verify')->group( function () {

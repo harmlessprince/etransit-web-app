@@ -37,7 +37,7 @@ class FlutterwavePayment extends Controller
             'email' => auth()->user()->email,
             'tx_ref' => $reference,
             'currency' => "NGN",
-            'redirect_url' => route('callback'),
+            'redirect_url' => route('api.callback'),
             'customer' => [
                 'email' => auth()->user()->email,
                 "phone_number" => auth()->user()->phone,
