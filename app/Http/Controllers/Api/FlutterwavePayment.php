@@ -22,7 +22,7 @@ class FlutterwavePayment extends Controller
         $reference = Flutterwave::generateReference();
 
         //get the type of service
-        $service = \App\Models\Service::where('id' , request()->service_id)->first();
+       $service = \App\Models\Service::where('id' , request()->service_id)->first();
 
         if(! $service)
         {
@@ -37,6 +37,7 @@ class FlutterwavePayment extends Controller
             'email' => auth()->user()->email,
             'tx_ref' => $reference,
             'currency' => "NGN",
+            'redirect_url' => route('callback'),
             'customer' => [
                 'email' => auth()->user()->email,
                 "phone_number" => auth()->user()->phone,
@@ -61,7 +62,7 @@ class FlutterwavePayment extends Controller
             ]
         ];
 
-        $payment = Flutterwave::initializePayment($data);
+       $payment = Flutterwave::initializePayment($data);
 
 
         if ($payment['status'] !== 'success') {
