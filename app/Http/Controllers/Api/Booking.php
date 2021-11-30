@@ -116,7 +116,7 @@ class Booking extends Controller
         request()->validate([
             'full_name' => 'required|array',
             'gender' => 'required|array',
-            'passenger_option' => 'required'
+            'passenger_option' => 'required|array'
         ]);
 
         $passengerArray = [];
