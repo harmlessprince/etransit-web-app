@@ -23,6 +23,8 @@ class CreateCarHistoriesTable extends Migration
             $table->time('delayed_trip_in_minutes')->nullable()->comment('This start counting after 12 hours of delay and keeps increasing hourly');
             $table->double('amount_to_remit_after_delayed_trip')->nullable()->comment('This start counting after 12 hours of delay and keeps increasing hourly');
             $table->date('date')->comment('pickup date');
+            $table->date('returnDate')->comment('return date');
+            $table->time('returnTime')->comment('return time');
             $table->time('time')->comment('pick up time');
             $table->enum('isConfirmed',['True', 'False'])->default('False')->comment('confirmation is the ride is already book for the date');
             $table->timestamps();

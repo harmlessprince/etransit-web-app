@@ -116,7 +116,7 @@ class Booking extends Controller
         request()->validate([
             'full_name' => 'required|array',
             'gender' => 'required|array',
-            'passenger_option' => 'required|array'
+            'passenger_option' => 'required'
         ]);
 
         $passengerArray = [];
@@ -137,6 +137,11 @@ class Booking extends Controller
         $selectedSeat = \App\Models\SeatTracker::where('schedule_id',$schedule_id)
             ->where('user_id',auth()->user()->id)
             ->where('booked_status', 1)->get();
+
+        if(!$selectedSeat)
+        {
+         abort('404');
+        }
 
 
         $fetchScheduleDetails = \App\Models\Schedule::where('id',$schedule_id)->with('service','bus','destination','pickup','terminal')->first();

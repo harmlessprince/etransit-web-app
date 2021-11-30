@@ -16,6 +16,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Models\CarPlan;
 use App\Models\Transaction;
 use DateTime;
+use Carbon\Carbon;
 
 
 
@@ -175,10 +176,10 @@ class Car extends Controller
                     'time' => 'required'
                 ]);
 
+
               //ensure user is unable to pick a date  that has already passed
               $currentDate = \Carbon\Carbon::now()->format('Y-m-d');
               $currentTime = \Carbon\Carbon::now()->format('H:i');
-
 
               if( $data['date'] >= $currentDate  && $data['time'] >= $currentTime )
               {
@@ -197,6 +198,44 @@ class Car extends Controller
                                                               ->where('isConfirmed' ,'=','True')
                                                               ->first();
 
+                  $Carplan = $plan->plan;
+
+
+                  switch ($Carplan) {
+                      case  'Daily Rentals':
+                          $delayedTime =  Carbon::createFromFormat('H', env('DAILY_RENTALS'))->format('H:i:s');
+                          break;
+                      case 'North Central';
+                          $delayedTime =  Carbon::createFromFormat('H', env('NC_RENTALS'))->format('H:i:s');
+                          break;
+                      case 'South West':
+                          $delayedTime =  Carbon::createFromFormat('H', env('SW_RENTALS'))->format('H:i:s');
+                          break;
+                      case 'South South':
+                          $delayedTime =  Carbon::createFromFormat('H', env('SS_RENTALS'))->format('H:i:s');
+                          break;
+                      case 'South East':
+                          $delayedTime =  Carbon::createFromFormat('H', env('SE_RENTALS'))->format('H:i:s');
+                          break;
+                      default:
+                          break;
+                  }
+
+                  ( $currentTime > 12) ? $daysToAdd = 1 :  $daysToAdd = 0;
+
+
+                  $time = $data['time'];
+                  $time2 = $delayedTime;
+
+                  $secs = strtotime($time2)-strtotime("00:00:00");
+                  $returnTime = date("H:i:s",strtotime($time)+$secs);
+
+                  //add days if the rent time is 12pm and above to get the accurate date of returning
+                  $date = Carbon::createFromFormat('Y-m-d', $data['date']);
+                  $returnDate = $date->addDays($daysToAdd);
+
+
+
                 IF(is_null($findCarHistroryForThisDate))
                 {
                     $recordOperation                =  new CarHistory();
@@ -205,6 +244,9 @@ class Car extends Controller
                     $recordOperation->user_id       =  auth()->user()->id;
                     $recordOperation->date          =  $data['date'];
                     $recordOperation->time          =  $data['time'];
+                    $recordOperation->returnTime    =  $returnTime ;
+                    $recordOperation->returnDate    =  $returnDate;
+
                     $recordOperation->save();
 
                     return view('pages.car-hire.payment',compact('recordOperation','plan','service'));
