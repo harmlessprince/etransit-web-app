@@ -217,100 +217,100 @@
 
     <!-- modal box -->
 
-    <div class="modal fade" id="vehicleModal" tabindex="-1" role="dialog" aria-labelledby="vehicleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h2 class="modal-title" id="exampleModalLabel" >Add Car</h2>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <form >
+{{--    <div class="modal fade" id="vehicleModal" tabindex="-1" role="dialog" aria-labelledby="vehicleModalLabel" aria-hidden="true">--}}
+{{--        <div class="modal-dialog" role="document">--}}
+{{--            <div class="modal-content">--}}
+{{--                <div class="modal-header">--}}
+{{--                    <h2 class="modal-title" id="exampleModalLabel" >Add Car</h2>--}}
+{{--                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">--}}
+{{--                        <span aria-hidden="true">&times;</span>--}}
+{{--                    </button>--}}
+{{--                </div>--}}
+{{--                <form >--}}
 
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label for="car_brand">Car Brand Name</label>
-                            <input type="text" class="form-control" name="car_brand" id="car_brand" required/>
-                        </div>
+{{--                    <div class="modal-body">--}}
+{{--                        <div class="form-group">--}}
+{{--                            <label for="car_brand">Car Brand Name</label>--}}
+{{--                            <input type="text" class="form-control" name="car_brand" id="car_brand" required/>--}}
+{{--                        </div>--}}
 
-                        <br>
-                        <div class="form-group">
-                            <label for="car_registration">Car Registration</label>
-                            <input type="text" class="form-control" name="car_registration" id="car_registration" required/>
-                        </div>
-                        <br>
-                        <div class="form-group">
-                            <label for="car_type">Car Type</label>
-                            <select  class="form-control" name="car_type" id="car_type" required>
-                                <option>Select Car Type</option>
-                                @foreach($types as $type)
-                                <option value="{{$type->id}}">{{$type->name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
+{{--                        <br>--}}
+{{--                        <div class="form-group">--}}
+{{--                            <label for="car_registration">Car Registration</label>--}}
+{{--                            <input type="text" class="form-control" name="car_registration" id="car_registration" required/>--}}
+{{--                        </div>--}}
+{{--                        <br>--}}
+{{--                        <div class="form-group">--}}
+{{--                            <label for="car_type">Car Type</label>--}}
+{{--                            <select  class="form-control" name="car_type" id="car_type" required>--}}
+{{--                                <option>Select Car Type</option>--}}
+{{--                                @foreach($types as $type)--}}
+{{--                                <option value="{{$type->id}}">{{$type->name}}</option>--}}
+{{--                                @endforeach--}}
+{{--                            </select>--}}
+{{--                        </div>--}}
 
-                        <div class="form-group">
-                            <label for="car_class">Car Class </label>
-                            <select  class="form-control" name="car_class" id="car_class" required>
-                                <option>Seelct Car Class</option>
-                                @foreach($classes as $class)
-                                    <option value="{{$class->id}}">{{$class->name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
+{{--                        <div class="form-group">--}}
+{{--                            <label for="car_class">Car Class </label>--}}
+{{--                            <select  class="form-control" name="car_class" id="car_class" required>--}}
+{{--                                <option>Seelct Car Class</option>--}}
+{{--                                @foreach($classes as $class)--}}
+{{--                                    <option value="{{$class->id}}">{{$class->name}}</option>--}}
+{{--                                @endforeach--}}
+{{--                            </select>--}}
+{{--                        </div>--}}
 
-                        <div class="form-group">
-                            <label for="capacity">Seat Capacity</label>
-                            <input type="number" class="form-control" name="capacity" id="capacity" required/>
-                        </div>
+{{--                        <div class="form-group">--}}
+{{--                            <label for="capacity">Seat Capacity</label>--}}
+{{--                            <input type="number" class="form-control" name="capacity" id="capacity" required/>--}}
+{{--                        </div>--}}
 
-                        <div class="form-group">
-                            <label for="daily_rentals">Daily Rentals</label>
-                            <input type="text" class="form-control" name="daily_rentals" id="daily_rentals" required/>
-                        </div>
+{{--                        <div class="form-group">--}}
+{{--                            <label for="daily_rentals">Daily Rentals</label>--}}
+{{--                            <input type="text" class="form-control" name="daily_rentals" id="daily_rentals" required/>--}}
+{{--                        </div>--}}
 
-                        <div class="form-group">
-                            <label for="extra_hour">Extra Hour</label>
-                            <input type="text" class="form-control" name="extra_hour" id="extra_hour" required/>
-                        </div>
+{{--                        <div class="form-group">--}}
+{{--                            <label for="extra_hour">Extra Hour</label>--}}
+{{--                            <input type="text" class="form-control" name="extra_hour" id="extra_hour" required/>--}}
+{{--                        </div>--}}
 
-                        <div class="form-group">
-                            <label for="sw_region_fare">SW Region (Fare)r</label>
-                            <input type="text" class="form-control" name="sw_region_fare" id="sw_region_fare" required/>
-                        </div>
+{{--                        <div class="form-group">--}}
+{{--                            <label for="sw_region_fare">SW Region (Fare)r</label>--}}
+{{--                            <input type="text" class="form-control" name="sw_region_fare" id="sw_region_fare" required/>--}}
+{{--                        </div>--}}
 
-                        <div class="form-group">
-                            <label for="se_region_fare">SE Region (Fare)</label>
-                            <input type="text" class="form-control" name="se_region_fare" id="se_region_fare" required/>
-                        </div>
+{{--                        <div class="form-group">--}}
+{{--                            <label for="se_region_fare">SE Region (Fare)</label>--}}
+{{--                            <input type="text" class="form-control" name="se_region_fare" id="se_region_fare" required/>--}}
+{{--                        </div>--}}
 
-                        <div class="form-group">
-                            <label for="ss_region_fare">SS Region (Fare)</label>
-                            <input type="text" class="form-control" name="ss_region_fare" id="ss_region_fare" required/>
-                        </div>
+{{--                        <div class="form-group">--}}
+{{--                            <label for="ss_region_fare">SS Region (Fare)</label>--}}
+{{--                            <input type="text" class="form-control" name="ss_region_fare" id="ss_region_fare" required/>--}}
+{{--                        </div>--}}
 
-                        <div class="form-group">
-                            <label for="nc_region_fare">NC Region (Fare)</label>
-                            <input type="text" class="form-control" name="nc_region_fare" id="nc_region_fare" required/>
-                        </div>
+{{--                        <div class="form-group">--}}
+{{--                            <label for="nc_region_fare">NC Region (Fare)</label>--}}
+{{--                            <input type="text" class="form-control" name="nc_region_fare" id="nc_region_fare" required/>--}}
+{{--                        </div>--}}
 
-                        <div class="form-group">
-                            <label for="description">Description</label>
-                            <textarea class="form-control" name="description" id="description" rows="10" cols="20" required></textarea>
-                        </div>
+{{--                        <div class="form-group">--}}
+{{--                            <label for="description">Description</label>--}}
+{{--                            <textarea class="form-control" name="description" id="description" rows="10" cols="20" required></textarea>--}}
+{{--                        </div>--}}
 
 
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn-close" data-dismiss="modal">Close</button>
-                        <button type="button" class="send-btn  btn-submit" id="send-btn">Save changes</button>
-                    </div>
-                </form>
+{{--                    </div>--}}
+{{--                    <div class="modal-footer">--}}
+{{--                        <button type="button" class="btn-close" data-dismiss="modal">Close</button>--}}
+{{--                        <button type="button" class="send-btn  btn-submit" id="send-btn">Save changes</button>--}}
+{{--                    </div>--}}
+{{--                </form>--}}
 
-            </div>
-        </div>
-    </div>
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </div>--}}
     <!-- end modal box here -->
     <script type="text/javascript">
 

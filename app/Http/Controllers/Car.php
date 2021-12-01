@@ -9,7 +9,10 @@ use App\Imports\CarsImport;
 use App\Mail\CarHireRecept;
 use App\Models\CarClass;
 use App\Models\CarHistory;
+use App\Models\CarImage;
 use App\Models\CarType;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
+use Illuminate\Support\Facades\DB;
 use PDF;
 use Illuminate\Http\Request;
 use App\Models\Car as HiredCars;
@@ -29,11 +32,8 @@ class Car extends Controller
     public function allCars()
     {
         $cars     = HiredCars::with('carclass','cartype')->get();
-        $classes  = CarClass::all();
-        $types    = CarType::all();
 
-
-        return view('admin.cars.cars', compact('cars','types','classes'));
+        return view('admin.cars.cars', compact('cars'));
     }
 
     public function carClass()
@@ -82,7 +82,10 @@ class Car extends Controller
     }
     public function addCar()
     {
-        return view('admin.cars.store');
+
+        $classes  = CarClass::all();
+        $types    = CarType::all();
+        return view('admin.cars.store',compact('types','classes'));
     }
 
 
@@ -95,19 +98,18 @@ class Car extends Controller
                             'car_class' => 'required',
                             'daily_rentals' => 'required',
                             'extra_hour' => 'required',
-                            'sw_fare' => 'required',
-                            'ss_fare' => 'required',
-                            'se_fare' => 'required',
-                            'nc_fare' => 'required',
+                            'sw_region_fare' => 'required',
+                            'ss_region_fare' => 'required',
+                            'se_region_fare' => 'required',
+                            'nc_region_fare' => 'required',
                             'description'=> 'required',
                             'capacity' => 'required',
                             'car_brand' => 'required',
-                            'car_registration' => 'required'
+                            'car_registration' => 'required',
                         ]);
 
-
-               $service_id  = \App\Models\Service::where('id',6)
-                                                            ->select('id')->first();
+        DB::beginTransaction();
+               $service_id  = \App\Models\Service::where('id',6)->select('id')->first();
 
                $car                   = new HiredCars();
                $car->car_class_id     = $data['car_class'];
@@ -119,6 +121,24 @@ class Car extends Controller
                $car->car_registration = $data['car_registration'];
                $car->save();
 
+               if($request->hasfile('images'))
+               {
+                   $input=$request->file('images');
+
+                   $images=array();
+                   if($files=$request->file('images')){
+                       foreach($files as  $file){
+                           $name=$file->getClientOriginalName();
+                           $uploadedFileUrl = Cloudinary::upload($file->getRealPath())->getSecurePath();
+                           $carImage = new CarImage();
+                           $carImage->car_id = $car->id;
+                           $carImage->path = $uploadedFileUrl;
+                           $carImage->save();
+                       }
+
+                   }
+               }
+
               $Dailyplan = new \App\Models\CarPlan();
               $Dailyplan->plan = 'Daily Rentals';
               $Dailyplan->amount = $data['daily_rentals'];
@@ -128,30 +148,29 @@ class Car extends Controller
 
               $SWPlan = new \App\Models\CarPlan();
               $SWPlan->plan = 'South West';
-              $SWPlan->amount = $data['sw_fare'];
+              $SWPlan->amount = $data['sw_region_fare'];
               $SWPlan->car_id = $car->id;
               $SWPlan->save();
 
-
               $SSPlan = new \App\Models\CarPlan();
               $SSPlan->plan = 'South South';
-              $SSPlan->amount = $data['ss_fare'];
+              $SSPlan->amount = $data['ss_region_fare'];
               $SSPlan->car_id = $car->id;
               $SSPlan->save();
 
               $SEPlan = new \App\Models\CarPlan();
               $SEPlan->plan = 'South East';
-              $SEPlan->amount = $data['se_fare'];
+              $SEPlan->amount = $data['se_region_fare'];
               $SEPlan->car_id = $car->id;
               $SEPlan->save();
 
               $NCPlan = new \App\Models\CarPlan();
               $NCPlan->plan = 'North Central';
-              $NCPlan->amount = $data['nc_fare'];
+              $NCPlan->amount = $data['nc_region_fare'];
               $NCPlan->car_id = $car->id;
               $NCPlan->save();
-
-             return   response()->json(['success' => 'true', 'message' => 'Data saved successfully']);
+        DB::commit();
+             return  back();
 
     }
 

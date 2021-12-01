@@ -43,18 +43,25 @@
                             <li><a href="projectcreate.html">Manage Car Hiring</a></li>
                         </ul>
                     </li>
-                    <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"></i><span>Bus Schedules</span></a>
-                        <ul class="nav-submenu menu-content">
-                            <li><a href="{{url('admin/import-export-schedule')}}">Schedules</a></li>
+{{--                    <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"></i><span>Bus Schedules</span></a>--}}
+{{--                        <ul class="nav-submenu menu-content">--}}
+{{--                            <li><a href="{{url('admin/import-export-schedule')}}">Schedules</a></li>--}}
 
-                        </ul>
-                    </li>
+{{--                        </ul>--}}
+{{--                    </li>--}}
                     <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"></i><span>Bus Management</span></a>
                         <ul class="nav-submenu menu-content">
                             <li><a href="{{url('/admin/manage/vehicle')}}">Manage Buses</a></li>
                         </ul>
                     </li>
                     <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"></i><span>Car Hire </span></a>
+                        <ul class="nav-submenu menu-content">
+                            <li><a href="{{url('/admin/manage/cars')}}">Manage Car Hiring </a></li>
+                            <li><a href="{{url('/admin/manage/car-class')}}">Manage Car Class </a></li>
+                            <li><a href="{{url('/admin/manage/car-type')}}">Manage Car Type </a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"></i><span>Boat Cruise  </span></a>
                         <ul class="nav-submenu menu-content">
                             <li><a href="{{url('/admin/manage/cars')}}">Manage Car Hiring </a></li>
                             <li><a href="{{url('/admin/manage/car-class')}}">Manage Car Class </a></li>

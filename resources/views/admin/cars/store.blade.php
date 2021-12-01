@@ -15,6 +15,22 @@
         border-radius: 5px !important;
         width: 240px !important;
     }
+    .sumbit_request{
+        background: #021037 !important;
+        cursor: pointer;
+        border: 1px solid  #021037 !important;
+        color: #fff !important;
+        border-radius: 5px !important;
+        padding:10px;
+    }
+    .sumbit_request:hover{
+        background: #DC6513 !important;
+        cursor: pointer;
+        border: 1px solid  #DC6513 !important;
+        color: #fff !important;
+        border-radius: 5px !important;
+        padding:10px;
+    }
     .bulk-upload-button:hover {
         background: #DC6513 !important;
         opacity: 0.8 !important;
@@ -25,7 +41,39 @@
         cursor: pointer;
     }
 
+.car-box{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 30px;
+}
+.car-box input , select{
+    outline:none !important;
+    border:none !important;
+    border-bottom: 1px solid #03174C !important;
+}
+    input:focus ,select:focus{
+        outline: none !important;
+    }
+    textarea {
+        background-color: transparent !important;
+        resize: none !important;
+        outline: none !important;
+        border: 1px solid #03174C !important;
+    }
 
+    textarea:focus {
+        outline: none !important;
+        border: 1px solid  #03174C  !important;
+    }
+    .image_file{
+        outline: none !important;
+        border:none !important;
+    }
+    .images-preview-div img
+    {
+        padding: 10px;
+        max-width: 200px;
+    }
 
 </style>
 @section('content')
@@ -84,160 +132,174 @@
         </div>
         <div class="card">
             <div class="card-body">
-                <div class="vehicle-box">
-
-                </div>
-            </div>
-        </div>
-
-    </div>
-
-
-    <!-- modal box -->
-
-    <div class="modal fade" id="vehicleModal" tabindex="-1" role="dialog" aria-labelledby="vehicleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h2 class="modal-title" id="exampleModalLabel" >Add Car</h2>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <form >
-
-                    <div class="modal-body">
+                <form method="post" action="{{url('/admin/store/car')}}" enctype="multipart/form-data">
+                    @csrf
+                    <div class="car-box">
                         <div class="form-group">
-                            <label for="car_brand">Car Brand Name</label>
-                            <input type="text" class="form-control" name="car_brand" id="car_brand" required/>
+                            <label>Car Brand</label>
+                            <input type="text" name="car_brand" id="car_brand" class="form-control" required/>
+                            @error('car_brand')
+                            <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
-
-                        <br>
                         <div class="form-group">
                             <label for="car_registration">Car Registration</label>
                             <input type="text" class="form-control" name="car_registration" id="car_registration" required/>
+                            @error('car_registration')
+                            <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
-                        <br>
                         <div class="form-group">
                             <label for="car_type">Car Type</label>
                             <select  class="form-control" name="car_type" id="car_type" required>
                                 <option>Select Car Type</option>
-{{--                                @foreach($types as $type)--}}
-{{--                                    <option value="{{$type->id}}">{{$type->name}}</option>--}}
-{{--                                @endforeach--}}
+                                    @foreach($types as $type)
+                                        <option value="{{$type->id}}">{{$type->name}}</option>
+                                    @endforeach
                             </select>
+                            @error('car_type')
+                            <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
 
                         <div class="form-group">
                             <label for="car_class">Car Class </label>
                             <select  class="form-control" name="car_class" id="car_class" required>
-                                <option>Seelct Car Class</option>
-{{--                                @foreach($classes as $class)--}}
-{{--                                    <option value="{{$class->id}}">{{$class->name}}</option>--}}
-{{--                                @endforeach--}}
+                                <option>Select Car Class</option>
+                                @foreach($classes as $class)
+                                    <option value="{{$class->id}}">{{$class->name}}</option>
+                                @endforeach
                             </select>
+                            @error('car_class')
+                            <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
 
                         <div class="form-group">
                             <label for="capacity">Seat Capacity</label>
                             <input type="number" class="form-control" name="capacity" id="capacity" required/>
+                            @error('capacity')
+                            <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
 
                         <div class="form-group">
                             <label for="daily_rentals">Daily Rentals</label>
                             <input type="text" class="form-control" name="daily_rentals" id="daily_rentals" required/>
+                            @error('daily_rentals')
+                            <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
 
                         <div class="form-group">
                             <label for="extra_hour">Extra Hour</label>
                             <input type="text" class="form-control" name="extra_hour" id="extra_hour" required/>
+                            @error('extra_hour')
+                            <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
 
                         <div class="form-group">
                             <label for="sw_region_fare">SW Region (Fare)r</label>
                             <input type="text" class="form-control" name="sw_region_fare" id="sw_region_fare" required/>
+                            @error('sw_region_fare')
+                            <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
 
                         <div class="form-group">
                             <label for="se_region_fare">SE Region (Fare)</label>
                             <input type="text" class="form-control" name="se_region_fare" id="se_region_fare" required/>
+                            @error('se_region_fare')
+                            <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
 
                         <div class="form-group">
                             <label for="ss_region_fare">SS Region (Fare)</label>
                             <input type="text" class="form-control" name="ss_region_fare" id="ss_region_fare" required/>
+                            @error('ss_region_fare')
+                            <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
 
                         <div class="form-group">
                             <label for="nc_region_fare">NC Region (Fare)</label>
                             <input type="text" class="form-control" name="nc_region_fare" id="nc_region_fare" required/>
+                            @error('nc_region_fare')
+                            <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
 
                         <div class="form-group">
-                            <label for="description">Description</label>
-                            <textarea class="form-control" name="description" id="description" rows="10" cols="20" required></textarea>
+                            <label for="nc_region_fare">Add Images</label>
+                            <input  required type="file" id="images" class="form-control image_file" name="images[]" placeholder="address" multiple>
+                            @error('images')
+                            <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
 
+                    </div>
 
+                    <div class="col-md-12 mb-2">
+                        <div class="images-preview-div"> </div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn-close" data-dismiss="modal">Close</button>
-                        <button type="button" class="send-btn  btn-submit" id="send-btn">Save changes</button>
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea class="form-control" name="description" id="description" rows="10" cols="20" required></textarea>
                     </div>
+                    <button class="sumbit_request" type="submit">Add Car</button>
                 </form>
-
             </div>
+
         </div>
+
     </div>
-    <!-- end modal box here -->
+
     <script type="text/javascript">
 
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
 
-        $(".btn-submit").click(function(e){
-            e.preventDefault();
-
-            var car_class         = $("#car_class").val();
-            var car_type          = $("#car_type").val();
-            var daily_rentals     = $("input[name=daily_rentals]").val();
-            var capacity          = $("input[name=capacity]").val();
-            var extra_hour        = $("input[name=extra_hour]").val();
-            var sw_fare           = $("input[name=sw_region_fare]").val();
-            var ss_fare           = $("input[name=ss_region_fare]").val();
-            var se_fare           = $("input[name=se_region_fare]").val();
-            var nc_fare           = $("input[name=nc_region_fare]").val();
-            var description       = $("#description").val();
-            var car_registration  = $("input[name=car_registration]").val();
-            var car_brand         = $("input[name=car_brand]").val();
-
-
-            $("#send-btn").prop('disabled', true);
-
-            $.ajax({
-                type:'POST',
-                url: "/admin/store/car",
-                data:{"_token": "{{ csrf_token() }}",car_class, car_type,daily_rentals , extra_hour ,
-                    sw_fare , ss_fare , se_fare, nc_fare , capacity ,description,car_registration ,car_brand},
-                success:function(data){
-                    if(data.success)
-                    {
-                        displaySuccessMessage(data.message)
-                        setTimeout(function(){
-                            location.reload(true);
-                        }, 2000);
+        $(function() {
+            var previewImages = function(input, imgPreviewPlaceholder) {
+                if (input.files) {
+                    var filesAmount = input.files.length;
+                    for (i = 0; i < filesAmount; i++) {
+                        var reader = new FileReader();
+                        reader.onload = function(event) {
+                            $($.parseHTML('<img>')).attr('src', event.target.result).appendTo(imgPreviewPlaceholder);
+                        }
+                        reader.readAsDataURL(input.files[i]);
                     }
                 }
+            };
+            $('#images').on('change', function() {
+                previewImages(this, 'div.images-preview-div');
             });
-
         });
-
-        function displaySuccessMessage(message) {
-            toastr.success(message, 'Success');
-        }
 
     </script>
 

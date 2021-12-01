@@ -105,8 +105,7 @@ class FlutterwavePayment extends Controller
                     break;
             }
 
-            toastr()->success('Payment made successfully');
-            return redirect()->intended('/');;
+            return response()->json(['success' => true , 'message' => 'Payment made successfully' ]);
 
 
         }
