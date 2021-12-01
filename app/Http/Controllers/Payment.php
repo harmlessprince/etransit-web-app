@@ -115,6 +115,7 @@ class Payment extends Controller
         $scheduleId    = (int)   $data['data']['meta']['schedule_id'];
         $serviceID     = (int)   $data['data']['meta']['service_id'];
 
+
         //find the schedule to get the actual amount stored in the database
         $tripSchedule = \App\Models\Schedule::where('id', $scheduleId)->select('fare_adult', 'fare_children', 'id', 'seats_available', 'bus_id')->first();
         !$tripSchedule ? abort('404') : '';

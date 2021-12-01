@@ -24,6 +24,7 @@ class FlutterwavePayment extends Controller
         //get the type of service
        $service = \App\Models\Service::where('id' , request()->service_id)->first();
 
+
         if(! $service)
         {
             abort('404');
@@ -52,7 +53,7 @@ class FlutterwavePayment extends Controller
                 "user_id" => auth()->user()->id,
                 "childrenCount" => request()->childrenCount ?? null,
                 "adultCount" => request()->adultCount ?? null,
-                'service_id' => request()->service_id,
+                'service_id' => $service->id,
                 'user_email' => auth()->user()->email,
                 'user_name' => auth()->user()->full_name,
                 'plan_id' => request()->plan_id ?? null,
@@ -85,6 +86,7 @@ class FlutterwavePayment extends Controller
         $transactionID = $request->id;
 
         $status = request()->status;
+
 
         //if payment is successful
         if ($status ==  'successful') {
@@ -123,13 +125,14 @@ class FlutterwavePayment extends Controller
     }
 
 
-    protected function busTickettingPayment($data ,$tripType)
+    protected function busTickettingPayment($data ,$tripType )
     {
+
         //check if the maount paid is correct
         $childrenCount = (int)   $data['data']['meta']['childrenCount'];
         $adultCount    = (int)   $data['data']['meta']['adultCount'];
         $scheduleId    = (int)   $data['data']['meta']['schedule_id'];
-        $serviceID     = (int)   $data['data']['meta']['service_id'];
+        $serviceId     = (int)   $data['data']['meta']['service_id'];
 
         //find the schedule to get the actual amount stored in the database
         $tripSchedule = \App\Models\Schedule::where('id', $scheduleId)->select('fare_adult', 'fare_children', 'id', 'seats_available', 'bus_id')->first();
@@ -156,11 +159,11 @@ class FlutterwavePayment extends Controller
             $transactions->description = $data['data']['meta']['description'];
             $transactions->user_id = $data['data']['meta']['user_id'];
             $transactions->passenger_count = $adultCount + $childrenCount;
-            $transactions->service_id = $serviceID;
+            $transactions->service_id = $serviceId;
             $transactions->save();
-            toastr()->success('Payment made successfully');
-            return redirect()->intended('/');;
             DB::commit();
+            return response()->json(['success' => true ,'message' => 'Payment made successfully']);
+
         } else {
             DB::beginTransaction();
             $transactions = new \App\Models\Transaction();
@@ -172,7 +175,7 @@ class FlutterwavePayment extends Controller
             $transactions->description = $data['data']['meta']['description'];
             $transactions->user_id = $data['data']['meta']['user_id'];
             $transactions->passenger_count = $adultCount + $childrenCount;
-            $transactions->service_id = $serviceID;
+            $transactions->service_id = $serviceId;
             $transactions->isConfirmed = 'True';
             $transactions->save();
 
@@ -196,8 +199,8 @@ class FlutterwavePayment extends Controller
 
 
             }
-            $this->flushSession();
             DB::commit();
+            return response()->json(['success' => true ,'message' => 'Payment made successfully']);
         }
     }
 
@@ -232,6 +235,7 @@ class FlutterwavePayment extends Controller
             $transactions->isConfirmed = 'True';
             $transactions->save();
             DB::commit();
+            return response()->json(['success' => true ,'message' => 'Payment made successfully']);
 
         }else{
 
@@ -265,6 +269,7 @@ class FlutterwavePayment extends Controller
             });
 
             DB::commit();
+            return response()->json(['success' => true ,'message' => 'Payment made successfully']);
         }
 
 
@@ -272,10 +277,10 @@ class FlutterwavePayment extends Controller
 
 
 
-    public function flushSession()
-    {
-        request()->session()->forget('return_date');
-        request()->session()->forget('tripType');
-    }
+//    public function flushSession()
+//    {
+//        request()->session()->forget('return_date');
+//        request()->session()->forget('tripType');
+//    }
 
 }
