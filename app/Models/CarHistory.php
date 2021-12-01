@@ -17,9 +17,17 @@ class CarHistory extends Model
      */
     protected $casts = [
         'date' => 'date',
+        'returnDate' => 'date',
+        'time' => 'datetime',
+        'returnTime' => 'datetime',
+
     ];
 
 
+    public function car()
+    {
+        return $this->belongsTo(Car::class);
+    }
 
     public function carplan()
     {

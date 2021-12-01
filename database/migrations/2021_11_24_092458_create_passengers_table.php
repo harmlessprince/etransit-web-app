@@ -21,8 +21,11 @@ class CreatePassengersTable extends Migration
             $table->string('full_name');
             $table->string('gender');
             $table->string('passenger_age_range')->comment('adult or children');
-
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('schedule_id')->references('id')->on('schedules')->onDelete('cascade');
+            $table->foreign('seat_tracker_id')->references('id')->on('seat_trackers')->onDelete('cascade');
         });
     }
 

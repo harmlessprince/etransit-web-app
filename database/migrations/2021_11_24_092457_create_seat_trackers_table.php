@@ -24,6 +24,7 @@ class CreateSeatTrackersTable extends Migration
 
             $table->foreign('schedule_id')->references('id')->on('schedules')->onDelete('cascade');
             $table->foreign('bus_id')->references('id')->on('buses')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

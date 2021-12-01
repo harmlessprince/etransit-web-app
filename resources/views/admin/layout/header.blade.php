@@ -47,5 +47,5 @@
             padding: 1px 30px !important;
         }
     </style>
-
+    @cloudinaryJS
 </head>

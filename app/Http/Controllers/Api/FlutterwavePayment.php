@@ -29,7 +29,6 @@ class FlutterwavePayment extends Controller
             abort('404');
         }
 
-
         // Enter the details of the payment
         $data = [
             'payment_options' => 'card,banktransfer',

@@ -198,7 +198,7 @@
                            <img src="{{asset('/images/trending/vehicle.png')}}" alt="about-us-image"   />
                        </div>
                        <div class="car_name_function_box">
-                           <div class="car_name"><h5>{{Ucfirst($car->car_type)}}</h5></div>
+                           <div class="car_name"><h5>{{Ucfirst($car->car_name)}}</h5></div>
                            <div class="car_description">
                                <p>
                                    {{ \Illuminate\Support\Str::limit($car->description, $limit = 150, $end = '...') }}

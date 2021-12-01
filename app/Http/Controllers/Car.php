@@ -7,7 +7,9 @@ use App\Classes\Reference;
 use App\Exports\CarsExport;
 use App\Imports\CarsImport;
 use App\Mail\CarHireRecept;
+use App\Models\CarClass;
 use App\Models\CarHistory;
+use App\Models\CarType;
 use PDF;
 use Illuminate\Http\Request;
 use App\Models\Car as HiredCars;
@@ -26,12 +28,65 @@ class Car extends Controller
 {
     public function allCars()
     {
-        $cars = HiredCars::all();
+        $cars     = HiredCars::with('carclass','cartype')->get();
+        $classes  = CarClass::all();
+        $types    = CarType::all();
 
-        return view('admin.cars.cars', compact('cars'));
+
+        return view('admin.cars.cars', compact('cars','types','classes'));
     }
 
-    public function addCars(Request $request)
+    public function carClass()
+    {
+
+        $carsClasses = CarClass::all();
+
+       return view('admin.cars.car-class', compact('carsClasses'));
+    }
+
+    public function  saveCarClass(Request $request)
+    {
+        request()->validate([
+            'car_class'=> 'required'
+        ]);
+
+
+        $carClass = new CarClass();
+        $carClass->name = $request['car_class'];
+        $carClass->save();
+
+        return   response()->json(['success' => 'true', 'message' => 'Data saved successfully']);
+    }
+
+    public function carType()
+    {
+
+        $carsTypes = CarType::all();
+
+        return view('admin.cars.car-type', compact('carsTypes'));
+    }
+
+
+    public function saveCarType(Request $request)
+    {
+        request()->validate([
+            'car_type'=> 'required'
+        ]);
+
+
+        $carType = new CarType();
+        $carType->name = $request['car_type'];
+        $carType->save();
+
+        return   response()->json(['success' => 'true', 'message' => 'Data saved successfully']);
+    }
+    public function addCar()
+    {
+        return view('admin.cars.store');
+    }
+
+
+    public function storeCar(Request $request)
     {
 
 
@@ -45,19 +100,23 @@ class Car extends Controller
                             'se_fare' => 'required',
                             'nc_fare' => 'required',
                             'description'=> 'required',
-                            'capacity' => 'required'
+                            'capacity' => 'required',
+                            'car_brand' => 'required',
+                            'car_registration' => 'required'
                         ]);
 
 
                $service_id  = \App\Models\Service::where('id',6)
                                                             ->select('id')->first();
 
-               $car                  = new HiredCars();
-               $car->car_class       = $data['car_class'];
-               $car->car_type        = $data['car_type'];
-               $car->description     = $data['description'];
-               $car->capacity        = $data['capacity'];
-               $car->service_id      = $service_id->id;
+               $car                   = new HiredCars();
+               $car->car_class_id     = $data['car_class'];
+               $car->car_type_id      = $data['car_type'];
+               $car->description      = $data['description'];
+               $car->capacity         = $data['capacity'];
+               $car->service_id       = $service_id->id;
+               $car->car_name         = $data['car_brand'];
+               $car->car_registration = $data['car_registration'];
                $car->save();
 
               $Dailyplan = new \App\Models\CarPlan();
@@ -100,7 +159,6 @@ class Car extends Controller
     public function carList()
     {
         $cars = HiredCars::where('functional',1)->paginate(10);
-
 
         return view('pages.car-hire.hire', compact('cars'));
     }
@@ -153,8 +211,7 @@ class Car extends Controller
 
     public function selectPlan($car_id)
     {
-        $car = HiredCars::where('id',$car_id)->with('plans')->first();
-
+        $car = HiredCars::where('id',$car_id)->with('plans','cartype','carclass')->first();
 
         return view('pages.car-hire.plan', compact('car'));
     }
@@ -248,6 +305,7 @@ class Car extends Controller
                     $recordOperation->returnDate    =  $returnDate;
 
                     $recordOperation->save();
+                    $recordOperation->with('carplan','car')->first();
 
                     return view('pages.car-hire.payment',compact('recordOperation','plan','service'));
                 }else{
@@ -311,5 +369,23 @@ class Car extends Controller
         return redirect('/car-hire');
     }
 
+
+    public function onTrip()
+    {
+
+        $carsOnTripCurrently = CarHistory::where('available_status','On Trip')->with('car','carplan','user')->orderby('returnDate','desc')->get();
+
+        return view('admin.cars.on-trip', compact('carsOnTripCurrently'));
+    }
+
+
+    public function tripDetails($carhistory_id)
+    {
+
+        $car = CarHistory::where('id', $carhistory_id)->with('user','carplan','car')
+                                                                                ->first();
+
+        return view('admin.cars.details',compact('car'));
+    }
 
 }

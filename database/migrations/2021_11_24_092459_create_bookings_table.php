@@ -21,9 +21,9 @@ class CreateBookingsTable extends Migration
             $table->string('number_of_passengers');
             $table->timestamps();
 
-             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-//            $table->foreign('schedule_id')->references('id')->on('schedules')->onDelete('cascade');
-//            $table->foreign('trip_type_id')->references('id')->on('trip_type')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('schedule_id')->references('id')->on('schedules')->onDelete('cascade');
+            $table->foreign('trip_type_id')->references('id')->on('trip_type')->onDelete('cascade');
 
         });
     }

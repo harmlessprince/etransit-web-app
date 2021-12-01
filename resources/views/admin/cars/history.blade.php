@@ -169,7 +169,7 @@
                     <div class="card-header card-no-border">
                         <div class="media">
                             <div class="media-body">
-                                <h5><span class="f-w-900 font-primary">{{$carHistory->car_type}}</span>  <span class="f-w-500 font-roboto">History</span></h5>
+                                <h5><span class="f-w-900 font-primary">{{$carHistory->car_name}}</span>  <span class="f-w-500 font-roboto">History</span></h5>
                                 <br><br>
                                 <table class="table table-striped">
                                     <thead>

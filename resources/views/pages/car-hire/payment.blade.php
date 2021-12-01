@@ -112,8 +112,8 @@
                             <div class="orange-dot"></div>
                             <div  class="header_text">
                                <h6>
-                                   {{strtoupper($plan->car->car_type)}}
-                                   ({{strtoupper($plan->car->car_class)}})
+                                   {{strtoupper($plan->car->car_name)}}
+                                   ({{strtoupper($plan->car->car_registration)}})
                                </h6>
                             </div>
                         </div>
@@ -139,7 +139,7 @@
                         </div>
                         <div class="pickup_time">
                             <h6>TIME</h6>
-                            <small>{{ $recordOperation->time}}</small>
+                            <small>{{ $recordOperation->time->format('H:i:s')}}</small>
                         </div>
                     </div>
                     <div class="passenger_details">

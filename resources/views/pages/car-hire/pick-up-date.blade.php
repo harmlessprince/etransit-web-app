@@ -63,10 +63,10 @@
                 <img src="{{asset('images/icons/plan_options.png')}}" alt="plan-icon"/>
                 <small>Rental Plan :{{$findPaymentOption->plan}}</small>
             </div>
-            <div class="car_info">
-                <img src="{{asset('images/icons/plan_options.png')}}" alt="plan-icon"/>
-                <small>Class :{{$findPaymentOption->car->car_class}}</small>
-            </div>
+{{--            <div class="car_info">--}}
+{{--                <img src="{{asset('images/icons/plan_options.png')}}" alt="plan-icon"/>--}}
+{{--                <small>Class :{{$findPaymentOption->car->car_class}}</small>--}}
+{{--            </div>--}}
             <div class="car_info">
                 <img src="{{asset('images/icons/plan_options.png')}}" alt="plan-icon"/>
                 <small>Rental Fare :&#8358; {{$findPaymentOption->amount}}</small>
@@ -77,10 +77,10 @@
                 <small>Extra Hour : &#8358; {{$findPaymentOption->extra_hour}}</small>
             </div>
             @endif
-            <div class="car_info">
-                <img src="{{asset('images/icons/plan_options.png')}}" alt="plan-icon"/>
-                <small>Type :{{$findPaymentOption->car->car_type}}</small>
-            </div>
+{{--            <div class="car_info">--}}
+{{--                <img src="{{asset('images/icons/plan_options.png')}}" alt="plan-icon"/>--}}
+{{--                <small>Type :{{$findPaymentOption->car->car_type}}</small>--}}
+{{--            </div>--}}
 
             @if(!empty($findPaymentOption->extra_hour))
             <div class="car_info">

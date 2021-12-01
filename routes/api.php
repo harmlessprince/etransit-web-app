@@ -2,7 +2,8 @@
 
 use App\Http\Controllers\Api\AuthUser;
 use App\Http\Controllers\Api\Booking;
-use App\Http\Controllers\Api\FlutterWavePayment;
+use App\Http\Controllers\Api\Car;
+use App\Http\Controllers\Api\FlutterwavePayment;
 use App\Http\Controllers\Api\Partner;
 use App\Http\Controllers\Api\PasswordReset;
 use App\Http\Controllers\Api\Payment;
@@ -52,7 +53,18 @@ Route::group(['prefix' => 'v1'], function() {
         Route::get('/get-user-profile',[Profile::class,'getUserProfile']);
         Route::post('/profile/update',[Profile::class,'profileUpdate']);
 
-        Route::post('/initialise-pay', [FlutterWavePayment::class, 'initialize'])->name('api.pay');
+        Route::post('/initialise-pay', [FlutterwavePayment::class, 'initialize'])->name('api.pay.flutter');
+
+        //car hiree endpoint
+        Route::get('/car/types',[Car::class , 'CarType']);
+        Route::get('/car/class' , [Car::class , 'carClass']);
+        Route::get('/select/type/{car_type_id}',[Car::class,'selectCarType']);
+        Route::get('/select/class/{car_class_id}/{selected_car_type_id}',[Car::class,'selectCarClass']);
+        Route::get('/fetch/car-list/{car_type_id}/{car_class_id}' , [Car::class , 'carList']);
+        Route::get('/car/{car_id}/plan' , [Car::class , 'selectPlan']);
+        Route::get('/pick-car-plan/{plan_id}' , [Car::class , 'pickPlan']);
+        Route::post('/book-date/{plan_id}' ,[Car::class,'bookADate']);
+        Route::get('/car-hire/handle-cash-payment/{history_id}' ,[Car::class,'makeCashPayment']);
 
     });
 

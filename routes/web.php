@@ -98,8 +98,16 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::get('/transactions' , [Transaction::class , 'allTransactions']);
         //manage car hiring module route
         Route::get('/manage/cars' , [Car::class ,'allCars']);
-        Route::post('add/cars', [Car::class, 'addCars']);
+        Route::get('manage/car-class' , [Car::class , 'carClass']);
+        Route::post('add/car-class' , [Car::class , 'saveCarClass']);
+        Route::get('manage/car-type' , [Car::class , 'carType']);
+        Route::post('add/car-type' , [Car::class , 'saveCarType']);
+
+        Route::get('add/car-hire',[Car::class ,'addCar']);
+        Route::post('store/car', [Car::class, 'storeCar']);
         Route::get('/car/{car_id}/history',[Car::class , 'carHistory']);
+        Route::get('cars/on-trip',[Car::class , 'onTrip']);
+        Route::get('/car/details/{carhistory_id}', [Car::class , 'tripDetails']);
 
     });
 });

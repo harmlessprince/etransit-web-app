@@ -87,7 +87,7 @@
                 <div class="plans_options">
                     <div>
                         <img src="{{asset('images/icons/plan_options_white.png')}}" alt="plan-icon"/>
-                        <small>{{Ucfirst($car->car_class)}}</small>
+                        <small>{{Ucfirst($car->carclass->name)}}</small>
                     </div>
                     @if(!empty($car->plans[$i]->extra_hour))
                     <div>

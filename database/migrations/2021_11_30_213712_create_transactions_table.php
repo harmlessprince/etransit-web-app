@@ -29,6 +29,11 @@ class CreateTransactionsTable extends Migration
             $table->enum('isConfirmed',['True', 'False'])->default('False');
             $table->string('description');
             $table->timestamps();
+
+            $table->foreign('service_id')->references('id')->on('services')->onDelete('cascade');
+            $table->foreign('car_history_id')->references('id')->on('car_histories')->onDelete('cascade');
+            $table->foreign('schedule_id')->references('id')->on('schedules')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

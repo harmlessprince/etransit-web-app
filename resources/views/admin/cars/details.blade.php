@@ -83,6 +83,13 @@
         padding:8px;
         border-radius:2px;
     }
+    .off_trip{
+        background:green;
+        color:white;
+        padding:10px;
+        border-radius: 4px;
+    }
+
     /*480px, 768px,*/
     @media screen and (max-width: 480px) {
         .vehicle-box{
@@ -98,15 +105,68 @@
         }
     }
 
-.no_data_img{
-    display:grid;
-    grid-template-columns: repeat(5,1fr);
-}
-.not_found{
-    grid-column:1/5;
-   margin-left:170%;
+    .no_data_img{
+        display:grid;
+        grid-template-columns: repeat(5,1fr);
+    }
+    .not_found{
+        grid-column:1/5;
+        margin-left:170%;
 
-}
+    }
+    .action_btn{
+        background:  #DC6513;
+        border:1px solid  #DC6513;
+        padding:4px;
+        color:white;
+        border-radius:4px;
+    }
+    .action_btn:hover{
+        background:  #021037;
+        border:2px solid #DC6513;
+        padding:4px;
+        color:white;
+    }
+    .details_container{
+        display: grid;
+        grid-template-columns: repeat(12 , 1fr);
+        grid-gap: 50px;
+    }
+    .user_container{
+        grid-column: 1/4;
+    }
+    .trip_container{
+        grid-column: 4/12;
+    }
+    .user_info{
+        background: white;
+        box-shadow: 1px 2px 1px 2px rgba(219, 226, 241, 0.78);
+        border-radius: 5px;
+
+    }
+    .user_image{
+      text-align: center;
+    }
+    .drop_off{
+        align-items: center;
+    }
+
+    .drop_off button:first-child{
+        background: #DC6513;
+        padding:5px;
+        color: white;
+        border:1px solid #DC6513;
+    }
+    .notice_board{
+        display:flex;
+        justify-content: space-between;
+    }
+    .accept_payment_btn{
+        padding:5px;
+        background: red;
+        color:white;
+    }
+
 </style>
 @section('content')
     <div class="container-fluid">
@@ -158,57 +218,119 @@
     </div>
 
     <div class="container-fluid" >
-        <div class="button-box" >
-            <div>
-                <a href="{{url('admin/cars/on-trip')}}">
-                    <button class="btn s add-terminal-button btn-sm" >Currently On Trip</button>
-                </a>
-            </div>
-            <div>
-                <a href="{{url('/admin/import-export-cars')}}" class="btn bulk-upload-button btn-sm"  style="margin-right:10px;">Bulk Import Cars</a>&nbsp;
 
-                <a href="{{url('admin/add/car-hire')}}">
-                    <button class="btn s add-terminal-button btn-sm"  >Add Cars</button>
-                </a>
-
-{{--                data-toggle="modal" data-target="#vehicleModal"--}}
+            <div class="alert alert-light notice_board" role="alert">
+                <div>
+                  <span>Notice !! Extra charge of 400 should be applied trip was delayed for extra 2 hours</span>
+                </div>
+                <div>
+                    <button class="bnt accept_payment_btn">Accept Cash Payment</button>
+                </div>
             </div>
-        </div>
+
         <div class="card">
             <div class="card-body">
-                <div style="display: flex; justify-content: flex-end; margin-bottom: 20px;">
-                    <div class="otn-group col-md-4" style="display: flex;" >
-                        <input type="text" name="search" placeholder="Search with Registration Number , Car Type or Model ..." id="search-box" class="form-control"/>
-                        <button class="btn btn-sm btn-primary">Search</button>
-                    </div>
-                </div>
-
-                <div class="vehicle-box">
-                    @if(count($cars) > 0)
-                        @foreach($cars as $car)
-                            <div class="card text-white terminal-card mb-3" style="max-width: 18rem;">
-                                <div class="card-header terminal-card" style="display: flex;justify-content: center;" >
-                                    <h6>{{Ucfirst($car->car_name)}}</h6>
-
-                                </div>
-                                <div class="card-body" style="display: flex;justify-content: center;">
-                                    <h6 class="card-title"> {{strtoupper($car->car_registration)}}</h6>
-                                </div>
-                                <div class="card-footer terminal-card" style="display: flex;justify-content: center;">
-                                    <a href="{{url('/admin/car/'.$car->id.'/history')}}" class="btn schedule-button">View Car History</a>
-                                </div>
+             <div class="details_container">
+                 <div class="user_container">
+                        <div class="user_info">
+                            <div class="user_image">
+                                <img src="{{asset('images/icons/user-profile.png')}}"/>
+                                <hr>
+                                <h5>{{$car->user->full_name}}</h5>
+                                <hr>
                             </div>
-                        @endforeach
-                    @else
-                        <div class="no_data_img">
-                            <div class="not_found">
-                               <div>
-                                   <img src="{{asset('images/illustrations/empty_data.png')}}" width="400" height="300" alt="bus-image"/>
-                               </div>
+                            <div class="user_image">
+                                <h5>{{$car->user->email}}</h5>
+                                <hr>
+                            </div>
+                            <div class="user_image">
+                                <h5>{{$car->user->phone_number}}</h5>
+                                <hr>
+                            </div>
+                            <div class="user_image drop_off"">
+                                <button>Confirm Drop Off</button>
+                                <hr>
                             </div>
                         </div>
-                    @endif
-                </div>
+                 </div>
+                 <div class="trip_container">
+                    <div>
+                        <h6>Trip Plan</h6>
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Trip Type</th>
+                                <th scope="col">Trip Amount</th>
+                                <th scope="col">Extra Charge</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>{{$car->carplan->plan}}</td>
+                                <td>&#8358; {{number_format($car->carplan->amount)}}</td>
+                                <td>&#8358; {{number_format($car->carplan->extra_hour)}} </td>
+                                <td>Mark</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <h6>Car Details</h6>
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Car Type</th>
+                                <th scope="col">Car Class</th>
+                                <th scope="col">Capacity</th>
+                                <th scope="col">Service</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>
+                                    {{$car->car->car_type}}
+                                </td>
+                                <td>
+                                    {{$car->car->car_class}}
+                                </td>
+                                <td>
+                                    {{$car->car->capacity}}
+                                </td>
+                                <td>
+                                    {{$car->car->service->name}}
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <h6>Expected Pickup / Excpected Dropoff Date</h6>
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Pickup Date</th>
+                                <th scope="col">Pickup Time</th>
+                                <th scope="col">Return Date</th>
+                                <th scope="col">Return Time</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>{{$car->date->format('Y M d')}}</td>
+                                <td>{{$car->time->format('H:i:s')}}</td>
+                                <td>{{$car->returnDate->format('Y M d')}}</td>
+                                <td>{{$car->returnTime->format('H:i:s')}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                     <div>
+
+                     </div>
+                 </div>
+             </div>
             </div>
         </div>
 
@@ -229,40 +351,20 @@
                 <form >
 
                     <div class="modal-body">
-                        <div class="form-group">
-                            <label for="car_brand">Car Brand Name</label>
-                            <input type="text" class="form-control" name="car_brand" id="car_brand" required/>
-                        </div>
-
-                        <br>
-                        <div class="form-group">
-                            <label for="car_registration">Car Registration</label>
-                            <input type="text" class="form-control" name="car_registration" id="car_registration" required/>
-                        </div>
                         <br>
                         <div class="form-group">
                             <label for="car_type">Car Type</label>
-                            <select  class="form-control" name="car_type" id="car_type" required>
-                                <option>Select Car Type</option>
-                                @foreach($types as $type)
-                                <option value="{{$type->id}}">{{$type->name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="car_class">Car Class </label>
-                            <select  class="form-control" name="car_class" id="car_class" required>
-                                <option>Seelct Car Class</option>
-                                @foreach($classes as $class)
-                                    <option value="{{$class->id}}">{{$class->name}}</option>
-                                @endforeach
-                            </select>
+                            <input type="text" class="form-control" name="car_type" id="car_type" required/>
                         </div>
 
                         <div class="form-group">
                             <label for="capacity">Seat Capacity</label>
                             <input type="number" class="form-control" name="capacity" id="capacity" required/>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="car_class">Car Class </label>
+                            <input type="text" class="form-control" name="car_class" id="car_class" required/>
                         </div>
 
                         <div class="form-group">
@@ -323,8 +425,8 @@
         $(".btn-submit").click(function(e){
             e.preventDefault();
 
-            var car_class         = $("#car_class").val();
-            var car_type          = $("#car_type").val();
+            var car_class         = $("input[name=car_class]").val();
+            var car_type          = $("input[name=car_type]").val();
             var daily_rentals     = $("input[name=daily_rentals]").val();
             var capacity          = $("input[name=capacity]").val();
             var extra_hour        = $("input[name=extra_hour]").val();
@@ -333,17 +435,14 @@
             var se_fare           = $("input[name=se_region_fare]").val();
             var nc_fare           = $("input[name=nc_region_fare]").val();
             var description       = $("#description").val();
-            var car_registration  = $("input[name=car_registration]").val();
-            var car_brand         = $("input[name=car_brand]").val();
 
 
             $("#send-btn").prop('disabled', true);
 
             $.ajax({
                 type:'POST',
-                url: "/admin/store/car",
-                data:{"_token": "{{ csrf_token() }}",car_class, car_type,daily_rentals , extra_hour ,
-                    sw_fare , ss_fare , se_fare, nc_fare , capacity ,description,car_registration ,car_brand},
+                url: "/admin/add/cars",
+                data:{"_token": "{{ csrf_token() }}",car_class, car_type,daily_rentals , extra_hour , sw_fare , ss_fare , se_fare, nc_fare , capacity ,description},
                 success:function(data){
                     if(data.success)
                     {

@@ -20,5 +20,14 @@ class Car extends Model
         return $this->belongsTo(Service::class);
     }
 
+    public function cartype()
+    {
+        return $this->belongsTo(CarType::class , 'car_type_id');
+    }
+
+    public function carclass()
+    {
+        return $this->belongsTo(CarClass::class, 'car_class_id');
+    }
 
 }

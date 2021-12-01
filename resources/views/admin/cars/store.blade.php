@@ -2,22 +2,11 @@
 <style>
     .button-box{
         display:flex;
-        justify-content: space-between;
+        justify-content: flex-end;
         margin-bottom: 20px;
     }
 
-    #search-box{
-        border: 1px solid black;
-    }
-    .vehicle-box{
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr;
-    }
-    .terminal-card{
-        background: #021037 !important;
-        border-radius: 20px !important;
-    }
-    .bulk-upload-button , .add-terminal-button{
+    .bulk-upload-button {
         background: #021037 !important;
         cursor: pointer;
         opacity: 0.8 !important;
@@ -26,7 +15,7 @@
         border-radius: 5px !important;
         width: 240px !important;
     }
-    .bulk-upload-button:hover , .add-terminal-button:hover{
+    .bulk-upload-button:hover {
         background: #DC6513 !important;
         opacity: 0.8 !important;
         border: 1px solid  #DC6513 !important;
@@ -35,78 +24,9 @@
         width: 240px !important;
         cursor: pointer;
     }
-    .schedule-button {
-        background:  #021037 !important;
-        opacity: 0.8 !important;
-        border: 1px solid #DC6513 !important;
-        color: #fff !important;
-        border-radius: 5px !important;
-        width: 240px !important;
-        cursor: pointer;
-    }
-    .schedule-button:hover {
-        background: #DC6513 !important;
-        cursor: pointer;
-        opacity: 0.8 !important;
-        border: 1px solid  #DC6513 !important;
-        color: #fff !important;
-        border-radius: 5px !important;
-        width: 240px !important;
-    }
 
-    .send-btn{
-        background: #021037;
-        color:white !important;
-        padding:10px;
-        border-radius:2px;
-        border:1px solid #021037;
-    }
-    .send-btn:hover{
-        background: #DC6513;
-        color:white !important;
-        padding:8px;
-        border-radius:2px;
-        border:1px solid #DC6513;
 
-    }
-    .btn-close{
-        background:#e70c0c;
-        /*#021037;*/
-        color:white !important;
-        padding:10px;
-        border-radius:2px;
-        border:1px solid #e70c0c;
-    }
-    .btn-close:hover{
-        background:#e70c0c;
-        color:white !important;
-        padding:8px;
-        border-radius:2px;
-    }
-    /*480px, 768px,*/
-    @media screen and (max-width: 480px) {
-        .vehicle-box{
-            display: grid;
-            grid-template-columns: auto auto;
-        }
-    }
 
-    @media screen and (max-width: 380px) {
-        .vehicle-box{
-            display: grid;
-            grid-template-columns: auto;
-        }
-    }
-
-.no_data_img{
-    display:grid;
-    grid-template-columns: repeat(5,1fr);
-}
-.not_found{
-    grid-column:1/5;
-   margin-left:170%;
-
-}
 </style>
 @section('content')
     <div class="container-fluid">
@@ -117,7 +37,7 @@
                     <h3>{{env('APP_NAME')}}</h3>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{url('/admin/manage/vehicle')}}"><i data-feather="home"></i></a></li>
-                        <li class="breadcrumb-item">Car Hiring Management</li>
+                        <li class="breadcrumb-item">Add car</li>
                     </ol>
                 </div>
                 <div class="col-6">
@@ -151,7 +71,6 @@
                             </li>
                         </ul>
                     </div>
-                    <!-- Bookmark Ends-->
                 </div>
             </div>
         </div>
@@ -160,54 +79,13 @@
     <div class="container-fluid" >
         <div class="button-box" >
             <div>
-                <a href="{{url('admin/cars/on-trip')}}">
-                    <button class="btn s add-terminal-button btn-sm" >Currently On Trip</button>
-                </a>
-            </div>
-            <div>
                 <a href="{{url('/admin/import-export-cars')}}" class="btn bulk-upload-button btn-sm"  style="margin-right:10px;">Bulk Import Cars</a>&nbsp;
-
-                <a href="{{url('admin/add/car-hire')}}">
-                    <button class="btn s add-terminal-button btn-sm"  >Add Cars</button>
-                </a>
-
-{{--                data-toggle="modal" data-target="#vehicleModal"--}}
             </div>
         </div>
         <div class="card">
             <div class="card-body">
-                <div style="display: flex; justify-content: flex-end; margin-bottom: 20px;">
-                    <div class="otn-group col-md-4" style="display: flex;" >
-                        <input type="text" name="search" placeholder="Search with Registration Number , Car Type or Model ..." id="search-box" class="form-control"/>
-                        <button class="btn btn-sm btn-primary">Search</button>
-                    </div>
-                </div>
-
                 <div class="vehicle-box">
-                    @if(count($cars) > 0)
-                        @foreach($cars as $car)
-                            <div class="card text-white terminal-card mb-3" style="max-width: 18rem;">
-                                <div class="card-header terminal-card" style="display: flex;justify-content: center;" >
-                                    <h6>{{Ucfirst($car->car_name)}}</h6>
 
-                                </div>
-                                <div class="card-body" style="display: flex;justify-content: center;">
-                                    <h6 class="card-title"> {{strtoupper($car->car_registration)}}</h6>
-                                </div>
-                                <div class="card-footer terminal-card" style="display: flex;justify-content: center;">
-                                    <a href="{{url('/admin/car/'.$car->id.'/history')}}" class="btn schedule-button">View Car History</a>
-                                </div>
-                            </div>
-                        @endforeach
-                    @else
-                        <div class="no_data_img">
-                            <div class="not_found">
-                               <div>
-                                   <img src="{{asset('images/illustrations/empty_data.png')}}" width="400" height="300" alt="bus-image"/>
-                               </div>
-                            </div>
-                        </div>
-                    @endif
                 </div>
             </div>
         </div>
@@ -244,9 +122,9 @@
                             <label for="car_type">Car Type</label>
                             <select  class="form-control" name="car_type" id="car_type" required>
                                 <option>Select Car Type</option>
-                                @foreach($types as $type)
-                                <option value="{{$type->id}}">{{$type->name}}</option>
-                                @endforeach
+{{--                                @foreach($types as $type)--}}
+{{--                                    <option value="{{$type->id}}">{{$type->name}}</option>--}}
+{{--                                @endforeach--}}
                             </select>
                         </div>
 
@@ -254,9 +132,9 @@
                             <label for="car_class">Car Class </label>
                             <select  class="form-control" name="car_class" id="car_class" required>
                                 <option>Seelct Car Class</option>
-                                @foreach($classes as $class)
-                                    <option value="{{$class->id}}">{{$class->name}}</option>
-                                @endforeach
+{{--                                @foreach($classes as $class)--}}
+{{--                                    <option value="{{$class->id}}">{{$class->name}}</option>--}}
+{{--                                @endforeach--}}
                             </select>
                         </div>
 

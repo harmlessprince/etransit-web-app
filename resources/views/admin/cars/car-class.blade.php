@@ -98,15 +98,15 @@
         }
     }
 
-.no_data_img{
-    display:grid;
-    grid-template-columns: repeat(5,1fr);
-}
-.not_found{
-    grid-column:1/5;
-   margin-left:170%;
+    .no_data_img{
+        display:grid;
+        grid-template-columns: repeat(5,1fr);
+    }
+    .not_found{
+        grid-column:1/5;
+        margin-left:170%;
 
-}
+    }
 </style>
 @section('content')
     <div class="container-fluid">
@@ -117,7 +117,7 @@
                     <h3>{{env('APP_NAME')}}</h3>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{url('/admin/manage/vehicle')}}"><i data-feather="home"></i></a></li>
-                        <li class="breadcrumb-item">Car Hiring Management</li>
+                        <li class="breadcrumb-item">Add Car Class</li>
                     </ol>
                 </div>
                 <div class="col-6">
@@ -160,51 +160,44 @@
     <div class="container-fluid" >
         <div class="button-box" >
             <div>
-                <a href="{{url('admin/cars/on-trip')}}">
-                    <button class="btn s add-terminal-button btn-sm" >Currently On Trip</button>
-                </a>
+
             </div>
             <div>
-                <a href="{{url('/admin/import-export-cars')}}" class="btn bulk-upload-button btn-sm"  style="margin-right:10px;">Bulk Import Cars</a>&nbsp;
-
-                <a href="{{url('admin/add/car-hire')}}">
-                    <button class="btn s add-terminal-button btn-sm"  >Add Cars</button>
-                </a>
-
-{{--                data-toggle="modal" data-target="#vehicleModal"--}}
+                <button class="btn s add-terminal-button btn-sm"  data-toggle="modal" data-target="#vehicleModal">Add Car Class</button>
             </div>
         </div>
         <div class="card">
             <div class="card-body">
-                <div style="display: flex; justify-content: flex-end; margin-bottom: 20px;">
-                    <div class="otn-group col-md-4" style="display: flex;" >
-                        <input type="text" name="search" placeholder="Search with Registration Number , Car Type or Model ..." id="search-box" class="form-control"/>
-                        <button class="btn btn-sm btn-primary">Search</button>
-                    </div>
-                </div>
 
-                <div class="vehicle-box">
-                    @if(count($cars) > 0)
-                        @foreach($cars as $car)
-                            <div class="card text-white terminal-card mb-3" style="max-width: 18rem;">
-                                <div class="card-header terminal-card" style="display: flex;justify-content: center;" >
-                                    <h6>{{Ucfirst($car->car_name)}}</h6>
 
-                                </div>
-                                <div class="card-body" style="display: flex;justify-content: center;">
-                                    <h6 class="card-title"> {{strtoupper($car->car_registration)}}</h6>
-                                </div>
-                                <div class="card-footer terminal-card" style="display: flex;justify-content: center;">
-                                    <a href="{{url('/admin/car/'.$car->id.'/history')}}" class="btn schedule-button">View Car History</a>
-                                </div>
-                            </div>
-                        @endforeach
+                <div >
+                    @if(count($carsClasses) > 0)
+
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Class</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($carsClasses as $index =>  $carClass)
+                                <tr>
+                                    <th scope="row">{{$index+1}}</th>
+                                    <td>{{$carClass->name}}</td>
+                                    <td>Edit Delete</td>
+                                </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+
                     @else
                         <div class="no_data_img">
                             <div class="not_found">
-                               <div>
-                                   <img src="{{asset('images/illustrations/empty_data.png')}}" width="400" height="300" alt="bus-image"/>
-                               </div>
+                                <div>
+                                    <img src="{{asset('images/illustrations/empty_data.png')}}" width="400" height="300" alt="bus-image"/>
+                                </div>
                             </div>
                         </div>
                     @endif
@@ -221,90 +214,22 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h2 class="modal-title" id="exampleModalLabel" >Add Car</h2>
+                    <h2 class="modal-title" id="exampleModalLabel" >Add Car Class</h2>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <form >
-
                     <div class="modal-body">
-                        <div class="form-group">
-                            <label for="car_brand">Car Brand Name</label>
-                            <input type="text" class="form-control" name="car_brand" id="car_brand" required/>
-                        </div>
-
                         <br>
                         <div class="form-group">
-                            <label for="car_registration">Car Registration</label>
-                            <input type="text" class="form-control" name="car_registration" id="car_registration" required/>
+                            <label for="car_type">Car Class</label>
+                            <input type="text" class="form-control" name="car_class" id="car_class" required/>
                         </div>
-                        <br>
-                        <div class="form-group">
-                            <label for="car_type">Car Type</label>
-                            <select  class="form-control" name="car_type" id="car_type" required>
-                                <option>Select Car Type</option>
-                                @foreach($types as $type)
-                                <option value="{{$type->id}}">{{$type->name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="car_class">Car Class </label>
-                            <select  class="form-control" name="car_class" id="car_class" required>
-                                <option>Seelct Car Class</option>
-                                @foreach($classes as $class)
-                                    <option value="{{$class->id}}">{{$class->name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="capacity">Seat Capacity</label>
-                            <input type="number" class="form-control" name="capacity" id="capacity" required/>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="daily_rentals">Daily Rentals</label>
-                            <input type="text" class="form-control" name="daily_rentals" id="daily_rentals" required/>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="extra_hour">Extra Hour</label>
-                            <input type="text" class="form-control" name="extra_hour" id="extra_hour" required/>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="sw_region_fare">SW Region (Fare)r</label>
-                            <input type="text" class="form-control" name="sw_region_fare" id="sw_region_fare" required/>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="se_region_fare">SE Region (Fare)</label>
-                            <input type="text" class="form-control" name="se_region_fare" id="se_region_fare" required/>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="ss_region_fare">SS Region (Fare)</label>
-                            <input type="text" class="form-control" name="ss_region_fare" id="ss_region_fare" required/>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="nc_region_fare">NC Region (Fare)</label>
-                            <input type="text" class="form-control" name="nc_region_fare" id="nc_region_fare" required/>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="description">Description</label>
-                            <textarea class="form-control" name="description" id="description" rows="10" cols="20" required></textarea>
-                        </div>
-
-
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn-close" data-dismiss="modal">Close</button>
-                        <button type="button" class="send-btn  btn-submit" id="send-btn">Save changes</button>
+                        <button type="button" class="send-btn  btn-submit" id="send-btn">Add Class</button>
                     </div>
                 </form>
 
@@ -323,27 +248,13 @@
         $(".btn-submit").click(function(e){
             e.preventDefault();
 
-            var car_class         = $("#car_class").val();
-            var car_type          = $("#car_type").val();
-            var daily_rentals     = $("input[name=daily_rentals]").val();
-            var capacity          = $("input[name=capacity]").val();
-            var extra_hour        = $("input[name=extra_hour]").val();
-            var sw_fare           = $("input[name=sw_region_fare]").val();
-            var ss_fare           = $("input[name=ss_region_fare]").val();
-            var se_fare           = $("input[name=se_region_fare]").val();
-            var nc_fare           = $("input[name=nc_region_fare]").val();
-            var description       = $("#description").val();
-            var car_registration  = $("input[name=car_registration]").val();
-            var car_brand         = $("input[name=car_brand]").val();
-
-
+            var car_class   = $("input[name=car_class]").val();
             $("#send-btn").prop('disabled', true);
 
             $.ajax({
                 type:'POST',
-                url: "/admin/store/car",
-                data:{"_token": "{{ csrf_token() }}",car_class, car_type,daily_rentals , extra_hour ,
-                    sw_fare , ss_fare , se_fare, nc_fare , capacity ,description,car_registration ,car_brand},
+                url: "/admin/add/car-class",
+                data:{"_token": "{{ csrf_token() }}",car_class},
                 success:function(data){
                     if(data.success)
                     {
