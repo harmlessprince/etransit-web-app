@@ -64,7 +64,7 @@ class Car extends Controller
     {
 
         $cars = HiredCars::where('functional',1)->where('car_type_id' , $selected_car_type_id)
-                                        ->where('car_class_id',$selectCarClass)->paginate(20);
+                                        ->where('car_class_id',$selectCarClass)->with('car_images')->paginate(20);
 
         return response()->json(['success' => true, compact('cars')]);
     }

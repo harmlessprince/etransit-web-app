@@ -74,6 +74,19 @@
         padding: 10px;
         max-width: 200px;
     }
+    #buttonID{
+        background:rgba(219, 226, 241, 0.54);
+        color:white;
+        padding:10px;
+        border-radius: 50%;
+
+    }
+    .file_image_form{
+        display:flex;
+    }
+    .add_butto{
+        margin-top:90px;
+    }
 
 </style>
 @section('content')
@@ -253,18 +266,25 @@
                             @enderror
                         </div>
 
-                        <div class="form-group">
-                            <label for="nc_region_fare">Add Images</label>
-                            <input  required type="file" id="images" class="form-control image_file" name="images[]" placeholder="address" multiple>
-                            @error('images')
-                            <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
-                        </div>
 
                     </div>
-
+                  <div class="file_image_form">
+                      <div class="form-group">
+                          <label for="nc_region_fare">Add Images</label>
+                          <input  required type="file" id="images" class="form-control image_file" name="images[]" multiple="multiple">
+                          @error('images')
+                          <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                          @enderror
+                      </div>
+                      <div class="add_button">
+                          <button id="buttonID"> <img src="{{asset('images/icons/upload.png')}}"  width="20" height="20" /> </button>
+                      </div>
+                  </div>
+                    <div class="col-md-12 mb-2">
+                    <div class="add_file"></div><br>
+                    </div>
                     <div class="col-md-12 mb-2">
                         <div class="images-preview-div"> </div>
                     </div>
@@ -282,7 +302,19 @@
 
     <script type="text/javascript">
 
+        $('#buttonID').click(function(e){
+            e.preventDefault();
+            $('.add_file').append(`<div >
+                        <div class="gender_section">
+                            <div class="passenger_type radio-group">
+                                <div class="passenger_options">
+                                    <input type="file" name="images[]"  />
 
+                                </div>
+                            </div>
+                        </div>
+                    </div>`);
+        });
         $(function() {
             var previewImages = function(input, imgPreviewPlaceholder) {
                 if (input.files) {

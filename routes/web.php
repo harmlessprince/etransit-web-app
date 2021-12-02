@@ -9,6 +9,7 @@ use App\Http\Controllers\Eticket\AuthLogin;
 use App\Http\Controllers\Login;
 use App\Http\Controllers\Page;
 use App\Http\Controllers\Payment;
+use App\Http\Controllers\Tour;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Schedule;
@@ -45,6 +46,10 @@ Route::get('/car-hire', [Car::class , 'carList']);
 Route::get('/boat-cruise',[BoatCruise::class , 'boatCruiseList']);
 //add boat id later on
 Route::get('/boat-cruise/show',[BoatCruise::class , 'boatCruiseShow']);
+
+//tours packages
+Route::get('/tour-packages', [Tour::class , 'tourPackageList']);
+Route::get('/tour-packages/show', [Tour::class , 'tourPackageShow']);
 
 Route::group(['middleware' => ['auth','prevent-back-history']], function() {
 

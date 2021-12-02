@@ -4,140 +4,140 @@
         display:grid;
         grid-template-columns: repeat(3, 1fr);
     }
- .boat-container{
-     display:grid;
-     grid-template-columns: repeat(12 , 1fr);
-     margin-top: 5%;
-     grid-gap: 40px;
- }
- .navigation{
-     grid-column: 2/5;
-     background: white;
-     box-shadow:2px 2px 2px 2px rgba(219, 226, 241, 0.54);
-     border-radius: 10px;
-     padding:20px;
-     max-height: 400px;
- }
- .boat_info_box{
-     grid-column: 5/12;
-     width:800px;
- }
- .overview{
-     display:flex;
-     margin-top:20px;
- }
-.overview h4:first-child{
-    margin-right:20px;
-    color:#111111;
-    font-weight: bolder;
-}
-.overview h4:nth-child(2){
-    color:#BDBDBD;
-    font-weight: bolder;
-}
-.rating_duration_box{
-    display:flex;
-}
-.rating{
-    background: white;
-    border: 1px solid #F2F2F2;
-    border-radius: 10px;
-    padding:5px;
-    box-shadow:2px 2px 2px 2px rgba(219, 226, 241, 0.54);
-}
-.duration{
-    background: white;
-    border: 1px solid #F2F2F2;
-    border-radius: 10px;
-    padding:5px;
-    box-shadow:2px 2px 2px 2px rgba(219, 226, 241, 0.54);
-    margin-right: 20px;
-
-}
-.duration_box , .rating{
-    display:flex;
-}
-.outer_circle{
-    height:35px;
-    width:35px;
-    background: #DC6513;
-    border-radius: 50%;
-    margin-right:30px;
-
-}
-.boat_rating{
-    margin-right:30px;
-}
-.inner_circle{
-    height:25px;
-    width:25px;
-    border-radius: 50%;
-    margin:auto;
-
-}
-.inner_circle img {
-    margin-left:10px;
-    margin-top:10px;
-}
-.duration_text h6:first-child{
-    color:#BDBDBD;
-    font-weight: bolder;
-}
-.duration_text h6:nth-child(2){
-    color:#111111;
-    font-weight: bolder;
-}
-.rating_text h6:first-child{
-    color:#BDBDBD;
-    font-weight: bolder;
-}
-
-.rating_text  h6:nth-child(2){
+    .boat-container{
+        display:grid;
+        grid-template-columns: repeat(12 , 1fr);
+        margin-top: 5%;
+        grid-gap: 40px;
+    }
+    .navigation{
+        grid-column: 2/5;
+        background: white;
+        box-shadow:2px 2px 2px 2px rgba(219, 226, 241, 0.54);
+        border-radius: 10px;
+        padding:20px;
+        max-height: 400px;
+    }
+    .boat_info_box{
+        grid-column: 5/12;
+        width:800px;
+    }
+    .overview{
+        display:flex;
+        margin-top:20px;
+    }
+    .overview h4:first-child{
+        margin-right:20px;
         color:#111111;
         font-weight: bolder;
     }
-.description{
-    margin-top:20px;
-}
-.price_per_trip h6:first-child{
-    color:#111111;
-    font-weight: bolder;
-}
-.regular_class{
-    display:flex;
-    margin-bottom: 10px;
-}
-.regular_class span:first-child{
-    color:#111111;
-    font-weight: bolder;
-}
-.regular_class span:nth-child(2){
-    color:#BDBDBD;
-    font-weight: bolder;
-}
-.regular_input_field{
-    margin-right: 40px;
-}
-.popular_cruise{
-    margin-top:40px;
-}
-.popular_cruise h4:first-child{
-    color:#111111;
-    font-weight: bolder;
-}
-.popular_cruise_box{
-    display:grid;
-    grid-template-columns: repeat(6 , 1fr);
-    grid-gap: 20px;
-    overflow-x: scroll;
-}
-.boat_card{
-    background: white;
-    box-shadow:2px 2px 2px 2px rgba(219, 226, 241, 0.54);
-    border-radius: 10px;
-    width:400px;
+    .overview h4:nth-child(2){
+        color:#BDBDBD;
+        font-weight: bolder;
+    }
+    .rating_duration_box{
+        display:flex;
+    }
+    .rating{
+        background: white;
+        border: 1px solid #F2F2F2;
+        border-radius: 10px;
+        padding:5px;
+        box-shadow:2px 2px 2px 2px rgba(219, 226, 241, 0.54);
+    }
+    .duration{
+        background: white;
+        border: 1px solid #F2F2F2;
+        border-radius: 10px;
+        padding:5px;
+        box-shadow:2px 2px 2px 2px rgba(219, 226, 241, 0.54);
+        margin-right: 20px;
 
-}
+    }
+    .duration_box , .rating{
+        display:flex;
+    }
+    .outer_circle{
+        height:35px;
+        width:35px;
+        background: #DC6513;
+        border-radius: 50%;
+        margin-right:30px;
+
+    }
+    .boat_rating{
+        margin-right:30px;
+    }
+    .inner_circle{
+        height:25px;
+        width:25px;
+        border-radius: 50%;
+        margin:auto;
+
+    }
+    .inner_circle img {
+        margin-left:10px;
+        margin-top:10px;
+    }
+    .duration_text h6:first-child{
+        color:#BDBDBD;
+        font-weight: bolder;
+    }
+    .duration_text h6:nth-child(2){
+        color:#111111;
+        font-weight: bolder;
+    }
+    .rating_text h6:first-child{
+        color:#BDBDBD;
+        font-weight: bolder;
+    }
+
+    .rating_text  h6:nth-child(2){
+        color:#111111;
+        font-weight: bolder;
+    }
+    .description{
+        margin-top:20px;
+    }
+    .price_per_trip h6:first-child{
+        color:#111111;
+        font-weight: bolder;
+    }
+    .regular_class{
+        display:flex;
+        margin-bottom: 10px;
+    }
+    .regular_class span:first-child{
+        color:#111111;
+        font-weight: bolder;
+    }
+    .regular_class span:nth-child(2){
+        color:#BDBDBD;
+        font-weight: bolder;
+    }
+    .regular_input_field{
+        margin-right: 40px;
+    }
+    .popular_cruise{
+        margin-top:40px;
+    }
+    .popular_cruise h4:first-child{
+        color:#111111;
+        font-weight: bolder;
+    }
+    .popular_cruise_box{
+        display:grid;
+        grid-template-columns: repeat(6 , 1fr);
+        grid-gap: 20px;
+        overflow-x: scroll;
+    }
+    .boat_card{
+        background: white;
+        box-shadow:2px 2px 2px 2px rgba(219, 226, 241, 0.54);
+        border-radius: 10px;
+        width:400px;
+
+    }
     .backgrund_img{
         position:relative;
     }
@@ -162,7 +162,7 @@
         width:100%;
     }
     .add_payment{
-       text-align: center;
+        text-align: center;
         margin-top: 30px;
     }
     .add_payment button{
@@ -234,7 +234,7 @@
 </style>
 @section('content')
     <div>
-        <div class="booking_bg"  style="background-image: url('{{ asset('/images/bg/boat_cruise.png')}}'); height:200px;" >
+        <div class="booking_bg"  style="background-image: url('{{ asset('/images/bg/tour.png')}}'); height:200px;" >
             <div class="booking_hero_text">
                 <div class="booking_hero_icon">
                     <img src="{{asset('/images/icons/arrow_left_2.png')}}">
@@ -250,23 +250,23 @@
                 <h3>Filter search</h3>
             </div>
             <div class="boat_info_box">
-               <div class="carousel-container">
-                   <div class="item main">
-                      <img src="{{ asset('/images/bg/boat.png')}}"  alt="'hero-img" />
-                   </div>
-                   <div class="item">
-                       <img src="https://i.pinimg.com/originals/cd/7b/5c/cd7b5c8d4687b5c98a445127926a56e2.jpg" alt="beach" />
-                       <div class="caption">Image 2</div>
-                   </div>
-                   <div class="item">
-                       <img src="https://i.ytimg.com/vi/-3N6fCzgXuc/maxresdefault.jpg" alt="cityscape" />
-                       <div class="caption">Image 3</div>
-                   </div>
-                   <div class="navigation-items">
-                       <div class="prev nav-btn"><</div>
-                       <div class="next nav-btn">></div>
-                   </div>
-               </div>
+                <div class="carousel-container">
+                    <div class="item main">
+                        <img src="{{ asset('/images/bg/tour-slider.png')}}"  alt="'hero-img" />
+                    </div>
+                    <div class="item">
+                        <img src="https://i.pinimg.com/originals/cd/7b/5c/cd7b5c8d4687b5c98a445127926a56e2.jpg" alt="beach" />
+                        <div class="caption">Image 2</div>
+                    </div>
+                    <div class="item">
+                        <img src="https://i.ytimg.com/vi/-3N6fCzgXuc/maxresdefault.jpg" alt="cityscape" />
+                        <div class="caption">Image 3</div>
+                    </div>
+                    <div class="navigation-items">
+                        <div class="prev nav-btn"><</div>
+                        <div class="next nav-btn">></div>
+                    </div>
+                </div>
 
                 <div class="overview">
                     <h4>Overview</h4>
@@ -320,7 +320,7 @@
                         @for($i =0; $i < 5 ;$i++)
                             <div class="boat_card">
                                 <div class="backgrund_img" >
-                                    <img src="{{ asset('/images/bg/mini_boat.png')}}" />
+                                    <img src="{{ asset('/images/bg/tour-thumb.png')}}" />
                                     <div class="price_tag">
                                         <h5>New Board</h5>
                                         <h5>500,000 - 600,000</h5>
@@ -355,39 +355,39 @@
 
         </div>
     </div>
-<script>
-    const prev = document.querySelector('.prev');
-    const next = document.querySelector('.next');
-    const images = document.querySelector('.carousel-container').children;
-    const totalImages = images.length;
-    let index = 0;
+    <script>
+        const prev = document.querySelector('.prev');
+        const next = document.querySelector('.next');
+        const images = document.querySelector('.carousel-container').children;
+        const totalImages = images.length;
+        let index = 0;
 
-    prev.addEventListener('click', () => {
-        nextImage('next');
-    })
+        prev.addEventListener('click', () => {
+            nextImage('next');
+        })
 
-    next.addEventListener('click', () => {
-        nextImage('prev');
-    })
+        next.addEventListener('click', () => {
+            nextImage('prev');
+        })
 
-    function nextImage(direction) {
-        if(direction == 'next') {
-            index++;
-            if(index == totalImages) {
-                index = 0;
-            }
-        } else {
-            if(index == 0) {
-                index = totalImages - 1;
+        function nextImage(direction) {
+            if(direction == 'next') {
+                index++;
+                if(index == totalImages) {
+                    index = 0;
+                }
             } else {
-                index--;
+                if(index == 0) {
+                    index = totalImages - 1;
+                } else {
+                    index--;
+                }
             }
-        }
 
-        for(let i = 0; i < images.length; i++) {
-            images[i].classList.remove('main');
+            for(let i = 0; i < images.length; i++) {
+                images[i].classList.remove('main');
+            }
+            images[index].classList.add('main');
         }
-        images[index].classList.add('main');
-    }
-</script>
+    </script>
 @endsection

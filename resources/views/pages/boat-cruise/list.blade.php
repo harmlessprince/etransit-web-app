@@ -16,6 +16,7 @@
         box-shadow:2px 2px 2px 2px rgba(219, 226, 241, 0.54);
         border-radius: 10px;
         padding:20px;
+        max-height: 500px;
 
     }
     .boat_list{
@@ -50,8 +51,8 @@
     }
     .price_tag{
         position: absolute;
-        top: 620px;
-        left: 990px;
+        top: 120px;
+        right:25px;
     }
 
     .price_tag h5{
@@ -102,11 +103,12 @@
                     <div class="boat_card">
                         <div class="backgrund_img" >
                             <img src="{{ asset('/images/bg/mini_boat.png')}}" />
+                            <div class="price_tag">
+                                <h5>New Board</h5>
+                                <h5>500,000 - 600,000</h5>
+                            </div>
                         </div>
-                        <div class="price_tag">
-                            <h5>New Board</h5>
-                            <h5>500,000 - 600,000</h5>
-                        </div>
+
                         <div class="ratings_box" >
                             <h5>Harmony of seas</h5>
                             <small>

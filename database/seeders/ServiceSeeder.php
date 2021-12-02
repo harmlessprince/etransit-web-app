@@ -39,5 +39,8 @@ class ServiceSeeder extends Seeder
         Service::create([
             'name' => "Boat Cruise"
         ]);
+        Service::create([
+            'name' => "Tour Packages"
+        ]);
     }
 }

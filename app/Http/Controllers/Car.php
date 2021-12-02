@@ -108,6 +108,7 @@ class Car extends Controller
                             'car_registration' => 'required',
                         ]);
 
+
         DB::beginTransaction();
                $service_id  = \App\Models\Service::where('id',6)->select('id')->first();
 
@@ -177,7 +178,8 @@ class Car extends Controller
 
     public function carList()
     {
-        $cars = HiredCars::where('functional',1)->paginate(10);
+        $cars = HiredCars::where('functional',1)->with('car_images')->paginate(10);
+
 
         return view('pages.car-hire.hire', compact('cars'));
     }
@@ -186,7 +188,7 @@ class Car extends Controller
     public function carHistory($car_id)
     {
 
-        $carHistory = HiredCars::where('id',$car_id)->firstorfail();
+        $carHistory = HiredCars::where('id',$car_id)->with('car_images')->firstorfail();
 
         $histories = CarHistory::where('car_id',$car_id)->with('carplan','user')->orderby('created_at','desc')->get();
 
