@@ -22,7 +22,7 @@ class FlutterwavePayment extends Controller
         $reference = Flutterwave::generateReference();
 
         //get the type of service
-       $service = \App\Models\Service::where('id' , request()->service_id)->first();
+        $service = \App\Models\Service::where('id' , request()->service_id)->first();
 
 
         if(! $service)
@@ -128,6 +128,7 @@ class FlutterwavePayment extends Controller
     protected function busTickettingPayment($data ,$tripType )
     {
 
+//        return response()->json($data['data']['meta']);
         //check if the maount paid is correct
         $childrenCount = (int)   $data['data']['meta']['childrenCount'];
         $adultCount    = (int)   $data['data']['meta']['adultCount'];
@@ -136,7 +137,6 @@ class FlutterwavePayment extends Controller
 
         //find the schedule to get the actual amount stored in the database
         $tripSchedule = \App\Models\Schedule::where('id', $scheduleId)->select('fare_adult', 'fare_children', 'id', 'seats_available', 'bus_id')->first();
-        !$tripSchedule ? abort('404') : '';
         $adultFare = (double)$tripSchedule->fare_adult;
         $childrenFare = (double)$tripSchedule->fare_children;
 

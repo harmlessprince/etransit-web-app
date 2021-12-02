@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminLogin;
+use App\Http\Controllers\BoatCruise;
 use App\Http\Controllers\Booking;
 use App\Http\Controllers\Car;
 use App\Http\Controllers\Dashboard;
@@ -40,6 +41,10 @@ Route::post('/bus/bookings' , [Booking::class , 'bookingRequest'])->name('bus.bo
 Auth::routes();
 
 Route::get('/car-hire', [Car::class , 'carList']);
+//boat cruise
+Route::get('/boat-cruise',[BoatCruise::class , 'boatCruiseList']);
+//add boat id later on
+Route::get('/boat-cruise/show',[BoatCruise::class , 'boatCruiseShow']);
 
 Route::group(['middleware' => ['auth','prevent-back-history']], function() {
 
@@ -56,6 +61,8 @@ Route::group(['middleware' => ['auth','prevent-back-history']], function() {
     Route::get('/pick-date' ,[Car::class ,'pickDate']);
     Route::post('/plan/{plan_id}',[Car::class , 'proceedToPaymentPlan']);
     Route::get('car-hire/cash/payment/{history_id}/method',[Car::class , 'makePayment']);
+
+
 });
 
 
