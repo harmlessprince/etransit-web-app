@@ -164,7 +164,7 @@
                     $(this).addClass("selected");
                     var id = $(this).attr('href');
                     var user_id = {{auth()->user()->id}}
-                    var  baseUrl = {{APP_ENV('APP_URL')}}
+                    let  baseUrl = {{env('APP_URL')}}
 
                 $.ajax({
                     type:'POST',
@@ -187,7 +187,7 @@
                 $(this).removeClass("selected");
                 var id = $(this).attr('href');
                 var user_id = {{auth()->user()->id}}
-                var  baseUrl = {{APP_ENV('APP_URL')}}
+                let  baseUrl = {{env('APP_URL')}}
                 $.ajax({
                     type:'POST',
                     url:baseUrl +  "/deselect-seat/",
