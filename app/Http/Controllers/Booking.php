@@ -131,8 +131,9 @@ class Booking extends Controller
 
         //find if the seats selected matches the number of passengers listed
         $selectedSeat = \App\Models\SeatTracker::where('schedule_id',$schedule_id)
-            ->where('user_id',auth()->user()->id)
-            ->where('booked_status', 1)->get();
+                                            ->where('user_id',auth()->user()->id)
+                                            ->where('booked_status', 1)->get();
+         ddd( $selectedSeat);
 
 
          $passenger_options = $request['passenger_option'];
@@ -158,19 +159,19 @@ class Booking extends Controller
 
          $fetchScheduleDetails = \App\Models\Schedule::where('id',$schedule_id)->with('service','bus','destination','pickup','terminal')->first();
 
-//        if($passengerCount < count($selectedSeat) || $passengerCount > count($selectedSeat))
-//        {
-//
-//            foreach($selectedSeat as $unbookedseat)
-//            {
-//                $unbookedseat->update([
-//                    'booked_status' => 0,
-//                    'user_id' => null
-//                ]);
-//            }
-//            toastr()->error('Number of seats selected must match the passenger count');
-//            return  back();
-//        }
+        if($passengerCount < count($selectedSeat) || $passengerCount > count($selectedSeat))
+        {
+
+            foreach($selectedSeat as $unbookedseat)
+            {
+                $unbookedseat->update([
+                    'booked_status' => 0,
+                    'user_id' => null
+                ]);
+            }
+            toastr()->error('Number of seats selected must match the passenger count');
+            return  back();
+        }
 
         if($passengerCount != $passengerOptionCount)
         {
