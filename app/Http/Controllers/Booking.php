@@ -152,10 +152,8 @@ class Booking extends Controller
         $passengerOptionCount = count($passenger_options);
         $passengerCount = count($passengerArray);
 
-
-
          $fetchScheduleDetails = \App\Models\Schedule::where('id',$schedule_id)->with('service','bus','destination','pickup','terminal')->first();
-return response()->json(['data' => compact('passengerCount', 'selectedSeat')]);
+
         if($passengerCount != count($selectedSeat))
         {
 
