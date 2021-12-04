@@ -164,10 +164,11 @@
                     $(this).addClass("selected");
                     var id = $(this).attr('href');
                     var user_id = {{auth()->user()->id}}
+                    var  baseUrl = {{APP_ENV('APP_URL')}}
 
                 $.ajax({
                     type:'POST',
-                    url: "/seat-selector-tracker/",
+                    url:  baseUrl + "/seat-selector-tracker/",
                     data:{"_token": "{{ csrf_token() }}",seat_id:id , user_id },
                     success:function(data){
                         if(data.success)
@@ -186,9 +187,10 @@
                 $(this).removeClass("selected");
                 var id = $(this).attr('href');
                 var user_id = {{auth()->user()->id}}
+                var  baseUrl = {{APP_ENV('APP_URL')}}
                 $.ajax({
                     type:'POST',
-                    url: "/deselect-seat/",
+                    url:baseUrl +  "/deselect-seat/",
                     data:{"_token": "{{ csrf_token() }}",seat_id:id , user_id },
                     success:function(data){
                         if(!data.success)
