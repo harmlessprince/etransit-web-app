@@ -54,8 +54,8 @@ Route::get('/tour-packages/show', [Tour::class , 'tourPackageShow']);
 Route::group(['middleware' => ['auth','prevent-back-history']], function() {
 
     Route::get('/seat-picker/{schedule_id}', [Booking::class, 'seatSelector']);
-    Route::post('/seat-selector-tracker/',[Booking::class ,'selectorTracker']);
-    Route::post('/deselect-seat' ,[Booking::class , 'deselectSeat']);
+    Route::post('/seat-selector-tracker/',[Booking::class ,'selectorTracker'])->name('select-seat');
+    Route::post('/deselect-seat' ,[Booking::class , 'deselectSeat'])->name('de-select-seat');
     Route::post('/book/trip/{schedule_id}',[Booking::class , 'bookTrip']);
     // The route that the button calls to initialize payment
     Route::post('/pay', [Payment::class, 'initialize'])->name('pay');

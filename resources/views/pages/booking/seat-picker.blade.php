@@ -168,7 +168,8 @@
 
                 $.ajax({
                     type:'POST',
-                    url: "/seat-selector-tracker/",
+                    url: "{{ route('select-seat') }}",
+                        //"/seat-selector-tracker/",
                     data:{"_token": "{{ csrf_token() }}",seat_id:id , user_id },
                     success:function(data){
                         if(data.success)
@@ -189,7 +190,7 @@
                 var user_id = {{auth()->user()->id}}
                 $.ajax({
                     type:'POST',
-                    url:"/deselect-seat/",
+                    url:  "{{ route('de-select-seat') }}",
                     data:{"_token": "{{ csrf_token() }}",seat_id:id , user_id },
                     success:function(data){
                         if(!data.success)
