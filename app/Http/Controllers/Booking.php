@@ -133,7 +133,7 @@ class Booking extends Controller
         $selectedSeat = \App\Models\SeatTracker::where('schedule_id',$schedule_id)
                                             ->where('user_id',auth()->user()->id)
                                             ->where('booked_status', 1)->get();
-         ddd( $selectedSeat);
+         dd($selectedSeat);
 
 
          $passenger_options = $request['passenger_option'];
