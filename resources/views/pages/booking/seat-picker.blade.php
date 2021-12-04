@@ -168,6 +168,7 @@
                 $.ajax({
                     type:'POST',
                     url: "/seat-selector-tracker/",
+                    contentType: "application/json",
                     data:{"_token": "{{ csrf_token() }}",seat_id:id , user_id },
                     success:function(data){
                         if(data.success)
@@ -189,6 +190,7 @@
                 $.ajax({
                     type:'POST',
                     url: "/deselect-seat/",
+                    contentType: "application/json",
                     data:{"_token": "{{ csrf_token() }}",seat_id:id , user_id },
                     success:function(data){
                         if(!data.success)
