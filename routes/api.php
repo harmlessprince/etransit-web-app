@@ -35,8 +35,8 @@ Route::group(['prefix' => 'v1'], function() {
     Route::post('/rave/callback', [FlutterwavePayment::class, 'callback'])->name('api.callback');
 
 
-    Route::middleware('jwt.verify')->group( function () {
-
+//    Route::middleware('jwt.verify')->group( function () {
+    Route::group(['middleware' => ['jwt.verify']], function () {
         Route::get('/services' , [Service::class , 'services']);
         Route::post('/search/services' , [Service::class , 'searchServices']);
         //bookings
