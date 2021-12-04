@@ -25,6 +25,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        if($this->app->environment('production')) {
+            \URL::forceScheme('https');
+        }
         Builder::macro('whereLike', function(string $attribute, string $searchTerm) {
             return $this->orWhere($attribute, 'LIKE', "%{$searchTerm}%");
         });
