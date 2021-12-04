@@ -157,8 +157,8 @@ class Booking extends Controller
         $passengerCount = count($passengerArray);
 
          $fetchScheduleDetails = \App\Models\Schedule::where('id',$schedule_id)->with('service','bus','destination','pickup','terminal')->first();
-dd($passengerCount == count($selectedSeat));
-        if((int) $passengerCount !== count($selectedSeat))
+
+        if($passengerCount < count($selectedSeat) || $passengerCount > count($selectedSeat))
         {
 
             foreach($selectedSeat as $unbookedseat)
