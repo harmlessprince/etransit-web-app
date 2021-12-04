@@ -134,7 +134,6 @@ class Booking extends Controller
         $selectedSeat = SeatTracker::where('schedule_id',$schedule_id)
                                             ->where('user_id',auth()->user()->id)
                                             ->where('booked_status', 1)->get();
-         dd($selectedSeat);
 
 
          $passenger_options = $request['passenger_option'];
@@ -160,7 +159,7 @@ class Booking extends Controller
 
          $fetchScheduleDetails = Schedule::where('id',$schedule_id)->with('service','bus','destination','pickup','terminal')->first();
 
-        if($passengerCount < count($selectedSeat) || $passengerCount > count($selectedSeat))
+        if($passengerCount != count($selectedSeat))
         {
 
             foreach($selectedSeat as $unbookedseat)
