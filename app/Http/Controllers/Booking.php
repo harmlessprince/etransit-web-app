@@ -158,19 +158,19 @@ class Booking extends Controller
 
          $fetchScheduleDetails = \App\Models\Schedule::where('id',$schedule_id)->with('service','bus','destination','pickup','terminal')->first();
 
-        if($passengerCount < count($selectedSeat) || $passengerCount > count($selectedSeat))
-        {
-
-            foreach($selectedSeat as $unbookedseat)
-            {
-                $unbookedseat->update([
-                    'booked_status' => 0,
-                    'user_id' => null
-                ]);
-            }
-            toastr()->error('Number of seats selected must match the passenger count');
-            return  back();
-        }
+//        if($passengerCount < count($selectedSeat) || $passengerCount > count($selectedSeat))
+//        {
+//
+//            foreach($selectedSeat as $unbookedseat)
+//            {
+//                $unbookedseat->update([
+//                    'booked_status' => 0,
+//                    'user_id' => null
+//                ]);
+//            }
+//            toastr()->error('Number of seats selected must match the passenger count');
+//            return  back();
+//        }
 
         if($passengerCount != $passengerOptionCount)
         {
