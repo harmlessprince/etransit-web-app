@@ -109,12 +109,13 @@ class Booking extends Controller
         return response()->json(['success' => false , 'message' => 'Seat has already been booked']);
     }
 
+
     public  function bookTrip(Request $request , $schedule_id)
     {
          request()->validate([
                     'full_name' => 'required|array',
                     'gender' => 'required|array',
-                    'passenger_options' => 'required|array'
+                    'passenger_option' => 'required|array'
                 ]);
 
          $passengerArray = [];
@@ -127,12 +128,15 @@ class Booking extends Controller
                  array_push($passengerArray ,$passenger);
              }
          }
+
         //find if the seats selected matches the number of passengers listed
         $selectedSeat = \App\Models\SeatTracker::where('schedule_id',$schedule_id)
             ->where('user_id',auth()->user()->id)
             ->where('booked_status', 1)->get();
 
+
          $passenger_options = $request['passenger_option'];
+
 
          if(is_null($passenger_options))
          {
@@ -154,7 +158,7 @@ class Booking extends Controller
 
          $fetchScheduleDetails = \App\Models\Schedule::where('id',$schedule_id)->with('service','bus','destination','pickup','terminal')->first();
 
-        if($passengerCount != count($selectedSeat))
+        if((int) $passengerCount !== count($selectedSeat))
         {
 
             foreach($selectedSeat as $unbookedseat)
@@ -184,6 +188,7 @@ class Booking extends Controller
 
             $adult = [];
             $children = [];
+
             foreach($passenger_options as $passenger_option)
             {
                 if(strtolower($passenger_option) == 'adult')
