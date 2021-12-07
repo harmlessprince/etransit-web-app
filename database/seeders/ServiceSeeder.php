@@ -42,5 +42,8 @@ class ServiceSeeder extends Seeder
         Service::create([
             'name' => "Tour Packages"
         ]);
+        Service::create([
+            'name' => "Parcel"
+        ]);
     }
 }

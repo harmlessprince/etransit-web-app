@@ -44,6 +44,17 @@
                             <li><a href="{{url('/admin/manage/boat-location')}}">Add Cruise Location</a></li>
                         </ul>
                     </li>
+                    <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"></i><span>Parcel Management</span></a>
+                        <ul class="nav-submenu menu-content">
+                            <li><a href="{{url('/admin/manage/parcel')}}">Parcel Type</a></li>
+                            <li><a href="{{url('/admin/parcel/state/index')}}">Manage State</a></li>
+                            <li><a href="{{url('/admin/manage/city')}}">Manage Cities</a></li>
+                            <li><a href="{{url('/admin/manage/weight')}}">Manage Weight</a></li>
+                            <li><a href="{{url('/admin/manage/height')}}">Manage Height</a></li>
+                            <li><a href="{{url('/admin/manage/length')}}">Manage Length</a></li>
+                            <li><a href="{{url('/admin/manage/width')}}">Manage Width</a></li>
+                        </ul>
+                    </li>
 
                     <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"></i><span>Transactions</span></a>
                         <ul class="nav-submenu menu-content">

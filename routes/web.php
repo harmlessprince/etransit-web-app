@@ -8,6 +8,7 @@ use App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Eticket\AuthLogin;
 use App\Http\Controllers\Login;
 use App\Http\Controllers\Page;
+use App\Http\Controllers\Parcel;
 use App\Http\Controllers\Payment;
 use App\Http\Controllers\Tour;
 use Illuminate\Support\Facades\Auth;
@@ -156,6 +157,19 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::get('/tour/{tour_id}/history',[Tour::class , 'history']);
         Route::get('/edit/{tour_id}/tour',[Tour::class , 'editTour']);
         Route::put('/update/tour/{tour_id}',[Tour::class , 'updateTour']);
+
+        //parcel management
+        Route::get('/manage/parcel' , [Parcel::class , 'index']);
+        Route::post('/add/parcel',[Parcel::class , 'store']);
+        Route::get('/parcel/state/index', [Parcel::class , 'stateIndex']);
+        Route::post('/parcel/state' , [Parcel::class , 'addState']);
+        Route::get('/manage/city' , [Parcel::class , 'addCity']);
+        Route::post('/add/city' , [Parcel::class , 'storeCity']);
+        Route::get('/manage/height' , [Parcel::class , 'manageHeight']);
+        Route::get('/manage/weight' , [Parcel::class , 'manageWeight']);
+        Route::get('/manage/length' , [Parcel::class , 'manageLength']);
+        Route::get('/manage/width' , [Parcel::class , 'manageWidth']);
+        Route::post('/add/dimension/{slug}' , [Parcel::class , 'storeDimension']);
 
 
 
