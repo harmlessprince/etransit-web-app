@@ -19,5 +19,9 @@ class Service extends Model
         return $this->hasMany(Terminal::class);
     }
 
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
+    }
 
 }

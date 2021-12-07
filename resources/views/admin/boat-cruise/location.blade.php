@@ -98,15 +98,15 @@
         }
     }
 
-.no_data_img{
-    display:grid;
-    grid-template-columns: repeat(5,1fr);
-}
-.not_found{
-    grid-column:1/5;
-   margin-left:170%;
+    .no_data_img{
+        display:grid;
+        grid-template-columns: repeat(5,1fr);
+    }
+    .not_found{
+        grid-column:1/5;
+        margin-left:170%;
 
-}
+    }
 </style>
 @section('content')
     <div class="container-fluid">
@@ -117,7 +117,7 @@
                     <h3>{{env('APP_NAME')}}</h3>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{url('/admin/manage/vehicle')}}"><i data-feather="home"></i></a></li>
-                        <li class="breadcrumb-item">Car Hiring Management</li>
+                        <li class="breadcrumb-item">Add Cruise Location</li>
                     </ol>
                 </div>
                 <div class="col-6">
@@ -160,51 +160,42 @@
     <div class="container-fluid" >
         <div class="button-box" >
             <div>
-                <a href="{{url('admin/cars/on-trip')}}">
-                    <button class="btn s add-terminal-button btn-sm" >Currently On Trip</button>
-                </a>
+
             </div>
             <div>
-                <a href="{{url('/admin/import-export-cars')}}" class="btn bulk-upload-button btn-sm"  style="margin-right:10px;">Bulk Import Cars</a>&nbsp;
-
-                <a href="{{url('admin/add/car-hire')}}">
-                    <button class="btn s add-terminal-button btn-sm"  >Add Cars</button>
-                </a>
-
-{{--                data-toggle="modal" data-target="#vehicleModal"--}}
+                <button class="btn s add-terminal-button btn-sm"  data-toggle="modal" data-target="#vehicleModal">Add Cruise Location</button>
             </div>
         </div>
         <div class="card">
             <div class="card-body">
-                <div style="display: flex; justify-content: flex-end; margin-bottom: 20px;">
-                    <div class="otn-group col-md-4" style="display: flex;" >
-                        <input type="text" name="search" placeholder="Search with Registration Number , Car Type or Model ..." id="search-box" class="form-control"/>
-                        <button class="btn btn-sm btn-primary">Search</button>
-                    </div>
-                </div>
+                <div >
+                    @if(count($locations) > 0)
 
-                <div class="vehicle-box">
-                    @if(count($cars) > 0)
-                        @foreach($cars as $car)
-                            <div class="card text-white terminal-card mb-3" style="max-width: 18rem;">
-                                <div class="card-header terminal-card" style="display: flex;justify-content: center;" >
-                                    <h6>{{Ucfirst($car->car_name)}}</h6>
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Locations</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($locations as $index =>  $location)
+                                <tr>
+                                    <th scope="row">{{$index+1}}</th>
+                                    <td>{{$location->destination}}</td>
+                                    <td>Edit Delete</td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
 
-                                </div>
-                                <div class="card-body" style="display: flex;justify-content: center;">
-                                    <h6 class="card-title"> {{strtoupper($car->car_registration)}}</h6>
-                                </div>
-                                <div class="card-footer terminal-card" style="display: flex;justify-content: center;">
-                                    <a href="{{url('/admin/car/'.$car->id.'/history')}}" class="btn schedule-button">View Car History</a>
-                                </div>
-                            </div>
-                        @endforeach
                     @else
                         <div class="no_data_img">
                             <div class="not_found">
-                               <div>
-                                   <img src="{{asset('images/illustrations/empty_data.png')}}" width="400" height="300" alt="bus-image"/>
-                               </div>
+                                <div>
+                                    <img src="{{asset('images/illustrations/empty_data.png')}}" width="400" height="300" alt="bus-image"/>
+                                </div>
                             </div>
                         </div>
                     @endif
@@ -214,6 +205,36 @@
 
     </div>
 
+
+    <!-- modal box -->
+
+    <div class="modal fade" id="vehicleModal" tabindex="-1" role="dialog" aria-labelledby="vehicleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title" id="exampleModalLabel" >Add Cruise Location</h2>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form >
+                    <div class="modal-body">
+                        <br>
+                        <div class="form-group">
+                            <label for="location">Location</label>
+                            <input type="text" class="form-control" name="location" id="location" required/>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn-close" data-dismiss="modal">Close</button>
+                        <button type="button" class="send-btn  btn-submit" id="send-btn">Add Location</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+    <!-- end modal box here -->
     <script type="text/javascript">
 
         $.ajaxSetup({
@@ -225,35 +246,22 @@
         $(".btn-submit").click(function(e){
             e.preventDefault();
 
-            var car_class         = $("#car_class").val();
-            var car_type          = $("#car_type").val();
-            var daily_rentals     = $("input[name=daily_rentals]").val();
-            var capacity          = $("input[name=capacity]").val();
-            var extra_hour        = $("input[name=extra_hour]").val();
-            var sw_fare           = $("input[name=sw_region_fare]").val();
-            var ss_fare           = $("input[name=ss_region_fare]").val();
-            var se_fare           = $("input[name=se_region_fare]").val();
-            var nc_fare           = $("input[name=nc_region_fare]").val();
-            var description       = $("#description").val();
-            var car_registration  = $("input[name=car_registration]").val();
-            var car_brand         = $("input[name=car_brand]").val();
-
-
+            var location   = $("input[name=location]").val();
             $("#send-btn").prop('disabled', true);
 
             $.ajax({
                 type:'POST',
-                url: "/admin/store/car",
-                data:{"_token": "{{ csrf_token() }}",car_class, car_type,daily_rentals , extra_hour ,
-                    sw_fare , ss_fare , se_fare, nc_fare , capacity ,description,car_registration ,car_brand},
+                url: "/admin/add/cruise-location",
+                data:{"_token": "{{ csrf_token() }}",location},
                 success:function(data){
                     if(data.success)
                     {
                         displaySuccessMessage(data.message)
-                        setTimeout(function(){
-                            location.reload(true);
-                        }, 2000);
+
+                    }else{
+                        displayErrorMessage(response.message);
                     }
+                    setTimeout(function(){location.reload(true);}, 3000);
                 }
             });
 
@@ -262,6 +270,10 @@
         function displaySuccessMessage(message) {
             toastr.success(message, 'Success');
         }
+        function displayErrorMessage(message) {
+            toastr.error(message, 'Error');
+        }
+
 
     </script>
 

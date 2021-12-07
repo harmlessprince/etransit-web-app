@@ -251,17 +251,12 @@
             </div>
             <div class="boat_info_box">
                 <div class="carousel-container">
+                    @foreach($tour->tourimages as $img)
                     <div class="item main">
-                        <img src="{{ asset('/images/bg/tour-slider.png')}}"  alt="'hero-img" />
+                        <img src="{{$img->path}}"  alt="'hero-img" />
                     </div>
-                    <div class="item">
-                        <img src="https://i.pinimg.com/originals/cd/7b/5c/cd7b5c8d4687b5c98a445127926a56e2.jpg" alt="beach" />
-                        <div class="caption">Image 2</div>
-                    </div>
-                    <div class="item">
-                        <img src="https://i.ytimg.com/vi/-3N6fCzgXuc/maxresdefault.jpg" alt="cityscape" />
-                        <div class="caption">Image 3</div>
-                    </div>
+                    @endforeach
+
                     <div class="navigation-items">
                         <div class="prev nav-btn"><</div>
                         <div class="next nav-btn">></div>
@@ -297,22 +292,22 @@
                     </div>
                 </div>
                 <div class="description">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                        exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-                        dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                        Excepteur sint occaecat cupidatat non proident,
-                        sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    <p>{{$tour->description}}</p>
                 </div>
                 <div class="price_per_trip">
                     <h6>Price Per Trip</h6>
-                    <div class="regular_class">
-                        <div class="regular_input_field"><input type="checkbox" /> Regular </div>
-                        <div><span>N40,000</span> <span >per trip</span></div>
-                    </div>
-                    <div class="regular_class">
-                        <div class="regular_input_field"><input type="checkbox" /> Standard </div>
-                        <div><span>N40,000</span> <span >per trip</span></div>
-                    </div>
+                    <form id="payment_plan" method="post" action="{{url('/tour/'.$tour->id.'/payment-plan/'.$service->id)}}">
+                        @csrf
+                        <fieldset id="payemtn_option">
+                            <div class="regular_class">
+                                <div class="regular_input_field"><input type="radio" value="{{$tour->amount_regular}}" name="amount" class="radioInput" /> Regular </div>
+                                <div><span>&#x20A6;{{number_format($tour->amount_regular)}}</span> <span >per trip</span></div>
+                            </div>
+                            <div class="regular_class">
+                                <div class="regular_input_field"><input type="radio" value="{{$tour->amount_standard}}" name="amount" class="radioInput"/> Standard </div>
+                                <div><span>&#x20A6;{{number_format($tour->amount_standard)}}</span> <span >per trip</span></div>
+                            </div>
+                        </fieldset>
                 </div>
                 <div class="popular_cruise">
                     <h4>Popular Cruise</h4>
@@ -349,7 +344,7 @@
                     </div>
                 </div>
                 <div class="add_payment">
-                    <button>Continue To Payment</button>
+                    <button type="submit" form="payment_plan">Continue To Payment</button>
                 </div>
             </div>
 

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AuthUser;
+use App\Http\Controllers\Api\BoatCruise;
 use App\Http\Controllers\Api\Booking;
 use App\Http\Controllers\Api\Car;
 use App\Http\Controllers\Api\FlutterwavePayment;
@@ -9,6 +10,7 @@ use App\Http\Controllers\Api\PasswordReset;
 use App\Http\Controllers\Api\Payment;
 use App\Http\Controllers\Api\Profile;
 use App\Http\Controllers\Api\Service;
+use App\Http\Controllers\Api\Tour;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -30,9 +32,10 @@ Route::group(['prefix' => 'v1'], function() {
     Route::post('/forgot-password', [PasswordReset::class, 'forgotPasswordNotification']);
     Route::post('/reset-password', [PasswordReset::class, 'resetPassword']);
 
-    //store partners
+//    store partners
     Route::post('/partners/create' , [Partner::class , 'store']);
-    Route::post('/rave/callback', [FlutterwavePayment::class, 'callback'])->name('api.callback');
+    Route::post('/rave/callback/', [FlutterwavePayment::class, 'callback'])->name('api.callback');
+
 
 
 //    Route::middleware('jwt.verify')->group( function () {
@@ -64,6 +67,21 @@ Route::group(['prefix' => 'v1'], function() {
         Route::get('/pick-car-plan/{plan_id}' , [Car::class , 'pickPlan']);
         Route::post('/book-date/{plan_id}' ,[Car::class,'bookADate']);
         Route::get('/car-hire/handle-cash-payment/{history_id}' ,[Car::class,'makeCashPayment']);
+
+        //boat cruise api
+        Route::get('/boat-cruise',[BoatCruise::class , 'boatCruiseList']);
+        Route::get('/boat-cruise/{trip_id}/show',[BoatCruise::class , 'boatCruiseShow']);
+        Route::post('/boat-cruise/{trip_id}/payment-plan/{service_id}',[BoatCruise::class , 'addPayment']);
+        //cash payment option
+        Route::post('/boat-cruise/cash-payment', [BoatCruise::class , 'addCashPayment'])->name('boat-cruise.pay-cash');
+
+        //tour packages
+        Route::get('/tour-packages', [Tour::class , 'tourPackageList']);
+        Route::get('/tour-packages/{tour_id}/show/{service_id}', [Tour::class , 'tourPackageShow']);
+
+        //add tour payment options
+        Route::post('/tour/{tour_id}/payment-plan/{service_id}',[Tour::class , 'addPayment']);
+        Route::post('/tour/cash-payment', [Tour::class , 'addCashPaymentTour'])->name('tour.pay-cash');
 
     });
 

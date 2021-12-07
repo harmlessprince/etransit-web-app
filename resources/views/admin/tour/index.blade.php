@@ -2,7 +2,7 @@
 <style>
     .button-box{
         display:flex;
-        justify-content: space-between;
+        justify-content: flex-end;
         margin-bottom: 20px;
     }
 
@@ -98,15 +98,15 @@
         }
     }
 
-.no_data_img{
-    display:grid;
-    grid-template-columns: repeat(5,1fr);
-}
-.not_found{
-    grid-column:1/5;
-   margin-left:170%;
+    .no_data_img{
+        display:grid;
+        grid-template-columns: repeat(5,1fr);
+    }
+    .not_found{
+        grid-column:1/5;
+        margin-left:170%;
 
-}
+    }
 </style>
 @section('content')
     <div class="container-fluid">
@@ -117,7 +117,7 @@
                     <h3>{{env('APP_NAME')}}</h3>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{url('/admin/manage/vehicle')}}"><i data-feather="home"></i></a></li>
-                        <li class="breadcrumb-item">Car Hiring Management</li>
+                        <li class="breadcrumb-item">Tour Management</li>
                     </ol>
                 </div>
                 <div class="col-6">
@@ -160,18 +160,13 @@
     <div class="container-fluid" >
         <div class="button-box" >
             <div>
-                <a href="{{url('admin/cars/on-trip')}}">
-                    <button class="btn s add-terminal-button btn-sm" >Currently On Trip</button>
-                </a>
-            </div>
-            <div>
-                <a href="{{url('/admin/import-export-cars')}}" class="btn bulk-upload-button btn-sm"  style="margin-right:10px;">Bulk Import Cars</a>&nbsp;
+                <a href="{{url('/admin/import-export-cars')}}" class="btn bulk-upload-button btn-sm"  style="margin-right:10px;">Bulk Import Boat</a>&nbsp;
 
-                <a href="{{url('admin/add/car-hire')}}">
-                    <button class="btn s add-terminal-button btn-sm"  >Add Cars</button>
+                <a href="{{url('admin/add/tour')}}">
+                    <button class="btn s add-terminal-button btn-sm"  >Add Tour</button>
                 </a>
 
-{{--                data-toggle="modal" data-target="#vehicleModal"--}}
+                {{--                data-toggle="modal" data-target="#vehicleModal"--}}
             </div>
         </div>
         <div class="card">
@@ -184,27 +179,24 @@
                 </div>
 
                 <div class="vehicle-box">
-                    @if(count($cars) > 0)
-                        @foreach($cars as $car)
+                    @if(count($tours) > 0)
+                        @foreach($tours as $tour)
                             <div class="card text-white terminal-card mb-3" style="max-width: 18rem;">
-                                <div class="card-header terminal-card" style="display: flex;justify-content: center;" >
-                                    <h6>{{Ucfirst($car->car_name)}}</h6>
-
-                                </div>
                                 <div class="card-body" style="display: flex;justify-content: center;">
-                                    <h6 class="card-title"> {{strtoupper($car->car_registration)}}</h6>
+                                    <small class="card-title"> {{strtoupper($tour->name)}}</small>
                                 </div>
                                 <div class="card-footer terminal-card" style="display: flex;justify-content: center;">
-                                    <a href="{{url('/admin/car/'.$car->id.'/history')}}" class="btn schedule-button">View Car History</a>
+                                    <a href="{{url('/admin/tour/'.$tour->id.'/history')}}" class="btn schedule-button">View</a>
                                 </div>
+
                             </div>
                         @endforeach
                     @else
                         <div class="no_data_img">
                             <div class="not_found">
-                               <div>
-                                   <img src="{{asset('images/illustrations/empty_data.png')}}" width="400" height="300" alt="bus-image"/>
-                               </div>
+                                <div>
+                                    <img src="{{asset('images/illustrations/empty_data.png')}}" width="400" height="300" alt="bus-image"/>
+                                </div>
                             </div>
                         </div>
                     @endif

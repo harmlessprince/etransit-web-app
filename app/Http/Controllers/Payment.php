@@ -48,7 +48,10 @@ class Payment extends Controller
                 'user_email'      => auth()->user()->email,
                 'user_name'       => auth()->user()->full_name,
                 'plan_id'         => request()->plan_id ?? null ,
-                'car_history_id'         => request()->carhistory_id ?? null ,
+                'car_history_id'  => request()->carhistory_id ?? null ,
+                'cruiseType'      => request()->cruiseType ?? null,
+                'boatTrip_id'     => request()->boatTrip_id ?? null,
+                'tour_id'         => request()->tour_id ?? null,
 
             ]
         ];
@@ -87,6 +90,12 @@ class Payment extends Controller
                       break;
                   case 6:
                       $this->carHirePayment($data);
+                      break;
+                  case 7:
+                      $this->boatCruisePayment($data);
+                      break;
+                  case 8:
+                      $this->tourPackagePayment($data);
                       break;
                   default:
                       break;
@@ -255,7 +264,66 @@ class Payment extends Controller
 
     }
 
+    public function boatCruisePayment($data)
+    {
+        DB::beginTransaction();
+        $transactions = new \App\Models\Transaction();
+        $transactions->reference = Reference::generateTrnxRef();
+        $transactions->trx_ref = $data['data']['tx_ref'];
+        $transactions->amount = (double) $data['data']['amount'];
+        $transactions->status = 'Successful';
+        $transactions->description = $data['data']['meta']['description'];
+        $transactions->user_id = $data['data']['meta']['user_id'];
+        $transactions->service_id = $data['data']['meta']['service_id'];
+        $transactions->boat_trip_id = $data['data']['meta']['boatTrip_id'];
+        $transactions->isConfirmed = 'True';
+        $transactions->save();
 
+        $data["email"] =  $data['data']['meta']['user_email'];
+        $data['name']  =  $data['data']['meta']['user_name'];
+        $data["title"] = env('APP_NAME').' Boat Cruise Receipt';
+        $data["body"]  = "This is Demo";
+
+        $pdf = PDF::loadView('pdf.car-hire', $data);
+
+        Mail::send('pdf.car-hire', $data, function($message)use($data, $pdf) {
+            $message->to($data["email"])
+                ->subject($data["title"])
+                ->attachData($pdf->output(), "receipt.pdf");
+        });
+
+        DB::commit();
+    }
+
+    public function tourPackagePayment($data)
+    {
+        DB::beginTransaction();
+        $transactions = new \App\Models\Transaction();
+        $transactions->reference = Reference::generateTrnxRef();
+        $transactions->trx_ref = $data['data']['tx_ref'];
+        $transactions->amount = (double) $data['data']['amount'];
+        $transactions->status = 'Successful';
+        $transactions->description = $data['data']['meta']['description'];
+        $transactions->user_id = auth()->user()->id;
+        $transactions->service_id = $data['data']['meta']['service_id'];
+        $transactions->tour_id = $data['data']['meta']['tour_id'];
+        $transactions->save();
+
+        $data["email"] =  $data['data']['meta']['user_email'];
+        $data['name']  =  $data['data']['meta']['user_name'];
+        $data["title"] = env('APP_NAME').'Tour Package  Receipt';
+        $data["body"]  = "This is Demo";
+
+        $pdf = PDF::loadView('pdf.car-hire', $data);
+
+        Mail::send('pdf.car-hire', $data, function($message)use($data, $pdf) {
+            $message->to($data["email"])
+                ->subject($data["title"])
+                ->attachData($pdf->output(), "receipt.pdf");
+        });
+
+        DB::commit();
+    }
 
     public function flushSession()
     {

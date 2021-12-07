@@ -45,11 +45,12 @@ Route::get('/car-hire', [Car::class , 'carList']);
 //boat cruise
 Route::get('/boat-cruise',[BoatCruise::class , 'boatCruiseList']);
 //add boat id later on
-Route::get('/boat-cruise/show',[BoatCruise::class , 'boatCruiseShow']);
+Route::get('/boat-cruise/{id}/show',[BoatCruise::class , 'boatCruiseShow']);
 
 //tours packages
 Route::get('/tour-packages', [Tour::class , 'tourPackageList']);
-Route::get('/tour-packages/show', [Tour::class , 'tourPackageShow']);
+Route::get('/tour-packages/{tour_id}/show', [Tour::class , 'tourPackageShow']);
+
 
 Route::group(['middleware' => ['auth','prevent-back-history']], function() {
 
@@ -66,6 +67,20 @@ Route::group(['middleware' => ['auth','prevent-back-history']], function() {
     Route::get('/pick-date' ,[Car::class ,'pickDate']);
     Route::post('/plan/{plan_id}',[Car::class , 'proceedToPaymentPlan']);
     Route::get('car-hire/cash/payment/{history_id}/method',[Car::class , 'makePayment']);
+
+    //select payment plan for boat cruise
+    Route::post('/boat-cruise/{boat_id}/payment-plan/{service_id}',[BoatCruise::class , 'addPayment']);
+    //make cash payment
+    Route::post('/boat-cruise/cash-payment', [BoatCruise::class , 'addCashPayment'])->name('boat-cruise.pay-cash');
+
+    //add tour payment
+    Route::post('/tour/{tour_id}/payment-plan/{service_id}',[Tour::class , 'addPayment']);
+    Route::post('/tour/cash-payment', [Tour::class , 'addCashPaymentTour'])->name('tour.pay-cash');
+
+
+
+
+
 
 
 });
@@ -120,6 +135,31 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::get('/car/{car_id}/history',[Car::class , 'carHistory']);
         Route::get('cars/on-trip',[Car::class , 'onTrip']);
         Route::get('/car/details/{carhistory_id}', [Car::class , 'tripDetails']);
+
+        //manage boat cruise
+        Route::get("/manage/boat-cruise" , [BoatCruise::class , 'index']);
+        Route::get('add/boat',[BoatCruise::class ,'addBoat']);
+        Route::post('store/boat',[BoatCruise::class ,'storeBoat']);
+        Route::get('/manage/boat-schedule/{boat_id}', [BoatCruise::class , 'schedule']);
+        Route::post('/schedule/boat-cruise-event',[BoatCruise::class , 'addBoatSchedule'])->name('cruise.event');
+        Route::get('manage/boat-location', [BoatCruise::class , 'addCruiseLocation']);
+        Route::post('/add/cruise-location', [BoatCruise::class , 'storeCruiseLocation']);
+        //boat management
+        Route::get('boat/{boat_id}/history',[BoatCruise::class , 'boatHistory']);
+        Route::get('/edit/{boat_id}/boat', [BoatCruise::class , 'editBoat']);
+        Route::put('/update/{boat_id}/boat' ,[BoatCruise::class , 'updateBoat']);
+
+        //tour management
+        Route::get('manage/tour',[Tour::class , 'manageTour']);
+        Route::get('/add/tour',[Tour::class , 'addTour']);
+        Route::post('/store/tour',[Tour::class , 'storeTour']);
+        Route::get('/tour/{tour_id}/history',[Tour::class , 'history']);
+        Route::get('/edit/{tour_id}/tour',[Tour::class , 'editTour']);
+        Route::put('/update/tour/{tour_id}',[Tour::class , 'updateTour']);
+
+
+
+
 
     });
 });

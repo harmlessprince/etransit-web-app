@@ -17,10 +17,16 @@ class CreateToursTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('location');
-            $table->double('min_amount');
-            $table->double('max_amount');
+            $table->date('tour_date');
+            $table->time('tour_time');
+            $table->string('duration');
+            $table->unsignedBigInteger('service_id');
             $table->longText('description');
+            $table->double('amount_regular');
+            $table->double('amount_standard');
             $table->timestamps();
+
+            $table->foreign('service_id')->references('id')->on('services')->onDelete('cascade');
         });
     }
 

@@ -98,15 +98,15 @@
         }
     }
 
-.no_data_img{
-    display:grid;
-    grid-template-columns: repeat(5,1fr);
-}
-.not_found{
-    grid-column:1/5;
-   margin-left:170%;
+    .no_data_img{
+        display:grid;
+        grid-template-columns: repeat(5,1fr);
+    }
+    .not_found{
+        grid-column:1/5;
+        margin-left:170%;
 
-}
+    }
 </style>
 @section('content')
     <div class="container-fluid">
@@ -117,7 +117,7 @@
                     <h3>{{env('APP_NAME')}}</h3>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{url('/admin/manage/vehicle')}}"><i data-feather="home"></i></a></li>
-                        <li class="breadcrumb-item">Car Hiring Management</li>
+                        <li class="breadcrumb-item">Baot Cruise Management</li>
                     </ol>
                 </div>
                 <div class="col-6">
@@ -165,13 +165,13 @@
                 </a>
             </div>
             <div>
-                <a href="{{url('/admin/import-export-cars')}}" class="btn bulk-upload-button btn-sm"  style="margin-right:10px;">Bulk Import Cars</a>&nbsp;
+                <a href="{{url('/admin/import-export-cars')}}" class="btn bulk-upload-button btn-sm"  style="margin-right:10px;">Bulk Import Boat</a>&nbsp;
 
-                <a href="{{url('admin/add/car-hire')}}">
-                    <button class="btn s add-terminal-button btn-sm"  >Add Cars</button>
+                <a href="{{url('admin/add/boat')}}">
+                    <button class="btn s add-terminal-button btn-sm"  >Add Boat</button>
                 </a>
 
-{{--                data-toggle="modal" data-target="#vehicleModal"--}}
+                {{--                data-toggle="modal" data-target="#vehicleModal"--}}
             </div>
         </div>
         <div class="card">
@@ -184,27 +184,25 @@
                 </div>
 
                 <div class="vehicle-box">
-                    @if(count($cars) > 0)
-                        @foreach($cars as $car)
+                    @if(count($boats) > 0)
+                        @foreach($boats as $boat)
                             <div class="card text-white terminal-card mb-3" style="max-width: 18rem;">
-                                <div class="card-header terminal-card" style="display: flex;justify-content: center;" >
-                                    <h6>{{Ucfirst($car->car_name)}}</h6>
-
-                                </div>
                                 <div class="card-body" style="display: flex;justify-content: center;">
-                                    <h6 class="card-title"> {{strtoupper($car->car_registration)}}</h6>
+                                    <small class="card-title"> {{strtoupper($boat->name)}}</small>
                                 </div>
                                 <div class="card-footer terminal-card" style="display: flex;justify-content: center;">
-                                    <a href="{{url('/admin/car/'.$car->id.'/history')}}" class="btn schedule-button">View Car History</a>
+                                    <a href="{{url('/admin/boat/'.$boat->id.'/history')}}" class="btn schedule-button">View</a>
+                                    <a href="{{url('/admin/manage/boat-schedule/'.$boat->id)}}" class="btn schedule-button">Schedule </a>
                                 </div>
+
                             </div>
                         @endforeach
                     @else
                         <div class="no_data_img">
                             <div class="not_found">
-                               <div>
-                                   <img src="{{asset('images/illustrations/empty_data.png')}}" width="400" height="300" alt="bus-image"/>
-                               </div>
+                                <div>
+                                    <img src="{{asset('images/illustrations/empty_data.png')}}" width="400" height="300" alt="bus-image"/>
+                                </div>
                             </div>
                         </div>
                     @endif

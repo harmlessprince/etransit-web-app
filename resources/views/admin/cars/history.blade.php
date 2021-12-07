@@ -163,8 +163,11 @@
                     </div>
                 </div>
             </div>
+
           <div class="row">
             <div class="col-xl-12 box-col-12 col-md-12">
+                <button class="btn btn-success">Edit {{$carHistory->car_name}}</button>
+                <br><br>
                 <div class="card o-hidden">
                     <div class="card-header card-no-border">
                         <div class="media">

@@ -16,6 +16,7 @@
     @include('admin.layout.sidebar')
     <!-- Page Sidebar Ends-->
         <div class="page-body">
+            @include('sweetalert::alert')
 {{--            @include('sweetalert::alert')--}}
             @yield('content')
         </div>

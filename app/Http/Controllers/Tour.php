@@ -2,8 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Classes\Reference;
+use App\Models\BoatTrip;
 use App\Models\Service;
+use App\Models\TourImage;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Illuminate\Http\Request;
+use App\Models\Tour as TourPackage;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use RealRashid\SweetAlert\Facades\Alert;
+use PDF;
 
 class Tour extends Controller
 {
@@ -11,15 +20,250 @@ class Tour extends Controller
     {
 
         $service = Service::where('id', 8)->firstorfail();
+        $tours  = TourPackage::with('tourimages')->get();
 
-        return view('pages.tour-packages.list', compact('service'));
+        return view('pages.tour-packages.list', compact('service','tours'));
     }
 
 
-    public function tourPackageShow()
+    public function tourPackageShow($tour_id)
     {
         $service = Service::where('id', 8)->firstorfail();
 
-        return view('pages.tour-packages.show', compact('service'));
+        $tour  = TourPackage::where('id',$tour_id)->with('tourimages')->first();
+
+        return view('pages.tour-packages.show', compact('service','tour'));
     }
+
+    public function manageTour()
+    {
+
+        $tours = TourPackage::all();
+
+        return view('admin.tour.index',compact('tours'));
+    }
+
+
+    public function addTour()
+    {
+        $service = Service::where('id', 8)->firstorfail();
+
+        return view('admin.tour.store' , compact('service'));
+    }
+
+    public function storeTour(Request $request)
+    {
+        request()->validate([
+            'tour_name'      => 'required',
+            'departure_date' => 'required',
+            'departure_time' => 'required',
+            'duration'       => 'required',
+            'location'       =>'required',
+            'amount_regular' => 'required',
+            'amount_standard'  => 'required'
+        ]);
+
+
+        DB::beginTransaction();
+
+        $tour = new TourPackage();
+        $tour->name             = $request->tour_name;
+        $tour->location         = $request->location;
+        $tour->tour_date        = $request->departure_date;
+        $tour->tour_time        = $request->departure_time;
+        $tour->duration         = abs($request->duration);
+        $tour->service_id       = $request->service_id;
+        $tour->amount_regular   = $request->amount_regular;
+        $tour->amount_standard  = $request->amount_standard;
+        $tour->description      = $request->description;
+        $tour->save();
+
+        $images = array();
+
+        if($files = $request->file('images')){
+
+            foreach($files as  $file){
+                $request->validate([
+                    'images' => 'required|array',
+                    'images.*' => '|mimes:jpg,jpeg,png|max:4048',
+                ]);
+                $name = $file->getClientOriginalName();
+                $uploadedFileUrl = Cloudinary::upload($file->getRealPath())->getSecurePath();
+                $tourImage = new TourImage();
+                $tourImage->tour_id = $tour->id;
+                $tourImage->path = $uploadedFileUrl;
+                $tourImage->save();
+            }
+
+        }
+        DB::commit();
+
+        Alert::success('Success ', 'Tour added successfully');
+
+        return back();
+    }
+
+    public function history($tour_id)
+    {
+        $tourHistory = TourPackage::where('id' , $tour_id)->firstorfail();
+
+        return view('admin.tour.history' , compact('tourHistory'));
+
+    }
+
+
+    public function editTour($tour_id)
+    {
+
+        $tour = TourPackage::where('id', $tour_id)->with('tourimages')->firstorfail();
+
+        return view('admin.tour.edit' , compact('tour'));
+    }
+
+    public function updateTour(Request $request , $tour_id)
+    {
+        request()->validate([
+            'tour_name'      => 'required',
+            'departure_date' => 'required',
+            'departure_time' => 'required',
+            'duration'       => 'required',
+            'location'       =>'required',
+            'amount_regular' => 'required',
+            'amount_standard'=> 'required'
+        ]);
+
+        DB::beginTransaction();
+
+        $updateTour =   TourPackage::where('id', $tour_id)->firstorfail();
+
+        $updateTour->update([
+            'name'            => $request->tour_name,
+            'description'     => $request->description,
+            'location'        => $request->location,
+            'duration'        => $request->duration,
+            'tour_time'       => $request->departure_time,
+            'tour_date'       => $request->departure_date,
+            'amount_regular'  => $request->amount_regular,
+            'amount_standard' => $request->amount_standard,
+        ]);
+
+        $images = array();
+
+        if($files = $request->file('images')){
+
+            foreach($files as $index =>  $file){
+                $request->validate([
+                    'images' => 'required|array',
+                    'images.*' => '|mimes:jpg,jpeg,png|max:4048',
+                ]);
+                $name = $file->getClientOriginalName();
+                $uploadedFileUrl = Cloudinary::upload($file->getRealPath())->getSecurePath();
+                $tourImage = TourImage::where('boat_id',$tour_id)->get();
+                $tourImage[$index]->update([
+                    'boat_id' => $tour_id,
+                    'path'   => $uploadedFileUrl,
+                ]);
+            }
+        }
+        DB::commit();
+
+        Alert::success('Success ', 'Updated  successfully');
+
+        return back();
+    }
+
+
+    public function addPayment(Request $request , $tour_id , $service_id)
+    {
+        request()->validate([
+            'amount' => 'required'
+        ]);
+
+        $tour = TourPackage::where('id',$tour_id)->first();
+        $service = Service::where('id', 8)->firstorfail();
+
+        if((double) $tour->amount_regular == (double) $request->amount)
+        {
+            $amount = $tour->amount_regular;
+            $type = 'Regular';
+
+        }elseif((double) $tour->amount_standard == (double) $request->amount){
+
+            $amount = $tour->amount_standard;
+            $type = 'Standard';
+
+        }else{
+
+            abort('404');
+        }
+
+        return view('pages.tour-packages.payment', compact('amount','type','tour','service'));
+    }
+
+    public function addCashPaymentTour(Request $request)
+    {
+
+        request()->validate([
+            'tour_id' => 'required|integer',
+            'cruiseType' => 'required|string',
+            'amount' => 'required',
+            'service_id' => 'required'
+        ]);
+
+        $tour = TourPackage::where('id', $request->tour_id)->firstorfail();
+
+
+        if(strtolower($request->cruiseType) == 'regular')
+        {
+
+            $this->handlePayment($request->amount , $request->service_id , $tour);
+
+            toastr()->success('Success !! cash payment made successfully');
+            return  redirect('/');
+        }elseif(strtolower($request->cruiseType) == 'standard')
+        {
+            $this->handlePayment($request->amount , $request->service_id , $tour);
+            toastr()->success('Success !! cash payment made successfully');
+            return  redirect('/');
+        }else{
+            abort('404');
+        }
+
+    }
+
+    private function handlePayment($amount , $serviceId , $trip)
+    {
+        DB::beginTransaction();
+        $transactions = new \App\Models\Transaction();
+        $transactions->reference = Reference::generateTrnxRef();
+        $transactions->amount = (double) $amount;
+        $transactions->status = 'Pending';
+        $transactions->description = 'Cash Payment';
+        $transactions->user_id = auth()->user()->id;
+        $transactions->service_id = $serviceId;
+        $transactions->tour_id = $trip->id;
+        $transactions->save();
+
+        $data["email"] =  auth()->user()->email;
+        $data['name']  =  auth()->user()->full_name;
+        $data["title"] = env('APP_NAME').' Boat Cruise Receipt';
+        $data["body"]  = "This is Demo";
+
+        $pdf = PDF::loadView('pdf.car-hire', $data);
+
+        Mail::send('pdf.car-hire', $data, function($message)use($data, $pdf) {
+            $message->to($data["email"])
+                ->subject($data["title"])
+                ->attachData($pdf->output(), "receipt.pdf");
+        });
+
+        DB::commit();
+
+
+
+
+
+    }
+
+
 }

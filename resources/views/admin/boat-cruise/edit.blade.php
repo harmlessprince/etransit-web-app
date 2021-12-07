@@ -41,16 +41,16 @@
         cursor: pointer;
     }
 
-.car-box{
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 30px;
-}
-.car-box input , select{
-    outline:none !important;
-    border:none !important;
-    border-bottom: 1px solid #03174C !important;
-}
+    .car-box{
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+
+    }
+    .car-box input , select{
+        outline:none !important;
+        border:none !important;
+        border-bottom: 1px solid #03174C !important;
+    }
     input:focus ,select:focus{
         outline: none !important;
     }
@@ -90,6 +90,16 @@
     .invalid-feedback{
         color:red !important;
     }
+    .custom-file-upload {
+        border: 1px solid #ccc;
+        display: inline-block;
+        padding: 6px 12px;
+        cursor: pointer;
+        background: #ccc !important;
+    }
+    .images-box{
+        overflow-x:scroll;
+    }
 
 </style>
 @section('content')
@@ -101,7 +111,7 @@
                     <h3>{{env('APP_NAME')}}</h3>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{url('/admin/manage/vehicle')}}"><i data-feather="home"></i></a></li>
-                        <li class="breadcrumb-item">Add car</li>
+                        <li class="breadcrumb-item">Add Boat</li>
                     </ol>
                 </div>
                 <div class="col-6">
@@ -143,7 +153,7 @@
     <div class="container-fluid" >
         <div class="button-box" >
             <div>
-                <a href="{{url('/admin/import-export-cars')}}" class="btn bulk-upload-button btn-sm"  style="margin-right:10px;">Bulk Import Cars</a>&nbsp;
+                {{--                <a href="{{url('/admin/import-export-cars')}}" class="btn bulk-upload-button btn-sm"  style="margin-right:10px;">Bulk Import Boats</a>&nbsp;--}}
             </div>
         </div>
         <div class="row">
@@ -156,103 +166,45 @@
                     </div>
                 @endif
             </div>
+
         </div>
         <div class="card">
             <div class="card-body">
-                <form method="post" action="{{url('/admin/store/car')}}" enctype="multipart/form-data">
+                <form method="post" action="{{url('/admin/update/'.$boat->id.'/boat')}}" enctype="multipart/form-data">
                     @csrf
-                    <div class="car-box">
+                    {{ method_field('PUT') }}
+                    <div class="car-box col-md-12">
                         <div class="form-group">
-                            <label>Car Brand</label>
-                            <input type="text" name="car_brand" id="car_brand" class="form-control" value="{{ old('car_brand') }}"  required/>
+                            <label for="boat_name">Boat Name</label>
+                            <input type="text" name="boat_name" id="boat_name" class="form-control" value="{{ $boat->name }}" required />
                         </div>
-                        <div class="form-group">
-                            <label for="car_registration">Car Registration</label>
-                            <input type="text" class="form-control" name="car_registration" id="car_registration" value="{{ old('car_registration') }}"  required/>
-                        </div>
-                        <div class="form-group">
-                            <label for="car_type">Car Type</label>
-                            <select  class="form-control" name="car_type" id="car_type"  required>
-                                <option>Select Car Type</option>
-                                    @foreach($types as $type)
-                                        <option value="{{$type->id}}">{{$type->name}}</option>
-                                    @endforeach
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="car_class">Car Class </label>
-                            <select  class="form-control" name="car_class" id="car_class" required>
-                                <option>Select Car Class</option>
-                                @foreach($classes as $class)
-                                    <option value="{{$class->id}}">{{$class->name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="capacity">Seat Capacity</label>
-                            <input type="number" class="form-control" name="capacity" id="capacity" value="{{ old('capacity') }}"  required/>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="daily_rentals">Daily Rentals</label>
-                            <input type="text" class="form-control" name="daily_rentals" id="daily_rentals" value="{{ old('daily_rentals') }}"  required/>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="extra_hour">Extra Hour</label>
-                            <input type="text" class="form-control" name="extra_hour" id="extra_hour" value="{{ old('extra_hour') }}"  required/>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="sw_region_fare">SW Region (Fare)r</label>
-                            <input type="text" class="form-control" name="sw_region_fare" id="sw_region_fare" value="{{ old('sw_region_fare') }}"  required/>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="se_region_fare">SE Region (Fare)</label>
-                            <input type="text" class="form-control" name="se_region_fare" id="se_region_fare" value="{{ old('se_region_fare') }}"  required/>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="ss_region_fare">SS Region (Fare)</label>
-                            <input type="text" class="form-control" name="ss_region_fare" id="ss_region_fare" value="{{ old('ss_region_fare') }}"  required/>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="nc_region_fare">NC Region (Fare)</label>
-                            <input type="text" class="form-control" name="nc_region_fare" id="nc_region_fare" value="{{ old('nc_region_fare') }}"  required/>
-                        </div>
-
 
                     </div>
-                  <div class="file_image_form">
-                      <div class="form-group">
-                          <label for="images">Add Images</label>
-                          <input   type="file" id="images" class="form-control image_file" name="images[]" multiple="multiple" required>
-
-                      </div>
-                      <div class="add_button">
-                          <button id="buttonID"> <img src="{{asset('images/icons/upload.png')}}"  width="20" height="20" /> </button>
-                      </div>
-                  </div>
-                    <div class="col-md-12 mb-2">
-                    <div class="add_file"></div><br>
+                    @foreach($boat->boatimages as $index =>  $img)
+                    <div class="file_image_form">
+                        <div class="form-group">
+                            <label for="images">Add Image {{$index+1}}</label>
+                            <input   type="file" id="images" class="form-control image_file custom-file-upload" name="images[]" multiple="multiple"  >
+                        </div>
                     </div>
+                    @endforeach
+
                     <div class="col-md-12 mb-2">
-                        <div class="images-preview-div"> </div>
+                        <div class="images-box">
+                          @foreach($boat->boatimages as $img)
+                           <img src="{{$img->path}}" width="300" height="300"/>
+                           @endforeach
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="description">Description</label>
-                        <textarea class="form-control" name="description" id="description" rows="10" cols="20" value="{{ old('description') }}" required> </textarea>
+                        <textarea class="form-control" name="description" id="description" rows="10" cols="20" required >{{$boat->description}}</textarea>
                     </div>
-                    <button class="sumbit_request" type="submit">Add Car</button>
+                    <button class="sumbit_request" type="submit">Update Boat</button>
                 </form>
             </div>
 
         </div>
-
     </div>
 
     <script type="text/javascript">
@@ -260,11 +212,10 @@
         $('#buttonID').click(function(e){
             e.preventDefault();
             $('.add_file').append(`<div >
-                        <div class="gender_section">
+                        <div class="gender_section" style="margin-top:10px;">
                             <div class="passenger_type radio-group">
-                                <div class="passenger_options">
+                                <div class="passenger_options custom-file-upload">
                                     <input type="file" name="images[]"  />
-
                                 </div>
                             </div>
                         </div>

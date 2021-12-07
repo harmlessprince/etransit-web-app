@@ -22,9 +22,7 @@ use App\Models\CarPlan;
 use App\Models\Transaction;
 use DateTime;
 use Carbon\Carbon;
-
-
-
+use RealRashid\SweetAlert\Facades\Alert;
 
 
 class Car extends Controller
@@ -94,8 +92,8 @@ class Car extends Controller
 
 
            $data  = request()->validate([
-                            'car_type' => 'required',
-                            'car_class' => 'required',
+                            'car_type' => 'required|integer',
+                            'car_class' => 'required|integer',
                             'daily_rentals' => 'required',
                             'extra_hour' => 'required',
                             'sw_region_fare' => 'required',
@@ -105,7 +103,7 @@ class Car extends Controller
                             'description'=> 'required',
                             'capacity' => 'required',
                             'car_brand' => 'required',
-                            'car_registration' => 'required',
+                            'car_registration' => 'required|unique:cars',
                         ]);
 
 
@@ -124,11 +122,18 @@ class Car extends Controller
 
                if($request->hasfile('images'))
                {
+
                    $input=$request->file('images');
 
                    $images=array();
                    if($files=$request->file('images')){
+
                        foreach($files as  $file){
+                           $request->validate([
+                               'images' => 'required|array',
+                               'images.*' => '|mimes:jpg,jpeg,png|max:2048',
+                           ]);
+//                           dimensions:min_width=100,min_height=100,max_width=1000,max_height=1000',
                            $name=$file->getClientOriginalName();
                            $uploadedFileUrl = Cloudinary::upload($file->getRealPath())->getSecurePath();
                            $carImage = new CarImage();
@@ -171,7 +176,10 @@ class Car extends Controller
               $NCPlan->car_id = $car->id;
               $NCPlan->save();
         DB::commit();
-             return  back();
+
+        Alert::success('Success ', 'Boat added successfully');
+
+        return  back();
 
     }
 

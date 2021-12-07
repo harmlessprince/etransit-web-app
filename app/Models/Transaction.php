@@ -24,4 +24,9 @@ class Transaction extends Model
     {
         return $this->belongsTo(CarHistory::class ,'car_history_id');
     }
+
+    public function service()
+    {
+        return $this->belongsTo(Service::class);
+    }
 }

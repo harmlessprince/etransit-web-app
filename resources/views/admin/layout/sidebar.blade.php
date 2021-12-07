@@ -20,54 +20,31 @@
                     <li ><a class="nav-link" href="{{route('admin.dashboard')}}"><i data-feather="home"></i><span>Dashboard</span></a>
 
                     </li>
-                    <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="airplay"></i><span class="lan-6">Widgets</span></a>
-                        <ul class="nav-submenu menu-content">
-                            <li><a href="general-widget.html">General</a></li>
-                            <li><a href="chart-widget.html">Chart</a></li>
-                        </ul>
-                    </li>
 
-{{--                    <li class="sidebar-title">--}}
-{{--                        <div>--}}
-{{--                            <h6 >Service Management</h6>--}}
-{{--                            <p >Manage {{env('APP_NAME')}} services</p>--}}
-{{--                        </div>--}}
-{{--                    </li>--}}
-                    <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"></i><span>Services</span></a>
-                        <ul class="nav-submenu menu-content">
-                            <li><a href="{{url('/admin/manage/vehicle')}}">Manage Bus Ticketing</a></li>
-                            <li><a href="projectcreate.html">Manage Train Ticketing</a></li>
-                            <li><a href="projectcreate.html">Manage Car Hire</a></li>
-                            <li><a href="projectcreate.html">Manage Train Ticketing</a></li>
-                            <li><a href="projectcreate.html">Manage Plane Ticketing</a></li>
-                            <li><a href="projectcreate.html">Manage Car Hiring</a></li>
-                        </ul>
-                    </li>
-{{--                    <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"></i><span>Bus Schedules</span></a>--}}
-{{--                        <ul class="nav-submenu menu-content">--}}
-{{--                            <li><a href="{{url('admin/import-export-schedule')}}">Schedules</a></li>--}}
-
-{{--                        </ul>--}}
-{{--                    </li>--}}
                     <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"></i><span>Bus Management</span></a>
                         <ul class="nav-submenu menu-content">
                             <li><a href="{{url('/admin/manage/vehicle')}}">Manage Buses</a></li>
                         </ul>
                     </li>
-                    <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"></i><span>Car Hire </span></a>
+                    <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"></i><span>Tour Management</span></a>
+                        <ul class="nav-submenu menu-content">
+                            <li><a href="{{url('/admin/manage/tour')}}">Manage Tour</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"></i><span>Car Management </span></a>
                         <ul class="nav-submenu menu-content">
                             <li><a href="{{url('/admin/manage/cars')}}">Manage Car Hiring </a></li>
                             <li><a href="{{url('/admin/manage/car-class')}}">Manage Car Class </a></li>
                             <li><a href="{{url('/admin/manage/car-type')}}">Manage Car Type </a></li>
                         </ul>
                     </li>
-                    <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"></i><span>Boat Cruise  </span></a>
+                    <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"></i><span>Boat Management</span></a>
                         <ul class="nav-submenu menu-content">
-                            <li><a href="{{url('/admin/manage/cars')}}">Manage Car Hiring </a></li>
-                            <li><a href="{{url('/admin/manage/car-class')}}">Manage Car Class </a></li>
-                            <li><a href="{{url('/admin/manage/car-type')}}">Manage Car Type </a></li>
+                            <li><a href="{{url('/admin/manage/boat-cruise')}}">Manage Boat Cruise</a></li>
+                            <li><a href="{{url('/admin/manage/boat-location')}}">Add Cruise Location</a></li>
                         </ul>
                     </li>
+
                     <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"></i><span>Transactions</span></a>
                         <ul class="nav-submenu menu-content">
                             <li><a href="{{url('/admin/transactions')}}">Manage Transactions</a></li>

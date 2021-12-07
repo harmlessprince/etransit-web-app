@@ -132,7 +132,7 @@
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Amount</th>
-                        <th scope="col">Passenger Count</th>
+                        <th scope="col">Service Type</th>
                         <th scope="col">Reference</th>
                         <th scope="col">Flutterwave Reference</th>
                         <th scope="col">Purchased By</th>
@@ -147,7 +147,7 @@
                                 <tr>
                                     <th scope="row">{{$index + 1}}</th>
                                     <td>&#8358; {{number_format($transaction->amount)}}</td>
-                                    <td>{{$transaction->passenger_count}}</td>
+                                    <td>{{$transaction->service->name}}</td>
                                     <td>{{$transaction->reference}}</td>
                                     <td>{{$transaction->trx_ref}}</td>
                                     <td>{{$transaction->user->full_name}}</td>

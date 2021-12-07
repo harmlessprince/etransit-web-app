@@ -21,19 +21,23 @@ class CreateTransactionsTable extends Migration
             $table->enum('status',['Successful','Pending','Likely Fraud']);
             $table->unsignedBigInteger('service_id');
             $table->unsignedBigInteger('car_history_id')->nullable();
+            $table->unsignedBigInteger('boat_trip_id')->nullable();
 //            $table->unsignedBigInteger('car_plan_id')->nullable();
             $table->enum('transaction_type',['cash payment','online'])->default('online');
             $table->unsignedBigInteger('schedule_id')->nullable();
             $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('tour_id')->nullable();
             $table->unsignedBigInteger('passenger_count')->nullable();
             $table->enum('isConfirmed',['True', 'False'])->default('False');
             $table->string('description');
             $table->timestamps();
 
+            $table->foreign('tour_id')->references('id')->on('tours')->onDelete('cascade');
             $table->foreign('service_id')->references('id')->on('services')->onDelete('cascade');
             $table->foreign('car_history_id')->references('id')->on('car_histories')->onDelete('cascade');
             $table->foreign('schedule_id')->references('id')->on('schedules')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('boat_trip_id')->references('id')->on('boat_trips')->onDelete('cascade');
         });
     }
 

@@ -249,7 +249,7 @@
                 </div>
             </div>
         </div>
-        <div class="header_text">
+        <div class="header_text" id="about_us_section">
             <div><h3>ABOUT US</h3></div>
         </div>
         <div class="header_text_2">

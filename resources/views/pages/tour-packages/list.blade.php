@@ -69,6 +69,10 @@
     .backgrund_img img {
         width:100%;
     }
+    .boat_cruise_list a {
+        text-decoration: none !important;
+        color:#000 !important;
+    }
 </style>
 @section('content')
     <div>
@@ -99,21 +103,21 @@
                     <input type="text" placeholder="search"  class="search_text"/>
                 </div>
                 <div class="boat_cruise_list">
-                    @for($i=0;$i < 4 ; $i++)
+                    @foreach($tours as $index => $tour)
+                        <a href="{{url('/tour-packages/'.$tour->id.'/show')}}">
                         <div class="boat_card">
                             <div class="backgrund_img" >
-                                <img src="{{ asset('/images/bg/tour-thumb.png')}}" />
+                                <img src="{{$tour->tourimages[$index]->path}}" />
                                 <div class="price_tag">
-                                    <h5>New Board</h5>
-                                    <h5>500,000 - 600,000</h5>
+                                    <h5>{{$tour->name}}</h5>
+                                    <h5> &#x20A6; {{number_format($tour->amount_regular)}}  -  &#x20A6; {{number_format($tour->amount_standard)}}</h5>
                                 </div>
                             </div>
 
                             <div class="ratings_box" >
                                 <h5>Harmony of seas</h5>
                                 <small>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                    incididunt ut labore et dolore mag
+                                    {{ \Illuminate\Support\Str::limit($tour->description, $limit = 150, $end = '...') }}
                                 </small>
                                 <div class="ratings_location">
                                     <div>
@@ -122,12 +126,13 @@
                                     </div>
                                     <div>
                                         <img src="{{asset('/images/icons/location.png')}}" alt="location-img"/>
-                                        <small>Los Angeles , USA</small>
+                                        <small>{{$tour->location}}</small>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    @endfor
+                        </a>
+                    @endforeach
                 </div>
             </div>
         </div>
