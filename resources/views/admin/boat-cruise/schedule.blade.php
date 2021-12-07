@@ -124,7 +124,7 @@
         <div class="card ">
             <div class="card-body">
                 <div id="app">
-                    <div id='schedule_event_calender'></div>
+                    <div id='schedule_event_calender_boat'></div>
                 </div>
             </div>
         </div>
@@ -197,7 +197,7 @@
                 }
             });
 
-            var calendar = $('#schedule_event_calender').fullCalendar({
+            var calendar = $('#schedule_event_calender_boat').fullCalendar({
                 editable: true,
                 editable: true,
 
@@ -226,13 +226,12 @@
                             var destination        = $("#destination").val();
                             var description        = $("#description").val();
                             var time               = $("input[name=time]").val();
-                            var boatID             = {{$boat->id}},
+                            var boatID             = {{$boat->id}};
                             var duration           = $("input[name=duration]").val();
 
 
                             $.ajax({
                                 url: SITEURL + '/schedule/boat-cruise-event',
-                                {{--"{{ route('admin.cruise.event') }}",--}}
                                 data: {
                                     cruise_name,
                                     max_amount,
@@ -277,3 +276,6 @@
     </script>
 
 @endsection
+
+
+
