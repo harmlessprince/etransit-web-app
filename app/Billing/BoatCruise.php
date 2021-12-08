@@ -27,7 +27,7 @@ class BoatCruise
         $transactions->description =  $data['data']['meta']['description'];
         $transactions->user_id =  $data['data']['meta']['user_id'];
         $transactions->service_id = $data['data']['meta']['service_id'];
-        $transactions->tour_id = $data['data']['meta']['tour_id'];
+        $transactions->boat_trip_id = $data['data']['meta']['boat_cruise_id'];
         $transactions->isConfirmed = 'True';
         $transactions->save();
 
