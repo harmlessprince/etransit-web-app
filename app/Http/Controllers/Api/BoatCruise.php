@@ -27,7 +27,12 @@ class BoatCruise extends Controller
     public function boatCruiseShow($trip_id)
     {
         $service = Service::where('id', 7)->firstorfail();
-        $boat = BoatTrip::where('id', $trip_id)->with('boat','cruiselocation')->first();
+//        $boat = BoatTrip::where('id', $trip_id)->with('boat','cruiselocation')->first();
+        
+        $boat =  BoatTrip::where('id' , $trip_id)->with(['cruiselocation','boat' => function($query) {
+                                              $query->with('boatimages')->get();
+                                            }])->first();
+        return $boat;
 
         return response()->json(['success' => true ,'data' => compact('service','boat')]);
     }
