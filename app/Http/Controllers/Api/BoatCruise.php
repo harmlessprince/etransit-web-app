@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Classes\Reference;
 use App\Http\Controllers\Controller;
+use App\Models\Boat;
 use App\Models\BoatTrip;
 use App\Models\Service;
 use Illuminate\Http\Request;
@@ -16,7 +17,9 @@ class BoatCruise extends Controller
     public function boatCruiseList()
     {
 
-        $boatCruise = BoatTrip::with('boat','cruiselocation')->get();
+
+      $boatCruise =  Boat::whereHas('trips')->with(['boatimages', 'trips' => function($query) {
+                                                         $query->with('cruiselocation')->get();}])->get();
 
         return response()->json(['success' => true ,'data'=> compact('boatCruise')]);
     }

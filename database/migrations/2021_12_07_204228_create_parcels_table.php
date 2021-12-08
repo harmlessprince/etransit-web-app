@@ -18,6 +18,8 @@ class CreateParcelsTable extends Migration
             $table->unsignedBigInteger('service_id');
             $table->enum('type',['document','parcel']);
             $table->timestamps();
+
+            $table->foreign('service_id')->references('id')->on('services')->onDelete('cascade');
         });
     }
 

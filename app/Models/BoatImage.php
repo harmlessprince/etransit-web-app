@@ -14,4 +14,6 @@ class BoatImage extends Model
     {
         return $this->belongsTo(Boat::class);
     }
+
+
 }

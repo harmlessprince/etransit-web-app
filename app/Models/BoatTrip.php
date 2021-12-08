@@ -29,4 +29,5 @@ class BoatTrip extends Model
     {
         return $this->belongsTo(CruiseDestination::class , 'cruise_destination_id');
     }
+
 }

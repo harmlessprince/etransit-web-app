@@ -61,6 +61,7 @@ class ConfirmCashPaymentForCarHire extends Command
                     $transaction->carhistory->update([
                         'payment_status' => 'Pending',
                         'isConfirmed'   => 'False'
+//                        'available_status' =>
                     ]);
                 }
             }

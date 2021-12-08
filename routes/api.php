@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\BoatCruise;
 use App\Http\Controllers\Api\Booking;
 use App\Http\Controllers\Api\Car;
 use App\Http\Controllers\Api\FlutterwavePayment;
+use App\Http\Controllers\Api\Parcel;
 use App\Http\Controllers\Api\Partner;
 use App\Http\Controllers\Api\PasswordReset;
 use App\Http\Controllers\Api\Payment;
@@ -82,6 +83,11 @@ Route::group(['prefix' => 'v1'], function() {
         //add tour payment options
         Route::post('/tour/{tour_id}/payment-plan/{service_id}',[Tour::class , 'addPayment']);
         Route::post('/tour/cash-payment', [Tour::class , 'addCashPaymentTour'])->name('tour.pay-cash');
+
+        //send parcel
+        Route::get('/parcel' , [Parcel::class , 'fetchParcel']);
+        Route::get('/fetch-cities/{state_id}',[Parcel::class , 'fetchCities']);
+        Route::post('/send-parcel' , [Parcel::class , 'sendParcel']);
 
     });
 

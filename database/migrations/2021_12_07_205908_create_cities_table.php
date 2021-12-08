@@ -19,6 +19,8 @@ class CreateCitiesTable extends Migration
             $table->string('name');
             $table->double('amount');
             $table->timestamps();
+
+            $table->foreign('state_id')->references('id')->on('states')->onDelete('cascade');
         });
     }
 

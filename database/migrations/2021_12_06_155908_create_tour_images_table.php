@@ -19,6 +19,7 @@ class CreateTourImagesTable extends Migration
             $table->string('path');
             $table->foreign('tour_id')->references('id')->on('tours')->onDelete('cascade');
             $table->timestamps();
+
         });
     }
 
