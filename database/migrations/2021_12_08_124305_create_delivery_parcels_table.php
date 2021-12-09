@@ -17,18 +17,24 @@ class CreateDeliveryParcelsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('parcel_id');
-            $table->string('sender_name')->nullable();
-            $table->string('sender_phone_number')->nullable();
-            $table->unsignedBigInteger('city_id')->nullable();
 
-            $table->string('receiver_name')->nullable();
-            $table->string('receiver_phone_number')->nullable();
-            $table->unsignedBigInteger('delivery_city_id')->nullable();
+            $table->string('sender_name');
+            $table->string('sender_phone_number');
+            $table->unsignedBigInteger('state_id');
+            $table->unsignedBigInteger('city_id');
+
+            $table->string('receiver_name');
+            $table->string('receiver_phone_number');
+            $table->unsignedBigInteger('delivery_state_id');
+            $table->unsignedBigInteger('delivery_city_id');
 
             $table->unsignedBigInteger('weight');
             $table->unsignedBigInteger('height');
             $table->unsignedBigInteger('length');
             $table->unsignedBigInteger('width');
+
+            $table->double('amount');
+            $table->unsignedBigInteger('quantity');
             $table->longText('notes')->nullable();
 
             $table->timestamps();
