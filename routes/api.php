@@ -90,6 +90,7 @@ Route::group(['prefix' => 'v1'], function() {
         Route::get('/fetch-cities/{state_id}',[Parcel::class , 'fetchCities']);
         Route::post('/send-parcel' , [Parcel::class , 'sendParcel']);
         Route::post('/parcel/user-info', [Parcel::class , 'storeUserInfo']);
+        Route::post('/parcel-cash-payment' , [Parcel::class , 'addCashPayment']);
 
     });
 
