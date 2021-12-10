@@ -11,6 +11,7 @@ use App\Models\Weight;
 use App\Models\Width;
 use Illuminate\Http\Request;
 use App\Models\Parcel as ParcelPackage;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class Parcel extends Controller
 {
@@ -169,5 +170,34 @@ class Parcel extends Controller
         $width->max_width = $data->max;
         $width->amount     = $data->amount;
         $width->save();
+    }
+
+    public function editParcelCity($city_id)
+    {
+        $city = City::where('id' , $city_id)->with('state')->firstorfail();
+        $states = State::all();
+
+        return view('admin.parcel.edit' , compact('city','states'));
+    }
+
+    public function updateParcelCity(Request $request , $city_id)
+    {
+        request()->validate([
+            'state' => 'required|integer',
+            'city'  => 'required|string',
+            'amount' => 'required'
+        ]);
+
+        $findCity = City::where('id' , $city_id)->firstorfail();
+
+        $findCity->update([
+          'state_id' => $request->state,
+          'name'     => $request->city,
+          'amount' => $request->amount
+        ]);
+
+        Alert::success('Success ', 'Updated successfully');
+
+        return back();
     }
 }

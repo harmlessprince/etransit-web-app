@@ -171,6 +171,10 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::get('/manage/width' , [Parcel::class , 'manageWidth']);
         Route::post('/add/dimension/{slug}' , [Parcel::class , 'storeDimension']);
 
+        //edit city
+        Route::get('/edit-city/{city_id}/parcel' , [Parcel::class , 'editParcelCity']);
+        Route::put('/update-city/{city_id}/parcel' , [Parcel::class , 'updateParcelCity']);
+
 
 
 
