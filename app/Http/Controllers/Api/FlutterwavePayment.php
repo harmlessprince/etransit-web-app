@@ -6,6 +6,7 @@ use App\Billing\BusTicketPayment;
 use App\Billing\CarHire;
 use App\Billing\TourPayment;
 use App\Billing\BoatCruise;
+use App\Billing\Parcel;
 use App\Classes\Reference;
 use App\Http\Controllers\Controller;
 use App\Models\CarHistory;
@@ -64,6 +65,7 @@ class FlutterwavePayment extends Controller
                 'car_history_id' => request()->carhistory_id ?? null,
                 'tour_id'   => request()->tour_id ?? null,
                 'boat_cruise_id' => request()->boat_cruise_id ?? null,
+                'delivery_parcel_id' => request()->delivery_parcel_id ?? null,
 
             ]
         ];
@@ -112,6 +114,9 @@ class FlutterwavePayment extends Controller
                     break;
                 case 8:
                     TourPayment::handleTourPayment($data);
+                    break;
+                case 9:
+                    Parcel::handleParcelPayment($data);
                     break;
                 default:
                     break;

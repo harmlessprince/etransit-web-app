@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Classes\Reference;
 use App\Http\Controllers\Controller;
 use App\Models\City;
 use App\Models\DeliveryParcel;
@@ -13,6 +14,7 @@ use App\Models\Width;
 use Illuminate\Http\Request;
 use App\Models\Parcel as ParcelPackage;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class Parcel extends Controller
 {
@@ -177,8 +179,48 @@ class Parcel extends Controller
         $recordParcelInfo->delivery_city_id        = $request->delivery_city_id;
         $recordParcelInfo->save();
         DB::commit();
-
         return response()->json(['success' => true , 'data' => compact('recordParcelInfo')]);
+    }
+
+
+    public function addCashPayment(Request $request)
+    {
+
+        $findParcel = deliveryParcel::where('id', $request->delivery_parcel_id)->firstorfail();
+        $this->handlePayment($request->amount , $request->service_id , $findParcel);
+        return response()->json(['success' => true , 'message' => 'Success !! cash payment made successfully']);
+
 
     }
+
+    private function handlePayment($amount , $serviceId , $parcel)
+    {
+        DB::beginTransaction();
+        $transactions = new \App\Models\Transaction();
+        $transactions->reference = Reference::generateTrnxRef();
+        $transactions->amount = (double) $amount;
+        $transactions->status = 'Pending';
+        $transactions->description = 'Cash Payment';
+        $transactions->user_id = auth()->user()->id;
+        $transactions->service_id = $serviceId;
+        $transactions->delivery_parcel_id = $parcel->id;
+        $transactions->save();
+
+        $data["email"] =  auth()->user()->email;
+        $data['name']  =  auth()->user()->full_name;
+        $data["title"] = env('APP_NAME').' Boat Cruise Receipt';
+        $data["body"]  = "This is Demo";
+
+        $pdf = PDF::loadView('pdf.car-hire', $data);
+
+        Mail::send('pdf.car-hire', $data, function($message)use($data, $pdf) {
+            $message->to($data["email"])
+                ->subject($data["title"])
+                ->attachData($pdf->output(), "receipt.pdf");
+        });
+
+        DB::commit();
+
+    }
+
 }

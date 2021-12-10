@@ -326,18 +326,7 @@ class BoatCruise extends Controller
 
         DB::commit();
 
-
-
-
-
     }
 
-//    protected function checkAmount($exactAmount , $paidAmount)
-//    {
-//        if((double)  $exactAmount != (double) $paidAmount)
-//        {
-//            toastr()->error('Oops !! something went wrong with your payment');
-//            return back();
-//        }
-//    }
+
 }
