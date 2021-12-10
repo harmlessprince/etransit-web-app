@@ -23,9 +23,9 @@ class BoatCruise extends Controller
         $service = Service::where('id', 7)->firstorfail();
 
         $boatCruise = BoatTrip::with('boat','cruiselocation')->get();
-//        dd($boatCruise->boat->boatimages[0]->path);
 
-//dd( $boatCruise);
+
+
         return view('pages.boat-cruise.list', compact('service','boatCruise'));
     }
 
@@ -85,11 +85,15 @@ class BoatCruise extends Controller
                     ]);
                     $name = $file->getClientOriginalName();
                     $uploadedFileUrl = Cloudinary::upload($file->getRealPath())->getSecurePath();
-                    $boatImage = new BoatImage();
-                    $boatImage->boat_id = $boat->id;
-                    $boatImage->path = $uploadedFileUrl;
-                    $boatImage->save();
+                    array_push($images ,  $uploadedFileUrl);
+
                 }
+                $imagePath = json_encode($images);
+
+                $boat->update([
+                    'paths' => $imagePath,
+                ]);
+
 
             }
         }
@@ -111,9 +115,19 @@ class BoatCruise extends Controller
 
     public function editBoat($boat_id)
     {
-        $boat = Boat::where('id', $boat_id)->with('boatimages')->firstorfail();
+        $boat = Boat::where('id', $boat_id)->firstorfail();
 
-        return view('admin.boat-cruise.edit', compact('boat'));
+        $images = json_decode($boat->paths , true);
+
+        if(!is_array($images))
+        {
+            $images = $boat->paths;
+
+        }else{
+            $images =  json_decode($boat->paths , true);
+        }
+
+        return view('admin.boat-cruise.edit', compact('boat', 'images'));
     }
 
     public function updateBoat(Request $request , $boat_id)
@@ -142,12 +156,15 @@ class BoatCruise extends Controller
                 ]);
                 $name = $file->getClientOriginalName();
                 $uploadedFileUrl = Cloudinary::upload($file->getRealPath())->getSecurePath();
-                $boatImage = BoatImage::where('boat_id',$boat_id)->get();
-                $boatImage[$index]->update([
-                    'boat_id' => $boat_id,
-                    'path'   => $uploadedFileUrl,
-                ]);
+
+                array_push($images , $uploadedFileUrl);
+
             }
+            $boatImages = json_encode($images , true);
+            $boatImage = Boat::where('id',$boat_id)->firstorfail();
+            $boatImage->update([
+                'paths'   => $boatImages,
+            ]);
         }
         DB::commit();
 

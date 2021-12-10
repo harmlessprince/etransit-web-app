@@ -18,8 +18,8 @@ class BoatCruise extends Controller
     {
 
 
-      $boatCruise =  Boat::whereHas('trips')->with(['boatimages', 'trips' => function($query) {
-                                                         $query->with('cruiselocation')->get();}])->get();
+       $boatCruise =  BoatTrip::with(['boat', 'cruiselocation'])->get();
+
 
         return response()->json(['success' => true ,'data'=> compact('boatCruise')]);
     }
@@ -27,11 +27,9 @@ class BoatCruise extends Controller
     public function boatCruiseShow($trip_id)
     {
         $service = Service::where('id', 7)->firstorfail();
-//  
+//
 
-        $boat =  BoatTrip::where('id' , $trip_id)->with(['cruiselocation','boat' => function($query) {
-                                              $query->with('boatimages')->get();
-                                            }])->first();
+        $boat =  BoatTrip::where('id' , $trip_id)->with(['cruiselocation','boat'])->first();
 
         return response()->json(['success' => true ,'data' => compact('service','boat')]);
     }

@@ -180,7 +180,11 @@
                         </div>
 
                     </div>
-                    @foreach($boat->boatimages as $index =>  $img)
+                    @php
+
+                    @endphp
+                    @if(is_array($images))
+                    @foreach($images as $index =>  $img)
                     <div class="file_image_form">
                         <div class="form-group">
                             <label for="images">Add Image {{$index+1}}</label>
@@ -188,14 +192,30 @@
                         </div>
                     </div>
                     @endforeach
+                    @else
+                        <div class="file_image_form">
+                            <div class="form-group">
+                                <label for="images">Add Image</label>
+                                <input   type="file" id="images" class="form-control image_file custom-file-upload" name="images[]" multiple="multiple"  >
+                            </div>
+                        </div>
+                    @endif
 
+                    @if(is_array($images))
                     <div class="col-md-12 mb-2">
                         <div class="images-box">
-                          @foreach($boat->boatimages as $img)
-                           <img src="{{$img->path}}" width="300" height="300"/>
+                          @foreach($images as  $index => $img)
+                           <img src="{{$images[$index]}}" width="300" height="300"/>
                            @endforeach
                         </div>
                     </div>
+                    @else
+                        <div class="col-md-12 mb-2">
+                            <div class="images-box">
+                                    <img src="{{$images}}" width="300" height="300"/>
+                            </div>
+                        </div>
+                    @endif
                     <div class="form-group">
                         <label for="description">Description</label>
                         <textarea class="form-control" name="description" id="description" rows="10" cols="20" required >{{$boat->description}}</textarea>

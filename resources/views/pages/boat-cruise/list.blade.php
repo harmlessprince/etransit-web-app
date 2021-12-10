@@ -103,11 +103,15 @@
                 <input type="text" placeholder="search"  class="search_text"/>
             </div>
             <div class="boat_cruise_list">
+
                @foreach($boatCruise as $i => $boat)
                    <a href="{{url('/boat-cruise/'.$boat->id.'/show')}}">
                     <div class="boat_card">
+                        @php
+                        $image = json_decode($boat->boat->paths);
+                        @endphp
                         <div class="backgrund_img" >
-                            <img src="{{$boat->boat->boatimages[$i]->path}}" />
+                            <img src="{{ $image[$i]}}" />
                             <div class="price_tag">
                                 <h5>{{$boat->cruise_name}}</h5>
                                 <h5>&#x20A6; {{number_format($boat->min_amount)}} - &#x20A6; {{number_format($boat->max_amount)}}</h5>

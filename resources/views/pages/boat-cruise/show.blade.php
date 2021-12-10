@@ -252,9 +252,12 @@
             </div>
             <div class="boat_info_box">
                <div class="carousel-container">
-                   @foreach($boat->boat->boatimages as $image)
+                   @php
+                       $images = json_decode($boat->boat->paths);
+                   @endphp
+                   @foreach($images as $image)
                    <div class="item main">
-                      <img src="{{$image->path}}"  alt="'hero-img" />
+                      <img src="{{$image}}"  alt="'hero-img" />
                    </div>
                    @endforeach
                    <div class="navigation-items">

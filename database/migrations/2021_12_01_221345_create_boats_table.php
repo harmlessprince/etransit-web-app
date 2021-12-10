@@ -19,6 +19,7 @@ class CreateBoatsTable extends Migration
             $table->string('location')->nullable();
             $table->unsignedBigInteger('service_id');
             $table->longText('description');
+            $table->longText('paths')->nullable();
             $table->timestamps();
         });
     }

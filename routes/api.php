@@ -86,6 +86,7 @@ Route::group(['prefix' => 'v1'], function() {
 
         //send parcel
         Route::get('/parcel' , [Parcel::class , 'fetchParcel']);
+        Route::get('fetch-states' , [Parcel::class , 'fetchStates']);
         Route::get('/fetch-cities/{state_id}',[Parcel::class , 'fetchCities']);
         Route::post('/send-parcel' , [Parcel::class , 'sendParcel']);
         Route::post('/parcel/user-info', [Parcel::class , 'storeUserInfo']);

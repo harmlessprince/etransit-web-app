@@ -25,6 +25,12 @@ class Parcel extends Controller
         return response()->json(['success' => true , 'data' => compact('parcels','states')]);
     }
 
+    public function fetchStates()
+    {
+        $states = State::all();
+
+        return response()->json(['success' => true , 'data' => compact('states')]);
+    }
     public function fetchCities($state_id)
     {
         $cities = City::where('state_id' , $state_id)->select('id','name')->get();

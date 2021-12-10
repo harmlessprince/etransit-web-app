@@ -50,7 +50,6 @@ class FlutterwavePayment extends Controller
             ],
             "customizations" => [
                 "title" => $service->name,
-//                "description" => "Purchase of " . request()->service .' '. now()
             ],
             "meta" => [
                 "schedule_id" => request()->schedule_id ?? null,

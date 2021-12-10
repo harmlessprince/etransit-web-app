@@ -15,7 +15,7 @@ use PDF;
 
 class CarHire
 {
-    public static function handleCarHirePayment($data)
+    public static function handleCarHirePayment($data , $car_history_id)
     {
 
         $serviceID     = (int)   $data['data']['meta']['service_id'];
@@ -42,6 +42,7 @@ class CarHire
             $transactions->description = $data['data']['meta']['description'];
             $transactions->user_id = $data['data']['meta']['user_id'];
             $transactions->service_id = $serviceID;
+            $transactions->car_history_id = $car_history_id;
             $transactions->isConfirmed = 'True';
             $transactions->save();
             DB::commit();
@@ -58,6 +59,7 @@ class CarHire
             $transactions->description = $data['data']['meta']['description'];
             $transactions->user_id = $data['data']['meta']['user_id'];
             $transactions->service_id = $serviceID;
+            $transactions->car_history_id = $car_history_id;
             $transactions->isConfirmed = 'True';
             $transactions->save();
 
