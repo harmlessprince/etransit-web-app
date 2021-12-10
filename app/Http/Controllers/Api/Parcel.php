@@ -185,7 +185,7 @@ class Parcel extends Controller
 
     public function addCashPayment(Request $request)
     {
-
+        request()->validate(['service_id' => 'required|integer' , 'amount' => 'required|integer' ,'delivery_parcel_id' => 'required|integer']);
         $findParcel = deliveryParcel::where('id', $request->delivery_parcel_id)->firstorfail();
         $this->handlePayment($request->amount , $request->service_id , $findParcel);
         return response()->json(['success' => true , 'message' => 'Success !! cash payment made successfully']);
