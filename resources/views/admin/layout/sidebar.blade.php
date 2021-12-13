@@ -55,13 +55,13 @@
                             <li><a href="{{url('/admin/manage/width')}}">Manage Width</a></li>
                         </ul>
                     </li>
-                    <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"></i><span>Ferry Management</span></a>
-                        <ul class="nav-submenu menu-content">
-                            <li><a href="{{url('/admin/manage/parcel')}}">Add Ferry</a></li>
-                            <li><a href="{{url('/admin/parcel/state/index')}}">Manage types</a></li>
-                            <li><a href="{{url('/admin/manage/city')}}">Manage Location</a></li>
-                        </ul>
-                    </li>
+{{--                    <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"></i><span>Ferry Management</span></a>--}}
+{{--                        <ul class="nav-submenu menu-content">--}}
+{{--                            <li><a href="{{url('/admin/manage/parcel')}}">Add Ferry</a></li>--}}
+{{--                            <li><a href="{{url('/admin/parcel/state/index')}}">Manage types</a></li>--}}
+{{--                            <li><a href="{{url('/admin/manage/city')}}">Manage Location</a></li>--}}
+{{--                        </ul>--}}
+{{--                    </li>--}}
 
                     <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"></i><span>Transactions</span></a>
                         <ul class="nav-submenu menu-content">
