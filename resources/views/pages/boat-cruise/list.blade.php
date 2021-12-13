@@ -104,39 +104,41 @@
             </div>
             <div class="boat_cruise_list">
 
-               @foreach($boatCruise as $i => $boat)
-                   <a href="{{url('/boat-cruise/'.$boat->id.'/show')}}">
-                    <div class="boat_card">
-                        @php
-                        $image = json_decode($boat->boat->paths);
-                        @endphp
-                        <div class="backgrund_img" >
-                            <img src="{{ $image[$i]}}" />
-                            <div class="price_tag">
-                                <h5>{{$boat->cruise_name}}</h5>
-                                <h5>&#x20A6; {{number_format($boat->min_amount)}} - &#x20A6; {{number_format($boat->max_amount)}}</h5>
+                @if(!is_null($boatCruise))
+                   @foreach($boatCruise as $i => $boat)
+                       <a href="{{url('/boat-cruise/'.$boat->id.'/show')}}">
+                        <div class="boat_card">
+                            @php
+                            $image = json_decode($boat->boat->paths);
+                            @endphp
+                            <div class="backgrund_img" >
+                                <img src="{{ $image[$i]}}" />
+                                <div class="price_tag">
+                                    <h5>{{$boat->cruise_name}}</h5>
+                                    <h5>&#x20A6; {{number_format($boat->min_amount)}} - &#x20A6; {{number_format($boat->max_amount)}}</h5>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="ratings_box" >
-                            <h5>{{$boat->cruise_name}}</h5>
-                            <small>
-                                {{ \Illuminate\Support\Str::limit($boat->description, $limit = 150, $end = '...') }}
-                            </small>
-                            <div class="ratings_location">
-                                <div>
-                                    <img src="{{asset('/images/icons/ratings.png')}}" alt="ratings-img"/>
-                                    <small>4.7/5 Ratings</small>
-                                </div>
-                                <div>
-                                    <img src="{{asset('/images/icons/location.png')}}" alt="location-img"/>
-                                    <small>{{$boat->cruiselocation->destination}}</small>
+                            <div class="ratings_box" >
+                                <h5>{{$boat->cruise_name}}</h5>
+                                <small>
+                                    {{ \Illuminate\Support\Str::limit($boat->description, $limit = 150, $end = '...') }}
+                                </small>
+                                <div class="ratings_location">
+                                    <div>
+                                        <img src="{{asset('/images/icons/ratings.png')}}" alt="ratings-img"/>
+                                        <small>4.7/5 Ratings</small>
+                                    </div>
+                                    <div>
+                                        <img src="{{asset('/images/icons/location.png')}}" alt="location-img"/>
+                                        <small>{{$boat->cruiselocation->destination}}</small>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                   </a>
-               @endforeach
+                       </a>
+                   @endforeach
+               @endif
             </div>
         </div>
     </div>

@@ -76,6 +76,14 @@ class BoatCruise extends Controller
 
             $images = array();
 
+            if(count($request->file('images')) < 2)
+            {
+                Alert::error('Warning ', 'Please Upload at least two images');
+
+                return back();
+            }
+
+
             if($files = $request->file('images')){
 
                 foreach($files as  $file){
@@ -147,7 +155,17 @@ class BoatCruise extends Controller
 
         $images = array();
 
+
+
+
         if($files = $request->file('images')){
+            
+            if(count($request->file('images')) < 2)
+            {
+                Alert::error('Warning ', 'Please Upload at least two images');
+
+                return back();
+            }
 
             foreach($files as $index =>  $file){
                 $request->validate([

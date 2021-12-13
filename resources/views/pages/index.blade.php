@@ -155,7 +155,13 @@
 
 
 }
-
+.coming_soon{
+    display:flex;
+    justify-content: center;
+}
+    .coming_soon h3{
+        color: red;
+    }
 </style>
 @section('content')
 
@@ -242,9 +248,22 @@
                                 </div>
                             </div>
                         </div>
-                        <div role="tabpanel" class="tab-pane" id="profile">... hxhxhxhhxhx</div>
-                        <div role="tabpanel" class="tab-pane" id="messages">..aaaaaaa.</div>
-                        <div role="tabpanel" class="tab-pane" id="settings">...aaanananana</div>
+                        <div role="tabpanel" class="tab-pane" id="profile">
+                            <div class="coming_soon">
+                                <div><h3>Coming Soon</h3></div>
+                            </div>
+
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="messages">
+                            <div class="coming_soon">
+                                <div><h3>Coming Soon</h3></div>
+                            </div>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="settings">
+                            <div class="coming_soon">
+                                <div><h3>Coming Soon</h3></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
