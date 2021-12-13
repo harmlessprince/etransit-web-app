@@ -122,178 +122,178 @@
                     </div>
                 </div>
             </div>
-            <div class="col-xl-4 xl-50 box-col-12">
-                <div class="card">
-                    <div class="card-header card-no-border">
-                        <h5>New Product</h5>
-                        <div class="card-header-right">
-                            <ul class="list-unstyled card-option">
-                                <li><i class="fa fa-spin fa-cog"></i></li>
-                                <li><i class="view-html fa fa-code"></i></li>
-                                <li><i class="icofont icofont-maximize full-card"></i></li>
-                                <li><i class="icofont icofont-minus minimize-card"></i></li>
-                                <li><i class="icofont icofont-refresh reload-card"></i></li>
-                                <li><i class="icofont icofont-error close-card"></i></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="card-body pt-0">
-                        <div class="our-product">
-                            <div class="table-responsive">
-                                <table class="table table-bordernone">
-                                    <tbody class="f-w-500">
-                                    <tr>
-                                        <td>
-                                            <div class="media"><img class="img-fluid m-r-15 rounded-circle" src="../assets/images/dashboard-2/product-1.png" alt="">
-                                                <div class="media-body"><span>Hike Shoes</span>
-                                                    <p class="font-roboto">100 item</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <p>coupon code</p><span>PIX001</span>
-                                        </td>
-                                        <td>
-                                            <p>-51%</p><span>$99.00</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="media"><img class="img-fluid m-r-15 rounded-circle" src="../assets/images/dashboard-2/product-3.png" alt="">
-                                                <div class="media-body"><span>Tree Pot</span>
-                                                    <p class="font-roboto">105 item</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <p>coupon code</p><span>PIX002</span>
-                                        </td>
-                                        <td>
-                                            <p>-78%</p><span>$66.00</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="media"><img class="img-fluid m-r-15 rounded-circle" src="../assets/images/dashboard-2/product-4.png" alt="">
-                                                <div class="media-body"><span>Bag</span>
-                                                    <p class="font-roboto">604 item</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <p>coupon code</p><span>PIX003</span>
-                                        </td>
-                                        <td>
-                                            <p>-04%</p><span>$116.00</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="media"><img class="img-fluid m-r-15 rounded-circle" src="../assets/images/dashboard-2/product-5.png" alt="">
-                                                <div class="media-body"><span>Wtach</span>
-                                                    <p class="font-roboto">541 item</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <p>coupon code</p><span>PIX004</span>
-                                        </td>
-                                        <td>
-                                            <p>-60%</p><span>$99.00</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="media"><img class="img-fluid m-r-15 rounded-circle" src="../assets/images/dashboard-2/product-6.png" alt="">
-                                                <div class="media-body"><span>T-shirt</span>
-                                                    <p class="font-roboto">999 item</p>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <p>coupon code</p><span>PIX005</span>
-                                        </td>
-                                        <td>
-                                            <p>-50%</p><span>$58.00</span>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="code-box-copy">
-                            <button class="code-box-copy__btn btn-clipboard" data-clipboard-target="#example-head3" title="Copy"><i class="icofont icofont-copy-alt"></i></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-4 xl-50 box-col-12">
-                <div class="card">
-                    <div class="card-header card-no-border">
-                        <h5>Location</h5>
-                        <div class="card-header-right">
+{{--            <div class="col-xl-4 xl-50 box-col-12">--}}
+{{--                <div class="card">--}}
+{{--                    <div class="card-header card-no-border">--}}
+{{--                        <h5>New Product</h5>--}}
+{{--                        <div class="card-header-right">--}}
+{{--                            <ul class="list-unstyled card-option">--}}
+{{--                                <li><i class="fa fa-spin fa-cog"></i></li>--}}
+{{--                                <li><i class="view-html fa fa-code"></i></li>--}}
+{{--                                <li><i class="icofont icofont-maximize full-card"></i></li>--}}
+{{--                                <li><i class="icofont icofont-minus minimize-card"></i></li>--}}
+{{--                                <li><i class="icofont icofont-refresh reload-card"></i></li>--}}
+{{--                                <li><i class="icofont icofont-error close-card"></i></li>--}}
+{{--                            </ul>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                    <div class="card-body pt-0">--}}
+{{--                        <div class="our-product">--}}
+{{--                            <div class="table-responsive">--}}
+{{--                                <table class="table table-bordernone">--}}
+{{--                                    <tbody class="f-w-500">--}}
+{{--                                    <tr>--}}
+{{--                                        <td>--}}
+{{--                                            <div class="media"><img class="img-fluid m-r-15 rounded-circle" src="../assets/images/dashboard-2/product-1.png" alt="">--}}
+{{--                                                <div class="media-body"><span>Hike Shoes</span>--}}
+{{--                                                    <p class="font-roboto">100 item</p>--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
+{{--                                        </td>--}}
+{{--                                        <td>--}}
+{{--                                            <p>coupon code</p><span>PIX001</span>--}}
+{{--                                        </td>--}}
+{{--                                        <td>--}}
+{{--                                            <p>-51%</p><span>$99.00</span>--}}
+{{--                                        </td>--}}
+{{--                                    </tr>--}}
+{{--                                    <tr>--}}
+{{--                                        <td>--}}
+{{--                                            <div class="media"><img class="img-fluid m-r-15 rounded-circle" src="../assets/images/dashboard-2/product-3.png" alt="">--}}
+{{--                                                <div class="media-body"><span>Tree Pot</span>--}}
+{{--                                                    <p class="font-roboto">105 item</p>--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
+{{--                                        </td>--}}
+{{--                                        <td>--}}
+{{--                                            <p>coupon code</p><span>PIX002</span>--}}
+{{--                                        </td>--}}
+{{--                                        <td>--}}
+{{--                                            <p>-78%</p><span>$66.00</span>--}}
+{{--                                        </td>--}}
+{{--                                    </tr>--}}
+{{--                                    <tr>--}}
+{{--                                        <td>--}}
+{{--                                            <div class="media"><img class="img-fluid m-r-15 rounded-circle" src="../assets/images/dashboard-2/product-4.png" alt="">--}}
+{{--                                                <div class="media-body"><span>Bag</span>--}}
+{{--                                                    <p class="font-roboto">604 item</p>--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
+{{--                                        </td>--}}
+{{--                                        <td>--}}
+{{--                                            <p>coupon code</p><span>PIX003</span>--}}
+{{--                                        </td>--}}
+{{--                                        <td>--}}
+{{--                                            <p>-04%</p><span>$116.00</span>--}}
+{{--                                        </td>--}}
+{{--                                    </tr>--}}
+{{--                                    <tr>--}}
+{{--                                        <td>--}}
+{{--                                            <div class="media"><img class="img-fluid m-r-15 rounded-circle" src="../assets/images/dashboard-2/product-5.png" alt="">--}}
+{{--                                                <div class="media-body"><span>Wtach</span>--}}
+{{--                                                    <p class="font-roboto">541 item</p>--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
+{{--                                        </td>--}}
+{{--                                        <td>--}}
+{{--                                            <p>coupon code</p><span>PIX004</span>--}}
+{{--                                        </td>--}}
+{{--                                        <td>--}}
+{{--                                            <p>-60%</p><span>$99.00</span>--}}
+{{--                                        </td>--}}
+{{--                                    </tr>--}}
+{{--                                    <tr>--}}
+{{--                                        <td>--}}
+{{--                                            <div class="media"><img class="img-fluid m-r-15 rounded-circle" src="../assets/images/dashboard-2/product-6.png" alt="">--}}
+{{--                                                <div class="media-body"><span>T-shirt</span>--}}
+{{--                                                    <p class="font-roboto">999 item</p>--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
+{{--                                        </td>--}}
+{{--                                        <td>--}}
+{{--                                            <p>coupon code</p><span>PIX005</span>--}}
+{{--                                        </td>--}}
+{{--                                        <td>--}}
+{{--                                            <p>-50%</p><span>$58.00</span>--}}
+{{--                                        </td>--}}
+{{--                                    </tr>--}}
+{{--                                    </tbody>--}}
+{{--                                </table>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                        <div class="code-box-copy">--}}
+{{--                            <button class="code-box-copy__btn btn-clipboard" data-clipboard-target="#example-head3" title="Copy"><i class="icofont icofont-copy-alt"></i></button>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--            <div class="col-xl-4 xl-50 box-col-12">--}}
+{{--                <div class="card">--}}
+{{--                    <div class="card-header card-no-border">--}}
+{{--                        <h5>Location</h5>--}}
+{{--                        <div class="card-header-right">--}}
 
-                        </div>
-                    </div>
-                    <div class="card-body pt-0">
-                        <div class="dash-map">
-                            <div id="map"></div>
-                        </div>
-                        <div class="code-box-copy">
-                            <button class="code-box-copy__btn btn-clipboard" data-clipboard-target="#example-head4" title="Copy"><i class="icofont icofont-copy-alt"></i></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-4 xl-50 box-col-12">
-                <div class="card">
-                    <div class="card-header card-no-border">
-                        <h5>News & Updates</h5>
-                        <div class="card-header-right">
-                            <ul class="list-unstyled card-option">
-                                <li><i class="fa fa-spin fa-cog"></i></li>
-                                <li><i class="view-html fa fa-code"></i></li>
-                                <li><i class="icofont icofont-maximize full-card"></i></li>
-                                <li><i class="icofont icofont-minus minimize-card"></i></li>
-                                <li><i class="icofont icofont-refresh reload-card"></i></li>
-                                <li><i class="icofont icofont-error close-card"></i></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="card-body new-update pt-0">
-                        <div class="activity-timeline">
-                            <div class="media">
-                                <div class="activity-line"></div>
-                                <div class="activity-dot-secondary"></div>
-                                <div class="media-body"><span>Update Product</span>
-                                    <p class="font-roboto">Quisque a consequat ante Sit amet magna at volutapt.</p>
-                                </div>
-                            </div>
-                            <div class="media">
-                                <div class="activity-dot-primary"></div>
-                                <div class="media-body"><span>James liked Nike Shoes</span>
-                                    <p class="font-roboto">Aenean sit amet magna vel magna fringilla ferme.</p>
-                                </div>
-                            </div>
-                            <div class="media">
-                                <div class="activity-dot-secondary"></div>
-                                <div class="media-body"><span>john just buy your product<i class="fa fa-circle circle-dot-secondary pull-right"></i></span>
-                                    <p class="font-roboto">Vestibulum nec mi suscipit, dapibus purus.....</p>
-                                </div>
-                            </div>
-                            <div class="media">
-                                <div class="activity-dot-primary"></div>
-                                <div class="media-body"><span>Jihan Doe just save your product<i class="fa fa-circle circle-dot-primary pull-right"></i></span>
-                                    <p class="font-roboto">Curabitur egestas consequat lorem.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="code-box-copy">
-                            <button class="code-box-copy__btn btn-clipboard" data-clipboard-target="#example-head5" title="Copy"><i class="icofont icofont-copy-alt"></i></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                    <div class="card-body pt-0">--}}
+{{--                        <div class="dash-map">--}}
+{{--                            <div id="map"></div>--}}
+{{--                        </div>--}}
+{{--                        <div class="code-box-copy">--}}
+{{--                            <button class="code-box-copy__btn btn-clipboard" data-clipboard-target="#example-head4" title="Copy"><i class="icofont icofont-copy-alt"></i></button>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--            <div class="col-xl-4 xl-50 box-col-12">--}}
+{{--                <div class="card">--}}
+{{--                    <div class="card-header card-no-border">--}}
+{{--                        <h5>News & Updates</h5>--}}
+{{--                        <div class="card-header-right">--}}
+{{--                            <ul class="list-unstyled card-option">--}}
+{{--                                <li><i class="fa fa-spin fa-cog"></i></li>--}}
+{{--                                <li><i class="view-html fa fa-code"></i></li>--}}
+{{--                                <li><i class="icofont icofont-maximize full-card"></i></li>--}}
+{{--                                <li><i class="icofont icofont-minus minimize-card"></i></li>--}}
+{{--                                <li><i class="icofont icofont-refresh reload-card"></i></li>--}}
+{{--                                <li><i class="icofont icofont-error close-card"></i></li>--}}
+{{--                            </ul>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                    <div class="card-body new-update pt-0">--}}
+{{--                        <div class="activity-timeline">--}}
+{{--                            <div class="media">--}}
+{{--                                <div class="activity-line"></div>--}}
+{{--                                <div class="activity-dot-secondary"></div>--}}
+{{--                                <div class="media-body"><span>Update Product</span>--}}
+{{--                                    <p class="font-roboto">Quisque a consequat ante Sit amet magna at volutapt.</p>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                            <div class="media">--}}
+{{--                                <div class="activity-dot-primary"></div>--}}
+{{--                                <div class="media-body"><span>James liked Nike Shoes</span>--}}
+{{--                                    <p class="font-roboto">Aenean sit amet magna vel magna fringilla ferme.</p>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                            <div class="media">--}}
+{{--                                <div class="activity-dot-secondary"></div>--}}
+{{--                                <div class="media-body"><span>john just buy your product<i class="fa fa-circle circle-dot-secondary pull-right"></i></span>--}}
+{{--                                    <p class="font-roboto">Vestibulum nec mi suscipit, dapibus purus.....</p>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                            <div class="media">--}}
+{{--                                <div class="activity-dot-primary"></div>--}}
+{{--                                <div class="media-body"><span>Jihan Doe just save your product<i class="fa fa-circle circle-dot-primary pull-right"></i></span>--}}
+{{--                                    <p class="font-roboto">Curabitur egestas consequat lorem.</p>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                        <div class="code-box-copy">--}}
+{{--                            <button class="code-box-copy__btn btn-clipboard" data-clipboard-target="#example-head5" title="Copy"><i class="icofont icofont-copy-alt"></i></button>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
 
         </div>
     </div>
