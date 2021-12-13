@@ -97,7 +97,7 @@
             </div>
             <div class="boat_list">
                 <div>
-                    <h3>Available Cruise</h3>
+                    <h3>Available Tours</h3>
                 </div>
                 <div>
                     <input type="text" placeholder="search"  class="search_text"/>
@@ -107,7 +107,7 @@
                         <a href="{{url('/tour-packages/'.$tour->id.'/show')}}">
                         <div class="boat_card">
                             <div class="backgrund_img" >
-                                <img src="{{$tour->tourimages[$index]->path}}" />
+                                <img src="{{$tour->tourimages[0]->path}}" />
                                 <div class="price_tag">
                                     <h5>{{$tour->name}}</h5>
                                     <h5> &#x20A6; {{number_format($tour->amount_regular)}}  -  &#x20A6; {{number_format($tour->amount_standard)}}</h5>
@@ -134,6 +134,7 @@
                         </a>
                     @endforeach
                 </div>
+
             </div>
         </div>
     </div>
