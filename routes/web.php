@@ -6,6 +6,7 @@ use App\Http\Controllers\Booking;
 use App\Http\Controllers\Car;
 use App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Eticket\AuthLogin;
+use App\Http\Controllers\Ferry;
 use App\Http\Controllers\Login;
 use App\Http\Controllers\Page;
 use App\Http\Controllers\Parcel;
@@ -174,6 +175,9 @@ Route::prefix('admin')->name('admin.')->group(function(){
         //edit city
         Route::get('/edit-city/{city_id}/parcel' , [Parcel::class , 'editParcelCity']);
         Route::put('/update-city/{city_id}/parcel' , [Parcel::class , 'updateParcelCity']);
+
+        //ferry management
+        Route::get('/manage/ferry',[Ferry::class , 'index']);
 
 
 
