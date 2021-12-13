@@ -178,6 +178,7 @@ Route::prefix('admin')->name('admin.')->group(function(){
 
         //ferry management
         Route::get('/manage/ferry',[Ferry::class , 'index']);
+        Route::get('/add/ferry',[Ferry::class , 'create']);
 
 
 
