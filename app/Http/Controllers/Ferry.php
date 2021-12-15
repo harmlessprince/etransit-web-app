@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\FerryImage;
 use App\Models\FerryLocation;
 use App\Models\FerrySeat;
+use App\Models\FerrySeatTracker;
 use App\Models\FerryTrip;
 use App\Models\FerryType;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
@@ -151,7 +152,11 @@ class Ferry extends Controller
 
     public function scheduleEvent(Request $request)
     {
+
+       DB::beginTransaction();
+
        $ferry = FerryBoat::where('id' , $request->ferryId)->with('ferrytype')->firstorfail();
+
        $trips = new FerryTrip();
        $trips->ferry_id = $request->ferryId;
        $trips->ferry_pick_up_id = $request->pickUp;
@@ -165,6 +170,20 @@ class Ferry extends Controller
        $trips->number_of_passengers = $ferry->occupants;
        $trips->ferry_type_id = $ferry->ferrytype->id;
        $trips->save();
+
+       $fetchSeats = FerrySeat::where('ferry_id' , $request->ferryId)->select('id')->get();
+
+
+        foreach($fetchSeats as $seat)
+       {
+            $seatTracker = new FerrySeatTracker();
+            $seatTracker->ferry_id = $request->ferryId;
+            $seatTracker->ferry_seat_id = $seat->id;
+            $seatTracker->ferry_trip_id = $trips->id;
+            $seatTracker->save();
+       }
+
+       DB::commit();
 
        return response()->json(['success' => true , 'message' => 'Data saved successfully']);
 

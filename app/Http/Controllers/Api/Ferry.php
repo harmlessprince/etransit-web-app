@@ -65,21 +65,23 @@ class Ferry extends Controller
     }
 
 
-    public function selectFerrySeat($ferry_id)
+    public function selectFerrySeat($ferry_trip_id , $tripType)
     {
 
-        $seats = \App\Models\FerrySeat::where('id' , $ferry_id)->get();
+        $seats = \App\Models\FerrySeatTracker::where('ferry_trip_id' , $ferry_trip_id)->with('ferryseat')->get();
 
-        return response()->json(['success' => true  , 'data' => compact('seats')]);
+        return response()->json(['success' => true  , 'data' => compact('seats','tripType')]);
     }
 
     public function FerrySelectorTracker(Request $request)
     {
         $data = request()->validate([
-            'seat_id' => 'required'
+            'seat_id' => 'required|integer',
+            'tripType'=> 'required|integer'
         ]);
 
-        $seat = \App\Models\FerrySeat::where('id' ,$data['seat_id'])->first();
+        $seat = \App\Models\FerrySeatTracker::where('id' ,$data['seat_id'])->first();
+        $tripType = $request->tripType;
 
         if($seat->booked_status != 2)
         {
@@ -90,7 +92,7 @@ class Ferry extends Controller
             return response()->json(['success' => true , 'message' => 'Seat Selected successfully']);
         }
 
-        return response()->json(['success' => false , 'message' => 'Seat has already been booked']);
+        return response()->json(['success' => false , 'message' => 'Seat has already been booked' , 'data' => compact('tripType')]);
     }
 
     public function deselectFerrySeat(Request $request)
@@ -99,7 +101,7 @@ class Ferry extends Controller
             'seat_id' => 'required'
         ]);
 
-        $seat = \App\Models\FerrySeat::where('id' ,$data['seat_id'])->where('user_id',auth()->user()->id)->first();
+        $seat = \App\Models\FerrySeatTracker::where('id' ,$data['seat_id'])->where('user_id',auth()->user()->id)->first();
 
         if(is_null($seat))
         {
@@ -118,12 +120,13 @@ class Ferry extends Controller
     }
 
 
-    public  function bookTripForPassenger(Request $request , $schedule_id)
+    public  function bookTripForPassenger(Request $request , $seat_tracker_id)
     {
         request()->validate([
             'full_name' => 'required|array',
             'gender' => 'required|array',
-            'passenger_option' => 'required|array'
+            'passenger_option' => 'required|array',
+            'tripType' => 'required|integer'
         ]);
 
         $passengerArray = [];
@@ -141,9 +144,9 @@ class Ferry extends Controller
         $passengerOptionCount = count($passenger_options);
         $passengerCount = count($passengerArray);
         //find if the seats selected matches the number of passengers listed
-        $selectedSeat = \App\Models\SeatTracker::where('schedule_id',$schedule_id)
-            ->where('user_id',auth()->user()->id)
-            ->where('booked_status', 1)->get();
+        $selectedSeat = \App\Models\FerrySeatTracker::where('id',$seat_tracker_id)
+                                                ->where('user_id',auth()->user()->id)
+                                                ->where('booked_status', 1)->get();
 
         if(!$selectedSeat)
         {
@@ -151,7 +154,7 @@ class Ferry extends Controller
         }
 
 
-        $fetchScheduleDetails = \App\Models\Schedule::where('id',$schedule_id)->with('service','bus','destination','pickup','terminal')->first();
+        $fetchScheduleDetails = \App\Models\FerryTrip::where('id',$seat_tracker_id)->first();
 
         if($passengerCount != count($selectedSeat))
         {
@@ -200,18 +203,18 @@ class Ferry extends Controller
 
         for($i = 0 ; $i < $passengerOptionCount ; $i++)
         {
-            $createPassenger                        = new \App\Models\Passenger();
+            $createPassenger                        = new \App\Models\FerryPassenger();
             $createPassenger->full_name             = $request->full_name[$i];
             $createPassenger->gender                = $request->gender[$i];
             $createPassenger->passenger_age_range   = $request->passenger_option[$i];
-            $createPassenger->schedule_id           = $schedule_id;
+            $createPassenger->ferry_trip_id         = $seat_tracker_id;
             $createPassenger->user_id               = auth()->user()->id;
-            $createPassenger->seat_tracker_id       = $selectedSeat[$i]->id;
+            $createPassenger->ferry_seat_tracker_id = $selectedSeat[$i]->id;
             $createPassenger->save();
         }
 
 
-        $totalFare = (double)  $fetchScheduleDetails->fare_adult * (int) $adultCount +  (double) $fetchScheduleDetails->fare_children * (int) $childrenCount;
+        $totalFare = ((double)  $fetchScheduleDetails->fare_adult * (int) $adultCount +  (double) $fetchScheduleDetails->fare_children * (int) $childrenCount ) * (int) $request->tripType;
 
         return response()->json(['success' => true ,
             compact('childrenCount','fetchScheduleDetails','adultCount',
