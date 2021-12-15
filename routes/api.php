@@ -99,6 +99,7 @@ Route::group(['prefix' => 'v1'], function() {
         Route::get('/ferry-seat/{ferry_trip_id}/{tripType}' , [Ferry::class , 'selectFerrySeat']);
         Route::get('/select/ferry-seat', [Ferry::class , 'FerrySelectorTracker']);
         Route::post('/de-select/ferry-seat' , [Ferry::class , 'deselectFerrySeat']);
+        Route::post('/book/ferry-trip/{seat_tracker_id}' , [Ferry::class ,'bookTripForFerryPassenger']);
 
     });
 

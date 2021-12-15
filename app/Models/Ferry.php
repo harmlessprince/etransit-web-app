@@ -13,4 +13,9 @@ class Ferry extends Model
     {
         return $this->belongsTo(FerryType::class ,'ferry_type_id');
     }
+
+    public function trips()
+    {
+        return $this->hasMany(FerryTrip::class);
+    }
 }

@@ -45,7 +45,7 @@ class Ferry extends Controller
                     ->where('ferry_destination_id',$data['destination_to'])
                     ->where('ferry_type_id',$data['ferry_type_id'])
                     ->where('number_of_passengers' , '>=', $data['number_of_passengers'])
-                    ->with('ferry','destination','pickup','service')->get();
+                    ->with('ferry','destination','pickup')->get();
 
          $tripType = $request->trip_type;
 
@@ -120,7 +120,7 @@ class Ferry extends Controller
     }
 
 
-    public  function bookTripForPassenger(Request $request , $seat_tracker_id)
+    public  function bookTripForFerryPassenger(Request $request , $seat_tracker_id)
     {
         request()->validate([
             'full_name' => 'required|array',
