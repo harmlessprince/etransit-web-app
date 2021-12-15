@@ -24,8 +24,8 @@ class CreateFerryPassengersTable extends Migration
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('ferry_trip_id')->references('id')->on('ferry_trips')->onDelete('cascade');
-            $table->foreign('ferry_seat_tracker_id')->references('id')->on('ferry_seat_trackers')->onDelete('cascade');
+//            $table->foreign('ferry_trip_id')->references('id')->on('ferry_trips')->onDelete('cascade');
+//            $table->foreign('ferry_seat_tracker_id')->references('id')->on('ferry_seat_trackers')->onDelete('cascade');
             $table->timestamps();
         });
     }
