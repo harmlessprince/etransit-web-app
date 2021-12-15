@@ -151,7 +151,7 @@ class Ferry extends Controller
 
     public function scheduleEvent(Request $request)
     {
-        $ferry = FerryBoat::where('id' , $request->ferryId)->firstorfail();
+       $ferry = FerryBoat::where('id' , $request->ferryId)->with('ferrytype')->firstorfail();
        $trips = new FerryTrip();
        $trips->ferry_id = $request->ferryId;
        $trips->ferry_pick_up_id = $request->pickUp;

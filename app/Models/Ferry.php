@@ -11,6 +11,6 @@ class Ferry extends Model
 
     public function ferrytype()
     {
-        return $this->belongsTo(FerryType::class);
+        return $this->belongsTo(FerryType::class ,'ferry_type_id');
     }
 }
