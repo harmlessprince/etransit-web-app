@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Ferry extends Model
+class FerryType extends Model
 {
     use HasFactory;
 
-    public function ferrytype()
+    public function ferries()
     {
-        return $this->belongsTo(FerryType::class);
+        return $this->hasMany(Ferry::class);
     }
 }

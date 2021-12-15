@@ -97,6 +97,12 @@
         cursor: pointer;
         background: #ccc !important;
     }
+    .coach-box{
+        display:flex;
+    }
+    .coach-btn{
+        margin-top:35px;
+    }
 
 </style>
 @section('content')
@@ -136,7 +142,7 @@
         <div class="card">
 
             <div class="card-body">
-                <form method="post" action="{{url('/admin/store/boat')}}" enctype="multipart/form-data">
+                <form method="post" action="{{url('/admin/store/ferry')}}" enctype="multipart/form-data">
                     @csrf
                     <div class="car-box col-md-12">
                         <div class="form-group">
@@ -144,8 +150,43 @@
                             <input type="text" name="ferry_name" id="ferry_name" class="form-control" value="{{ old('ferry_name') }}" required />
                             <input type="hidden" name="service_id" value="{{$service->id}}" />
                         </div>
-
                     </div>
+                    <div class="car-box col-md-12">
+                        <div class="form-group">
+                            <label for="ferry_type">Ferry Type</label>
+                            <select class="form-control" name="ferry_type" id="ferry_type">
+                                <option> Please Select Ferry Type</option>
+                                @foreach($ferryTypes as $type)
+                                <option value="{{$type->id}}">{{$type->name}}</option>
+                                @endforeach
+
+                            </select>
+                        </div>
+                    </div>
+                    <div class="car-box col-md-12">
+                        <div class="form-group">
+                            <label for="seats">Number Of Seats</label>
+                            <input type="number" name="seats" id="seats" class="form-control" value="{{ old('seats') }}" required />
+                        </div>
+                    </div>
+                    <div class="col-md-12 coach-box">
+                        <div class="car-box col-md-4">
+                            <div class="form-group">
+                                <label for="coach_type">Coach Type</label>
+                                <input type="text" name="coach_type[]" id="coach_type" class="form-control" value="{{ old('coach_type') }}" placeholder="e.g A" required />
+                            </div>
+                        </div>
+                        <div class=" car-box col-md-4">
+                            <div class="form-group">
+                                <label for="coach_seats">Number of Seats</label>
+                                <input type="number" name="coach_seats[]" id="coach_seats[]" class="form-control" placeholder="e.g 8" value="{{ old('coach_seat') }}" required />
+                            </div>
+                        </div>
+                        <div class="col-md-4 coach-btn">
+                            <button class="btn btn-success" id="coach">Add More Coach</button>
+                        </div>
+                    </div>
+                    <div class="add_coach"></div>
                     <div class="file_image_form">
                         <div class="form-group">
                             <label for="images">Add Images</label>
@@ -186,6 +227,32 @@
                         </div>
                     </div>`);
         });
+        $('#coach').click(function(e){
+            e.preventDefault();
+            $('.add_coach').append(` <div class="col-md-12 coach-box" id="coachForm">
+                        <div class="car-box col-md-4">
+                            <div class="form-group">
+                                <label for="coach_type">Coach Type</label>
+                                <input type="text" name="coach_type[]" id="coach_type" class="form-control" value="{{ old('coach_type') }}" required />
+                            </div>
+                        </div>
+                        <div class=" car-box col-md-4">
+                            <div class="form-group">
+                                <label for="coach_seats">Number of Seats</label>
+                                <input type="number" name="coach_seats[]" id="coach_seats" class="form-control" value="{{ old('coach_seats') }}" required />
+                            </div>
+                        </div>
+                        <div class="col-md-4 coach-btn">
+                            <button class="btn btn-danger" id="coachRemove">Remove Coach</button>
+                        </div>
+                    </div>`);
+        });
+
+
+        $(document).on('click', '#coachRemove', function () {
+            $(this).closest('#coachForm').remove();
+        });
+
         $(function() {
             var previewImages = function(input, imgPreviewPlaceholder) {
                 if (input.files) {

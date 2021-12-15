@@ -117,7 +117,7 @@
                     <h3>{{env('APP_NAME')}}</h3>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{url('/admin/manage/vehicle')}}"><i data-feather="home"></i></a></li>
-                        <li class="breadcrumb-item">Add Car Types</li>
+                        <li class="breadcrumb-item">Add Ferry Types</li>
                     </ol>
                 </div>
             </div>
@@ -130,26 +130,26 @@
 
             </div>
             <div>
-                <button class="btn s add-terminal-button btn-sm"  data-toggle="modal" data-target="#vehicleModal">Add Car Type</button>
+                <button class="btn s add-terminal-button btn-sm"  data-toggle="modal" data-target="#vehicleModal">Add Ferry Type</button>
             </div>
         </div>
         <div class="card">
             <div class="card-body">
                 <div >
-                    @if(count($carsTypes) > 0)
+                    @if(count($ferryTypes) > 0)
                         <table class="table table-striped">
                             <thead>
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Car Type</th>
+                                <th scope="col">Ferry Type</th>
                                 <th scope="col">Action</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($carsTypes as $index =>  $carType)
+                            @foreach($ferryTypes as $index =>  $Type)
                                 <tr>
                                     <th scope="row">{{$index+1}}</th>
-                                    <td>{{$carType->name}}</td>
+                                    <td>{{$Type->name}}</td>
                                     <td>Edit Delete</td>
                                 </tr>
                             @endforeach
@@ -178,7 +178,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h2 class="modal-title" id="exampleModalLabel" >Add Car Type</h2>
+                    <h2 class="modal-title" id="exampleModalLabel" >Add Ferry Type</h2>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -187,13 +187,13 @@
                     <div class="modal-body">
                         <br>
                         <div class="form-group">
-                            <label for="car_type">Car Type</label>
-                            <input type="text" class="form-control" name="car_type" id="car_type" required/>
+                            <label for="ferry_type">Type</label>
+                            <input type="text" class="form-control" name="ferry_type" id="ferry_type" required/>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn-close" data-dismiss="modal">Close</button>
-                        <button type="button" class="send-btn  btn-submit" id="send-btn">Add Car type</button>
+                        <button type="button" class="send-btn  btn-submit" id="send-btn">Add Ferry Type</button>
                     </div>
                 </form>
 
@@ -211,12 +211,12 @@
 
         $(".btn-submit").click(function(e){
             e.preventDefault();
-            var car_type  = $("input[name=car_type]").val();
+            var ferry_type  = $("input[name=ferry_type]").val();
             $("#send-btn").prop('disabled', true);
             $.ajax({
                 type:'POST',
-                url: "/admin/add/car-type",
-                data:{"_token": "{{ csrf_token() }}",car_type},
+                url: "/admin/add/ferry-type",
+                data:{"_token": "{{ csrf_token() }}",ferry_type},
                 success:function(data){
                     if(data.success)
                     {

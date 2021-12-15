@@ -117,7 +117,7 @@
                     <h3>{{env('APP_NAME')}}</h3>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{url('/admin/manage/vehicle')}}"><i data-feather="home"></i></a></li>
-                        <li class="breadcrumb-item">Add Car Types</li>
+                        <li class="breadcrumb-item">Add Location</li>
                     </ol>
                 </div>
             </div>
@@ -130,26 +130,26 @@
 
             </div>
             <div>
-                <button class="btn s add-terminal-button btn-sm"  data-toggle="modal" data-target="#vehicleModal">Add Car Type</button>
+                <button class="btn s add-terminal-button btn-sm"  data-toggle="modal" data-target="#vehicleModal">Add Location</button>
             </div>
         </div>
         <div class="card">
             <div class="card-body">
                 <div >
-                    @if(count($carsTypes) > 0)
+                    @if(count($locations) > 0)
                         <table class="table table-striped">
                             <thead>
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Car Type</th>
+                                <th scope="col">Locations</th>
                                 <th scope="col">Action</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($carsTypes as $index =>  $carType)
+                            @foreach($locations as $index =>  $location)
                                 <tr>
                                     <th scope="row">{{$index+1}}</th>
-                                    <td>{{$carType->name}}</td>
+                                    <td>{{$location->locations}}</td>
                                     <td>Edit Delete</td>
                                 </tr>
                             @endforeach
@@ -178,7 +178,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h2 class="modal-title" id="exampleModalLabel" >Add Car Type</h2>
+                    <h2 class="modal-title" id="exampleModalLabel" >Add Location</h2>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -187,13 +187,13 @@
                     <div class="modal-body">
                         <br>
                         <div class="form-group">
-                            <label for="car_type">Car Type</label>
-                            <input type="text" class="form-control" name="car_type" id="car_type" required/>
+                            <label for="location">Locations</label>
+                            <input type="text" class="form-control" name="location" id="location" required/>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn-close" data-dismiss="modal">Close</button>
-                        <button type="button" class="send-btn  btn-submit" id="send-btn">Add Car type</button>
+                        <button type="button" class="send-btn  btn-submit" id="send-btn">Add Location</button>
                     </div>
                 </form>
 
@@ -211,12 +211,12 @@
 
         $(".btn-submit").click(function(e){
             e.preventDefault();
-            var car_type  = $("input[name=car_type]").val();
+            var location  = $("input[name=location]").val();
             $("#send-btn").prop('disabled', true);
             $.ajax({
                 type:'POST',
-                url: "/admin/add/car-type",
-                data:{"_token": "{{ csrf_token() }}",car_type},
+                url: "/admin/store/location",
+                data:{"_token": "{{ csrf_token() }}",location},
                 success:function(data){
                     if(data.success)
                     {
@@ -225,6 +225,7 @@
                             location.reload(true);
                         }, 2000);
                     }
+
                 }
             });
 

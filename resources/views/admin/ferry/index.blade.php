@@ -158,8 +158,8 @@
                                     <small class="card-title"> {{strtoupper($ferry->name)}}</small>
                                 </div>
                                 <div class="card-footer terminal-card" style="display: flex;justify-content: center;">
-                                    <a href="{{url('/admin/boat/'.$ferry->id.'/history')}}" class="btn schedule-button">View</a>
-                                    <a href="{{url('/admin/manage/boat-schedule/'.$ferry->id)}}" class="btn schedule-button">Schedule </a>
+                                    <a href="{{url('/admin/ferry/'.$ferry->id.'/history')}}" class="btn schedule-button">View</a>
+                                    <a href="{{url('/admin/ferry/schedule-trips/'.$ferry->id)}}" class="btn schedule-button">Schedule </a>
                                 </div>
 
                             </div>

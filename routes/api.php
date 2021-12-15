@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\AuthUser;
 use App\Http\Controllers\Api\BoatCruise;
 use App\Http\Controllers\Api\Booking;
 use App\Http\Controllers\Api\Car;
+use App\Http\Controllers\Api\Ferry;
 use App\Http\Controllers\Api\FlutterwavePayment;
 use App\Http\Controllers\Api\Parcel;
 use App\Http\Controllers\Api\Partner;
@@ -91,6 +92,13 @@ Route::group(['prefix' => 'v1'], function() {
         Route::post('/send-parcel' , [Parcel::class , 'sendParcel']);
         Route::post('/parcel/user-info', [Parcel::class , 'storeUserInfo']);
         Route::post('/parcel-cash-payment' , [Parcel::class , 'addCashPayment']);
+
+        //ferry
+        Route::get('/ferry-service' , [Ferry::class ,'ferryService']);
+        Route::post('/book/ferry' , [Ferry::class , 'bookFerry']);
+        Route::get('/ferry-seat/{ferry_id}/' , [Ferry::class , 'selectFerrySeat']);
+        Route::get('/select/ferry-seat', [Ferry::class , 'FerrySelectorTracker']);
+        Route::post('/de-select/ferry-seat' , [Ferry::class , 'deselectFerrySeat']);
 
     });
 

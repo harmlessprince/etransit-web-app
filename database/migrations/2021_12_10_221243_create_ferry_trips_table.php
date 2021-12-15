@@ -18,10 +18,18 @@ class CreateFerryTripsTable extends Migration
             $table->unsignedBigInteger('ferry_id');
             $table->unsignedBigInteger('ferry_pick_up_id');
             $table->unsignedBigInteger('ferry_destination_id');
-            $table->double('amount');
+            $table->double('amount_adult');
+            $table->double('amount_children');
             $table->string('trip_duration');
+            $table->unsignedBigInteger('ferry_type_id');
+            $table->string('number_of_passengers');
+            $table->date('event_date');
+            $table->time('event_time');
             $table->longText('trip_description')->nullable();
             $table->timestamps();
+
+            $table->foreign('ferry_id')->references('id')->on('ferries')->onDelete('cascade');
+
         });
     }
 

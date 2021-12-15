@@ -179,6 +179,15 @@ Route::prefix('admin')->name('admin.')->group(function(){
         //ferry management
         Route::get('/manage/ferry',[Ferry::class , 'index']);
         Route::get('/add/ferry',[Ferry::class , 'create']);
+        Route::post('/store/ferry' ,[Ferry::class , 'store']);
+        Route::get('/ferry/types' , [Ferry::class ,'types']);
+        Route::post('/add/ferry-type',[Ferry::class , 'storeFerryType']);
+        Route::get('/ferry/schedule-trips/{ferry_id}', [Ferry::class , 'schedule']);
+        Route::get('/ferry/locations', [Ferry::class , 'ferryLocations']);
+        Route::get('ferry/{ferry_id}/history', [Ferry::class , 'ferryHistory']);
+        Route::post('/store/location',[Ferry::class , 'storeLocation']);
+        Route::post('/schedule/ferry-event',[Ferry::class , 'scheduleEvent']);
+
 
 
 
