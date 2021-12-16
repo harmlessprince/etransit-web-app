@@ -103,13 +103,15 @@ class FlutterwavePayment extends Controller
 
             $serviceId = $data['data']['meta']['service_id'];
             $tripType = request()->get('tripType') ?? null;
+            $fetchScheduleDetailsID = request()->ferrySceduleID ?? null;
 
             switch($serviceId){
                 case 1 :
                     BusTicketPayment::handleBusPayment($data , $tripType);
                     break;
                 case 3 :
-                    FerryPayment::handlePayment($data , $tripType);
+                    //for ferry passs $data , $tripType , $fetchScheduleDetailsID;
+                    FerryPayment::handlePayment($data , $tripType , $fetchScheduleDetailsID);
                     break;
                 case 6:
                     CarHire::handleCarHirePayment($data);

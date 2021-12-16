@@ -72,8 +72,8 @@ class BusTicketPayment
             $transactions->save();
 
             if ($transactions) {
-//update the status of seat tracker to booked after payment from selected
-//0 = available 1 = selected 2 = booked
+                //update the status of seat tracker to booked after payment from selected
+                //0 = available 1 = selected 2 = booked
                 $seatTracker = \App\Models\SeatTracker::where('user_id', $data['data']['meta']['user_id'])
                     ->where('schedule_id', $scheduleId)->where('bus_id', $tripSchedule->bus_id)->get();
 
@@ -83,7 +83,7 @@ class BusTicketPayment
                     ]);
                 }
 
-//update available seats for this schedule and trip
+                //update available seats for this schedule and trip
                 $updatedSeatCount = (int)($tripSchedule->seats_available) - ($adultCount + $childrenCount);
                 $tripSchedule->update([
                     'seats_available' => $updatedSeatCount
