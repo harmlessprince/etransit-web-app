@@ -214,10 +214,10 @@ class Ferry extends Controller
         }
 
 
-        $totalFare = ((double)  $fetchScheduleDetails->fare_adult * (int) $adultCount +  (double) $fetchScheduleDetails->fare_children * (int) $childrenCount ) * (int) $request->tripType;
+        $totalFare = ((double)  $fetchScheduleDetails->amount_adult * (int) $adultCount +  (double) $fetchScheduleDetails->amount_children * (int) $childrenCount ) * (int) $request->tripType;
 
         return response()->json(['success' => true ,
-            compact('childrenCount','fetchScheduleDetails','adultCount',
+           'data' => compact('childrenCount','fetchScheduleDetails','adultCount',
                 'childrenCount','totalFare','selectedSeat') ]);
 
     }
