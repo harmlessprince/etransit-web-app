@@ -23,6 +23,7 @@ class CreateTransactionsTable extends Migration
             $table->unsignedBigInteger('car_history_id')->nullable()->comment('ad id to track car hiring booking');
             $table->unsignedBigInteger('boat_trip_id')->nullable()->comment('ad id to track boat booking');
             $table->unsignedBigInteger('delivery_parcel_id')->nullable()->comment('set the id of the parcel that was paid for');
+            $table->unsignedBigInteger('ferry_trip_id')->nullable()->comment('set the id of the ferry trip id');
             $table->enum('transaction_type',['cash payment','online'])->default('online');
             $table->unsignedBigInteger('schedule_id')->nullable()->comment('schedule id is for bus ticketing');
             $table->unsignedBigInteger('user_id');

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Billing\BusTicketPayment;
 use App\Billing\CarHire;
+use App\Billing\FerryPayment;
 use App\Billing\TourPayment;
 use App\Billing\BoatCruise;
 use App\Billing\Parcel;
@@ -66,6 +67,7 @@ class FlutterwavePayment extends Controller
                 'tour_id'   => request()->tour_id ?? null,
                 'boat_cruise_id' => request()->boat_cruise_id ?? null,
                 'delivery_parcel_id' => request()->delivery_parcel_id ?? null,
+                'ferry_trip_id' => request()->ferry_trip_id ?? null,
 
             ]
         ];
@@ -105,6 +107,9 @@ class FlutterwavePayment extends Controller
             switch($serviceId){
                 case 1 :
                     BusTicketPayment::handleBusPayment($data , $tripType);
+                    break;
+                case 3 :
+                    FerryPayment::handlePayment($data , $tripType);
                     break;
                 case 6:
                     CarHire::handleCarHirePayment($data);
