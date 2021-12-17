@@ -17,10 +17,9 @@ class FerryPayment
 {
     public static function handlePayment($data ,$tripType , $fetchScheduleDetailsID)
     {
-        DB::beginTransaction();
+//        DB::beginTransaction();
         $tripSchedule = \App\Models\FerryTrip::where('id', $fetchScheduleDetailsID)->select('amount_adult', 'amount_children', 'id', 'number_of_passengers', 'ferry_id')->first();
-
-
+return $tripSchedule;
         $childrenCount = (int)$data['data']['meta']['childrenCount'];
         $adultCount = (int)$data['data']['meta']['adultCount'];
 
@@ -72,7 +71,7 @@ class FerryPayment
 
         }
 
-        DB::commit();
+//        DB::commit();
 
         return response()->json(['success' => true, 'message' => 'Payment made successfully']);
 
