@@ -54,7 +54,7 @@ class FerryPayment
         if ($transactions) {
             //update the status of seat tracker to booked after payment from selected
             //0 = available 1 = selected 2 = booked
-            $seatTracker = \App\Models\SeatTracker::where('user_id', $data['data']['meta']['user_id'])
+            $seatTracker = \App\Models\FerrySeatTracker::where('user_id', $data['data']['meta']['user_id'])
                 ->where('ferry_trip_id', $tripSchedule->id)->where('ferry_id', $tripSchedule->ferry_id)->get();
 
             for ($i = 0; $i < count($seatTracker); $i++) {
