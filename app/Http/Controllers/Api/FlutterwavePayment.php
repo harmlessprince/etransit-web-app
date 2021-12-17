@@ -103,7 +103,7 @@ class FlutterwavePayment extends Controller
 
             $serviceId = $data['data']['meta']['service_id'];
             $tripType = request()->get('tripType') ?? null;
-            $fetchScheduleDetailsID = request()->ferrySceduleID ?? null;
+            $fetchScheduleDetailsID = request()->fetchscheduledetailsId ?? null;
 
             switch($serviceId){
                 case 1 :
