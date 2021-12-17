@@ -111,7 +111,9 @@ class FlutterwavePayment extends Controller
                     break;
                 case 3 :
                     //for ferry passs $data , $tripType , $fetchScheduleDetailsID;
-                    FerryPayment::handlePayment($data , $tripType , $fetchScheduleDetailsID);
+                    $tripSchedule = \App\Models\FerryTrip::where('id', $fetchScheduleDetailsID)->select('amount_adult', 'amount_children', 'id', 'number_of_passengers', 'ferry_id')->first();
+                  //  FerryPayment::handlePayment($data , $tripType , $fetchScheduleDetailsID);
+                return $tripSchedule;
                     break;
                 case 6:
                     CarHire::handleCarHirePayment($data);
