@@ -126,7 +126,8 @@ class Ferry extends Controller
             'full_name' => 'required|array',
             'gender' => 'required|array',
             'passenger_option' => 'required|array',
-            'tripType' => 'required|integer'
+            'tripType' => 'required|integer',
+            'ferry_trip_id' => 'required|integer'
         ]);
 
         $passengerArray = [];
@@ -154,7 +155,7 @@ class Ferry extends Controller
         }
 
 
-        $fetchScheduleDetails = \App\Models\FerryTrip::where('id',$seat_tracker_id)->first();
+        $fetchScheduleDetails = \App\Models\FerryTrip::where('id',request()->ferry_trip_id)->first();
 
         if($passengerCount != count($selectedSeat))
         {
@@ -207,7 +208,7 @@ class Ferry extends Controller
             $createPassenger->full_name             = $request->full_name[$i];
             $createPassenger->gender                = $request->gender[$i];
             $createPassenger->passenger_age_range   = $request->passenger_option[$i];
-            $createPassenger->ferry_trip_id         = $seat_tracker_id;
+            $createPassenger->ferry_trip_id         = $fetchScheduleDetails->id;
             $createPassenger->user_id               = auth()->user()->id;
             $createPassenger->ferry_seat_tracker_id = $selectedSeat[$i]->id;
             $createPassenger->save();
