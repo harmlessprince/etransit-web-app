@@ -149,7 +149,7 @@ class Ferry extends Controller
         $passengerCount = count($passengerArray);
 
         //find if the seats selected matches the number of passengers listed
-        $selectedSeat = \App\Models\FerrySeatTracker::where('ferry_trip_id',$request->erry_trip_id)
+        $selectedSeat = \App\Models\FerrySeatTracker::where('ferry_trip_id',$request->ferry_trip_id)
                                                              ->where('user_id',auth()->user()->id)
                                                              ->where('booked_status', 1)->get();
 
