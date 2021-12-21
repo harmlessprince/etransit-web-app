@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Classes\Reference;
 use App\Http\Controllers\Controller;
 use App\Models\FerryLocation;
 use App\Models\FerryTrip;
@@ -10,6 +11,8 @@ use App\Models\Schedule;
 use App\Models\Service;
 use App\Models\TripType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class Ferry extends Controller
 {
@@ -120,7 +123,7 @@ class Ferry extends Controller
     }
 
 
-    public  function bookTripForFerryPassenger(Request $request , $seat_tracker_id)
+    public  function bookTripForFerryPassenger(Request $request)
     {
         request()->validate([
             'full_name' => 'required|array',
@@ -145,9 +148,9 @@ class Ferry extends Controller
         $passengerOptionCount = count($passenger_options);
         $passengerCount = count($passengerArray);
         //find if the seats selected matches the number of passengers listed
-        $selectedSeat = \App\Models\FerrySeatTracker::where('id',$seat_tracker_id)
-                                                ->where('user_id',auth()->user()->id)
-                                                ->where('booked_status', 1)->get();
+        $selectedSeat = \App\Models\FerrySeatTracker::where('ferry_trip_id',$request->erry_trip_id)
+                                                            ->where('user_id',auth()->user()->id)
+                                                            ->where('booked_status', 1)->get();
 
         if(!$selectedSeat)
         {
@@ -220,6 +223,76 @@ class Ferry extends Controller
         return response()->json(['success' => true ,
            'data' => compact('childrenCount','fetchScheduleDetails','adultCount',
                 'childrenCount','totalFare','selectedSeat') ]);
+
+    }
+
+
+    public function handleFerryCashPayment(Request $request)
+    {
+        request()->validate([
+            'totalFare'              => 'required',
+            'ferry_type_id'          => 'required|integer',
+            'service_id'             => 'required|integer',
+            'fetchScheduleDetailsID' => 'required',
+            'tripType'               => 'required|integer'
+        ]);
+        DB::beginTransaction();
+        $tripSchedule = \App\Models\FerryTrip::where('id', $request->fetchScheduleDetailsID)->select('amount_adult', 'amount_children', 'id', 'number_of_passengers', 'ferry_id')->first();
+
+        $service = \App\Models\Service::where('id', $request->service_id)->first();
+
+        $childrenCount = (int)$request->childrenCount;
+        $adultCount = (int) $request->adultCount;
+
+        $transactions = new \App\Models\Transaction();
+        $transactions->reference = Reference::generateTrnxRef();
+        $transactions->amount = (double) $request->totalFare;
+
+        $transactions->status = 'Pending';
+        $transactions->description =  'Cash payment for ' . $service->name . ' by ' . auth()->user()->email . ' at ' . now() ;
+        $transactions->user_id =  auth()->user()->id;
+        $transactions->service_id = $request->service_id;
+        $transactions->ferry_trip_id = $request->ferry_type_id;
+        $transactions->isConfirmed = 'True';
+        $transactions->save();
+
+        $data["email"] =  auth()->user()->email;
+        $data['name']  =  auth()->user()->full_name;
+        $data["title"] = env('APP_NAME').' Ferry Receipt';
+        $data["body"]  = "This is Demo";
+
+        $pdf = PDF::loadView('pdf.car-hire', $data);
+
+        Mail::send('pdf.car-hire', $data, function($message)use($data, $pdf) {
+            $message->to($data["email"])
+                ->subject($data["title"])
+                ->attachData($pdf->output(), "receipt.pdf");
+        });
+
+        if ($transactions) {
+            //update the status of seat tracker to booked after payment from selected
+            //0 = available 1 = selected 2 = booked
+            $seatTracker = \App\Models\FerrySeatTracker::where('user_id', auth()->user()->id)
+                ->where('ferry_trip_id', $tripSchedule->id)->where('ferry_id', $tripSchedule->ferry_id)->get();
+
+            for ($i = 0; $i < count($seatTracker); $i++) {
+                $seatTracker[$i]->update([
+                    'booked_status' => 2
+                ]);
+            }
+
+            //update available seats for this schedule and trip
+            $updatedSeatCount = (int)($tripSchedule->number_of_passengers) - ($adultCount + $childrenCount);
+            $tripSchedule->update([
+                'number_of_passengers' => $updatedSeatCount
+            ]);
+
+
+        }
+
+        DB::commit();
+
+        return response()->json(['success' => true, 'message' => 'Cash Payment made successfully']);
 
     }
 }

@@ -62,6 +62,13 @@
                             <li><a href="{{url('/admin/ferry/locations')}}">Manage Location</a></li>
                         </ul>
                     </li>
+                    <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"></i><span>Train Management</span></a>
+                        <ul class="nav-submenu menu-content">
+                            <li><a href="{{url('/admin/manage/train')}}">Manage Train</a></li>
+                            <li><a href="{{url('/admin/train/class')}}">Manage Class</a></li>
+                            <li><a href="{{url('/admin/manage/train/location')}}">Manage Location</a></li>
+                        </ul>
+                    </li>
                     <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"></i><span>Transactions</span></a>
                         <ul class="nav-submenu menu-content">
                             <li><a href="{{url('/admin/transactions')}}">Manage Transactions</a></li>

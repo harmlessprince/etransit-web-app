@@ -12,6 +12,7 @@ use App\Http\Controllers\Page;
 use App\Http\Controllers\Parcel;
 use App\Http\Controllers\Payment;
 use App\Http\Controllers\Tour;
+use App\Http\Controllers\Train;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Schedule;
@@ -188,9 +189,17 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::post('/store/location',[Ferry::class , 'storeLocation']);
         Route::post('/schedule/ferry-event',[Ferry::class , 'scheduleEvent']);
 
-
-
-
+        //manage train
+        Route::get('/manage/train'  ,[Train::class , 'index']);
+        Route::get('/add/train'     ,[Train::class , 'create']);
+        Route::post('/store/train'  ,[Train::class , 'store']);
+        Route::get('/train/class'   ,[Train::class ,'trainClassList']);
+        Route::post('/store/train-class',[Train::class ,'storeTrainClass']);
+        Route::get('/manage/train/location' , [Train::class , 'trainLocation']);
+        Route::post('/store/train-state',[Train::class , 'storeTrainState']);
+        Route::post('store/train-stops' , [Train::class , 'addEachStop']);
+        Route::get('train/{train_id}/history',[Train::class , 'trainHistory']);
+        Route::get('/manage/train/schedule/{train_id}', [Train::class , 'manageSchedule']);
 
 
     });
