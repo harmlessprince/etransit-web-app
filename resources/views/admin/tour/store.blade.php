@@ -214,6 +214,9 @@
                             <input type="text" name="amount_standard" id="amount_standard" class="form-control" value="{{ old('amount_standard') }}" required  mon="0"/>
                         </div>
                     </div>
+                    <div class="alert alert-primary" role="alert">
+                        Upload the right dimension width=957px height=408px
+                    </div>
                     <div class="file_image_form">
                         <div class="form-group">
                             <label for="images">Add Images</label>

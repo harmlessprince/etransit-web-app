@@ -79,7 +79,9 @@
         <div class="booking_bg"  style="background-image: url('{{ asset('/images/bg/tour.png')}}'); height:200px;" >
             <div class="booking_hero_text">
                 <div class="booking_hero_icon">
+                    <a href="{{url('/')}}">
                     <img src="{{asset('/images/icons/arrow_left_2.png')}}">
+                    </a>
                 </div>
                 <div class="booking_text">
                     <h1>{{$service->name}}</h1>

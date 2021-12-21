@@ -78,7 +78,7 @@
                 </div>
                 <div class="plan_header_text">
                     <small>
-                        {{ \Illuminate\Support\Str::limit($car->description, $limit = 150, $end = '...') }}
+{{--                        {{ \Illuminate\Support\Str::limit($car->description, $limit = 150, $end = '...') }}--}}
                     </small>
                 </div>
                 <div class="plan_pice">

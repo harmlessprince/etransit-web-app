@@ -46,7 +46,7 @@
                     <li><a href="#about_us_section" class="routerLink" active-link='active' > About Us </a></li>
                     <li><a href="{{url('tour-packages')}}" class="routerLink {{ (request()->is('tour-packages')) ? 'active-text' : '' }}" active-link='active'> Tour Packages </a><span class="{{ (request()->is('tour-packages')) ? 'active-nav' : '' }}"></span></li>
                     <li><a href="{{url('boat-cruise')}}" class="routerLink {{ (request()->is('boat-cruise')) ? 'active-text' : '' }}" active-link='active'> Boat Cruise </a><span class="{{ (request()->is('boat-cruise')) ? 'active-nav' : '' }}"></span></li>
-                    <li><a href="{{url('car-hire')}}" class="routerLink {{ (request()->is('car-hire')) ? 'active-text' : '' }}" active-link='active'> Car Hire </a> <span class="{{ (request()->is('car-hire')) ? 'active-nav' : '' }}"></span></li>
+                    <li><a href="{{url('car-hire')}}" class="routerLink {{ (request()->is('car-hire')) ? 'active-text' : '' }}" active-link='active'> Hire A Vehicle </a> <span class="{{ (request()->is('car-hire')) ? 'active-nav' : '' }}"></span></li>
                     <li><a href="/" class="routerLink" active-link='active'> Hotel Bookings </a></li>
                     <li><a href="/" class="routerLink" active-link='active'> Become A Partner </a></li>
                     <li><a href="/" class="routerLink" active-link='active'> Send Parcel </a></li>

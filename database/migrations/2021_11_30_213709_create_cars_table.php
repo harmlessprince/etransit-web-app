@@ -17,6 +17,8 @@ class CreateCarsTable extends Migration
             $table->id();
             $table->string('car_name');
             $table->string('car_registration');
+            $table->enum('transmission', ['automatic', 'manual']);
+            $table->string('model_year');
             $table->unsignedBigInteger('car_type_id');
             $table->unsignedBigInteger('car_class_id');
             $table->unsignedBigInteger('service_id');
@@ -25,6 +27,7 @@ class CreateCarsTable extends Migration
             $table->longText('description')->nullable();
             $table->unsignedBigInteger('functional')->default(1)->comment('0 = false , 1 = true');
             $table->unsignedBigInteger('air_conditioning')->default(1)->comment('0 = false , 1 = true');
+
             $table->enum('booked_status',['true' , 'false'])->default('false');
             $table->timestamps();
 

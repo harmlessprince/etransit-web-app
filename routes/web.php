@@ -61,6 +61,7 @@ Route::group(['middleware' => ['auth','prevent-back-history']], function() {
     Route::post('/seat-selector-tracker/',[Booking::class ,'selectorTracker'])->name('select-seat');
     Route::post('/deselect-seat' ,[Booking::class , 'deselectSeat'])->name('de-select-seat');
     Route::post('/book/trip/{schedule_id}',[Booking::class , 'bookTrip']);
+    Route::post('/bus/cash-payment' ,[Booking::class , 'handleBusCashPayment'])->name('bus.pay-cash');
     // The route that the button calls to initialize payment
     Route::post('/pay', [Payment::class, 'initialize'])->name('pay');
 
@@ -118,6 +119,7 @@ Route::prefix('admin')->name('admin.')->group(function(){
         //vehicle management
         Route::get('/manage/vehicle', [Vehicle::class, 'manage'])->name('manage.vehicle');
         Route::post('/add/vehicle', [Vehicle::class, 'addVehicle'])->name('add.vehicle');
+
         //manage terminal
         Route::get('manage/terminals',[Terminal::class , 'Terminals']);
         Route::post('add/terminal',[Terminal::class , 'AddTerminal']);

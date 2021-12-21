@@ -178,6 +178,9 @@
                         </div>
 
                     </div>
+                    <div class="alert alert-primary" role="alert">
+                        Upload the right dimension width=957px height=408px
+                    </div>
                     <div class="file_image_form">
                         <div class="form-group">
                             <label for="images">Add Images</label>

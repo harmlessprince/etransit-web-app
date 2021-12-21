@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Classes\Reference;
 use App\Models\Schedule;
 use App\Models\SeatTracker;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class Booking extends Controller
 {
@@ -235,5 +237,70 @@ class Booking extends Controller
             compact('childrenCount','fetchScheduleDetails','adultCount',
                 'childrenCount','totalFare','selectedSeat','returnDate'));
 
+    }
+
+
+    public function handleBusCashPayment(Request $request)
+    {
+            $attr  = request()->validate([
+                        'amount' => 'required',
+                        'service' => 'required',
+                        'service_id' => 'required|integer',
+                        'schedule_id' => 'required|integer',
+                        'childrenCount' => 'required|integer',
+                        'adultCount' => 'required|integer',
+                    ]);
+
+        //find the schedule to get the actual amount stored in the database
+        $tripSchedule = \App\Models\Schedule::where('id', $attr['schedule_id'])
+                                ->select('fare_adult', 'fare_children', 'id', 'seats_available', 'bus_id')->first();
+        !$tripSchedule ? abort('404') : '';
+        $adultFare = (double)$tripSchedule->fare_adult;
+        $childrenFare = (double)$tripSchedule->fare_children;
+        $tripType = request()->session()->get('tripType');
+
+        if ((int)$tripType == 2) {
+            $type = 2;
+        } else {
+            $type = 1;
+        }
+
+        DB::beginTransaction();
+        $transactions = new \App\Models\Transaction();
+        $transactions->reference = Reference::generateTrnxRef();
+        $transactions->amount = $attr['amount'];
+        $transactions->status = 'Successful';
+        $transactions->schedule_id = $attr['schedule_id'];
+        $transactions->description = 'Cash payment for of ' . $request->amount .' was paid at ' . now();
+        $transactions->user_id = auth()->user()->id;
+        $transactions->passenger_count = $attr['adultCount'] + $attr['childrenCount'];
+        $transactions->service_id = $attr['service_id'];
+        $transactions->isConfirmed = 'False';
+        $transactions->save();
+
+        if ($transactions) {
+            //update the status of seat tracker to booked after payment from selected
+            //0 = available 1 = selected 2 = booked
+            $seatTracker = \App\Models\SeatTracker::where('user_id', auth()->user()->id)
+                ->where('schedule_id', $attr['schedule_id'])->where('bus_id', $tripSchedule->bus_id)->get();
+
+            for ($i = 0; $i < count($seatTracker); $i++) {
+                $seatTracker[$i]->update([
+                    'booked_status' => 2
+                ]);
+            }
+
+            //update available seats for this schedule and trip
+            $updatedSeatCount = (int)($tripSchedule->seats_available) - ($attr['adultCount'] + $attr['childrenCount']);
+            $tripSchedule->update([
+                'seats_available' => $updatedSeatCount
+            ]);
+
+
+        }
+        DB::commit();
+
+        toastr()->success('Success !! cash payment made successfully');
+        return  redirect('/');
     }
 }

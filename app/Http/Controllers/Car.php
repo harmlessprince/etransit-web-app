@@ -29,7 +29,7 @@ class Car extends Controller
 {
     public function allCars()
     {
-        $cars     = HiredCars::with('carclass','cartype')->get();
+        $cars  = HiredCars::with('carclass','cartype')->get();
 
         return view('admin.cars.cars', compact('cars'));
     }
@@ -78,6 +78,7 @@ class Car extends Controller
 
         return   response()->json(['success' => 'true', 'message' => 'Data saved successfully']);
     }
+
     public function addCar()
     {
 
@@ -104,6 +105,8 @@ class Car extends Controller
                             'capacity' => 'required',
                             'car_brand' => 'required',
                             'car_registration' => 'required|unique:cars',
+                            'transmission' => 'required|string',
+                            'model_year' => 'required'
                         ]);
 
 
@@ -118,6 +121,8 @@ class Car extends Controller
                $car->service_id       = $service_id->id;
                $car->car_name         = $data['car_brand'];
                $car->car_registration = $data['car_registration'];
+               $car->model_year       = $data['model_year'];
+               $car->transmission     = $data['transmission'];
                $car->save();
 
                if($request->hasfile('images'))
@@ -134,6 +139,7 @@ class Car extends Controller
                                'images.*' => '|mimes:jpg,jpeg,png|max:2048',
                            ]);
 //                           dimensions:min_width=100,min_height=100,max_width=1000,max_height=1000',
+                           //|dimensions:max_width=232,max_height=83
                            $name=$file->getClientOriginalName();
                            $uploadedFileUrl = Cloudinary::upload($file->getRealPath())->getSecurePath();
                            $carImage = new CarImage();
@@ -186,9 +192,9 @@ class Car extends Controller
 
     public function carList()
     {
-        $cars = HiredCars::where('functional',1)->with('car_images')->paginate(10);
+        $cars = HiredCars::where('functional',1)->with('car_images','carclass','cartype','plans')->paginate(10);
 
-
+//dd($cars);
         return view('pages.car-hire.hire', compact('cars'));
     }
 

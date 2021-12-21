@@ -196,6 +196,19 @@
                         </div>
 
                         <div class="form-group">
+                            <label for="transmission">Seat Capacity</label>
+                           <select class="form-control" name="transmission" id="transmission">
+                               <option value="automatic">Automatic</option>
+                               <option value="manual">Manual</option>
+                           </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="model_year">Model Year</label>
+                            <input type="text" class="form-control" name="model_year" id="model_year" value="{{ old('model_year') }}" placeholder="2009" required/>
+                        </div>
+
+                        <div class="form-group">
                             <label for="daily_rentals">Daily Rentals</label>
                             <input type="text" class="form-control" name="daily_rentals" id="daily_rentals" value="{{ old('daily_rentals') }}"  required/>
                         </div>
@@ -227,7 +240,11 @@
 
 
                     </div>
+                    <div class="alert alert-primary" role="alert">
+                       Upload the righ dimension width=233px height=83px
+                    </div>
                   <div class="file_image_form">
+
                       <div class="form-group">
                           <label for="images">Add Images</label>
                           <input   type="file" id="images" class="form-control image_file" name="images[]" multiple="multiple" required>

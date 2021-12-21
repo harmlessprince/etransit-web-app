@@ -121,7 +121,9 @@
         <div class="booking_bg"  style="background-image: url('{{ asset('/images/bg/booking_hero.png')}}'); height:200px;" >
             <div class="booking_hero_text">
                 <div class="booking_hero_icon">
+                    <a href="{{url('/')}}">
                      <img src="{{asset('/images/icons/arrow_left_2.png')}}">
+                    </a>
                 </div>
                 <div class="booking_text">
                     <h1>Car Hire</h1>
@@ -194,9 +196,11 @@
             <div class="cars_hire_body_box">
                <div class="car_list">
                    <div class="car_list_content">
+                       @if(!is_null($cars))
                        <div class="car_img">
-                           <img src="{{asset('/images/trending/vehicle.png')}}" alt="about-us-image"   />
+                           <img src="{{$cars[0]->car_images[0]->path}}" alt="about-us-image"  width=232x" height="83px"  />
                        </div>
+                       @endif
                        <div class="car_name_function_box">
                            <div class="car_name"><h5>{{Ucfirst($car->car_name)}}</h5></div>
                            <div class="car_description">
@@ -206,14 +210,33 @@
                            </div>
                            <div class="car_functionality">
                                <div>
-                                  <img src="{{asset('/images/icons/seat_2.png')}}" alt="about-us-image"   />  389m
+                                  <img src="{{asset('/images/icons/seat_2.png')}}" alt="about-us-image"   />
+                                   &#8358;  {{number_format($car->plans[0]->amount)}} Daily
                                </div>
                               <div>
                                   <img src="{{asset('/images/icons/functional_2.png')}}" alt="about-us-image"   />  Functional
                               </div>
                                <div>
-                                   <img src="{{asset('/images/icons/seat_2.png')}}" alt="about-us-image"   /> {{$car->capacity}} adults
+                                   <img src="{{asset('/images/icons/seat_2.png')}}" alt="about-us-image"   /> {{$car->capacity}} Seat(s)
                                </div>
+                               <div>
+                                   <img src="{{asset('/images/icons/seat_2.png')}}" alt="about-us-image"   />  {{$car->carclass->name}}
+                               </div>
+                               <div>
+                                   <img src="{{asset('/images/icons/functional_2.png')}}" alt="about-us-image"   />  {{$car->cartype->name}}
+                               </div>
+                               <div>
+                                   <img src="{{asset('/images/icons/seat_2.png')}}" alt="about-us-image"   />
+                                  A/C : {{$car->air_conditioning  == 1 ? 'True' : 'False'}}
+                               </div>
+                               <div>
+                                   <img src="{{asset('/images/icons/seat_2.png')}}" alt="about-us-image"   />  {{Ucfirst($car->transmission)}}
+                               </div>
+                               <div>
+                                   <img src="{{asset('/images/icons/functional_2.png')}}" alt="about-us-image"   /> Model : {{$car->model_year}}
+                               </div>
+
+
                            </div>
                        </div>
                        <div class="car_booking_button">
