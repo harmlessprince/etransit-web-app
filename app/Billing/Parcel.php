@@ -44,6 +44,7 @@ class Parcel
         });
 
         DB::commit();
+        return response()->json(['success' => true, 'message' => 'Payment made successfully']);
 
     }
 

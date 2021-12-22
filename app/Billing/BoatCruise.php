@@ -46,5 +46,7 @@ class BoatCruise
 
         DB::commit();
 
+        return response()->json(['success' => true, 'message' => 'Payment made successfully']);
+
     }
 }
