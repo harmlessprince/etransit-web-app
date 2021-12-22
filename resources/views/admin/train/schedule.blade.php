@@ -6,7 +6,7 @@
         margin-bottom: 20px;
     }
 
-    .bulk-upload-button , .add-terminal-button{
+    .bulk-upload-button {
         background: #021037 !important;
         cursor: pointer;
         opacity: 0.8 !important;
@@ -15,7 +15,23 @@
         border-radius: 5px !important;
         width: 240px !important;
     }
-    .bulk-upload-button:hover , .add-terminal-button:hover{
+    .sumbit_request{
+        background: #021037 !important;
+        cursor: pointer;
+        border: 1px solid  #021037 !important;
+        color: #fff !important;
+        border-radius: 5px !important;
+        padding:10px;
+    }
+    .sumbit_request:hover{
+        background: #DC6513 !important;
+        cursor: pointer;
+        border: 1px solid  #DC6513 !important;
+        color: #fff !important;
+        border-radius: 5px !important;
+        padding:10px;
+    }
+    .bulk-upload-button:hover {
         background: #DC6513 !important;
         opacity: 0.8 !important;
         border: 1px solid  #DC6513 !important;
@@ -24,40 +40,72 @@
         width: 240px !important;
         cursor: pointer;
     }
-    .checkbox_box{
+
+    .car-box{
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+
+    }
+    .car-box input , select{
+        outline:none !important;
+        border:none !important;
+        border-bottom: 1px solid #03174C !important;
+    }
+    input:focus ,select:focus{
+        outline: none !important;
+    }
+    textarea {
+        background-color: transparent !important;
+        resize: none !important;
+        outline: none !important;
+        border: 1px solid #03174C !important;
+    }
+
+    textarea:focus {
+        outline: none !important;
+        border: 1px solid  #03174C  !important;
+    }
+    .image_file{
+        outline: none !important;
+        border:none !important;
+    }
+    .images-preview-div img
+    {
+        padding: 10px;
+        max-width: 200px;
+    }
+    #buttonID{
+        background:rgba(219, 226, 241, 0.54);
+        color:white;
+        padding:10px;
+        border-radius: 50%;
+
+    }
+    .file_image_form{
         display:flex;
-        justify-content: space-between;
     }
-    #editModal{
-
-        height: 700px !important;
+    .add_butto{
+        margin-top:90px;
     }
-
-    .send-btn{
-        background: #021037;
-        color:white !important;
-        padding:10px;
-        border-radius:2px;
-        border:1px solid #021037;
+    .invalid-feedback{
+        color:red !important;
     }
-    .send-btn:hover{
-        background: #DC6513;
-        color:white !important;
-        padding:8px;
-        border-radius:2px;
-        border:1px solid #DC6513;
-
+    .custom-file-upload {
+        border: 1px solid #ccc;
+        display: inline-block;
+        padding: 6px 12px;
+        cursor: pointer;
+        background: #ccc !important;
     }
-    .btn-close{
-        background:#e70c0c;
-        /*#021037;*/
-        color:white !important;
-        padding:10px;
-        border-radius:2px;
-        border:1px solid #e70c0c;
+    .coach-box{
+        display:flex;
     }
-    .btn-close:hover{
-        padding:8px;
+    .coach-btn{
+        margin-top:35px;
+    }
+    .train_header_text{
+        display: flex;
+        justify-content: center;
     }
 
 </style>
@@ -69,163 +117,81 @@
                 <div class="col-6">
                     <h3>{{env('APP_NAME')}}</h3>
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{url('/admin/')}}"><i data-feather="home"></i></a></li>
-                        <li class="breadcrumb-item">Schedule Train Event </li>
+                        <li class="breadcrumb-item"><a href="{{url('/admin/manage/vehicle')}}"><i data-feather="home"></i></a></li>
+                        <li class="breadcrumb-item">Schedule Train Trip</li>
                     </ol>
                 </div>
             </div>
         </div>
     </div>
-    <div class="container-fluid">
-        <div class="button-box" >
-{{--            <a href="{{url('/admin/import-export-schedule')}}" class="btn bulk-upload-button btn-sm"  style="margin-right:10px;">Bulk Import Event</a>&nbsp;--}}
-            <button class="btn s add-terminal-button btn-sm"  data-toggle="modal" data-target="#vehicleModal">View Schedule Event</button>
+
+    <div class="container-fluid" >
+        <div class="row">
+            <div class="col-md-12 col-lg-12 col-sm-12">
+                @if(count($errors) > 0)
+                    <div class="alert alert-danger">
+                        @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </div>
+                @endif
+            </div>
+
         </div>
-        <div class="card ">
-            <div class="card-body">
-                <div style="display: flex; justify-content: center;">
-                    <h1>{{strtoupper($train->name)}}</h1>
-                </div>
+        <div class="card">
+            <div class="card-body train_header_text" >
+               <div>
+                   <h2>{{$train->name}}</h2>
+               </div>
             </div>
         </div>
-        <div class="card ">
+        <div class="card">
+
             <div class="card-body">
-                <div id="app">
-                    <div id='schedule_event_calender'></div>
-                </div>
+                <form method="post" action="{{url('/admin/store/train')}}">
+                    @csrf
+                    <div class="car-box col-md-12">
+                        <div class="form-group">
+                            <label for="boat_name">Pick Up</label>
+                            <select class="form-control">
+                                <option>Lagos</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="car-box col-md-12">
+                        <div class="form-group">
+                            <label for="seats">Final Destination</label>
+                            <select class="form-control">
+                                <option>Lagos</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-12 coach-box">
+                        <div class="car-box col-md-4">
+                            <div class="form-group">
+                                <label for="coach_type">Date</label>
+                                <input type="date" name="date" class="form-control" value="{{ old('date') }}" required/>
+                            </div>
+                        </div>
+                        <div class=" car-box col-md-4">
+                            <div class="form-group">
+                                <label for="coach_seats">Time Of Departure</label>
+                                <input type="time" name="time" id="time" class="form-control"  value="{{ old('time') }}" required />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="car-box col-md-12">
+                        <
+                    </div>
+                    <div class="col-md-4 coach-btn">
+                        <button class="btn btn-success" >Schedule Trip</button>
+                    </div>
+                </form>
             </div>
+
         </div>
     </div>
 
-    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog modalBody" role="document" >
-            <div class="modal-content">
-                <div class="modal-body">
-                    <h3>Schedule Events</h3>
-                    <br>
-                    <input type="hidden" value="{{$train->id}}" name="train_id" id="trainId"/>
-                    <div class="form-group">
-                        <label for="pick_up">Pick Up</label>
-                        <select class="form-control" name="pickup" id="pick_up">
-                            <option> Please Select Pick Up Station </option>
-{{--                            @foreach($locations as $location)--}}
-{{--                                <option value="{{$location->id}}" >{{$location->locations}}</option>--}}
-{{--                            @endforeach--}}
-                        </select>
-                    </div>
 
-                    <div class="form-group">
-                        <label for="pick_up">Destination</label>
-                        <select class="form-control" name="destination" id="destination">
-                            <option> Please Select Destination </option>
-{{--                            @foreach($locations as $location)--}}
-{{--                                <option value="{{$location->id}}" >{{$location->locations}}</option>--}}
-{{--                            @endforeach--}}
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="departure_time">Departure Time</label>
-                        <input type="time" name="departure_time" id="departure_time" class="form-control" required/>
-                    </div>
-                    <div class="form-group">
-                        <label for="trip_duration">Trip Duration</label>
-                        <input type="number" name="trip_duration" id="trip_duration" class="form-control" required/>
-                    </div>
-                </div>
-
-                <div class="modal-footer">
-                    <button type="button" class="btn-close" data-dismiss="modal">Close</button>
-                    <input type="button" class="send-btn btn-submit" id="appointment_update" value="Save">
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <script>
-        $(document).ready(function () {
-
-            var SITEURL = "{{ url('/admin') }}";
-
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-
-            var calendar = $('#schedule_event_calender').fullCalendar({
-                editable: true,
-                editable: true,
-                {{--events: SITEURL + "/event/ferry/" + {{$ferry->id}} +"/schedule",--}}
-                displayEventTime: true,
-                eventRender: function (event, element, view) {
-                    if (event.allDay === 'true') {
-                        event.allDay = true;
-                    } else {
-                        event.allDay = false;
-                    }
-                },
-                selectable: true,
-                selectHelper: true,
-                select: function (event_start, event_end, allDay ) {
-                    var modalOpen = $("#editModal").modal('show');
-
-                    if (modalOpen) {
-                        var event_start  = $.fullCalendar.formatDate(event_start, "Y-MM-DD HH:mm:ss");
-                        $(".btn-submit").click(function(e){
-                            var ferryId           = $("input[name=ferry_id]").val();
-                            var departureTime     = $("input[name=departure_time]").val();
-                            var Tfare             = $("input[name=t_fare]").val();
-                            var TfareChild        = $("input[name=t_fare_child]").val();
-                            var description       = $("#description").val();
-                            var pickUp            =  $("#pick_up").val();
-                            var destination       = $("#destination").val();
-                            var duration          = $("input[name=trip_duration]").val();
-
-                            $.ajax({
-                                url: SITEURL + '/schedule/ferry-event',
-                                data: {
-                                    ferryId,
-                                    departureTime,
-                                    Tfare,
-                                    pickUp,
-                                    destination,
-                                    event_start,
-                                    TfareChild,
-                                    description,
-                                    duration,
-                                },
-                                type: "POST",
-                                success: function (response) {
-                                    console.log(response)
-                                    if(response.success){
-                                        displaySuccessMessage(response.message);
-                                    }else{
-                                        displayErrorMessage(response.message);
-                                    }
-                                    setTimeout(function(){ location.reload(); }, 3000);
-                                },
-                                error: function(xhr, textStatus, error){
-                                    displayErrorMessage("An error occured");
-                                }
-                            });
-
-                        });
-                    }
-                },
-            });
-        });
-
-        function displaySuccessMessage(message) {
-            toastr.success(message, 'Successful');
-        }
-
-        function displayErrorMessage(message) {
-            toastr.error(message, 'Error');
-        }
-
-
-
-    </script>
 
 @endsection

@@ -153,7 +153,10 @@ class Train extends Controller
     {
         $train = TrainTicket::where('id' , $train_id)->firstorfail();
 
-        return view('admin.train.schedule', compact('train'));
+        $trainRoutes = TrainStop::all();
+//        dd($train);
+
+        return view('admin.train.schedule', compact('train','trainRoutes'));
     }
 
 

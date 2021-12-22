@@ -110,6 +110,13 @@
         margin-top:40px;
         margin-right:150px;
     }
+    .car_img{
+        width: 240px;
+        height: 100px;
+    }
+    .car_img img{
+        width:100%;
+    }
 
 </style>
 @push('css')
@@ -198,7 +205,7 @@
                    <div class="car_list_content">
                        @if(!is_null($cars))
                        <div class="car_img">
-                           <img src="{{$cars[0]->car_images[0]->path}}" alt="about-us-image"  width=232x" height="83px"  />
+                           <img src="{{$car->car_images[0]->path}}" alt="about-us-image"  />
                        </div>
                        @endif
                        <div class="car_name_function_box">
