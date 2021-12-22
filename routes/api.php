@@ -36,7 +36,8 @@ Route::group(['prefix' => 'v1'], function() {
 
 //    store partners
     Route::post('/partners/create' , [Partner::class , 'store']);
-    Route::post('/rave/callback/', [FlutterwavePayment::class, 'callback'])->name('api.callback');
+    Route::get('/rave/callback/', [FlutterwavePayment::class, 'callback'])->name('api.callback');
+    Route::post('/rave/callback/', [FlutterwavePayment::class, 'callback'])->name('api.callback.api');
 
 
 
