@@ -45,10 +45,10 @@ class Booking extends Controller
                                                                       ->with('terminal','bus','destination','pickup','service')->get()
 
                                          : $checkSchedule =  Schedule::where('departure_date',$data['departure_date'])
-                                                                        ->where('return_date',$data['return_date'])
                                                                         ->where('destination_id', $data['destination_from'])
                                                                          ->where('seats_available' , '>=', $data['number_of_passengers'])
-                                                                        ->where('pickup_id',$data['destination_to'])->get();
+                                                                        ->where('pickup_id',$data['destination_to'])
+                                                                      ->with('terminal','bus','destination','pickup','service')->get();
              if($checkSchedule->isEmpty())
              {
                return response()->json(['success' => false , 'message' => 'We dont\'t have any result for your query at the moment']);

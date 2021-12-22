@@ -103,14 +103,6 @@
     .coach-btn{
         margin-top:35px;
     }
-    .train_header_text{
-        display: flex;
-        justify-content: center;
-    }
-    #route-list{
-        height: 200px;
-        overflow-x: scroll;
-    }
 
 </style>
 @section('content')
@@ -122,7 +114,7 @@
                     <h3>{{env('APP_NAME')}}</h3>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{url('/admin/manage/vehicle')}}"><i data-feather="home"></i></a></li>
-                        <li class="breadcrumb-item">Schedule Train Trip</li>
+                        <li class="breadcrumb-item">Add State / Stops / Terminal</li>
                     </ol>
                 </div>
             </div>
@@ -130,6 +122,11 @@
     </div>
 
     <div class="container-fluid" >
+        <div class="button-box" >
+            <div>
+                {{--                <a href="{{url('/admin/import-export-cars')}}" class="btn bulk-upload-button btn-sm"  style="margin-right:10px;">Bulk Import Boats</a>&nbsp;--}}
+            </div>
+        </div>
         <div class="row">
             <div class="col-md-12 col-lg-12 col-sm-12">
                 @if(count($errors) > 0)
@@ -142,71 +139,105 @@
             </div>
 
         </div>
-        <div class="card">
-            <div class="card-body train_header_text" >
-               <div>
-                   <h2>{{$train->name}}</h2>
-               </div>
-            </div>
-        </div>
+
+    <div class="container-fluid" >
+
         <div class="card">
 
             <div class="card-body">
-                <form method="post" action="{{url('/admin/store/train')}}">
+                <form method="post" action="{{url('/admin/store/train/routes-fare')}}">
                     @csrf
                     <div class="car-box col-md-12">
                         <div class="form-group">
-                            <label for="boat_name">Pick Up</label>
-                            <select class="form-control">
+                            <label for="train_class">Location (City)</label>
+                            <select class="form-control" name="state" required>
+                                <option value=""> Select City</option>
                                 @foreach($locations as $location)
-                                    <option>{{$location->locations_state}}</option>
+                                    <option value="{{$location->id}}">{{$location->locations_state}}</option>
                                 @endforeach
                             </select>
                         </div>
                     </div>
                     <div class="car-box col-md-12">
                         <div class="form-group">
-                            <label for="seats">Final Destination</label>
-                            <select class="form-control">
-                                @foreach($locations as $location)
-                                    <option>{{$location->locations_state}}</option>
+                            <label for="class_id">Train Route </label>
+                            <select class="form-control" name="route_id" required>
+                                <option value=""> Select Route</option>
+                                @foreach($routes as $route)
+                                    <option value="{{$route->id}}">{{$route->stop_name}}</option>
                                 @endforeach
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-12 coach-box">
-                        <div class="car-box col-md-4">
-                            <div class="form-group">
-                                <label for="coach_type">Date</label>
-                                <input type="date" name="date" class="form-control" value="{{ old('date') }}" required/>
-                            </div>
-                        </div>
-                        <div class=" car-box col-md-4">
-                            <div class="form-group">
-                                <label for="coach_seats">Time Of Departure</label>
-                                <input type="time" name="time" id="time" class="form-control"  value="{{ old('time') }}" required />
-                            </div>
+                    <div class="car-box col-md-12">
+                        <div class="form-group">
+                            <label for="class_id">Class </label>
+                            <select class="form-control" name="class_id" required>
+                                <option value=""> Select Class</option>
+                                @foreach($trainClass as $class)
+                                    <option value="{{$class->id}}">{{$class->class}}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                     <div class="car-box col-md-12">
-                        <h3> Pick Route(s) </h3>
-                        <div id="route-list">
-                            @foreach($trainRoutes as $route)
-                                <div class="form-group" >
-                                    <input type="checkbox" name="route"/> {{$route->stop_name}}
-                                </div>
-                            @endforeach
+                        <div class="form-group">
+                            <label for="amount_adult">Amount (Adult)</label>
+                            <input type="text" name="amount_adult" id="amount_adult" class="form-control" value="{{ old('amount_adult') }}" required />
                         </div>
                     </div>
-                    <div class="col-md-4 coach-btn">
-                        <button class="btn btn-success" >Schedule Trip</button>
+                    <div class="car-box col-md-12">
+                        <div class="form-group">
+                            <label for="train_class">Amount (Child)</label>
+                            <input type="text" name="amount_child" id="amount_child" class="form-control" value="{{ old('amount_child') }}" required />
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <button class="btn btn-success" id="coach">Add Farep</button>
                     </div>
                 </form>
             </div>
 
         </div>
+        <div class="card">
+
+            <div class="card-body">
+
+                <div class="car-box col-md-12">
+                    <div>
+                        <h3>Routes Fare (Each Stop / Terminal) </h3>
+                    </div>
+                </div>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">State</th>
+                        <th scope="col">Stop</th>
+                        <th scope="col">Class</th>
+                        <th scope="col">Amount (Adult)</th>
+                        <th scope="col">Amount (Child)</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                    </thead>
+                    @foreach($routes as $index => $stop)
+                        <tbody>
+                        <tr>
+                            <th scope="row">{{$index + 1}}</th>
+                            <td>{{Ucfirst($stop->city->locations_state)}}</td>
+                            <td>{{Ucfirst($stop->terminal->stop_name)}}</td>
+                            <td>{{Ucfirst($stop->seatClass->class)}}</td>
+                            <td>&#8358; {{number_format($stop->amount_adult)}}</td>
+                            <td>&#8358; {{number_format($stop->amount_child)}}</td>
+                            <td>Edit|Delete</td>
+                        </tr>
+                        </tbody>
+                    @endforeach
+                </table>
+            </div>
+
+        </div>
     </div>
-
-
+    </div>
 
 @endsection

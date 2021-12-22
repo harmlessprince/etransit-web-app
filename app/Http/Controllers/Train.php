@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Models\RouteFare;
 use App\Models\Service;
 use App\Models\TrainClass;
 use App\Models\TrainLocation;
@@ -129,34 +130,65 @@ class Train extends Controller
     {
      $attr =  request()->validate([
                     'state' => 'required|integer' ,
-                    'train_stop' => 'required|string' ,
-                    'amount_adult' => 'required' ,
-                    'amount_child' => 'required' ,
-                    'class_id' => 'required|integer'
+                    'train_stop' => 'required|string'
+//                    'amount_adult' => 'required' ,
+//                    'amount_child' => 'required' ,
+//                    'class_id' => 'required|integer'
                     ]);
 
-      $trainStop = new TrainStop;
-      $trainStop->train_location_id = $attr['state'];
-      $trainStop->train_class_id    = $attr['class_id'];
-      $trainStop->stop_name         = $attr['train_stop'];
-      $trainStop->amount_adult      = $attr['amount_adult'];
-      $trainStop->amount_child      = $attr['amount_child'];
-      $trainStop->save();
+     DB::beginTransaction();
+          $trainStop = new TrainStop;
+          $trainStop->train_location_id = $attr['state'];
+          $trainStop->stop_name         = $attr['train_stop'];
+          $trainStop->save();
+      DB::commit();
 
       Alert::success('Success', 'Train Stop  Added Successfully');
 
       return back();
     }
 
+    public function manageRoute()
+    {
+        $locations = TrainLocation::all();
+        $routes = RouteFare::with('city','terminal','seatClass')->get();
+        $trainClass = TrainClass::all();
+//        dd( $routes);
+
+
+        return view('admin.train.route' , compact('locations','routes','trainClass'));
+    }
 
     public function manageSchedule($train_id)
     {
         $train = TrainTicket::where('id' , $train_id)->firstorfail();
-
+        $locations = TrainLocation::all();
         $trainRoutes = TrainStop::all();
-//        dd($train);
 
-        return view('admin.train.schedule', compact('train','trainRoutes'));
+        return view('admin.train.schedule', compact('train','trainRoutes','locations'));
+    }
+
+    public function storeRoute(request $request)
+    {
+        $attr =  request()->validate([
+            'state' => 'required|integer' ,
+            'amount_adult' => 'required' ,
+            'amount_child' => 'required' ,
+            'class_id' => 'required|integer',
+            'route_id' => 'required|integer'
+        ]);
+
+        $routeFare = new RouteFare;
+        $routeFare->train_location_id = $attr['state'];
+        $routeFare->train_stop_id     = $attr['route_id'];
+        $routeFare->amount_adult      = $attr['amount_adult'];
+        $routeFare->amount_child      = $attr['amount_child'];
+        $routeFare->train_class_id    = $attr['class_id'];
+        $routeFare->save();
+
+        Alert::success('Success', 'Route fare  Added Successfully');
+
+        return back();
     }
 
 

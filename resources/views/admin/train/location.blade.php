@@ -206,35 +206,25 @@
                            </select>
                         </div>
                     </div>
-                    <div class="car-box col-md-12">
-                        <div class="form-group">
-                            <label for="class_id">Class </label>
-                            <select class="form-control" name="class_id" required>
-                                <option value=""> Select Class</option>
-                                @foreach($trainClass as $class)
-                                    <option value="{{$class->id}}">{{$class->class}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
+
                     <div class="car-box col-md-12">
                         <div class="form-group">
                             <label for="train_class">Location (Each Stop)</label>
                             <input type="text" name="train_stop" id="train_stop" class="form-control" value="{{ old('train_stop') }}" placeholder="e.g Agege or Ibadan" required />
                         </div>
                     </div>
-                    <div class="car-box col-md-12">
-                        <div class="form-group">
-                            <label for="amount_adult">Amount (Adult)</label>
-                            <input type="text" name="amount_adult" id="amount_adult" class="form-control" value="{{ old('amount_adult') }}" required />
-                        </div>
-                    </div>
-                    <div class="car-box col-md-12">
-                        <div class="form-group">
-                            <label for="train_class">Amount (Child)</label>
-                            <input type="text" name="amount_child" id="amount_child" class="form-control" value="{{ old('amount_child') }}" required />
-                        </div>
-                    </div>
+{{--                    <div class="car-box col-md-12">--}}
+{{--                        <div class="form-group">--}}
+{{--                            <label for="amount_adult">Amount (Adult)</label>--}}
+{{--                            <input type="text" name="amount_adult" id="amount_adult" class="form-control" value="{{ old('amount_adult') }}" required />--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                    <div class="car-box col-md-12">--}}
+{{--                        <div class="form-group">--}}
+{{--                            <label for="train_class">Amount (Child)</label>--}}
+{{--                            <input type="text" name="amount_child" id="amount_child" class="form-control" value="{{ old('amount_child') }}" required />--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
                     <div class="col-md-4">
                         <button class="btn btn-success" id="coach">Add Each Stop</button>
                     </div>
@@ -257,9 +247,6 @@
                         <th scope="col">#</th>
                         <th scope="col">State</th>
                         <th scope="col">Stop</th>
-                        <th scope="col">Class</th>
-                        <th scope="col">Amount (Adult)</th>
-                        <th scope="col">Amount (Child)</th>
                         <th scope="col">Action</th>
                     </tr>
                     </thead>
@@ -269,9 +256,6 @@
                                 <th scope="row">{{$index + 1}}</th>
                                 <td>{{Ucfirst($stop->state->locations_state)}}</td>
                                 <td>{{Ucfirst($stop->stop_name)}}</td>
-                                <td>{{Ucfirst($stop->class->class)}}</td>
-                                <td>&#8358; {{number_format($stop->amount_adult)}}</td>
-                                <td>&#8358; {{number_format($stop->amount_child)}}</td>
                                 <td>Edit|Delete</td>
                             </tr>
                             </tbody>

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTrainStopsTable extends Migration
+class CreateRouteFareTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,13 @@ class CreateTrainStopsTable extends Migration
      */
     public function up()
     {
-        Schema::create('train_stops', function (Blueprint $table) {
+        Schema::create('route_fare', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('train_location_id');
-            $table->string('stop_name');
+            $table->unsignedBigInteger('train_stop_id');
+            $table->unsignedBigInteger('train_class_id');
+            $table->double('amount_adult');
+            $table->double('amount_child');
             $table->timestamps();
         });
     }
@@ -28,6 +31,6 @@ class CreateTrainStopsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('train_stops');
+        Schema::dropIfExists('route_fare');
     }
 }

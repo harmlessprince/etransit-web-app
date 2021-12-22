@@ -9,4 +9,9 @@ class TrainLocation extends Model
 {
     use HasFactory;
     protected $table = 'train_locations';
+
+    public function routes()
+    {
+        return $this->hasMany(TrainLocation::class );
+    }
 }
