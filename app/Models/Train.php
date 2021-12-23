@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Train extends Model
 {
     use HasFactory;
+
+    public function trainseats()
+    {
+        return $this->hasMany(TrainSeat::class );
+    }
+
+
 }

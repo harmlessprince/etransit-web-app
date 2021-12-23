@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class TrainSeat extends Model
 {
     use HasFactory;
+
+    public function train()
+    {
+        return $this->belongsTo(Train::class);
+    }
+
+    public function trainclass()
+    {
+        return $this->belongsTo(TrainClass::class , 'class_id');
+    }
 }

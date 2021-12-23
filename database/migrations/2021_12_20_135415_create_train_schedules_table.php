@@ -18,6 +18,8 @@ class CreateTrainSchedulesTable extends Migration
             $table->unsignedBigInteger('train_id');
             $table->date('departure_date');
             $table->time('departure_time');
+            $table->string('destination_id');
+            $table->string('pickup_id');
             $table->unsignedBigInteger('how_many_stops');
             $table->unsignedBigInteger('seats_available')->comment("Numbers of seat available");;
             $table->timestamps();

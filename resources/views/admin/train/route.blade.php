@@ -163,7 +163,7 @@
                             <label for="class_id">Train Route </label>
                             <select class="form-control" name="route_id" required>
                                 <option value=""> Select Route</option>
-                                @foreach($routes as $route)
+                                @foreach($trainRoutes as $route)
                                     <option value="{{$route->id}}">{{$route->stop_name}}</option>
                                 @endforeach
                             </select>

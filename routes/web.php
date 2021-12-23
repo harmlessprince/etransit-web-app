@@ -202,6 +202,7 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::post('store/train-stops' , [Train::class , 'addEachStop']);
         Route::get('train/{train_id}/history',[Train::class , 'trainHistory']);
         Route::get('/manage/train/schedule/{train_id}', [Train::class , 'manageSchedule']);
+        Route::post('/manage/train/schedule', [Train::class , 'ScheduleTrainTrip']);
         Route::get('/manage/train/routes-fare' , [Train::class , 'manageRoute']);
         Route::post('/store/train/routes-fare' , [Train::class , 'storeRoute']);
 

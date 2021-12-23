@@ -13,6 +13,7 @@ use App\Http\Controllers\Api\Payment;
 use App\Http\Controllers\Api\Profile;
 use App\Http\Controllers\Api\Service;
 use App\Http\Controllers\Api\Tour;
+use App\Http\Controllers\Api\Train;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -43,6 +44,7 @@ Route::group(['prefix' => 'v1'], function() {
 
 //    Route::middleware('jwt.verify')->group( function () {
     Route::group(['middleware' => ['jwt.verify']], function () {
+
         Route::get('/services' , [Service::class , 'services']);
         Route::post('/search/services' , [Service::class , 'searchServices']);
         //bookings
@@ -102,6 +104,13 @@ Route::group(['prefix' => 'v1'], function() {
         Route::post('/de-select/ferry-seat' , [Ferry::class , 'deselectFerrySeat']);
         Route::post('/book/ferry-trip' , [Ferry::class ,'bookTripForFerryPassenger']);
         Route::post('/handle/ferry/cash-payment',[Ferry::class , 'handleFerryCashPayment']);
+
+        //train module
+        Route::get('/train-bookings' , [Train::class , 'bookTrain']);
+        Route::post('/check/train-schedule', [Train::class , 'checkSchedule']);
+        Route::get('/train-seat/{train_id}' , [Train::class , 'trainSeat']);
+        Route::post('/train-select-seat', [Train::class , 'selectSeat']);
+        Route::post('/train-de-select-seat', [Train::class , 'DeselectSeat']);
 
     });
 

@@ -152,14 +152,15 @@
         <div class="card">
 
             <div class="card-body">
-                <form method="post" action="{{url('/admin/store/train')}}">
+                <form method="post" action="{{url('/admin/manage/train/schedule')}}">
                     @csrf
                     <div class="car-box col-md-12">
                         <div class="form-group">
                             <label for="boat_name">Pick Up</label>
-                            <select class="form-control">
+                            <select class="form-control" name="pickup">
+                                <option> Select Pick city </option>
                                 @foreach($locations as $location)
-                                    <option>{{$location->locations_state}}</option>
+                                    <option value="{{$location->id}}">{{$location->locations_state}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -167,9 +168,10 @@
                     <div class="car-box col-md-12">
                         <div class="form-group">
                             <label for="seats">Final Destination</label>
-                            <select class="form-control">
+                            <select class="form-control" name="destination">
+                                <option> Select Destination City </option>
                                 @foreach($locations as $location)
-                                    <option>{{$location->locations_state}}</option>
+                                    <option value="{{$location->id}}">{{$location->locations_state}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -179,6 +181,7 @@
                             <div class="form-group">
                                 <label for="coach_type">Date</label>
                                 <input type="date" name="date" class="form-control" value="{{ old('date') }}" required/>
+                                <input type="hidden" name="train_id" value="{{$train->id}}" />
                             </div>
                         </div>
                         <div class=" car-box col-md-4">
@@ -193,7 +196,7 @@
                         <div id="route-list">
                             @foreach($trainRoutes as $route)
                                 <div class="form-group" >
-                                    <input type="checkbox" name="route"/> {{$route->stop_name}}
+                                    <input type="checkbox" name="route[]" value="{{$route->id}}"/> {{$route->stop_name}}
                                 </div>
                             @endforeach
                         </div>

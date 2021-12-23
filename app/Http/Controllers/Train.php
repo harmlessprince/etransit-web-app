@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 
 
 use App\Models\RouteFare;
+use App\Models\ScheduleRoute;
 use App\Models\Service;
 use App\Models\TrainClass;
 use App\Models\TrainLocation;
+use App\Models\TrainSchedule;
 use App\Models\TrainSeat;
+use App\Models\TrainSeatTracker;
 use App\Models\TrainStop;
 use Illuminate\Http\Request;
 use App\Models\Train as TrainTicket;
@@ -153,10 +156,9 @@ class Train extends Controller
         $locations = TrainLocation::all();
         $routes = RouteFare::with('city','terminal','seatClass')->get();
         $trainClass = TrainClass::all();
-//        dd( $routes);
+        $trainRoutes = TrainStop::all();
 
-
-        return view('admin.train.route' , compact('locations','routes','trainClass'));
+        return view('admin.train.route' , compact('locations','trainRoutes','routes','trainClass'));
     }
 
     public function manageSchedule($train_id)
@@ -166,6 +168,59 @@ class Train extends Controller
         $trainRoutes = TrainStop::all();
 
         return view('admin.train.schedule', compact('train','trainRoutes','locations'));
+    }
+
+    public function ScheduleTrainTrip(Request $request)
+    {
+                $attr = request()->validate([
+                           'pickup' => 'required|integer',
+                           'destination' => 'required|integer',
+                           'date' => 'required',
+                           'time' => 'required',
+                           'route' => 'required|array'
+                         ]);
+
+
+                DB::beginTransaction();
+                     $train = TrainTicket::where('id' , $request->train_id)->firstorfail();
+                     $schedule = new TrainSchedule();
+                     $schedule->train_id = $train->id;
+                     $schedule->departure_time = $attr['time'];
+                     $schedule->departure_date = $attr['date'];
+                     $schedule->destination_id = $attr['destination'];
+                     $schedule->pickup_id      = $attr['pickup'];
+                     $schedule->how_many_stops = count($request->route);
+                     $schedule->seats_available = $train->occupants;
+                     $schedule->save();
+
+
+                     if($schedule)
+                     {
+                         $trainSeat = TrainSeat::where('train_id', $train->id)->get();
+                         foreach($trainSeat as $index =>  $seat)
+                         {
+                             $seatTracker = new TrainSeatTracker;
+                             $seatTracker->train_seat_id       = $seat->id;
+                             $seatTracker->train_id            = $train->id;
+                             $seatTracker->train_schedule_id   = $schedule->id;
+                             $seatTracker->save();
+                         }
+                     }
+
+                     $routeArray = $request->route;
+                     foreach($routeArray as $index => $route)
+                     {
+                         $routeTracker = new ScheduleRoute;
+                         $routeTracker->train_schedule_id = $schedule->id;
+                         $routeTracker->train_stop_id     = $route;
+                         $routeTracker->save();
+                     }
+
+                 DB::commit();
+
+                 Alert::success('Success', 'Train Schedule  Added Successfully');
+
+                return back();
     }
 
     public function storeRoute(request $request)
