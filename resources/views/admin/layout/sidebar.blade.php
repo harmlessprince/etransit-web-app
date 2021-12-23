@@ -70,6 +70,11 @@
                             <li><a href="{{url('/admin/manage/train/routes-fare')}}">Manage Routes Fare</a></li>
                         </ul>
                     </li>
+                    <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"></i><span>Customers</span></a>
+                        <ul class="nav-submenu menu-content">
+                            <li><a href="{{url('/admin/customers')}}">Manage Customers</a></li>
+                        </ul>
+                    </li>
                     <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"></i><span>Transactions</span></a>
                         <ul class="nav-submenu menu-content">
                             <li><a href="{{url('/admin/transactions')}}">Manage Transactions</a></li>

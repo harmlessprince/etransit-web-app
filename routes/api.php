@@ -40,16 +40,45 @@ Route::group(['prefix' => 'v1'], function() {
 //    Route::get('/rave/callback/', [FlutterwavePayment::class, 'callback'])->name('api.callback');
     Route::post('/rave/callback/', [FlutterwavePayment::class, 'callback'])->name('api.callback');
 
+    Route::get('/services' , [Service::class , 'services']);
+    Route::post('/search/services' , [Service::class , 'searchServices']);
+    //bookings
+    Route::get('/book/{service}/service' , [Booking::class , 'bookingForService']);
+    Route::post('/book/trip' , [Booking::class , 'bookTrip']);
 
+    //car hiree endpoint
+    Route::get('/car/types',[Car::class , 'CarType']);
+    Route::get('/car/class' , [Car::class , 'carClass']);
+    Route::get('/select/type/{car_type_id}',[Car::class,'selectCarType']);
+    Route::get('/select/class/{car_class_id}/{selected_car_type_id}',[Car::class,'selectCarClass']);
+    Route::get('/fetch/car-list/{car_type_id}/{car_class_id}' , [Car::class , 'carList']);
+
+    //boat cruise api
+    Route::get('/boat-cruise',[BoatCruise::class , 'boatCruiseList']);
+    Route::get('/boat-cruise/{trip_id}/show',[BoatCruise::class , 'boatCruiseShow']);
+
+    //tour packages
+    Route::get('/tour-packages', [Tour::class , 'tourPackageList']);
+    Route::get('/tour-packages/{tour_id}/show/{service_id}', [Tour::class , 'tourPackageShow']);
+
+    //send parcel
+    Route::get('/parcel' , [Parcel::class , 'fetchParcel']);
+    Route::get('fetch-states' , [Parcel::class , 'fetchStates']);
+    Route::get('/fetch-cities/{state_id}',[Parcel::class , 'fetchCities']);
+
+    //ferry
+    Route::get('/ferry-service' , [Ferry::class ,'ferryService']);
+    Route::post('/book/ferry' , [Ferry::class , 'bookFerry']);
+
+    //train module
+    Route::get('/train-bookings' , [Train::class , 'bookTrain']);
+    Route::post('/check/train-schedule', [Train::class , 'checkSchedule']);
 
 //    Route::middleware('jwt.verify')->group( function () {
     Route::group(['middleware' => ['jwt.verify']], function () {
 
-        Route::get('/services' , [Service::class , 'services']);
-        Route::post('/search/services' , [Service::class , 'searchServices']);
-        //bookings
-        Route::get('/book/{service}/service' , [Booking::class , 'bookingForService']);
-        Route::post('/book/trip' , [Booking::class , 'bookTrip']);
+
+         //bus booking
         Route::get('/select-seat/{schedule_id}' ,[Booking::class, 'selectSeat']);
         Route::post('/seat/selector_tracker',[Booking::class , 'selectorTracker']);
         Route::post('/deselect-seat',[Booking::class , 'deselectSeat']);
@@ -62,52 +91,36 @@ Route::group(['prefix' => 'v1'], function() {
 
         Route::post('/initialise-pay', [FlutterwavePayment::class, 'initialize'])->name('api.pay.flutter');
 
-        //car hiree endpoint
-        Route::get('/car/types',[Car::class , 'CarType']);
-        Route::get('/car/class' , [Car::class , 'carClass']);
-        Route::get('/select/type/{car_type_id}',[Car::class,'selectCarType']);
-        Route::get('/select/class/{car_class_id}/{selected_car_type_id}',[Car::class,'selectCarClass']);
-        Route::get('/fetch/car-list/{car_type_id}/{car_class_id}' , [Car::class , 'carList']);
+        //car hire module
         Route::get('/car/{car_id}/plan' , [Car::class , 'selectPlan']);
         Route::get('/pick-car-plan/{plan_id}' , [Car::class , 'pickPlan']);
         Route::post('/book-date/{plan_id}' ,[Car::class,'bookADate']);
         Route::get('/car-hire/handle-cash-payment/{history_id}' ,[Car::class,'makeCashPayment']);
 
-        //boat cruise api
-        Route::get('/boat-cruise',[BoatCruise::class , 'boatCruiseList']);
-        Route::get('/boat-cruise/{trip_id}/show',[BoatCruise::class , 'boatCruiseShow']);
+        // boat cruise module
         Route::post('/boat-cruise/{trip_id}/payment-plan/{service_id}',[BoatCruise::class , 'addPayment']);
         //cash payment option
         Route::post('/boat-cruise/cash-payment', [BoatCruise::class , 'addCashPayment'])->name('boat-cruise.pay-cash');
 
-        //tour packages
-        Route::get('/tour-packages', [Tour::class , 'tourPackageList']);
-        Route::get('/tour-packages/{tour_id}/show/{service_id}', [Tour::class , 'tourPackageShow']);
 
+         //tour packages module
         //add tour payment options
         Route::post('/tour/{tour_id}/payment-plan/{service_id}',[Tour::class , 'addPayment']);
         Route::post('/tour/cash-payment', [Tour::class , 'addCashPaymentTour'])->name('tour.pay-cash');
 
-        //send parcel
-        Route::get('/parcel' , [Parcel::class , 'fetchParcel']);
-        Route::get('fetch-states' , [Parcel::class , 'fetchStates']);
-        Route::get('/fetch-cities/{state_id}',[Parcel::class , 'fetchCities']);
+        //send parcel module
         Route::post('/send-parcel' , [Parcel::class , 'sendParcel']);
         Route::post('/parcel/user-info', [Parcel::class , 'storeUserInfo']);
         Route::post('/parcel-cash-payment' , [Parcel::class , 'addCashPayment']);
 
-        //ferry
-        Route::get('/ferry-service' , [Ferry::class ,'ferryService']);
-        Route::post('/book/ferry' , [Ferry::class , 'bookFerry']);
+        //fery booking module
         Route::get('/ferry-seat/{ferry_trip_id}/{tripType}' , [Ferry::class , 'selectFerrySeat']);
         Route::post('/select/ferry-seat', [Ferry::class , 'FerrySelectorTracker']);
         Route::post('/de-select/ferry-seat' , [Ferry::class , 'deselectFerrySeat']);
         Route::post('/book/ferry-trip' , [Ferry::class ,'bookTripForFerryPassenger']);
         Route::post('/handle/ferry/cash-payment',[Ferry::class , 'handleFerryCashPayment']);
 
-        //train module
-        Route::get('/train-bookings' , [Train::class , 'bookTrain']);
-        Route::post('/check/train-schedule', [Train::class , 'checkSchedule']);
+        //train ticketing module
         Route::get('/train-seat/{train_id}' , [Train::class , 'trainSeat']);
         Route::post('/train-select-seat', [Train::class , 'selectSeat']);
         Route::post('/train-de-select-seat', [Train::class , 'DeselectSeat']);

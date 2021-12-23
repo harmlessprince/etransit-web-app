@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminLogin;
 use App\Http\Controllers\BoatCruise;
 use App\Http\Controllers\Booking;
 use App\Http\Controllers\Car;
+use App\Http\Controllers\Customer;
 use App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Eticket\AuthLogin;
 use App\Http\Controllers\Ferry;
@@ -205,6 +206,11 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::post('/manage/train/schedule', [Train::class , 'ScheduleTrainTrip']);
         Route::get('/manage/train/routes-fare' , [Train::class , 'manageRoute']);
         Route::post('/store/train/routes-fare' , [Train::class , 'storeRoute']);
+
+        //manage customer
+        Route::get('/customers',[Customer::class , 'customerIndex']);
+        Route::get('/customer/list', [Customer::class , 'customers'])->name('customers.list');
+        Route::get('/customer/{customer_id}', [Customer::class , 'getCustomer']);
 
 
     });
