@@ -9,6 +9,8 @@ class TrainSchedule extends Model
 {
     use HasFactory;
 
+    protected $guarded = ['id'];
+
     public function destination()
     {
         return $this->belongsTo(TrainLocation::class , 'destination_id');

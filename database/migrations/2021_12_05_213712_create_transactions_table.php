@@ -27,7 +27,8 @@ class CreateTransactionsTable extends Migration
             $table->enum('transaction_type',['cash payment','online'])->default('online');
             $table->unsignedBigInteger('schedule_id')->nullable()->comment('schedule id is for bus ticketing');
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('tour_id')->nullable()->comment('for yout packages payment');
+            $table->unsignedBigInteger('tour_id')->nullable()->comment('for Tour packages payment');
+            $table->unsignedBigInteger('train_schedule_id')->nullable()->comment('for train packages payment');
             $table->unsignedBigInteger('passenger_count')->nullable()->comment('passenger count for bus booking');
             $table->enum('isConfirmed',['True', 'False'])->default('False');
             $table->string('description');

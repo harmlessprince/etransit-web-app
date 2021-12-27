@@ -18,4 +18,9 @@ class TrainSeat extends Model
     {
         return $this->belongsTo(TrainClass::class , 'class_id');
     }
+
+    public function seattrakers()
+    {
+        return $this->hasMany(TrainSeatTracker::class);
+    }
 }

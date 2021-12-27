@@ -8,6 +8,7 @@ use App\Billing\FerryPayment;
 use App\Billing\TourPayment;
 use App\Billing\BoatCruise;
 use App\Billing\Parcel;
+use App\Billing\TrainTicketPayment;
 use App\Classes\Reference;
 use App\Http\Controllers\Controller;
 use App\Models\CarHistory;
@@ -108,6 +109,9 @@ class FlutterwavePayment extends Controller
             switch($serviceId){
                 case 1 :
                     BusTicketPayment::handleBusPayment($data , $tripType);
+                    break;
+                case 2 :
+                    TrainTicketPayment::handlePayment($data);
                     break;
                 case 3 :
                     //for ferry passs $data , $tripType , $fetchScheduleDetailsID;

@@ -124,6 +124,9 @@ Route::group(['prefix' => 'v1'], function() {
         Route::get('/train-seat/{train_id}' , [Train::class , 'trainSeat']);
         Route::post('/train-select-seat', [Train::class , 'selectSeat']);
         Route::post('/train-de-select-seat', [Train::class , 'DeselectSeat']);
+        Route::get('/train-route/selector/{train_schedule_id}' , [Train::class , 'routeSelector']);
+        Route::post('/train/add-passenger-details' , [Train::class , 'passengerDetails']);
+        Route::post('/train/handle-cash-payment' , [Train::class , 'handleCashPayment']);
 
     });
 
