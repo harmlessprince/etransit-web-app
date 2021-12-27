@@ -69,6 +69,7 @@ class FlutterwavePayment extends Controller
                 'boat_cruise_id' => request()->boat_cruise_id ?? null,
                 'delivery_parcel_id' => request()->delivery_parcel_id ?? null,
                 'ferry_trip_id' => request()->ferry_trip_id ?? null,
+                'train_schedule_id' => request()->train_schedule_id ?? null,
 
             ]
         ];
