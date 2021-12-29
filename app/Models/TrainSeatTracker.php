@@ -15,4 +15,8 @@ class TrainSeatTracker extends Model
     {
         return $this->belongsTo(TrainSeat::class , 'train_seat_id');
     }
+
+
+
+
 }

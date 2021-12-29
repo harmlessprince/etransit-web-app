@@ -61,7 +61,7 @@ class Train extends Controller
     public function trainSeat($train_id)
     {
         $train = TrainTicket::where('id',$train_id)->with(['trainseats' => function($query){
-                                                            $query->with('trainclass')->get();
+                                                            $query->with('trainclass', 'seattrakers')->get();
                                                         }])->first();
 
         return  response()->json(['success' => true , 'data' => compact('train',)]);
