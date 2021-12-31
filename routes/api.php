@@ -121,7 +121,7 @@ Route::group(['prefix' => 'v1'], function() {
         Route::post('/handle/ferry/cash-payment',[Ferry::class , 'handleFerryCashPayment']);
 
         //train ticketing module
-        Route::get('/train-seat/{train_id}' , [Train::class , 'trainSeat']);
+        Route::get('/train-seat/{train_schedule_id}/{train_id}' , [Train::class , 'trainSeat']);
         Route::post('/train-select-seat', [Train::class , 'selectSeat']);
         Route::post('/train-de-select-seat', [Train::class , 'DeselectSeat']);
         Route::get('/train-route/selector/{train_schedule_id}' , [Train::class , 'routeSelector']);
