@@ -49,7 +49,7 @@
                     <li><a href="{{url('car-hire')}}" class="routerLink {{ (request()->is('car-hire')) ? 'active-text' : '' }}" active-link='active'> Hire A Vehicle </a> <span class="{{ (request()->is('car-hire')) ? 'active-nav' : '' }}"></span></li>
                     <li><a href="/" class="routerLink" active-link='active'> Hotel Bookings </a></li>
                     <li><a href="/" class="routerLink" active-link='active'> Become A Partner </a></li>
-                    <li><a href="/" class="routerLink" active-link='active'> Send Parcel </a></li>
+                    <li><a href="{{url('parcel')}}" class="routerLink {{ (request()->is('parcel')) ? 'active-text' : '' }}"  active-link='active'> Send Parcel </a><span class="{{ (request()->is('parcel')) ? 'active-nav' : '' }}"></span></li>
                 </ul>
             </div>
         </nav>

@@ -54,17 +54,20 @@ class ConfirmCashPaymentForCarHire extends Command
 
             if($diffInMinutes <= 30)
             {
-                $transaction->status = 'Pending';
-                $transaction->save();
-                if($transaction)
-                {
-                    $transaction->carhistory->update([
-                        'payment_status' => 'Pending',
-                        'isConfirmed'   => 'False'
-//                        'available_status' =>
-                    ]);
-                }
-            }
+               if( $transaction->status = 'Pending')
+               {
+                        // $transaction->save();
+                        if($transaction)
+                        {
+                            $transaction->carhistory->update([
+                                'payment_status' => 'Pending',
+                                'isConfirmed'   => 'False'
+        //                        'available_status' =>
+                            ]);
+                        }
+                    }
+               }
+
 
         }
 

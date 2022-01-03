@@ -11,6 +11,7 @@ use App\Http\Controllers\Ferry;
 use App\Http\Controllers\Login;
 use App\Http\Controllers\Page;
 use App\Http\Controllers\Parcel;
+use App\Http\Controllers\ParcelMgt;
 use App\Http\Controllers\Payment;
 use App\Http\Controllers\Tour;
 use App\Http\Controllers\Train;
@@ -54,6 +55,9 @@ Route::get('/boat-cruise/{id}/show',[BoatCruise::class , 'boatCruiseShow']);
 //tours packages
 Route::get('/tour-packages', [Tour::class , 'tourPackageList']);
 Route::get('/tour-packages/{tour_id}/show', [Tour::class , 'tourPackageShow']);
+
+//manage parcel
+Route::get('parcel' , [ParcelMgt::class , 'parcel']);
 
 
 Route::group(['middleware' => ['auth','prevent-back-history']], function() {

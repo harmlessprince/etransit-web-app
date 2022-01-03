@@ -34,7 +34,7 @@ class TrainTicketPayment
             $transactions->trx_ref = $data['data']['tx_ref'];
             $transactions->amount = $data['data']['amount'];
             $transactions->status = 'Successful';
-            $transactions->schedule_id = $scheduleId;
+            $transactions->train_schedule_id = $scheduleId;
             $transactions->description = $data['data']['meta']['description'];
             $transactions->user_id = $data['data']['meta']['user_id'];
             $transactions->passenger_count = $adultCount + $childrenCount;
