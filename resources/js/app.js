@@ -36,7 +36,10 @@ Vue.component('App', require('./components/App.vue').default);
 Vue.component('Homepage', require('./components/pages/Home.vue').default);
 Vue.component('Login', require('./components/pages/Login.vue').default);
 Vue.component('excel-upload', require('./components/ExcelUpload.vue').default);
+Vue.component('terminal', require('./components/TerminalUpload.vue').default);
 Vue.component('schedule-event', require('./components/ScheduleEvent.vue').default);
+Vue.component('car-upload', require('./components/CarImport.vue').default);
+Vue.component('bus-schedules-upload', require('./components/BulkImportBusSchedules.vue').default);
 
 
 

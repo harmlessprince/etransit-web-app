@@ -2,10 +2,10 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-6 footer-copyright">
-                <p class="mb-0">Copyright 2020 © {{env('APP_NAME')}} rights reserved.</p>
+                <p class="mb-0">Copyright <?php echo date('Y'); ?> © {{env('APP_NAME')}} rights reserved.</p>
             </div>
             <div class="col-md-6">
-                <p class="pull-right mb-0">Developed with  <i class="fa fa-heart font-secondary"></i></p>
+{{--                <p class="pull-right mb-0">Developed with  <i class="fa fa-heart font-secondary"></i></p>--}}
             </div>
         </div>
     </div>
@@ -41,7 +41,7 @@
 <!-- Plugins JS Ends-->
 <!-- Theme js-->
 <script src="{{asset('assets/js/theme-customizer/customizer.js')}}"></script>
-<script src="{{mix('/js/app.js')}}"></script>
+<script src="{{asset('/js/app.js')}}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" defer></script>

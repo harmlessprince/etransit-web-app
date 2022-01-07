@@ -64,4 +64,7 @@ class Vehicle extends Controller
         return response()->json(['message' => 'uploaded successfully'], 200);
     }
 
+
+
+
 }

@@ -12,7 +12,7 @@ class Service extends Controller
     {
       $services  =  ETransitService::all();
 
-      return response()->json(['success' => true , 'data' => compact('services')]);
+      return response()->json(['success' => true , 'data' => compact('services')], 200);
     }
 
     public function searchServices(Request $request)

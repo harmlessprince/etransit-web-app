@@ -9,43 +9,61 @@ use Illuminate\Support\Facades\Validator;
 use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use App\Models\User;
+use App\Http\Controllers\Api\BaseController as BaseController;
+use Illuminate\Support\Facades\Auth;
 
-class AuthUser extends Controller
+
+class AuthUser extends BaseController
 {
-    /* user login */
+
+
     public function authenticate(Request $request)
     {
+        request()->validate( [
+            'email'    => 'required|email',
+            'password' => 'required|string|min:6|max:50'
+        ]);
         $credentials = $request->only('email', 'password');
 
+        //Request is validated
+        //Crean token
         try {
             if (! $token = JWTAuth::attempt($credentials)) {
-                return response()->json(['error' => 'invalid_credentials'], 400);
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Login credentials are invalid.',
+                ], 400);
             }
         } catch (JWTException $e) {
-            return response()->json(['error' => 'could_not_create_token'], 500);
+//            return $credentials;
+            return response()->json([
+                'success' => false,
+                'message' => 'Could not create token.',
+            ], 500);
         }
 
-        $user = User::where('email', $request['email'])->firstorfail();
-        return response()->json(compact('token','user'));
+        return response()->json([
+            'success' => true,
+            'user' => auth()->user(),
+            'token' => $token,
+        ]);
     }
 
     /* user Registration */
     public function register(Request $request)
     {
 
-        $validator = Validator::make($request->all(), [
-            'full_name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
-            'address' => 'sometimes',
-            'username' => 'required|string|max:40|unique:users',
-            'phone_number' => 'required'
+        request()->validate(
+            [
+                'full_name' => 'required|string|max:255',
+                'email' => 'required|string|email|max:255|unique:users',
+                'password' => 'required|string|min:6|confirmed',
+                'address' => 'sometimes',
+                'username' => 'required|string|max:40|unique:users',
+                'phone_number' => 'required|string|unique:users'
                 //|regex:/(01)[0-9]{9}/',
-        ]);
-
-        if($validator->fails()){
-            return response()->json($validator->errors()->toJson(), 400);
-        }
+            ]
+        );
 
         $user = User::create([
             'full_name' => $request->get('full_name'),
@@ -56,7 +74,7 @@ class AuthUser extends Controller
             'phone_number' => $request['phone_number']
         ]);
 
-        $token = JWTAuth::fromUser($user);
+        $token = JWTAUTH::fromUser($user);
 
         return response()->json(compact('user','token'),201);
     }
@@ -86,4 +104,5 @@ class AuthUser extends Controller
 
         return response()->json(compact('user'));
     }
+
 }

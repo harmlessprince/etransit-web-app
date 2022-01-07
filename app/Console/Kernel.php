@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use Aws\Command;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -13,7 +14,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        Commands\ConfirmCashPaymentForCarHire::class,
+        Commands\StartCarHireTrip::class,
     ];
 
     /**
@@ -24,7 +26,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        $schedule->command('car-hire:cash-payment-confirmation')->everyMinute();
+        $schedule->command('car-hire:start-trip')->everyMinute();
     }
 
     /**

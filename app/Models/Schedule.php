@@ -36,7 +36,7 @@ class Schedule extends Model
 
     public function pickup()
     {
-        return $this->belongsTo(Destination::class , 'pickup_id');
+        return $this->belongsTo(Pickup::class);
     }
 
     public function service()
@@ -49,5 +49,9 @@ class Schedule extends Model
         return $this->belongsTo(SeatTracker::class);
     }
 
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
+    }
 
 }

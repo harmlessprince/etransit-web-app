@@ -2,19 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Hash;
+use Illuminate\Support\Facades\Auth;
 use Session;
 use App\Models\Admin;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use RealRashid\SweetAlert\Facades\Alert;
+
 class AdminLogin extends Controller
 {
-    protected $redirectTo = '/dashboard';
+    use AuthenticatesUsers;
 
     public function __construct()
     {
         $this->middleware('guest:admin')->except('logout');
     }
+
     public function showLoginForm()
     {
         return view('admin.auth.login');
@@ -22,33 +27,34 @@ class AdminLogin extends Controller
 
     public function loginAdmin(Request $request)
     {
-        $request->validate([
-            'email' => 'required',
-            'password' => 'required',
+        request()->validate([
+            'email'   => 'required|email|exists:admins',
+            'password' => 'required'
         ]);
 
-        if(Auth::guard('admin')
-            ->attempt($request->only(['email', 'password'])))
-        {
-            return redirect()
-                ->route('dashboard');
-        }
+        if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) {
 
-        return redirect()
-            ->back()
-            ->with('error', 'Invalid Credentials');
+//            Alert::success('Congrats', 'You\'ve Successfully Registered');
+//            toastr()->success('Successfully logged in ...');
+            return redirect()->intended('/admin');
+        }
+        return back()->withInput($request->only('email', 'remember'));
     }
+
+
 
     public function logout()
     {
         Auth::guard('admin')
             ->logout();
         return redirect()
-            ->route('admin.login');
+            ->route('admin.login.page');
     }
 
     protected function guard()
     {
         return Auth::guard('admin');
     }
+
+
 }

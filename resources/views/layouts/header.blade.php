@@ -25,12 +25,12 @@
                         <button class="sign-up">Sign Up</button>
                     </a>
                     @else
-                        <a href="{{ route('logout') }}"  onclick="event.preventDefault();
+                        <a href="{{ url('/logout') }}"  onclick="event.preventDefault();
                           document.getElementById('logout-form').submit();">
                         <button class="sign-up">Sign Out</button>
                         </a>
                     @endif
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    <form id="logout-form" action="{{ url('/logout') }}" method="POST" class="d-none">
                         @csrf
                     </form>
                 </div>
@@ -42,13 +42,14 @@
             </div>
             <div class="nav-menu">
                 <ul>
-                    <li><a  href="/" class="routerLink" active-link='active'> Home </a></li>
-                    <li><a href="/" class="routerLink" active-link='active'> About Us </a></li>
-                    <li><a href="/" class="routerLink" active-link='active'> Tour Packages </a></li>
-                    <li><a href="/" class="routerLink" active-link='active'> Boat Cruise </a></li>
+                    <li><a  href="/" class="routerLink {{ (request()->is('/')) ? 'active-text' : '' }}" active-link='active'> Home </a><span class="{{ (request()->is('/')) ? 'active-nav' : '' }}"></span></li>
+                    <li><a href="#about_us_section" class="routerLink" active-link='active' > About Us </a></li>
+                    <li><a href="{{url('tour-packages')}}" class="routerLink {{ (request()->is('tour-packages')) ? 'active-text' : '' }}" active-link='active'> Tour Packages </a><span class="{{ (request()->is('tour-packages')) ? 'active-nav' : '' }}"></span></li>
+                    <li><a href="{{url('boat-cruise')}}" class="routerLink {{ (request()->is('boat-cruise')) ? 'active-text' : '' }}" active-link='active'> Boat Cruise </a><span class="{{ (request()->is('boat-cruise')) ? 'active-nav' : '' }}"></span></li>
+                    <li><a href="{{url('car-hire')}}" class="routerLink {{ (request()->is('car-hire')) ? 'active-text' : '' }}" active-link='active'> Hire A Vehicle </a> <span class="{{ (request()->is('car-hire')) ? 'active-nav' : '' }}"></span></li>
                     <li><a href="/" class="routerLink" active-link='active'> Hotel Bookings </a></li>
                     <li><a href="/" class="routerLink" active-link='active'> Become A Partner </a></li>
-                    <li><a href="/" class="routerLink" active-link='active'> Send Parcel </a></li>
+                    <li><a href="{{url('parcel')}}" class="routerLink {{ (request()->is('parcel')) ? 'active-text' : '' }}"  active-link='active'> Send Parcel </a><span class="{{ (request()->is('parcel')) ? 'active-nav' : '' }}"></span></li>
                 </ul>
             </div>
         </nav>

@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\ScheduleExport;
+use App\Imports\ScheduleImport;
 use Illuminate\Http\Request;
-use App\Models\Terminal;
 use App\Models\Bus;
 use App\Models\Schedule as EventSchedule;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 
 class Schedule extends Controller
 {
@@ -15,6 +17,7 @@ class Schedule extends Controller
          $bus =  Bus::where('id',$bus_id)->first();
          $terminals = \App\Models\Terminal::all();
          $locations  = \App\Models\Destination::all();
+         $pickups    = \App\Models\Pickup::all();
 
         if($request->ajax()) {
             $data = EventSchedule::whereDate('departure_date', '>=', $request->start)
@@ -25,7 +28,7 @@ class Schedule extends Controller
 
 
 
-         return view('admin.schedule.event' , compact('terminals','bus','locations'));
+         return view('admin.schedule.event' , compact('terminals','bus','locations','pickups'));
 
     }
 
@@ -34,7 +37,8 @@ class Schedule extends Controller
 
                 request()->validate([
                     'departureTime'=> 'required',
-                    'Tfare'        => 'required'
+                    'Tfare'        => 'required',
+                    'TfareChild'   => 'required'
                 ]);
 
                 $service = \App\Models\Terminal::where('id',$request['terminal'])->with('service')->first();
@@ -50,6 +54,7 @@ class Schedule extends Controller
                         $scheduleEvent->pickup_id         = (int) $request['pickUp'];
                         $scheduleEvent->destination_id    = (int) $request['destination'];
                         $scheduleEvent->fare_adult        = $request['Tfare'];
+                        $scheduleEvent->fare_children     = $request['TfareChild'];
                         $scheduleEvent->departure_date    = $request['eventDate'];
                         $scheduleEvent->departure_time    = $request['departureTime'];
                         $scheduleEvent->seats_available   = $numberOfSeats->seater ;
@@ -73,4 +78,41 @@ class Schedule extends Controller
 
                 }
     }
+
+
+    public function importExportViewSchedule()
+    {
+        return view('admin.schedule.import');
+    }
+
+    public function exportSchedule()
+    {
+
+     $schedules =   DB::table('schedules')
+                        ->select('terminal_name','name','car_registration','pickups.location as pickup'
+                        ,'destinations.location','fare_adult','fare_children','departure_date','departure_time')
+                         ->join('terminals', 'schedules.terminal_id', '=', 'terminals.id')
+                         ->join('services', 'schedules.service_id', '=', 'services.id')
+                         ->join('buses', 'schedules.bus_id', '=', 'buses.id')
+                         ->join('pickups', 'schedules.pickup_id', '=', 'pickups.id')
+                         ->join('destinations', 'schedules.destination_id', '=', 'destinations.id')
+                         ->get();
+
+        return Excel::download(new ScheduleExport( $schedules), 'schedule.xlsx');
+    }
+
+
+    public function importSchedule(Request $request)
+    {
+        $request->validate([
+            'excel_file' => 'required|file|mimes:xls,xlsx,csv'
+        ]);
+
+        Excel::import(new ScheduleImport,request()->file('excel_file'));
+
+        toastr()->success('Data saved successfully');
+
+        return response()->json(['message' => 'uploaded successfully'], 200);
+    }
+
 }

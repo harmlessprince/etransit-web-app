@@ -20,6 +20,9 @@ class DatabaseSeeder extends Seeder
         $this->call(BusSeeder::class);
         $this->call(TripTypeSeeder::class);
         $this->call(DestinationSeeder::class);
+        $this->call(PickUpSeeder::class);
+        $this->call(AdminSeeder::class);
+        $this->call(UserSeeder::class);
 
     }
 }

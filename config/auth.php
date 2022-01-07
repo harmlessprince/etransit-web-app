@@ -17,6 +17,14 @@ return [
         'guard' => 'web',
         'passwords' => 'users',
     ],
+    'admin' => [
+        'guard'=> 'eloquent',
+        'model'=> App\Models\Admin::class,
+    ],
+    'e-ticket' => [
+        'guard'=> 'eloquent',
+        'model'=> App\Models\Eticket::class,
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -41,9 +49,17 @@ return [
             'provider' => 'users',
         ],
         'admin' => [
-            'redirectTo' => 'dashboard',
             'driver' => 'session',
-            'provider' => 'admin',
+            'provider' => 'admins',
+        ],
+        'e-ticket' => [
+            'driver' => 'session',
+            'provider' => 'e-tickets',
+        ],
+        'api' => [
+            'driver' => 'jwt',
+            'provider' => 'users',
+            'hash' => false,
         ],
     ],
 
@@ -69,10 +85,15 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
-        'admin' => [
+        'admins' => [
             'driver' => 'eloquent',
-             'model' => App\Models\Admin::class,
+             'model' => \App\Models\Admin::class,
         ],
+        'e-tickets' => [
+            'driver' => 'eloquent',
+            'model' => \App\Models\Eticket::class,
+        ],
+
 
         // 'users' => [
         //     'driver' => 'database',
@@ -101,6 +122,14 @@ return [
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,
+        ],
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Admin::class,
+        ],
+        'e-tickets' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Eticket::class,
         ],
     ],
 

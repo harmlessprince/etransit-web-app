@@ -25,7 +25,7 @@ class BusSeeder extends Seeder
         Bus::create([
             'car_type' => 'Toyota Liat',
             'car_model' => 'Bus',
-            'car_registration' => 'LND 141 QR',
+            'car_registration' => 'LND 141 QP',
             'air_conditioning' => 1,
             'wheels' => 12,
             'seater' => 20,
@@ -34,7 +34,7 @@ class BusSeeder extends Seeder
         Bus::create([
             'car_type' => 'Toyota Bus2',
             'car_model' => 'Saloon Car',
-            'car_registration' => 'LND 141 QR',
+            'car_registration' => 'LND 121 XL',
             'air_conditioning' => 1,
             'wheels' => 12,
             'seater' => 21,
@@ -43,7 +43,7 @@ class BusSeeder extends Seeder
         Bus::create([
             'car_type' => 'Toyota Bus3',
             'car_model' => 'Saloon Car',
-            'car_registration' => 'LND 141 QR',
+            'car_registration' => 'LND 112 JL',
             'air_conditioning' => 0,
             'wheels' => 4,
             'seater' => 22,

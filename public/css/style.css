@@ -1,6 +1,13 @@
 
 body{
     background:#FDFCFC !important;
+    margin:0;
+    padding:0;
+}
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
 }
 .hero-bg-section{
     position: relative;
@@ -33,6 +40,7 @@ body{
     letter-spacing: -0.02em;
     color: #FFFFFF;
     margin-top: 200px;
+    margin-left:100px ;
 }
 .hero-bg-text p{
     font-weight: 600;
@@ -66,17 +74,17 @@ body{
     display: flex;
     justify-content: center;
     height: 450px;
-
 }
+
 .ticketing-box {
     padding:20px;
     position: absolute;
-    top: 500px;
+    top: 400px;
     background: #FFFFFF;
     box-shadow: 0px 4px 30px rgba(187, 187, 187, 0.33);
     border-radius: 15px;
     width: 1024px;
-    height: 500px;
+    /*height: 500px;*/
 
 
 }
@@ -90,9 +98,10 @@ body{
     border: 1px solid #F2F2F2;
     margin-top:20px;
 }
+
 .booking-trip-button button:hover{
     width:150px;
-    background:  #03174C;
+    background: #03174C;
     height: 50px;
     border: 1px solid  #03174C;
     color:#fff;
@@ -147,6 +156,7 @@ body{
     box-shadow: 0px 4px 30px rgba(187, 187, 187, 0.33);
     border-radius: 8px;
     border-bottom:1px solid #E0E0E0;
+    margin-top: 8px;
 }
 #departure:hover , .departure_day_box:hover{
     border-bottom:1px solid  #FFAB72;
@@ -176,7 +186,7 @@ body{
     border: none;
     box-shadow: 0px 4px 30px rgba(187, 187, 187, 0.33);
     border-bottom:1px solid #E0E0E0;
-    width:100px !important;
+    width:100px;
     text-align: center;
 }
 .travelling_select_box{
@@ -284,7 +294,7 @@ body{
 }
 .discount_plane_img{
     /*width:1000px !important;*/
-    width: 918px !important;
+    width: 918px;
 }
 .trending_vehicle_items{
     display:flex;
@@ -296,7 +306,9 @@ body{
 .trending_vehicle_items{
     width: 1394px;
     overflow: scroll;
-
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
 .trending_header_text{
     display: flex;
@@ -385,32 +397,13 @@ body{
 #navbarSupportedContent1{
     /*display:none;*/
 }
-/* screen for 1400px */
-@media screen and (max-width: 1400px) {
 
-    .discount_plane_img {
-        width: 760px !important;
-    }
-
-    .about_us_img {
-        width: 434px !important;
-        margin-top: 30px;
-    }
-    .about_us_content .about_paragragh {
-        width: 443px;
-        height: 90px;
-        margin-left: -22px;
-    }
-    .hero-bg-text {
-        left: 347px;
-    }
-}
 
 /* bus booking page styles */
 .booking_bg{
     display:flex;
     justify-content: center;
-position:relative;
+    position:relative;
 }
 .booking_hero_text{
     margin-top:70px;
@@ -531,11 +524,13 @@ position:relative;
 .passenger_input_field{
     border-bottom: 1px solid gray;
     width:450px;
+    outline:none;
 }
 .gender{
     border-bottom: 1px solid gray;
     width:250px;
     margin-top:15px;
+    outline:none;
 }
 .passenger_name{
     display:flex;
@@ -622,7 +617,7 @@ position:relative;
 }
 .selected {
     background:#4E6CBB !important;
-    color:#fff;
+    color:#fff !important;
     border:1px solid #E0E0E0;
 }
 .available {
@@ -771,11 +766,14 @@ background:#DC6513;
     grid-column: 6;
     margin-top: -23px;
 }
-.receipt_date{
+.receipt_date , .round_trip{
     display:grid;
     grid-template-columns: repeat(5 , 1fr);
 }
-.pickup_date{
+.round_trip{
+    margin-top:20px;
+}
+.pickup_date , .trip_type{
     grid-column: 1/5;
 }
 .pickup_time {
@@ -824,211 +822,6 @@ background:#DC6513;
     margin-left:100px;
     margin-top:10px;
     color:#828282;
-}
-
-
-
-
-/* end of payment box **/
-/* responsivess for 1200px screeen */
-@media screen and (max-width: 1200px) {
-
-    .discount_plane_img {
-        width: 675px !important;
-    }
-    .trending_vehicle_items {
-        width: 1155px;
-        overflow: scroll;
-    }
-    .discount_bus_img {
-        width: 285px !important;
-        margin-top: 40px;
-    }
-    .about_us_img {
-        display: none !important;
-    }
-    .about_us_content .about_paragragh {
-        width: 526px;
-        height: 90px;
-        line-height: 2em;
-    }
-    .hero-bg-text {
-        left: 251px;
-    }
-}
-
-@media screen and (max-width: 992px) {
-
-    .ticketing-box {
-        padding: 20px;
-        position: absolute;
-        top: 500px;
-        background: #FFFFFF;
-        box-shadow: 0px 4px 30px rgb(187 187 187 / 33%);
-        border-radius: 15px;
-        width: 854px;
-        height: 500px;
-    }
-    .ticket-box-menu ul li a {
-        padding: 30px;
-        font-size: 24px;
-        color: #021037;
-    }
-    .about_us_box {
-        display: flex;
-        justify-content: flex-start;
-        margin-left: -133px;
-    }
-    .discount_plane_img {
-        width: 514px !important;
-    }
-    .discount_bus_img {
-        width: 237px !important;
-        margin-top: 40px;
-    }
-    .trending_vehicle_items {
-        width: 991px;
-        overflow: scroll;
-    }
-    .trending_vehicle_item {
-        background: #fff !important;
-        box-shadow: 0px 3px 20px rgb(209 209 209 / 38%);
-        border-radius: 10px;
-        /*padding: -8px;*/
-        margin: 30px;
-    }
-    .vehicle_image img {
-        width: 258px !important;
-        height: 73px !important;
-    }
-    .vehicle_function p{
-        font-size: 8px !important;
-    }
-    .vehicle_name p{
-        font-size: 13px;
-    }
-    .client_img{
-        width:150px !important;
-        margin-top:40px;
-    }
-    .hero-bg-text {
-        left: 126px;
-    }
-}
-@media screen and (max-width: 768px) {
-    .hero-bg-text {
-        left: 30px;
-    }
-
-    .ticketing-box {
-        padding: 20px;
-        position: absolute;
-        top: 500px;
-        background: #FFFFFF;
-        box-shadow: 0px 4px 30px rgb(187 187 187 / 33%);
-        border-radius: 15px;
-        width: 699px;
-        height: 500px;
-    }
-    .ticket-box-menu ul li a {
-        padding: 22px;
-        font-size: 20px;
-        color: #021037;
-    }
-    .ticket-box-menu ul li a:hover{
-        background: #021037;
-        color: #DC6513;
-        padding: 22px;
-        font-size: 20px;
-    }
-    #departure, #destination {
-        width: 227px;
-        margin-top: 20px;
-        padding: 10px;
-        border: none;
-        background: #FFFFFF;
-        box-shadow: 0px 4px 30px rgb(187 187 187 / 33%);
-        border-radius: 15px;
-        border-bottom: 1px solid #E0E0E0;
-    }
-    .departure_day_box {
-        margin-top: 41px;
-        background: #fff;
-        padding: 8px;
-        box-shadow: 0px 4px 30px rgb(187 187 187 / 33%);
-        border-radius: 10px;
-        border-bottom: 1px solid #E0E0E0;
-
-        width: 247px !important;
-        text-align: center;
-        margin-left: 10px;
-        margin-bottom: 26px;
-    }
-    #travelling_from {
-        width: 292px;
-        margin-top: 20px;
-        padding: 10px;
-        border: none;
-        background: #FFFFFF;
-        box-shadow: 0px 4px 30px rgb(187 187 187 / 33%);
-        border-radius: 8px;
-        border-bottom: 1px solid #E0E0E0;
-        margin-right: 15px;
-    }
-    .about_us_content .about_paragragh {
-        width: 413px;
-        height: 90px;
-        line-height: 2em;
-        margin-left: -48px;
-    }
-
-    .discount_plane_img {
-        width: 323px !important;
-        height: 255px;
-    }
-    .discount_bus_img {
-        width: 193px !important;
-        margin-top: 60px;
-        height: 227px;
-    }
-    .discount_bg {
-        margin-top: 40px;
-        background: #03174C;
-        display: flex;
-        justify-content: space-between;
-        height: 255px;
-    }
-
-    .discount_text h3 {
-        color: #fff;
-        margin-top: -7px;
-        font-size: 18px;
-        margin-left: 8px;
-    }
-    .discount_text .discount_text {
-        color: #fff;
-        margin-top: -7px;
-        font-size: 18px;
-        margin-left: -11px !important;
-    }
-    .discount_text  p{
-        font-size: 14px;
-    }
-    .discount_text span {
-        color: #fff;
-        margin-left: 15px;
-        font-size: 14px;
-    }
-    .trending_vehicle_items {
-        width: 756px;
-        overflow: scroll;
-    }
-    #travelling_from , #travelling_to {
-        width: 287px;
-    }
-    .routerLink {
-        font-size: 12px !important;
-    }
 }
 
 /* start of navigation header css */
@@ -1117,19 +910,37 @@ background:#DC6513;
 }
 .logo img{
     margin-top: 10px;
+    margin-left: -351px;
 }
 .nav-menu ul{
     list-style: none;
     display:flex;
+    height:100%;
 }
 .nav-menu ul li {
     font-style: normal;
     font-weight: bold;
     font-size: 18px;
-    /*line-height: 21px;*/
-    margin: 15px  10px 0px 10px;
+    height:100%;
+    position:relative;
+    padding: 15px  10px 0px 10px;
     color:#828282;
 
+}
+
+.active-nav{
+    display:flex;
+    height:3px;
+    position:absolute;
+    width:70%;
+    transform: translateX(-50%);
+    left:50%;
+    border-radius:40px;
+    background:#021037;
+    bottom:5px;
+}
+.active-text{
+    color:#021037 !important;
 }
 .routerLink{
     color: #828282;
@@ -1137,14 +948,13 @@ background:#DC6513;
 .routerLink:hover{
     color: #021037;
     padding-bottom:10px;
+    text-decoration:none;
 }
 /* end of navigation header css */
 .container, .container-fluid, .container-xl, .container-lg, .container-md, .container-sm{
     padding:0px !important;
 }
-body{
-    background: #E5E5E5;
-}
+
 /* foooter css */
 .newsletter_box{
     background: #fff !important;
@@ -1155,7 +965,7 @@ body{
 .newsletter{
     background:transparent;
     border: none ;
-    width:400px !important;
+    width:400px ;
     padding: 10px;
     border-bottom:1px solid grey;
 }
@@ -1231,22 +1041,327 @@ body{
 .copyright_section{
     display: flex;
     justify-content: space-between;
+    height: 200px;
+    padding-bottom: 20px;
+    align-items: flex-end;
+    padding: 0px 4%;
 
 }
 .copyright_section h5{
     color:white;
-    margin-top: 180px;
-    margin-left:  70px;
-    margin-right:70px ;
-
 }
 
 .copyright_section h5 span{
     color: #DC6513;
 
 }
+.logo img {
+    margin-left: -174px;
+}
+
+/* end of payment box **/
+/* responsivess for 1200px screeen */
+@media screen and (max-width: 1600px) {
+    .about_us_box {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 68px;
+    }
+    .about_us_content .about_paragragh {
+        width: 443px;
+        height: 90px;
+        margin-left: 77px;
+    }
+    .hero-bg-text{
+        margin-left:28px ;
+    }
+
+}
+/*@media screen and (min-width: 1024px) {*/
+
+/*    .about_us_content .about_paragragh {*/
+/*        width: 400px;*/
+/*        height: 90px;*/
+/*        line-height: 24px;*/
+/*        !* justify-content: space-between; *!*/
+/*    }*/
+/*}*/
+/* screen for 1400px */
+@media screen and (max-width: 1400px) {
+
+    .discount_plane_img {
+        width: 760px;
+    }
+
+    .about_us_img {
+        width: 434px !important;
+        margin-top: 30px;
+    }
+    .about_us_content .about_paragragh {
+        width: 443px;
+        height: 90px;
+        margin-left: -22px;
+    }
+    .hero-bg-text{
+        margin-left:-75px ;
+    }
+    .logo img {
+        margin-left: -71px;
+    }
+
+}
+@media screen and (max-width: 1200px) {
+    .discount_plane_img {
+        width: 632px;
+     }
+    .trending_vehicle_items {
+        width: 1155px;
+        overflow: scroll;
+    }
+    .discount_bus_img {
+        width: 285px !important;
+        margin-top: 40px;
+    }
+    .about_us_img {
+        display: none !important;
+    }
+    .about_us_content .about_paragragh {
+        width: 526px;
+        height: 90px;
+        line-height: 2em;
+    }
+    .hero-bg-text{
+        margin-left:-187px ;
+    }
+    .about_us_box {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 153px;
+        font-size: 13px;
+    }
+    .about_us_content {
+        margin-left: 238px;
+    }
+    .logo img {
+        margin-left: -18px;
+    }
+}
+@media screen and (max-width: 1024px) {
+
+    .nav-menu ul li {
+        font-size: 15px;
+    }
+    .discount_plane_img {
+        width: 525px;
+    }
+    .socials_menu {
+        margin-left: 87px;
+    }
+    .trending_vehicle_items {
+        width: 1009px;
+
+    }
+    .hero-bg-text{
+        margin-left:-269px ;
+    }
+    .logo img {
+        margin-left: -12px;
+    }
+
+
+
+}
+@media screen and (max-width: 992px) {
+
+    .ticketing-box {
+        padding: 20px;
+        position: absolute;
+        top: 500px;
+        background: #FFFFFF;
+        box-shadow: 0px 4px 30px rgb(187 187 187 / 33%);
+        border-radius: 15px;
+        width: 854px;
+        /*height: 500px;*/
+    }
+    .ticket-box-menu ul li a {
+        padding: 30px;
+        font-size: 24px;
+        color: #021037;
+    }
+    .about_us_box {
+        display: flex;
+        justify-content: flex-start;
+        margin-left: -133px;
+    }
+    .discount_plane_img {
+        width: 514px;
+    }
+    .discount_bus_img {
+        width: 237px !important;
+        margin-top: 40px;
+    }
+    /*.trending_vehicle_items {*/
+    /*    width: 991px;*/
+    /*    overflow: scroll;*/
+    /*}*/
+    .trending_vehicle_item {
+        background: #fff !important;
+        box-shadow: 0px 3px 20px rgb(209 209 209 / 38%);
+        border-radius: 10px;
+        /*padding: -8px;*/
+        margin: 30px;
+    }
+    .vehicle_image img {
+        width: 258px !important;
+        height: 73px !important;
+    }
+    .vehicle_function p{
+        font-size: 8px !important;
+    }
+    .vehicle_name p{
+        font-size: 13px;
+    }
+    .client_img{
+        width:150px !important;
+        margin-top:40px;
+    }
+    .hero-bg-text {
+        left: 469px;
+    }
+    .trending_vehicle_items {
+        width: 988px;
+    }
+    .header_text {
+        margin-top: 672px;
+
+    }
+}
+@media screen and (max-width: 768px) {
+
+    .hero-bg-text {
+        left: 363px;
+    }
+
+    .ticketing-box {
+        padding: 20px;
+        position: absolute;
+        top: 500px;
+        background: #FFFFFF;
+        box-shadow: 0px 4px 30px rgb(187 187 187 / 33%);
+        border-radius: 15px;
+        width: 699px;
+        /*height: 500px;*/
+    }
+    .ticket-box-menu ul li a {
+        padding: 21px;
+        font-size: 20px;
+        color: #021037;
+    }
+    .ticket-box-menu ul li a:hover{
+        background: #021037;
+        color: #DC6513;
+        padding: 22px;
+        font-size: 20px;
+    }
+    #departure, #destination {
+        width: 227px;
+        margin-top: 20px;
+        padding: 10px;
+        border: none;
+        background: #FFFFFF;
+        box-shadow: 0px 4px 30px rgb(187 187 187 / 33%);
+        border-radius: 15px;
+        border-bottom: 1px solid #E0E0E0;
+    }
+    .departure_day_box {
+        margin-top: 41px;
+        background: #fff;
+        padding: 8px;
+        box-shadow: 0px 4px 30px rgb(187 187 187 / 33%);
+        border-radius: 10px;
+        border-bottom: 1px solid #E0E0E0;
+
+        width: 247px !important;
+        text-align: center;
+        margin-left: 10px;
+        margin-bottom: 26px;
+    }
+    #travelling_from {
+        width: 292px;
+        margin-top: 20px;
+        padding: 10px;
+        border: none;
+        background: #FFFFFF;
+        box-shadow: 0px 4px 30px rgb(187 187 187 / 33%);
+        border-radius: 8px;
+        border-bottom: 1px solid #E0E0E0;
+        margin-right: 15px;
+    }
+    .about_us_content .about_paragragh {
+        width: 413px;
+        height: 90px;
+        line-height: 2em;
+        margin-left: -48px;
+    }
+
+    .discount_plane_img {
+        width: 323px;
+        height: 255px;
+    }
+    .discount_bus_img {
+        width: 193px !important;
+        margin-top: 60px;
+        height: 227px;
+    }
+    .discount_bg {
+        margin-top: 40px;
+        background: #03174C;
+        display: flex;
+        justify-content: space-between;
+        height: 255px;
+    }
+
+    .discount_text h3 {
+        color: #fff;
+        margin-top: -7px;
+        font-size: 18px;
+        margin-left: 8px;
+    }
+    .discount_text .discount_text {
+        color: #fff;
+        margin-top: -7px;
+        font-size: 18px;
+        margin-left: -11px !important;
+    }
+    .discount_text  p{
+        font-size: 14px;
+    }
+    .discount_text span {
+        color: #fff;
+        margin-left: 15px;
+        font-size: 14px;
+    }
+    .trending_vehicle_items {
+        width: 765px;
+        overflow: scroll;
+    }
+
+    #travelling_from , #travelling_to {
+        width: 287px;
+    }
+    .routerLink {
+        font-size: 12px !important;
+    }
+}
+
+
 /* end footer css */
 /* navigation optimization for 992 */
+/*@media screen and (max-width: 1024px) {*/
+/*   .nav-menu ul li a {*/
+/*       font-size:19px !important;*/
+/*    }*/
+/*}*/
 @media screen and (max-width: 992px) {
     .routerLink{
         font-size: 16px;
@@ -1272,9 +1387,6 @@ body{
         width: 70px;
         margin-right: 10px;
     }
-
-    element.style {
-    }
     .currency-block span {
 
         font-weight: bold;
@@ -1292,13 +1404,11 @@ body{
     .socials_menu {
         display: flex;
         flex-direction: column;
-        margin-left: 84px !important;
+        margin-left: 84px;
     }
-    .nav-menu ul {
-        list-style: none;
-
+    .nav-menu ul li{
+        font-size:10px;
     }
-
 }
 @media screen and (max-width: 768px) {
     .navbar {
@@ -1312,9 +1422,12 @@ body{
     .nav-menu ul {
         display:flex;
         flex-direction: column;
+        padding:20px;
     }
     .nav-menu ul  li:hover{
-        background: red;
+        background: #021037;
+        color:#fff;
+
     }
     .bottom-nav {
         display: none !important;
@@ -1335,7 +1448,7 @@ body{
     .newsletter {
         background: transparent;
         border: none;
-        width: 204px !important;
+        width: 204px ;
         padding: 10px;
         border-bottom: 1px solid grey;
     }
@@ -1385,7 +1498,7 @@ body{
     .socials_menu {
         display: flex;
         flex-direction: column;
-        margin-left: 55px !important;
+        margin-left: 55px ;
     }
     .socials_menu h3{
         font-size: 17px;
@@ -1398,6 +1511,9 @@ body{
         margin-right: 70px;
         font-size: 12px;
     }
+    .logo img {
+        margin-left: -346px;
+    }
 
 }
 @media screen and (max-width: 576px) {
@@ -1408,8 +1524,8 @@ body{
         background: #FFFFFF;
         box-shadow: 0px 4px 30px rgb(187 187 187 / 33%);
         border-radius: 15px;
-        width: 573px;
-        height: 500px;
+        width: 535px;
+        /*height: 500px;*/
     }
     .hero-bg-text h1 {
         font-weight: 800;
@@ -1420,17 +1536,43 @@ body{
         font-size: 99%;
     }
     .hero-bg-text {
-        left: -4px;
+        left: 261px;
     }
+    .logo img {
+        margin-left: -174px;
+    }
+
     .ticket-box-menu ul li a {
-        font-size: 15px;
+        font-size: 13px;
     }
     .ticket-box-menu ul li a:hover{
-        font-size: 15px;
+        font-size: 13px;
+    }
+    .passengers {
+        margin-top: 19px;
+        padding:5px;
     }
     #departure, #destination {
         width: 165px;
     }
+    .about_e_transit{
+        margin-left: -17px;
+    }
+    .why_choose_us_header_text{
+        margin-left: -42px;
+    }
+    .about_us_content h5 {
+        width: 200px;
+        margin-left: 28px;
+    }
+
+    .about_us {
+        margin-left: 66px;
+    }
+    .about_us h1 {
+        font-size: 29px;
+    }
+
     .departure_day_box {
         width: 235px !important;
     }
@@ -1480,11 +1622,8 @@ body{
         height: 255px;
     }
     .discount_plane_img {
-        width: 238px !important;
-        height: 206px;
+        width: 238px;
         height: 255px;
-
-
 
     }
     .discount_bus_img {
@@ -1512,7 +1651,7 @@ body{
         font-size: 7px;
     }
     .newsletter {
-        width: 177px !important;
+        width: 177px;
     }
     .subscribe_button {
         font-size: 9px;
@@ -1520,7 +1659,7 @@ body{
     .socials_menu {
         display: flex;
         flex-direction: column;
-        margin-left: 27px !important;
+        margin-left: 27px;
     }
     .socials_menu h3 {
         font-size: 15px;
@@ -1529,6 +1668,248 @@ body{
         color: white;
         font-size: 9px;
     }
+    .copyright_section{
+        display: flex;
+        /* justify-content: space-between; */
+        flex-direction: column;
+        /*height: 250px;*/
+        justify-content: flex-end;
+        /*padding-bottom: 20px;*/
+        /* align-items: flex-end; */
+        padding: 0px 4%;
+
+    }
+    .copyright_section h5{
+        margin-bottom: -106px;
+    }
+
+    .copyright_section  .powered_by{
+        margin-top: 60px;
+
+    }
+
+}
+@media screen and (max-width: 540px) {
+    .trending_vehicle_items {
+        width: 536px;
+    }
+    .copyright_section {
+        height: 154px;
+    }
+    .discount_plane_img {
+        width: 186px;
+        height: 255px;
+    }
+}
+@media screen and (max-width: 414px) {
+    #travelling_from, #travelling_to {
+        width: 178px;
+    }
+    .ticketing-box {
+        width: 407px;
+        /*height: 500px;*/
+    }
+     .discount_bus_img {
+      display:none;
+    }
+    .trending_vehicle_items {
+        width: 406px;
+    }
+    .email-container span{
+        display:none;
+    }
+    .currency-block span{
+        display:none;
+    }
+    .login {
+        margin-top: 10px;
+        width:100px;
+        padding:2px;
+    }
+    .sign-up {
+        margin-top: 10px;
+        width:100px;
+        padding:2px;
+        margin-right: -58px;
+    }
+    .about_us_dot {
+      display:none;
+    }
+    .abouts_header_2_box {
+        margin-left: 113px;
+    }
+    .why_etransit_2 {
+        margin-top: 41px;
+    }
+    .plane_img{
+        display:none;
+    }
+    .footer_menu_item h3 {
+        font-weight: 800;
+        font-size: 14px;
+    }
+    .sub_footer_menu ul li {
+        font-size: 7px;
+    }
+    .footer_contacts h6:first-child {
+        margin-top: 40px;
+        font-size: 11px;
+    }
+    .footer_contacts span {
+        font-size: 12px;
+        color: white;
+    }
+    .socials_menu {
+        display: flex;
+        flex-direction: column;
+        margin-left: 19px;
+    }
+    .nav-menu ul {
+        list-style: none;
+    }
+    #departure, #destination {
+        width: 370px;
+    }
+    .departure_box{
+        display:grid;
+        grid-template-columns: repeat(1 , 1fr);
+    }
+    .bus-booking-departure-date{
+        display:grid;
+        grid-template-columns: repeat(1 , 1fr);
+    }
+    .passengers {
+        width: 366px;
+    }
+    .departure_count{
+        font-size:14px;
+    }
+    .ticketing-box {
+        width: 407px;
+        /*height: 610px;*/
+    }
+    .return_date{
+        margin-top:20px;
+    }
+    .header_text{
+        margin-top: 780px;
+    }
+    .get_started_btn {
+        margin-left: -36px;
+    }
+    .trending_header_text{
+        display:flex;
+        justify-content:center;
+        margin-left: 35px;
+    }
+    .trending_header_text h3{
+        font-size:16px;
+    }
+    .trending_header_text p{
+        font-size:10px;
+    }
+    .newsletter {
+        width: 259px;
+    }
+    .newsletter_box {
+        padding: 35px;
+        display:grid;
+    }
+
+
+}
+@media screen and (max-width: 375px) {
+    .ticketing-box {
+        width: 364px;
+    }
+    #travelling_from, #travelling_to {
+        width: 145px;
+
+    }
+    .ticket-box-menu ul li a {
+        font-size: 7px;
+    }
+    .ticket-box-menu ul li a:hover{
+        font-size: 8px;
+    }
+
+    #departure, #destination {
+        width: 116px;
+        margin-bottom: 20px;
+    }
+    .trending_vehicle_items {
+        width: 332px;
+    }
+    .hero-sm-text{
+        font-size:10px !important;
+    }
+    .plane_img , .discount_bus_img{
+        display:none;
+    }
+    .about_us_content .about_paragragh {
+        width: 349px;
+    }
+    .email-container{
+        display:none;
+    }
+    .client_img {
+        width: 96px !important;
+        margin-top: 40px;
+    }
+
+    .footer_menu_item h3 {
+        font-size: 13px !important;
+        margin-left:10px;
+    }
+    .sub_footer_menu ul li {
+        font-size: 7px;
+        margin-left:15px;
+    }
+    .footer_contacts h6:first-child {
+        margin-top: 40px;
+        font-size: 10px;
+        margin-left:15px;
+    }
+
+    .footer_contacts span {
+        font-size: 12px;
+        color: white;
+        margin-left:15px;
+    }
+    .socials_menu h3 {
+        font-size: 12px;
+    }
+    .socials_menu {
+        margin-left: 21px;
+    }
+    .trending_header_text{
+        display:flex;
+        justify-content:center;
+        margin-left:52px;
+    }
+    .trending_header_text h3{
+        font-size:17px;
+    }
+    .trending_header_text p {
+       font-size:12px;
+    }
+    .client_header_text h3 {
+        font-size: 17px;
+    }
+    .newsletter {
+        width: 219px;
+    }
+    .newsletter_box {
+        padding: 37px;
+        display:grid;
+    }
+    .passengers {
+        width: 333px;
+    }
+    .sign-up {
+        margin-right: -48px;
+    }
+
 
 }
 
