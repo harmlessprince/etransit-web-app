@@ -13,6 +13,7 @@ use App\Models\TripType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use PDF;
 
 class Ferry extends Controller
 {
