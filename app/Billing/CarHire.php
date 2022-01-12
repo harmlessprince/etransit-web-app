@@ -63,7 +63,7 @@ class CarHire
             $transactions->isConfirmed = 'True';
             $transactions->save();
 
-            $carHistory = CarHistory::where('id', $data['data']['meta']['car_history_id'])->first();
+            $carHistory = CarHistory::where('id', $car_history_id)->first();
             $carHistory->update(['payment_status' => 'paid' ,'isConfirmed' => 'True']);
 
 
