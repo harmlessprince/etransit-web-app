@@ -84,6 +84,11 @@ class Ferry extends Controller
         ]);
 
         $seat = \App\Models\FerrySeatTracker::where('id' ,$data['seat_id'])->first();
+
+        if(is_null($seat))
+        {
+            return response()->json(['success' => false , 'message' => 'Oops seems you picked an empty seat']);
+        }
         $tripType = $request->tripType;
 
         if($seat->booked_status != 2)
@@ -159,7 +164,7 @@ class Ferry extends Controller
         }
 
 
-        $fetchScheduleDetails = \App\Models\FerryTrip::where('id',request()->ferry_trip_id)->first();
+       $fetchScheduleDetails = \App\Models\FerryTrip::where('id',request()->ferry_trip_id)->first();
 
         if($passengerCount != count($selectedSeat))
         {

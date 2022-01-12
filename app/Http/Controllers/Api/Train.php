@@ -78,7 +78,7 @@ class Train extends Controller
                     ]);
 
 
-        $bookSeat = TrainSeatTracker::where('train_seat_id', $attr['train_seat_id'])
+     $bookSeat = TrainSeatTracker::where('train_seat_id', $attr['train_seat_id'])
                                         ->where('train_id', $attr['train_id'])
                                         ->where('train_schedule_id', $attr['train_schedule_id'])
                                         ->firstorfail();
@@ -160,7 +160,7 @@ class Train extends Controller
         }
 
 
-       $fetchScheduleDetails = \App\Models\TrainSchedule::where('id',$request->schedule_id)->with('train','destination','pickup')->first();
+      $fetchScheduleDetails = \App\Models\TrainSchedule::where('id',$request->schedule_id)->with('train','destination','pickup')->first();
 
         if($passengerCount != count($selectedSeat))
         {

@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 use App\Models\Parcel as ParcelPackage;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use PDF;
 
 class Parcel extends Controller
 {
@@ -80,8 +81,8 @@ class Parcel extends Controller
         }
 
         //check length calculation
-        $lengthAmount = Length::where('min_length', '<=', $request->height)
-            ->where('max_length', '>=', $request->height)
+        $lengthAmount = Length::where('min_length', '<=', $request->length)
+            ->where('max_length', '>=', $request->length)
             ->first();
 
         if(is_null($lengthAmount))
@@ -90,8 +91,8 @@ class Parcel extends Controller
         }
 
         //check length calculation
-        $widthAmount = Width::where('min_width', '<=', $request->height)
-            ->where('max_width', '>=', $request->height)
+        $widthAmount = Width::where('min_width', '<=', $request->width)
+            ->where('max_width', '>=', $request->width)
             ->first();
 
         if(is_null($widthAmount))
@@ -186,7 +187,7 @@ class Parcel extends Controller
     public function addCashPayment(Request $request)
     {
         request()->validate(['service_id' => 'required|integer' , 'amount' => 'required|integer' ,'delivery_parcel_id' => 'required|integer']);
-        $findParcel = deliveryParcel::where('id', $request->delivery_parcel_id)->firstorfail();
+        $findParcel = DeliveryParcel::where('id', $request->delivery_parcel_id)->firstorfail();
         $this->handlePayment($request->amount , $request->service_id , $findParcel);
         return response()->json(['success' => true , 'message' => 'Success !! cash payment made successfully']);
 
@@ -204,11 +205,12 @@ class Parcel extends Controller
         $transactions->user_id = auth()->user()->id;
         $transactions->service_id = $serviceId;
         $transactions->delivery_parcel_id = $parcel->id;
+        $transactions->transaction_type  = 'cash payment';
         $transactions->save();
 
         $data["email"] =  auth()->user()->email;
         $data['name']  =  auth()->user()->full_name;
-        $data["title"] = env('APP_NAME').' Boat Cruise Receipt';
+        $data["title"] = env('APP_NAME').' Parcel Receipt';
         $data["body"]  = "This is Demo";
 
         $pdf = PDF::loadView('pdf.car-hire', $data);
