@@ -100,6 +100,7 @@ class Car extends Controller
         {
 
             $plan =  CarPlan::where('id' , $plan_id)->with('car')->firstorfail();
+            
             $service = \App\Models\Service::where('id' , $plan->car->service_id)->firstorfail();
 
 
