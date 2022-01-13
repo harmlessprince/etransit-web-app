@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Classes\Reference;
 use App\Http\Controllers\Controller;
 use App\Models\TripType;
 use Illuminate\Http\Request;
 use App\Models\Service;
 use App\Models\Schedule;
 use App\Models\Destination;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use PDF;
 
 class Booking extends Controller
 {
@@ -210,5 +214,85 @@ class Booking extends Controller
             compact('childrenCount','fetchScheduleDetails','adultCount',
                 'childrenCount','totalFare','selectedSeat') ]);
 
+    }
+
+    public function handleBusCashPayment(Request $request)
+    {
+        $attr  = request()->validate([
+            'amount' => 'required',
+            'service_id' => 'required|integer',
+            'schedule_id' => 'required|integer',
+            'childrenCount' => 'required|integer',
+            'adultCount' => 'required|integer',
+        ]);
+
+        //find the schedule to get the actual amount stored in the database
+        $tripSchedule = \App\Models\Schedule::where('id', $attr['schedule_id'])
+                                         ->select('fare_adult', 'fare_children', 'id', 'seats_available', 'bus_id')->first();
+
+        !$tripSchedule ? abort('404') : '';
+
+        $adultFare = (double)$tripSchedule->fare_adult;
+
+        $childrenFare = (double)$tripSchedule->fare_children;
+
+        $tripType = request()->tripType;
+
+        if ((int)$tripType == 2) {
+            $type = 2;
+        } else {
+            $type = 1;
+        }
+
+        $amount = (double) $request->amount  * (int) $type;
+        DB::beginTransaction();
+        $transactions = new \App\Models\Transaction();
+        $transactions->reference = Reference::generateTrnxRef();
+        $transactions->amount = $amount;
+        $transactions->status = 'Successful';
+        $transactions->schedule_id = $attr['schedule_id'];
+        $transactions->description = 'Cash payment  of ' . $amount .' was paid at ' . now();
+        $transactions->user_id = auth()->user()->id;
+        $transactions->passenger_count = $attr['adultCount'] + $attr['childrenCount'];
+        $transactions->service_id = $attr['service_id'];
+        $transactions->isConfirmed = 'False';
+        $transactions->save();
+
+        if ($transactions) {
+            //update the status of seat tracker to booked after payment from selected
+            //0 = available 1 = selected 2 = booked
+            $seatTracker = \App\Models\SeatTracker::where('user_id', auth()->user()->id)
+                ->where('schedule_id', $attr['schedule_id'])->where('bus_id', $tripSchedule->bus_id)->get();
+
+            for ($i = 0; $i < count($seatTracker); $i++) {
+                $seatTracker[$i]->update([
+                    'booked_status' => 2
+                ]);
+            }
+
+            //update available seats for this schedule and trip
+            $updatedSeatCount = (int)($tripSchedule->seats_available) - ($attr['adultCount'] + $attr['childrenCount']);
+            $tripSchedule->update([
+                'seats_available' => $updatedSeatCount
+            ]);
+
+
+        }
+        DB::commit();
+
+        $data["email"] =  auth()->user()->email;
+        $data['name']  =  auth()->user()->full_name;
+        $data["title"] = env('APP_NAME').' Bus Booking Receipt';
+        $data["body"]  = "This is Demo";
+
+        $pdf = PDF::loadView('pdf.car-hire', $data);
+
+        Mail::send('pdf.car-hire', $data, function($message)use($data, $pdf) {
+            $message->to($data["email"])
+                ->subject($data["title"])
+                ->attachData($pdf->output(), "receipt.pdf");
+        });
+
+        return  response()->json(['success' => true , 'message' =>  'cash payment made successfully']);
     }
 }

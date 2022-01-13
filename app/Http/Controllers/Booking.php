@@ -7,6 +7,8 @@ use App\Models\Schedule;
 use App\Models\SeatTracker;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use PDF;
 
 class Booking extends Controller
 {
@@ -299,6 +301,19 @@ class Booking extends Controller
 
         }
         DB::commit();
+
+        $data["email"] =  auth()->user()->email;
+        $data['name']  =  auth()->user()->full_name;
+        $data["title"] = env('APP_NAME').' Bus Booking Receipt';
+        $data["body"]  = "This is Demo";
+
+        $pdf = PDF::loadView('pdf.car-hire', $data);
+
+        Mail::send('pdf.car-hire', $data, function($message)use($data, $pdf) {
+            $message->to($data["email"])
+                ->subject($data["title"])
+                ->attachData($pdf->output(), "receipt.pdf");
+        });
 
         toastr()->success('Success !! cash payment made successfully');
         return  redirect('/');
