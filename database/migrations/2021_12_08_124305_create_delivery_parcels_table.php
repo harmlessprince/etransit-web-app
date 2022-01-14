@@ -37,6 +37,9 @@ class CreateDeliveryParcelsTable extends Migration
             $table->unsignedBigInteger('quantity');
             $table->longText('notes')->nullable();
 
+            $table->longText('receiver_landmark')->nullable();
+            $table->longText('sender_landmark')->nullable();
+
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

@@ -85,6 +85,7 @@ Route::group(['prefix' => 'v1'], function() {
         Route::post('passenger/info/{schedule_id}',[Booking::class ,'bookTripForPassenger']);
         // The route that the button calls to initialize payment
         Route::post('/pay', [Payment::class, 'initialize'])->name('pay');
+        Route::post('/bus/handle-cash-payment' ,[Booking::class , 'handleBusCashPayment'])->name('bus.handle-pay-cash');
         //profile update
         Route::get('/get-user-profile',[Profile::class,'getUserProfile']);
         Route::post('/profile/update',[Profile::class,'profileUpdate']);

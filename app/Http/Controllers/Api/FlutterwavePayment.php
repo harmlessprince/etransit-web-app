@@ -97,6 +97,7 @@ class FlutterwavePayment extends Controller
         //transaction ID and tripType
         $transactionID = request()->id;
         $status = request()->status;
+        $car_history_id = request()->car_history_id;
 
         //if payment is successful
         if ($status ==  'successful') {
@@ -119,7 +120,7 @@ class FlutterwavePayment extends Controller
                     FerryPayment::handlePayment($data , $tripType , $fetchScheduleDetailsID);
                     break;
                 case 6:
-                    CarHire::handleCarHirePayment($data);
+                    CarHire::handleCarHirePayment($data , $car_history_id);
                     break;
                 case 7:
                     BoatCruise::handleCruisePayment($data);

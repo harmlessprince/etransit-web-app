@@ -56,8 +56,11 @@ Route::get('/boat-cruise/{id}/show',[BoatCruise::class , 'boatCruiseShow']);
 Route::get('/tour-packages', [Tour::class , 'tourPackageList']);
 Route::get('/tour-packages/{tour_id}/show', [Tour::class , 'tourPackageShow']);
 
+
 //manage parcel
 Route::get('parcel' , [ParcelMgt::class , 'parcel']);
+Route::get('/pick-up-city/{state_id}', [ParcelMgt::class ,'fetchCities']);
+
 
 
 Route::group(['middleware' => ['auth','prevent-back-history']], function() {
@@ -86,8 +89,9 @@ Route::group(['middleware' => ['auth','prevent-back-history']], function() {
     Route::post('/tour/{tour_id}/payment-plan/{service_id}',[Tour::class , 'addPayment']);
     Route::post('/tour/cash-payment', [Tour::class , 'addCashPaymentTour'])->name('tour.pay-cash');
 
-
-
+    //send parcel info
+    Route::post('send-parcel-info', [ParcelMgt::class ,'sendParcel']);
+    Route::post('parcel-cash-payment' , [ParcelMgt::class , 'handleCashPayment'])->name('parcel-cash-payment');
 
 
 
