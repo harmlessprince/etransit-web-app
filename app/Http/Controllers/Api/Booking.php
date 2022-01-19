@@ -125,7 +125,7 @@ class Booking extends Controller
             'gender' => 'required|array',
             'passenger_option' => 'required|array',
             'tripType' => 'required',
-            'return_date' => 'required'
+            'return_date' => 'sometimes'
         ]);
 
         $passengerArray = [];
