@@ -218,7 +218,7 @@ class Booking extends Controller
         $returnDate = $request->return_date;
 
         return response()->json(['success' => true ,
-            compact('childrenCount','fetchScheduleDetails','adultCount',
+           'data' =>  compact('childrenCount','fetchScheduleDetails','adultCount',
                 'childrenCount','totalFare','selectedSeat', 'returnDate') ]);
 
     }
