@@ -125,7 +125,7 @@ class Booking extends Controller
             'gender' => 'required|array',
             'passenger_option' => 'required|array',
             'tripType' => 'required',
-            'return_date ' => 'required'
+            'return_date' => 'required'
         ]);
 
         $passengerArray = [];
@@ -216,7 +216,7 @@ class Booking extends Controller
         $totalFare = ((double)  $fetchScheduleDetails->fare_adult * (int) $adultCount +  (double) $fetchScheduleDetails->fare_children * (int) $childrenCount) * (int) abs($request->tripType);
 
         $returnDate = $request->return_date;
-        
+
         return response()->json(['success' => true ,
             compact('childrenCount','fetchScheduleDetails','adultCount',
                 'childrenCount','totalFare','selectedSeat', 'returnDate') ]);
