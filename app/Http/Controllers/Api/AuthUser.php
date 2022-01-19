@@ -19,7 +19,7 @@ class AuthUser extends BaseController
 
     public function authenticate(Request $request)
     {
-        request()->validate( [
+        request()->validate([
             'email'    => 'required|email',
             'password' => 'required|string|min:6|max:50'
         ]);
@@ -55,11 +55,11 @@ class AuthUser extends BaseController
 
         request()->validate(
             [
-                'full_name' => 'required|string|max:255',
-                'email' => 'required|string|email|max:255|unique:users',
-                'password' => 'required|string|min:6|confirmed',
-                'address' => 'sometimes',
-                'username' => 'required|string|max:40|unique:users',
+                'full_name'   => 'required|string|max:255',
+                'email'       => 'required|string|email|max:255|unique:users',
+                'password'    => 'required|string|min:6|confirmed',
+                'address'     => 'sometimes',
+                'username'     => 'required|string|max:40|unique:users',
                 'phone_number' => 'required|string|unique:users'
                 //|regex:/(01)[0-9]{9}/',
             ]

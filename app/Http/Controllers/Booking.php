@@ -273,7 +273,7 @@ class Booking extends Controller
         $transactions->amount = $attr['amount'];
         $transactions->status = 'Successful';
         $transactions->schedule_id = $attr['schedule_id'];
-        $transactions->description = 'Cash payment for of ' . $request->amount .' was paid at ' . now();
+        $transactions->description = 'Cash payment of ' . $request->amount .' was paid at ' . now();
         $transactions->user_id = auth()->user()->id;
         $transactions->passenger_count = $attr['adultCount'] + $attr['childrenCount'];
         $transactions->service_id = $attr['service_id'];
