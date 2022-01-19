@@ -53,8 +53,8 @@ class Train extends Controller
                                                 ->where('pickup_id',$attr['destination_from'])
                                                 ->with(['destination','pickup','train'])->get();
 
-
-        return response()->json(['success' => true ,'data' => compact('checkSchedule')]);
+        $returnDate = $request->return_date;
+        return response()->json(['success' => true ,'data' => compact('checkSchedule','returnDate')]);
     }
 
 
@@ -131,7 +131,8 @@ class Train extends Controller
             'passenger_option' => 'required|array',
             'schedule_id'      => 'required|integer',
             'route_id'         => 'required|array',
-            'tripType'         => 'required|integer'
+            'tripType'         => 'required|integer',
+            'return_date' => 'sometimes'
         ]);
         DB::beginTransaction();
         $passengerArray = [];
@@ -234,12 +235,13 @@ class Train extends Controller
         $amount = array_sum($totalFare) * (int) $request->tripType;
         $ticketType = TripType::where('id', $request->tripType)->select('type')->firstorfail();
         $totalPasseneger = (int) $childrenCount + (int) $adultCount;
+        $return_date = $request->return_date;
         DB::commit();
 
 
         return response()->json(['success' => true ,
            'data' => compact('childrenCount','fetchScheduleDetails','adultCount',
-                'childrenCount','amount','selectedSeat','ticketType' , 'totalPasseneger') ]);
+                'childrenCount','amount','selectedSeat','ticketType' , 'totalPasseneger','return_date') ]);
     }
 
 

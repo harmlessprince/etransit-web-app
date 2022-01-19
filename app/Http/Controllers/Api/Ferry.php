@@ -65,7 +65,8 @@ class Ferry extends Controller
             return response()->json(['success' => false , 'message' => 'We dont\'t have any result for your query at the moment']);
         }
 
-        return  response()->json(['success'=>true ,'data' => compact('checkSchedule','tripType')]);
+        $returnDate = $request->return_date;
+        return  response()->json(['success'=>true ,'data' => compact('checkSchedule','tripType','returnDate')]);
     }
 
 
@@ -136,7 +137,8 @@ class Ferry extends Controller
             'gender' => 'required|array',
             'passenger_option' => 'required|array',
             'tripType' => 'required|integer',
-            'ferry_trip_id' => 'required|integer'
+            'ferry_trip_id' => 'required|integer',
+            'return_date' => 'sometimes'
         ]);
 
         $passengerArray = [];
@@ -227,9 +229,13 @@ class Ferry extends Controller
 
         $totalFare = ((double)  $fetchScheduleDetails->amount_adult * (int) $adultCount +  (double) $fetchScheduleDetails->amount_children * (int) $childrenCount ) * (int) $request->tripType;
 
+        $return_date = $request->return_date;
+
+        $tripType = $request->tripType;
+
         return response()->json(['success' => true ,
            'data' => compact('childrenCount','fetchScheduleDetails','adultCount',
-                'childrenCount','totalFare','selectedSeat') ]);
+                'childrenCount','totalFare','selectedSeat','return_date','tripType') ]);
 
     }
 
