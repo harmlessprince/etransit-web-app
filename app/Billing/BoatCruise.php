@@ -9,6 +9,8 @@ namespace App\Billing;
 
 
 use App\Classes\Reference;
+use App\Mail\BoatCruiseBooking;
+use App\Mail\BusBooking;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use PDF;
@@ -33,16 +35,16 @@ class BoatCruise
 
         $data["email"] =   $data['data']['meta']['user_email'];
         $data['name']  =   $data['data']['meta']['user_name'];
-        $data["title"] = env('APP_NAME').' Boat Cruise Receipt';
-        $data["body"]  = "This is Demo";
+        
+        $maildata = [
+            'name' =>  $data['name'],
+            'service' => 'Boat Cruise',
+            'transaction' => $transactions
+        ];
 
-        $pdf = PDF::loadView('pdf.car-hire', $data);
+        $email =   $data["email"];
 
-        Mail::send('pdf.car-hire', $data, function($message)use($data, $pdf) {
-            $message->to($data["email"])
-                ->subject($data["title"])
-                ->attachData($pdf->output(), "receipt.pdf");
-        });
+        Mail::to($email)->send(new BoatCruiseBooking($maildata));
 
         DB::commit();
 

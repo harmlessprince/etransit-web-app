@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Classes\Reference;
+use App\Mail\BoatCruiseBooking;
 use App\Models\Boat;
 use App\Models\BoatImage;
 use App\Models\BoatTrip;
@@ -159,7 +160,7 @@ class BoatCruise extends Controller
 
 
         if($files = $request->file('images')){
-            
+
             if(count($request->file('images')) < 2)
             {
                 Alert::error('Warning ', 'Please Upload at least two images');
@@ -334,13 +335,15 @@ class BoatCruise extends Controller
         $data["title"] = env('APP_NAME').' Boat Cruise Receipt';
         $data["body"]  = "This is Demo";
 
-        $pdf = PDF::loadView('pdf.car-hire', $data);
+        $maildata = [
+            'name' => auth()->user()->full_name,
+            'service' => 'Boat Cruise',
+            'transaction' => $transactions
+        ];
 
-        Mail::send('pdf.car-hire', $data, function($message)use($data, $pdf) {
-            $message->to($data["email"])
-                ->subject($data["title"])
-                ->attachData($pdf->output(), "receipt.pdf");
-        });
+        $email = auth()->user()->email;
+
+        Mail::to($email)->send(new BoatCruiseBooking($maildata));
 
         DB::commit();
 

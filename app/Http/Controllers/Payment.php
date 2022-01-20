@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Classes\Reference;
+use App\Mail\BoatCruiseBooking;
 use App\Models\CarHistory;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
@@ -281,16 +283,16 @@ class Payment extends Controller
 
         $data["email"] =  $data['data']['meta']['user_email'];
         $data['name']  =  $data['data']['meta']['user_name'];
-        $data["title"] = env('APP_NAME').' Boat Cruise Receipt';
-        $data["body"]  = "This is Demo";
 
-        $pdf = PDF::loadView('pdf.car-hire', $data);
+        $maildata = [
+            'name' =>  $data['name'],
+            'service' => 'Boat Cruise',
+            'transaction' => $transactions
+        ];
 
-        Mail::send('pdf.car-hire', $data, function($message)use($data, $pdf) {
-            $message->to($data["email"])
-                ->subject($data["title"])
-                ->attachData($pdf->output(), "receipt.pdf");
-        });
+        $email =   $data["email"];
+
+        Mail::to($email)->send(new BoatCruiseBooking($maildata));
 
         DB::commit();
     }

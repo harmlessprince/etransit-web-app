@@ -61,7 +61,10 @@ Route::get('/tour-packages/{tour_id}/show', [Tour::class , 'tourPackageShow']);
 Route::get('parcel' , [ParcelMgt::class , 'parcel']);
 Route::get('/pick-up-city/{state_id}', [ParcelMgt::class ,'fetchCities']);
 
-
+//check PDF
+Route::get('check-pdf' , function(){
+   return view('pdf.boat-cruise');
+});
 
 Route::group(['middleware' => ['auth','prevent-back-history']], function() {
 
