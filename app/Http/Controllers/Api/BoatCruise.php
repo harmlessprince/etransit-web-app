@@ -75,16 +75,14 @@ class BoatCruise extends Controller
 
         $data["email"] =  auth()->user()->email;
         $data['name']  =  auth()->user()->full_name;
-        
+
         $maildata = [
-            'name' => auth()->user()->full_name,
+            'name' => $data['name'],
             'service' => 'Boat Cruise',
             'transaction' => $transactions
         ];
-
-        $email = auth()->user()->email;
-
-        Mail::to($email)->send(new BoatCruiseBooking($maildata));
+        
+        Mail::to($data["email"])->send(new BoatCruiseBooking($maildata));
 
         DB::commit();
 
