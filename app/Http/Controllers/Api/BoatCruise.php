@@ -81,7 +81,7 @@ class BoatCruise extends Controller
             'service' => 'Boat Cruise',
             'transaction' => $transactions
         ];
-        
+
         Mail::to($data["email"])->send(new BoatCruiseBooking($maildata));
 
         DB::commit();
