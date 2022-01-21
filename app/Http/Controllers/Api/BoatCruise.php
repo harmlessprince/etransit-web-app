@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Classes\Reference;
 use App\Http\Controllers\Controller;
+use App\Mail\BoatCruiseBooking;
 use App\Models\Boat;
 use App\Models\BoatTrip;
 use App\Models\Service;
@@ -74,14 +75,16 @@ class BoatCruise extends Controller
 
         $data["email"] =  auth()->user()->email;
         $data['name']  =  auth()->user()->full_name;
+        
+        $maildata = [
+            'name' => auth()->user()->full_name,
+            'service' => 'Boat Cruise',
+            'transaction' => $transactions
+        ];
 
-        $pdf = PDF::loadView('pdf.car-hire', $data);
+        $email = auth()->user()->email;
 
-        Mail::send('pdf.car-hire', $data, function($message)use($data, $pdf) {
-            $message->to($data["email"])
-                ->subject($data["title"])
-                ->attachData($pdf->output(), "receipt.pdf");
-        });
+        Mail::to($email)->send(new BoatCruiseBooking($maildata));
 
         DB::commit();
 
