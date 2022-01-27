@@ -6,6 +6,8 @@ namespace App\Http\Controllers;
 use App\Classes\Reference;
 use App\Exports\CarsExport;
 use App\Imports\CarsImport;
+use App\Mail\BoatCruiseBooking;
+use App\Mail\CarHire;
 use App\Mail\CarHireRecept;
 use App\Models\CarClass;
 use App\Models\CarHistory;
@@ -384,20 +386,17 @@ class Car extends Controller
        $transaction->car_history_id   =  $history_id;
        $transaction->description      = 'A cash payment for made successfully';
 
-        $transaction->save();
+       $transaction->save();
 
-        $data["email"] = auth()->user()->email;
-        $data["title"] = env('APP_NAME').' Car Hire Receipt';
-        $data["body"] = "This is Demo";
+        $maildata = [
+            'name' => auth()->user()->full_name,
+            'service' => 'Car Hire',
+            'transaction' => $transaction
+        ];
 
-        $pdf = PDF::loadView('pdf.car-hire', $data);
+        $email = auth()->user()->email;
 
-        Mail::send('pdf.car-hire', $data, function($message)use($data, $pdf) {
-            $message->to($data["email"])
-                ->subject($data["title"])
-                ->attachData($pdf->output(), "receipt.pdf");
-        });
-
+        Mail::to($email)->send(new CarHire($maildata));
 
         toastr()->success('Cash Payment Made successfully');
 

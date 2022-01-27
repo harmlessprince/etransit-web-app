@@ -210,17 +210,16 @@ class Parcel extends Controller
 
         $data["email"] =  auth()->user()->email;
         $data['name']  =  auth()->user()->full_name;
-        $data["title"] = env('APP_NAME').' Parcel Receipt';
-        $data["body"]  = "This is Demo";
 
-        $pdf = PDF::loadView('pdf.car-hire', $data);
+        $maildata = [
+            'name' =>  $data['data']['meta']['user_email'],
+            'service' => 'Parcel delivery service',
+            'transaction' => $transactions
+        ];
 
-        Mail::send('pdf.car-hire', $data, function($message)use($data, $pdf) {
-            $message->to($data["email"])
-                ->subject($data["title"])
-                ->attachData($pdf->output(), "receipt.pdf");
-        });
+        $email =  $data["email"];
 
+        Mail::to($email)->send(new \App\Mail\Parcel($maildata));
         DB::commit();
 
     }

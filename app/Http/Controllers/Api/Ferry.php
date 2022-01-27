@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Classes\Reference;
 use App\Http\Controllers\Controller;
+use App\Mail\FerryBookings;
 use App\Models\FerryLocation;
 use App\Models\FerryTrip;
 use App\Models\FerryType;
@@ -271,16 +272,16 @@ class Ferry extends Controller
 
         $data["email"] =  auth()->user()->email;
         $data['name']  =  auth()->user()->full_name;
-        $data["title"] = env('APP_NAME').' Ferry Receipt';
-        $data["body"]  = "This is Demo";
 
-        $pdf = PDF::loadView('pdf.car-hire', $data);
+        $maildata = [
+            'name' => auth()->user()->full_name,
+            'service' => 'Ferry Booking',
+            'transaction' => $transactions
+        ];
 
-        Mail::send('pdf.car-hire', $data, function($message)use($data, $pdf) {
-            $message->to($data["email"])
-                ->subject($data["title"])
-                ->attachData($pdf->output(), "receipt.pdf");
-        });
+        $email = $data["email"];
+
+        Mail::to($email)->send(new FerryBookings($maildata));
 
         if ($transactions) {
             //update the status of seat tracker to booked after payment from selected

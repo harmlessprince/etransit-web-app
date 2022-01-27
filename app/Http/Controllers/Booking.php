@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Classes\Reference;
+use App\Mail\BusBooking;
 use App\Models\Schedule;
 use App\Models\SeatTracker;
 use Illuminate\Http\Request;
@@ -302,18 +303,14 @@ class Booking extends Controller
         }
         DB::commit();
 
-        $data["email"] =  auth()->user()->email;
-        $data['name']  =  auth()->user()->full_name;
-        $data["title"] = env('APP_NAME').' Bus Booking Receipt';
-        $data["body"]  = "This is Demo";
+        $maildata = [
+            'name' => auth()->user()->full_name,
+            'service' => 'Bus Booking',
+            'transaction' => $transactions
+        ];
+        $email = auth()->user()->email;
 
-        $pdf = PDF::loadView('pdf.car-hire', $data);
-
-        Mail::send('pdf.car-hire', $data, function($message)use($data, $pdf) {
-            $message->to($data["email"])
-                ->subject($data["title"])
-                ->attachData($pdf->output(), "receipt.pdf");
-        });
+        Mail::to($email)->send(new BusBooking($maildata));
 
         toastr()->success('Success !! cash payment made successfully');
         return  redirect('/');

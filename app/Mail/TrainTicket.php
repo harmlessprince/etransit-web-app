@@ -8,7 +8,7 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use PDF;
 
-class BusBooking extends Mailable
+class TrainTicket extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -30,14 +30,15 @@ class BusBooking extends Mailable
      */
     public function build()
     {
+
         $data = $this->data;
 
         $customPaper = array(0,0,567.00,283.80);
-        $pdf = PDF::loadView('pdf.bus-booking', compact('data'))->setPaper($customPaper, 'landscape');;
+        $pdf = PDF::loadView('pdf.train-booking', compact('data'))->setPaper($customPaper, 'landscape');;
 
-        return $this->markdown('emails.busbooking')
-                                ->subject('Etransit Bus Booking Ticket')
-                                ->with('data', $this->data)
-                                ->attachData($pdf->output(), "receipt.pdf");
+        return $this->markdown('emails.trainticket')
+                            ->subject('Etransit Train Ticket')
+                            ->with('data', $this->data)
+                            ->attachData($pdf->output(), "receipt.pdf");
     }
 }

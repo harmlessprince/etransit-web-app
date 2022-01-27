@@ -32,16 +32,16 @@ class Parcel
 
         $data["email"] = $data['data']['meta']['user_email'];
         $data['name']  =  $data['data']['meta']['user_name'];
-        $data["title"] = env('APP_NAME').' Parcel Receipt';
-        $data["body"]  = "This is Demo";
 
-        $pdf = PDF::loadView('pdf.car-hire', $data);
+        $maildata = [
+            'name' =>  $data['data']['meta']['user_name'],
+            'service' => 'Parcel delivery service',
+            'transaction' => $transactions
+        ];
 
-        Mail::send('pdf.car-hire', $data, function($message)use($data, $pdf) {
-            $message->to($data["email"])
-                ->subject($data["title"])
-                ->attachData($pdf->output(), "receipt.pdf");
-        });
+        $email =  $data["email"];
+
+        Mail::to($email)->send(new \App\Mail\Parcel($maildata));
 
         DB::commit();
         return response()->json(['success' => true, 'message' => 'Payment made successfully']);

@@ -7,6 +7,7 @@
 namespace App\Billing;
 
 use App\Classes\Reference;
+use App\Mail\TourPackages;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use App\Models\Transaction;
@@ -33,16 +34,15 @@ class TourPayment
 
         $data["email"] = $data['data']['meta']['user_email'];
         $data['name']  =  $data['data']['meta']['user_name'];
-        $data["title"] = env('APP_NAME').' Tour Receipt';
-        $data["body"]  = "This is Demo";
 
-        $pdf = PDF::loadView('pdf.car-hire', $data);
+        $maildata = [
+            'name' =>  $data['data']['meta']['user_name'],
+            'service' => 'Tour Package',
+            'transaction' => $transactions
+        ];
 
-        Mail::send('pdf.car-hire', $data, function($message)use($data, $pdf) {
-            $message->to($data["email"])
-                ->subject($data["title"])
-                ->attachData($pdf->output(), "receipt.pdf");
-        });
+
+        Mail::to($data["email"])->send(new TourPackages($maildata));
 
         DB::commit();
         return response()->json(['success' => true, 'message' => 'Payment made successfully']);

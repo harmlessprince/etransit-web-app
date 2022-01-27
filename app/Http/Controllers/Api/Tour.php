@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Classes\Reference;
 use App\Http\Controllers\Controller;
+use App\Mail\TourPackages;
 use Illuminate\Http\Request;
 use App\Models\Tour as TourPackage;
 use App\Models\Service;
@@ -106,16 +107,15 @@ class Tour extends Controller
 
         $data["email"] =  auth()->user()->email;
         $data['name']  =  auth()->user()->full_name;
-        $data["title"] = env('APP_NAME').' Boat Cruise Receipt';
-        $data["body"]  = "This is Demo";
 
-        $pdf = PDF::loadView('pdf.car-hire', $data);
+        $maildata = [
+            'name' =>  $data['name'] ,
+            'service' => 'Tour Package',
+            'transaction' => $transactions
+        ];
 
-        Mail::send('pdf.car-hire', $data, function($message)use($data, $pdf) {
-            $message->to($data["email"])
-                ->subject($data["title"])
-                ->attachData($pdf->output(), "receipt.pdf");
-        });
+
+        Mail::to($data["email"])->send(new TourPackages($maildata));
 
         DB::commit();
 

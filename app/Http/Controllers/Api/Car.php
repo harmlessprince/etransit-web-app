@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Classes\Reference;
 use App\Http\Controllers\Controller;
+use App\Mail\CarHire;
 use App\Models\Car as HiredCars;
 use App\Models\CarClass;
 use App\Models\CarHistory;
@@ -100,7 +101,7 @@ class Car extends Controller
         {
 
             $plan =  CarPlan::where('id' , $plan_id)->with('car')->firstorfail();
-            
+
             $service = \App\Models\Service::where('id' , $plan->car->service_id)->firstorfail();
 
 
@@ -209,17 +210,15 @@ class Car extends Controller
 
         $transaction->save();
 
-        $data["email"] = auth()->user()->email;
-        $data["title"] = env('APP_NAME').' Car Hire Receipt';
-        $data["body"] = "This is Demo";
+        $maildata = [
+            'name' => auth()->user()->full_name,
+            'service' => 'Car Hire',
+            'transaction' => $transaction
+        ];
 
-        $pdf = PDF::loadView('pdf.car-hire', $data);
+        $email = auth()->user()->email;
 
-        Mail::send('pdf.car-hire', $data, function($message)use($data, $pdf) {
-            $message->to($data["email"])
-                ->subject($data["title"])
-                ->attachData($pdf->output(), "receipt.pdf");
-        });
+        Mail::to($email)->send(new CarHire($maildata));
 
         return response()->json(['success' => true , 'message' => 'Cash Payment Made successfully ,if proof of fund is not confirmed within 30minutes this car will be available to other users to book']);
     }

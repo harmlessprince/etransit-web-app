@@ -266,12 +266,9 @@ class Train extends Controller
         $transactions->transaction_type   = "cash payment";
         $transactions->save();
 
-        $data["email"] =  auth()->user()->email;
-        $data['name']  =  auth()->user()->full_name;
-        $data["title"] = env('APP_NAME').' Train Ticket Receipt';
-        $data["body"]  = "This is Demo";
 
-        $pdf = PDF::loadView('pdf.car-hire', $data);
+
+
 
         //find tain schedule and update the seat availability
         $seat = TrainSchedule::where('id', $request->train_schedule_id)->first();
@@ -292,11 +289,20 @@ class Train extends Controller
             ]);
         }
 
-        Mail::send('pdf.car-hire', $data, function($message)use($data, $pdf) {
-            $message->to($data["email"])
-                ->subject($data["title"])
-                ->attachData($pdf->output(), "receipt.pdf");
-        });
+
+        $data["email"] =  auth()->user()->email;
+        $data['name']  =  auth()->user()->full_name;
+
+        $maildata = [
+            'name' => auth()->user()->full_name,
+            'service' => 'Train Booking',
+            'transaction' => $transactions
+        ];
+
+        $email =  $data["email"];
+
+        Mail::to($email)->send(new \App\Mail\TrainTicket($maildata));
+
         DB::commit();
 
         return response()->json(['success' => true ,'message' => 'Cash Payment made successfully']);

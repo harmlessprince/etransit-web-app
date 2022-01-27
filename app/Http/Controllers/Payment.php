@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Classes\Reference;
 use App\Mail\BoatCruiseBooking;
+use App\Mail\BusBooking;
+use App\Mail\CarHire;
+use App\Mail\TourPackages;
 use App\Models\CarHistory;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -190,7 +193,14 @@ class Payment extends Controller
                     'seats_available' => $updatedSeatCount
                 ]);
 
+                $maildata = [
+                    'name' =>  $data['data']['meta']['user_name'],
+                    'service' => 'Bus Booking',
+                    'transaction' => $transactions
+                ];
+                $email = $data['data']['meta']['user_email'];
 
+                Mail::to($email)->send(new BusBooking($maildata));
             }
             $this->flushSession();
             DB::commit();
@@ -247,18 +257,15 @@ class Payment extends Controller
             $carHistory->update(['payment_status' => 'paid' ,'isConfirmed' => 'True']);
 
 
-            $data["email"] =  $data['data']['meta']['user_email'];
-            $data['name']  =  $data['data']['meta']['user_name'];
-            $data["title"] = env('APP_NAME').' Car Hire Receipt';
-            $data["body"]  = "This is Demo";
+            $maildata = [
+                'name' =>  $data['data']['meta']['user_name'],
+                'service' => 'Car Hire',
+                'transaction' => $transactions
+            ];
 
-            $pdf = PDF::loadView('pdf.car-hire', $data);
+            $email = $data['data']['meta']['user_email'];
 
-            Mail::send('pdf.car-hire', $data, function($message)use($data, $pdf) {
-                $message->to($data["email"])
-                    ->subject($data["title"])
-                    ->attachData($pdf->output(), "receipt.pdf");
-            });
+            Mail::to($email)->send(new CarHire($maildata));
 
             DB::commit();
         }
@@ -313,16 +320,14 @@ class Payment extends Controller
 
         $data["email"] =  $data['data']['meta']['user_email'];
         $data['name']  =  $data['data']['meta']['user_name'];
-        $data["title"] = env('APP_NAME').'Tour Package  Receipt';
-        $data["body"]  = "This is Demo";
 
-        $pdf = PDF::loadView('pdf.car-hire', $data);
+        $maildata = [
+            'name' =>  $data['name'] ,
+            'service' => 'Tour Package',
+            'transaction' => $transactions
+        ];
 
-        Mail::send('pdf.car-hire', $data, function($message)use($data, $pdf) {
-            $message->to($data["email"])
-                ->subject($data["title"])
-                ->attachData($pdf->output(), "receipt.pdf");
-        });
+        Mail::to($data["email"])->send(new TourPackages($maildata));
 
         DB::commit();
     }

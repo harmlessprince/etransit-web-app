@@ -66,19 +66,15 @@ class CarHire
             $carHistory = CarHistory::where('id', $car_history_id)->first();
             $carHistory->update(['payment_status' => 'paid' ,'isConfirmed' => 'True']);
 
+            $maildata = [
+                'name' =>  $data['data']['meta']['user_name'],
+                'service' => 'Car Hire',
+                'transaction' => $transactions
+            ];
 
-            $data["email"] =  $data['data']['meta']['user_email'];
-            $data['name']  =  $data['data']['meta']['user_name'];
-            $data["title"] = env('APP_NAME').' Car Hire Receipt';
-            $data["body"]  = "This is Demo";
+            $email = auth()->user()->email;
 
-            $pdf = PDF::loadView('pdf.car-hire', $data);
-
-            Mail::send('pdf.car-hire', $data, function($message)use($data, $pdf) {
-                $message->to($data["email"])
-                    ->subject($data["title"])
-                    ->attachData($pdf->output(), "receipt.pdf");
-            });
+            Mail::to($email)->send(new \App\Mail\CarHire($maildata));
 
             DB::commit();
             return response()->json(['success' => true ,'message' => 'Payment made successfully']);

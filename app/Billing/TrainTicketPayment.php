@@ -64,6 +64,19 @@ class TrainTicketPayment
                     ]);
                 }
             }
+
+            $data['name']  =   $data['data']['meta']['user_name'];
+            $data['email']  =   $data['data']['meta']['user_email'];
+
+            $maildata = [
+                'name' => auth()->user()->full_name,
+                'service' => 'Train Booking',
+                'transaction' => $transactions
+            ];
+    
+
+            Mail::to($data['email'] )->send(new \App\Mail\TrainTicket($maildata));
+
             DB::commit();
             return response()->json(['success' => true, 'message' => 'Payment made successfully']);
         }
