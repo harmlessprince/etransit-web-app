@@ -9,6 +9,7 @@ use App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Eticket\AuthLogin;
 use App\Http\Controllers\Ferry;
 use App\Http\Controllers\Login;
+use App\Http\Controllers\Operator;
 use App\Http\Controllers\Page;
 use App\Http\Controllers\Parcel;
 use App\Http\Controllers\ParcelMgt;
@@ -222,6 +223,11 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::get('/customers',[Customer::class , 'customerIndex']);
         Route::get('/customer/list', [Customer::class , 'customers'])->name('customers.list');
         Route::get('/customer/{customer_id}', [Customer::class , 'getCustomer']);
+
+        //manage operators
+        Route::get('manage/operators',[Operator::class , 'operators']);
+        Route::get('create-new-operator',[Operator::class , 'createOperator']);
+        Route::post('store-operator',[Operator::class , 'storeOperator']);
 
 
     });
