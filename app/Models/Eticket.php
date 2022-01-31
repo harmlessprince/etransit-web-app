@@ -11,7 +11,7 @@ use Laravel\Sanctum\HasApiTokens;
 class Eticket extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
-
+    protected $guard = 'e-ticket';
     /**
      * The attributes that are mass assignable.
      *

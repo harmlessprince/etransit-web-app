@@ -1,4 +1,4 @@
-@extends('admin.layout.app')
+@extends('Eticket.layout.app')
 @section('content')
     <div class="container-fluid">
         <div class="page-header">
@@ -11,6 +11,7 @@
                     </ol>
                 </div>
                 <div class="col-6">
+
                 </div>
             </div>
         </div>
@@ -91,6 +92,8 @@
                     </div>
                 </div>
             </div>
+
+
         </div>
     </div>
     <!-- Container-fluid Ends-->

@@ -35,10 +35,9 @@
                     <thead>
                     <tr>
                         <th>No</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Username</th>
-                        <th>Phone</th>
+                        <th>Company Name</th>
+                        <th>Address</th>
+                        <th>Phone Number</th>
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -63,12 +62,11 @@
             var table = $('.yajra-datatable').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: "{{ route('admin.customers.list') }}",
+                ajax: "{{ route('admin.fetch-tenants') }}",
                 columns: [
                     {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-                    {data: 'full_name', name: 'name'},
-                    {data: 'email', name: 'email'},
-                    {data: 'username', name: 'username'},
+                    {data: 'company_name', name: 'company_name'},
+                    {data: 'address', name: 'address'},
                     {data: 'phone_number', name: 'phone'},
 
                     {

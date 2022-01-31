@@ -9,7 +9,7 @@ class Tenant extends Model
 {
     use HasFactory;
 
-    public function etickerusers()
+    public function eticketusers()
     {
         return $this->hasMany(Eticket::class);
     }

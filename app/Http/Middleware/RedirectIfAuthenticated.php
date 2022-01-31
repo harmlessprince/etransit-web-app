@@ -22,12 +22,14 @@ class RedirectIfAuthenticated
     public function handle($request, Closure $next, $guard = null)
     {
 
+
         if ($guard == "admin" && Auth::guard($guard)->check()) {
          return  redirect(RouteServiceProvider::ADMIN_HOME);
         }
 
         if($guard == 'e-ticket' && Auth::guard($guard)->check())
         {
+
             return  redirect(RouteServiceProvider::TICKET_HOME);
         }
 

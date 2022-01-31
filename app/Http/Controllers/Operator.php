@@ -10,12 +10,56 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Mail;
+use DataTables;
 
 class Operator extends Controller
 {
     public function operators()
     {
         return  view('admin.operator.all-operator');
+    }
+
+    public function fetchOperators(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = Tenant::latest()->get();
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function($row){
+                    $id = $row->id;
+                    $actionBtn = "<a href='/admin/customer/$id'  class='edit btn btn-success btn-sm'>Edit</a> <a href='/admin/view-operator/$id' class='delete btn btn-primary btn-sm'>View</a>";
+                    return $actionBtn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+
+    }
+
+
+    public function viewOperator($id)
+    {
+        $tenant = Tenant::find($id);
+
+        return view('admin.operator.view-operator', compact('tenant'));
+    }
+
+
+    public function fetchOperatorUser(Request $request , $id)
+    {
+        if ($request->ajax()) {
+            $data = Eticket::where('tenant_id', $id)->latest()->get();
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function($row){
+                    $id = $row->id;
+                    $actionBtn = "<a href='/admin/customer/$id'  class='edit btn btn-success btn-sm'>Edit</a> <a href='/admin/view-operator/$id' class='delete btn btn-primary btn-sm'>View</a>";
+                    return $actionBtn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+
     }
 
     public function createOperator()

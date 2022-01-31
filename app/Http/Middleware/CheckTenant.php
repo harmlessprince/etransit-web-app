@@ -17,6 +17,7 @@ class CheckTenant
      */
     public function handle(Request $request, Closure $next , $guard = null)
     {
+
         if( !Auth::guard('e-ticket')->check())
         {
             return redirect()->route('e-ticket.login-page')->with('error', 'You dont have permission to have access to this resource');

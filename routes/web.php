@@ -228,6 +228,9 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::get('manage/operators',[Operator::class , 'operators']);
         Route::get('create-new-operator',[Operator::class , 'createOperator']);
         Route::post('store-operator',[Operator::class , 'storeOperator']);
+        Route::get('fetch-tenants' ,[Operator::class ,'fetchOperators'])->name('fetch-tenants');
+        Route::get('view-operator/{id}' , [Operator::class , 'viewOperator']);
+        Route::get('get-operator-users/{id}',[Operator::class , 'fetchOperatorUser'])->name('get-operator-users');
 
 
     });
@@ -243,7 +246,7 @@ Route::prefix('e-ticket')->name('e-ticket.')->group(function(){
     Route::post('/logout-tenant',[AuthLogin::class , 'logout'] )->name('logout');
     Route::post('/login-tenant' , [AuthLogin::class , 'loginTenant'])->name('login');
 
-    Route::group(['middleware' => ['tenant','prevent-back-history']], function() {
+    Route::group(['middleware' => ['e-ticket','prevent-back-history']], function() {
         Route::get('/dashboard' , [AuthLogin::class , 'dashboard'])->name('dashboard');
     });
 
