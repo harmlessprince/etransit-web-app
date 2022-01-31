@@ -30,6 +30,8 @@ class AuthLogin extends Controller
 
           $user = Eticket::where('email', $data['email'])->with('tenant')->first();
 
+          session()->put('tenant_id', $user->tenant_id);
+
           return view('Eticket.Auth.authenticate',compact('user'));
     }
 
@@ -49,7 +51,8 @@ class AuthLogin extends Controller
 
     public function dashboard()
     {
-      return view('Eticket.dashboard.index');
+        $users = Eticket::all();
+      return view('Eticket.dashboard.index' , compact('users'));
     }
 
     public function logout()
