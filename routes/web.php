@@ -7,6 +7,7 @@ use App\Http\Controllers\Car;
 use App\Http\Controllers\Customer;
 use App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Eticket\AuthLogin;
+use App\Http\Controllers\Eticket\Driver;
 use App\Http\Controllers\Eticket\ManageBus;
 use App\Http\Controllers\Ferry;
 use App\Http\Controllers\Login;
@@ -252,7 +253,22 @@ Route::prefix('e-ticket')->name('e-ticket.')->group(function(){
         Route::get('/dashboard' , [AuthLogin::class , 'dashboard'])->name('dashboard');
 
         //manage bus
-        Route::get('/buses' , [ManageBus::class , 'allBuses']);
+        Route::get('/buses' , [ManageBus::class , 'allBuses'])->name('fetch-buses');
+        Route::get('fetch-tenant-buses',[ManageBus::class , 'fetchOBuses'])->name('fetch-tenant-buses');
+        Route::get('view-tenant-bus/{bus_id}',[ManageBus::class , 'viewBus'])->name('view-tenant-bus');
+        Route::get('edit-tenant-bus/{bus_id}',[ManageBus::class , 'editBus'])->name('edit-tenant-bus');
+        Route::get('add-new-tenant-bus', [ManageBus::class , 'addNewBus']);
+        Route::post('post-new-tenant-bus', [ManageBus::class , 'createTenantBus']);
+        Route::get('assign-driver/{bus_id}',[ManageBus::class , 'assignDriver']);
+        Route::put('assign-driver/{bus_id}',[ManageBus::class , 'assignDriverToBus']);
+        Route::get('remove-driver-from-bus/{driver_id}/{bus_id}' ,[ManageBus::class , 'removeDriverFromBus']);
+
+        //manage bus drivers
+        Route::get('drivers', [Driver::class ,'drivers']);
+        Route::get('create-driver' , [Driver::class , 'createDriver']);
+        Route::post('new-driver' , [Driver::class , 'storeDriver']);
+        Route::get('fetch-tenant-drivers',[Driver::class , 'fetchDrivers'])->name('fetch-tenant-drivers');
+
 
     });
 

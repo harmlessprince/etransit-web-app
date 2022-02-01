@@ -15,10 +15,11 @@ class CreateBusesTable extends Migration
     {
         Schema::create('buses', function (Blueprint $table) {
             $table->id();
-            $table->string('car_type');
-            $table->string('car_model');
+            $table->string('bus_type');
+            $table->string('bus_model');
             $table->unsignedBigInteger('tenant_id');
-            $table->string('car_registration')->unique();
+            $table->unsignedBigInteger('driver_id')->nullable();
+            $table->string('bus_registration')->unique();
             $table->unsignedBigInteger('air_conditioning')->default(1)->comment("False = 0, True = 1");;
             $table->string('wheels')->nullable()->comment("Number of tyres");;
             $table->string('seater')->comment("how many seater");;

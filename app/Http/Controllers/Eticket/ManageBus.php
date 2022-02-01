@@ -3,13 +3,138 @@
 namespace App\Http\Controllers\Eticket;
 
 use App\Http\Controllers\Controller;
+use App\Models\Bus;
+use App\Models\Tenant;
 use Illuminate\Http\Request;
+use DataTables;
+use RealRashid\SweetAlert\Facades\Alert;
+use App\Models\Driver;
 
 class ManageBus extends Controller
 {
     public function allBuses()
     {
+        $busCount = Bus::count();
 
-        return view('Eticket.bus.index');
+        return view('Eticket.bus.index' , compact('busCount'));
+    }
+
+
+    public function fetchOBuses(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = Bus::latest()->get();
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function($row){
+                    $id = $row->id;
+                    $actionBtn = "<a href='/e-ticket/edit-tenant-bus/$id'  class='edit btn btn-success btn-sm'>Edit</a> <a href='/e-ticket/view-tenant-bus/$id' class='delete btn btn-primary btn-sm'>View</a>";
+                    return $actionBtn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+    }
+
+
+    public function viewBus($bus_id)
+    {
+        $findBus = Bus::where('tenant_id',session()->get('tenant_id'))->where('id', $bus_id)->with('driver')->first();
+
+        return view('Eticket.bus.view',compact('findBus'));
+    }
+
+
+    public function addNewBus()
+    {
+        return view('Eticket.bus.new');
+    }
+
+    public function createTenantBus(Request $request)
+    {
+        request()->validate([
+            'bus_model' => 'required',
+            'bus_type' => 'required',
+            'bus_registration' => 'required|unique:buses',
+            'wheels' => 'required',
+            'seater'=> 'required',
+            'driver_phone_number' => 'sometimes'
+        ]);
+
+       $newBus = new Bus;
+       $newBus->bus_model = $request->bus_model;
+       $newBus->bus_type = $request->bus_type;
+       $newBus->bus_registration = $request->bus_registration;
+       $newBus->wheels = $request->wheels;
+       $newBus->tenant_id = session()->get('tenant_id');
+       $newBus->seater = $request->seater;
+       $newBus->air_conditioning  = $request->air_conditioning == 'om' ? 1 : 0 ;
+       $newBus->save();
+
+        Alert::success('Success ', 'Bus added successfully');
+
+       return redirect('e-ticket/buses');
+    }
+
+    public function assignDriver($bus_id)
+    {
+        $bus = Bus::find($bus_id);
+
+        return view('Eticket.bus.assign-driver', compact('bus'));
+    }
+
+    public function assignDriverToBus(Request $request , $bus_id)
+    {
+        request()->validate([
+            'driver_phone_number' => 'required'
+        ]);
+
+        $findBus = Bus::find($bus_id);
+
+        if(!$findBus)
+        {
+            Alert::error('Error', 'No bus found');
+            return back();
+        }
+
+
+        $findDriver = Driver::where('tenant_id', session()->get('tenant_id'))->where('phone_number', $request->driver_phone_number)->first();
+
+        if(!$findDriver)
+        {
+            Alert::error('Error', 'No driver driver found with that number in your organization');
+            return back();
+        }
+
+        $findBus->update([
+            'driver_id'=>$findDriver->id
+        ]);
+
+        Alert::success('Success ', 'Driver assigned to bus successfully');
+
+        return redirect('e-ticket/view-tenant-bus/'.$bus_id);
+
+    }
+
+
+    public function removeDriverFromBus($driver_id , $bus_id)
+    {
+        $findDriver = Driver::find($driver_id);
+
+        if(!$findDriver)
+        {
+            Alert::error('Error', 'No driver driver found with that number in your organization');
+            return back();
+        }
+
+        $findBus = Bus::find($bus_id);
+
+        $findBus->update([
+            'driver_id' => null
+        ]);
+
+        Alert::success('Success ', 'Driver removed from bus successfully');
+
+        return redirect('e-ticket/view-tenant-bus/'.$bus_id);
     }
 }

@@ -44,52 +44,17 @@
     </div>
     <!-- Container-fluid starts-->
     <div class="container-fluid" >
-        <div class="row three-row-grid">
-            <div class="col-md-3 col-lg-3 col-xl-3 col-sm-3">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="align-text">
-                            <h1>{{$busCount}}</h1>
-                            <h6>Bus(es)</h6>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 col-lg-3 col-xl-3 col-sm-3">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="align-text">
-                            <h1>100</h1>
-                            <h6>Terminal(s)</h6>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 col-lg-3 col-xl-3 col-sm-3">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="align-text">
-                            <h1>100</h1>
-                            <h6>Transaction(s)</h6>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
 
         <div class="row">
             <div class="col-md-12 col-xl-12 col-lg-12 col-sm-12">
-               <div class="add_bus_btn">
-                   <div class="space-left">
-                       <button class="btn btn-success">Bulk Upload</button>
-                   </div>
-                   <div class="space-left">
-                       <a href="{{url('e-ticket/add-new-tenant-bus')}}" class="btn btn-success">Add Bus(es)</a>
-                   </div>
-                   <div class="space-left">
-                       <button class="btn btn-success">Schedule Trip</button>
-                   </div>
-               </div>
+                <div class="add_bus_btn">
+                    <div class="space-left">
+                        <button class="btn btn-success">Bulk Upload</button>
+                    </div>
+                    <div class="space-left">
+                        <a href="{{url('e-ticket/create-driver')}}" class="btn btn-success">Add Driver(s)</a>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="card">
@@ -98,11 +63,9 @@
                     <thead>
                     <tr>
                         <th>No</th>
-                        <th>Bus</th>
-                        <th>Bus Type</th>
-                        <th>Car Registration</th>
-                        <th>Seats</th>
-                        <th>Wheels</th>
+                        <th>Full Name</th>
+                        <th>Phone Number</th>
+                        <th>Address</th>
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -127,14 +90,12 @@
             var table = $('.yajra-datatable').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: "{{ route('e-ticket.fetch-tenant-buses') }}",
+                ajax: "{{ route('e-ticket.fetch-tenant-drivers') }}",
                 columns: [
                     {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-                    {data: 'bus_type', name: 'bus_type'},
-                    {data: 'bus_model', name: 'bus_model'},
-                    {data: 'bus_registration', name: 'bus_registration'},
-                    {data: 'seater', name: 'seater'},
-                    {data: 'wheels', name: 'wheels'},
+                    {data: 'full_name', name: 'full_name'},
+                    {data: 'phone_number', name: 'phone_number'},
+                    {data: 'address', name: 'address'},
 
                     {
                         data: 'action',
