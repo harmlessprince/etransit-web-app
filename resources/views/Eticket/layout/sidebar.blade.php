@@ -23,7 +23,7 @@
 
                     <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"></i><span>Bus Management</span></a>
                         <ul class="nav-submenu menu-content">
-                            <li><a href="{{url('/admin/manage/vehicle')}}">Manage Buses</a></li>
+                            <li><a href="{{url('/e-ticket/buses')}}">Manage Buses</a></li>
                         </ul>
                     </li>
                 </ul>

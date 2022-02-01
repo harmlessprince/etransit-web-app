@@ -26,10 +26,10 @@ class SetTenantIdInSession
      */
     public function handle($event)
     {
-//        if((Auth::guard('e-ticket')))
-//        {
-//            dd($event);
-//        }
+        if((Auth::guard('e-ticket')->check()))
+        {
+            session()->put('tenant_id', $event->user->tenant_id);
+        }
 
     }
 }

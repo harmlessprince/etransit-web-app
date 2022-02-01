@@ -93,9 +93,7 @@
                 </div>
             </div>
 
-{{count($users)}}
+
         </div>
     </div>
-    <!-- Container-fluid Ends-->
-
 @endsection

@@ -17,6 +17,7 @@ class CreateBusesTable extends Migration
             $table->id();
             $table->string('car_type');
             $table->string('car_model');
+            $table->unsignedBigInteger('tenant_id');
             $table->string('car_registration')->unique();
             $table->unsignedBigInteger('air_conditioning')->default(1)->comment("False = 0, True = 1");;
             $table->string('wheels')->nullable()->comment("Number of tyres");;

@@ -7,6 +7,7 @@ use App\Http\Controllers\Car;
 use App\Http\Controllers\Customer;
 use App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Eticket\AuthLogin;
+use App\Http\Controllers\Eticket\ManageBus;
 use App\Http\Controllers\Ferry;
 use App\Http\Controllers\Login;
 use App\Http\Controllers\Operator;
@@ -242,12 +243,17 @@ Route::prefix('admin')->name('admin.')->group(function(){
 Route::prefix('e-ticket')->name('e-ticket.')->group(function(){
 
     Route::get('', [AuthLogin::class , 'eticketLogin'])->name('login-page');
-    Route::post('/user',[AuthLogin::class,'fetchUser'])->name('user');
+//    Route::post('/user',[AuthLogin::class,'fetchUser'])->name('user');
     Route::post('/logout-tenant',[AuthLogin::class , 'logout'] )->name('logout');
     Route::post('/login-tenant' , [AuthLogin::class , 'loginTenant'])->name('login');
 
     Route::group(['middleware' => ['e-ticket','prevent-back-history']], function() {
+
         Route::get('/dashboard' , [AuthLogin::class , 'dashboard'])->name('dashboard');
+
+        //manage bus
+        Route::get('/buses' , [ManageBus::class , 'allBuses']);
+
     });
 
 

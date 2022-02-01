@@ -27,7 +27,7 @@
                         <span class="fa fa-user-o"></span>
                     </div>
                     <h3 class="text-center mb-4">Sign In</h3>
-                    <form action="{{route('e-ticket.user')}}"  method="POST" class="login-form">
+                    <form action="{{route('e-ticket.login')}}"  method="POST" class="login-form">
                         @csrf
                         <input type="hidden" name="type" value="admin">
                         <div class="form-group">
@@ -38,14 +38,14 @@
                                 </span>
                             @enderror
                         </div>
-{{--                        <div class="form-group">--}}
-{{--                            <input type="password" class="form-control rounded-left @error('password')is-invalid @enderror" placeholder="Password" name="password"/>--}}
-{{--                            @error('password')--}}
-{{--                            <span class="invalid-feedback" role="alert">--}}
-{{--                                    <strong>{{ $message }}</strong>--}}
-{{--                                </span>--}}
-{{--                            @enderror--}}
-{{--                        </div>--}}
+                        <div class="form-group">
+                            <input type="password" class="form-control rounded-left @error('password')is-invalid @enderror" placeholder="Password" name="password"/>
+                            @error('password')
+                            <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
                         <div class="form-group">
                             <button type="submit" class="form-control btn btn-primary rounded submit px-3">Login</button>
                         </div>
