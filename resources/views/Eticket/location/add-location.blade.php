@@ -21,7 +21,7 @@
                     <h3>{{\App\Models\Tenant::first()->company_name ?? env('APP_NAME')}}</h3>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{url('e-ticket/dashboard')}}"><i data-feather="home"></i></a></li>
-                        <li class="breadcrumb-item">Assign Driver To Bus</li>
+                        <li class="breadcrumb-item">Create Bus</li>
                     </ol>
                 </div>
                 <div class="col-6">
@@ -47,30 +47,14 @@
             <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
                 <div class="card">
                     <div class="card-body">
-                        <h3>Assign Driver</h3>
-                        <form action="{{url('e-ticket/assign-driver/'.$bus->id)}}" method="post">
-                            @method('put')
+                        <form action="{{url('e-ticket/store-location')}}" method="post">
                             @csrf
                             <div class="form-group">
-                                <label for="bus_model">Bus Model</label>
-                                <input type="text" class="form-control" name="bus_model" value="{{$bus->bus_model}}" id="bus_model" disabled/>
-                            </div>
-                            <div class="form-group">
-                                <label for="bus_type">Bus Type</label>
-                                <input type="text" class="form-control" name="bus_type" value="{{$bus->bus_type}}" id="bus_type" disabled/>
-                            </div>
-                            <div class="form-group">
-                                <label for="registration">Bus Registration</label>
-                                <input type="text" class="form-control" name="bus_registration" value="{{$bus->bus_registration}}" id="registration" disabled/>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="driver">Assign Driver</label><br>
-                                <span class="optional_notes">Type in driver's phone number to assign them to the bus</span>
-                                <input type="text" class="form-control" name="driver_phone_number"value="{{old('driver_phone_number')}}" id="driver" />
+                                <label for="location">Location (City)e</label>
+                                <input type="text" class="form-control" name="location" value="{{old('location')}}" id="location"/>
                             </div>
                             <div class="submit_button">
-                                <button class="btn btn-success">Assign Driver</button>
+                                <button class="btn btn-success">Create Location</button>
                             </div>
                         </form>
                     </div>

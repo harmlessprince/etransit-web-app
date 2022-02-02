@@ -18,9 +18,10 @@ class CreateTerminalsTable extends Migration
             $table->string('terminal_name')->index();
             $table->string('terminal_address');
             $table->unsignedBigInteger('tenant_id');
-            $table->unsignedBigInteger('service_id')->default(1)->comment('on creation only bus have terminals for now');
-
-            $table->foreign('service_id')->references('id')->on('services')->onDelete('cascade');
+            $table->unsignedBigInteger('destination_id');
+//            $table->unsignedBigInteger('service_id')->default(1)->comment('on creation only bus have terminals for now');
+//
+//            $table->foreign('service_id')->references('id')->on('services')->onDelete('cascade');
             $table->timestamps();
         });
     }

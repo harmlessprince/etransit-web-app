@@ -17,7 +17,7 @@
                             <h6>Dashboard</h6>
                         </div>
                     </li>
-                    <li ><a class="nav-link" href="{{route('admin.dashboard')}}"><i data-feather="home"></i><span>Dashboard</span></a>
+                    <li ><a class="nav-link" href="{{route('e-ticket.dashboard')}}"><i data-feather="home"></i><span>Dashboard</span></a>
 
                     </li>
 
@@ -25,6 +25,8 @@
                         <ul class="nav-submenu menu-content">
                             <li><a href="{{url('/e-ticket/buses')}}">Manage Buses</a></li>
                             <li><a href="{{url('/e-ticket/drivers')}}">Manage Drivers</a></li>
+                            <li><a href="{{url('/e-ticket/terminals')}}">Manage Terminals</a></li>
+                            <li><a href="{{url('/e-ticket/locations')}}">Manage Locations</a></li>
                         </ul>
                     </li>
                 </ul>

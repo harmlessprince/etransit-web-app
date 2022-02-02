@@ -36,15 +36,11 @@
                         <li class="breadcrumb-item">Dashboard</li>
                     </ol>
                 </div>
-                <div class="col-6">
-
-                </div>
             </div>
         </div>
     </div>
     <!-- Container-fluid starts-->
     <div class="container-fluid" >
-
         <div class="row">
             <div class="col-md-12 col-xl-12 col-lg-12 col-sm-12">
                 <div class="add_bus_btn">
@@ -52,7 +48,7 @@
                         <button class="btn btn-success">Bulk Upload</button>
                     </div>
                     <div class="space-left">
-                        <a href="{{url('e-ticket/create-driver')}}" class="btn btn-success">Add Driver(s)</a>
+                        <a href="{{url('e-ticket/add-terminal')}}" class="btn btn-success">Add Terminal(s)</a>
                     </div>
                 </div>
             </div>
@@ -63,8 +59,7 @@
                     <thead>
                     <tr>
                         <th>No</th>
-                        <th>Full Name</th>
-                        <th>Phone Number</th>
+                        <th>Terminal Name</th>
                         <th>Address</th>
                         <th>Action</th>
                     </tr>
@@ -90,13 +85,11 @@
             var table = $('.yajra-datatable').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: "{{ route('e-ticket.fetch-tenant-drivers') }}",
+                ajax: "{{ route('e-ticket.fetch-tenant-terminal') }}",
                 columns: [
                     {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-                    {data: 'full_name', name: 'full_name'},
-                    {data: 'phone_number', name: 'phone_number'},
-                    {data: 'address', name: 'address'},
-
+                    {data: 'terminal_name', name: 'terminal_name'},
+                    {data: 'terminal_address', name: 'terminal_address'},
                     {
                         data: 'action',
                         name: 'action',

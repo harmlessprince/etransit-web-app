@@ -8,6 +8,8 @@ use App\Http\Controllers\Customer;
 use App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Eticket\AuthLogin;
 use App\Http\Controllers\Eticket\Driver;
+use App\Http\Controllers\Eticket\EticketLocation;
+use App\Http\Controllers\Eticket\EticketTerminal;
 use App\Http\Controllers\Eticket\ManageBus;
 use App\Http\Controllers\Ferry;
 use App\Http\Controllers\Login;
@@ -268,6 +270,18 @@ Route::prefix('e-ticket')->name('e-ticket.')->group(function(){
         Route::get('create-driver' , [Driver::class , 'createDriver']);
         Route::post('new-driver' , [Driver::class , 'storeDriver']);
         Route::get('fetch-tenant-drivers',[Driver::class , 'fetchDrivers'])->name('fetch-tenant-drivers');
+
+        //e-ticket terminal
+        Route::get('terminals', [EticketTerminal::class , 'allTerminals']);
+        Route::get('add-terminal', [EticketTerminal::class , 'addTerminal']);
+        Route::post('store-terminal', [EticketTerminal::class , 'storeAddress']);
+        Route::get('fetch-tenant-terminal' , [EticketTerminal::class , 'fetchTerminal'])->name('fetch-tenant-terminal');
+
+        //manage e-tickets locations
+        Route::get('locations' , [EticketLocation::class , 'manageLocations']);
+        Route::get('add-location', [EticketLocation::class , 'addLocation']);
+        Route::post('store-location',[EticketLocation::class , 'storeLocation']);
+        Route::get('fetch-tenant-locations', [EticketLocation::class ,'fetchLocation'])->name('fetch-tenant-locations');
 
 
     });

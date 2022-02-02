@@ -24,14 +24,14 @@
         width: 240px !important;
         cursor: pointer;
     }
-.checkbox_box{
-    display:flex;
-    justify-content: space-between;
-}
-#editModal{
+    .checkbox_box{
+        display:flex;
+        justify-content: space-between;
+    }
+    #editModal{
 
-    height: 700px !important;
-}
+        height: 700px !important;
+    }
 
     .send-btn{
         background: #021037;
@@ -67,7 +67,7 @@
         <div class="page-header">
             <div class="row">
                 <div class="col-6">
-                    <h3>{{env('APP_NAME')}}</h3>
+                    <h3>{{\App\Models\Tenant::first()->company_name ?? env('APP_NAME')}}</h3>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{url('/admin/')}}"><i data-feather="home"></i></a></li>
                         <li class="breadcrumb-item">Schedule Event </li>
@@ -84,7 +84,7 @@
         <div class="card ">
             <div class="card-body">
                 <div style="display: flex; justify-content: center;">
-                        <h1>{{strtoupper($bus->bus_type)}}  - {{strtoupper($bus->bus_registration)}}</h1>
+                    <h1>{{strtoupper($bus->bus_type)}}  - {{strtoupper($bus->bus_registration)}}</h1>
                 </div>
             </div>
         </div>
@@ -108,7 +108,7 @@
                         <label for="pick_up">Pick Up</label>
                         <select class="form-control" name="pickup" id="pick_up">
                             @foreach($pickups as $location)
-                            <option value="{{$location->id}}" >{{$location->location}}</option>
+                                <option value="{{$location->id}}" >{{$location->location}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -183,7 +183,7 @@
                 selectable: true,
                 selectHelper: true,
                 select: function (event_start, event_end, allDay ) {
-                   var modalOpen = $("#editModal").modal('show');
+                    var modalOpen = $("#editModal").modal('show');
 
                     if (modalOpen) {
                         var event_start  = $.fullCalendar.formatDate(event_start, "Y-MM-DD HH:mm:ss");

@@ -24,13 +24,16 @@
         margin-left: 10px;
         margin-bottom:10px;
     }
+    a{
+        text-decoration: none !important;
+    }
 </style>
 @section('content')
     <div class="container-fluid">
         <div class="page-header">
             <div class="row">
                 <div class="col-6">
-                    <h3>{{env('APP_NAME')}}</h3>
+                    <h3>{{\App\Models\Tenant::first()->company_name ?? env('APP_NAME')}}</h3>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{url('e-ticket/dashboard')}}"><i data-feather="home"></i></a></li>
                         <li class="breadcrumb-item">Dashboard</li>
@@ -56,14 +59,16 @@
                 </div>
             </div>
             <div class="col-md-3 col-lg-3 col-xl-3 col-sm-3">
+                <a href="{{url('e-ticket/terminals')}}">
                 <div class="card">
                     <div class="card-body">
                         <div class="align-text">
-                            <h1>100</h1>
+                            <h1>{{$terminalCount}}</h1>
                             <h6>Terminal(s)</h6>
                         </div>
                     </div>
                 </div>
+                </a>
             </div>
             <div class="col-md-3 col-lg-3 col-xl-3 col-sm-3">
                 <div class="card">

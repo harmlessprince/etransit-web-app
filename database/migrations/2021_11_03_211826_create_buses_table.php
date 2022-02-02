@@ -19,6 +19,7 @@ class CreateBusesTable extends Migration
             $table->string('bus_model');
             $table->unsignedBigInteger('tenant_id');
             $table->unsignedBigInteger('driver_id')->nullable();
+            $table->unsignedBigInteger('service_id');
             $table->string('bus_registration')->unique();
             $table->unsignedBigInteger('air_conditioning')->default(1)->comment("False = 0, True = 1");;
             $table->string('wheels')->nullable()->comment("Number of tyres");;

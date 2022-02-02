@@ -147,10 +147,10 @@
                     <div class="vehicle-box">
                         @foreach($vehicles as $vehicle)
                         <div class="card text-white  mb-3 vehicle-cards"  style="max-width: 18rem;">
-                            <div class="card-header vehicle-cards"><h5>{{strtoupper($vehicle->car_registration)}}</h5></div>
+                            <div class="card-header vehicle-cards"><h5>{{strtoupper($vehicle->bus_registration)}}</h5></div>
                             <div class="card-body">
-                                <h6 class="card-title"> Vehicle Type: {{Ucfirst($vehicle->car_model)}}</h6>
-                                <p class="card-text"> Car Model : {{Ucfirst($vehicle->car_type)}}</p>
+                                <h6 class="card-title"> Vehicle Type: {{Ucfirst($vehicle->bus_model)}}</h6>
+                                <p class="card-text"> Car Model : {{Ucfirst($vehicle->bus_type)}}</p>
                                 <p class="card-text"> Air Condition: {{$vehicle->air_conditioning == 1 ? 'True' : "False"}}</p>
                                 <p class="card-text"> Passenger Seats : {{$vehicle->seater}}</p>
                                 <p class="card-text"> Wheels: {{$vehicle->wheels}}</p>

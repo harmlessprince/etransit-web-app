@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Eticket;
 use App\Http\Controllers\Controller;
 use App\Models\Bus;
 use App\Models\Tenant;
+use App\Models\Terminal;
 use Illuminate\Http\Request;
 use DataTables;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -15,8 +16,9 @@ class ManageBus extends Controller
     public function allBuses()
     {
         $busCount = Bus::count();
+        $terminalCount = Terminal::count();
 
-        return view('Eticket.bus.index' , compact('busCount'));
+        return view('Eticket.bus.index' , compact('busCount','terminalCount'));
     }
 
 
@@ -68,6 +70,7 @@ class ManageBus extends Controller
        $newBus->wheels = $request->wheels;
        $newBus->tenant_id = session()->get('tenant_id');
        $newBus->seater = $request->seater;
+       $newBus->service_id = 1;
        $newBus->air_conditioning  = $request->air_conditioning == 'om' ? 1 : 0 ;
        $newBus->save();
 
