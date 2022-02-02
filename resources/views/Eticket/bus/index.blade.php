@@ -36,11 +36,8 @@
                     <h3>{{\App\Models\Tenant::first()->company_name ?? env('APP_NAME')}}</h3>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{url('e-ticket/dashboard')}}"><i data-feather="home"></i></a></li>
-                        <li class="breadcrumb-item">Dashboard</li>
+                        <li class="breadcrumb-item">Bus</li>
                     </ol>
-                </div>
-                <div class="col-6">
-
                 </div>
             </div>
         </div>
@@ -71,6 +68,18 @@
                 </a>
             </div>
             <div class="col-md-3 col-lg-3 col-xl-3 col-sm-3">
+                <a href="{{url('e-ticket/all-scheduled-trip')}}">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="align-text">
+                            <h1>{{$schedule}}</h1>
+                            <h6>Total Scheduled Trips</h6>
+                        </div>
+                    </div>
+                </div>
+                </a>
+            </div>
+            <div class="col-md-3 col-lg-3 col-xl-3 col-sm-3">
                 <div class="card">
                     <div class="card-body">
                         <div class="align-text">
@@ -92,7 +101,7 @@
                        <a href="{{url('e-ticket/add-new-tenant-bus')}}" class="btn btn-success">Add Bus(es)</a>
                    </div>
                    <div class="space-left">
-                       <button class="btn btn-success">Schedule Trip</button>
+                       <a href="{{url('e-ticket/all-scheduled-trip')}}" class="btn btn-success">Scheduled Trip</a>
                    </div>
                </div>
             </div>

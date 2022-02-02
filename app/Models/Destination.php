@@ -15,4 +15,9 @@ class Destination extends Model
         return $this->hasMany(Schedule::class);
     }
 
+    public function terminals()
+    {
+        return $this->hasMany(Terminal::class);
+    }
+
 }

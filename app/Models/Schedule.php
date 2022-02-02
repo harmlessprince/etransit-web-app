@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Scopes\TenantScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -17,6 +18,7 @@ class Schedule extends Model
      */
     protected $casts = [
         'departure_date' => 'datetime',
+        'return_date' => 'datetime',
     ];
 
     public function terminal()
@@ -52,6 +54,16 @@ class Schedule extends Model
     public function transactions()
     {
         return $this->hasMany(Transaction::class);
+    }
+
+    /**
+     * The "booted" method of the model.
+     *
+     * @return void
+     */
+    protected static function booted()
+    {
+        static::addGlobalScope(new TenantScope);
     }
 
 }

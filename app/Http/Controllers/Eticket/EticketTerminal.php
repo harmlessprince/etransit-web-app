@@ -19,7 +19,7 @@ class EticketTerminal extends Controller
     public function fetchTerminal(Request $request)
     {
         if ($request->ajax()) {
-            $data = Terminal::latest()->get();
+            $data = Terminal::with('destination')->latest()->get();
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function($row){

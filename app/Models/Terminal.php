@@ -21,6 +21,11 @@ class Terminal extends Model
         return $this->belongsTo(Service::class);
     }
 
+    public function destination()
+    {
+        return $this->belongsTo(Destination::class);
+    }
+
     /**
      * The "booted" method of the model.
      *

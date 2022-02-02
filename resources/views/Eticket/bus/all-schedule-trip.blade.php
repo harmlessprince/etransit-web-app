@@ -24,6 +24,9 @@
         margin-left: 10px;
         margin-bottom:10px;
     }
+    a{
+        text-decoration: none !important;
+    }
 </style>
 @section('content')
     <div class="container-fluid">
@@ -33,7 +36,7 @@
                     <h3>{{\App\Models\Tenant::first()->company_name ?? env('APP_NAME')}}</h3>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{url('e-ticket/dashboard')}}"><i data-feather="home"></i></a></li>
-                        <li class="breadcrumb-item">Dashboard</li>
+                        <li class="breadcrumb-item">Bus Schedules</li>
                     </ol>
                 </div>
             </div>
@@ -41,27 +44,19 @@
     </div>
     <!-- Container-fluid starts-->
     <div class="container-fluid" >
-        <div class="row">
-            <div class="col-md-12 col-xl-12 col-lg-12 col-sm-12">
-                <div class="add_bus_btn">
-                    <div class="space-left">
-                        <button class="btn btn-success">Bulk Upload</button>
-                    </div>
-                    <div class="space-left">
-                        <a href="{{url('e-ticket/add-terminal')}}" class="btn btn-success">Add Terminal(s)</a>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="card">
             <div class="card-body">
                 <table class="table table-bordered yajra-datatable">
                     <thead>
                     <tr>
                         <th>No</th>
-                        <th>Terminal Name</th>
-                        <th>Terminal Location</th>
-                        <th>Address</th>
+                        <th>Pickup</th>
+                        <th>Destination</th>
+                        <th>Bus Number Plate</th>
+                        <th>Terminal Name (PickUp)</th>
+                        <th>Fare (Adult)</th>
+                        <th>Fare (Child)</th>
+                        <th>Seats Available</th>
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -86,12 +81,17 @@
             var table = $('.yajra-datatable').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: "{{ route('e-ticket.fetch-tenant-terminal') }}",
+                ajax: "{{ route('e-ticket.fetch-scheduled-trip') }}",
                 columns: [
                     {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-                    {data: 'terminal_name', name: 'terminal_name'},
+                    {data: 'pickup.location', name: 'pickup.location'},
                     {data: 'destination.location', name: 'destination.location'},
-                    {data: 'terminal_address', name: 'terminal_address'},
+                    {data: 'bus.bus_registration', name: 'bus.bus_registration'},
+                    {data: 'terminal.terminal_name', name: 'terminal.terminal_name'},
+                    {data: 'fare_adult', name: 'fare_adult'},
+                    {data: 'fare_children', name: 'fare_children'},
+                    {data: 'seats_available', name: 'seats_available'},
+
                     {
                         data: 'action',
                         name: 'action',

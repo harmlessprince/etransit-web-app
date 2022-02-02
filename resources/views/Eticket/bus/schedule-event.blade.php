@@ -1,4 +1,4 @@
-@extends('admin.layout.app')
+@extends('Eticket.layout.app')
 <style>
     .button-box{
         display:flex;
@@ -101,13 +101,13 @@
         <div class="modal-dialog modalBody" role="document" >
             <div class="modal-content">
                 <div class="modal-body">
-                    <h3>Schedule Events</h3>
+                    <h3>Schedule Trip</h3>
                     <br>
                     <input type="hidden" value="{{$bus->id}}" name="bus_id" id="busId"/>
                     <div class="form-group">
                         <label for="pick_up">Pick Up</label>
                         <select class="form-control" name="pickup" id="pick_up">
-                            @foreach($pickups as $location)
+                            @foreach($locations as $location)
                                 <option value="{{$location->id}}" >{{$location->location}}</option>
                             @endforeach
                         </select>
@@ -137,6 +137,11 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="return_date">Return Date</label>
+                        <input type="date" name="return_date" id="return_date" class="form-control" required/>
+                    </div>
+
+                    <div class="form-group">
                         <label for="t_fare">Transportation Fee (Adult)</label>
                         <input type="text" name="t_fare" class="form-control" id="Tfare" required/>
                     </div>
@@ -160,7 +165,7 @@
     <script>
         $(document).ready(function () {
 
-            var SITEURL = "{{ url('/admin') }}";
+            var SITEURL = "{{ url('/e-ticket') }}";
 
             $.ajaxSetup({
                 headers: {
@@ -192,13 +197,14 @@
                             var departureTime     = $("input[name=departure_time]").val();
                             var Tfare             = $("input[name=t_fare]").val();
                             var TfareChild        = $("input[name=t_fare_child]").val();
+                            var returnDate        = $("input[name=return_date]").val();
 
                             var pickUp            =  $("#pick_up").val();
                             var terminal          = $("#terminal").val();
                             var destination       = $("#destination").val();
 
                             $.ajax({
-                                url: SITEURL + '/schedule/event',
+                                url: SITEURL + '/add-eticket-schedule',
                                 data: {
                                     busId         : busId,
                                     departureTime : departureTime ,
@@ -208,6 +214,7 @@
                                     destination   : destination ,
                                     eventDate     : event_start,
                                     TfareChild    : TfareChild,
+                                    returnDate    : returnDate,
                                 },
                                 type: "POST",
                                 success: function (response) {

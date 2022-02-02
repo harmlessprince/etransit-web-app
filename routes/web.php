@@ -9,6 +9,7 @@ use App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Eticket\AuthLogin;
 use App\Http\Controllers\Eticket\Driver;
 use App\Http\Controllers\Eticket\EticketLocation;
+use App\Http\Controllers\Eticket\EticketSchedule;
 use App\Http\Controllers\Eticket\EticketTerminal;
 use App\Http\Controllers\Eticket\ManageBus;
 use App\Http\Controllers\Ferry;
@@ -282,6 +283,14 @@ Route::prefix('e-ticket')->name('e-ticket.')->group(function(){
         Route::get('add-location', [EticketLocation::class , 'addLocation']);
         Route::post('store-location',[EticketLocation::class , 'storeLocation']);
         Route::get('fetch-tenant-locations', [EticketLocation::class ,'fetchLocation'])->name('fetch-tenant-locations');
+
+
+        //schedule trip for buses
+        Route::get('/schedule/{bus_id}',[ManageBus::class , 'scheduleTrip']);
+        Route::post('add-eticket-schedule', [EticketSchedule::class , 'addEticketSchedule'])->name('add-eticket-schedule');
+        Route::get('all-scheduled-trip',[EticketSchedule::class , 'allScheduledTrip']);
+        Route::get('fetch-scheduled-trip', [EticketSchedule::class, 'fetchAllSchedules'])->name('fetch-scheduled-trip');
+        Route::get('view-each-schedule/{schedule_id}' , [EticketSchedule::class , 'viewEachSchedule']);
 
 
     });

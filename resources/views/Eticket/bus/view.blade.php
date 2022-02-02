@@ -87,7 +87,7 @@
             <div class="col-md-12">
                 <div class="bus_event ">
                     <div class="schedule_trip">
-                        <button class="btn btn-success">Schedule Trip</button>
+                        <a href="{{url('e-ticket/schedule/'.$findBus->id)}}" class="btn btn-success">Schedule Trip</a>
                     </div>
                     <div class="schedules">
                         <button class="btn btn-success">Check Schedule(s)</button>

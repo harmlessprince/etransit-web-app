@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use App\Mail\OperatorCredentials;
 use App\Models\Eticket;
 use App\Models\Tenant;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Mail;
 use DataTables;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class Operator extends Controller
 {
@@ -75,7 +77,18 @@ class Operator extends Controller
             'phone_number' => 'required',
             'full_name' => 'required',
             'email' => 'required|email|unique:etickets',
+            'company_logo' => 'sometimes',
+            'display_name' => 'required'
         ]);
+
+        if($request->hasFile('company_logo'))
+        {
+            request()->validate([
+                'company_logo' => 'mimes:jpeg,jpg,png|max:2048'
+            ]);
+
+        }
+
 
         DB::beginTransaction();
            $password  =   Str::random(8);
@@ -84,6 +97,8 @@ class Operator extends Controller
             $tenant->company_name = $request->company_name;
             $tenant->address = $request->company_address;
             $tenant->phone_number = $request->phone_number;
+            $tenant->display_name  = $request->display_name;
+            $tenant->image_url = $request->hasFile('company_logo') ?  Cloudinary::upload($request->file('company_logo')->getRealPath())->getSecurePath() : null;
             $tenant->save();
 
             if($tenant)
@@ -107,9 +122,9 @@ class Operator extends Controller
         Mail::to($request->email)->send(new OperatorCredentials($maildata));
         DB::commit();
 
+        Alert::success('Success ', 'Operator added successfully');
 
-
-        return back();
+        return redirect('admin/manage/operators');
 
     }
 }

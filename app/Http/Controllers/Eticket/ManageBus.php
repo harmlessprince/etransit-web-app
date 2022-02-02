@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Eticket;
 
 use App\Http\Controllers\Controller;
 use App\Models\Bus;
+use App\Models\Destination;
+use App\Models\Schedule;
 use App\Models\Tenant;
 use App\Models\Terminal;
 use Illuminate\Http\Request;
@@ -17,8 +19,9 @@ class ManageBus extends Controller
     {
         $busCount = Bus::count();
         $terminalCount = Terminal::count();
+        $schedule = Schedule::count();
 
-        return view('Eticket.bus.index' , compact('busCount','terminalCount'));
+        return view('Eticket.bus.index' , compact('busCount','terminalCount','schedule'));
     }
 
 
@@ -139,5 +142,23 @@ class ManageBus extends Controller
         Alert::success('Success ', 'Driver removed from bus successfully');
 
         return redirect('e-ticket/view-tenant-bus/'.$bus_id);
+    }
+
+
+    public function scheduleTrip($bus_id)
+    {
+        $bus = Bus::find($bus_id);
+
+        if(!$bus)
+        {
+            Alert::error('Error ', 'Unable to fetch bus');
+            return back();
+        }
+
+        $locations = Destination::all();
+        $terminals = Terminal::all();
+
+        return view('Eticket.bus.schedule-event', compact('bus','locations','terminals'));
+
     }
 }
