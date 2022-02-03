@@ -65,32 +65,32 @@
     .available{
         background: white;
         border : 1px solid black;
-        width:40px;
-        height:40px;
+        width:60px;
+        height:60px;
         color:black;
         align-items: center;
-        padding:10px 15px;
+        padding:15px 17px;
         border-radius: 5px;
     }
     .selected{
         background:#7f7fd9;
         border : 1px solid #7f7fd9;
-        width:40px;
-        height:40px;
+        width:60px;
+        height:60px;
         color:black;
         align-items: center;
-        padding:10px 15px;
+        padding:15px 17px;
         border-radius: 5px;
         color:white;
     }
     .booked{
         background: #ebebeb;
         border : 1px solid #ebebeb;
-        width:40px;
-        height:40px;
+        width:60px;
+        height:60px;
         color:black;
         align-items: center;
-        padding:10px 15px;
+        padding:15px 17px;
         border-radius: 5px;
     }
     .passenger-info{
@@ -179,7 +179,7 @@
                                 <h4>Seat Information</h4>
                             </div>
                             <div>
-                                <a href="" class="btn btn-success">Check Manifest</a>
+                                <a href="{{url('e-ticket/schedule-manifest/'.$findSchedule->id)}}" class="btn btn-success">Check Manifest</a>
                             </div>
                         </div>
                         <hr>

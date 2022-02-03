@@ -9,6 +9,7 @@ use App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Eticket\AuthLogin;
 use App\Http\Controllers\Eticket\Driver;
 use App\Http\Controllers\Eticket\EticketLocation;
+use App\Http\Controllers\Eticket\EticketManifest;
 use App\Http\Controllers\Eticket\EticketSchedule;
 use App\Http\Controllers\Eticket\EticketTerminal;
 use App\Http\Controllers\Eticket\ManageBus;
@@ -291,6 +292,11 @@ Route::prefix('e-ticket')->name('e-ticket.')->group(function(){
         Route::get('all-scheduled-trip',[EticketSchedule::class , 'allScheduledTrip']);
         Route::get('fetch-scheduled-trip', [EticketSchedule::class, 'fetchAllSchedules'])->name('fetch-scheduled-trip');
         Route::get('view-each-schedule/{schedule_id}' , [EticketSchedule::class , 'viewEachSchedule']);
+
+
+        //check schedule manifest
+        Route::get('schedule-manifest/{schedule_id}', [EticketManifest::class , 'manifest']);
+        Route::get('fetch-bus-manifest/{schedule_id}', [EticketManifest::class ,'fetchBusManifest'])->name('fetch-bus-manifest');
 
 
     });
