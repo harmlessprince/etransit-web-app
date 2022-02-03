@@ -61,6 +61,7 @@ class AuthLogin extends Controller
     public function dashboard()
     {
         $users = Eticket::all();
+//        $company_name = \App\Models\Tenant::where('id',session()->get('tenant_id'))->first();
       return view('Eticket.dashboard.index' , compact('users'));
     }
 

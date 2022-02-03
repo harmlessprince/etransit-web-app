@@ -23,7 +23,7 @@ class EticketLocation extends Controller
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
                     $id = $row->id;
-                    $actionBtn = "<a href='/e-ticket/view-tenant-bus/$id' class='delete btn btn-primary btn-sm'>View</a>";
+                    $actionBtn = "<a href='/e-ticket/view-tenant-location/$id' class='delete btn btn-primary btn-sm'>View</a>";
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])
@@ -51,5 +51,10 @@ class EticketLocation extends Controller
         Alert::success('Success ', 'Location added successfully');
 
         return redirect('e-ticket/locations');
+    }
+
+    public function viewLocation($location_id)
+    {
+        dd($location_id);
     }
 }

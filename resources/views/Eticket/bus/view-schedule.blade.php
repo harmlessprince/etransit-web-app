@@ -68,8 +68,7 @@
         width:60px;
         height:60px;
         color:black;
-        align-items: center;
-        padding:15px 17px;
+        text-align: center;
         border-radius: 5px;
     }
     .selected{
@@ -78,8 +77,7 @@
         width:60px;
         height:60px;
         color:black;
-        align-items: center;
-        padding:15px 17px;
+        text-align: center;
         border-radius: 5px;
         color:white;
     }
@@ -89,8 +87,7 @@
         width:60px;
         height:60px;
         color:black;
-        align-items: center;
-        padding:15px 17px;
+        text-align: center;
         border-radius: 5px;
     }
     .passenger-info{
@@ -108,7 +105,7 @@
         <div class="page-header">
             <div class="row">
                 <div class="col-6">
-                    <h3>{{\App\Models\Tenant::first()->company_name ?? env('APP_NAME')}}</h3>
+                    <h3>{{$tenantCompanyName ?? env('APP_NAME')}}</h3>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{url('e-ticket/buses')}}"><i data-feather="home"></i></a></li>
                         <li class="breadcrumb-item">Schedule</li>
@@ -201,9 +198,10 @@
                             <hr>
                             <div class="seat_box">
                                 @foreach($seatTracker as $tracker)
-                                <a href=""  @if($tracker->booked_status == 0)  class="available seat_picked"
+                                <a href="{{$tracker->id}}"  @if($tracker->booked_status == 0)  class="available seat_picked"
                                      @elseif($tracker->booked_status == 1) class="selected seat_picked"
-                                     @elseif($tracker->booked_status == 2) class="booked seat_picked"  @endif>{{$tracker->seat_position}}</a>
+                                     @elseif($tracker->booked_status == 2) class="booked seat_picked"  @endif >{{$tracker->seat_position}}</a>
+{{--                                    data-toggle="modal" data-target="#passengerDetails"--}}
                                 @endforeach
                             </div>
                         </div>
@@ -213,6 +211,26 @@
         </div>
     </div>
 
+    <div class="modal fade" id="passengerDetails" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Passenger Details</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="full_name">Name : <div id="name"></div></div>
+                    <div class="booked_by">Booked By <div class="email"></div></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
@@ -244,6 +262,29 @@
                     },
 
                 ]
+            });
+        });
+
+        $(".seat_picked").click(function(e){
+            var id = $(this).attr('href');
+            console.log(id)
+
+            $.ajax({
+                url: 'e-ticket/fetch-passenger-details/'.id,
+                data: { },
+                type: "GET",
+                success: function (response) {
+                    // console.log(response)
+                    if(response.success){
+                    console.log(response)
+                    }else{
+
+                    }
+                    setTimeout(function(){ location.reload(); }, 5000);
+                },
+                error: function(xhr, textStatus, error){
+                    displayErrorMessage("An error occured");
+                }
             });
 
         });

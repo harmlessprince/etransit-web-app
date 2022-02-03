@@ -12,6 +12,7 @@ class Driver extends Controller
 {
     public function drivers()
     {
+
         return view('Eticket.driver.all-driver');
     }
 
@@ -23,7 +24,7 @@ class Driver extends Controller
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
                     $id = $row->id;
-                    $actionBtn = "<a href='/e-ticket/edit-tenant-bus/$id'  class='edit btn btn-success btn-sm'>Edit</a> <a href='/e-ticket/view-tenant-bus/$id' class='delete btn btn-primary btn-sm'>View</a>";
+                    $actionBtn = "<a href='/e-ticket/edit-tenant-terminal/$id'  class='edit btn btn-success btn-sm'>Edit</a>";
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])
@@ -56,5 +57,10 @@ class Driver extends Controller
         $newDriver->save();
 
         return redirect('e-ticket/drivers');
+    }
+
+    public function editDriver($driver_id)
+    {
+        dd($driver_id);
     }
 }

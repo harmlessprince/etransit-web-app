@@ -33,7 +33,7 @@
         <div class="page-header">
             <div class="row">
                 <div class="col-6">
-                    <h3>{{\App\Models\Tenant::first()->company_name ?? env('APP_NAME')}}</h3>
+                    <h3>{{$tenantCompanyName ?? env('APP_NAME')}}</h3>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{url('e-ticket/dashboard')}}"><i data-feather="home"></i></a></li>
                         <li class="breadcrumb-item">Bus</li>
@@ -49,7 +49,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="align-text">
-                            <h1>1000</h1>
+                            <h1>{{$tranx}}</h1>
                             <h6>Actual Return</h6>
                         </div>
                     </div>
@@ -60,8 +60,8 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="align-text">
-                            <h1>100</h1>
-                            <h6>Expected Return</h6>
+                            <h1>{{$bookings}}</h1>
+                            <h6>Total Bookings</h6>
                         </div>
                     </div>
                 </div>

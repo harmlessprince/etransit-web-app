@@ -161,4 +161,9 @@ class ManageBus extends Controller
         return view('Eticket.bus.schedule-event', compact('bus','locations','terminals'));
 
     }
+
+    public function editBus($bus_id)
+    {
+        dd($bus_id);
+    }
 }

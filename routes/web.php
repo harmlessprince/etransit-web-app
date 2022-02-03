@@ -272,18 +272,21 @@ Route::prefix('e-ticket')->name('e-ticket.')->group(function(){
         Route::get('create-driver' , [Driver::class , 'createDriver']);
         Route::post('new-driver' , [Driver::class , 'storeDriver']);
         Route::get('fetch-tenant-drivers',[Driver::class , 'fetchDrivers'])->name('fetch-tenant-drivers');
+        Route::get('edit-tenant-driver/{driver_id}', [Driver::class , 'editDriver']);
 
         //e-ticket terminal
         Route::get('terminals', [EticketTerminal::class , 'allTerminals']);
         Route::get('add-terminal', [EticketTerminal::class , 'addTerminal']);
         Route::post('store-terminal', [EticketTerminal::class , 'storeAddress']);
         Route::get('fetch-tenant-terminal' , [EticketTerminal::class , 'fetchTerminal'])->name('fetch-tenant-terminal');
+        Route::get('edit-tenant-terminal/{terminal_id}', [EticketTerminal::class , 'editTerminal']);
 
         //manage e-tickets locations
         Route::get('locations' , [EticketLocation::class , 'manageLocations']);
         Route::get('add-location', [EticketLocation::class , 'addLocation']);
         Route::post('store-location',[EticketLocation::class , 'storeLocation']);
         Route::get('fetch-tenant-locations', [EticketLocation::class ,'fetchLocation'])->name('fetch-tenant-locations');
+        Route::get('view-tenant-location/{location_id}', [EticketLocation::class , 'viewLocation']);
 
 
         //schedule trip for buses
@@ -297,6 +300,7 @@ Route::prefix('e-ticket')->name('e-ticket.')->group(function(){
         //check schedule manifest
         Route::get('schedule-manifest/{schedule_id}', [EticketManifest::class , 'manifest']);
         Route::get('fetch-bus-manifest/{schedule_id}', [EticketManifest::class ,'fetchBusManifest'])->name('fetch-bus-manifest');
+        Route::get('fetch-passenger-details/{seat_tracker_id}', [EticketManifest::class , 'fetchPassengerDetails']);
 
 
     });

@@ -33,7 +33,7 @@
         <div class="page-header">
             <div class="row">
                 <div class="col-6">
-                    <h3>{{\App\Models\Tenant::first()->company_name ?? env('APP_NAME')}}</h3>
+                    <h3>{{$tenantCompanyName  ?? env('APP_NAME')}}</h3>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{url('e-ticket/dashboard')}}"><i data-feather="home"></i></a></li>
                         <li class="breadcrumb-item">Bus Schedules</li>

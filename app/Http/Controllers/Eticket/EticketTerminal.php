@@ -24,7 +24,7 @@ class EticketTerminal extends Controller
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
                     $id = $row->id;
-                    $actionBtn = "<a href='/e-ticket/edit-tenant-bus/$id'  class='edit btn btn-success btn-sm'>Edit</a> <a href='/e-ticket/view-tenant-bus/$id' class='delete btn btn-primary btn-sm'>View</a>";
+                    $actionBtn = "<a href='/e-ticket/edit-tenant-terminal/$id'  class='edit btn btn-success btn-sm'>Edit</a>";
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])
@@ -58,5 +58,10 @@ class EticketTerminal extends Controller
 
         return redirect('e-ticket/terminals');
 
+    }
+    
+    public function editTerminal($terminal_id)
+    {
+        dd($terminal_id);
     }
 }
