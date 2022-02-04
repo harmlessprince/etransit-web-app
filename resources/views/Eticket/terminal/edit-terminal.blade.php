@@ -5,7 +5,14 @@
         border-bottom: 1px solid gray ! important;
 
     }
+    select{
+        border:0 !important;
+        border-bottom: 1px solid gray ! important;
+    }
 
+    select:focus{
+        outline:none !important;
+    }
     input:focus{
         outline:none !important;
     }
@@ -18,10 +25,10 @@
         <div class="page-header">
             <div class="row">
                 <div class="col-6">
-                    <h3>{{$tenantCompanyName  ?? env('APP_NAME')}}</h3>
+                    <h3>{{$tenantCompanyName ?? env('APP_NAME')}}</h3>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{url('e-ticket/dashboard')}}"><i data-feather="home"></i></a></li>
-                        <li class="breadcrumb-item">Create Bus</li>
+                        <li class="breadcrumb-item">Update Terminal</li>
                     </ol>
                 </div>
                 <div class="col-6">
@@ -47,22 +54,28 @@
             <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
                 <div class="card">
                     <div class="card-body">
-                        <form action="{{url('e-ticket/update-driver/'.$driver->id)}}" method="post">
+                        <form action="{{url('e-ticket/update-tenant-terminal/'.$terminal->id)}}" method="post">
                             @csrf
+                            @method('put')
                             <div class="form-group">
-                                <label for="full_name">Full Name</label>
-                                <input type="text" class="form-control" name="full_name" value="{{old('full_name')}}" id="full_name"/>
+                                <label for="terminal_name">Terminal Name</label>
+                                <input type="text" class="form-control" name="terminal_name" value="{{$terminal->terminal_name}}" id="terminal_name"/>
                             </div>
                             <div class="form-group">
-                                <label for="phone_number">Phone Number</label>
-                                <input type="text" class="form-control" name="phone_number" value="{{old('phone_number')}}" id="phone_number"/>
+                                <label for="terminal_address">Terminal Address</label>
+                                <input type="text" class="form-control" name="terminal_address" value="{{$terminal->terminal_address}}" id="terminal_address"/>
                             </div>
                             <div class="form-group">
-                                <label for="address">Address</label>
-                                <input type="text" class="form-control" name="address" value="{{old('address')}}" id="address"/>
+                                <label for="location">Location(s)</label>
+                                <select name="location" class="form-control">
+                                    <option value="{{$terminal->destination->id}}">{{$terminal->destination->location}}</option>
+                                    @foreach($locations as $location)
+                                        <option value="{{$location->id}}">{{$location->location}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="submit_button">
-                                <button class="btn btn-success">Create Driver</button>
+                                <button class="btn btn-success">Update Terminal</button>
                             </div>
                         </form>
                     </div>

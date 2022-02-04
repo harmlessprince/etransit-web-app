@@ -70,17 +70,13 @@
                     <h3>{{$tenantCompanyName  ?? env('APP_NAME')}}</h3>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{url('/admin/')}}"><i data-feather="home"></i></a></li>
-                        <li class="breadcrumb-item">Schedule Event </li>
+                        <li class="breadcrumb-item">Schedule Bus Trip/Event </li>
                     </ol>
                 </div>
             </div>
         </div>
     </div>
     <div class="container-fluid">
-        <div class="button-box" >
-            <a href="{{url('/admin/import-export-schedule')}}" class="btn bulk-upload-button btn-sm"  style="margin-right:10px;">Bulk Import Event</a>&nbsp;
-            <button class="btn s add-terminal-button btn-sm"  data-toggle="modal" data-target="#vehicleModal">View Schedule Event</button>
-        </div>
         <div class="card ">
             <div class="card-body">
                 <div style="display: flex; justify-content: center;">

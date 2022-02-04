@@ -59,9 +59,28 @@ class EticketTerminal extends Controller
         return redirect('e-ticket/terminals');
 
     }
-    
+
     public function editTerminal($terminal_id)
     {
-        dd($terminal_id);
+        $terminal = Terminal::with('destination')->find($terminal_id);
+        $locations = Destination::all();
+
+        return view('Eticket.terminal.edit-terminal' , compact('locations','terminal'));
+    }
+
+    public function updateTerminal(Request $request , $terminal_id)
+    {
+        $terminal =  Terminal::find($terminal_id);
+
+        $terminal->update([
+            'terminal_name' => $request->terminal_name,
+            'terminal_address' => $request->terminal_address,
+            'tenant_id' => session()->get('tenant_id'),
+            'destination_id' => $request->location,
+        ]);
+
+        Alert::success('Success ', 'Terminal updated successfully');
+
+        return redirect('e-ticket/terminals');
     }
 }

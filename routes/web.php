@@ -261,6 +261,7 @@ Route::prefix('e-ticket')->name('e-ticket.')->group(function(){
         Route::get('fetch-tenant-buses',[ManageBus::class , 'fetchOBuses'])->name('fetch-tenant-buses');
         Route::get('view-tenant-bus/{bus_id}',[ManageBus::class , 'viewBus'])->name('view-tenant-bus');
         Route::get('edit-tenant-bus/{bus_id}',[ManageBus::class , 'editBus'])->name('edit-tenant-bus');
+        Route::put('update-tenant-bus/{bus_id}', [ManageBus::class , 'updateBus']);
         Route::get('add-new-tenant-bus', [ManageBus::class , 'addNewBus']);
         Route::post('post-new-tenant-bus', [ManageBus::class , 'createTenantBus']);
         Route::get('assign-driver/{bus_id}',[ManageBus::class , 'assignDriver']);
@@ -273,6 +274,7 @@ Route::prefix('e-ticket')->name('e-ticket.')->group(function(){
         Route::post('new-driver' , [Driver::class , 'storeDriver']);
         Route::get('fetch-tenant-drivers',[Driver::class , 'fetchDrivers'])->name('fetch-tenant-drivers');
         Route::get('edit-tenant-driver/{driver_id}', [Driver::class , 'editDriver']);
+        Route::put('update-driver/{driver_id}',[Driver::class , 'updateDriver']);
 
         //e-ticket terminal
         Route::get('terminals', [EticketTerminal::class , 'allTerminals']);
@@ -280,6 +282,7 @@ Route::prefix('e-ticket')->name('e-ticket.')->group(function(){
         Route::post('store-terminal', [EticketTerminal::class , 'storeAddress']);
         Route::get('fetch-tenant-terminal' , [EticketTerminal::class , 'fetchTerminal'])->name('fetch-tenant-terminal');
         Route::get('edit-tenant-terminal/{terminal_id}', [EticketTerminal::class , 'editTerminal']);
+        Route::put('update-tenant-terminal/{terminal_id}', [EticketTerminal::class , 'updateTerminal']);
 
         //manage e-tickets locations
         Route::get('locations' , [EticketLocation::class , 'manageLocations']);

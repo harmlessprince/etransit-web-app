@@ -42,7 +42,6 @@ class EticketLocation extends Controller
             'location' => 'required',
         ]);
 
-
         $destination = new Destination;
         $destination->location = $request->location;
         $destination->tenant_id = session()->get('tenant_id');
@@ -55,6 +54,9 @@ class EticketLocation extends Controller
 
     public function viewLocation($location_id)
     {
-        dd($location_id);
+        $location = Destination::with('terminals')->find($location_id);
+
+
+        return view('Eticket.location.view-location', compact('location'));
     }
 }

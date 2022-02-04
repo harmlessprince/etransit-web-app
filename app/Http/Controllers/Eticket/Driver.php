@@ -24,7 +24,7 @@ class Driver extends Controller
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
                     $id = $row->id;
-                    $actionBtn = "<a href='/e-ticket/edit-tenant-terminal/$id'  class='edit btn btn-success btn-sm'>Edit</a>";
+                    $actionBtn = "<a href='/e-ticket/edit-tenant-driver/$id'  class='edit btn btn-success btn-sm'>Edit</a>";
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])
@@ -61,6 +61,25 @@ class Driver extends Controller
 
     public function editDriver($driver_id)
     {
-        dd($driver_id);
+        $driver = TenantDriver::find($driver_id);
+
+        return view('Eticket.driver.edit-driver', compact('driver'));
+    }
+
+    public function updateDriver(Request $request , $driver_id)
+    {
+        $driver = TenantDriver::find($driver_id);
+
+        $driver->update([
+            'full_name' => $request->full_name,
+            'phone_number' => $request->phone_number,
+            'address' => $request->address,
+            'tenant_id' => session()->get('tenant_id')
+        ]);
+
+        Alert::success('Success ', 'Driver information updated successfully');
+
+
+        return redirect('e-ticket/drivers');
     }
 }

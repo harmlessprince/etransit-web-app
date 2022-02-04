@@ -57,14 +57,8 @@ class ManageBus extends Controller
 
     public function createTenantBus(Request $request)
     {
-        request()->validate([
-            'bus_model' => 'required',
-            'bus_type' => 'required',
-            'bus_registration' => 'required|unique:buses',
-            'wheels' => 'required',
-            'seater'=> 'required',
-            'driver_phone_number' => 'sometimes'
-        ]);
+
+       $this->validateBuRequest($request);
 
        $newBus = new Bus;
        $newBus->bus_model = $request->bus_model;
@@ -74,7 +68,7 @@ class ManageBus extends Controller
        $newBus->tenant_id = session()->get('tenant_id');
        $newBus->seater = $request->seater;
        $newBus->service_id = 1;
-       $newBus->air_conditioning  = $request->air_conditioning == 'om' ? 1 : 0 ;
+       $newBus->air_conditioning  = $request->air_conditioning == 'on' ? 1 : 0 ;
        $newBus->save();
 
         Alert::success('Success ', 'Bus added successfully');
@@ -164,6 +158,44 @@ class ManageBus extends Controller
 
     public function editBus($bus_id)
     {
-        dd($bus_id);
+        $bus = Bus::with('driver')->find($bus_id);
+
+        return view('Eticket.bus.edit-bus' , compact('bus'));
     }
+
+
+    public function updateBus(Request $request , $bus_id)
+    {
+//        $this->validateBuRequest($request);
+        $bus = Bus::find($bus_id);
+        $bus->update([
+            'bus_model' => $request->bus_model,
+            'bus_type' => $request->bus_type,
+            'bus_registration' => $request->bus_registration,
+            'wheels' => $request->wheels,
+            'tenant_id' => session()->get('tenant_id'),
+            'seater' => $request->seater,
+            'service_id' => 1,
+            'air_conditioning' =>  $request->air_conditioning == 'on' ? 1 : 0 ,
+        ]);
+
+
+        Alert::success('Success ', 'Bus updated successfully');
+
+        return redirect('e-ticket/buses');
+    }
+
+
+    private function validateBuRequest($request)
+    {
+          $request->validate([
+                'bus_model' => 'required',
+                'bus_type' => 'required',
+                'bus_registration' => 'required|unique:buses',
+                'wheels' => 'required',
+                'seater'=> 'required',
+                'driver_phone_number' => 'sometimes'
+            ]);
+    }
+
 }
