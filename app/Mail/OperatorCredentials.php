@@ -7,18 +7,19 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class CarHireRecept extends Mailable
+class OperatorCredentials extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $data;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($data)
     {
-        //
+        $this->data = $data;
     }
 
     /**
@@ -28,6 +29,8 @@ class CarHireRecept extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.car-hire.receipt');
+        return $this->markdown('emails.operator-credentialsl')
+                                ->subject('Login Credentials')
+                                ->with('data', $this->data);
     }
 }

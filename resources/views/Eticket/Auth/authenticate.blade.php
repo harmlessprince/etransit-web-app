@@ -31,7 +31,7 @@
                         @csrf
                         <input type="hidden" name="type" value="admin">
                         <div class="form-group">
-                            <input type="text" class="form-control rounded-left @error('email')is-invalid @enderror" placeholder="Email" value="{{$user->email}}" name="email" disabled >
+                            <input type="text" class="form-control rounded-left @error('email')is-invalid @enderror" placeholder="Email"  value="{{$user->email}}"   name="email"  >
                             <input type="hidden" value="{{$user->email}}" name="email">
                             @error('email')
                             <span class="invalid-feedback" role="alert">

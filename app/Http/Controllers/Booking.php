@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Classes\Reference;
+use App\Mail\BusBooking;
 use App\Models\Schedule;
 use App\Models\SeatTracker;
 use Illuminate\Http\Request;
@@ -31,24 +32,25 @@ class Booking extends Controller
         //ensure the query does not return a data if the date the user picked has passed
         //to avoid booking a ride that has already passed or left
 
-//        (int)  $data['trip_type'] ==  1  ? $checkSchedule =  Schedule::where('departure_date', $data['departure_date'])
-////            ->whereDate('departure_date','>=', $data['departure_date'])
-//            ->where('pickup_id', $data['destination_from'])
-//            ->where('destination_id',$data['destination_to'])
-//            ->where('seats_available' , '>=', $data['number_of_passengers'])
-//            ->with('terminal','bus','destination','pickup','service')->get()
-//
-//            : $checkSchedule =  Schedule::where('departure_date',$data['departure_date'])
-//            ->where('return_date',$data['return_date'])
-//            ->where('destination_id', $data['destination_from'])
-//            ->where('seats_available' , '>=', $data['number_of_passengers'])
-//            ->where('pickup_id',$data['destination_to'])->get();
+        (int)  $data['trip_type'] ==  1  ? $checkSchedule =  Schedule::where('departure_date', $data['departure_date'])
+                                               //  ->whereDate('departure_date','>=', $data['departure_date'])
+                                                ->where('pickup_id', $data['destination_from'])
+                                                ->where('destination_id',$data['destination_to'])
+                                                ->where('seats_available' , '>=', $data['number_of_passengers'])
+                                                ->with('terminal','bus','destination','pickup','service')->get()
 
-        $checkSchedule =  Schedule::where('departure_date', $data['departure_date'])
-                                            ->where('pickup_id', $data['destination_from'])
-                                            ->where('destination_id',$data['destination_to'])
-                                            ->where('seats_available' , '>=', $data['number_of_passengers'])
-                                            ->with('terminal','bus','destination','pickup','service')->get();
+                                                : $checkSchedule =  Schedule::where('departure_date',$data['departure_date'])
+                                                ->where('return_date',$data['return_date'])
+                                                ->where('destination_id', $data['destination_from'])
+                                                ->where('seats_available' , '>=', $data['number_of_passengers'])
+                                                ->where('pickup_id',$data['destination_to'])
+                                                 ->with('terminal','bus','destination','pickup','service')->get();
+
+//        $checkSchedule =  Schedule::where('departure_date', $data['departure_date'])
+//                                            ->where('pickup_id', $data['destination_from'])
+//                                            ->where('destination_id',$data['destination_to'])
+//                                            ->where('seats_available' , '>=', $data['number_of_passengers'])
+//                                            ->with('terminal','bus','destination','pickup','service')->get();
 
         //fetch destination and pick up
         $pickUp = \App\Models\Destination::where('id',$data['destination_from'])->select('location')->first();
@@ -273,7 +275,7 @@ class Booking extends Controller
         $transactions->amount = $attr['amount'];
         $transactions->status = 'Successful';
         $transactions->schedule_id = $attr['schedule_id'];
-        $transactions->description = 'Cash payment for of ' . $request->amount .' was paid at ' . now();
+        $transactions->description = 'Cash payment of ' . $request->amount .' was paid at ' . now();
         $transactions->user_id = auth()->user()->id;
         $transactions->passenger_count = $attr['adultCount'] + $attr['childrenCount'];
         $transactions->service_id = $attr['service_id'];
@@ -302,18 +304,14 @@ class Booking extends Controller
         }
         DB::commit();
 
-        $data["email"] =  auth()->user()->email;
-        $data['name']  =  auth()->user()->full_name;
-        $data["title"] = env('APP_NAME').' Bus Booking Receipt';
-        $data["body"]  = "This is Demo";
+        $maildata = [
+            'name' => auth()->user()->full_name,
+            'service' => 'Bus Booking',
+            'transaction' => $transactions
+        ];
+        $email = auth()->user()->email;
 
-        $pdf = PDF::loadView('pdf.car-hire', $data);
-
-        Mail::send('pdf.car-hire', $data, function($message)use($data, $pdf) {
-            $message->to($data["email"])
-                ->subject($data["title"])
-                ->attachData($pdf->output(), "receipt.pdf");
-        });
+        Mail::to($email)->send(new BusBooking($maildata));
 
         toastr()->success('Success !! cash payment made successfully');
         return  redirect('/');

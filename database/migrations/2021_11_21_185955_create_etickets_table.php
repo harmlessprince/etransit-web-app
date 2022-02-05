@@ -19,9 +19,6 @@ class CreateEticketsTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('address')->nullable();
-            $table->string('username')->unique();
-            $table->string('phone_number');
             $table->string('reset_pin')->nullable();
             $table->unsignedBigInteger('tenant_id');
             $table->rememberToken();

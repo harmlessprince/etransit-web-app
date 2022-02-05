@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Classes\Reference;
 use App\Http\Controllers\Controller;
+use App\Mail\BoatCruiseBooking;
 use App\Models\Boat;
 use App\Models\BoatTrip;
 use App\Models\Service;
@@ -37,7 +38,7 @@ class BoatCruise extends Controller
     public function addCashPayment(Request $request)
     {
 
-        $findTrip = BoatTrip::where('id', $request->boatTrip_id)->firstorfail();
+       $findTrip = BoatTrip::where('id', $request->boatTrip_id)->firstorfail();
 
 
         if(strtolower($request->cruiseType)== 'regular')
@@ -49,7 +50,7 @@ class BoatCruise extends Controller
 
         }elseif(strtolower($request->cruiseType) == 'standard')
         {
-            $this->handlePayment($request->amount , $request->service_id , $findTrip);
+             $this->handlePayment($request->amount , $request->service_id , $findTrip);
 
             return  response()->json(['success'=> true , 'message' => 'Success !! cash payment made successfully']);
         }else{
@@ -60,6 +61,7 @@ class BoatCruise extends Controller
 
     private function handlePayment($amount , $serviceId , $trip)
     {
+
         DB::beginTransaction();
         $transactions = new \App\Models\Transaction();
         $transactions->reference = Reference::generateTrnxRef();
@@ -73,16 +75,14 @@ class BoatCruise extends Controller
 
         $data["email"] =  auth()->user()->email;
         $data['name']  =  auth()->user()->full_name;
-        $data["title"] = env('APP_NAME').' Boat Cruise Receipt';
-        $data["body"]  = "This is Demo";
 
-        $pdf = PDF::loadView('pdf.car-hire', $data);
+        $maildata = [
+            'name' => $data['name'],
+            'service' => 'Boat Cruise',
+            'transaction' => $transactions
+        ];
 
-        Mail::send('pdf.car-hire', $data, function($message)use($data, $pdf) {
-            $message->to($data["email"])
-                ->subject($data["title"])
-                ->attachData($pdf->output(), "receipt.pdf");
-        });
+        Mail::to($data["email"])->send(new BoatCruiseBooking($maildata));
 
         DB::commit();
 
@@ -91,6 +91,7 @@ class BoatCruise extends Controller
 
     public function addPayment(Request $request ,$trip_id , $service_id)
     {
+
         request()->validate([
             'amount' => 'required'
         ]);
@@ -107,7 +108,7 @@ class BoatCruise extends Controller
             $type = 'Standard';
         }else{
 
-            abort('404');
+           return response()->json(['success' => false , 'message' => 'Please provide the accurate fare']);
         }
 
         return response()->json(['success'=> true ,'data' => compact('amount','type','trip','service')]);

@@ -14,39 +14,47 @@ class BusSeeder extends Seeder
     public function run()
     {
         Bus::create([
-            'car_type' => 'Toyota Sienna',
-            'car_model' => 'Saloon Car',
-            'car_registration' => 'LND 141 QR',
+            'bus_type' => 'Toyota Sienna',
+            'bus_model' => 'Saloon Car',
+            'bus_registration' => 'LND 141 QR',
             'air_conditioning' => 1,
             'wheels' => 12,
             'seater' => 5,
+            'tenant_id' => 1,
+            'service_id' => 1,
         ]);
 
         Bus::create([
-            'car_type' => 'Toyota Liat',
-            'car_model' => 'Bus',
-            'car_registration' => 'LND 141 QP',
+            'bus_type' => 'Toyota Liat',
+            'bus_model' => 'Bus',
+            'bus_registration' => 'LND 141 QP',
             'air_conditioning' => 1,
             'wheels' => 12,
             'seater' => 20,
+            'tenant_id' => 1,
+            'service_id' => 1,
         ]);
 
         Bus::create([
-            'car_type' => 'Toyota Bus2',
-            'car_model' => 'Saloon Car',
-            'car_registration' => 'LND 121 XL',
+            'bus_type' => 'Toyota Bus2',
+            'bus_model' => 'Saloon Car',
+            'bus_registration' => 'LND 121 XL',
             'air_conditioning' => 1,
             'wheels' => 12,
             'seater' => 21,
+            'tenant_id' => 1,
+            'service_id' => 1,
         ]);
 
         Bus::create([
-            'car_type' => 'Toyota Bus3',
-            'car_model' => 'Saloon Car',
-            'car_registration' => 'LND 112 JL',
+            'bus_type' => 'Toyota Bus3',
+            'bus_model' => 'Saloon Car',
+            'bus_registration' => 'LND 112 JL',
             'air_conditioning' => 0,
             'wheels' => 4,
             'seater' => 22,
+            'tenant_id' => 1,
+            'service_id' => 1,
         ]);
     }
 }

@@ -9,6 +9,7 @@ namespace App\Billing;
 
 
 use App\Classes\Reference;
+use App\Mail\BusBooking;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use PDF;
@@ -88,8 +89,15 @@ class BusTicketPayment
                 $tripSchedule->update([
                     'seats_available' => $updatedSeatCount
                 ]);
+                $data['name']  =   $data['data']['meta']['user_name'];
+                $maildata = [
+                    'name' =>  $data['name'] ,
+                    'service' => 'Bus Booking',
+                    'transaction' => $transactions
+                ];
+                $email = $data['data']['meta']['user_email'];
 
-
+                Mail::to($email)->send(new BusBooking($maildata));
             }
             DB::commit();
             return response()->json(['success' => true, 'message' => 'Payment made successfully']);

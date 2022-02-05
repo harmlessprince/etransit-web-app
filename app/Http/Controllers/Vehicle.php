@@ -12,7 +12,7 @@ class Vehicle extends Controller
 {
     public function manage()
     {
-        $vehicles = \App\Models\Bus::orderby('id','desc')->get();
+        $vehicles = \App\Models\Bus::withoutGlobalScopes()->orderby('id','desc')->get();
         return view('admin.vehicle.manage' , compact('vehicles'));
     }
 

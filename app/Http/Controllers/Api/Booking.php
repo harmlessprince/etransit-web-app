@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Classes\Reference;
 use App\Http\Controllers\Controller;
+use App\Mail\BusBooking;
 use App\Models\TripType;
 use Illuminate\Http\Request;
 use App\Models\Service;
@@ -58,7 +59,10 @@ class Booking extends Controller
                return response()->json(['success' => false , 'message' => 'We dont\'t have any result for your query at the moment']);
              }
 
-             return  response()->json(['success'=>true ,'data' => compact('checkSchedule')]);
+             $tripType = $request->trip_type;
+             $returnDate = $request->return_date;
+
+             return  response()->json(['success'=>true ,'data' => compact('checkSchedule','tripType','returnDate')]);
     }
 
 
@@ -120,7 +124,9 @@ class Booking extends Controller
         request()->validate([
             'full_name' => 'required|array',
             'gender' => 'required|array',
-            'passenger_option' => 'required|array'
+            'passenger_option' => 'required|array',
+            'tripType' => 'required',
+            'return_date' => 'sometimes'
         ]);
 
         $passengerArray = [];
@@ -208,11 +214,13 @@ class Booking extends Controller
         }
 
 
-        $totalFare = (double)  $fetchScheduleDetails->fare_adult * (int) $adultCount +  (double) $fetchScheduleDetails->fare_children * (int) $childrenCount;
+        $totalFare = ((double)  $fetchScheduleDetails->fare_adult * (int) $adultCount +  (double) $fetchScheduleDetails->fare_children * (int) $childrenCount) * (int) abs($request->tripType);
+
+        $returnDate = $request->return_date;
 
         return response()->json(['success' => true ,
-            compact('childrenCount','fetchScheduleDetails','adultCount',
-                'childrenCount','totalFare','selectedSeat') ]);
+           'data' =>  compact('childrenCount','fetchScheduleDetails','adultCount',
+                'childrenCount','totalFare','selectedSeat', 'returnDate') ]);
 
     }
 
@@ -238,20 +246,21 @@ class Booking extends Controller
 
         $tripType = request()->tripType;
 
-        if ((int)$tripType == 2) {
+        if ((int)$tripType == 2)
+        {
             $type = 2;
         } else {
             $type = 1;
         }
 
-        $amount = (double) $request->amount  * (int) $type;
+       // $amount = (double) $request->amount  * (int) $type;
         DB::beginTransaction();
         $transactions = new \App\Models\Transaction();
         $transactions->reference = Reference::generateTrnxRef();
-        $transactions->amount = $amount;
+        $transactions->amount =  $request->amount;
         $transactions->status = 'Successful';
         $transactions->schedule_id = $attr['schedule_id'];
-        $transactions->description = 'Cash payment  of ' . $amount .' was paid at ' . now();
+        $transactions->description = 'Cash payment  of ' .  $request->amount  .' was paid at ' . now();
         $transactions->user_id = auth()->user()->id;
         $transactions->passenger_count = $attr['adultCount'] + $attr['childrenCount'];
         $transactions->service_id = $attr['service_id'];
@@ -281,17 +290,16 @@ class Booking extends Controller
         DB::commit();
 
         $data["email"] =  auth()->user()->email;
-        $data['name']  =  auth()->user()->full_name;
-        $data["title"] = env('APP_NAME').' Bus Booking Receipt';
-        $data["body"]  = "This is Demo";
 
-        $pdf = PDF::loadView('pdf.car-hire', $data);
+        $maildata = [
+            'name' => auth()->user()->full_name,
+            'service' => 'Bus Booking',
+            'transaction' => $transactions
+        ];
 
-        Mail::send('pdf.car-hire', $data, function($message)use($data, $pdf) {
-            $message->to($data["email"])
-                ->subject($data["title"])
-                ->attachData($pdf->output(), "receipt.pdf");
-        });
+        $email =  $data["email"];
+
+        Mail::to($email)->send(new BusBooking($maildata));
 
         return  response()->json(['success' => true , 'message' =>  'cash payment made successfully']);
     }

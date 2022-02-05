@@ -7,8 +7,15 @@ use App\Http\Controllers\Car;
 use App\Http\Controllers\Customer;
 use App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Eticket\AuthLogin;
+use App\Http\Controllers\Eticket\Driver;
+use App\Http\Controllers\Eticket\EticketLocation;
+use App\Http\Controllers\Eticket\EticketManifest;
+use App\Http\Controllers\Eticket\EticketSchedule;
+use App\Http\Controllers\Eticket\EticketTerminal;
+use App\Http\Controllers\Eticket\ManageBus;
 use App\Http\Controllers\Ferry;
 use App\Http\Controllers\Login;
+use App\Http\Controllers\Operator;
 use App\Http\Controllers\Page;
 use App\Http\Controllers\Parcel;
 use App\Http\Controllers\ParcelMgt;
@@ -61,7 +68,10 @@ Route::get('/tour-packages/{tour_id}/show', [Tour::class , 'tourPackageShow']);
 Route::get('parcel' , [ParcelMgt::class , 'parcel']);
 Route::get('/pick-up-city/{state_id}', [ParcelMgt::class ,'fetchCities']);
 
-
+//check PDF
+Route::get('check-pdf' , function(){
+   return view('pdf.boat-cruise');
+});
 
 Route::group(['middleware' => ['auth','prevent-back-history']], function() {
 
@@ -220,6 +230,14 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::get('/customer/list', [Customer::class , 'customers'])->name('customers.list');
         Route::get('/customer/{customer_id}', [Customer::class , 'getCustomer']);
 
+        //manage operators
+        Route::get('manage/operators',[Operator::class , 'operators']);
+        Route::get('create-new-operator',[Operator::class , 'createOperator']);
+        Route::post('store-operator',[Operator::class , 'storeOperator']);
+        Route::get('fetch-tenants' ,[Operator::class ,'fetchOperators'])->name('fetch-tenants');
+        Route::get('view-operator/{id}' , [Operator::class , 'viewOperator']);
+        Route::get('get-operator-users/{id}',[Operator::class , 'fetchOperatorUser'])->name('get-operator-users');
+
 
     });
 });
@@ -230,12 +248,69 @@ Route::prefix('admin')->name('admin.')->group(function(){
 Route::prefix('e-ticket')->name('e-ticket.')->group(function(){
 
     Route::get('', [AuthLogin::class , 'eticketLogin'])->name('login-page');
-    Route::post('/user',[AuthLogin::class,'fetchUser'])->name('user');
+//    Route::post('/user',[AuthLogin::class,'fetchUser'])->name('user');
     Route::post('/logout-tenant',[AuthLogin::class , 'logout'] )->name('logout');
     Route::post('/login-tenant' , [AuthLogin::class , 'loginTenant'])->name('login');
 
-    Route::group(['middleware' => ['tenant','prevent-back-history']], function() {
+    Route::group(['middleware' => ['e-ticket','prevent-back-history']], function() {
+
         Route::get('/dashboard' , [AuthLogin::class , 'dashboard'])->name('dashboard');
+
+        //manage bus
+        Route::get('/buses' , [ManageBus::class , 'allBuses'])->name('fetch-buses');
+        Route::get('fetch-tenant-buses',[ManageBus::class , 'fetchOBuses'])->name('fetch-tenant-buses');
+        Route::get('view-tenant-bus/{bus_id}',[ManageBus::class , 'viewBus'])->name('view-tenant-bus');
+
+
+        Route::get('edit-tenant-bus/{bus_id}',[ManageBus::class , 'editBus'])->name('edit-tenant-bus');
+        Route::put('update-tenant-bus/{bus_id}', [ManageBus::class , 'updateBus']);
+        Route::get('add-new-tenant-bus', [ManageBus::class , 'addNewBus']);
+        Route::post('post-new-tenant-bus', [ManageBus::class , 'createTenantBus']);
+        Route::get('assign-driver/{bus_id}',[ManageBus::class , 'assignDriver']);
+        Route::put('assign-driver/{bus_id}',[ManageBus::class , 'assignDriverToBus']);
+        Route::get('remove-driver-from-bus/{driver_id}/{bus_id}' ,[ManageBus::class , 'removeDriverFromBus']);
+
+        //manage bus drivers
+        Route::get('drivers', [Driver::class ,'drivers']);
+        Route::get('create-driver' , [Driver::class , 'createDriver']);
+        Route::post('new-driver' , [Driver::class , 'storeDriver']);
+        Route::get('fetch-tenant-drivers',[Driver::class , 'fetchDrivers'])->name('fetch-tenant-drivers');
+        Route::get('edit-tenant-driver/{driver_id}', [Driver::class , 'editDriver']);
+        Route::put('update-driver/{driver_id}',[Driver::class , 'updateDriver']);
+
+        //e-ticket terminal
+        Route::get('terminals', [EticketTerminal::class , 'allTerminals']);
+        Route::get('add-terminal', [EticketTerminal::class , 'addTerminal']);
+        Route::post('store-terminal', [EticketTerminal::class , 'storeAddress']);
+        Route::get('fetch-tenant-terminal' , [EticketTerminal::class , 'fetchTerminal'])->name('fetch-tenant-terminal');
+        Route::get('edit-tenant-terminal/{terminal_id}', [EticketTerminal::class , 'editTerminal']);
+        Route::put('update-tenant-terminal/{terminal_id}', [EticketTerminal::class , 'updateTerminal']);
+
+        //manage e-tickets locations
+        Route::get('locations' , [EticketLocation::class , 'manageLocations']);
+        Route::get('add-location', [EticketLocation::class , 'addLocation']);
+        Route::post('store-location',[EticketLocation::class , 'storeLocation']);
+        Route::get('fetch-tenant-locations', [EticketLocation::class ,'fetchLocation'])->name('fetch-tenant-locations');
+        Route::get('view-tenant-location/{location_id}', [EticketLocation::class , 'viewLocation']);
+
+
+        //schedule trip for buses
+        Route::get('/schedule/{bus_id}',[ManageBus::class , 'scheduleTrip']);
+        Route::post('add-eticket-schedule', [EticketSchedule::class , 'addEticketSchedule'])->name('add-eticket-schedule');
+        Route::get('all-scheduled-trip',[EticketSchedule::class , 'allScheduledTrip']);
+        Route::get('fetch-scheduled-trip', [EticketSchedule::class, 'fetchAllSchedules'])->name('fetch-scheduled-trip');
+        Route::get('view-each-schedule/{schedule_id}' , [EticketSchedule::class , 'viewEachSchedule']);
+        Route::get('view-bus-each-schedule/{bus_id}', [EticketSchedule::class , 'viewBusSchedule']);
+        Route::get('view-bus-schedules/{bus_id}', [EticketSchedule::class , 'viewEachBusSchedule'])->name('view-bus-schedules');
+
+
+
+        //check schedule manifest
+        Route::get('schedule-manifest/{schedule_id}', [EticketManifest::class , 'manifest']);
+        Route::get('fetch-bus-manifest/{schedule_id}', [EticketManifest::class ,'fetchBusManifest'])->name('fetch-bus-manifest');
+        Route::get('fetch-passenger-details/{seat_tracker_id}', [EticketManifest::class , 'fetchPassengerDetails']);
+
+
     });
 
 

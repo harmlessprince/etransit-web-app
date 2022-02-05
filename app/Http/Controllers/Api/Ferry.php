@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Classes\Reference;
 use App\Http\Controllers\Controller;
+use App\Mail\FerryBookings;
 use App\Models\FerryLocation;
 use App\Models\FerryTrip;
 use App\Models\FerryType;
@@ -65,7 +66,8 @@ class Ferry extends Controller
             return response()->json(['success' => false , 'message' => 'We dont\'t have any result for your query at the moment']);
         }
 
-        return  response()->json(['success'=>true ,'data' => compact('checkSchedule','tripType')]);
+        $returnDate = $request->return_date;
+        return  response()->json(['success'=>true ,'data' => compact('checkSchedule','tripType','returnDate')]);
     }
 
 
@@ -136,7 +138,8 @@ class Ferry extends Controller
             'gender' => 'required|array',
             'passenger_option' => 'required|array',
             'tripType' => 'required|integer',
-            'ferry_trip_id' => 'required|integer'
+            'ferry_trip_id' => 'required|integer',
+            'return_date' => 'sometimes'
         ]);
 
         $passengerArray = [];
@@ -227,9 +230,13 @@ class Ferry extends Controller
 
         $totalFare = ((double)  $fetchScheduleDetails->amount_adult * (int) $adultCount +  (double) $fetchScheduleDetails->amount_children * (int) $childrenCount ) * (int) $request->tripType;
 
+        $return_date = $request->return_date;
+
+        $tripType = $request->tripType;
+
         return response()->json(['success' => true ,
            'data' => compact('childrenCount','fetchScheduleDetails','adultCount',
-                'childrenCount','totalFare','selectedSeat') ]);
+                'childrenCount','totalFare','selectedSeat','return_date','tripType') ]);
 
     }
 
@@ -265,16 +272,16 @@ class Ferry extends Controller
 
         $data["email"] =  auth()->user()->email;
         $data['name']  =  auth()->user()->full_name;
-        $data["title"] = env('APP_NAME').' Ferry Receipt';
-        $data["body"]  = "This is Demo";
 
-        $pdf = PDF::loadView('pdf.car-hire', $data);
+        $maildata = [
+            'name' => auth()->user()->full_name,
+            'service' => 'Ferry Booking',
+            'transaction' => $transactions
+        ];
 
-        Mail::send('pdf.car-hire', $data, function($message)use($data, $pdf) {
-            $message->to($data["email"])
-                ->subject($data["title"])
-                ->attachData($pdf->output(), "receipt.pdf");
-        });
+        $email = $data["email"];
+
+        Mail::to($email)->send(new FerryBookings($maildata));
 
         if ($transactions) {
             //update the status of seat tracker to booked after payment from selected

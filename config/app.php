@@ -172,6 +172,7 @@ return [
          */
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
+        App\Providers\ComposerServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
@@ -186,6 +187,7 @@ return [
         CloudinaryLabs\CloudinaryLaravel\CloudinaryServiceProvider::class,
         RealRashid\SweetAlert\SweetAlertServiceProvider::class,
         Yajra\DataTables\DataTablesServiceProvider::class,
+      //  Barryvdh\Snappy\ServiceProvider::class,
 
     ],
 
@@ -250,6 +252,8 @@ return [
         'Cloudinary' => CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary::class,
         'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
+//        'PDF' => Barryvdh\Snappy\Facades\SnappyPdf::class,
+//        'SnappyImage' => Barryvdh\Snappy\Facades\SnappyImage::class,
 
     ],
 

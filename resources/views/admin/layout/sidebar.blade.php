@@ -85,6 +85,11 @@
                             <li><a href="{{url('/admin/manage/terminals')}}">All Terminals</a></li>
                         </ul>
                     </li>
+                    <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"></i><span>Operator</span></a>
+                        <ul class="nav-submenu menu-content">
+                            <li><a href="{{url('/admin/manage/operators')}}">All Operators</a></li>
+                        </ul>
+                    </li>
                     <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="file-text"></i><span>Roles</span></a>
                         <ul class="nav-submenu menu-content">
                             <li><a class="" href="#">All Roles</a> </li>
