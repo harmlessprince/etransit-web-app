@@ -88,7 +88,32 @@ class EticketSchedule extends Controller
         $findSchedule = EventSchedule::where('id',$schedule_id)->with(['pickup','destination','bus','terminal'])->first();
         $seatTracker = SeatTracker::where('schedule_id',$schedule_id)->get();
 
-
         return view('Eticket.bus.view-schedule', compact('findSchedule', 'seatTracker'));
     }
+
+    public function viewBusSchedule($bus_id)
+    {
+
+        $bus = \App\Models\Bus::find($bus_id);
+
+       return view('Eticket.bus.each-bus-schedule',compact('bus'));
+    }
+
+    public function viewEachBusSchedule(Request $request , $bus_id)
+    {
+
+        if ($request->ajax()) {
+            $data = EventSchedule::with(['pickup','destination','bus','terminal'])->where('bus_id', $bus_id)->latest()->get();
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function($row){
+                    $id = $row->id;
+                    $actionBtn = "<a href='/e-ticket/edit-tenant-bus/$id'  class='edit btn btn-success btn-sm'>Edit</a> <a href='/e-ticket/view-each-schedule/$id' class='delete btn btn-primary btn-sm'>View</a>";
+                    return $actionBtn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+    }
+
 }

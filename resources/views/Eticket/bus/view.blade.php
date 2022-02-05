@@ -30,6 +30,9 @@
         display: flex;
         justify-content: center;
     }
+    a:hover {
+        text-decoration: none !important;
+    }
 </style>
 @section('content')
     <div class="container-fluid">
@@ -52,34 +55,28 @@
     <div class="container-fluid" >
         <div class="row three-row-grid">
             <div class="col-md-3 col-lg-3 col-xl-3 col-sm-3">
+                <a href="">
                 <div class="card">
                     <div class="card-body">
                         <div class="align-text">
-                            <h1>1</h1>
+                            <h1>{{!is_null($findBus->driver) ? count($findBus->driver) : 0}}</h1>
                             <h6>Driver</h6>
                         </div>
                     </div>
                 </div>
+                </a>
             </div>
             <div class="col-md-3 col-lg-3 col-xl-3 col-sm-3">
+                <a href="{{url('e-ticket/view-bus-each-schedule/'.$findBus->id)}}">
                 <div class="card">
                     <div class="card-body">
                         <div class="align-text">
-                            <h1>100</h1>
+                            <h1>{{count($findBus->schedules)}}</h1>
                             <h6>Schedules</h6>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-3 col-lg-3 col-xl-3 col-sm-3">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="align-text">
-                            <h1>100</h1>
-                            <h6>Transaction(s)</h6>
-                        </div>
-                    </div>
-                </div>
+                </a>
             </div>
         </div>
 
@@ -90,7 +87,7 @@
                         <a href="{{url('e-ticket/schedule/'.$findBus->id)}}" class="btn btn-success">Schedule Trip</a>
                     </div>
                     <div class="schedules">
-                        <button class="btn btn-success">Check Schedule(s)</button>
+                        <a href="{{url('e-ticket/view-bus-each-schedule/'.$findBus->id)}}" class="btn btn-success">Check Schedule(s)</a>
                     </div>
                 </div>
             </div>

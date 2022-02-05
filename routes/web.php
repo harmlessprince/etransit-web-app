@@ -260,6 +260,8 @@ Route::prefix('e-ticket')->name('e-ticket.')->group(function(){
         Route::get('/buses' , [ManageBus::class , 'allBuses'])->name('fetch-buses');
         Route::get('fetch-tenant-buses',[ManageBus::class , 'fetchOBuses'])->name('fetch-tenant-buses');
         Route::get('view-tenant-bus/{bus_id}',[ManageBus::class , 'viewBus'])->name('view-tenant-bus');
+
+
         Route::get('edit-tenant-bus/{bus_id}',[ManageBus::class , 'editBus'])->name('edit-tenant-bus');
         Route::put('update-tenant-bus/{bus_id}', [ManageBus::class , 'updateBus']);
         Route::get('add-new-tenant-bus', [ManageBus::class , 'addNewBus']);
@@ -298,6 +300,9 @@ Route::prefix('e-ticket')->name('e-ticket.')->group(function(){
         Route::get('all-scheduled-trip',[EticketSchedule::class , 'allScheduledTrip']);
         Route::get('fetch-scheduled-trip', [EticketSchedule::class, 'fetchAllSchedules'])->name('fetch-scheduled-trip');
         Route::get('view-each-schedule/{schedule_id}' , [EticketSchedule::class , 'viewEachSchedule']);
+        Route::get('view-bus-each-schedule/{bus_id}', [EticketSchedule::class , 'viewBusSchedule']);
+        Route::get('view-bus-schedules/{bus_id}', [EticketSchedule::class , 'viewEachBusSchedule'])->name('view-bus-schedules');
+
 
 
         //check schedule manifest

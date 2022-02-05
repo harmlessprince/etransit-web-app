@@ -44,7 +44,7 @@ class ManageBus extends Controller
 
     public function viewBus($bus_id)
     {
-        $findBus = Bus::where('tenant_id',session()->get('tenant_id'))->where('id', $bus_id)->with('driver')->first();
+        $findBus = Bus::where('tenant_id',session()->get('tenant_id'))->where('id', $bus_id)->with('driver','schedules')->first();
 
         return view('Eticket.bus.view',compact('findBus'));
     }
