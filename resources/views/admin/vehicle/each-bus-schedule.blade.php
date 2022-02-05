@@ -33,7 +33,7 @@
         <div class="page-header">
             <div class="row">
                 <div class="col-6">
-                    <h3>{{$tenantCompanyName  ?? env('APP_NAME')}}</h3>
+                    <h3>{{ env('APP_NAME')}}</h3>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{url('e-ticket/dashboard')}}"><i data-feather="home"></i></a></li>
                         <li class="breadcrumb-item">Bus Schedules</li>
@@ -81,7 +81,7 @@
             var table = $('.yajra-datatable').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: "{{ route('e-ticket.view-bus-schedules',[$bus->id]) }}",
+                ajax: "{{ route('admin.view-bus-schedule',[$bus->id]) }}",
                 columns: [
                     {data: 'DT_RowIndex', name: 'DT_RowIndex'},
                     {data: 'pickup.location', name: 'pickup.location'},

@@ -67,7 +67,7 @@
                 </a>
             </div>
             <div class="col-md-3 col-lg-3 col-xl-3 col-sm-3">
-                <a href="{{url('e-ticket/view-bus-each-schedule/'.$findBus->id)}}">
+                <a href="{{url('admin/view-bus/'.$findBus->id)}}">
                     <div class="card">
                         <div class="card-body">
                             <div class="align-text">
@@ -87,7 +87,7 @@
 {{--                        <a href="{{url('e-ticket/schedule/'.$findBus->id)}}" class="btn btn-success">Schedule Trip</a>--}}
 {{--                    </div>--}}
                     <div class="schedules">
-                        <a href="{{url('e-ticket/view-bus-each-schedule/'.$findBus->id)}}" class="btn btn-success">Check {{$findBus->bus_registration}} Schedule(s)</a>
+                        <a href="{{url('admin/view-bus/'.$findBus->id)}}" class="btn btn-success">Check {{$findBus->bus_registration}} Schedule(s)</a>
                     </div>
                 </div>
             </div>
