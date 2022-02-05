@@ -137,6 +137,13 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::get('/dashboard', [Dashboard::class, 'dashboard'])->name('dashboard');
         //vehicle management
         Route::get('/manage/vehicle', [Vehicle::class, 'manage'])->name('manage.vehicle');
+        Route::get('/manage/tenant-bus' , [Vehicle::class , 'tenantBus']);
+        Route::get('manage/fetch-all-buses' , [Vehicle::class , 'fetchAllTenantBus'])->name('manage-fetch-all-buses');
+        Route::get('manage/view-tenant-bus/{bus_id}' , [Vehicle::class , 'viewTenantBus']);
+
+
+
+
         Route::post('/add/vehicle', [Vehicle::class, 'addVehicle'])->name('add.vehicle');
 
         //manage terminal
