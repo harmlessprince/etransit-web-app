@@ -15,5 +15,10 @@ class Tenant extends Model
         return $this->hasMany(Eticket::class);
     }
 
+    public function buses()
+    {
+        return $this->hasMany(Bus::class);
+    }
+
 
 }
