@@ -59,7 +59,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="align-text">
-                            <h1>{{!is_null($findBus->driver) ? count($findBus->driver) : 0}}</h1>
+                            <h1>{{!is_null($findBus->driver) ? 1 : 0}}</h1>
                             <h6>Driver</h6>
                         </div>
                     </div>
