@@ -16,6 +16,10 @@ class EmailVerify extends Controller
         ]);
 
         $findUser = User::where('verification_token',$request->token)->first();
+        if(!$findUser)
+        {
+            return response()->json(['success' => false , 'message' => 'Token not found']);
+        }
         $findUser->update([
             'email_verified_at' => Carbon::now(),
             'verification_token' => null,
