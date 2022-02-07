@@ -20,6 +20,7 @@ use App\Http\Controllers\Page;
 use App\Http\Controllers\Parcel;
 use App\Http\Controllers\ParcelMgt;
 use App\Http\Controllers\Payment;
+use App\Http\Controllers\SocialController;
 use App\Http\Controllers\Tour;
 use App\Http\Controllers\Train;
 use Illuminate\Support\Facades\Auth;
@@ -68,12 +69,15 @@ Route::get('/tour-packages/{tour_id}/show', [Tour::class , 'tourPackageShow']);
 Route::get('parcel' , [ParcelMgt::class , 'parcel']);
 Route::get('/pick-up-city/{state_id}', [ParcelMgt::class ,'fetchCities']);
 
+Route::get('login/{provider}', [SocialController::class ,'redirect']);
+Route::get('login/{provider}/callback',[SocialController::class ,'Callback']);
+
 //check PDF
 Route::get('check-pdf' , function(){
    return view('pdf.boat-cruise');
 });
 
-Route::group(['middleware' => ['auth','prevent-back-history']], function() {
+Route::group(['middleware' => ['auth','prevent-back-history','must_verify']], function() {
 
     Route::get('/seat-picker/{schedule_id}', [Booking::class, 'seatSelector']);
     Route::post('/seat-selector-tracker/',[Booking::class ,'selectorTracker'])->name('select-seat');
