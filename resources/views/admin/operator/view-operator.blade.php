@@ -5,7 +5,9 @@
         border-bottom: 1px solid gray ! important;
 
     }
-
+a{
+    text-decoration: none !important;
+}
     input:focus{
         outline:none !important;
     }
@@ -36,24 +38,28 @@
     <div class="container-fluid" >
         <div class="row three-row-grid">
             <div class="col-md-3 col-lg-3 col-xl-3 col-sm-3">
+                <a href="">
                 <div class="card">
                     <div class="card-body">
                         <div class="align-text">
-                            <h1>100</h1>
+                            <h1>{{$busCount}}</h1>
                             <h6>Bus(es)</h6>
                         </div>
                     </div>
                 </div>
+                </a>
             </div>
             <div class="col-md-3 col-lg-3 col-xl-3 col-sm-3">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="align-text">
-                            <h1>100</h1>
-                            <h6>Terminal(s)</h6>
+                <a href="">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="align-text">
+                                <h1>{{$terminalCount}}</h1>
+                                <h6>Terminal(s)</h6>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </a>
             </div>
             <div class="col-md-3 col-lg-3 col-xl-3 col-sm-3">
                 <div class="card">

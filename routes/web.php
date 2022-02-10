@@ -250,7 +250,10 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::post('store-operator',[Operator::class , 'storeOperator']);
         Route::get('fetch-tenants' ,[Operator::class ,'fetchOperators'])->name('fetch-tenants');
         Route::get('view-operator/{id}' , [Operator::class , 'viewOperator']);
+        Route::get('operator/{operator_id}',[Operator::class , 'editOperator']);
+        Route::put('update-operator/{operator_id}',[Operator::class , 'updateOperator']);
         Route::get('get-operator-users/{id}',[Operator::class , 'fetchOperatorUser'])->name('get-operator-users');
+        Route::get('operator-generate-password/{id}',[Operator::class , 'regeneratePassword']);
 
 
     });
