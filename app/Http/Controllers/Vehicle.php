@@ -12,6 +12,7 @@ use App\Models\Terminal;
 use App\Models\Transaction;
 use App\Models\Schedule;
 use DataTables;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class Vehicle extends Controller
 {
@@ -24,8 +25,8 @@ class Vehicle extends Controller
 
     public function tenantBus()
     {
-        $terminalCount  = Terminal::count();
-        $busesCount     = Bus::count();
+        $terminalCount  = Terminal::withoutGlobalScopes()->count();
+        $busesCount     = Bus::withoutGlobalScopes()->count();
         $transactionsCount = Transaction::pluck('amount')->sum();
 
         return view('admin.vehicle.manage-tenant-bus' , compact('terminalCount','busesCount','transactionsCount'));
@@ -39,7 +40,7 @@ class Vehicle extends Controller
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
                     $id = $row->id;
-                    $actionBtn = "<a href='/e-ticket/edit-tenant-driver/$id'  class='edit btn btn-success btn-sm'>Edit</a> <a href='/admin/manage/view-tenant-bus/$id'  class='edit btn btn-success btn-sm'>View</a>";
+                    $actionBtn = "<a href='/admin/edit-bus/$id'  class='edit btn btn-success btn-sm'>Edit</a> <a href='/admin/manage/view-tenant-bus/$id'  class='edit btn btn-success btn-sm'>View</a>";
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])
@@ -55,9 +56,46 @@ class Vehicle extends Controller
         return  view('admin.vehicle.view-bus', compact('findBus'));
     }
 
+    public function editBus($bus_id)
+    {
+        $bus  = Bus::withoutGlobalScopes()->find($bus_id);
+
+        return view('admin.vehicle.edit-bus',compact('bus'));
+    }
+
+    public function updateBus(Request $request , $bus_id)
+    {
+        $request->validate([
+            'bus_model' => 'required',
+            'bus_type' => 'required',
+            'bus_registration' => 'required',
+            'wheels' => 'required',
+            'seater'=> 'required'
+        ]);
+
+       $bus = Bus::withoutGlobalScopes()->where('id',$bus_id)->first();
+
+        $bus->update([
+            'bus_model' => $request->bus_model,
+            'bus_type' => $request->bus_type,
+            'bus_registration' => $request->bus_registration,
+            'wheels' => $request->wheels,
+            'tenant_id' => session()->get('tenant_id'),
+            'seater' => $request->seater,
+            'service_id' => 1,
+            'air_conditioning' =>  $request->air_conditioning == 'on' ? 1 : 0 ,
+        ]);
+
+
+        Alert::success('Success ', 'Bus updated successfully');
+
+        return redirect('admin/manage/tenant-bus');
+    }
+
     public function busSchedule($bus_id)
     {
         $bus = Bus::where('id',$bus_id)->first();
+
         return view('admin.vehicle.each-bus-schedule', compact('bus'));
     }
 

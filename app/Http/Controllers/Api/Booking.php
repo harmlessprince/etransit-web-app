@@ -52,6 +52,7 @@ class Booking extends Controller
                                                                          }])->get()
 
                                          : $checkSchedule =  Schedule::where('departure_date',$data['departure_date'])
+                                                                       ->where('return_date',$data['return_date'])
                                                                         ->where('destination_id', $data['destination_to'])
                                                                          ->where('seats_available' , '>=', $data['number_of_passengers'])
                                                                         ->where('pickup_id',$data['destination_from'])

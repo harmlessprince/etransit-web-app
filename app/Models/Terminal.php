@@ -26,6 +26,11 @@ class Terminal extends Model
         return $this->belongsTo(Destination::class);
     }
 
+    public function tenant()
+    {
+        return $this->belongsTo(Tenant::class);
+    }
+
     /**
      * The "booted" method of the model.
      *

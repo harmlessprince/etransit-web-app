@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\AuthUser;
 use App\Http\Controllers\Api\BoatCruise;
 use App\Http\Controllers\Api\Booking;
 use App\Http\Controllers\Api\Car;
+use App\Http\Controllers\Api\EmailVerify;
 use App\Http\Controllers\Api\Ferry;
 use App\Http\Controllers\Api\FlutterwavePayment;
 use App\Http\Controllers\Api\Parcel;
@@ -12,6 +13,7 @@ use App\Http\Controllers\Api\PasswordReset;
 use App\Http\Controllers\Api\Payment;
 use App\Http\Controllers\Api\Profile;
 use App\Http\Controllers\Api\Service;
+use App\Http\Controllers\Api\SocialController;
 use App\Http\Controllers\Api\Tour;
 use App\Http\Controllers\Api\Train;
 use Illuminate\Http\Request;
@@ -34,6 +36,11 @@ Route::group(['prefix' => 'v1'], function() {
     Route::post('login', [AuthUser::class , 'authenticate']);
     Route::post('/forgot-password', [PasswordReset::class, 'forgotPasswordNotification']);
     Route::post('/reset-password', [PasswordReset::class, 'resetPassword']);
+    Route::post('verify-email',[EmailVerify::class ,'verifyEmail']);
+    Route::post('resend-verify-token',[EmailVerify::class , 'resendEmailVerifyToken']);
+
+    Route::get('login/{provider}', [SocialController::class ,'redirect']);
+    Route::get('login/{provider}/callback',[SocialController::class ,'Callback']);
 
 //    store partners
     Route::post('/partners/create' , [Partner::class , 'store']);
@@ -75,9 +82,7 @@ Route::group(['prefix' => 'v1'], function() {
     Route::post('/check/train-schedule', [Train::class , 'checkSchedule']);
 
 //    Route::middleware('jwt.verify')->group( function () {
-    Route::group(['middleware' => ['jwt.verify']], function () {
-
-
+    Route::group(['middleware' => ['jwt.verify' ,'must_verify']], function () {
          //bus booking
         Route::get('/select-seat/{schedule_id}' ,[Booking::class, 'selectSeat']);
         Route::post('/seat/selector_tracker',[Booking::class , 'selectorTracker']);

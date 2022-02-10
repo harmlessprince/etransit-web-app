@@ -6,9 +6,11 @@ use App\Exports\TerminalsExport;
 
 
 use App\Imports\TerminalImport;
+use App\Models\Bus;
 use Illuminate\Http\Request;
 use App\Models\Terminal as BusTerminal;
 use Maatwebsite\Excel\Facades\Excel;
+use DataTables;
 
 class Terminal extends Controller
 {
@@ -32,6 +34,36 @@ class Terminal extends Controller
            $terminal->save();
 
            return response()->json(['success' => true , 'message' => 'Terminal created successfully']);
+    }
+
+
+    public function allTenantsTerminal()
+    {
+        return view('admin.terminal.tenant-terminal');
+    }
+
+    public function fetchTenantsTerminal(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = BusTerminal::withoutGlobalScopes()->with('tenant','destination')->latest()->get();
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function($row){
+                    $id = $row->id;
+                    $actionBtn = "<a href='/e-ticket/edit-tenant-bus/$id'  class='edit btn btn-success btn-sm'>Edit</a> <a href='/admin/view-terminal/$id' class='delete btn btn-success btn-sm'>View</a>";
+                    return $actionBtn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+    }
+
+
+    public function viewTerminal($terminal_id)
+    {
+        $terminal = BusTerminal::withoutGlobalScopes()->where('id',$terminal_id)->with('tenant','destination')->first();
+
+        return view('admin.terminal.view-terminal' , compact('terminal'));
     }
 
 

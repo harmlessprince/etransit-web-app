@@ -18,15 +18,7 @@ class Eticket extends Authenticatable
      *
      * @var string[]
      */
-    protected $fillable = [
-        'full_name',
-        'email',
-        'password',
-        'address',
-        'username',
-        'phone_number',
-        'reset_pin'
-    ];
+    protected $guarded = ['id'];
 
     /**
      * The attributes that should be hidden for serialization.

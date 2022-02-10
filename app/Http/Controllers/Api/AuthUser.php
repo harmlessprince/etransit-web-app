@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Classes\VerificationToken;
 use App\Http\Controllers\Controller;
+use App\Mail\VerificationToken as VerificationTokenMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
@@ -65,15 +68,22 @@ class AuthUser extends BaseController
             ]
         );
 
-        $user = User::create([
-            'full_name' => $request->get('full_name'),
-            'email' => $request->get('email'),
-            'password' => Hash::make($request->get('password')),
-            'address'  => $request['address'] ?? null,
-            'username' => $request['username'],
-            'phone_number' => $request['phone_number']
-        ]);
+        $verifyToken = VerificationToken::generate();
 
+        $user = User::create([
+                    'full_name' => $request->get('full_name'),
+                    'email' => $request->get('email'),
+                    'password' => Hash::make($request->get('password')),
+                    'address'  => $request['address'] ?? null,
+                    'username' => $request['username'],
+                    'phone_number' => $request['phone_number'],
+                    'verification_token' => $verifyToken
+                ]);
+
+        $maildata = [
+            'verify_token' => $verifyToken
+        ];
+        Mail::to($request->get('email'))->send(new VerificationTokenMail($maildata));
         $token = JWTAUTH::fromUser($user);
 
         return response()->json(compact('user','token'),201);

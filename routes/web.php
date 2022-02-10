@@ -20,6 +20,7 @@ use App\Http\Controllers\Page;
 use App\Http\Controllers\Parcel;
 use App\Http\Controllers\ParcelMgt;
 use App\Http\Controllers\Payment;
+use App\Http\Controllers\SocialController;
 use App\Http\Controllers\Tour;
 use App\Http\Controllers\Train;
 use Illuminate\Support\Facades\Auth;
@@ -68,12 +69,15 @@ Route::get('/tour-packages/{tour_id}/show', [Tour::class , 'tourPackageShow']);
 Route::get('parcel' , [ParcelMgt::class , 'parcel']);
 Route::get('/pick-up-city/{state_id}', [ParcelMgt::class ,'fetchCities']);
 
+Route::get('login/{provider}', [SocialController::class ,'redirect']);
+Route::get('login/{provider}/callback',[SocialController::class ,'Callback']);
+
 //check PDF
 Route::get('check-pdf' , function(){
    return view('pdf.boat-cruise');
 });
 
-Route::group(['middleware' => ['auth','prevent-back-history']], function() {
+Route::group(['middleware' => ['auth','prevent-back-history','must_verify']], function() {
 
     Route::get('/seat-picker/{schedule_id}', [Booking::class, 'seatSelector']);
     Route::post('/seat-selector-tracker/',[Booking::class ,'selectorTracker'])->name('select-seat');
@@ -143,6 +147,8 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::get('view-bus/{bus_id}' , [Vehicle::class , 'busSchedule']);
         Route::get('view-bus-schedule/{bus_id}' , [Vehicle::class , 'busScheduleFetch'])->name('view-bus-schedule');
         Route::get('view-bus-schedule-page/{schedule_id}' , [Vehicle::class , 'viewBusSchedulePage']);
+        Route::get('edit-bus/{bus_id}',[Vehicle::class ,'editBus']);
+        Route::put('update-bus/{bus_id}',[Vehicle::class , 'updateBus']);
 
 
 
@@ -152,6 +158,13 @@ Route::prefix('admin')->name('admin.')->group(function(){
         //manage terminal
         Route::get('manage/terminals',[Terminal::class , 'Terminals']);
         Route::post('add/terminal',[Terminal::class , 'AddTerminal']);
+
+        //manage bus terminals for tenants
+        Route::get('manage/bus-terminals',[Terminal::class , 'allTenantsTerminal']);
+        Route::get('fetch-all-tenants-terminal', [Terminal::class , 'fetchTenantsTerminal'])->name('fetch-all-tenants-terminal');
+        Route::get('view-terminal/{terminal_id}' ,[Terminal::class ,'viewTerminal']);
+
+
         //schedule an event
         Route::get('/event/{bus_id}/schedule' ,[Schedule::class , 'scheduleEvent']);
         Route::post('/schedule/event', [Schedule::class , 'addEvent']);
@@ -246,7 +259,10 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::post('store-operator',[Operator::class , 'storeOperator']);
         Route::get('fetch-tenants' ,[Operator::class ,'fetchOperators'])->name('fetch-tenants');
         Route::get('view-operator/{id}' , [Operator::class , 'viewOperator']);
+        Route::get('operator/{operator_id}',[Operator::class , 'editOperator']);
+        Route::put('update-operator/{operator_id}',[Operator::class , 'updateOperator']);
         Route::get('get-operator-users/{id}',[Operator::class , 'fetchOperatorUser'])->name('get-operator-users');
+        Route::get('operator-generate-password/{id}',[Operator::class , 'regeneratePassword']);
 
 
     });

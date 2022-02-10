@@ -188,6 +188,7 @@ return [
         RealRashid\SweetAlert\SweetAlertServiceProvider::class,
         Yajra\DataTables\DataTablesServiceProvider::class,
       //  Barryvdh\Snappy\ServiceProvider::class,
+        Laravel\Socialite\SocialiteServiceProvider::class,
 
     ],
 
@@ -252,6 +253,7 @@ return [
         'Cloudinary' => CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary::class,
         'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
 //        'PDF' => Barryvdh\Snappy\Facades\SnappyPdf::class,
 //        'SnappyImage' => Barryvdh\Snappy\Facades\SnappyImage::class,
 

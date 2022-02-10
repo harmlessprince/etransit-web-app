@@ -1,4 +1,4 @@
-@extends('Eticket.layout.app')
+@extends('admin.layout.app')
 <style>
     input{
         border:0 !important;
@@ -18,10 +18,10 @@
         <div class="page-header">
             <div class="row">
                 <div class="col-6">
-                    <h3>{{$tenantCompanyName  ?? env('APP_NAME')}}</h3>
+                    <h3>{{env('APP_NAME')}}</h3>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{url('e-ticket/dashboard')}}"><i data-feather="home"></i></a></li>
-                        <li class="breadcrumb-item">Create Bus</li>
+                        <li class="breadcrumb-item">Update Bus</li>
                     </ol>
                 </div>
                 <div class="col-6">
@@ -47,22 +47,35 @@
             <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
                 <div class="card">
                     <div class="card-body">
-                        <form action="{{url('e-ticket/new-driver/')}}" method="post">
+                        <form action="{{url('admin/update-bus/'.$bus->id)}}" method="post">
                             @csrf
+                            @method('PUT')
                             <div class="form-group">
-                                <label for="full_name">Full Name</label>
-                                <input type="text" class="form-control" name="full_name" value="{{old('full_name')}}" id="full_name"/>
+                                <label for="bus_model">Bus Model</label>
+                                <input type="text" class="form-control" name="bus_model" value="{{$bus->bus_model}}" id="bus_model"/>
                             </div>
                             <div class="form-group">
-                                <label for="phone_number">Phone Number</label>
-                                <input type="text" class="form-control" name="phone_number" value="{{old('phone_number')}}" id="phone_number"/>
+                                <label for="bus_type">Bus Type</label>
+                                <input type="text" class="form-control" name="bus_type" value="{{$bus->bus_type}}" id="bus_type"/>
                             </div>
                             <div class="form-group">
-                                <label for="address">Address</label>
-                                <input type="text" class="form-control" name="address" value="{{old('address')}}" id="address"/>
+                                <label for="registration">Bus Registration</label>
+                                <input type="text" class="form-control" name="bus_registration" value="{{$bus->bus_registration}}" id="registration"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="wheels">Bus Wheels</label>
+                                <input type="text" class="form-control" name="wheels" value="{{$bus->wheels}}" id="wheels"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="seater">Bus Seater</label>
+                                <input type="text" class="form-control" name="seater" value="{{$bus->seater}}" id="seater"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="bus_model">Air Conditioning</label>
+                                <input type="checkbox"  name="air_conditioning" @if($bus->air_conditioning == 1) checked @endif/>
                             </div>
                             <div class="submit_button">
-                                <button class="btn btn-success">Create Driver</button>
+                                <button class="btn btn-success">Update Bus</button>
                             </div>
                         </form>
                     </div>

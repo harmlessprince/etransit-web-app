@@ -25,6 +25,7 @@
                         <ul class="nav-submenu menu-content">
 {{--                            <li><a href="{{url('/admin/manage/vehicle')}}">Manage Buses</a></li>--}}
                             <li><a href="{{url('/admin/manage/tenant-bus')}}">Manage Buses</a></li>
+                            <li><a href="{{url('/admin/manage/bus-terminals')}}">Manage Bus Terminals</a></li>
                         </ul>
                     </li>
                     <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"></i><span>Tour Management</span></a>
