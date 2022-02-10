@@ -1,4 +1,4 @@
-@extends('Eticket.layout.app')
+@extends('admin.layout.app')
 <style>
     input{
         border:0 !important;

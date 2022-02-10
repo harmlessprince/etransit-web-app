@@ -147,6 +147,8 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::get('view-bus/{bus_id}' , [Vehicle::class , 'busSchedule']);
         Route::get('view-bus-schedule/{bus_id}' , [Vehicle::class , 'busScheduleFetch'])->name('view-bus-schedule');
         Route::get('view-bus-schedule-page/{schedule_id}' , [Vehicle::class , 'viewBusSchedulePage']);
+        Route::get('edit-bus/{bus_id}',[Vehicle::class ,'editBus']);
+        Route::put('update-bus/{bus_id}',[Vehicle::class , 'updateBus']);
 
 
 
@@ -156,6 +158,13 @@ Route::prefix('admin')->name('admin.')->group(function(){
         //manage terminal
         Route::get('manage/terminals',[Terminal::class , 'Terminals']);
         Route::post('add/terminal',[Terminal::class , 'AddTerminal']);
+
+        //manage bus terminals for tenants
+        Route::get('manage/bus-terminals',[Terminal::class , 'allTenantsTerminal']);
+        Route::get('fetch-all-tenants-terminal', [Terminal::class , 'fetchTenantsTerminal'])->name('fetch-all-tenants-terminal');
+        Route::get('view-terminal/{terminal_id}' ,[Terminal::class ,'viewTerminal']);
+
+
         //schedule an event
         Route::get('/event/{bus_id}/schedule' ,[Schedule::class , 'scheduleEvent']);
         Route::post('/schedule/event', [Schedule::class , 'addEvent']);
