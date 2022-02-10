@@ -37,6 +37,7 @@ Route::group(['prefix' => 'v1'], function() {
     Route::post('/forgot-password', [PasswordReset::class, 'forgotPasswordNotification']);
     Route::post('/reset-password', [PasswordReset::class, 'resetPassword']);
     Route::post('verify-email',[EmailVerify::class ,'verifyEmail']);
+    Route::post('resend-verify-token',[EmailVerify::class , 'resendEmailVerifyToken']);
 
     Route::get('login/{provider}', [SocialController::class ,'redirect']);
     Route::get('login/{provider}/callback',[SocialController::class ,'Callback']);
