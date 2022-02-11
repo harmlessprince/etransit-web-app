@@ -82,11 +82,11 @@
                             <li><a href="{{url('/admin/transactions')}}">Manage Transactions</a></li>
                         </ul>
                     </li>
-                    <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"></i><span>Terminals</span></a>
-                        <ul class="nav-submenu menu-content">
-                            <li><a href="{{url('/admin/manage/terminals')}}">All Terminals</a></li>
-                        </ul>
-                    </li>
+{{--                    <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"></i><span>Terminals</span></a>--}}
+{{--                        <ul class="nav-submenu menu-content">--}}
+{{--                            <li><a href="{{url('/admin/manage/terminals')}}">All Terminals</a></li>--}}
+{{--                        </ul>--}}
+{{--                    </li>--}}
                     <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"></i><span>Operator</span></a>
                         <ul class="nav-submenu menu-content">
                             <li><a href="{{url('/admin/manage/operators')}}">All Operators</a></li>
