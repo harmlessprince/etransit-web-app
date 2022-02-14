@@ -152,6 +152,7 @@ class Payment extends Controller
             $transactions->amount = $data['data']['amount'];
             $transactions->status = 'Likely Fraud';
             $transactions->schedule_id = $scheduleId;
+            $transactions->tenant_id = $tripSchedule->bus->tenant->id;
             $transactions->description = $data['data']['meta']['description'];
             $transactions->user_id = $data['data']['meta']['user_id'];
             $transactions->passenger_count = $adultCount + $childrenCount;
@@ -168,6 +169,7 @@ class Payment extends Controller
             $transactions->amount = $data['data']['amount'];
             $transactions->status = 'Successful';
             $transactions->schedule_id = $scheduleId;
+            $transactions->tenant_id = $tripSchedule->bus->tenant->id;
             $transactions->description = $data['data']['meta']['description'];
             $transactions->user_id = $data['data']['meta']['user_id'];
             $transactions->passenger_count = $adultCount + $childrenCount;

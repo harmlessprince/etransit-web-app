@@ -249,13 +249,15 @@ class Tour extends Controller
     private function handlePayment($amount , $serviceId , $trip)
     {
         DB::beginTransaction();
+        $service = Service::where('id', 8)->firstorfail();
         $transactions = new \App\Models\Transaction();
         $transactions->reference = Reference::generateTrnxRef();
         $transactions->amount = (double) $amount;
         $transactions->status = 'Pending';
-        $transactions->description = 'Cash Payment';
+        $transactions->description = 'Cash Payment for '. $service->name . ' made on ' . now();
         $transactions->user_id = auth()->user()->id;
         $transactions->service_id = $serviceId;
+        $transactions->transaction_type = 'cash payment';
         $transactions->tour_id = $trip->id;
         $transactions->save();
 

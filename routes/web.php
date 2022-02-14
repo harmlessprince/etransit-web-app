@@ -77,7 +77,8 @@ Route::get('check-pdf' , function(){
    return view('pdf.boat-cruise');
 });
 
-Route::group(['middleware' => ['auth','prevent-back-history','must_verify']], function() {
+Route::group(['middleware' => ['auth','prevent-back-history']], function() {
+//    ,'must_verify'
 
     Route::get('/seat-picker/{schedule_id}', [Booking::class, 'seatSelector']);
     Route::post('/seat-selector-tracker/',[Booking::class ,'selectorTracker'])->name('select-seat');
@@ -170,6 +171,13 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::post('/schedule/event', [Schedule::class , 'addEvent']);
         //manage transactions
         Route::get('/transactions' , [Transaction::class , 'allTransactions']);
+        Route::get('view-transaction/{transaction_id}',[Transaction::class ,'viewTransaction']);
+        //aprove transaction
+        Route::get('approve-payment/{transaction_id}',[Transaction::class , 'approveTransaction']);
+
+
+
+
         //manage car hiring module route
         Route::get('/manage/cars' , [Car::class ,'allCars']);
         Route::get('manage/car-class' , [Car::class , 'carClass']);

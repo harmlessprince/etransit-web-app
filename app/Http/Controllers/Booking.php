@@ -70,7 +70,8 @@ class Booking extends Controller
 
     public function seatSelector($schedule_id)
     {
-        $fetchSeats = \App\Models\SeatTracker::where('schedule_id' ,$schedule_id)
+
+       $fetchSeats = \App\Models\SeatTracker::where('schedule_id' ,$schedule_id)
                                         ->select('seat_position','id','booked_status')->get();
 
         return view('pages.booking.seat-picker' , compact('fetchSeats' ,'schedule_id'));
@@ -273,12 +274,14 @@ class Booking extends Controller
         $transactions = new \App\Models\Transaction();
         $transactions->reference = Reference::generateTrnxRef();
         $transactions->amount = $attr['amount'];
-        $transactions->status = 'Successful';
+        $transactions->status = 'Pending';
+        $transactions->tenant_id = $tripSchedule->bus->tenant->id;
         $transactions->schedule_id = $attr['schedule_id'];
         $transactions->description = 'Cash payment of ' . $request->amount .' was paid at ' . now();
         $transactions->user_id = auth()->user()->id;
         $transactions->passenger_count = $attr['adultCount'] + $attr['childrenCount'];
         $transactions->service_id = $attr['service_id'];
+        $transactions->transaction_type = 'cash payment';
         $transactions->isConfirmed = 'False';
         $transactions->save();
 

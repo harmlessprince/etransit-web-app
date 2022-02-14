@@ -269,6 +269,7 @@ class Booking extends Controller
         $transactions->user_id = auth()->user()->id;
         $transactions->passenger_count = $attr['adultCount'] + $attr['childrenCount'];
         $transactions->service_id = $attr['service_id'];
+        $transactions->tenant_id = $tripSchedule->bus->tenant->id;
         $transactions->isConfirmed = 'False';
         $transactions->save();
 
