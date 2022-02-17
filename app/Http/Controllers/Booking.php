@@ -70,7 +70,8 @@ class Booking extends Controller
 
     public function seatSelector($schedule_id)
     {
-        $fetchSeats = \App\Models\SeatTracker::where('schedule_id' ,$schedule_id)
+
+       $fetchSeats = \App\Models\SeatTracker::where('schedule_id' ,$schedule_id)
                                         ->select('seat_position','id','booked_status')->get();
 
         return view('pages.booking.seat-picker' , compact('fetchSeats' ,'schedule_id'));
@@ -122,7 +123,9 @@ class Booking extends Controller
          request()->validate([
                     'full_name' => 'required|array',
                     'gender' => 'required|array',
-                    'passenger_option' => 'required|array'
+                    'passenger_option' => 'required|array',
+                    'next_of_kin_name' => 'required|array',
+                    'next_of_kin_number' => 'required|array'
                 ]);
 
          $passengerArray = [];
@@ -219,6 +222,8 @@ class Booking extends Controller
             $createPassenger->gender                = $request->gender[$i];
             $createPassenger->passenger_age_range   = $request->passenger_option[$i];
             $createPassenger->schedule_id           = $schedule_id;
+            $createPassenger->next_of_kin_name      = $request->next_of_kin_name;
+            $createPassenger->next_of_kin_number    = $request->next_of_kin_number;
             $createPassenger->user_id               = auth()->user()->id;
             $createPassenger->seat_tracker_id       = $selectedSeat[$i]->id;
             $createPassenger->save();
@@ -273,12 +278,14 @@ class Booking extends Controller
         $transactions = new \App\Models\Transaction();
         $transactions->reference = Reference::generateTrnxRef();
         $transactions->amount = $attr['amount'];
-        $transactions->status = 'Successful';
+        $transactions->status = 'Pending';
+        $transactions->tenant_id = $tripSchedule->bus->tenant->id;
         $transactions->schedule_id = $attr['schedule_id'];
         $transactions->description = 'Cash payment of ' . $request->amount .' was paid at ' . now();
         $transactions->user_id = auth()->user()->id;
         $transactions->passenger_count = $attr['adultCount'] + $attr['childrenCount'];
         $transactions->service_id = $attr['service_id'];
+        $transactions->transaction_type = 'cash payment';
         $transactions->isConfirmed = 'False';
         $transactions->save();
 

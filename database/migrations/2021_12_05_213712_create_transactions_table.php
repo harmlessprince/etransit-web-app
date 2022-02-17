@@ -18,6 +18,7 @@ class CreateTransactionsTable extends Migration
             $table->string('reference');
             $table->string('trx_ref')->nullable();
             $table->double('amount',);
+            $table->unsignedBigInteger('tenant_id')->nullable();
             $table->enum('status',['Successful','Pending','Likely Fraud']);
             $table->unsignedBigInteger('service_id');
             $table->unsignedBigInteger('car_history_id')->nullable()->comment('ad id to track car hiring booking');

@@ -20,6 +20,8 @@ class CreatePassengersTable extends Migration
             $table->unsignedBigInteger('seat_tracker_id');
             $table->string('full_name');
             $table->string('gender');
+            $table->string('next_of_kin_name');
+            $table->string('next_of_kin_number');
             $table->string('passenger_age_range')->comment('adult or children');
             $table->timestamps();
 

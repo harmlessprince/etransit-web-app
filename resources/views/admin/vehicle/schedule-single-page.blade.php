@@ -195,7 +195,7 @@
                             <hr>
                             <div class="seat_box">
                                 @foreach($seatTracker as $tracker)
-                                    <a href="{{$tracker->id}}"  @if($tracker->booked_status == 0)  class="available seat_picked"
+                                    <a href="#"  @if($tracker->booked_status == 0)  class="available seat_picked"
                                        @elseif($tracker->booked_status == 1) class="selected seat_picked"
                                        @elseif($tracker->booked_status == 2) class="booked seat_picked"  @endif >{{$tracker->seat_position}}</a>
                                     {{--                                    data-toggle="modal" data-target="#passengerDetails"--}}

@@ -52,6 +52,7 @@ class BusTicketPayment
             $transactions->description = $data['data']['meta']['description'];
             $transactions->user_id = $data['data']['meta']['user_id'];
             $transactions->passenger_count = $adultCount + $childrenCount;
+            $transactions->tenant_id = $tripSchedule->bus->tenant->id;
             $transactions->service_id = $serviceId;
             $transactions->save();
             DB::commit();
@@ -68,6 +69,7 @@ class BusTicketPayment
             $transactions->description = $data['data']['meta']['description'];
             $transactions->user_id = $data['data']['meta']['user_id'];
             $transactions->passenger_count = $adultCount + $childrenCount;
+            $transactions->tenant_id = $tripSchedule->bus->tenant->id;
             $transactions->service_id = $serviceId;
             $transactions->isConfirmed = 'True';
             $transactions->save();

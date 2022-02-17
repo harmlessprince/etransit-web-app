@@ -21,6 +21,7 @@ class ManageBus extends Controller
         $terminalCount = Terminal::count();
         $schedule = Schedule::count();
 
+
         return view('Eticket.bus.index' , compact('busCount','terminalCount','schedule'));
     }
 
@@ -60,6 +61,8 @@ class ManageBus extends Controller
 
        $this->validateBuRequest($request);
 
+       //service ID 1 == Bus Booking
+        //the value should change if there are changes to the way the service is arranged
        $newBus = new Bus;
        $newBus->bus_model = $request->bus_model;
        $newBus->bus_type = $request->bus_type;

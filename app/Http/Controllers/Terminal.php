@@ -50,7 +50,8 @@ class Terminal extends Controller
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
                     $id = $row->id;
-                    $actionBtn = "<a href='/e-ticket/edit-tenant-bus/$id'  class='edit btn btn-success btn-sm'>Edit</a> <a href='/admin/view-terminal/$id' class='delete btn btn-success btn-sm'>View</a>";
+                    $actionBtn = "<a href='/admin/view-terminal/$id' class='delete btn btn-success btn-sm'>View</a>";
+//                    <a href='/e-ticket/edit-tenant-bus/$id'  class='edit btn btn-success btn-sm'>Edit</a>
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])

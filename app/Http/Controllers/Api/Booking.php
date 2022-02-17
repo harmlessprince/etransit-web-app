@@ -41,24 +41,24 @@ class Booking extends Controller
                             'trip_type'            => 'required'
                         ]);
 
-            (int)  $data['trip_type'] ==  1  ? $checkSchedule =  Schedule::where('departure_date', $data['departure_date'])
-                                                                      ->where('pickup_id', $data['destination_from'])
-                                                                      ->where('destination_id',$data['destination_to'])
-                                                                      ->where('seats_available' , '>=', $data['number_of_passengers'])
-//                                                                      ->select('fare_adult','terminal_id','bus_id','id',
-//                                                                          'destination_id','pickup_id','fare_children')
-                                                                      ->with(['terminal','destination','pickup','service' ,'bus' => function($query){
-                                                                                    $query->with('tenant')->first();
-                                                                         }])->get()
+            (int)  $data['trip_type'] ==  1  ? $checkSchedule  =  Schedule::where('departure_date', $data['departure_date'])
+                                                                                  ->where('pickup_id', $data['destination_from'])
+                                                                                  ->where('destination_id',$data['destination_to'])
+                                                                                  ->where('seats_available' , '>=', $data['number_of_passengers'])
+            //                                                                      ->select('fare_adult','terminal_id','bus_id','id',
+            //                                                                          'destination_id','pickup_id','fare_children')
+                                                                                  ->with(['terminal','destination','pickup','service' ,'bus' => function($query){
+                                                                                                $query->with('tenant')->first();
+                                                                                     }])->get()
 
-                                         : $checkSchedule =  Schedule::where('departure_date',$data['departure_date'])
-                                                                       ->where('return_date',$data['return_date'])
-                                                                        ->where('destination_id', $data['destination_to'])
-                                                                         ->where('seats_available' , '>=', $data['number_of_passengers'])
-                                                                        ->where('pickup_id',$data['destination_from'])
-                                                                      ->with(['terminal','destination','pickup','service','bus' => function($query){
-                                                                          $query->with('tenant')->first();
-                                                                      }])->get();
+                                         : $checkSchedule     =  Schedule::where('departure_date',$data['departure_date'])
+                                                                                          ->where('return_date',$data['return_date'])
+                                                                                          ->where('destination_id', $data['destination_to'])
+                                                                                          ->where('seats_available' , '>=', $data['number_of_passengers'])
+                                                                                          ->where('pickup_id',$data['destination_from'])
+                                                                                          ->with(['terminal','destination','pickup','service','bus' => function($query){
+                                                                                          $query->with('tenant')->first();
+                                                                                      }])->get();
              if($checkSchedule->isEmpty())
              {
                return response()->json(['success' => false , 'message' => 'We dont\'t have any result for your query at the moment']);
@@ -131,7 +131,9 @@ class Booking extends Controller
             'gender' => 'required|array',
             'passenger_option' => 'required|array',
             'tripType' => 'required',
-            'return_date' => 'sometimes'
+            'return_date' => 'sometimes',
+            'next_of_kin_name' => 'required|array',
+            'next_of_kin_number' => 'required|array'
         ]);
 
         $passengerArray = [];
@@ -214,6 +216,8 @@ class Booking extends Controller
             $createPassenger->passenger_age_range   = $request->passenger_option[$i];
             $createPassenger->schedule_id           = $schedule_id;
             $createPassenger->user_id               = auth()->user()->id;
+            $createPassenger->next_of_kin_name      = $request->next_of_kin_name;
+            $createPassenger->next_of_kin_number    = $request->next_of_kin_number;
             $createPassenger->seat_tracker_id       = $selectedSeat[$i]->id;
             $createPassenger->save();
         }
@@ -269,6 +273,7 @@ class Booking extends Controller
         $transactions->user_id = auth()->user()->id;
         $transactions->passenger_count = $attr['adultCount'] + $attr['childrenCount'];
         $transactions->service_id = $attr['service_id'];
+        $transactions->tenant_id = $tripSchedule->bus->tenant->id;
         $transactions->isConfirmed = 'False';
         $transactions->save();
 

@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Transaction extends Model
 {
     use HasFactory;
+    protected $guarded = ['id'];
 
     public function schedule()
     {
@@ -29,4 +30,10 @@ class Transaction extends Model
     {
         return $this->belongsTo(Service::class);
     }
+
+    public function tenant()
+    {
+        return $this->belongsTo(Tenant::class);
+    }
+
 }
