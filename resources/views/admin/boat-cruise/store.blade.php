@@ -215,7 +215,7 @@
                         <div class="gender_section" style="margin-top:10px;">
                             <div class="passenger_type radio-group">
                                 <div class="passenger_options custom-file-upload">
-                                    <input type="file" name="images[]"  />
+                                    <input type="file" name="images[]"  required/>
                                 </div>
                             </div>
                         </div>

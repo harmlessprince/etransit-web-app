@@ -45,4 +45,10 @@ class SocialController extends Controller
             return response()->json(['success' =>  true , 'data' => compact('token')]);
         }
     }
+
+
+    public function acceptToken(Request $request)
+    {
+
+    }
 }

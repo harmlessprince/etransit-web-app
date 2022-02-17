@@ -10,7 +10,7 @@ class Transaction extends Controller
 {
     public function allTransactions()
     {
-        $transactions  = Tranx::with('schedule','user')->get();
+        $transactions  = Tranx::with('schedule','user')->orderBy('created_at','desc')->Simplepaginate(30);
 
         return view('admin.transactions.transaction', compact('transactions'));
     }

@@ -123,7 +123,9 @@ class Booking extends Controller
          request()->validate([
                     'full_name' => 'required|array',
                     'gender' => 'required|array',
-                    'passenger_option' => 'required|array'
+                    'passenger_option' => 'required|array',
+                    'next_of_kin_name' => 'required|array',
+                    'next_of_kin_number' => 'required|array'
                 ]);
 
          $passengerArray = [];
@@ -220,6 +222,8 @@ class Booking extends Controller
             $createPassenger->gender                = $request->gender[$i];
             $createPassenger->passenger_age_range   = $request->passenger_option[$i];
             $createPassenger->schedule_id           = $schedule_id;
+            $createPassenger->next_of_kin_name      = $request->next_of_kin_name;
+            $createPassenger->next_of_kin_number    = $request->next_of_kin_number;
             $createPassenger->user_id               = auth()->user()->id;
             $createPassenger->seat_tracker_id       = $selectedSeat[$i]->id;
             $createPassenger->save();

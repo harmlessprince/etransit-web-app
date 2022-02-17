@@ -280,7 +280,7 @@
                         <div class="gender_section">
                             <div class="passenger_type radio-group">
                                 <div class="passenger_options">
-                                    <input type="file" name="images[]"  />
+                                    <input type="file" name="images[]"  required/>
 
                                 </div>
                             </div>

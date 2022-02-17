@@ -41,6 +41,8 @@ Route::group(['prefix' => 'v1'], function() {
 
     Route::get('login/{provider}', [SocialController::class ,'redirect']);
     Route::get('login/{provider}/callback',[SocialController::class ,'Callback']);
+    //accept token for google auth
+    Route::post('accept-token-google-signup',[SocialController::class , 'acceptToken']);
 
 //    store partners
     Route::post('/partners/create' , [Partner::class , 'store']);
@@ -133,6 +135,7 @@ Route::group(['prefix' => 'v1'], function() {
         Route::get('/train-route/selector/{train_schedule_id}' , [Train::class , 'routeSelector']);
         Route::post('/train/add-passenger-details' , [Train::class , 'passengerDetails']);
         Route::post('/train/handle-cash-payment' , [Train::class , 'handleCashPayment']);
+
 
     });
 

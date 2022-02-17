@@ -9,6 +9,12 @@
     grid-column: 2/4;
     justify-self: center;
 }
+.pagination_box{
+    display:flex;
+    justify-content: flex-end;
+    margin-top:40px;
+    margin-right:150px;
+}
 </style>
 @section('content')
 
@@ -108,7 +114,6 @@
                         <th scope="col">Action</th>
                     </tr>
                     </thead>
-{{--                    @if(count($transactions) > 0)--}}
                       <tbody>
                           @foreach($transactions as $index => $transaction)
                                 <tr>
@@ -125,17 +130,13 @@
                                     </td>
                                 </tr>
                             @endforeach
-{{--                      @else--}}
-{{--                       --}}
-{{--                            <div class="no_data_img">--}}
-{{--                                <img src="{{asset('images/illustrations/empty_data.png')}}" width="400" height="300" alt="bus-image"/>--}}
-{{--                            </div>--}}
-
                     </tbody>
-{{--                    @endif--}}
                 </table>
+                 </div>
+               </div>
             </div>
-        </div>
+            <div>
+                {{ $transactions->links() }}
             </div>
         </div>
 

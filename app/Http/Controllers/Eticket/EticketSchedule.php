@@ -28,7 +28,7 @@ class EticketSchedule extends Controller
             DB::beginTransaction();
             $scheduleEvent = new EventSchedule();
             $scheduleEvent->terminal_id       = (int)$request['terminal'];
-            $scheduleEvent->service_id        = (int) $serviceID;
+            $scheduleEvent->service_id        = 1;
             $scheduleEvent->bus_id            = (int) $request['busId'];
             $scheduleEvent->pickup_id         = (int) $request['pickUp'];
             $scheduleEvent->destination_id    = (int) $request['destination'];
