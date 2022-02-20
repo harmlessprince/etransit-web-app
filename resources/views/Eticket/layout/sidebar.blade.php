@@ -29,6 +29,11 @@
                             <li><a href="{{url('/e-ticket/locations')}}">Manage Locations</a></li>
                         </ul>
                     </li>
+                    <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"></i><span>Staff Management</span></a>
+                        <ul class="nav-submenu menu-content">
+                            <li><a href="{{url('/e-ticket/staffs')}}">Manage Staff</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
             <div class="right-arrow" id="right-arrow"><i data-feather="arrow-right"></i></div>

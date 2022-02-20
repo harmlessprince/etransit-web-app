@@ -33,7 +33,7 @@
                     <h3>{{$tenantCompanyName ?? env('APP_NAME')}}</h3>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{url('e-ticket/dashboard')}}"><i data-feather="home"></i></a></li>
-                        <li class="breadcrumb-item">Driver</li>
+                        <li class="breadcrumb-item">Staffs</li>
                     </ol>
                 </div>
                 <div class="col-6">
@@ -52,7 +52,7 @@
                         <button class="btn btn-success">Bulk Upload</button>
                     </div>
                     <div class="space-left">
-                        <a href="{{url('e-ticket/create-driver')}}" class="btn btn-success">Add Driver(s)</a>
+                        <a href="{{url('e-ticket/create-staff')}}" class="btn btn-success">Add Staff(s)</a>
                     </div>
                 </div>
             </div>
@@ -64,8 +64,10 @@
                     <tr>
                         <th>No</th>
                         <th>Full Name</th>
+                        <th>Email</th>
                         <th>Phone Number</th>
-                        <th>Address</th>
+                        <th>Designation</th>
+                        <th>Employment Date</th>
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -90,12 +92,14 @@
             var table = $('.yajra-datatable').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: "{{ route('e-ticket.fetch-tenant-drivers') }}",
+                ajax: "{{ route('e-ticket.fetch-tenant-staffs') }}",
                 columns: [
                     {data: 'DT_RowIndex', name: 'DT_RowIndex'},
                     {data: 'full_name', name: 'full_name'},
+                    {data: 'email', name: 'email'},
                     {data: 'phone_number', name: 'phone_number'},
-                    {data: 'address', name: 'address'},
+                    {data: 'designation', name: 'designation'},
+                    {data: 'employment_date', name: 'employment_date'},
 
                     {
                         data: 'action',

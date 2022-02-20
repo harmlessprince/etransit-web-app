@@ -9,6 +9,18 @@ use Illuminate\Database\Eloquent\Model;
 class Staff extends Model
 {
     use HasFactory;
+    protected $table = 'staffs';
+    protected $guarded = ['id'];
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'employment_date' => 'datetime',
+        'termination_date' => 'datetime',
+    ];
 
     /**
      * The "booted" method of the model.

@@ -13,6 +13,7 @@ use App\Http\Controllers\Eticket\EticketManifest;
 use App\Http\Controllers\Eticket\EticketSchedule;
 use App\Http\Controllers\Eticket\EticketTerminal;
 use App\Http\Controllers\Eticket\ManageBus;
+use App\Http\Controllers\Eticket\StaffMgt;
 use App\Http\Controllers\Ferry;
 use App\Http\Controllers\Login;
 use App\Http\Controllers\Operator;
@@ -362,6 +363,16 @@ Route::prefix('e-ticket')->name('e-ticket.')->group(function(){
         Route::get('schedule-manifest/{schedule_id}', [EticketManifest::class , 'manifest']);
         Route::get('fetch-bus-manifest/{schedule_id}', [EticketManifest::class ,'fetchBusManifest'])->name('fetch-bus-manifest');
         Route::get('fetch-passenger-details/{seat_tracker_id}', [EticketManifest::class , 'fetchPassengerDetails']);
+
+        //manage staffs
+        Route::get('staffs' , [StaffMgt::class , 'allStaff']);
+        Route::get('fetch-tenant-staffs', [StaffMgt::class , 'fetchStaffs'])->name('fetch-tenant-staffs');
+        Route::get('create-staff' , [StaffMgt::class , 'createStaff']);
+        Route::post('store-staff' , [StaffMgt::class , 'storeStaff']);
+        Route::get('store-edit/{staff_id}' , [StaffMgt::class , 'editStaff']);
+        Route::put('store-update/{staff_id}', [StaffMgt::class , 'updateStaff']);
+        Route::get('view-staff/{staff_id}', [StaffMgt::class , 'viewStaff']);
+        Route::get('terminate/{staff_id}/appointment',[StaffMgt::class ,'terminateAppointment']);
 
 
     });

@@ -26,7 +26,7 @@ class RoleMgt extends Controller
     {
         request()->validate(['role' => 'required']);
 
-        $role =  Role::create(['name' => $request->role]);
+        $role =  Role::create(['guard_name' => 'admin', 'name' => $request->role]);
 
         Alert::success('Success ', 'Role added successfully');
 
@@ -104,7 +104,7 @@ class RoleMgt extends Controller
     {
         $request->validate(['permission' => 'required']);
 
-        Permission::create(['name' => $request->permission]);
+        Permission::create(['guard_name' => 'admin','name' => $request->permission]);
 
         Alert::success('Success ', 'Permission added successfully');
 

@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
         $this->call(TripTypeSeeder::class);
         $this->call(DestinationSeeder::class);
         $this->call(PickUpSeeder::class);
+//        $this->call(RoleSeeder::class);
         $this->call(AdminSeeder::class);
         $this->call(UserSeeder::class);
 
