@@ -94,12 +94,12 @@
                     </li>
                     <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="file-text"></i><span>Roles</span></a>
                         <ul class="nav-submenu menu-content">
-                            <li><a class="" href="#">All Roles</a> </li>
+                            <li><a class="" href="{{url('admin/roles')}}">All Roles</a> </li>
                         </ul>
                     </li>
                     <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="server"></i><span>Permissions</span></a>
                         <ul class="nav-submenu menu-content">
-                            <li><a  href="#">All Permissions</a></li>
+                            <li><a  href="{{url('admin/permissions')}}">All Permissions</a></li>
                         </ul>
                     </li>
                 </ul>

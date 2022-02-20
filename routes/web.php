@@ -20,6 +20,7 @@ use App\Http\Controllers\Page;
 use App\Http\Controllers\Parcel;
 use App\Http\Controllers\ParcelMgt;
 use App\Http\Controllers\Payment;
+use App\Http\Controllers\RoleMgt;
 use App\Http\Controllers\SocialController;
 use App\Http\Controllers\Tour;
 use App\Http\Controllers\Train;
@@ -271,6 +272,24 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::put('update-operator/{operator_id}',[Operator::class , 'updateOperator']);
         Route::get('get-operator-users/{id}',[Operator::class , 'fetchOperatorUser'])->name('get-operator-users');
         Route::get('operator-generate-password/{id}',[Operator::class , 'regeneratePassword']);
+        Route::post('add-permissions-to-role',[RoleMgt::class ,'assignPermissionToRole']);
+
+        //roles and permissions
+        Route::get('roles' ,[RoleMgt::class , 'allRoles']);
+        Route::get('create-new-role',[RoleMgt::class , 'createNewRole']);
+        Route::post('store-role',[RoleMgt::class , 'storeRole']);
+        Route::get('fetch-roles',[RoleMgt::class ,'fetchRoles'])->name('fetch-roles');
+        Route::get('edit-role/{id}',[RoleMgt::class , 'editRole']);
+        Route::put('update-role/{id}',[RoleMgt::class ,'updateRole']);
+        Route::get('view-role/{id}',[RoleMgt::class , 'viewRole']);
+
+        //roles permissions
+        Route::get('permissions',[RoleMgt::class , 'allPermissions']);
+        Route::get('create-new-permissions',[RoleMgt::class , 'addPermissions']);
+        Route::post('store-permission',[RoleMgt::class ,'storePermission']);
+        Route::get('fetch-permissions',[RoleMgt::class , 'fetchPermissions'])->name('fetch-permissions');
+        Route::get('edit-permission/{id}', [RoleMgt::class , 'editPermission']);
+        Route::put('update-permission/{id}',[RoleMgt::class ,'updatePermission']);
 
 
     });

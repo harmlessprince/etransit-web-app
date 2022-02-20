@@ -14,7 +14,7 @@
                     <h3>{{env('APP_NAME')}}</h3>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{url('/admin/dashboard')}}"><i data-feather="home"></i></a></li>
-                        <li class="breadcrumb-item">Manage Operator</li>
+                        <li class="breadcrumb-item">Permission Management</li>
                     </ol>
                 </div>
             </div>
@@ -24,10 +24,10 @@
     <div class="container-fluid" >
         <div class="push-right">
             <div>
-                <a href="{{url('admin/create-new-operator')}}" class="btn btn-success">Add Operator</a>
+                <a href="{{url('admin/create-new-permissions')}}" class="btn btn-danger">Add Permissions</a>
             </div>
 
-               <br><br>
+            <br><br>
         </div>
         <div class="card">
             <div class="card-body">
@@ -35,9 +35,7 @@
                     <thead>
                     <tr>
                         <th>No</th>
-                        <th>Company Name</th>
-                        <th>Address</th>
-                        <th>Phone Number</th>
+                        <th>Permission</th>
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -62,13 +60,10 @@
             var table = $('.yajra-datatable').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: "{{ route('admin.fetch-tenants') }}",
+                ajax: "{{ route('admin.fetch-permissions') }}",
                 columns: [
                     {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-                    {data: 'company_name', name: 'company_name'},
-                    {data: 'address', name: 'address'},
-                    {data: 'phone_number', name: 'phone'},
-
+                    {data: 'name', name: 'name'},
                     {
                         data: 'action',
                         name: 'action',
