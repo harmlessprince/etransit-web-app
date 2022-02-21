@@ -13,6 +13,7 @@ use App\Http\Controllers\Eticket\EticketManifest;
 use App\Http\Controllers\Eticket\EticketSchedule;
 use App\Http\Controllers\Eticket\EticketTerminal;
 use App\Http\Controllers\Eticket\ManageBus;
+use App\Http\Controllers\Eticket\StaffMgt;
 use App\Http\Controllers\Ferry;
 use App\Http\Controllers\Login;
 use App\Http\Controllers\Operator;
@@ -20,6 +21,7 @@ use App\Http\Controllers\Page;
 use App\Http\Controllers\Parcel;
 use App\Http\Controllers\ParcelMgt;
 use App\Http\Controllers\Payment;
+use App\Http\Controllers\RoleMgt;
 use App\Http\Controllers\SocialController;
 use App\Http\Controllers\Tour;
 use App\Http\Controllers\Train;
@@ -137,15 +139,16 @@ Route::prefix('admin')->name('admin.')->group(function(){
     Route::get('export/schedule', [Schedule::class, 'exportSchedule'])->name('export.schedule');
     Route::post('import/schedule', [Schedule::class, 'importSchedule'])->name('import.schedule');
 
-    Route::group(['middleware' => ['admin','prevent-back-history']], function() {
+    Route::group(['middleware' => ['admin','prevent-back-history','permissions']], function() {
+
 
         Route::get('/dashboard', [Dashboard::class, 'dashboard'])->name('dashboard');
         //vehicle management
         Route::get('/manage/vehicle', [Vehicle::class, 'manage'])->name('manage.vehicle');
-        Route::get('/manage/tenant-bus' , [Vehicle::class , 'tenantBus']);
+        Route::get('/manage/tenant-bus' , [Vehicle::class , 'tenantBus'])->name('manage.bus');
         Route::get('manage/fetch-all-buses' , [Vehicle::class , 'fetchAllTenantBus'])->name('manage-fetch-all-buses');
-        Route::get('manage/view-tenant-bus/{bus_id}' , [Vehicle::class , 'viewTenantBus']);
-        Route::get('view-bus/{bus_id}' , [Vehicle::class , 'busSchedule']);
+        Route::get('manage/view-tenant-bus/{bus_id}' , [Vehicle::class , 'viewTenantBus'])->name('view.bus');
+        Route::get('view-bus/{bus_id}' , [Vehicle::class , 'busSchedule'])->name('bus.schedules');
         Route::get('view-bus-schedule/{bus_id}' , [Vehicle::class , 'busScheduleFetch'])->name('view-bus-schedule');
         Route::get('view-bus-schedule-page/{schedule_id}' , [Vehicle::class , 'viewBusSchedulePage']);
         Route::get('edit-bus/{bus_id}',[Vehicle::class ,'editBus']);
@@ -271,6 +274,24 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::put('update-operator/{operator_id}',[Operator::class , 'updateOperator']);
         Route::get('get-operator-users/{id}',[Operator::class , 'fetchOperatorUser'])->name('get-operator-users');
         Route::get('operator-generate-password/{id}',[Operator::class , 'regeneratePassword']);
+        Route::post('add-permissions-to-role',[RoleMgt::class ,'assignPermissionToRole']);
+
+        //roles and permissions
+        Route::get('roles' ,[RoleMgt::class , 'allRoles']);
+        Route::get('create-new-role',[RoleMgt::class , 'createNewRole']);
+        Route::post('store-role',[RoleMgt::class , 'storeRole']);
+        Route::get('fetch-roles',[RoleMgt::class ,'fetchRoles'])->name('fetch-roles');
+        Route::get('edit-role/{id}',[RoleMgt::class , 'editRole']);
+        Route::put('update-role/{id}',[RoleMgt::class ,'updateRole']);
+        Route::get('view-role/{id}',[RoleMgt::class , 'viewRole']);
+
+        //roles permissions
+        Route::get('permissions',[RoleMgt::class , 'allPermissions']);
+        Route::get('create-new-permissions',[RoleMgt::class , 'addPermissions']);
+        Route::post('store-permission',[RoleMgt::class ,'storePermission']);
+        Route::get('fetch-permissions',[RoleMgt::class , 'fetchPermissions'])->name('fetch-permissions');
+        Route::get('edit-permission/{id}', [RoleMgt::class , 'editPermission']);
+        Route::put('update-permission/{id}',[RoleMgt::class ,'updatePermission']);
 
 
     });
@@ -343,6 +364,16 @@ Route::prefix('e-ticket')->name('e-ticket.')->group(function(){
         Route::get('schedule-manifest/{schedule_id}', [EticketManifest::class , 'manifest']);
         Route::get('fetch-bus-manifest/{schedule_id}', [EticketManifest::class ,'fetchBusManifest'])->name('fetch-bus-manifest');
         Route::get('fetch-passenger-details/{seat_tracker_id}', [EticketManifest::class , 'fetchPassengerDetails']);
+
+        //manage staffs
+        Route::get('staffs' , [StaffMgt::class , 'allStaff']);
+        Route::get('fetch-tenant-staffs', [StaffMgt::class , 'fetchStaffs'])->name('fetch-tenant-staffs');
+        Route::get('create-staff' , [StaffMgt::class , 'createStaff']);
+        Route::post('store-staff' , [StaffMgt::class , 'storeStaff']);
+        Route::get('store-edit/{staff_id}' , [StaffMgt::class , 'editStaff']);
+        Route::put('store-update/{staff_id}', [StaffMgt::class , 'updateStaff']);
+        Route::get('view-staff/{staff_id}', [StaffMgt::class , 'viewStaff']);
+        Route::get('terminate/{staff_id}/appointment',[StaffMgt::class ,'terminateAppointment']);
 
 
     });

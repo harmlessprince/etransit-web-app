@@ -49,6 +49,8 @@ class SocialController extends Controller
 
     public function acceptToken(Request $request)
     {
-
+       request()->validate([
+           'token' => 'required'
+       ]);
     }
 }
