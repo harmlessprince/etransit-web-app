@@ -4,7 +4,9 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 use Spatie\Permission\Exceptions\UnauthorizedException;
+
 
 class PermissionMiddleware
 {
@@ -18,7 +20,10 @@ class PermissionMiddleware
          */
         public function handle($request, Closure $next, $permission = null, $guard = null)
         {
-                $authGuard = app('auth')->guard($guard);
+
+                $authGuard = app('auth')->guard('admin');
+
+
 
                 if ($authGuard->guest()) {
                     throw UnauthorizedException::notLoggedIn();
@@ -32,7 +37,6 @@ class PermissionMiddleware
 
                 if ( is_null($permission) ) {
                     $permission = $request->route()->getName();
-
                     $permissions = array($permission);
                 }
 
@@ -42,8 +46,10 @@ class PermissionMiddleware
                         return $next($request);
                     }
                 }
+               Alert::error('Error ', 'You don\'t have permission to view this page');
 
-                throw UnauthorizedException::forPermissions($permissions);
+                return back();
+//                throw UnauthorizedException::forPermissions($permissions);
          }
 
 }

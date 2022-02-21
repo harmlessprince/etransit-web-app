@@ -150,7 +150,7 @@ class RoleMgt extends Controller
 
         if($request->checked == 'checked')
         {
-            $role->givePermissionTo($permission );
+            $role->givePermissionTo($permission);
 
             return response()->json(['success' => true , 'message' => 'Permission Granted to role successfully']);
         }else{

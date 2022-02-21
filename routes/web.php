@@ -139,15 +139,16 @@ Route::prefix('admin')->name('admin.')->group(function(){
     Route::get('export/schedule', [Schedule::class, 'exportSchedule'])->name('export.schedule');
     Route::post('import/schedule', [Schedule::class, 'importSchedule'])->name('import.schedule');
 
-    Route::group(['middleware' => ['admin','prevent-back-history']], function() {
+    Route::group(['middleware' => ['admin','prevent-back-history','permissions']], function() {
+
 
         Route::get('/dashboard', [Dashboard::class, 'dashboard'])->name('dashboard');
         //vehicle management
         Route::get('/manage/vehicle', [Vehicle::class, 'manage'])->name('manage.vehicle');
-        Route::get('/manage/tenant-bus' , [Vehicle::class , 'tenantBus']);
+        Route::get('/manage/tenant-bus' , [Vehicle::class , 'tenantBus'])->name('manage.bus');
         Route::get('manage/fetch-all-buses' , [Vehicle::class , 'fetchAllTenantBus'])->name('manage-fetch-all-buses');
-        Route::get('manage/view-tenant-bus/{bus_id}' , [Vehicle::class , 'viewTenantBus']);
-        Route::get('view-bus/{bus_id}' , [Vehicle::class , 'busSchedule']);
+        Route::get('manage/view-tenant-bus/{bus_id}' , [Vehicle::class , 'viewTenantBus'])->name('view.bus');
+        Route::get('view-bus/{bus_id}' , [Vehicle::class , 'busSchedule'])->name('bus.schedules');
         Route::get('view-bus-schedule/{bus_id}' , [Vehicle::class , 'busScheduleFetch'])->name('view-bus-schedule');
         Route::get('view-bus-schedule-page/{schedule_id}' , [Vehicle::class , 'viewBusSchedulePage']);
         Route::get('edit-bus/{bus_id}',[Vehicle::class ,'editBus']);

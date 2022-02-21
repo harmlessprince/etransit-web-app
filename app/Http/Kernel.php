@@ -71,6 +71,7 @@ class Kernel extends HttpKernel
         'jwt.refresh' => 'Tymon\JWTAuth\Middleware\RefreshToken',
         'role' => \Spatie\Permission\Middlewares\RoleMiddleware::class,
         'permission' => \Spatie\Permission\Middlewares\PermissionMiddleware::class,
+        'permissions' => \App\Http\Middleware\PermissionMiddleware::class,
         'admin' => \App\Http\Middleware\CheckAdmin::class,
         'e-ticket' => \App\Http\Middleware\CheckTenant::class,
         'role_or_permission' => \Spatie\Permission\Middlewares\RoleOrPermissionMiddleware::class,

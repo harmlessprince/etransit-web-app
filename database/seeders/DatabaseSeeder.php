@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
         $this->call(ServiceSeeder::class);
 //        $this->call(TerminalSeeder::class);
-       // $this->call(BusSeeder::class);
+        $this->call(AdminPermissionsSeeder::class);
         $this->call(TripTypeSeeder::class);
         $this->call(DestinationSeeder::class);
         $this->call(PickUpSeeder::class);
