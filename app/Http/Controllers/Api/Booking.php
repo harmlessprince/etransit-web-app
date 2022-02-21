@@ -216,8 +216,8 @@ class Booking extends Controller
             $createPassenger->passenger_age_range   = $request->passenger_option[$i];
             $createPassenger->schedule_id           = $schedule_id;
             $createPassenger->user_id               = auth()->user()->id;
-            $createPassenger->next_of_kin_name      = $request->next_of_kin_name;
-            $createPassenger->next_of_kin_number    = $request->next_of_kin_number;
+            $createPassenger->next_of_kin_name      = $request->next_of_kin_name[$i];
+            $createPassenger->next_of_kin_number    = $request->next_of_kin_number[$i];
             $createPassenger->seat_tracker_id       = $selectedSeat[$i]->id;
             $createPassenger->save();
         }
