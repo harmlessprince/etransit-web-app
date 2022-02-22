@@ -16,6 +16,7 @@ use App\Http\Controllers\Api\Service;
 use App\Http\Controllers\Api\SocialController;
 use App\Http\Controllers\Api\Tour;
 use App\Http\Controllers\Api\Train;
+use App\Http\Controllers\Api\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -136,6 +137,8 @@ Route::group(['prefix' => 'v1'], function() {
         Route::post('/train/add-passenger-details' , [Train::class , 'passengerDetails']);
         Route::post('/train/handle-cash-payment' , [Train::class , 'handleCashPayment']);
 
+        //fetch user transaction
+        Route::get('my-transactions' , [Transaction::class ,'userTransactions']);
 
     });
 

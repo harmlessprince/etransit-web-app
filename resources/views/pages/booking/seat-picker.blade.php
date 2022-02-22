@@ -90,6 +90,14 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="form-group passenger_name">
+                            <div><label>NEXT OF KIN FULL NAME</label></div>
+                            <div><input type="text" name="next_of_kin_name[]"  class="passenger_input_field"/></div>
+                        </div>
+                        <div class="form-group passenger_name">
+                            <div><label>NEXT OF KIN NUMBER</label></div>
+                            <div><input type="text" name="next_of_kin_number[]"  class="passenger_input_field"/></div>
+                        </div>
                     </div>
                 </div>
 
@@ -226,6 +234,14 @@
                                     <input type="checkbox" name="passenger_option[]" value="children" id="children" />
                                 </div>
                             </div>
+                        </div>
+                        <div class="form-group passenger_name">
+                            <div><label>NEXT OF KIN FULL NAME</label></div>
+                            <div><input type="text" name="next_of_kin_name[]"  class="passenger_input_field"/></div>
+                        </div>
+                        <div class="form-group passenger_name">
+                            <div><label>NEXT OF KIN NUMBER</label></div>
+                            <div><input type="text" name="next_of_kin_number[]"  class="passenger_input_field"/></div>
                         </div>
                     </div>`);
         });
