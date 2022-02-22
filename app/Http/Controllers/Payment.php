@@ -198,7 +198,15 @@ class Payment extends Controller
                 $maildata = [
                     'name' =>  $data['data']['meta']['user_name'],
                     'service' => 'Bus Booking',
-                    'transaction' => $transactions
+                    'transaction' => $transactions,
+                    'seatTrackers' => $seatTracker,
+                    'adultFare' => $adultFare,
+                    'childFare'=>$childrenFare,
+                    'tripType' => $tripType,
+                    'adultCount' => $adultCount,
+                    'childrenCount' => $childrenCount,
+                    'tripSchedule' => $tripSchedule,
+                    'totalAmount' => $data['data']['amount'],
                 ];
                 $email = $data['data']['meta']['user_email'];
 
@@ -262,7 +270,8 @@ class Payment extends Controller
             $maildata = [
                 'name' =>  $data['data']['meta']['user_name'],
                 'service' => 'Car Hire',
-                'transaction' => $transactions
+                'transaction' => $transactions,
+
             ];
 
             $email = $data['data']['meta']['user_email'];

@@ -262,7 +262,8 @@ class Booking extends Controller
 
         //find the schedule to get the actual amount stored in the database
         $tripSchedule = \App\Models\Schedule::where('id', $attr['schedule_id'])
-                                ->select('fare_adult', 'fare_children', 'id', 'seats_available', 'bus_id')->first();
+                                ->select('fare_adult', 'fare_children', 'id', 'seats_available', 'bus_id','departure_date','return_date')->first();
+
         !$tripSchedule ? abort('404') : '';
         $adultFare = (double)$tripSchedule->fare_adult;
         $childrenFare = (double)$tripSchedule->fare_children;
@@ -314,7 +315,16 @@ class Booking extends Controller
         $maildata = [
             'name' => auth()->user()->full_name,
             'service' => 'Bus Booking',
-            'transaction' => $transactions
+            'transaction' => $transactions,
+            'seatTrackers' => $seatTracker,
+            'adultFare' => $adultFare,
+            'childFare'=>$childrenFare,
+            'tripType' => $tripType,
+            'adultCount' => $attr['adultCount'],
+            'childrenCount' => $attr['childrenCount'],
+            'tripSchedule' => $tripSchedule,
+            'totalAmount' => $attr['amount'],
+
         ];
         $email = auth()->user()->email;
 

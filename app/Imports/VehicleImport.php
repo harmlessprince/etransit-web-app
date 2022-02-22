@@ -22,13 +22,19 @@ class VehicleImport implements ToModel ,WithStartRow
     */
     public function model(array $row)
     {
+
+        $tenant = \App\Models\Tenant::where("company_name", "=", $row[7])->select('id')->first();
+        $row['tenant_id']  = $tenant->id;
+
         return new Bus([
-            'car_type'             => $row[1],
-            'car_model'            => $row[2],
-            'car_registration'     => $row[3],
+            'bus_type'             => $row[1],
+            'bus_model'            => $row[2],
+            'bus_registration'     => $row[3],
             'air_conditioning'     => $row[4],
             'wheels'               => $row[5],
             'seater'               => $row[6],
+            'tenant_id'            => $row['tenant_id'],
+            'service_id'           => 1,
         ]);
     }
 }

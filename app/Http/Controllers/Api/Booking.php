@@ -304,7 +304,15 @@ class Booking extends Controller
         $maildata = [
             'name' => auth()->user()->full_name,
             'service' => 'Bus Booking',
-            'transaction' => $transactions
+            'transaction' => $transactions,
+            'seatTrackers' => $seatTracker,
+            'adultFare' => $adultFare,
+            'childFare'=>$childrenFare,
+            'tripType' => $tripType,
+            'adultCount' => $attr['adultCount'],
+            'childrenCount' => $attr['childrenCount'],
+            'tripSchedule' => $tripSchedule,
+            'totalAmount' => $attr['amount'],
         ];
 
         $email =  $data["email"];

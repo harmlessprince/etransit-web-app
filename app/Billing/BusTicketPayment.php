@@ -95,7 +95,15 @@ class BusTicketPayment
                 $maildata = [
                     'name' =>  $data['name'] ,
                     'service' => 'Bus Booking',
-                    'transaction' => $transactions
+                    'transaction' => $transactions,
+                    'seatTrackers' => $seatTracker,
+                    'adultFare' => $adultFare,
+                    'childFare'=>$childrenFare,
+                    'tripType' => $tripType,
+                    'adultCount' => $adultCount,
+                    'childrenCount' => $childrenCount,
+                    'tripSchedule' => $tripSchedule,
+                    'totalAmount' => $data['data']['amount'],
                 ];
                 $email = $data['data']['meta']['user_email'];
 

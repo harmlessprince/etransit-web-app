@@ -38,20 +38,30 @@
     <div>
         <div class="receipt_column">
             <div >
-                <small>DATE</small>
+                <small>DEPARTURE DATE</small>
             </div>
             <div class="float-right">
-                <small>09:40</small>
+                <small>{{$data['tripSchedule']->departure_date}}</small>
+            </div>
+        </div>
+        @if($data['tripType'] == 2)
+        <div class="receipt_column">
+            <div >
+                <small>RETURN DATE</small>
+            </div>
+            <div class="float-right">
+                <small>{{$data['tripSchedule']->return_date}}</small>
             </div>
         </div>
         <div class="receipt_column">
             <div>
-                <small>Amount</small>
+                <small>Type</small>
             </div>
-            <div class="transport_amount float-right">
-                <small> N 4000</small>
+            <div class="float-right">
+                <small>Round Trip</small>
             </div>
         </div>
+        @else
         <div class="receipt_column">
             <div>
                 <small>Type</small>
@@ -60,6 +70,51 @@
                 <small>One Way</small>
             </div>
         </div>
+        @endif
+
+       @if($data['adultCount'] > 0)
+        <div class="receipt_column">
+            <div>
+                <small>Adult</small>
+            </div>
+            <div class="transport_amount float-right">
+                <small> {{$data['adultCount']}}</small>
+            </div>
+        </div>
+        @endif
+
+        @if($data['childrenCount'] > 0)
+            <div class="receipt_column">
+                <div>
+                    <small>Adult</small>
+                </div>
+                <div class="transport_amount float-right">
+                    <small> {{$data['childrenCount']}}</small>
+                </div>
+            </div>
+        @endif
+        @if($data['adultCount'] > 0)
+            <div class="receipt_column">
+                <div>
+                    <small>Amount (Adult)</small>
+                </div>
+                <div class="transport_amount float-right">
+                    <small> {{$data['adultFare']}}</small>
+                </div>
+            </div>
+        @endif
+
+        @if($data['childrenCount'] > 0)
+            <div class="receipt_column">
+                <div>
+                    <small>Amount (Child)</small>
+                </div>
+                <div class="transport_amount float-right">
+                    <small> {{$data['childFare']}}</small>
+                </div>
+            </div>
+        @endif
+
         <div class="receipt_column">
             <div >
                 <small>Discount</small>
@@ -77,7 +132,7 @@
             </div>
             <div class="price_box float-right" >
                 <small>
-                    N 10000
+                     {{number_format($data['totalAmount'])}}
                 </small>
             </div>
         </div>

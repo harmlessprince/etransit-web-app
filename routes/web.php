@@ -307,6 +307,10 @@ Route::prefix('e-ticket')->name('e-ticket.')->group(function(){
     Route::post('/logout-tenant',[AuthLogin::class , 'logout'] )->name('logout');
     Route::post('/login-tenant' , [AuthLogin::class , 'loginTenant'])->name('login');
 
+    //import and export buses
+    Route::get('export/vehicle', [ManageBus::class, 'exportVehicle'])->name('export.vehicle');
+
+
     Route::group(['middleware' => ['e-ticket','prevent-back-history']], function() {
 
         Route::get('/dashboard' , [AuthLogin::class , 'dashboard'])->name('dashboard');
@@ -324,6 +328,11 @@ Route::prefix('e-ticket')->name('e-ticket.')->group(function(){
         Route::get('assign-driver/{bus_id}',[ManageBus::class , 'assignDriver']);
         Route::put('assign-driver/{bus_id}',[ManageBus::class , 'assignDriverToBus']);
         Route::get('remove-driver-from-bus/{driver_id}/{bus_id}' ,[ManageBus::class , 'removeDriverFromBus']);
+
+        //bulk import bus
+        Route::get('import', [ManageBus::class, 'importExportView']);
+        Route::post('import/vehicle', [ManageBus::class, 'importVehicle'])->name('import.vehicle');
+
 
         //manage bus drivers
         Route::get('drivers', [Driver::class ,'drivers']);
