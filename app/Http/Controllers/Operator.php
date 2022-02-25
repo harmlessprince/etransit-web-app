@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Mail\OperatorCredentials;
 use App\Mail\PasswordRecovery;
 use App\Models\Eticket;
+use App\Models\Service;
+use App\Models\ServiceTenant;
 use App\Models\Tenant;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Illuminate\Http\Request;
@@ -48,8 +50,28 @@ class Operator extends Controller
         $busCount = Bus::count();
         $terminalCount = Terminal::withoutGlobalScopes()->where('tenant_id',$tenant->id)->count();
 
+        $tenantServiceObject = new \stdClass();
 
-        return view('admin.operator.view-operator', compact('tenant','busCount','terminalCount'));
+        $services = Service::all();
+
+        foreach($services as $index => $service) {
+            if (count($tenant->services) > 0){
+                foreach ($tenant->services as $tenantService) {
+                    $tenantServiceObject->$index['service'] = $service->name;
+                    $tenantServiceObject->$index['id'] = $service->id;
+                    $tenantServiceObject->$index['status'] = ($tenantService->name == $service->name) ? 'yes' : 'no';
+                    if ($tenantService->name == $service->name) {
+                        break;
+                    }
+                }
+            }else{
+                $tenantServiceObject->$index['service'] = $service->name;
+                $tenantServiceObject->$index['id'] = $service->id;
+                $tenantServiceObject->$index['status'] =  'no';
+            }
+        }
+
+        return view('admin.operator.view-operator', compact('tenant','busCount','terminalCount','tenantServiceObject'));
     }
 
 
@@ -210,6 +232,25 @@ class Operator extends Controller
         Alert::success('Success ', 'Operator Edited successfully');
 
         return redirect('admin/manage/operators');
+
+    }
+
+    public function addServiceToOperator(Request $request)
+    {
+
+        if($request->checked == "checked")
+        {
+            $newserviceTenant = new ServiceTenant();
+            $newserviceTenant->service_id = $request->service_id;
+            $newserviceTenant->tenant_id  = $request->tenant_id;
+            $newserviceTenant->save();
+            return response()->json(['success' => true , 'message' => 'Service added to tenant successfully']);
+        }else{
+            $servicetenant = ServiceTenant::where('tenant_id', $request->tenant_id)->where('service_id', $request->service_id)->first();
+            $servicetenant->delete();
+            return response()->json(['success' => true , 'message' => 'Service  removed  successfully']);
+        }
+
 
     }
 }

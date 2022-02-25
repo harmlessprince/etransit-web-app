@@ -20,7 +20,16 @@
                     <li ><a class="nav-link" href="{{route('e-ticket.dashboard')}}"><i data-feather="home"></i><span>Dashboard</span></a>
 
                     </li>
+                    @php
+                        $tenant = \App\Models\Tenant::find(session()->get('tenant_id'));
+                        $serviceArray = [];
+                        foreach($tenant->services as $service)
+                        {
+                        array_push($serviceArray , $service->id);
+                        }
+                    @endphp
 
+                    @if(in_array('1',$serviceArray))
                     <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"></i><span>Bus Management</span></a>
                         <ul class="nav-submenu menu-content">
                             <li><a href="{{url('/e-ticket/buses')}}">Manage Buses</a></li>
@@ -29,6 +38,16 @@
                             <li><a href="{{url('/e-ticket/locations')}}">Manage Locations</a></li>
                         </ul>
                     </li>
+                    @endif
+
+                    @if(in_array('6',$serviceArray))
+                        <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"></i><span>Car Management</span></a>
+                            <ul class="nav-submenu menu-content">
+                                <li><a href="{{url('/e-ticket/car-hire')}}">Manage Car</a></li>
+                            </ul>
+                        </li>
+                    @endif
+
                     <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"></i><span>Staff Management</span></a>
                         <ul class="nav-submenu menu-content">
                             <li><a href="{{url('/e-ticket/staffs')}}">Manage Staff</a></li>

@@ -25,6 +25,7 @@ class ManageBus extends Controller
         $schedule = Schedule::count();
 
 
+
         return view('Eticket.bus.index' , compact('busCount','terminalCount','schedule'));
     }
 

@@ -24,4 +24,9 @@ class Service extends Model
         return $this->hasMany(Transaction::class);
     }
 
+    public function tenants()
+    {
+        return $this->belongsToMany(Tenant::class ,'service_tenant');
+    }
+
 }

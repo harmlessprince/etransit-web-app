@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminLogin;
+use App\Http\Controllers\Api\CarHireMgt;
 use App\Http\Controllers\BoatCruise;
 use App\Http\Controllers\Booking;
 use App\Http\Controllers\Car;
@@ -194,6 +195,7 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::get('cars/on-trip',[Car::class , 'onTrip']);
         Route::get('/car/details/{carhistory_id}', [Car::class , 'tripDetails']);
 
+
         //manage boat cruise
         Route::get("/manage/boat-cruise" , [BoatCruise::class , 'index']);
         Route::get('add/boat',[BoatCruise::class ,'addBoat']);
@@ -274,6 +276,12 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::put('update-operator/{operator_id}',[Operator::class , 'updateOperator']);
         Route::get('get-operator-users/{id}',[Operator::class , 'fetchOperatorUser'])->name('get-operator-users');
         Route::get('operator-generate-password/{id}',[Operator::class , 'regeneratePassword']);
+        Route::post('add-service-to-tenant' , [Operator::class ,'addServiceToOperator'])->name('add-service-to-tenant');
+
+
+
+
+
         Route::post('add-permissions-to-role',[RoleMgt::class ,'assignPermissionToRole']);
 
         //roles and permissions
@@ -383,6 +391,11 @@ Route::prefix('e-ticket')->name('e-ticket.')->group(function(){
         Route::put('store-update/{staff_id}', [StaffMgt::class , 'updateStaff']);
         Route::get('view-staff/{staff_id}', [StaffMgt::class , 'viewStaff']);
         Route::get('terminate/{staff_id}/appointment',[StaffMgt::class ,'terminateAppointment']);
+
+
+        //mage car hire routes
+        Route::get('car-hire' , [CarHireMgt::class , 'allCars']);
+        Route::get('add-car' , [CarHireMgt::class , 'createCars']);
 
 
     });

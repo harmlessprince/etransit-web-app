@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Eticket;
 
 use App\Http\Controllers\Controller;
 use App\Models\Staff;
+
+use App\Models\Tenant;
 use Illuminate\Http\Request;
 use DataTables;
 use RealRashid\SweetAlert\Facades\Alert;

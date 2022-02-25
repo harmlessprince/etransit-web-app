@@ -185,7 +185,7 @@ class Car extends Controller
               $NCPlan->save();
         DB::commit();
 
-        Alert::success('Success ', 'Boat added successfully');
+        Alert::success('Success ', 'Car added successfully');
 
         return  back();
 
@@ -275,9 +275,17 @@ class Car extends Controller
               $currentDate = \Carbon\Carbon::now()->format('Y-m-d');
               $currentTime = \Carbon\Carbon::now()->format('H:i');
 
-              if( $data['date'] >= $currentDate  && $data['time'] >= $currentTime )
+
+
+              if( $data['date'] >= $currentDate)
               {
 
+
+                  if($data['time'] < $currentTime)
+                  {
+                      toastr()->error('You can\'t pick a time that has already passed');
+                      return back();
+                  }
                   $plan =  CarPlan::where('id' , $plan_id)->with('car')->firstorfail();
                   $service = \App\Models\Service::where('id' , $plan->car->service_id)->firstorfail();
 
@@ -353,7 +361,7 @@ class Car extends Controller
 
 
               }else{
-                  toastr()->error('You can\'t pick a date or time that has already passed');
+                  toastr()->error('You can\'t pick a date  that has already passed');
                   return back();
               }
 
