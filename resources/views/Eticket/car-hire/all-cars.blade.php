@@ -49,7 +49,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="align-text">
-{{--                            <h1>{{$busCount}}</h1>--}}
+                            <h1>{{$CountCars}}</h1>
                             <h6>Car(s)</h6>
                         </div>
                     </div>
@@ -106,11 +106,11 @@
                     <thead>
                     <tr>
                         <th>No</th>
-                        <th>Bus</th>
-                        <th>Bus Type</th>
+                        <th>Car Name</th>
                         <th>Car Registration</th>
-                        <th>Seats</th>
-                        <th>Wheels</th>
+                        <th>Transmission</th>
+                        <th>Model</th>
+                        <th>Capacity</th>
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -135,14 +135,15 @@
             var table = $('.yajra-datatable').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: "{{ route('e-ticket.fetch-tenant-buses') }}",
+                ajax: "{{ route('e-ticket.view-all-cars') }}",
                 columns: [
                     {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-                    {data: 'bus_type', name: 'bus_type'},
-                    {data: 'bus_model', name: 'bus_model'},
-                    {data: 'bus_registration', name: 'bus_registration'},
-                    {data: 'seater', name: 'seater'},
-                    {data: 'wheels', name: 'wheels'},
+                    {data: 'car_name', name: 'car_name'},
+                    {data: 'car_registration', name: 'car_registration'},
+                    {data: 'transmission', name: 'transmission'},
+                    {data: 'model_year', name: 'model_year'},
+                    {data: 'capacity', name: 'capacity'},
+
 
                     {
                         data: 'action',

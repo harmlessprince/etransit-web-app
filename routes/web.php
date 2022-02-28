@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminLogin;
-use App\Http\Controllers\Api\CarHireMgt;
+use App\Http\Controllers\Eticket\CarHireMgt;
 use App\Http\Controllers\BoatCruise;
 use App\Http\Controllers\Booking;
 use App\Http\Controllers\Car;
@@ -394,8 +394,28 @@ Route::prefix('e-ticket')->name('e-ticket.')->group(function(){
 
 
         //mage car hire routes
-        Route::get('car-hire' , [CarHireMgt::class , 'allCars']);
-        Route::get('add-car' , [CarHireMgt::class , 'createCars']);
+        Route::get('car-hire' , [CarHireMgt::class , 'allCars'])->name('all-cars');
+        Route::get('add-car' , [CarHireMgt::class , 'createCars'])->name('create-car');
+
+        Route::post('store-car' ,[CarHireMgt::class ,'storeCar'])->name('store-car');
+        Route::get('fetch-hired-cars',[CarHireMgt::class , 'fetchHiredCars'])->name('view-all-cars');
+
+        Route::get('edit-car/{car_id}', [CarHireMgt::class , 'editCar'])->name('edit-car');
+        Route::put('update-tenant-car/{car_id}',[CarHireMgt::class , 'updateCarInformation'])->name('update-car');
+
+        Route::get('edit-car-plan/{car_id}',[CarHireMgt::class ,'editCarPlan'])->name('edit-car-plan');
+        Route::put('update-car-plan/{car_id}',[CarHireMgt::class ,'updateCarPlan'])->name('update-car-plan');
+
+        //view car
+        Route::get('view-car/{car_id}' ,[CarHireMgt::class , 'viewCar'])->name('view-car');
+
+        Route::get('view-tenant-car-history/{car_id}' ,[CarHireMgt::class , 'viewCarHistories'])->name('view-all-car-history');
+
+        Route::get('view-history/{car_history_id}' , [CarHireMgt::class , 'viewCarHistory'])->name('view-history');
+
+        Route::get('confirm-drop-off/{car_history_id}', [CarHireMgt::class , 'confirmDropOff'])->name('confirm-drop-off');
+
+        Route::get('confirm-pick-up/{car_history_id}', [CarHireMgt::class , 'confirmPickUp'])->name('confirm-pick-up');
 
 
     });

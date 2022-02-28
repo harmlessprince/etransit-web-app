@@ -9,6 +9,7 @@ class CarPlan extends Model
 {
     use HasFactory;
     protected $table = 'car_plans';
+    protected $guarded = ['id'];
 
     public function car()
     {

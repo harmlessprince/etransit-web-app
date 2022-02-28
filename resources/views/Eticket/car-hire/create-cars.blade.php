@@ -31,6 +31,9 @@
     .add_more_images_text{
         color:red;
     }
+    .sumbit_request{
+        color:#fff !important;
+    }
 </style>
 @section('content')
     <div class="container-fluid">
@@ -48,9 +51,19 @@
     </div>
     <!-- Container-fluid starts-->
     <div class="container-fluid" >
+        @if($errors->any())
+            <div class="alert alert-danger">
+                <p><strong>Opps Something went wrong</strong></p>
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <div class="card">
             <div class="card-body">
-                <form method="post" action="{{url('/admin/store/car')}}" enctype="multipart/form-data">
+                <form method="post" action="{{url('/e-ticket/store-car')}}" enctype="multipart/form-data">
                     @csrf
                     <div class="car-box">
                       <div class="row">
@@ -168,8 +181,13 @@
                           </div>
                           <div class="col-md-6 colm-sm-6 col-lg-6 col-xl-6 col-xs-6">
                               <div class="form-group">
-                                  <label for="nc_region_fare">State</label>
-                                  <input type="text" class="form-control" name="nc_region_fare" id="nc_region_fare" value="{{ old('nc_region_fare') }}"  required/>
+                                  <label for="nc_region_fare">Operating State</label>
+                                  <select name="operating_state" id="operting_state" class="form-control">
+                                      <option value="">Please Select Operating State</option>
+                                      @foreach($locations as $location)
+                                          <option value="{{$location->id}}">{{$location->location}}</option>
+                                      @endforeach
+                                  </select>
                               </div>
                           </div>
                       </div>
@@ -203,7 +221,7 @@
                         <label for="description">Description</label>
                         <textarea class="form-control" name="description" id="description" rows="10" cols="20" value="{{ old('description') }}" required> </textarea>
                     </div>
-                    <button class="sumbit_request" type="submit">Add Car</button>
+                    <button class="sumbit_request btn btn-success" type="submit">Add Car</button>
                 </form>
             </div>
         </div>

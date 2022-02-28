@@ -20,8 +20,10 @@ class CreateCarsTable extends Migration
             $table->enum('transmission', ['automatic', 'manual']);
             $table->string('model_year');
             $table->unsignedBigInteger('car_type_id');
+            $table->unsignedBigInteger('tenant_id');
             $table->unsignedBigInteger('car_class_id');
             $table->unsignedBigInteger('service_id');
+            $table->unsignedBigInteger('state_id');
             $table->integer('capacity')->comment('the seat capacity');
             $table->string('image_url')->nullable();
             $table->longText('description')->nullable();
