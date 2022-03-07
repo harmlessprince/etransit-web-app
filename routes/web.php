@@ -15,6 +15,7 @@ use App\Http\Controllers\Eticket\EticketSchedule;
 use App\Http\Controllers\Eticket\EticketTerminal;
 use App\Http\Controllers\Eticket\ManageBus;
 use App\Http\Controllers\Eticket\StaffMgt;
+use App\Http\Controllers\Eticket\TourPackage;
 use App\Http\Controllers\Ferry;
 use App\Http\Controllers\Login;
 use App\Http\Controllers\Operator;
@@ -332,7 +333,7 @@ Route::prefix('e-ticket')->name('e-ticket.')->group(function(){
     Route::get('export/vehicle', [ManageBus::class, 'exportVehicle'])->name('export.vehicle');
 
 
-    Route::group(['middleware' => ['e-ticket','prevent-back-history']], function() {
+    Route::group(['middleware' => ['e-ticket','prevent-back-history','check-if-session-is-set']], function() {
 
         Route::get('/dashboard' , [AuthLogin::class , 'dashboard'])->name('dashboard');
 
@@ -431,6 +432,17 @@ Route::prefix('e-ticket')->name('e-ticket.')->group(function(){
         Route::get('confirm-pick-up/{car_history_id}', [CarHireMgt::class , 'confirmPickUp'])->name('confirm-pick-up');
 
         Route::get('mark-as-paid/{car_history_id}',[CarHireMgt::class , 'markAsPaid'])->name('mark-as-paid');
+
+        //add tour
+        Route::get('tour-packages',[TourPackage::class , 'allTours'])->name('all-tours');
+
+        Route::get('fetch-tour-packages',[TourPackage::class , 'fetchTours'])->name('fetch-all-tours');
+
+        Route::get('add-tour',[TourPackage::class , 'addTours'])->name('add-tours');
+
+        Route::post('store-tour',[TourPackage::class ,'storeTour'])->name('store-tours');
+
+        Route::get('view-tour/{tour_id}',[TourPackage::class , 'viewTour'])->name('view-tour');
 
 
     });

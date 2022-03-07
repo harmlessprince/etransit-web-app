@@ -76,5 +76,6 @@ class Kernel extends HttpKernel
         'e-ticket' => \App\Http\Middleware\CheckTenant::class,
         'role_or_permission' => \Spatie\Permission\Middlewares\RoleOrPermissionMiddleware::class,
         'prevent-back-history' => \App\Http\Middleware\PreventBrowserBackHistory::class,
+        'check-if-session-is-set' => \App\Http\Middleware\CheckIfSessionIsSet::class,
     ];
 }

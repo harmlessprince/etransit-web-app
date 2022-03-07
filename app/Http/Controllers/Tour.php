@@ -27,6 +27,7 @@ class Tour extends Controller
     }
 
 
+
     public function tourPackageShow($tour_id)
     {
         $service = Service::where('id', 8)->firstorfail();

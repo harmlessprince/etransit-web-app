@@ -24,6 +24,7 @@ class CreateToursTable extends Migration
             $table->longText('description');
             $table->double('amount_regular');
             $table->double('amount_standard');
+            $table->unsignedBigInteger('tenant_id');
             $table->timestamps();
 
             $table->foreign('service_id')->references('id')->on('services')->onDelete('cascade');
