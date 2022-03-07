@@ -17,8 +17,9 @@ class CarHistory extends Model
      */
     protected $casts = [
         'date' => 'date',
-        'returnDate' => 'date',
+        'returnDate' => 'datetime',
         'dropOffDate' => 'date',
+        'returnTime' => 'datetime:H:i:s',
 
 
     ];

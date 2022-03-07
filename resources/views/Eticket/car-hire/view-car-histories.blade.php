@@ -89,6 +89,7 @@
                                 <th scope="col">Drop off Date</th>
                                 <th scope="col">Drop off Time</th>
                                 <th scope="col">Booking Confirmation</th>
+                                <th scope="col">Booked At</th>
                                 <th scope="col">Action</th>
                             </tr>
                             </thead>
@@ -107,6 +108,7 @@
                                     <td>{{$history->dropOffDate}}</td>
                                     <td>{{$history->dropOffTime}}</td>
                                     <td>{{$history->isConfirmed}}</td>
+                                    <td>{{$history->created_at->diffforhumans()}}</td>
                                     <td><a href="{{url('e-ticket/view-history/'.$history->id)}}" class="btn btn-success btn-sm">View</a></td>
                                 </tr>
                             @endforeach

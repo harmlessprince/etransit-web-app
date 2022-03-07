@@ -63,25 +63,31 @@ class Booking extends Controller
 
          $service = \App\Models\Service::where('id',$data['service_id'])->select('name')->first();
 
+         $tripTypeId = $data['trip_type'];
+
         return view('pages.booking.booking', compact('checkSchedule','data' ,'tripType',
-            'service' ,'destination' ,'pickUp'));
+            'service' ,'destination' ,'pickUp','tripTypeId'));
     }
 
 
-    public function seatSelector($schedule_id)
+    public function seatSelector($schedule_id , $tripType)
     {
 
        $fetchSeats = \App\Models\SeatTracker::where('schedule_id' ,$schedule_id)
                                         ->select('seat_position','id','booked_status')->get();
 
-        return view('pages.booking.seat-picker' , compact('fetchSeats' ,'schedule_id'));
+        return view('pages.booking.seat-picker' , compact('fetchSeats' ,'schedule_id','tripType'));
     }
 
     public function selectorTracker(Request $request)
     {
         $data = request()->validate([
-            'seat_id' => 'required'
+            'seat_id' => 'required',
+            'trip_type' => 'required'
         ]);
+
+
+    DB::beginTransaction();
 
       $seat = \App\Models\SeatTracker::where('id' ,$data['seat_id'])->first();
 
@@ -91,6 +97,34 @@ class Booking extends Controller
                'booked_status' => 1,
                'user_id' => $request->user_id
            ]);
+
+
+           if((int)$request->trip_type == 2)
+           {
+                   $checkSchedule = $seat->schedule_id;
+                   $scheduleReturnApp = Schedule::where('id' , $checkSchedule)->first();
+                   //find unique uuid for return trip
+                   $uniqueUUIDForReturnTrip = $scheduleReturnApp->return_uuid_tracker;
+
+                   $returnTripSchedule = Schedule::where('return_uuid_tracker',$uniqueUUIDForReturnTrip)->where('isReturn','=',1)->first();
+
+                   if($returnTripSchedule) {
+                       $findReturnScheduleTripSeat = \App\Models\SeatTracker::where('schedule_id', $returnTripSchedule->id)
+                           ->where('seat_position', $seat->seat_position)->first();
+
+                       if ($findReturnScheduleTripSeat) {
+                           $findReturnScheduleTripSeat->update([
+                               'booked_status' => 1,
+                               'user_id' => $request->user_id
+                           ]);
+                       }
+                   }
+
+
+
+           }
+           DB::commit();
+
            return response()->json(['success' => true , 'message' => 'Seat Selected successfully']);
        }
 
@@ -101,7 +135,8 @@ class Booking extends Controller
     public function deselectSeat(Request $request)
     {
         $data = request()->validate([
-            'seat_id' => 'required'
+            'seat_id' => 'required',
+            'trip_type' => 'required'
         ]);
 
         $seat = \App\Models\SeatTracker::where('id' ,$data['seat_id'])->where('user_id',$request->user_id)->first();
@@ -112,13 +147,39 @@ class Booking extends Controller
                 'booked_status' => 0,
                 'user_id' => null
             ]);
+
+            if((int)$request->trip_type == 2)
+            {
+                $checkSchedule = $seat->schedule_id;
+
+                $scheduleReturnApp = Schedule::where('id' , $checkSchedule)->first();
+
+                //find unique uuid for return trip
+                $uniqueUUIDForReturnTrip = $scheduleReturnApp->return_uuid_tracker;
+
+                $returnTripSchedule = Schedule::where('return_uuid_tracker',$uniqueUUIDForReturnTrip)->where('isReturn',1)->first();
+
+                if($returnTripSchedule)
+                {
+                    $findReturnScheduleTripSeat = \App\Models\SeatTracker::where('schedule_id', $returnTripSchedule->id)
+                        ->where('seat_position', $seat->seat_position)->first();
+                    if($findReturnScheduleTripSeat)
+                    {
+                        $findReturnScheduleTripSeat->update([
+                            'booked_status' => 0,
+                            'user_id' => null
+                        ]);
+                    }
+                }
+
+            }
             return response()->json(['success' => true , 'message' => 'Seat de-selected successfully']);
         }
         return response()->json(['success' => false , 'message' => 'Seat has already been booked']);
     }
 
 
-    public  function bookTrip(Request $request , $schedule_id)
+    public  function bookTrip(Request $request , $schedule_id ,$trip_type)
     {
          request()->validate([
                     'full_name' => 'required|array',
@@ -144,6 +205,22 @@ class Booking extends Controller
                                             ->where('user_id',auth()->user()->id)
                                             ->where('booked_status', 1)->get();
 
+        if((int)$trip_type == 2)
+        {
+            $checkSchedule = Schedule::find($schedule_id);
+
+
+            $scheduleReturnApp = Schedule::where('return_uuid_tracker' , $checkSchedule->return_uuid_tracker)->where('isReturn','=',1)->first();
+
+
+            if($scheduleReturnApp)
+            {
+                $selectedSeatForReturnTrip  = \App\Models\SeatTracker::where('schedule_id',$scheduleReturnApp->id)
+                                                                    ->where('user_id',auth()->user()->id)
+                                                                    ->where('booked_status', 1)->get();
+            }
+        }
+
 
          $passenger_options = $request['passenger_option'];
 
@@ -158,6 +235,18 @@ class Booking extends Controller
                      'user_id' => null
                  ]);
              }
+
+             if((int)$trip_type == 2)
+             {
+                 foreach($selectedSeatForReturnTrip as $unbookedReturnTripSeat)
+                 {
+                     $unbookedReturnTripSeat->update([
+                         'booked_status' => 0,
+                         'user_id' => null
+                     ]);
+                 }
+             }
+
              toastr()->error('Please select passenger age range option');
              return back();
          }
@@ -178,6 +267,18 @@ class Booking extends Controller
                     'user_id' => null
                 ]);
             }
+
+            if((int)$trip_type == 2)
+            {
+                foreach($selectedSeatForReturnTrip as $unbookedReturnTripSeat)
+                {
+                    $unbookedReturnTripSeat->update([
+                        'booked_status' => 0,
+                        'user_id' => null
+                    ]);
+                }
+            }
+
             toastr()->error('Number of seats selected must match the passenger count');
             return  back();
         }
@@ -191,6 +292,17 @@ class Booking extends Controller
                     'booked_status' => 0,
                     'user_id' => null
                 ]);
+            }
+
+            if((int)$trip_type == 2)
+            {
+                foreach($selectedSeatForReturnTrip as $unbookedReturnTripSeat)
+                {
+                    $unbookedReturnTripSeat->update([
+                        'booked_status' => 0,
+                        'user_id' => null
+                    ]);
+                }
             }
             toastr()->error('Please ensure the gender option is not more than the number of passenger intended for booking');
             return  back();
@@ -229,6 +341,23 @@ class Booking extends Controller
             $createPassenger->save();
         }
 
+        if((int)$trip_type == 2)
+        {
+            for($i = 0 ; $i < $passengerOptionCount ; $i++)
+            {
+                $createPassenger                        = new \App\Models\Passenger();
+                $createPassenger->full_name             = $request->full_name[$i];
+                $createPassenger->gender                = $request->gender[$i];
+                $createPassenger->passenger_age_range   = $request->passenger_option[$i];
+                $createPassenger->schedule_id           = $scheduleReturnApp->id;
+                $createPassenger->next_of_kin_name      = $request->next_of_kin_name[$i];
+                $createPassenger->next_of_kin_number    = $request->next_of_kin_number[$i];
+                $createPassenger->user_id               = auth()->user()->id;
+                $createPassenger->seat_tracker_id       = $selectedSeatForReturnTrip[$i]->id;
+                $createPassenger->save();
+            }
+        }
+
         $returnDate = request()->session()->get('return_date');
         $tripType = request()->session()->get('tripType');
 
@@ -251,6 +380,7 @@ class Booking extends Controller
 
     public function handleBusCashPayment(Request $request)
     {
+
             $attr  = request()->validate([
                         'amount' => 'required',
                         'service' => 'required',
@@ -258,11 +388,14 @@ class Booking extends Controller
                         'schedule_id' => 'required|integer',
                         'childrenCount' => 'required|integer',
                         'adultCount' => 'required|integer',
+//                        'tripType' => 'required'
                     ]);
 
+
+        DB::beginTransaction();
         //find the schedule to get the actual amount stored in the database
         $tripSchedule = \App\Models\Schedule::where('id', $attr['schedule_id'])
-                                ->select('fare_adult', 'fare_children', 'id', 'seats_available', 'bus_id','departure_date','return_date')->first();
+                                ->select('fare_adult', 'fare_children', 'id', 'seats_available', 'bus_id','departure_date','return_date','return_uuid_tracker')->first();
 
         !$tripSchedule ? abort('404') : '';
         $adultFare = (double)$tripSchedule->fare_adult;
@@ -271,11 +404,21 @@ class Booking extends Controller
 
         if ((int)$tripType == 2) {
             $type = 2;
+
+            $scheduleReturnApp = Schedule::where('return_uuid_tracker' , $tripSchedule->return_uuid_tracker)->where('isReturn','=',1)->first();
+
+            if($scheduleReturnApp)
+            {
+                $selectedSeatForReturnTrip  = \App\Models\SeatTracker::where('schedule_id',$scheduleReturnApp->id)
+                    ->where('user_id',auth()->user()->id)
+                    ->where('booked_status', 1)->get();
+            }
+
         } else {
             $type = 1;
         }
 
-        DB::beginTransaction();
+
         $transactions = new \App\Models\Transaction();
         $transactions->reference = Reference::generateTrnxRef();
         $transactions->amount = $attr['amount'];
@@ -302,14 +445,31 @@ class Booking extends Controller
                 ]);
             }
 
+            if($tripType == 2)
+            {
+                for($i = 0 ; $i < count($selectedSeatForReturnTrip); $i++)
+                {
+                    $selectedSeatForReturnTrip[$i]->update([
+                        'booked_status' => 2
+                    ]);
+                }
+
+                $updatedSeatCountForReturnTrip = (int) ($scheduleReturnApp->seats_available) -  ($attr['adultCount'] + $attr['childrenCount']);
+
+                $scheduleReturnApp->update([
+                    'seats_available' => $updatedSeatCountForReturnTrip
+                ]);
+            }
+
             //update available seats for this schedule and trip
             $updatedSeatCount = (int)($tripSchedule->seats_available) - ($attr['adultCount'] + $attr['childrenCount']);
+
             $tripSchedule->update([
                 'seats_available' => $updatedSeatCount
             ]);
 
-
         }
+
         DB::commit();
 
         $maildata = [

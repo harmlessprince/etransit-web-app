@@ -95,6 +95,12 @@
                         <small>Extra Hour :<sup>&#8358; </sup>  {{number_format($car->plans[$i]->extra_hour)}}</small>
                     </div>
                     @endif
+                    @if($car->plans[$i]->plan == "Daily Rentals")
+                        <div>
+                            <img src="{{asset('images/icons/plan_options_white.png')}}" alt="plan-icon"/>
+                            <small>Operating State : {{ Ucfirst($car->state->location) }} </small>
+                        </div>
+                    @endif
                 </div>
                 <div class="payment_box">
                     <a href="{{url('/select/plan/'. $car->plans[$i]->id)}}">

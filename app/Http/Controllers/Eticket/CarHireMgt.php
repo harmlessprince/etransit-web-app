@@ -246,8 +246,7 @@ class CarHireMgt extends Controller
 
     public function viewCarHistories($car_id)
     {
-        $carHistories = CarHistory::where('car_id',$car_id)->with('user','carplan')->get();
-
+        $carHistories = CarHistory::where('payment_status','!=','Unpaid')->where('car_id',$car_id)->with('user','carplan')->orderBy('created_at','desc')->get();
 
         return view('Eticket.car-hire.view-car-histories',compact('carHistories'));
     }
@@ -274,6 +273,42 @@ class CarHireMgt extends Controller
     public function  confirmDropOff($car_history_id)
     {
         $carHistory = CarHistory::where('id', $car_history_id)->first();
+
+        //check the return rate and return time
+        $carHistory->returnDate;
+        $carHistory->returnTime;
+
+        $timestamp =  Carbon::createFromDate($carHistory->returnDate, $carHistory->returnTime);
+//
+      $expectedReturnDate =  $timestamp->setDate($carHistory->returnDate->format('Y'),$carHistory->returnDate->format('m'),$carHistory->returnDate->format('d'))
+                                           ->setTime($carHistory->returnTime->format('H'),$carHistory->returnTime->format('i'),$carHistory->returnTime->format('s'))->toDateTimeString();
+
+
+      $returnDate = now()->toDateTimeString();
+
+
+
+//        $diff = $returnDate -  $expectedReturnDate;
+        if($expectedReturnDate < $returnDate && $carHistory->isReturned == 0 )
+        {
+            $normalDateToReturn = \Carbon\Carbon::createFromFormat('Y-m-d H:s:i', $returnDate);
+            $DateReturned = \Carbon\Carbon::createFromFormat('Y-m-d H:s:i', $expectedReturnDate);
+
+            $diff_in_hours = $DateReturned->diffInHours($normalDateToReturn);
+
+            $ExtraHourBalance = $carHistory->carplan->extra_hour*$diff_in_hours;
+
+            $carHistory->update([
+                'amount_to_remit_after_delayed_trip' => $ExtraHourBalance,
+                'numbers_of_hours_delayed' => $diff_in_hours,
+                'dropOffDate'=> now()->format('Y-m-d'),
+                'drpOffTime'=> now()->format('H:i:s'),
+            ]);
+
+            Alert::warning('Oops !!! ', 'Warning the expected return date / time already passed');
+            return back();
+        }
+
         $carHistory->update([
             'available_status' => 'Off Trip',
             'dropOffDate' => Carbon::now()->format('Y-m-d'),
@@ -282,6 +317,19 @@ class CarHireMgt extends Controller
         ]);
 
         Alert::success('Success ', 'Drop Off confirmed successfully');
+        return back();
+    }
+
+
+    public function markAsPaid($car_history_id)
+    {
+        $carHistory = CarHistory::where('id', $car_history_id)->first();
+
+        $carHistory->update([
+            'isReturned' => 1,
+        ]);
+
+        Alert::success('Success ', 'You have successfully marked this car transaction as paid');
         return back();
     }
 

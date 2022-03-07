@@ -8,6 +8,7 @@ use App\Mail\BusBooking;
 use App\Mail\CarHire;
 use App\Mail\TourPackages;
 use App\Models\CarHistory;
+use App\Models\Schedule;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -130,8 +131,9 @@ class Payment extends Controller
         $serviceID     = (int)   $data['data']['meta']['service_id'];
 
 
+
         //find the schedule to get the actual amount stored in the database
-        $tripSchedule = \App\Models\Schedule::where('id', $scheduleId)->select('fare_adult', 'fare_children', 'id', 'seats_available', 'bus_id')->first();
+        $tripSchedule = \App\Models\Schedule::where('id', $scheduleId)->select('fare_adult', 'fare_children', 'id', 'seats_available', 'bus_id','return_uuid_tracker')->first();
         !$tripSchedule ? abort('404') : '';
         $adultFare = (double)$tripSchedule->fare_adult;
         $childrenFare = (double)$tripSchedule->fare_children;
@@ -162,7 +164,77 @@ class Payment extends Controller
             return redirect()->intended('/');;
             DB::commit();
         } else {
+//            DB::beginTransaction();
+//            $transactions = new \App\Models\Transaction();
+//            $transactions->reference = Reference::generateTrnxRef();
+//            $transactions->trx_ref = $data['data']['tx_ref'];
+//            $transactions->amount = $data['data']['amount'];
+//            $transactions->status = 'Successful';
+//            $transactions->schedule_id = $scheduleId;
+//            $transactions->tenant_id = $tripSchedule->bus->tenant->id;
+//            $transactions->description = $data['data']['meta']['description'];
+//            $transactions->user_id = $data['data']['meta']['user_id'];
+//            $transactions->passenger_count = $adultCount + $childrenCount;
+//            $transactions->service_id = $serviceID;
+//            $transactions->isConfirmed = 'True';
+//            $transactions->save();
+//
+//            if ($transactions) {
+//                //update the status of seat tracker to booked after payment from selected
+//                //0 = available 1 = selected 2 = booked
+//                $seatTracker = \App\Models\SeatTracker::where('user_id', $data['data']['meta']['user_id'])
+//                    ->where('schedule_id', $scheduleId)->where('bus_id', $tripSchedule->bus_id)->get();
+//
+//                for ($i = 0; $i < count($seatTracker); $i++) {
+//                    $seatTracker[$i]->update([
+//                        'booked_status' => 2
+//                    ]);
+//                }
+//
+//                //update available seats for this schedule and trip
+//                $updatedSeatCount = (int)($tripSchedule->seats_available) - ($adultCount + $childrenCount);
+//                $tripSchedule->update([
+//                    'seats_available' => $updatedSeatCount
+//                ]);
+//
+//                $maildata = [
+//                    'name' =>  $data['data']['meta']['user_name'],
+//                    'service' => 'Bus Booking',
+//                    'transaction' => $transactions,
+//                    'seatTrackers' => $seatTracker,
+//                    'adultFare' => $adultFare,
+//                    'childFare'=>$childrenFare,
+//                    'tripType' => $tripType,
+//                    'adultCount' => $adultCount,
+//                    'childrenCount' => $childrenCount,
+//                    'tripSchedule' => $tripSchedule,
+//                    'totalAmount' => $data['data']['amount'],
+//                ];
+//                $email = $data['data']['meta']['user_email'];
+//
+//                Mail::to($email)->send(new BusBooking($maildata));
+//            }
+//            $this->flushSession();
+//            DB::commit();
+
             DB::beginTransaction();
+
+            if ($tripType == 2) {
+                $type = 2;
+
+                $scheduleReturnApp = Schedule::where('return_uuid_tracker' , $tripSchedule->return_uuid_tracker)->where('isReturn','=',1)->first();
+                if($scheduleReturnApp)
+                {
+                    $selectedSeatForReturnTrip  = \App\Models\SeatTracker::where('schedule_id',$scheduleReturnApp->id)
+                        ->where('user_id',auth()->user()->id)
+                        ->where('booked_status', 1)->get();
+                }
+
+            } else {
+                $type = 1;
+            }
+
+
             $transactions = new \App\Models\Transaction();
             $transactions->reference = Reference::generateTrnxRef();
             $transactions->trx_ref = $data['data']['tx_ref'];
@@ -180,7 +252,7 @@ class Payment extends Controller
             if ($transactions) {
                 //update the status of seat tracker to booked after payment from selected
                 //0 = available 1 = selected 2 = booked
-                $seatTracker = \App\Models\SeatTracker::where('user_id', $data['data']['meta']['user_id'])
+                $seatTracker = \App\Models\SeatTracker::where('user_id', auth()->user()->id)
                     ->where('schedule_id', $scheduleId)->where('bus_id', $tripSchedule->bus_id)->get();
 
                 for ($i = 0; $i < count($seatTracker); $i++) {
@@ -189,31 +261,49 @@ class Payment extends Controller
                     ]);
                 }
 
+                if($tripType == 2)
+                {
+                    for($i = 0 ; $i < count($selectedSeatForReturnTrip); $i++)
+                    {
+                        $selectedSeatForReturnTrip[$i]->update([
+                            'booked_status' => 2
+                        ]);
+                    }
+
+                    $updatedSeatCountForReturnTrip = (int) ($scheduleReturnApp->seats_available) -  ($adultCount + $childrenCount);
+
+                    $scheduleReturnApp->update([
+                        'seats_available' => $updatedSeatCountForReturnTrip
+                    ]);
+                }
+
                 //update available seats for this schedule and trip
                 $updatedSeatCount = (int)($tripSchedule->seats_available) - ($adultCount + $childrenCount);
+
                 $tripSchedule->update([
                     'seats_available' => $updatedSeatCount
                 ]);
 
-                $maildata = [
-                    'name' =>  $data['data']['meta']['user_name'],
-                    'service' => 'Bus Booking',
-                    'transaction' => $transactions,
-                    'seatTrackers' => $seatTracker,
-                    'adultFare' => $adultFare,
-                    'childFare'=>$childrenFare,
-                    'tripType' => $tripType,
-                    'adultCount' => $adultCount,
-                    'childrenCount' => $childrenCount,
-                    'tripSchedule' => $tripSchedule,
-                    'totalAmount' => $data['data']['amount'],
-                ];
-                $email = $data['data']['meta']['user_email'];
-
-                Mail::to($email)->send(new BusBooking($maildata));
             }
-            $this->flushSession();
+
             DB::commit();
+            $maildata = [
+                'name' =>  $data['data']['meta']['user_name'],
+                'service' => 'Bus Booking',
+                'transaction' => $transactions,
+                'seatTrackers' => $seatTracker,
+                'adultFare' => $adultFare,
+                'childFare'=>$childrenFare,
+                'tripType' => $tripType,
+                'adultCount' => $adultCount,
+                'childrenCount' => $childrenCount,
+                'tripSchedule' => $tripSchedule,
+                'totalAmount' => $data['data']['amount'],
+            ];
+            $email = $data['data']['meta']['user_email'];
+
+            Mail::to($email)->send(new BusBooking($maildata));
+
         }
     }
 

@@ -87,10 +87,10 @@ Route::group(['prefix' => 'v1'], function() {
 //    Route::middleware('jwt.verify')->group( function () {
     Route::group(['middleware' => ['jwt.verify' ,'must_verify']], function () {
          //bus booking
-        Route::get('/select-seat/{schedule_id}' ,[Booking::class, 'selectSeat']);
+        Route::get('/select-seat/{schedule_id}/{trip_type}' ,[Booking::class, 'selectSeat']);
         Route::post('/seat/selector_tracker',[Booking::class , 'selectorTracker']);
         Route::post('/deselect-seat',[Booking::class , 'deselectSeat']);
-        Route::post('passenger/info/{schedule_id}',[Booking::class ,'bookTripForPassenger']);
+        Route::post('passenger/info/{schedule_id}/{trip_type}',[Booking::class ,'bookTripForPassenger']);
         // The route that the button calls to initialize payment
         Route::post('/pay', [Payment::class, 'initialize'])->name('pay');
         Route::post('/bus/handle-cash-payment' ,[Booking::class , 'handleBusCashPayment'])->name('bus.handle-pay-cash');

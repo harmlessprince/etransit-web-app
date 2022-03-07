@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Eticket;
 
+use App\Classes\ReturnUUIDTracker;
 use App\Http\Controllers\Controller;
 use App\Models\Schedule as EventSchedule;
 use App\Models\SeatTracker;
@@ -27,18 +28,19 @@ class EticketSchedule extends Controller
         try {
             DB::beginTransaction();
             $scheduleEvent = new EventSchedule();
-            $scheduleEvent->terminal_id       = (int)$request['terminal'];
-            $scheduleEvent->service_id        = 1;
-            $scheduleEvent->bus_id            = (int) $request['busId'];
-            $scheduleEvent->pickup_id         = (int) $request['pickUp'];
-            $scheduleEvent->destination_id    = (int) $request['destination'];
-            $scheduleEvent->fare_adult        = $request['Tfare'];
-            $scheduleEvent->fare_children     = $request['TfareChild'];
-            $scheduleEvent->departure_date    = $request['eventDate'];
-            $scheduleEvent->departure_time    = $request['departureTime'];
-            $scheduleEvent->return_date       = $request['returnDate'];
-            $scheduleEvent->seats_available   = $numberOfSeats->seater ;
-            $scheduleEvent->tenant_id         = session()->get('tenant_id');
+            $scheduleEvent->terminal_id         = (int)$request['terminal'];
+            $scheduleEvent->service_id          = 1;
+            $scheduleEvent->bus_id              = (int) $request['busId'];
+            $scheduleEvent->pickup_id           = (int) $request['pickUp'];
+            $scheduleEvent->destination_id      = (int) $request['destination'];
+            $scheduleEvent->fare_adult          = $request['Tfare'];
+            $scheduleEvent->fare_children       = $request['TfareChild'];
+            $scheduleEvent->departure_date      = $request['eventDate'];
+            $scheduleEvent->departure_time      = $request['departureTime'];
+            $scheduleEvent->return_date         = $request['returnDate'] ?? null;
+            $scheduleEvent->seats_available     = $numberOfSeats->seater ;
+            $scheduleEvent->return_uuid_tracker = ReturnUUIDTracker::generate();
+            $scheduleEvent->tenant_id           = session()->get('tenant_id');
             $scheduleEvent->save();
 
             $seatCount = (int) $numberOfSeats->seater;
@@ -50,11 +52,47 @@ class EticketSchedule extends Controller
                 $seatTracker->seat_position = $i + 1;
                 $seatTracker->save();
             }
+
+
+            if($scheduleEvent && !is_null($request['returnDate']))
+            {
+                $scheduleReturnTripEvent = new EventSchedule();
+                $scheduleReturnTripEvent->terminal_id         = (int)$request['terminal'];
+                $scheduleReturnTripEvent->service_id          = 1;
+                $scheduleReturnTripEvent->bus_id              = (int) $request['busId'];
+                $scheduleReturnTripEvent->pickup_id           = (int) $request['destination'];
+                $scheduleReturnTripEvent->destination_id      = (int) $request['pickUp'];
+                $scheduleReturnTripEvent->fare_adult          = $request['Tfare'];
+                $scheduleReturnTripEvent->fare_children       = $request['TfareChild'];
+                $scheduleReturnTripEvent->departure_date      = $request['returnDate'] ;
+                $scheduleReturnTripEvent->departure_time      = $request['departureTime'];
+                $scheduleReturnTripEvent->return_date         = $request['eventDate'];
+                $scheduleReturnTripEvent->seats_available     = $numberOfSeats->seater ;
+                $scheduleReturnTripEvent->return_uuid_tracker =  $scheduleEvent->return_uuid_tracker;
+                $scheduleReturnTripEvent->isReturn            =  1;
+                $scheduleReturnTripEvent->tenant_id           = session()->get('tenant_id');
+                $scheduleReturnTripEvent->save();
+
+                $seatCount = (int) $numberOfSeats->seater;
+                for($i = 0 ; $i < $seatCount ; $i++)
+                {
+                    $seatTracker = new \App\Models\SeatTracker();
+                    $seatTracker->schedule_id = $scheduleReturnTripEvent->id;
+                    $seatTracker->bus_id      = (int) $request['busId'];
+                    $seatTracker->seat_position = $i + 1;
+                    $seatTracker->save();
+                }
+            }
+
+
+
             DB::commit();
             return response()->json(['success' => true , 'message' => 'Trip has been scheduled successfully']);
         } catch (\Exception $e) {
             DB::rollback();
-            return response()->json(['success' => false , 'message' => 'Could not save the event .Try again']);
+//            $e->getMessage()
+
+            return response()->json(['success' => false , 'message' =>  'Could not save the event .Try again']);
 
         }
     }

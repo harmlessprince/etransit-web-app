@@ -83,10 +83,14 @@ Route::get('check-pdf' , function(){
 Route::group(['middleware' => ['auth','prevent-back-history']], function() {
 //    ,'must_verify'
 
-    Route::get('/seat-picker/{schedule_id}', [Booking::class, 'seatSelector']);
+    Route::get('/seat-picker/{schedule_id}/{trip_type}', [Booking::class, 'seatSelector']);
+
     Route::post('/seat-selector-tracker/',[Booking::class ,'selectorTracker'])->name('select-seat');
+
     Route::post('/deselect-seat' ,[Booking::class , 'deselectSeat'])->name('de-select-seat');
-    Route::post('/book/trip/{schedule_id}',[Booking::class , 'bookTrip']);
+
+    Route::post('/book/trip/{schedule_id}/{trip_type}',[Booking::class , 'bookTrip']);
+
     Route::post('/bus/cash-payment' ,[Booking::class , 'handleBusCashPayment'])->name('bus.pay-cash');
     // The route that the button calls to initialize payment
     Route::post('/pay', [Payment::class, 'initialize'])->name('pay');
@@ -189,11 +193,15 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::get('manage/car-type' , [Car::class , 'carType']);
         Route::post('add/car-type' , [Car::class , 'saveCarType']);
 
+
         Route::get('add/car-hire',[Car::class ,'addCar']);
         Route::post('store/car', [Car::class, 'storeCar']);
         Route::get('/car/{car_id}/history',[Car::class , 'carHistory']);
         Route::get('cars/on-trip',[Car::class , 'onTrip']);
         Route::get('/car/details/{carhistory_id}', [Car::class , 'tripDetails']);
+
+
+        Route::get('fetch-all-cars',[Car::class ,'fetchAllTenantCars'])->name('fetch-all-cars');
 
 
         //manage boat cruise
@@ -416,6 +424,8 @@ Route::prefix('e-ticket')->name('e-ticket.')->group(function(){
         Route::get('confirm-drop-off/{car_history_id}', [CarHireMgt::class , 'confirmDropOff'])->name('confirm-drop-off');
 
         Route::get('confirm-pick-up/{car_history_id}', [CarHireMgt::class , 'confirmPickUp'])->name('confirm-pick-up');
+
+        Route::get('mark-as-paid/{car_history_id}',[CarHireMgt::class , 'markAsPaid'])->name('mark-as-paid');
 
 
     });

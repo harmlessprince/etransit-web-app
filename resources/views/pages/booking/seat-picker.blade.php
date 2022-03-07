@@ -51,8 +51,10 @@
 @section('content')
     <div class="seat_picker_nav"></div>
     <div class="container passenger_box">
-        <form method="POST" action="{{url('/book/trip/'.$schedule_id)}}" id="form_submit">
+        <form method="POST" action="{{url('/book/trip/'.$schedule_id .'/'. $tripType)}}" id="form_submit">
+
             @csrf
+            <input type="hidden" value="{{$tripType}}" name="tripType" id="tripType" />
             <div class="passsneger_details_header_text">
                 <div class="passenger_text_header">
                     <h4>Passenger  Details </h4>
@@ -172,17 +174,20 @@
                     $(this).addClass("selected");
                     var id = $(this).attr('href');
                     var user_id = {{auth()->user()->id}}
+                    var trip_type = $("input[name='tripType']").val();
+
 
 
                 $.ajax({
                     type:'POST',
                     url: "{{ route('select-seat') }}",
                         //"/seat-selector-tracker/",
-                    data:{"_token": "{{ csrf_token() }}",seat_id:id , user_id },
+                    data:{"_token": "{{ csrf_token() }}",seat_id:id , user_id ,trip_type},
                     success:function(data){
                         if(data.success)
                         {
-                           console.log('worked')
+
+                            displaySuccessMessage(data.message)
                         }else{
                            displayErrorMessage(data.message)
                         }
@@ -196,10 +201,13 @@
                 $(this).removeClass("selected");
                 var id = $(this).attr('href');
                 var user_id = {{auth()->user()->id}}
+                var trip_type = $("input[name='tripType']").val();
+
+
                 $.ajax({
                     type:'POST',
                     url:  "{{ route('de-select-seat') }}",
-                    data:{"_token": "{{ csrf_token() }}",seat_id:id , user_id },
+                    data:{"_token": "{{ csrf_token() }}",seat_id:id , user_id ,trip_type },
                     success:function(data){
                         if(!data.success)
                         {
@@ -248,6 +256,11 @@
         function displayErrorMessage(message) {
             toastr.error(message, 'Error');
         }
+
+        function displaySuccessMessage(message) {
+            toastr.success(message, 'Success');
+        }
+
 
     </script>
 @endsection

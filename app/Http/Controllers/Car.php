@@ -25,15 +25,33 @@ use App\Models\Transaction;
 use DateTime;
 use Carbon\Carbon;
 use RealRashid\SweetAlert\Facades\Alert;
+use DataTables;
 
 
 class Car extends Controller
 {
     public function allCars()
     {
-        $cars  = HiredCars::with('carclass','cartype')->get();
+        $cars  = HiredCars::withoutGlobalScopes()->orderby('id','desc')->with('carclass','cartype')->get();
 
         return view('admin.cars.cars', compact('cars'));
+    }
+
+
+    public function fetchAllTenantCars(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = HiredCars::with('carclass','cartype')->get();
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function($row){
+                    $id = $row->id;
+                    $actionBtn = "<a href='/admin/$id'  class='edit btn btn-success btn-sm'>Edit</a> <a href='/admin/$id'  class='edit btn btn-success btn-sm'>View</a>";
+                    return $actionBtn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
     }
 
     public function carClass()
@@ -195,7 +213,6 @@ class Car extends Controller
     public function carList()
     {
         $cars = HiredCars::where('functional',1)->with('car_images','carclass','cartype','plans')->paginate(10);
-
 //dd($cars);
         return view('pages.car-hire.hire', compact('cars'));
     }
@@ -248,6 +265,7 @@ class Car extends Controller
 
     public function selectPlan($car_id)
     {
+
         $car = HiredCars::where('id',$car_id)->with('plans','cartype','carclass')->first();
 
         return view('pages.car-hire.plan', compact('car'));

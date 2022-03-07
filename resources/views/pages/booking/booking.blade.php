@@ -118,7 +118,7 @@
                                     <b> &#x20A6; {{number_format($schedule->fare_adult)}}</b>
                                 </div>
                                 <div class="bookings_destination_box view_seats">
-                                    <a href="{{url('seat-picker/'.$schedule->id)}}">
+                                    <a href="{{url('seat-picker/'.$schedule->id. '/'.$tripTypeId)}}">
                                         <button>View Seats</button>
                                     </a>
                                 </div>

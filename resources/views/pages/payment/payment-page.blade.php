@@ -66,7 +66,7 @@
                 </form>
             </div>
            <div class="payment_button" id="cash_payment_option">
-               <form method="POST" action="{{ route('bus.pay-cash') }}">
+               <form method="POST" action="{{ url('bus/cash-payment') }}">
                    {{ csrf_field() }}
 
                    <input type="hidden" name="amount" value="{{$totalFare}}"/>

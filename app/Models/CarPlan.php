@@ -20,4 +20,6 @@ class CarPlan extends Model
     {
         return $this->belongsTo(CarHistory::class);
     }
+
+
 }

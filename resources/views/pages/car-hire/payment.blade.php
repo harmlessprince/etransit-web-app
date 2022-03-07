@@ -139,7 +139,7 @@
                         </div>
                         <div class="pickup_time">
                             <h6>TIME</h6>
-                            <small>{{ $recordOperation->time->format('H:i:s')}}</small>
+                            <small>{{ $recordOperation->time}}</small>
                         </div>
                     </div>
                     <div class="passenger_details">
