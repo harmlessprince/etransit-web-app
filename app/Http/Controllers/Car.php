@@ -38,7 +38,6 @@ class Car extends Controller
         $onTripCount = CarHistory::where('available_status', 'On Trip')->count();
         $transactions = Transaction::where('service_id',6)->pluck('amount')->sum();
 
-
         return view('admin.cars.cars', compact('onTripCount','offTripCount','transactions'));
     }
 
