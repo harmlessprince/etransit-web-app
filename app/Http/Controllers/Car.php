@@ -32,16 +32,46 @@ class Car extends Controller
 {
     public function allCars()
     {
-        $cars  = HiredCars::withoutGlobalScopes()->orderby('id','desc')->with('carclass','cartype')->get();
 
-        return view('admin.cars.cars', compact('cars'));
+//        $cars  = HiredCars::withoutGlobalScopes()->orderby('id','desc')->with('carclass','cartype')->get();
+        $offTripCount = CarHistory::where('available_status', 'Off Trip')->count();
+        $onTripCount = CarHistory::where('available_status', 'On Trip')->count();
+        $transactions = Transaction::where('service_id',6)->pluck('amount')->sum();
+
+
+        return view('admin.cars.cars', compact('onTripCount','offTripCount','transactions'));
     }
 
+    public function offTripCars()
+    {
+        return view('admin.cars.off-trip');
+    }
+
+    public function onTripCars()
+    {
+        return view('admin.cars.on-trip');
+    }
+
+    public function fetchAllOffTripCars(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = CarHistory::where('available_status', 'Off Trip')->with('car')->get();
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function($row){
+                    $id = $row->id;
+                    $actionBtn = "<a href='/admin/$id'  class='edit btn btn-success btn-sm'>Edit</a> <a href='/admin/$id'  class='edit btn btn-success btn-sm'>View</a>";
+                    return $actionBtn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+    }
 
     public function fetchAllTenantCars(Request $request)
     {
         if ($request->ajax()) {
-            $data = HiredCars::with('carclass','cartype')->get();
+            $data = HiredCars::withoutGlobalScopes()->orderby('id','desc')->with('carclass','cartype')->get();
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function($row){

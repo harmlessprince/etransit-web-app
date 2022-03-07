@@ -102,6 +102,7 @@ Route::group(['middleware' => ['auth','prevent-back-history']], function() {
     Route::post('/plan/{plan_id}',[Car::class , 'proceedToPaymentPlan']);
     Route::get('car-hire/cash/payment/{history_id}/method',[Car::class , 'makePayment']);
 
+
     //select payment plan for boat cruise
     Route::post('/boat-cruise/{boat_id}/payment-plan/{service_id}',[BoatCruise::class , 'addPayment']);
     //make cash payment
@@ -202,6 +203,10 @@ Route::prefix('admin')->name('admin.')->group(function(){
 
 
         Route::get('fetch-all-cars',[Car::class ,'fetchAllTenantCars'])->name('fetch-all-cars');
+
+        Route::get('off-trips-car' ,[Car::class , 'offTripCars']);
+        Route::get('fetch-all-off-trip-cars',[Car::class ,'fetchAllOffTripCars'])->name('fetch-all-off-trip-cars');
+        Route::get('on-trips-car' ,[Car::class , 'onTripCars']);
 
 
         //manage boat cruise
