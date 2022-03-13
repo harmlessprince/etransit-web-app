@@ -163,7 +163,6 @@ Route::prefix('admin')->name('admin.')->group(function(){
 
 
 
-
         Route::post('/add/vehicle', [Vehicle::class, 'addVehicle'])->name('add.vehicle');
 
         //manage terminal
@@ -206,7 +205,9 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::get('fetch-all-cars',[Car::class ,'fetchAllTenantCars'])->name('fetch-all-cars');
 
         Route::get('off-trips-car' ,[Car::class , 'offTripCars']);
-        Route::get('fetch-all-off-trip-cars',[Car::class ,'fetchAllOffTripCars'])->name('fetch-all-off-trip-cars');
+
+        Route::get('fetch-off-trip-cars',[Car::class ,'fetchAllOffTripCars'])->name('fetch-off-trip-cars');
+
         Route::get('on-trips-car' ,[Car::class , 'onTripCars']);
 
 
@@ -291,9 +292,6 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::get('get-operator-users/{id}',[Operator::class , 'fetchOperatorUser'])->name('get-operator-users');
         Route::get('operator-generate-password/{id}',[Operator::class , 'regeneratePassword']);
         Route::post('add-service-to-tenant' , [Operator::class ,'addServiceToOperator'])->name('add-service-to-tenant');
-
-
-
 
 
         Route::post('add-permissions-to-role',[RoleMgt::class ,'assignPermissionToRole']);

@@ -51,14 +51,14 @@
             var table = $('.yajra-datatable').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: "{{ route('admin.fetch-all-off-trip-cars') }}",
+                ajax: "{{ route('admin.fetch-off-trip-cars') }}",
                 columns: [
                     {data: 'DT_RowIndex', name: 'DT_RowIndex'},
                     {data: 'car_id', name: 'car_id'},
-                    // {data: 'car.car_registration', name: 'car.car_registration'},
-                    // {data: 'transmission', name: 'transmission'},
-                    // {data: 'model_year', name: 'model_year'},
-                    // {data: 'capacity', name: 'capacity'},
+                    {data: 'car.car_registration', name: 'car.car_registration'},
+                    {data: 'transmission', name: 'transmission'},
+                    {data: 'model_year', name: 'model_year'},
+                    {data: 'capacity', name: 'capacity'},
                     {
                         data: 'action',
                         name: 'action',

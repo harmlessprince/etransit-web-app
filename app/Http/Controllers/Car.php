@@ -54,7 +54,7 @@ class Car extends Controller
     public function fetchAllOffTripCars(Request $request)
     {
         if ($request->ajax()) {
-            $data = CarHistory::where('available_status', 'Off Trip')->with('car')->get();
+            $data = CarHistory::where('available_status','=', 'Off Trip')->with('car')->get();
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function($row){

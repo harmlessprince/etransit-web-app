@@ -132,6 +132,8 @@ class Train extends Controller
             'schedule_id'      => 'required|integer',
             'route_id'         => 'required|array',
             'tripType'         => 'required|integer',
+            'next_of_kin_full_name' => 'required|array',
+            'next_of_kin_phone_number' => 'required|array',
             'return_date' => 'sometimes'
         ]);
         DB::beginTransaction();
@@ -217,6 +219,8 @@ class Train extends Controller
             $createPassenger->gender                = $request->gender[$i];
             $createPassenger->passenger_age_range   = $request->passenger_option[$i];
             $createPassenger->train_schedule_id     = $request->schedule_id;
+            $createPassenger->next_of_kin_full_name = $request->next_of_kin_full_name[$i];
+            $createPassenger->next_of_kin_phone_number = $request->next_of_kin_phone_number[$i];
             $createPassenger->user_id               = auth()->user()->id;
             $createPassenger->train_seat_tracker_id = $selectedSeat[$i]->id;
             $createPassenger->save();
