@@ -14,6 +14,7 @@ use App\Http\Controllers\Eticket\EticketManifest;
 use App\Http\Controllers\Eticket\EticketSchedule;
 use App\Http\Controllers\Eticket\EticketTerminal;
 use App\Http\Controllers\Eticket\ManageBus;
+use App\Http\Controllers\Eticket\ManageRoles;
 use App\Http\Controllers\Eticket\StaffMgt;
 use App\Http\Controllers\Eticket\TourPackage;
 use App\Http\Controllers\Ferry;
@@ -280,6 +281,8 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::get('/customers',[Customer::class , 'customerIndex']);
         Route::get('/customer/list', [Customer::class , 'customers'])->name('customers.list');
         Route::get('/customer/{customer_id}', [Customer::class , 'getCustomer']);
+        Route::get('suspend-user/{customer_id}' , [Customer::class , 'suspendUser']);
+        Route::get('activate-user/{customer_id}' , [Customer::class , 'activateUser']);
 
         //manage operators
         Route::get('manage/operators',[Operator::class , 'operators']);
@@ -331,7 +334,7 @@ Route::prefix('e-ticket')->name('e-ticket.')->group(function(){
     Route::get('export/vehicle', [ManageBus::class, 'exportVehicle'])->name('export.vehicle');
 
 
-    Route::group(['middleware' => ['e-ticket','prevent-back-history','check-if-session-is-set']], function() {
+    Route::group(['middleware' => ['e-ticket','prevent-back-history','check-if-session-is-set','tenant_permissions']], function() {
 
         Route::get('/dashboard' , [AuthLogin::class , 'dashboard'])->name('dashboard');
 
@@ -441,6 +444,15 @@ Route::prefix('e-ticket')->name('e-ticket.')->group(function(){
         Route::post('store-tour',[TourPackage::class ,'storeTour'])->name('store-tours');
 
         Route::get('view-tour/{tour_id}',[TourPackage::class , 'viewTour'])->name('view-tour');
+
+
+        //manage roles
+        Route::get('roles',[ManageRoles::class , 'roles'])->name('all-roles');
+
+        Route::get('fetch-roles',[ManageRoles::class , 'fetchRoles'])->name('fetch-roles');
+
+        Route::get('view-role/{role_id}', [ManageRoles::class ,'viewRole'])->name('view-role');
+        Route::post('add-permissions-to-role', [ManageRoles::class ,'addPermisisonToRole'])->name('add-permission-to-role');
 
 
     });

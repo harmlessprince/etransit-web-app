@@ -85,7 +85,8 @@ Route::group(['prefix' => 'v1'], function() {
     Route::post('/check/train-schedule', [Train::class , 'checkSchedule']);
 
 //    Route::middleware('jwt.verify')->group( function () {
-    Route::group(['middleware' => ['jwt.verify' ,'must_verify']], function () {
+    Route::group(['middleware' => ['jwt.verify','is_banned','must_verify']], function () {
+
          //bus booking
         Route::get('/select-seat/{schedule_id}/{trip_type}' ,[Booking::class, 'selectSeat']);
         Route::post('/seat/selector_tracker',[Booking::class , 'selectorTracker']);

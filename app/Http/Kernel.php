@@ -38,12 +38,16 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            \App\Http\Middleware\CheckBanned::class,
         ],
 
         'api' => [
             \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
             'throttle:api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            \App\Http\Middleware\EncryptCookies::class,
+            \Illuminate\Session\Middleware\StartSession::class,
+
         ],
     ];
 
@@ -77,5 +81,7 @@ class Kernel extends HttpKernel
         'role_or_permission' => \Spatie\Permission\Middlewares\RoleOrPermissionMiddleware::class,
         'prevent-back-history' => \App\Http\Middleware\PreventBrowserBackHistory::class,
         'check-if-session-is-set' => \App\Http\Middleware\CheckIfSessionIsSet::class,
+        'is_banned' =>   \App\Http\Middleware\CheckBanned::class,
+        'tenant_permissions' => \App\Http\Middleware\EticketPermissionMiddleware::class,
     ];
 }

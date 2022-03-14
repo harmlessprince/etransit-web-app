@@ -26,9 +26,10 @@ class AdminSeeder extends Seeder
             'password' => Hash::make('password')
         ]);
         $role = Role::create(['guard_name' => 'admin','name' => 'Super Admin']);
+
         $user->assignRole($role);
 
-        $permissions = Permission::all();
+        $permissions = Permission::where('guard_name' ,'=','admin')->get();
 
         foreach($permissions as $permission)
         {

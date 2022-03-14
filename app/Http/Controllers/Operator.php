@@ -18,6 +18,8 @@ use DataTables;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\Models\Bus;
 use App\Models\Terminal;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class Operator extends Controller
 {
@@ -174,7 +176,19 @@ class Operator extends Controller
 
         ];
 
+        $role =  Role::create(['guard_name' => 'e-ticket','name' => 'Super Admin '.$tenant->display_name ,'tenant_id' => $tenant->id]);
+
+        $eticket->assignRole($role);
+
+        $permissions = Permission::where('guard_name' ,'e-ticket')->get();
+
+        foreach($permissions as $permission)
+        {
+            $role->givePermissionTo($permission);
+        }
+
         Mail::to($request->email)->send(new OperatorCredentials($maildata));
+
         DB::commit();
 
         Alert::success('Success ', 'Operator added successfully');

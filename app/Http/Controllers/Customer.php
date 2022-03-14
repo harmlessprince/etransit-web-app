@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use DataTables;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class Customer extends Controller
 {
@@ -40,6 +41,31 @@ class Customer extends Controller
         }])->firstorfail();
 
         return view('admin.customer.view' , compact('user'));
+    }
+
+
+    public function suspendUser($customer_id)
+    {
+       $user = User::where('id',$customer_id)->first();
+
+        $user->update(['banned_status' => 1]);
+
+        Alert::success('Success ', 'User account has been suspended successfully');
+
+        return back();
+    }
+
+
+    public function activateUser($customer_id)
+    {
+        $user = User::where('id',$customer_id)->first();
+
+        $user->update(['banned_status' => 0]);
+
+        Alert::success('Success ', 'User account has been activated successfully');
+
+        return back();
+
     }
 
 

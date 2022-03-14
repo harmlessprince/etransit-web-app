@@ -142,7 +142,16 @@
                                <hr>
                                <h6> {{$user->phone_number}}</h6>
                                <hr>
-                               <button class="btn btn-danger">Suspend user</button>
+                               @if($user->banned_status  == 0 )
+                               <a href="{{url('admin/suspend-user/'.$user->id)}}">
+                                   <button class="btn btn-danger">Suspend user</button>
+                               </a>
+                               @else
+                                   <a href="{{url('admin/activate-user/'.$user->id)}}">
+                                       <button class="btn btn-success">Activate user</button>
+                                   </a>
+                               @endif
+
                            </div>
                     </div>
                 </div>

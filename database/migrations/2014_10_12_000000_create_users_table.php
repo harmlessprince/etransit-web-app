@@ -24,6 +24,7 @@ class CreateUsersTable extends Migration
             $table->string('phone_number')->nullable();
             $table->string('reset_pin')->nullable();
             $table->string('verification_token')->nullable();
+            $table->string('banned_status')->default(0)->comment('1 means banned 0 means not banned');
             $table->string('provider')->nullable();
             $table->string('provider_id')->nullable();
             $table->rememberToken();

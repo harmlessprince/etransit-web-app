@@ -30,7 +30,8 @@ class User extends Authenticatable  implements JWTSubject
         'verification_token',
         'email_verified_at',
         'provider',
-        'provider_id'
+        'provider_id',
+        'banned_status'
     ];
 
     /**

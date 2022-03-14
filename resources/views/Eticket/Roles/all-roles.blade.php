@@ -1,20 +1,45 @@
-@extends('admin.layout.app')
+@extends('Eticket.layout.app')
+<style>
+    input{
+        border:0 !important;
+        border-bottom: 1px solid gray ! important;
+
+    }
+
+    input:focus{
+        outline:none !important;
+    }
+    .align-text{
+        text-align: center;
+    }
+    .three-row-grid{
+        display:flex;
+        justify-content: space-between;
+    }
+    .add_bus_btn{
+        display: flex;
+        justify-content: flex-end;
+    }
+    .space-left{
+        margin-left: 10px;
+        margin-bottom:10px;
+    }
+</style>
 @section('content')
     <div class="container-fluid">
-        @toastr_css
         <div class="page-header">
             <div class="row">
                 <div class="col-6">
-                    <h3>{{env('APP_NAME')}}</h3>
+                    <h3>{{$tenantCompanyName ?? env('APP_NAME')}}</h3>
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{url('/admin/manage/vehicle')}}"><i data-feather="home"></i></a></li>
-                        <li class="breadcrumb-item">Off trip Cars</li>
+                        <li class="breadcrumb-item"><a href="{{url('e-ticket/locations')}}"><i data-feather="home"></i></a></li>
+                        <li class="breadcrumb-item">All Roles</li>
                     </ol>
                 </div>
             </div>
         </div>
     </div>
-
+    <!-- Container-fluid starts-->
     <div class="container-fluid" >
         <div class="card">
             <div class="card-body">
@@ -22,11 +47,7 @@
                     <thead>
                     <tr>
                         <th>No</th>
-                        <th>Car Name</th>
-                        <th>Car Registration</th>
-                        <th>Transmission</th>
-                        <th>Model</th>
-                        <th>Capacity</th>
+                        <th>Name</th>
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -35,8 +56,8 @@
                 </table>
             </div>
         </div>
-
     </div>
+
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
@@ -51,14 +72,10 @@
             var table = $('.yajra-datatable').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: "{{ route('admin.fetch-off-trip-cars') }}",
+                ajax: "{{ route('e-ticket.fetch-roles') }}",
                 columns: [
                     {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-                    {data: 'car_id', name: 'car_id'},
-                    // {data: 'car.car_registration', name: 'car.car_registration'},
-                    {data: 'transmission', name: 'transmission'},
-                    {data: 'model_year', name: 'model_year'},
-                    {data: 'capacity', name: 'capacity'},
+                    {data: 'name', name: 'name'},
                     {
                         data: 'action',
                         name: 'action',
@@ -71,5 +88,4 @@
 
         });
     </script>
-
 @endsection

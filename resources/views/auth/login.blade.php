@@ -28,6 +28,11 @@
          <div class="login_bg">
                 <div class="login_box_section">
                     <div class="login_box">
+                        @if (session('error'))
+                            <div class="alert alert-danger">
+                                {{ session('error') }}
+                            </div>
+                        @endif
                             <div class="login_box_text">
                               <div>
                                   <h4>LOG IN</h4>
