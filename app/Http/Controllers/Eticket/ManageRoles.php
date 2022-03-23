@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Eticket;
 
 use App\Http\Controllers\Controller;
+use App\Models\Tenant;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 use Spatie\Permission\Models\Permission;
@@ -38,8 +39,8 @@ class ManageRoles extends Controller
     public function storeRole(Request $request)
     {
         request()->validate(['role' => 'required']);
-
-        $role =  Role::create(['guard_name' => 'e-ticket', 'name' => $request->role]);
+        $tenant = Tenant::where('id',session()->get('tenant_id'))->first();
+        $role =  Role::create(['guard_name' => 'e-ticket', 'name' => $request->role.''.$tenant->display_name , 'tenant_id' => session()->get('tenant_id')]);
 
         Alert::success('Success ', 'Role added successfully');
 
