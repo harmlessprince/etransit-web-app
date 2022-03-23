@@ -16,6 +16,6 @@ class Page extends Controller
 
 
 
-        return view('pages.new-index',compact('busService','locations','tripTypes','pickups'));
+        return view('pages.index',compact('busService','locations','tripTypes','pickups'));
     }
 }
