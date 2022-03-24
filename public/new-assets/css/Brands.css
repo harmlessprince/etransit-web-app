@@ -305,17 +305,17 @@
   margin-left: 175px;
 }
 
-#carhover:hover * {
+.carhover:hover * {
   /*background: #343f5f;*/
   color: #dc6513;
   border-color: #dc6513;
 }
 
-#carhover:hover {
+.carhover:hover {
   background-color: #343f5f;
 }
 
-#carhover div:hover {
+.carhover div:hover {
   border-color: #dc6513;
   background-color: #dc6513;
 }

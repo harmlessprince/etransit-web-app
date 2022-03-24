@@ -1,79 +1,62 @@
-<!DOCTYPE html>
-<html lang="en">
+{{--<!DOCTYPE html>--}}
+{{--<html lang="en">--}}
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Boat Cruise</title>
-    <link rel="stylesheet" href="new-assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface&amp;display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Arsenal&amp;display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Asap&amp;display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cookie&amp;display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:200,300,400,700&amp;display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,400i,700,700i&amp;display=swap">
-    <link rel="stylesheet" href="new-assets/fonts/fontawesome-all.min.css">
-    <link rel="stylesheet" href="new-assets/fonts/font-awesome.min.css">
-    <link rel="stylesheet" href="new-assets/fonts/ionicons.min.css">
-    <link rel="stylesheet" href="new-assets/fonts/material-icons.min.css">
-    <link rel="stylesheet" href="new-assets/fonts/typicons.min.css">
-    <link rel="stylesheet" href="new-assets/fonts/fontawesome5-overrides.min.css">
-    <link rel="stylesheet" href="new-assets/css/Brands.css">
-    <link rel="stylesheet" href="new-assets/css/etransit-top-nav.css">
-    <link rel="stylesheet" href="new-assets/css/etransit-vehicle-slide.css">
-    <link rel="stylesheet" href="new-assets/css/Etransitnews.css">
-    <link rel="stylesheet" href="new-assets/css/Form-Input.css">
-    <link rel="stylesheet" href="https://unpkg.com/@bootstrapstudio/bootstrap-better-nav/dist/bootstrap-better-nav.min.css">
-    <link rel="stylesheet" href="new-assets/css/Login-Form-Dark.css">
-    <link rel="stylesheet" href="new-assets/css/MAV_LanguageSelectButton.css">
-    <link rel="stylesheet" href="new-assets/css/Modern-Contact-Form.css">
-    <link rel="stylesheet" href="new-assets/css/navbar.css">
-    <link rel="stylesheet" href="new-assets/css/Off-Canvas-Sidebar-Drawer-Navbar.css">
-    <link rel="stylesheet" href="new-assets/css/Responsive-Product-Slider.css">
-    <link rel="stylesheet" href="new-assets/css/Search-Input-Responsive-with-Icon.css">
-    <link rel="stylesheet" href="new-assets/css/styles.css">
-    <link rel="stylesheet" href="new-assets/css/Timeline-Steps.css">
-    <link rel="stylesheet" href="new-assets/css/Tricky-Grid---2-Column-on-Desktop--Tablet-Flip-Order-of-12-Column-rows-on-Mobile.css">
-    <link rel="stylesheet" href="new-assets/css/Ultimate-Testimonial-Slider-BS5.css">
-</head>
+{{--<head>--}}
+{{--    <meta charset="utf-8">--}}
+{{--    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">--}}
+{{--    <title>{{env('APP_NAME')}}</title>--}}
+{{--    <link rel="stylesheet" href="new-assets/bootstrap/css/bootstrap.min.css">--}}
+{{--    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface&amp;display=swap">--}}
+{{--    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Arsenal&amp;display=swap">--}}
+{{--    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Asap&amp;display=swap">--}}
+{{--    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cookie&amp;display=swap">--}}
+{{--    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:200,300,400,700&amp;display=swap">--}}
+{{--    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,400i,700,700i&amp;display=swap">--}}
+{{--    <link rel="stylesheet" href="new-assets/fonts/fontawesome-all.min.css">--}}
+{{--    <link rel="stylesheet" href="new-assets/fonts/font-awesome.min.css">--}}
+{{--    <link rel="stylesheet" href="new-assets/fonts/ionicons.min.css">--}}
+{{--    <link rel="stylesheet" href="new-assets/fonts/material-icons.min.css">--}}
+{{--    <link rel="stylesheet" href="new-assets/fonts/typicons.min.css">--}}
+{{--    <link rel="stylesheet" href="new-assets/fonts/fontawesome5-overrides.min.css">--}}
+{{--    <link rel="stylesheet" href="new-assets/css/Brands.css">--}}
+{{--    <link rel="stylesheet" href="new-assets/css/etransit-top-nav.css">--}}
+{{--    <link rel="stylesheet" href="new-assets/css/etransit-vehicle-slide.css">--}}
+{{--    <link rel="stylesheet" href="new-assets/css/Etransitnews.css">--}}
+{{--    <link rel="stylesheet" href="new-assets/css/Form-Input.css">--}}
+{{--    <link rel="stylesheet" href="https://unpkg.com/@bootstrapstudio/bootstrap-better-nav/dist/bootstrap-better-nav.min.css">--}}
+{{--    <link rel="stylesheet" href="new-assets/css/Login-Form-Dark.css">--}}
+{{--    <link rel="stylesheet" href="new-assets/css/MAV_LanguageSelectButton.css">--}}
+{{--    <link rel="stylesheet" href="new-assets/css/Modern-Contact-Form.css">--}}
+{{--    <link rel="stylesheet" href="new-assets/css/navbar.css">--}}
+{{--    <link rel="stylesheet" href="new-assets/css/Off-Canvas-Sidebar-Drawer-Navbar.css">--}}
+{{--    <link rel="stylesheet" href="new-assets/css/Responsive-Product-Slider.css">--}}
+{{--    <link rel="stylesheet" href="new-assets/css/Search-Input-Responsive-with-Icon.css">--}}
+{{--    <link rel="stylesheet" href="new-assets/css/styles.css">--}}
+{{--    <link rel="stylesheet" href="new-assets/css/Timeline-Steps.css">--}}
+{{--    <link rel="stylesheet" href="new-assets/css/Tricky-Grid---2-Column-on-Desktop--Tablet-Flip-Order-of-12-Column-rows-on-Mobile.css">--}}
+{{--    <link rel="stylesheet" href="new-assets/css/Ultimate-Testimonial-Slider-BS5.css">--}}
+{{--</head>--}}
 
-<body>
-<section>
-    <div id="topnav" style="height: 49px;background: #343f5f;">
-        <div class="container">
-            <div class="row" style="height: 49px;">
-                <div class="col-sm-auto col-md-8 col-lg-8 col-xl-8 col-xxl-8" id="topparagrahp" style="height: 49px;">
-                    <p id="faicon" style="text-align: center;color: var(--bs-white);margin-top: 9px;margin-left: 7px;width: 293.703px;margin-bottom: 22px;"><i class="fa fa-facebook" style="padding-top: 5px;"></i>&nbsp; &nbsp;&nbsp;<i class="fa fa-linkedin" style="color: rgb(255, 255, 255);padding-top: 5px;"></i>&nbsp; &nbsp; &nbsp;<i class="fa fa-google-plus justify-content-center align-items-center align-content-center" style="padding-top: 5px;"></i>&nbsp; &nbsp; |&nbsp; hello@etransitafrica.com&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</p>
-                </div>
-                <div class="col-auto col-sm-auto col-md-2 col-lg-2 col-xl-2 col-xxl-2" id="currency" style="text-align: center;">
-                    <div class="dropdown" id="reducebutton-1" style="padding-top: 6px;padding-bottom: 6px;"><button class="btn btn-light dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" id="reducebutton-2" type="button" style="color: rgb(255,255,255);background: rgb(52,63,95);border-style: none;border-color: rgba(255,255,255,0);font-size: 12px;">NGN&nbsp;&nbsp;</button>
-                        <div class="dropdown-menu dropdown-menu-start" id="reducebutton-3"><a class="dropdown-item" href="#">First Item</a><a class="dropdown-item" href="#">Second Item</a><a class="dropdown-item" href="#">Third Item</a></div>
-                    </div>
-                </div>
-                <div class="col-auto col-sm-2 col-md-2 col-lg-2 col-xl-2 col-xxl-2" id="countrydiv" style="padding-right: 0px;padding-left: 5px;"><button class="btn btn-primary btn-lg text-start d-inline-flex" id="countrytext" type="button" style="margin: auto;width: 100%;color: var(--bs-white);margin-bottom: 2px;font-weight: 400;font-size: 14px;border-radius: 0px;background: rgba(247,247,247,0);border-style: none;border-color: rgba(255,255,255,0);padding-top: 12px;"><img src="new-assets/img/uk.svg" style="max-width: 24px;margin-right: 12px;">English</button></div>
-            </div>
-        </div>
-    </div>
-</section>
-<section>
-    <nav class="navbar navbar-light navbar-expand-md">
-        <div class="container"><a class="navbar-brand" href="#"><img src="new-assets/img/logofull%201.png"></a><button data-bs-toggle="offcanvas" data-bs-target="#offcanvas-1" class="navbar-toggler"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-            <div class="collapse navbar-collapse" id="navcol-1" style="text-align: right;">
-                <ul class="navbar-nav navbar-nav-scroll text-end d-md-flex ms-auto">
-                    <li class="nav-item"><a class="nav-link active" href="#" style="color: #06044e;">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#" style="color: #06044e;">About Us</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#" style="color: #06044e;">Tour Packages</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#" style="color: #06044e;">Boat Cruise&nbsp;</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#" style="color: #06044e;">Car Hire</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#" style="color: #06044e;">Hotel Booking</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#" style="color: #06044e;">Become A Partner</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#" style="color: #06044e;">Send Parcel</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-</section>
-<section style="height: 400px;background: url(&quot;new-assets/img/Rectangle%203.png&quot;) center / cover no-repeat;">
+{{--<body>--}}
+@extends('layouts.app')
+<style>
+    #ferry_form , #train_form{
+        display:none;
+    }
+    /*#one_way_trip{*/
+    /*    background: rgb(52,63,95);*/
+    /*}*/
+    #return_trip{
+        background: rgb(200,200,200);
+    }
+    #return_date_box{
+        display:none;
+    }
+</style>
+
+@section('content')
+
+<section style="height: 400px;background: url(&quot;new-assets/img/Rectangle%203.png&quot;) center / cover no-repeat;" >
     <div class="d-flex d-sm-flex d-md-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center" style="height: 400px;background: rgba(11,8,8,0.73);">
         <div class="container d-md-flex justify-content-md-center align-items-md-center">
             <div class="row">
@@ -90,21 +73,25 @@
     <div class="row">
         <div class="col" style="box-shadow: 1px 0px 7px rgb(103,103,103);border-radius: 10px;">
             <div class="row divshow" style="background: #ffffff;border-radius: 10px;border-bottom-right-radius: 0px;border-bottom-left-radius: 0px;border-color: rgba(33,37,41,0);border-bottom: 1px solid rgb(227,228,230);">
-                <div class="col-3 col-sm-3 col-xs-3" id="carhover" onclick="busnav()" style="text-align: center;padding-top: 25px;padding-bottom: 12px;margin: 0px;border-right: 1px solid rgb(219,220,221);border-top-left-radius: 10px;"><img class="img-fluid" src="new-assets/img/Layer%201dr.png">
+                <div class="col-3 col-sm-3 col-xs-3 carhover" id="bus_booking"  onclick="busnav()" style="text-align: center;padding-top: 25px;padding-bottom: 12px;margin: 0px;border-right: 1px solid rgb(219,220,221);border-top-left-radius: 10px;"><img class="img-fluid" src="{{asset('new-assets/img/Layer%201dr.png')}}">
                     <div class="divline"></div>
-                    <p style="border-color: rgb(52,63,95);color: rgb(23,31,72);"><strong>BUS BOOKING</strong></p>
+{{--                    style="border-color: rgb(52,63,95);color: rgb(23,31,72);"--}}
+                    <p ><strong>BUS BOOKING</strong></p>
                 </div>
-                <div class="col-3 col-sm-3 col-xs-3" id="carhover" onclick="trainnav()"style="text-align: center;padding-top: 12px;padding-bottom: 12px;border-right: 1px solid rgb(219,220,221) ;"><img class="img-fluid" src="new-assets/img/2003.i602.001_railway_station_set_flat-11%20[Converted]%201.svg">
+                <div class="col-3 col-sm-3 col-xs-3 carhover" id="train_booking" onclick="trainnav()" style="text-align: center;padding-top: 12px;padding-bottom: 12px;border-right: 1px solid rgb(219,220,221) ;"><img class="img-fluid" src="{{asset('new-assets/img/2003.i602.001_railway_station_set_flat-11%20[Converted]%201.svg')}}">
                     <div class="divline"></div>
-                    <p style="color: rgb(23,31,72);"><strong>TRAIN TICKET&nbsp;</strong></p>
+{{--                    style="color: rgb(23,31,72);"--}}
+                    <p ><strong>TRAIN TICKET&nbsp;</strong></p>
                 </div>
-                <div class="col-3 col-sm-3 col-xs-3" id="carhover" onclick="cruisenav()" style="text-align: center;padding-top: 25px;padding-bottom: 12px;border-right: 1px solid rgb(219,220,221) ;"><img class="img-fluid" src="new-assets/img/10.svg">
+                <div class="col-3 col-sm-3 col-xs-3 carhover" id="ferry_booking" onclick="cruisenav()" style="text-align: center;padding-top: 25px;padding-bottom: 12px;border-right: 1px solid rgb(219,220,221) ;"><img class="img-fluid" src="{{asset('new-assets/img/10.svg')}}">
                     <div class="divline"></div>
-                    <p style="color: rgb(23,31,72);"><strong>FEERY BOOKING</strong></p>
+{{--                    style="color: rgb(23,31,72);"--}}
+                    <p ><strong>FEERY BOOKING</strong></p>
                 </div>
-                <div class="col-3 col-sm-3 col-xs-3" id="carhover" onclick="flightnav()" style="text-align: center;padding-top: 25px;padding-bottom: 12px;border-top-right-radius: 10px;"><img class="img-fluid" src="new-assets/img/Layer%201.png">
+                <div class="col-3 col-sm-3 col-xs-3 carhover" id="flight_booking" onclick="flightnav()" style="text-align: center;padding-top: 25px;padding-bottom: 12px;border-top-right-radius: 10px;"><img class="img-fluid" src="{{asset('new-assets/img/Layer%201.png')}}">
                     <div class="divline"></div>
-                    <p style="color: rgb(23,31,72);"><strong>FLIGHT BOOKING</strong></p>
+{{--                    style="color: rgb(23,31,72);"--}}
+                    <p ><strong>FLIGHT BOOKING</strong></p>
                 </div>
             </div>
             <div class="row divshows" style="background: #ffffff;border-radius: 10px;border-bottom-right-radius: 0px;border-bottom-left-radius: 0px;border-color: rgba(33,37,41,0);border-bottom: 1px solid rgb(227,228,230);">
@@ -113,39 +100,133 @@
                 <div class="col-3 col-sm-3 col-xs-3" style="text-align: center;border-right: 1px solid rgb(219,220,221);padding-top: 15px;padding-bottom: 15px;"><a href="cruisehome.php"><i class="icon ion-android-boat" style="font-size: 36px;color: #e16803;"></i></a></div>
                 <div class="col-3 col-sm-3 col-xs-3" style="text-align: center;padding-top: 15px;padding-bottom: 15px;"><a href="#" data-bs-target="flighthomepage"><i class="material-icons" style="font-size: 36px;color: #e16803;">flight</i></a></div>
             </div>
-            <div class="row" style="background: #ffffff;padding-top: 20px;padding-bottom: 20px;border-style: none;border-bottom: 1px none rgb(217,218,220) ;">
-                <div class="col"><button class="btn btn-primary" type="button" style="margin-right: 5px;margin-left: 5px;width: 160px;background: rgb(52,63,95);border-style: none;border-bottom-style: none;">One way</button><button class="btn btn-primary .getspace" type="button" style="margin-right: 5px;margin-left: 5px;width: 160px;background: rgb(200,200,200);border-style: none;border-bottom-style: none;">Round Trip</button></div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <form>
-                        <div class="row d-flex" style="background: #ffffff;border-style: none;border-bottom: 1px none rgb(217,218,220) ;">
-                            <div class="col-sm-6 col-md-4" style="padding-top: 10px;"><label class="form-label" style="font-size: 14px;"><strong>DEPARTURE DATE</strong></label><input class="form-control" id="datemob" type="date" style="border-style: none;border-right-style: solid;border-radius: 0px;"></div>
-                            <div class="col-sm-6 col-md-4 .getspace" style="padding-top: 10px;">
-                                <ul class="list-inline" id="listposition">
-                                    <li class="list-inline-item"><a class="text-decoration-none" href="#" style="color: var(--bs-orange);">TODAY</a></li>
-                                    <li class="list-inline-item">|</li>
-                                    <li class="list-inline-item"><a class="text-decoration-none" href="#" style="color: var(--bs-dark);">TOMORROW</a></li>
-                                </ul>
+            <div id="bus_form">
+                <form method="POST" action="{{url('/bus/bookings')}}">
+                    @csrf
+                    <div class="row" style="background: #ffffff;padding-top: 20px;padding-bottom: 20px;border-style: none;border-bottom: 1px none rgb(217,218,220) ;">
+                        <div class="col"><button class="" type="button" id="one_way_trip" onclick="oneWayTrip()" style="margin-right: 5px;margin-left: 5px;width: 160px;border-style: none; border-bottom-style: none; padding:10px;">One way</button><button class="getspace" id="return_trip" type="button" onclick="ReturnTrip()" style="margin-right: 5px;margin-left: 5px;width: 160px; border-style: none;border-bottom-style: none; padding:10px;">Round Trip</button></div>
+                        <input type="hidden" name="service_id"  value="{{$busService->id}}" />
+                        <input type="hidden" name="trip_type" id="trip_type" class="one-way-trip-input" id="trip-form" value="" />
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="row d-flex" style="background: #ffffff;border-style: none;border-bottom: 1px none rgb(217,218,220) ;">
+                                <div class="col-sm-6 col-md-4" style="padding-top: 10px;">
+                                    <label class="form-label" style="font-size: 14px;"><strong>DEPARTURE DATE</strong></label>
+                                    <input class="form-control" id="datemob" type="date" name="departure_date"  style="border-style: none;border-right-style: solid;border-radius: 0px;"></div>
+                                <div class="col-sm-6 col-md-4" id="return_date_box" style="padding-top: 10px;">
+                                    <label class="form-label" style="font-size: 14px;"><strong>RETURN DATE</strong></label>
+                                    <input class="form-control" id="datemob2" name="return_date"   type="date" style="border-style: none;border-right-style: solid;border-radius: 0px;"></div>
+                                <div class="col-sm-6 col-md-4 getalign" style="padding-top: 10px;text-align: center;">
+                                    <label class="form-label" style="font-size: 14px;">NO. OF PERSON</label>
+                                    <select class="form-select" style="text-align: center;border-style: none;border-bottom-style: solid;border-radius: 0px;" name="number_of_passengers" required>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10</option>
+                                    </select></div>
                             </div>
-                            <div class="col-sm-6 col-md-4 getalign" style="padding-top: 10px;text-align: center;"><label class="form-label" style="font-size: 14px;">NO. OF PERSON</label><select class="form-select" style="text-align: center;border-style: none;border-bottom-style: solid;border-radius: 0px;">
-                                    <option value="1" selected="">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                </select></div>
+                            <div class="row" style="margin-bottom: 10px;">
+                                <div class="col-sm-6 col-md-4 createspace">
+                                    <label class="form-label d-block" style="margin-bottom: 8px;font-size: 14px;"><strong>LOCATION</strong></label>
+                                    <span class="d-block" style="font-size: 9px;color: rgb(146,150,154);">TRAVELING FROM</span>
+                                    <select class="form-select" name="destination_from"  style="border-style: none;border-right-style: solid;border-radius: 0px;">
+                                       @foreach($locations as $location)
+                                        <option value="{{$location->id}}" selected="">{{$location->location}}</option>
+                                       @endforeach
+                                    </select></div>
+                                <div class="col-sm-6 col-md-4">
+                                    <span class="d-block" id="spanposition" style="font-size: 9px;color: rgb(146,150,154);">TRAVELING TO</span>
+                                    <select name="destination_to"  class="form-select" style="border-style: none;border-right-style: solid;border-radius: 0px;">
+                                        @foreach($locations as $location)
+                                            <option value="{{$location->id}}" selected="">{{$location->location}}</option>
+                                        @endforeach
+                                    </select></div>
+                                <div class="col-sm-12 col-md-4 d-lg-flex justify-content-lg-center align-items-lg-end" style="text-align: center;padding-right: 5px;padding-left: 4px;"><button class="btn btn-primary" type="submit" style="margin-right: 5px;margin-left: 5px;width: auto;background: rgb(52,63,95);border-style: none;border-bottom-style: none;padding-right: 50px;padding-left: 50px;">PROCEED</button></div>
+                            </div>
                         </div>
-                        <div class="row" style="margin-bottom: 10px;">
-                            <div class="col-sm-6 col-md-4 createspace"><label class="form-label d-block" style="margin-bottom: 8px;font-size: 14px;"><strong>LOCATION</strong></label><span class="d-block" style="font-size: 9px;color: rgb(146,150,154);">TRAVELING FROM</span><select class="form-select" style="border-style: none;border-right-style: solid;border-radius: 0px;">
-                                    <option value="Abia" selected="">Abia</option>
-                                </select></div>
-                            <div class="col-sm-6 col-md-4"><span class="d-block" id="spanposition" style="font-size: 9px;color: rgb(146,150,154);">TRAVELING TO</span><select class="form-select" style="border-style: none;border-right-style: solid;border-radius: 0px;">
-                                    <option value="Lagos" selected="">Lagos</option>
-                                </select></div>
-                            <div class="col-sm-12 col-md-4 d-lg-flex justify-content-lg-center align-items-lg-end" style="text-align: center;padding-right: 5px;padding-left: 4px;"><button class="btn btn-primary" type="button" style="margin-right: 5px;margin-left: 5px;width: auto;background: rgb(52,63,95);border-style: none;border-bottom-style: none;padding-right: 50px;padding-left: 50px;">PROCEED</button></div>
-                        </div>
-                    </form>
-                </div>
+                    </div>
+                </form>
             </div>
+            <div id="train_form">
+                <form method="POST" action="{{url('/bus/bookings')}}">
+                    @csrf
+                    <div class="row" style="background: #ffffff;padding-top: 20px;padding-bottom: 20px;border-style: none;border-bottom: 1px none rgb(217,218,220) ;">
+                        <div class="col"><button class="btn btn-primary" type="button" style="margin-right: 5px;margin-left: 5px;width: 160px;background: rgb(52,63,95);border-style: none;border-bottom-style: none;">One way</button><button class="btn btn-primary .getspace" type="button" style="margin-right: 5px;margin-left: 5px;width: 160px;background: rgb(200,200,200);border-style: none;border-bottom-style: none;">Round Trip</button></div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="row d-flex" style="background: #ffffff;border-style: none;border-bottom: 1px none rgb(217,218,220) ;">
+                                <div class="col-sm-6 col-md-4" style="padding-top: 10px;"><label class="form-label" style="font-size: 14px;"><strong>DEPARTURE DATE</strong></label><input class="form-control" id="datemob" type="date" style="border-style: none;border-right-style: solid;border-radius: 0px;"></div>
+                                <div class="col-sm-6 col-md-4 .getspace" style="padding-top: 10px;">
+                                    <ul class="list-inline" id="listposition">
+                                        <li class="list-inline-item"><a class="text-decoration-none" href="#" style="color: var(--bs-orange);">TODAY</a></li>
+                                        <li class="list-inline-item">|</li>
+                                        <li class="list-inline-item"><a class="text-decoration-none" href="#" style="color: var(--bs-dark);">TOMORROW</a></li>
+                                    </ul>
+                                </div>
+                                <div class="col-sm-6 col-md-4 getalign" style="padding-top: 10px;text-align: center;"><label class="form-label" style="font-size: 14px;">NO. OF PERSON</label><select class="form-select" style="text-align: center;border-style: none;border-bottom-style: solid;border-radius: 0px;">
+                                        <option value="1" selected="">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                    </select></div>
+                            </div>
+                            <div class="row" style="margin-bottom: 10px;">
+                                <div class="col-sm-6 col-md-4 createspace"><label class="form-label d-block" style="margin-bottom: 8px;font-size: 14px;"><strong>LOCATION</strong></label><span class="d-block" style="font-size: 9px;color: rgb(146,150,154);">TRAVELING FROM</span><select class="form-select" style="border-style: none;border-right-style: solid;border-radius: 0px;">
+                                        <option value="Abia" selected="">Abia</option>
+                                    </select></div>
+                                <div class="col-sm-6 col-md-4"><span class="d-block" id="spanposition" style="font-size: 9px;color: rgb(146,150,154);">TRAVELING TO</span><select class="form-select" style="border-style: none;border-right-style: solid;border-radius: 0px;">
+                                        <option value="Lagos" selected="">Lagos</option>
+                                    </select></div>
+                                <div class="col-sm-12 col-md-4 d-lg-flex justify-content-lg-center align-items-lg-end" style="text-align: center;padding-right: 5px;padding-left: 4px;"><button class="btn btn-primary" type="submit" style="margin-right: 5px;margin-left: 5px;width: auto;background: rgb(52,63,95);border-style: none;border-bottom-style: none;padding-right: 50px;padding-left: 50px;">PROCEED</button></div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div id="ferry_form">
+                <form method="POST" action="{{url('/bus/bookings')}}">
+                    @csrf
+                    <div class="row" style="background: #ffffff;padding-top: 20px;padding-bottom: 20px;border-style: none;border-bottom: 1px none rgb(217,218,220) ;">
+                        <div class="col"><button class="btn btn-primary" type="button" style="margin-right: 5px;margin-left: 5px;width: 160px;background: rgb(52,63,95);border-style: none;border-bottom-style: none;">One way</button><button class="btn btn-primary .getspace" type="button" style="margin-right: 5px;margin-left: 5px;width: 160px;background: rgb(200,200,200);border-style: none;border-bottom-style: none;">Round Trip</button></div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="row d-flex" style="background: #ffffff;border-style: none;border-bottom: 1px none rgb(217,218,220) ;">
+                                <div class="col-sm-6 col-md-4" style="padding-top: 10px;"><label class="form-label" style="font-size: 14px;"><strong>DEPARTURE DATE</strong></label><input class="form-control" id="datemob" type="date" style="border-style: none;border-right-style: solid;border-radius: 0px;"></div>
+                                <div class="col-sm-6 col-md-4 .getspace" style="padding-top: 10px;">
+                                    <ul class="list-inline" id="listposition">
+                                        <li class="list-inline-item"><a class="text-decoration-none" href="#" style="color: var(--bs-orange);">TODAY</a></li>
+                                        <li class="list-inline-item">|</li>
+                                        <li class="list-inline-item"><a class="text-decoration-none" href="#" style="color: var(--bs-dark);">TOMORROW</a></li>
+                                    </ul>
+                                </div>
+                                <div class="col-sm-6 col-md-4 getalign" style="padding-top: 10px;text-align: center;"><label class="form-label" style="font-size: 14px;">NO. OF PERSON</label><select class="form-select" style="text-align: center;border-style: none;border-bottom-style: solid;border-radius: 0px;">
+                                        <option value="1" selected="">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                    </select></div>
+                            </div>
+                            <div class="row" style="margin-bottom: 10px;">
+                                <div class="col-sm-6 col-md-4 createspace"><label class="form-label d-block" style="margin-bottom: 8px;font-size: 14px;"><strong>LOCATION</strong></label><span class="d-block" style="font-size: 9px;color: rgb(146,150,154);">TRAVELING FROM</span><select class="form-select" style="border-style: none;border-right-style: solid;border-radius: 0px;">
+                                        <option value="Abia" selected="">Abia</option>
+                                    </select></div>
+                                <div class="col-sm-6 col-md-4"><span class="d-block" id="spanposition" style="font-size: 9px;color: rgb(146,150,154);">TRAVELING TO</span><select class="form-select" style="border-style: none;border-right-style: solid;border-radius: 0px;">
+                                        <option value="Lagos" selected="">Lagos</option>
+                                    </select></div>
+                                <div class="col-sm-12 col-md-4 d-lg-flex justify-content-lg-center align-items-lg-end" style="text-align: center;padding-right: 5px;padding-left: 4px;"><button class="btn btn-primary" type="submit" style="margin-right: 5px;margin-left: 5px;width: auto;background: rgb(52,63,95);border-style: none;border-bottom-style: none;padding-right: 50px;padding-left: 50px;">PROCEED</button></div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
         </div>
     </div>
 </div>
@@ -342,126 +423,11 @@
             </div>
         </div>
         <div class="row" style="padding-right: 60px;padding-left: 60px;">
-            <div class="col" style="text-align: center;"><img class="img-fluid" src="new-assets/img/client1%201.svg"></div>
-            <div class="col" style="text-align: center;"><img class="img-fluid" src="new-assets/img/client2%201.png"></div>
-            <div class="col" style="text-align: center;"><img class="img-fluid" src="new-assets/img/client3%201.svg"></div>
-            <div class="col" style="text-align: center;"><img class="img-fluid" src="new-assets/img/client4%201.svg"></div>
+            <div class="col" style="text-align: center;"><img class="img-fluid" src="{{asset('new-assets/img/client1%201.svg')}}"></div>
+            <div class="col" style="text-align: center;"><img class="img-fluid" src="{{asset('new-assets/img/client2%201.png')}}"></div>
+            <div class="col" style="text-align: center;"><img class="img-fluid" src="{{asset('new-assets/img/client3%201.svg')}}"></div>
+            <div class="col" style="text-align: center;"><img class="img-fluid" src="{{asset('new-assets/img/client4%201.svg')}}"></div>
         </div>
     </div>
 </section>
-<section style="background: #eeeeee;margin-top: 60px;">
-    <div class="container">
-        <div class="row" style="padding-bottom: 10px;">
-            <div class="col-sm-6 d-md-flex flex-column align-content-center align-self-center">
-                <h3 class="text-center" style="color: rgb(17,15,126);margin-top: 10px;"><strong>GET UPDATES AND MORE</strong></h3>
-                <p class="text-center">THOUGHFUL THOUGHT TO YOU INBOX</p>
-            </div>
-            <div class="col-sm-6 d-inline-flex d-md-flex align-items-md-center" id="divemail">
-                <form><input type="email" id="emailinput" placeholder="YOUR EMAIL" inputmode="email" style="background: rgb(238,238,238);border-top-style: none;border-right-style: none;border-left-style: none;height: 41px;width: 250px;"></form><button class="btn btn-primary" type="button" style="height: 31px;width: 113.5px;margin-left: -60px;padding-top: 3px;background: var(--bs-orange);border-top-style: none;">SUBSCRIBE</button>
-            </div>
-        </div>
-    </div>
-</section>
-<section style="background: #262466;">
-    <footer id="footerid" style="background: url(&quot;assets/img/footerimage.png&quot;) center / cover no-repeat, #20225f;padding: 40px;padding-bottom: 40px;border-style: none;border-top-width: 15px;max-height: auto;">
-        <div class="container" style="padding-bottom: 20px;">
-            <div class="row d-flex d-md-flex">
-                <div class="col">
-                    <h5 class="d-md-flex" style="color: var(--bs-orange);margin-bottom: 26px;width: 181px;text-align: left;"><strong>NEED HELP?</strong></h5>
-                    <ul class="list-unstyled">
-                        <li class="text-start d-md-flex align-items-md-center" style="color: var(--bs-gray-100);text-align: center;"><strong>CALL US</strong></li>
-                        <li class="d-md-flex align-items-md-center" style="color: var(--bs-gray-100);font-size: 14px;">080 6430 4717</li>
-                        <li class="text-start d-md-flex align-items-md-center" style="color: var(--bs-gray-100);text-align: center;margin-top: 37px;"><strong>EMAIL US</strong></li>
-                        <li class="d-md-flex align-items-md-center" style="color: var(--bs-gray-100);font-size: 14px;">hello@etransitafrica.com</li>
-                    </ul>
-                </div>
-                <div class="col flex-column">
-                    <h5 style="color: var(--bs-orange);height: 26px;"><strong>COMPANY</strong></h5>
-                    <ul class="list-unstyled">
-                        <li style="margin-bottom: 10px;"><a class="text-decoration-none" href="#" style="color: var(--bs-gray-100);">ABOUT US</a></li>
-                        <li style="margin-bottom: 10px;"><a class="text-decoration-none" href="#" style="color: var(--bs-gray-100);">COMMUNITY BLOG</a></li>
-                        <li style="margin-bottom: 10px;"><a class="text-decoration-none" href="#" style="margin-bottom: 10px;color: var(--bs-gray-100);">REWARDS</a></li>
-                        <li style="margin-bottom: 10px;"><a class="text-decoration-none" href="#" style="color: var(--bs-gray-100);">WORK WITH US</a></li>
-                        <li><a class="text-decoration-none" href="#" style="color: var(--bs-gray-100);">MEET THE TEAM</a></li>
-                    </ul>
-                </div>
-                <div class="col">
-                    <h5 style="color: var(--bs-orange);"><strong>SUPPORT</strong></h5>
-                    <ul class="list-unstyled">
-                        <li style="margin-bottom: 10px;"><a class="text-decoration-none" href="#" style="color: var(--bs-gray-100);">ACCOUNT</a></li>
-                        <li style="margin-bottom: 10px;"><a class="text-decoration-none" href="#" style="color: var(--bs-gray-100);">LEGAL</a></li>
-                        <li style="margin-bottom: 10px;"><a class="text-decoration-none" href="#" style="margin-bottom: 10px;color: var(--bs-gray-100);">CONTACT</a></li>
-                        <li style="margin-bottom: 10px;"><a class="text-decoration-none" href="#" style="color: var(--bs-gray-100);">AFFILIATE PROGRAM</a></li>
-                        <li><a class="text-decoration-none" href="#" style="color: var(--bs-gray-100);">PRIVACY POLICY</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <h3 style="font-weight: bold;color: var(--bs-gray-100);">FOLLOW US ON</h3>
-                    <ul class="list-inline">
-                        <li class="list-inline-item"><i class="fa fa-twitter" style="font-size: 30px;color: var(--bs-gray-100);margin-right: 10px;"></i></li>
-                        <li class="list-inline-item"><i class="fa fa-facebook-square" style="color: var(--bs-gray-100);font-size: 30px;margin-right: 10px;"></i></li>
-                        <li class="list-inline-item"><i class="fa fa-youtube-play" style="color: var(--bs-gray-100);font-size: 30px;margin-right: 10px;"></i></li>
-                        <li class="list-inline-item"><i class="fa fa-instagram" style="color: var(--bs-gray-100);font-size: 30px;"></i></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="row" style="margin-top: 57px;">
-                <div class="col">
-                    <p style="color: var(--bs-gray-100);">Copyright 2021 by E-transit Africa</p>
-                </div>
-                <div class="col">
-                    <p style="color: var(--bs-gray-100);font-weight: bold;text-align: right;">Powered By:&nbsp;<span style="color: var(--bs-orange);">MyAppSpace</span></p>
-                </div>
-            </div>
-        </div>
-    </footer>
-</section>
-<div class="offcanvas offcanvas-end" tabindex="-1" data-bs-scroll="true" data-bs-backdrop="false" id="offcanvas-1">
-    <div class="offcanvas-header">
-        <h5 class="offcanvas-title"></h5>
-        <div class="brands"><a href="#"> <img class="img-fluid" src="new-assets/img/logofull%201.png"></a></div><button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-    </div>
-    <div class="offcanvas-body">
-        <nav>
-            <ul class="list-unstyled" id="offcanvaslink">
-                <li id="sidehover-1" style="height: 34px;"><a id="sidenav" class="text-decoration-none" href="#" style="text-decoration: underline;font-weight: bold;">Home</a></li>
-                <li class="d-md-flex justify-content-md-start align-items-md-center" id="sidehover-2" style="height: 34px;"><a class="text-decoration-none" href="#" style="font-weight: bold;">About Us</a></li>
-                <li class="d-md-flex justify-content-md-start align-items-md-center" id="sidehover-3" style="height: 34px;"><a class="text-decoration-none" href="#" style="font-weight: bold;">Tour Packages</a></li>
-                <li class="d-md-flex justify-content-md-start align-items-md-center" id="sidehover-4" style="height: 34px;"><a class="text-decoration-none" href="#" style="font-weight: bold;">Boat Cruise</a></li>
-                <li class="d-md-flex justify-content-md-start align-items-md-center text-decoration-none" id="sidehover-5" style="height: 34px;"><a class="text-decoration-none" href="#" style="font-weight: bold;">Car Hire</a></li>
-                <li id="sidehover-6" class="text-decoration-none" style="height: 34px;"><a class="text-decoration-none" href="#" style="font-weight: bold;">Hotel Booking</a></li>
-                <li class="d-md-flex justify-content-md-start align-items-md-center" id="sidehover-7" style="height: 34px;"><a class="text-decoration-none" href="#" style="font-weight: bold;">Become A Partner</a></li>
-                <li class="d-md-flex justify-content-md-start align-items-md-center" id="sidehover-8" style="height: 34px;"><a class="text-decoration-none" href="#" style="font-weight: bold;">Send Parcel</a></li>
-            </ul>
-        </nav>
-        <p class="d-md-flex me-auto" id="faicon-1" style="text-align: left;color: #090b39;margin-top: 100px;margin-left: 0px;width: 293.703px;margin-bottom: 0px;background: var(--bs-body-bg);margin-right: auto;">&nbsp;<a href="#"><i class="fa fa-facebook d-md-flex align-items-md-end" style="padding-top: 5px;font-size: 25px;margin-right: 15px;"></i></a><a href="#"><i class="fa fa-linkedin d-md-flex align-items-md-end" style="color: rgb(13,110,253);padding-top: 5px;font-size: 25px;margin-right: 15px;"></i></a><a href="#"><i class="fa fa-google-plus d-md-flex justify-content-center align-items-center align-content-center" style="padding-top: 5px;font-size: 25px;"></i></a></p>
-    </div>
-</div>
-<script src="new-assets/bootstrap/js/bootstrap.min.js"></script>
-<script src="new-assets/js/Off-Canvas-Sidebar-Drawer-Navbar.js"></script>
-<script src="new-assets/js/Off-Canvas-Sidebar-Drawer-Navbar-1.js"></script>
-<script src="https://unpkg.chttps://unpkg.com/@bootstrapstudio/bootstrap-better-nav/dist/bootstrap-better-nav.min.jsom/@bootstrapstudio/bootstrap-better-nav/dist/bootstrap-better-nav.min.js" type="module"></script>
-<script src="https://unpkg.com/@bootstrapstudio/bootstrap-better-nav/dist/bootstrap-better-nav.min.js" type="module"></script>
-<script src="new-assets/js/Ultimate-Testimonial-Slider-BS5.js"></script>
-<script type="text/javascript">
-    function busnav(){
-        window.location = "bushome.html";
-    }
-
-    function trainnav(){
-        window.location = "trainhome.html";
-    }
-
-    function cruisenav(){
-        window.location = "cruisehome.html";
-    }
-
-    function flightnav(){
-        window.location = "flighthome.html";
-    }
-</script>
-</body>
-
-</html>
+@endsection

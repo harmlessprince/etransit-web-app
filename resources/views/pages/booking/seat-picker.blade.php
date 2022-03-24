@@ -1,31 +1,18 @@
 @extends('layouts.app')
-{{--<style>--}}
-{{--    .toast {--}}
-{{--        flex-basis: 350px;--}}
-{{--        max-width: 350px;--}}
-{{--        font-size: 0.875rem;--}}
-{{--        background-color: rgb(155 32 32 / 85%) !important;--}}
-{{--        background-clip: padding-box;--}}
-{{--        border: 1px solid rgb(155 32 32 / 85%) !important;--}}
-{{--        box-shadow: 0 0.25rem 0.75rem rgb(0 0 0 / 10%) !important;--}}
-{{--        opacity: 0;--}}
-{{--        border-radius: 0.25rem;--}}
-{{--    }--}}
-{{--</style>--}}
 <style>
     .passsneger_details_header_text{
         display:grid;
         grid-template-columns: repeat(4 , 1fr);
     }
-    .passsneger_details_header_text  .passenger_text_header{
-        grid-column: 1/3;
-    }
-    .add_more_passeneger_icon{
-        grid-column: 3/4;
-    }
-    .add_more_passeneger_icon img{
-        /*margin-left: 134px;*/
-    }
+    /*.passsneger_details_header_text  .passenger_text_header{*/
+    /*    grid-column: 1/3;*/
+    /*}*/
+    /*.add_more_passeneger_icon{*/
+    /*    grid-column: 3/4;*/
+    /*}*/
+    /*.add_more_passeneger_icon img{*/
+    /*    !*margin-left: 134px;*!*/
+    /*}*/
     .add_more_passeneger_icon button{
         background:#DC6513;
         padding:10px;
@@ -33,7 +20,6 @@
         text-align: center;
         border: 1px solid #DC6513;
         cursor:pointer;
-        margin-left: -275px;
         font-size:12px;
         border-radius:5px;
 
@@ -46,115 +32,258 @@
 
     }
 
+  .seat_picker_new{
+    background: rgba(13,110,253,0);
+    color: rgb(10,1,1);
+    border :1px solid #c5c5c5 !important;
+    /*border-color: #c5c5c5;*/
+    /*border-left-color: #c5c5c5;*/
+}
+
+    .selected {
+        background:#4E6CBB !important;
+        color:#fff !important;
+        border:1px solid #E0E0E0;
+    }
+    .available {
+        background:#fff !important;
+        color:#000;
+        border: 1px solid #000;
+    }
+    .booked{
+        background:#E0E0E0 !important;
+        color:#000;
+        border:1px solid #E0E0E0 !important;
+    }
 
 </style>
 @section('content')
-    <div class="seat_picker_nav"></div>
-    <div class="container passenger_box">
-        <form method="POST" action="{{url('/book/trip/'.$schedule_id .'/'. $tripType)}}" id="form_submit">
+{{--    <div class="seat_picker_nav"></div>--}}
+{{--    <div class="container passenger_box">--}}
+{{--        <form method="POST" action="{{url('/book/trip/'.$schedule_id .'/'. $tripType)}}" id="form_submit">--}}
 
+{{--            @csrf--}}
+{{--            <input type="hidden" value="{{$tripType}}" name="tripType" id="tripType" />--}}
+{{--            <div class="passsneger_details_header_text">--}}
+{{--                <div class="passenger_text_header">--}}
+{{--                    <h4>Passenger  Details </h4>--}}
+{{--                </div>--}}
+{{--                <div class="add_more_passeneger_icon">--}}
+{{--                    <button id="buttonID"> <img src="{{asset('images/icons/add_user_2.png')}}"  width="20" height="20" /> Add More Passenger</button>--}}
+{{--                </div>--}}
+
+{{--            </div>--}}
+
+{{--            <div class="passenger_form_container">--}}
+{{--            <div class="passenger_info_box">--}}
+{{--                <div class="passenger_details_form">--}}
+{{--                    <div >--}}
+{{--                        <div class="form-group passenger_name">--}}
+{{--                           <div><label>FULL NAME</label></div>--}}
+{{--                            <div><input type="text" name="full_name[]" value="{{auth()->user()->full_name}}"  class="passenger_input_field"/></div>--}}
+{{--                        </div>--}}
+{{--                        <div class="gender_section">--}}
+{{--                            <div class="gender_box">--}}
+{{--                                <select name="gender[]" class="gender" required>--}}
+{{--                                    <option value="">Select gender</option>--}}
+{{--                                    <option value="male">MALE</option>--}}
+{{--                                    <option value="female">FEMALE</option>--}}
+{{--                                </select>--}}
+{{--                            </div>--}}
+{{--                            <div class="passenger_type radio-group">--}}
+{{--                                <div class="passenger_options">--}}
+{{--                                    <label for="adult">Adult</label>--}}
+{{--                                    <input type="checkbox" name="passenger_option[]" value="adult" id="adult"  />--}}
+{{--                                </div>--}}
+{{--                                <div class="passenger_options">--}}
+{{--                                    <label for="children">Children</label>--}}
+{{--                                    <input type="checkbox" name="passenger_option[]" value="children" id="children" />--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                        <div class="form-group passenger_name">--}}
+{{--                            <div><label>NEXT OF KIN FULL NAME</label></div>--}}
+{{--                            <div><input type="text" name="next_of_kin_name[]"  class="passenger_input_field"/></div>--}}
+{{--                        </div>--}}
+{{--                        <div class="form-group passenger_name">--}}
+{{--                            <div><label>NEXT OF KIN NUMBER</label></div>--}}
+{{--                            <div><input type="text" name="next_of_kin_number[]"  class="passenger_input_field"/></div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+
+{{--                <div class="passenger_details_form_input">--}}
+
+{{--                </div>--}}
+
+{{--            </div>--}}
+
+{{--            <div class="passenger_seat_tracker_box">--}}
+{{--                <div class="passenger_seat_picker_header">--}}
+{{--                    <div><span>Choose Seat(s)</span></div>--}}
+{{--                    <div><img src="{{asset('/images/icons/seat.png')}}"/></div>--}}
+{{--                </div>--}}
+{{--                <div class="seat_selector_indicator">--}}
+{{--                    <div>--}}
+{{--                        <div class="selected_indicator"></div>--}}
+{{--                    </div>--}}
+{{--                    <div>--}}
+{{--                        <h5>Selected</h5>--}}
+{{--                    </div>--}}
+{{--                    <div>--}}
+{{--                        <div class="booked_indicator"></div>--}}
+{{--                    </div>--}}
+{{--                    <div>--}}
+{{--                        <h5>Booked</h5>--}}
+{{--                    </div>--}}
+{{--                    <div>--}}
+{{--                        <div class="available_indicator"></div>--}}
+{{--                    </div>--}}
+{{--                    <div>--}}
+{{--                        <h5>Available</h5>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--                <div class="passenger_selector_box">--}}
+
+{{--                    @foreach($fetchSeats as $seat)--}}
+{{--                      <div class="passenger_seat_picker_bpdy">--}}
+
+{{--                          <a href="{{$seat->id}}"   @if($seat->booked_status == 0)  class="available seat_selector btn"--}}
+{{--                                  @elseif($seat->booked_status == 1) class="seat_selector available_indicator btn"--}}
+{{--                                  @elseif($seat->booked_status == 2) class="booked seat_selector btn"  @endif--}}
+{{--                                 >--}}
+{{--                              {{$seat->seat_position}}</a>--}}
+
+{{--                      </div>--}}
+{{--                    @endforeach--}}
+{{--                  </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--        <div class="continue_to_payment">--}}
+{{--            <button class="make_payment" >CONTINUE TO PAYMENT</button>--}}
+{{--        </div>--}}
+{{--        </form>--}}
+{{--    </div>--}}
+
+    <section style="height: 226px;background: url('./assets/img/Rectangle%2015%20(2).png') center / cover no-repeat;">
+        <div class="d-flex d-sm-flex d-md-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center" style="height: 226px;background: rgba(11,8,8,0.73);">
+            <div class="container d-md-flex justify-content-md-center align-items-md-center">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1 style="color: var(--bs-white);text-align: center;"><strong>Bus Booking</strong></h1>
+                        <p style="font-size: 20px;color: var(--bs-white);text-align: center;">Loren ipsum dolor</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section style="padding-left: 0px;background: var(--bs-gray-100);">
+        <form method="POST" action="{{url('/book/trip/'.$schedule_id .'/'. $tripType)}}" id="form_submit">
             @csrf
             <input type="hidden" value="{{$tripType}}" name="tripType" id="tripType" />
-            <div class="passsneger_details_header_text">
-                <div class="passenger_text_header">
-                    <h4>Passenger  Details </h4>
-                </div>
-                <div class="add_more_passeneger_icon">
-                    <button id="buttonID"> <img src="{{asset('images/icons/add_user_2.png')}}"  width="20" height="20" /> Add More Passenger</button>
-                </div>
-
-            </div>
-
-            <div class="passenger_form_container">
-            <div class="passenger_info_box">
-                <div class="passenger_details_form">
-                    <div >
-                        <div class="form-group passenger_name">
-                           <div><label>FULL NAME</label></div>
-                            <div><input type="text" name="full_name[]" value="{{auth()->user()->full_name}}"  class="passenger_input_field"/></div>
-                        </div>
-                        <div class="gender_section">
-                            <div class="gender_box">
-                                <select name="gender[]" class="gender" required>
-                                    <option value="">Select gender</option>
-                                    <option value="male">MALE</option>
-                                    <option value="female">FEMALE</option>
-                                </select>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6" style="padding: 50px;padding-top: 50px;padding-bottom: 50px;background: var(--bs-gray-100);">
+                    <div class="row passenegr_header">
+                        <div class="col">
+                            <h5>PASSANGER DETAILS
+                            <div class="add_more_passeneger_icon">
+                                <button id="buttonID"> <img src="{{asset('images/icons/add_user_2.png')}}"  width="20" height="20" /> Add More Passenger</button>
                             </div>
-                            <div class="passenger_type radio-group">
-                                <div class="passenger_options">
-                                    <label for="adult">Adult</label>
-                                    <input type="checkbox" name="passenger_option[]" value="adult" id="adult"  />
+                        </h5>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <form>
+                                <div class="row">
+                                    <div class="col" style="margin-top: 44px;">
+                                        <h6>PASSANGER # 1 DETAILS</h6>
+                                    </div>
                                 </div>
-                                <div class="passenger_options">
-                                    <label for="children">Children</label>
-                                    <input type="checkbox" name="passenger_option[]" value="children" id="children" />
+                                <div class="row">
+                                    <div class="col" style="margin-top: 28px;">
+                                        <label class="form-label"  style="font-size: 14px;color: var(--bs-gray-500);">FULL NAME</label>
+                                        <input class="form-control" name="full_name[]" type="text" style="border-top-style: none;border-right-style: none;border-left-style: none;border-radius: 0px;border-top-left-radius: 0px;border-top-right-radius: 0px;border-bottom-right-radius: 0px;border-bottom-left-radius: 1px;background: rgba(255,255,255,0);" value="{{auth()->user()->full_name}}" required></div>
                                 </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <label class="form-label" style="font-size: 14px;color: var(--bs-gray-500);">GENDER</label>
+                                        <select class="form-select" name="gender[]" style="border-top-style: none;border-right-style: none;border-left-style: none;border-radius: 0px;border-top-left-radius: 0px;border-top-right-radius: 0px;border-bottom-right-radius: 0px;background: rgba(255,255,255,0);" required>
+                                            <option value="Male">Male</option>
+                                            <option value="Female">Female</option>
+                                        </select></div>
+                                    <div class="col d-block">
+                                        <div class="row d-md-flex">
+                                            <div class="col-md-12"><label class="col-form-label" style="font-size: 14px;color: var(--bs-gray-500);">AGE GROUP</label></div>
+                                            <div class="col-md-12 d-inline-flex" style="padding-right: 0px;padding-left: 5px;">
+                                                <div class="form-check d-inline-flex" style="margin-left: 1px;">
+                                                    <input class="form-check-input" name="passenger_option[]"  value="adult" type="checkbox" id="formCheck-1">
+                                                    <label class="form-check-label" for="formCheck-1" style="font-size: 14px;">&nbsp;Adult</label>
+                                                </div>
+                                                <div class="form-check d-inline-flex" style="margin-left: 18px;">
+                                                    <input class="form-check-input" name="passenger_option[]"  value="children" type="checkbox" id="formCheck-2" >
+                                                    <label class="form-check-label" for="formCheck-2" style="font-size: 14px;">&nbsp; Child</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group passenger_name">
+                                        <div><label class="form-label" style="font-size: 14px; margin-top:15px;color: var(--bs-gray-500);">NEXT OF KIN FULL NAME</label></div>
+                                        <div><input type="text" name="next_of_kin_name[]"  class="form-control" type="text" style="border-top-style: none;border-right-style: none;border-left-style: none;border-radius: 0px;border-top-left-radius: 0px;border-top-right-radius: 0px;border-bottom-right-radius: 0px;border-bottom-left-radius: 1px;background: rgba(255,255,255,0);"/></div>
+                                    </div>
+                                    <div class="form-group passenger_name">
+                                        <div><label class="form-label" style="font-size: 14px;margin-top:15px;color:  var(--bs-gray-500);">NEXT OF KIN NUMBER</label></div>
+                                        <div><input type="text" name="next_of_kin_number[]" class="form-control" type="text" style="border-top-style: none;border-right-style: none;border-left-style: none;border-radius: 0px;border-top-left-radius: 0px;border-top-right-radius: 0px;border-bottom-right-radius: 0px;border-bottom-left-radius: 1px;background: rgba(255,255,255,0);"/></div>
+                                    </div>
+                                </div>
+
+                                <div class="passenger_details_form_input">
+
+                                </div>
+
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6" id="secondtab" style="padding: 50px;padding-top: 50px;padding-bottom: 50px;background: #ffffff;text-align: center;margin-top: 0px;padding-left: 90px;padding-right: 30px;">
+                    <div class="row">
+                        <div class="col-md-12" style="text-align: left;padding-left: 5px;">
+                            <p style="font-weight: bold;">Choose Seats&nbsp;<i class="material-icons" style="margin-top: 2px;padding-top: 3px;color: rgb(42,66,136);">airline_seat_recline_extra</i></p>
+                        </div>
+                        <div class="col-md-12 d-inline-flex flex-row">
+                            <div class="form-check" style="padding-left: 15px;"><input class="form-check-input" type="checkbox" id="formCheck-7" style="color: rgb(52,63,95);background: rgb(52,63,95);"><label class="form-check-label" for="formCheck-7">Selected</label></div>
+                            <div class="form-check" style="padding-left: 40px;"><input class="form-check-input" type="checkbox" id="formCheck-8" style="background: var(--bs-gray-400);"><label class="form-check-label" for="formCheck-8">Booked</label></div>
+                            <div class="form-check" style="padding-left: 40px;"><input class="form-check-input" type="checkbox" id="formCheck-9"><label class="form-check-label" for="formCheck-9">Available</label></div>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 53px;padding: 24px;box-shadow: 1px 1px 6px rgb(231,231,231);border-left-width: 1px;border-radius: 20px;width: 252px;margin-left: 13px;">
+                        @foreach($fetchSeats as $seat)
+                        <div class="col-4">
+                            <div class="row">
+                                <div class="col-4 d-md-flex justify-content-md-center align-items-md-center" style="margin-top: 10px;margin-bottom: 10px;"></div>
+                                <div class="col-4 d-md-flex justify-content-md-center align-items-md-center" style="margin-top: 10px;margin-bottom: 10px;"></div>
+                                <div class="col-4 d-md-flex justify-content-md-center align-items-md-center" style="margin-top: 10px;margin-bottom: 10px;">
+                                    <a  href="{{$seat->id}}"
+                                       @if($seat->booked_status == 0)     class="available seat_selector btn seat_picker_new"
+                                       @elseif($seat->booked_status == 1) class="seat_selector available_indicator btn seat_picker_new"
+                                       @elseif($seat->booked_status == 2) class="booked seat_selector btn seat_picker_new"  @endif
+                                      style="width:43.25px;">{{$seat->seat_position}}</a></div>
                             </div>
                         </div>
-                        <div class="form-group passenger_name">
-                            <div><label>NEXT OF KIN FULL NAME</label></div>
-                            <div><input type="text" name="next_of_kin_name[]"  class="passenger_input_field"/></div>
-                        </div>
-                        <div class="form-group passenger_name">
-                            <div><label>NEXT OF KIN NUMBER</label></div>
-                            <div><input type="text" name="next_of_kin_number[]"  class="passenger_input_field"/></div>
-                        </div>
+                       @endforeach
                     </div>
                 </div>
-
-                <div class="passenger_details_form_input">
-
-                </div>
-
             </div>
-
-            <div class="passenger_seat_tracker_box">
-                <div class="passenger_seat_picker_header">
-                    <div><span>Choose Seat(s)</span></div>
-                    <div><img src="{{asset('/images/icons/seat.png')}}"/></div>
-                </div>
-                <div class="seat_selector_indicator">
-                    <div>
-                        <div class="selected_indicator"></div>
-                    </div>
-                    <div>
-                        <h5>Selected</h5>
-                    </div>
-                    <div>
-                        <div class="booked_indicator"></div>
-                    </div>
-                    <div>
-                        <h5>Booked</h5>
-                    </div>
-                    <div>
-                        <div class="available_indicator"></div>
-                    </div>
-                    <div>
-                        <h5>Available</h5>
-                    </div>
-                </div>
-                <div class="passenger_selector_box">
-
-                    @foreach($fetchSeats as $seat)
-                      <div class="passenger_seat_picker_bpdy">
-
-                          <a href="{{$seat->id}}"   @if($seat->booked_status == 0)  class="available seat_selector btn"
-                                  @elseif($seat->booked_status == 1) class="seat_selector available_indicator btn"
-                                  @elseif($seat->booked_status == 2) class="booked seat_selector btn"  @endif
-                                 >
-                              {{$seat->seat_position}}</a>
-
-                      </div>
-                    @endforeach
-                  </div>
+            <div class="row">
+                <div class="col-12 d-md-flex justify-content-center align-items-center align-content-center align-self-center justify-content-md-center" style="text-align: center;margin-top: 14px;padding-bottom: 17px;"><button class="btn btn-primary" type="submit" style="width: 235.422px;background: rgb(52,63,95);">CONTINUE TO PAYMENT</button></div>
             </div>
-        </div>
-        <div class="continue_to_payment">
-            <button class="make_payment" >CONTINUE TO PAYMENT</button>
         </div>
         </form>
-    </div>
+    </section>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
@@ -169,14 +298,14 @@
 
 
             $(".seat_selector").click(function(e){
+
                     e.preventDefault();
                     $(this).removeClass("available");
                     $(this).addClass("selected");
                     var id = $(this).attr('href');
+                    console.log(id)
                     var user_id = {{auth()->user()->id}}
                     var trip_type = $("input[name='tripType']").val();
-
-
 
                 $.ajax({
                     type:'POST',
@@ -186,7 +315,6 @@
                     success:function(data){
                         if(data.success)
                         {
-
                             displaySuccessMessage(data.message)
                         }else{
                            displayErrorMessage(data.message)
@@ -217,42 +345,42 @@
                 });
             });
 
+
         $('#buttonID').click(function(e){
             e.preventDefault();
-            $('.passenger_details_form_input').append(`<div >
-                        <div class="form-group passenger_name">
-                            <div><label>FULL NAME</label></div>
-                            <div><input type="text" name="full_name[]"  class="passenger_input_field fullname"/></div>
-                        </div>
-                        <div class="gender_section">
-                            <div class="gender_box">
-                                <select name="gender[]" class="gender" required>
-                                    <option value="">Select gender</option>
-                                    <option value="male">MALE</option>
-                                    <option value="female">FEMALE</option>
-                                </select>
-                            </div>
-                            <div class="passenger_type radio-group">
-                                <div class="passenger_options">
-                                    <label for="adult">Adult</label>
-                                    <input type="checkbox" name="passenger_option[]" value="adult" id="adult" />
+            $('.passenger_details_form_input').append(` <div class="row">
+                                    <div class="col" style="margin-top: 28px;">
+                                <label class="form-label" style="font-size: 14px;color: var(--bs-gray-500);">FULL NAME</label>
+                                <input class="form-control" name="full_name[]" type="text" style="border-top-style: none;border-right-style: none;border-left-style: none;border-radius: 0px;border-top-left-radius: 0px;border-top-right-radius: 0px;border-bottom-right-radius: 0px;border-bottom-left-radius: 1px;background: rgba(255,255,255,0);"></div>
                                 </div>
-                                <div class="passenger_options">
-                                    <label for="children">Children</label>
-                                    <input type="checkbox" name="passenger_option[]" value="children" id="children" />
+                                <div class="row">
+                                    <div class="col">
+                                        <label class="form-label" style="font-size: 14px;color: var(--bs-gray-500);">GENDER</label>
+                                        <select class="form-select" name="gender[]" style="border-top-style: none;border-right-style: none;border-left-style: none;border-radius: 0px;border-top-left-radius: 0px;border-top-right-radius: 0px;border-bottom-right-radius: 0px;background: rgba(255,255,255,0);">
+                                            <option value="Male">Male</option>
+                                            <option value="Female">Female</option>
+                                        </select></div>
+                                    <div class="col d-block">
+                                        <div class="row d-md-flex">
+                                            <div class="col-md-12"><label class="col-form-label" style="font-size: 14px;color: var(--bs-gray-500);">AGE GROUP</label></div>
+                                            <div class="col-md-12 d-inline-flex" style="padding-right: 0px;padding-left: 5px;">
+                                                <div class="form-check d-inline-flex" style="margin-left: 1px;"><input class="form-check-input" type="checkbox" name="passenger_option[]" id="formCheck-1" style="background: rgba(255,255,255,0);"><label class="form-check-label" for="formCheck-1" style="font-size: 14px;">&nbsp; Adult</label></div>
+                                                <div class="form-check d-inline-flex" style="margin-left: 18px;"><input class="form-check-input" type="checkbox" name="passenger_option[]" id="formCheck-2" style="background: rgba(255,255,255,0);"><label class="form-check-label" for="formCheck-2" style="font-size: 14px;">&nbsp; Child</label></div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="form-group passenger_name">
-                            <div><label>NEXT OF KIN FULL NAME</label></div>
-                            <div><input type="text" name="next_of_kin_name[]"  class="passenger_input_field"/></div>
-                        </div>
-                        <div class="form-group passenger_name">
-                            <div><label>NEXT OF KIN NUMBER</label></div>
-                            <div><input type="text" name="next_of_kin_number[]"  class="passenger_input_field"/></div>
-                        </div>
-                    </div>`);
+                                <div class="form-group passenger_name">
+                                    <div><label class="form-label" style="font-size: 14px; margin-top:15px; color: var(--bs-gray-500);">NEXT OF KIN FULL NAME</label></div>
+                                    <div><input type="text" name="next_of_kin_name[]"  class="form-control" type="text" style="border-top-style: none;border-right-style: none;border-left-style: none;border-radius: 0px;border-top-left-radius: 0px;border-top-right-radius: 0px;border-bottom-right-radius: 0px;border-bottom-left-radius: 1px;background: rgba(255,255,255,0);"/></div>
+                                </div>
+                                <div class="form-group passenger_name">
+                                    <div><label class="form-label" style="font-size: 14px; margin-top:15px; color: var(--bs-gray-500);">NEXT OF KIN NUMBER</label></div>
+                                    <div><input type="text" name="next_of_kin_number[]" class="form-control" type="text" style="border-top-style: none;border-right-style: none;border-left-style: none;border-radius: 0px;border-top-left-radius: 0px;border-top-right-radius: 0px;border-bottom-right-radius: 0px;border-bottom-left-radius: 1px;background: rgba(255,255,255,0);"/></div>
+                                </div>
+                            </div>`);
         });
+
         function displayErrorMessage(message) {
             toastr.error(message, 'Error');
         }
