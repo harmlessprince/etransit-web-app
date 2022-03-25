@@ -3,7 +3,28 @@
 
 a {
 }
-
+.routerLink{
+    color: #828282;
+}
+.routerLink:hover{
+    color: #021037 !important;
+    padding-bottom:10px;
+    text-decoration:none;
+}
+.active-nav{
+    display:flex;
+    height:3px;
+    position:absolute;
+    width:70%;
+    transform: translateX(-50%);
+    left:50%;
+    border-radius:40px;
+    background:#021037 !important;
+    bottom:5px;
+}
+.active-text{
+    color:#021037 !important;
+}
 @media (max-width: 576px) {
   #faicon {
     font-size: xx-small;

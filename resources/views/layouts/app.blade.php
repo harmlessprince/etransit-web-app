@@ -66,19 +66,15 @@
     <link href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css" rel="stylesheet">
 
     @toastr_css
+
 </head>
 <body onload="busnav()">
-
     <div>
-        <nav >
-            <div >
-            @include('layouts.header')
-                @yield('content')
-            @include('layouts.footer')
-            </div>
-        </nav>
-
-
+        <div >
+        @include('layouts.header')
+            @yield('content')
+        @include('layouts.footer')
+        </div>
     </div>
 </body>
 </html>

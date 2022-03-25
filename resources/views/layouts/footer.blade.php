@@ -85,7 +85,7 @@
     </div>
 </section>
 <section style="background: #262466;">
-    <footer id="footerid" style="background: url(&quot;assets/img/footerimage.png&quot;) center / cover no-repeat, #20225f;padding: 40px;padding-bottom: 40px;border-style: none;border-top-width: 15px;max-height: auto;">
+    <footer id="footerid" style="background: url('{{ asset('/new-assets/img/footerimage.png')}}')  center / cover no-repeat, #20225f;padding: 40px;padding-bottom: 40px;border-style: none;border-top-width: 15px;max-height: auto;">
         <div class="container" style="padding-bottom: 20px;">
             <div class="row d-flex d-md-flex">
                 <div class="col">
@@ -143,19 +143,35 @@
 <div class="offcanvas offcanvas-end" tabindex="-1" data-bs-scroll="true" data-bs-backdrop="false" id="offcanvas-1">
     <div class="offcanvas-header">
         <h5 class="offcanvas-title"></h5>
-        <div class="brands"><a href="#"> <img class="img-fluid" src="new-assets/img/logofull%201.png"></a></div><button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        <div class="brands"><a href="{{url('/')}}"> <img class="img-fluid" src="{{asset('new-assets/img/logofull%201.png')}}"></a></div><button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
         <nav>
             <ul class="list-unstyled" id="offcanvaslink">
-                <li id="sidehover-1" style="height: 34px;"><a id="sidenav" class="text-decoration-none" href="#" style="text-decoration: underline;font-weight: bold;">Home</a></li>
-                <li class="d-md-flex justify-content-md-start align-items-md-center" id="sidehover-2" style="height: 34px;"><a class="text-decoration-none" href="#" style="font-weight: bold;">About Us</a></li>
-                <li class="d-md-flex justify-content-md-start align-items-md-center" id="sidehover-3" style="height: 34px;"><a class="text-decoration-none" href="#" style="font-weight: bold;">Tour Packages</a></li>
-                <li class="d-md-flex justify-content-md-start align-items-md-center" id="sidehover-4" style="height: 34px;"><a class="text-decoration-none" href="#" style="font-weight: bold;">Boat Cruise</a></li>
-                <li class="d-md-flex justify-content-md-start align-items-md-center text-decoration-none" id="sidehover-5" style="height: 34px;"><a class="text-decoration-none" href="#" style="font-weight: bold;">Car Hire</a></li>
-                <li id="sidehover-6" class="text-decoration-none" style="height: 34px;"><a class="text-decoration-none" href="#" style="font-weight: bold;">Hotel Booking</a></li>
-                <li class="d-md-flex justify-content-md-start align-items-md-center" id="sidehover-7" style="height: 34px;"><a class="text-decoration-none" href="#" style="font-weight: bold;">Become A Partner</a></li>
-                <li class="d-md-flex justify-content-md-start align-items-md-center" id="sidehover-8" style="height: 34px;"><a class="text-decoration-none" href="#" style="font-weight: bold;">Send Parcel</a></li>
+                <li id="sidehover-1" style="height: 34px;">
+                    <a id="sidenav" class="text-decoration-none" href="{{url('/')}}" style="text-decoration: underline;font-weight: bold;">Home</a>
+                </li>
+                <li class="d-md-flex justify-content-md-start align-items-md-center" id="sidehover-2" style="height: 34px;">
+                    <a class="text-decoration-none" href="#about_us_section" style="font-weight: bold;">About Us</a>
+                </li>
+                <li class="d-md-flex justify-content-md-start align-items-md-center" id="sidehover-3" style="height: 34px;">
+                    <a class="text-decoration-none" href="{{url('tour-packages')}}" style="font-weight: bold;">Tour Packages</a>
+                </li>
+                <li class="d-md-flex justify-content-md-start align-items-md-center" id="sidehover-4" style="height: 34px;">
+                    <a class="text-decoration-none" href="{{url('boat-cruise')}}"  style="font-weight: bold;">Boat Cruise</a>
+                </li>
+                <li class="d-md-flex justify-content-md-start align-items-md-center text-decoration-none" id="sidehover-5" style="height: 34px;">
+                    <a class="text-decoration-none" href="{{url('car-hire')}}"  style="font-weight: bold;">Hire A Vehicle</a>
+                </li>
+                <li id="sidehover-6" class="text-decoration-none" style="height: 34px;">
+                    <a class="text-decoration-none" href="#" style="font-weight: bold;">Hotel Booking</a>
+                </li>
+                <li class="d-md-flex justify-content-md-start align-items-md-center" id="sidehover-7" style="height: 34px;">
+                    <a class="text-decoration-none" href="#" style="font-weight: bold;">Become A Partner</a>
+                </li>
+                <li class="d-md-flex justify-content-md-start align-items-md-center" id="sidehover-8" style="height: 34px;">
+                    <a class="text-decoration-none" href="#" style="font-weight: bold;">Send Parcel</a>
+                </li>
             </ul>
         </nav>
         <p class="d-md-flex me-auto" id="faicon-1" style="text-align: left;color: #090b39;margin-top: 100px;margin-left: 0px;width: 293.703px;margin-bottom: 0px;background: var(--bs-body-bg);margin-right: auto;">&nbsp;<a href="#"><i class="fa fa-facebook d-md-flex align-items-md-end" style="padding-top: 5px;font-size: 25px;margin-right: 15px;"></i></a><a href="#"><i class="fa fa-linkedin d-md-flex align-items-md-end" style="color: rgb(13,110,253);padding-top: 5px;font-size: 25px;margin-right: 15px;"></i></a><a href="#"><i class="fa fa-google-plus d-md-flex justify-content-center align-items-center align-content-center" style="padding-top: 5px;font-size: 25px;"></i></a></p>
@@ -262,6 +278,14 @@
 
     function displayErrorMessage(message) {
         toastr.error(message, 'Error');
+    }
+
+    var id = '1';
+    if (id == '1') {
+        document.getElementById('websignupdiv').style.display="none";
+        document.getElementById('profileshow').style.display="block";
+    }else if(id == '0'){
+        document.getElementById('profileshow').style.display="none";
     }
 </script>
 @jquery
