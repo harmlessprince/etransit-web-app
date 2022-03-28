@@ -28,6 +28,7 @@ use App\Http\Controllers\RoleMgt;
 use App\Http\Controllers\SocialController;
 use App\Http\Controllers\Tour;
 use App\Http\Controllers\Train;
+use App\Http\Controllers\UserProfile;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Schedule;
@@ -84,6 +85,9 @@ Route::get('check-pdf' , function(){
 
 Route::group(['middleware' => ['auth','prevent-back-history']], function() {
 //    ,'must_verify'
+
+    Route::get('profile/{user_id}',[UserProfile::class ,'myProfile']);
+    Route::put('update-user-profile/{user_id}' ,[UserProfile::class ,'updateUserProfile']);
 
     Route::get('/seat-picker/{schedule_id}/{trip_type}', [Booking::class, 'seatSelector']);
 
