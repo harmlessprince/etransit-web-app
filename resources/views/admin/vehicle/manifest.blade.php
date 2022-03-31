@@ -55,8 +55,28 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="align-text">
-                            <h1>{{$tranx}}</h1>
+                            <h1>&#8358; {{number_format($tranx)}}</h1>
                             <h6>Actual Return</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-lg-3 col-xl-3 col-sm-3">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="align-text">
+                            <h1>&#8358; {{number_format($manifests[0]->schedule->fare_adult ?? 0)}}</h1>
+                            <h6>Adult Fare</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-lg-3 col-xl-3 col-sm-3">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="align-text">
+                            <h1>&#8358; {{number_format($manifests[0]->schedule->fare_children ?? 0)}}</h1>
+                            <h6>Children Fare</h6>
                         </div>
                     </div>
                 </div>
@@ -78,7 +98,7 @@
             <div class="col-md-12 col-xl-12 col-lg-12 col-sm-12">
                 <div class="add_bus_btn">
                     <div class="space-left">
-                        <a href="" class="btn btn-success">Download Manifest</a>
+{{--                        <a href="" class="btn btn-success">Download Manifest</a>--}}
                     </div>
                 </div>
             </div>
@@ -95,7 +115,7 @@
                         <th>Age Range</th>
                         <th>Booked By</th>
                         <th>Seat Position</th>
-                        <th>Action</th>
+{{--                        <th>Action</th>--}}
                     </tr>
                     </thead>
                     <tbody>
@@ -112,7 +132,9 @@
                         <td>{{$manifest->passenger_age_range}}</td>
                         <td>{{$manifest->user->email}}</td>
                         <td>{{$manifest->seat_position->seat_position}}</td>
-                        <td>@mdo</td>
+{{--                        <td>--}}
+{{--                            <a href="" class="btn btn-danger">View Transaction</a>--}}
+{{--                        </td>--}}
                     </tr>
                         @endforeach
                     </tbody>

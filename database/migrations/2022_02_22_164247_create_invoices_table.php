@@ -18,6 +18,7 @@ class CreateInvoicesTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('transaction_id');
             $table->string('trip_type')->nullable()->comment('one way or round trip');
+            $table->date('return_date')->nullable();
             $table->timestamps();
         });
     }

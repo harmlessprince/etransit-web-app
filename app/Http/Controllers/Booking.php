@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Classes\Invoice;
 use App\Classes\Reference;
 use App\Mail\BusBooking;
 use App\Models\Schedule;
@@ -420,17 +421,17 @@ class Booking extends Controller
 
 
         $transactions = new \App\Models\Transaction();
-        $transactions->reference = Reference::generateTrnxRef();
-        $transactions->amount = $attr['amount'];
-        $transactions->status = 'Pending';
-        $transactions->tenant_id = $tripSchedule->bus->tenant->id;
-        $transactions->schedule_id = $attr['schedule_id'];
-        $transactions->description = 'Cash payment of ' . $request->amount .' was paid at ' . now();
-        $transactions->user_id = auth()->user()->id;
-        $transactions->passenger_count = $attr['adultCount'] + $attr['childrenCount'];
-        $transactions->service_id = $attr['service_id'];
+        $transactions->reference        = Reference::generateTrnxRef();
+        $transactions->amount           = $attr['amount'];
+        $transactions->status           = 'Pending';
+        $transactions->tenant_id        = $tripSchedule->bus->tenant->id;
+        $transactions->schedule_id      = $attr['schedule_id'];
+        $transactions->description      = 'Cash payment of ' . $request->amount .' was paid at ' . now();
+        $transactions->user_id          = auth()->user()->id;
+        $transactions->passenger_count  = $attr['adultCount'] + $attr['childrenCount'];
+        $transactions->service_id       = $attr['service_id'];
         $transactions->transaction_type = 'cash payment';
-        $transactions->isConfirmed = 'False';
+        $transactions->isConfirmed       = 'False';
         $transactions->save();
 
         if ($transactions) {
@@ -487,6 +488,8 @@ class Booking extends Controller
 
         ];
         $email = auth()->user()->email;
+
+        Invoice::record(auth()->user()->id , $transactions->id , $tripType ,$tripSchedule->return_date);
 
         Mail::to($email)->send(new BusBooking($maildata));
 

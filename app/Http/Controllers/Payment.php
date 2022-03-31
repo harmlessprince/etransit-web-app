@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Classes\Invoice;
 use App\Classes\Reference;
 use App\Mail\BoatCruiseBooking;
 use App\Mail\BusBooking;
@@ -141,7 +142,7 @@ class Payment extends Controller
 
 
         //find the schedule to get the actual amount stored in the database
-        $tripSchedule = \App\Models\Schedule::where('id', $scheduleId)->select('fare_adult', 'fare_children', 'id', 'seats_available', 'bus_id','return_uuid_tracker')->first();
+        $tripSchedule = \App\Models\Schedule::where('id', $scheduleId)->select('fare_adult', 'fare_children', 'id', 'seats_available','departure_date','return_date','bus_id','return_uuid_tracker')->first();
         !$tripSchedule ? abort('404') : '';
         $adultFare = (double)$tripSchedule->fare_adult;
         $childrenFare = (double)$tripSchedule->fare_children;
@@ -309,6 +310,8 @@ class Payment extends Controller
                 'totalAmount' => $data['data']['amount'],
             ];
             $email = $data['data']['meta']['user_email'];
+
+            Invoice::record($data['data']['meta']['user_id'] , $transactions->id , $tripType ,$tripSchedule->return_date);
 
             Mail::to($email)->send(new BusBooking($maildata));
 

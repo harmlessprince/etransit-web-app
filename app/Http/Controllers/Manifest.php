@@ -27,6 +27,8 @@ class Manifest extends Controller
                                         ->with('user','schedule' ,'seat_position')
                                         ->get();
 
+//        dd( $manifests[0]->schedule->fare_children);
+
 
         return  view('admin.vehicle.manifest', compact('schedule','bookings','tranx' ,'manifests'));
     }
