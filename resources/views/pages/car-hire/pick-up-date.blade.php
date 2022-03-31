@@ -51,6 +51,7 @@
                        <label for="time">Pick Up Time</label>
                        <input type="time" name="time" id="time" class="form-control" required/>
                    </div>
+                   <br>
                    <div class="pick_btn">
                        <button>Add Pick Up Information</button>
                    </div>
@@ -71,6 +72,7 @@
                 <img src="{{asset('images/icons/plan_options.png')}}" alt="plan-icon"/>
                 <small>Rental Fare :&#8358; {{$findPaymentOption->amount}}</small>
             </div>
+
             @if(!empty($findPaymentOption->extra_hour))
             <div class="car_info">
                 <img src="{{asset('images/icons/plan_options.png')}}" alt="plan-icon"/>
@@ -85,7 +87,7 @@
             @if(!empty($findPaymentOption->extra_hour))
             <div class="car_info">
                 <img src="{{asset('images/icons/plan_options.png')}}" alt="plan-icon"/>
-                <small>Daily rental is for a period of 12 hours</small>
+                <small>Rental is for a period of 12 hours</small>
             </div>
             @endif
 

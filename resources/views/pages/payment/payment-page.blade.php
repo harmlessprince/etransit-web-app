@@ -33,6 +33,34 @@
     #online_payment{
         display:none;
     }
+    .payment_options , .payment_button{
+        margin-left:30px;
+        margin-top:20px;
+    }
+    .payment_button{
+        background:#DC6513;
+        padding:10px;
+        color:white;
+        border:1px solid #DC6513;
+        width:250px;
+        border-radius:5px;
+        text-align:center;
+        cursor:pointer;
+    }
+    .payment_button:hover{
+        background:#021037;
+        border:1px solid #DC6513;
+
+    }
+    button, input[type="submit"], input[type="reset"] {
+        background: none;
+        color: inherit;
+        border: none;
+        padding: 0;
+        font: inherit;
+        cursor: pointer;
+        outline: inherit;
+    }
 </style>
 @section('content')
 {{--    <div class="payment-box container">--}}

@@ -173,7 +173,7 @@
                                 <h4>Seat Information</h4>
                             </div>
                             <div>
-                                <a href="{{url('e-ticket/schedule-manifest/'.$findSchedule->id)}}" class="btn btn-success">Check Manifest</a>
+                                <a href="{{url('admin/schedule-manifest/'.$findSchedule->id)}}" class="btn btn-success">Check Manifest</a>
                             </div>
                         </div>
                         <hr>

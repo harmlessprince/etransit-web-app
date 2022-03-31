@@ -116,6 +116,7 @@ class CarHireMgt extends Controller
         $SWPlan = new \App\Models\CarPlan();
         $SWPlan->plan   = 'South West';
         $SWPlan->amount = $data['sw_region_fare'];
+        $SWPlan->extra_hour = $data['extra_hour'];
         $SWPlan->tenant_id = $car->tenant_id;
         $SWPlan->car_id = $car->id;
         $SWPlan->save();
@@ -123,6 +124,7 @@ class CarHireMgt extends Controller
         $SSPlan = new \App\Models\CarPlan();
         $SSPlan->plan   = 'South South';
         $SSPlan->amount = $data['ss_region_fare'];
+        $SSPlan->extra_hour = $data['extra_hour'];
         $SSPlan->tenant_id = $car->tenant_id;
         $SSPlan->car_id = $car->id;
         $SSPlan->save();
@@ -130,6 +132,7 @@ class CarHireMgt extends Controller
         $SEPlan = new \App\Models\CarPlan();
         $SEPlan->plan   = 'South East';
         $SEPlan->amount = $data['se_region_fare'];
+        $SEPlan->extra_hour = $data['extra_hour'];
         $SEPlan->tenant_id = $car->tenant_id;
         $SEPlan->car_id = $car->id;
         $SEPlan->save();
@@ -137,6 +140,7 @@ class CarHireMgt extends Controller
         $NCPlan = new \App\Models\CarPlan();
         $NCPlan->plan   = 'North Central';
         $NCPlan->amount = $data['nc_region_fare'];
+        $NCPlan->extra_hour = $data['extra_hour'];
         $NCPlan->tenant_id = $car->tenant_id;
         $NCPlan->car_id = $car->id;
         $NCPlan->save();

@@ -441,7 +441,7 @@
                                 <div class="row">
                                     <div class="col-12">
                                         <h6 class="text-start">{{Ucfirst($car->car)}}</h6>
-{{--                                        <p class="text-start" style="font-size: 17px;"><span>Lorem ipsum&nbsp;&nbsp;</span></p>--}}
+                                        <h6 class="text-start" style="font-size: 17px;"><span>{{Ucfirst($car->car_name)}}&nbsp;&nbsp;</span></h6>
                                         <p>
                                             {{ \Illuminate\Support\Str::limit($car->description, $limit = 150, $end = '...') }}
                                         </p>

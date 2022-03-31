@@ -184,6 +184,7 @@
 <script src="https://unpkg.com/@bootstrapstudio/bootstrap-better-nav/dist/bootstrap-better-nav.min.js" type="module"></script>
 <script src="{{asset('new-assets/js/Ultimate-Testimonial-Slider-BS5.js')}}"></script>
 <script type="text/javascript">
+
     function busnav()
     {
         document.getElementById("bus_booking").style.backgroundColor = "#343f5f";
@@ -205,8 +206,26 @@
         document.getElementById("return_trip").style.backgroundColor = "rgb(200,200,200)";
 
         document.getElementById('trip_type').value = 1;
+
+        oneWayFerryTrip()
     }
 
+    function oneWayTrip()
+    {
+        document.getElementById("one_way_trip").style.backgroundColor = "#343f5f";
+        document.getElementById("one_way_trip").style.borderColor = "#343f5f";
+        document.getElementById("one_way_trip").style.color = "#fff";
+        document.getElementById('trip_type').value = 1;
+
+        document.getElementById("return_date_box").style.display = "none";
+
+        document.getElementById("return_trip").style.backgroundColor = "rgb(200,200,200)";
+        document.getElementById("return_trip").style.borderColor = "rgb(200,200,200)";
+        document.getElementById("return_trip").style.color = "#000";
+
+
+
+    }
 
    function  ReturnTrip()
    {
@@ -214,29 +233,39 @@
        document.getElementById("return_trip").style.borderColor = "#343f5f";
        document.getElementById("return_trip").style.color = "#fff";
        document.getElementById('trip_type').value = 2;
-
        document.getElementById("one_way_trip").style.backgroundColor = "rgb(200,200,200)";
        document.getElementById("one_way_trip").style.borderColor = "rgb(200,200,200)";
        document.getElementById("one_way_trip").style.color = "#000";
-
        document.getElementById("return_date_box").style.display = "block";
 
-
-
    }
 
-   function oneWayTrip()
-   {
-       document.getElementById("one_way_trip").style.backgroundColor = "#343f5f";
-       document.getElementById("one_way_trip").style.borderColor = "#343f5f";
-       document.getElementById("one_way_trip").style.color = "#fff";
-       document.getElementById('trip_type').value = 1;
+    function oneWayFerryTrip()
+    {
+        document.getElementById("one_way_ferry_trip").style.backgroundColor = "#343f5f";
+        document.getElementById("one_way_ferry_trip").style.borderColor = "#343f5f";
+        document.getElementById("one_way_ferry_trip").style.color = "#fff";
+        document.getElementById('ferry_trip_type').value = 1;
 
-       document.getElementById("return_trip").style.backgroundColor = "rgb(200,200,200)";
-       document.getElementById("return_trip").style.borderColor = "rgb(200,200,200)";
-       document.getElementById("return_trip").style.color = "#000";
+        document.getElementById("return_ferry_trip").style.backgroundColor = "rgb(200,200,200)";
+        document.getElementById("return_ferry_trip").style.borderColor = "rgb(200,200,200)";
+        document.getElementById("return_ferry_trip").style.color = "#000";
+        document.getElementById("ferry_return_date").style.display = "none";
+    }
 
-   }
+    function ReturnFerryTrip()
+    {
+        document.getElementById("return_ferry_trip").style.backgroundColor = "#343f5f";
+        document.getElementById("return_ferry_trip").style.borderColor = "#343f5f";
+        document.getElementById("return_ferry_trip").style.color = "#fff";
+        document.getElementById('ferry_trip_type').value = 2;
+        document.getElementById("one_way_ferry_trip").style.backgroundColor = "rgb(200,200,200)";
+        document.getElementById("one_way_ferry_trip").style.borderColor = "rgb(200,200,200)";
+        document.getElementById("one_way_ferry_trip").style.color = "#000";
+        document.getElementById("ferry_return_date").style.display = "block";
+    }
+
+
 
 
     function trainnav()
@@ -280,13 +309,7 @@
         toastr.error(message, 'Error');
     }
 
-    var id = '1';
-    if (id == '1') {
-        document.getElementById('websignupdiv').style.display="none";
-        document.getElementById('profileshow').style.display="block";
-    }else if(id == '0'){
-        document.getElementById('profileshow').style.display="none";
-    }
+
 </script>
 @jquery
 @toastr_js

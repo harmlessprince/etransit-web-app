@@ -18,4 +18,9 @@ class Passenger extends Model
     {
         return $this->belongsTo(SeatTracker::class , 'seat_tracker_id','id');
     }
+
+    public function schedule()
+    {
+        return $this->belongsTo(Schedule::class );
+    }
 }

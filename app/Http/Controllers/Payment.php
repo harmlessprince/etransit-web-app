@@ -45,19 +45,24 @@ class Payment extends Controller
 //                "description" => "Purchase of " . request()->service .' '. now()
             ],
             "meta"=>[
-                "schedule_id"     => request()->schedule_id ?? null,
-                "description"     =>  "Payment for " . request()->service .' at '. now() ,
-                "user_id"         =>  auth()->user()->id,
-                "childrenCount"   => request()->childrenCount ?? null,
-                "adultCount"      => request()->adultCount ?? null,
-                'service_id'      => request()->service_id,
-                'user_email'      => auth()->user()->email,
-                'user_name'       => auth()->user()->full_name,
-                'plan_id'         => request()->plan_id ?? null ,
-                'car_history_id'  => request()->carhistory_id ?? null ,
-                'cruiseType'      => request()->cruiseType ?? null,
-                'boatTrip_id'     => request()->boatTrip_id ?? null,
-                'tour_id'         => request()->tour_id ?? null,
+                "schedule_id"        => request()->schedule_id ?? null,
+                "description"        =>  "Payment for " . request()->service .' at '. now() ,
+                "user_id"            =>  auth()->user()->id,
+                "childrenCount"      => request()->childrenCount ?? null,
+                "adultCount"         => request()->adultCount ?? null,
+                'service_id'         => request()->service_id,
+                'user_email'         => auth()->user()->email,
+                'user_name'          => auth()->user()->full_name,
+                'plan_id'            => request()->plan_id ?? null ,
+                'car_history_id'     => request()->carhistory_id ?? null ,
+                'cruiseType'         => request()->cruiseType ?? null,
+                'boatTrip_id'        => request()->boatTrip_id ?? null,
+                'tour_id'            => request()->tour_id ?? null,
+                "ferry_trip_id"      => request()->ferry_trip_id ?? null,
+                "childrenCountFerry" => request()->childrenCountFerry ?? null,
+                "adultCountFerry"    => request()->adultCountFerry ?? null,
+                "tripTypeFerry"      => request()->tripTypeFerry ?? null,
+                "fetchFerryScheduleDetailsID" => request()->fetchFerryScheduleDetailsID ?? null,
 
             ]
         ];
@@ -93,6 +98,9 @@ class Payment extends Controller
               switch($serviceId){
                   case 1 :
                       $this->busTickettingPayment($data);
+                      break;
+                  case 3:
+                      $this->ferryPayment($data);
                       break;
                   case 6:
                       $this->carHirePayment($data);
@@ -405,6 +413,73 @@ class Payment extends Controller
         DB::commit();
     }
 
+    public function ferryPayment($data)
+    {
+        DB::beginTransaction();
+
+        $tripSchedule = \App\Models\FerryTrip::where('id', $data['data']['meta']['fetchFerryScheduleDetailsID'])
+            ->select('amount_adult', 'amount_children', 'id', 'number_of_passengers', 'ferry_id')
+            ->first();
+
+        $service = \App\Models\Service::where('id', $data['data']['meta']['service_id'])->first();
+
+        $childrenCountFerry    = (int)   $data['data']['meta']['childrenCountFerry'];
+        $adultCountFerry       = (int)   $data['data']['meta']['adultCountFerry'];
+
+
+        $transactions = new \App\Models\Transaction();
+
+        $transactions->reference     = Reference::generateTrnxRef();
+        $transactions->amount        = (double) $data['data']['amount'];
+        $transactions->trx_ref       = $data['data']['tx_ref'];
+        $transactions->status        = 'Successful';
+        $transactions->description   = $data['data']['meta']['description'];
+        $transactions->user_id       = $data['data']['meta']['user_id'];
+        $transactions->service_id    = $data['data']['meta']['service_id'];
+        $transactions->ferry_trip_id = $data['data']['meta']['ferry_trip_id'];
+        $transactions->save();
+
+        $data["email"] =  auth()->user()->email;
+        $data['name']  =  auth()->user()->full_name;
+
+        $maildata = [
+            'name' => auth()->user()->full_name,
+            'service' => 'Ferry Booking',
+            'transaction' => $transactions
+        ];
+
+        $email = $data["email"];
+
+        Mail::to($email)->send(new \App\Mail\FerryBookings($maildata));
+
+        if ($transactions) {
+            //update the status of seat tracker to booked after payment from selected
+            //0 = available 1 = selected 2 = booked
+            $seatTracker = \App\Models\FerrySeatTracker::where('user_id', $data['data']['meta']['user_id'])
+                ->where('ferry_trip_id', $tripSchedule->id)->where('ferry_id', $tripSchedule->ferry_id)->get();
+
+            for ($i = 0; $i < count($seatTracker); $i++) {
+                $seatTracker[$i]->update([
+                    'booked_status' => 2
+                ]);
+            }
+
+            //update available seats for this schedule and trip
+            $updatedSeatCount = (int)($tripSchedule->number_of_passengers) - ($adultCountFerry + $childrenCountFerry);
+            $tripSchedule->update([
+                'number_of_passengers' => $updatedSeatCount
+            ]);
+
+
+        }
+
+        DB::commit();
+
+//        toastr()->success('Cash Payment made successfully');
+//
+//        return redirect('/');
+    }
+
     public function tourPackagePayment($data)
     {
         DB::beginTransaction();
@@ -414,7 +489,7 @@ class Payment extends Controller
         $transactions->amount = (double) $data['data']['amount'];
         $transactions->status = 'Successful';
         $transactions->description = $data['data']['meta']['description'];
-        $transactions->user_id = auth()->user()->id;
+        $transactions->user_id =  $data['data']['meta']['user_id'];
         $transactions->service_id = $data['data']['meta']['service_id'];
         $transactions->tour_id = $data['data']['meta']['tour_id'];
         $transactions->save();

@@ -60,130 +60,148 @@
     #online_payment{
         display:none;
     }
+    .payment_options , .payment_button{
+        margin-left:30px;
+        margin-top:20px;
+    }
+    .payment_button{
+        background:#DC6513;
+        padding:10px;
+        color:white;
+        border:1px solid #DC6513;
+        width:250px;
+        border-radius:5px;
+        text-align:center;
+        cursor:pointer;
+    }
+    .payment_button:hover{
+        background:#021037;
+        border:1px solid #DC6513;
 
+    }
+    button, input[type="submit"], input[type="reset"] {
+        background: none;
+        color: inherit;
+        border: none;
+        padding: 0;
+        font: inherit;
+        cursor: pointer;
+        outline: inherit;
+    }
 </style>
 @section('content')
-    <div class="payment-box container">
-        <div class="payment">
-            <h3>PAYMENT</h3>
-            <p>Hire Our vehicles for your various trips and occasion </p>
-            <h5>SELECT PAYMENT METHOD</h5>
-            <div>
-                <select class="select_payment" id="select_payment_option" onchange="changeFunc();">
-                    <option value="0">Choose Payment Option</option>
-                    <option value="1">Online Payment</option>
-                    <option value="2">Cash Payment</option>
-                </select>
-            </div>
-            <div class="payment_button" id="online_payment">
-                <form method="POST" action="{{ route('pay') }}" id="paymentForm">
-                    {{ csrf_field() }}
-
-                    <input type="hidden" name="name" value="{{auth()->user()->full_name}}" placeholder="Name" />
-                    <input type="hidden" name="email" type="email" value="{{auth()->user()->email}}" placeholder="Your Email" />
-                    <input type="hidden" name="phone" type="tel" value="{{auth()->user()->phone_number}}" placeholder="Phone number" />
-                    <input type="hidden" name="amount" value="{{$plan->amount}}"/>
-                    <input type="hidden" name="plan_id" value="{{$plan->id}}"/>
-                    <input type="hidden" name="service" value="{{$service->name}}" />
-                    <input type="hidden" name="service_id" value="{{$service->id}}" />
-                    <input type="hidden" name="carhistory_id" value="{{$recordOperation->id}}" />
-                    <input type="submit" value="Buy Ticket Online" />
-                </form>
-            </div>
-            <div class="payment_button" id="cash_payment_option">
-                <a href="{{url('car-hire/cash/payment/'.$recordOperation->id).'/method'}}" class="cash_payment" >Pay With Cash</a>
-            </div>
-            <div class="payment_options">
-                <img src="{{asset('images/icons/mastercard.png')}}" width="70" height="50"/>
-                <img src="{{asset('images/icons/visa.png')}}" width="70" height="50"/>
-            </div>
-        </div>
-        <div class="receipt-box">
-            <div class="receipt-box-content">
-                <div class="receipt-destination-box">
-                    <div class="receipt-header">
-{{--                        <div class="receipt-header-image">--}}
-{{--                            <img src="{{asset('images/icons/shuttle.png')}}" width="30" height="40" />--}}
-{{--                        </div>--}}
-
+<section style="padding-left: 0px;background: var(--bs-gray-100);">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6" style="padding: 50px;padding-top: 50px;padding-bottom: 50px;background: var(--bs-gray-100);">
+                <div class="row">
+                    <div class="col-12">
+                        <h6 style="padding-left: 10px;">PAYMENT</h6>
                     </div>
-                    <div class="destination_container">
-                        <div class="receipt-header-destination-box">
-                            <div class="orange-dot"></div>
-                            <div  class="header_text">
-                               <h6>
-                                   {{strtoupper($plan->car->car_name)}}
-                                   ({{strtoupper($plan->car->car_registration)}})
-                               </h6>
-                            </div>
+                    <div class="col-12" style="padding-right: 0px;padding-left: 0px;text-align: left;">
+                        <ul>
+                            <li>Hire our vehicles for your various trips and occasion</li>
+                        </ul>
+                    </div>
+                    <div class="col-12" style="padding-right: 0px;padding-left: 0px;margin-top: 40px;">
+                        <p style="padding-left: 27px;">SELECT PAYMENT METHOD</p>
+                        <div>
+                            <select class="select_payment" id="select_payment_option" onchange="changeFunc();">
+                                <option value="0">Choose Payment Option</option>
+                                <option value="1">Online Payment</option>
+                                <option value="2">Cash Payment</option>
+                            </select>
                         </div>
-                        <div class="liner"></div>
-                        <div class="receipt-header-destination-box">
-                            <div class="orange-outer-line"></div>
-                            <div  class="exectuvie_header">
-                                <h6>{{strtoupper($plan->plan)}}</h6>
-                            </div>
-                            <div class="arrow_up">
-                                <img src="{{asset('images/icons/arrow_down.png')}}" />
-                                <img src="{{asset('images/icons/arrow_up.png')}}" />
-                            </div>
+                        <div class="payment_button" id="online_payment">
+                            <form method="POST" action="{{ route('pay') }}" id="paymentForm">
+                                {{ csrf_field() }}
 
+                                <input type="hidden" name="name" value="{{auth()->user()->full_name}}" placeholder="Name" />
+                                <input type="hidden" name="email" type="email" value="{{auth()->user()->email}}" placeholder="Your Email" />
+                                <input type="hidden" name="phone" type="tel" value="{{auth()->user()->phone_number}}" placeholder="Phone number" />
+                                <input type="hidden" name="amount" value="{{$plan->amount}}"/>
+                                <input type="hidden" name="plan_id" value="{{$plan->id}}"/>
+                                <input type="hidden" name="service" value="{{$service->name}}" />
+                                <input type="hidden" name="service_id" value="{{$service->id}}" />
+                                <input type="hidden" name="carhistory_id" value="{{$recordOperation->id}}" />
+                                <input type="submit" value="Buy Ticket Online" />
+                            </form>
+                        </div>
+                        <div class="payment_button" id="cash_payment_option">
+                            <a href="{{url('car-hire/cash/payment/'.$recordOperation->id).'/method'}}" class="cash_payment" >Pay With Cash</a>
+                        </div>
+                    </div>
+                    <div class="col-12" style="padding-right: 0px;padding-left: 0px;margin-top: 15px;">
+                        <div class="row">
+                            <div class="col-4" style="text-align: center;"><img src="{{asset('new-assets/img/MasterCard_Logo%201.svg')}}"></div>
+                            <div class="col-8"><img src="{{asset('new-assets/img/favpng_visa-debit-card-credit-card-logo-mastercard%201%20(1).svg')}}"></div>
                         </div>
                     </div>
                 </div>
-                <div class="receipt-calc-box">
-                    <div class="receipt_date">
-                        <div class="pickup_date">
-                            <h6>DATE</h6>
-                            <small>{{ $recordOperation->date->format('d M Y')}}</small>
-                        </div>
-                        <div class="pickup_time">
-                            <h6>TIME</h6>
-                            <small>{{ $recordOperation->time}}</small>
-                        </div>
-                    </div>
-                    <div class="passenger_details">
-                        <div class="passengers_payment">
-                            <h6>Amount</h6>
-                        </div>
-                        <div class="transport_amount">
-                           <h5> &#8358;  {{ number_format($plan->amount)}}</h5>
-                        </div>
-                    </div>
-                    <div class="passenger_details">
-                        <div class="passengers_payment">
-                            <h6>Discount</h6>
-                        </div>
-                        <div class="transport_amount">
-                            <h5> 0 %</h5>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="receipt_total">
-                        <div class="total_box" >
-                            <b>
-                                Total
-                            </b>
-                        </div>
-                        <div class="price_box" >
-                            <b>
-                                &#x20A6; {{number_format($plan->amount)}}
-                            </b>
+            </div>
+            <div class="col-sm-6" id="secondtab" style="padding: 50px;padding-top: 50px;padding-bottom: 50px;background: #ffffff;text-align: center;">
+                <div class="row" style="margin-top: 0px;padding: 24px;box-shadow: 1px 1px 6px rgb(231,231,231);border-left-width: 1px;border-radius: 10px;width: 285px;margin-left: 13px;padding-left: 0px;padding-right: 0px;padding-top: 11px;background: #f8f9fa;padding-bottom: 0px;">
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-2" style="text-align: left;padding-left: 5px;padding-right: 5px;">
+                                <i class="fas fa-bus" style="border-radius: 20px;color: rgb(255,255,255);background: #f8a159;border: 10px solid #f8a159 ;"></i></div>
+                            <div class="col" style="text-align: left;">
+                                <span class="d-block" style="color: rgb(52,63,95);font-size: 14px;"><strong>{{strtoupper($plan->car->car_name)}}</strong></span>
+                                <span class="d-block" style="color: var(--bs-gray);font-size: 14px;">{{strtoupper($plan->car->car_registration)}}</span>
+                            <span class="d-block" style="color: var(--bs-gray);font-size: 14px;">{{strtoupper($plan->plan)}} - (PLAN)</span>
+                            </div>
 
                         </div>
                     </div>
-                    <hr>
-                    <div class="barcode_receipt">
-                        <div class="barcode_img">{!! DNS1D::getBarcodeHTML('4445645656', 'UPCA') !!}</div>
+                    <div class="col-12" style="padding-left: 0px;">
+                        <hr id="linecut" style="width: 259px;">
                     </div>
-                    <div class="receipt_validity">
-                        <small>Valid till Tuesday 28th after purchase</small>
+                    <div class="col-12" style="border-top-left-radius: 16px;border-top-right-radius: 20px;background: var(--bs-white);box-shadow: 1px 0px 8px rgb(227,227,228);">
+                        <div class="table-responsive fs-6" style="font-size: 14px;border-bottom-width: 1px;border-bottom-style: dashed;">
+                            <table class="table table-borderless">
+                                <tbody>
+                                <tr>
+                                    <td style="font-size: 12px;color: var(--bs-gray-600);text-align: left;"><strong>DATE</strong></td>
+                                    <td style="font-size: 12px;color: var(--bs-gray-600);"><strong>TIME</strong></td>
+                                </tr>
+                                <tr>
+                                    <td style="color: var(--bs-gray-600);font-size: 12px;text-align: left;">{{ $recordOperation->date->format('d M Y')}}</td>
+                                    <td style="color: var(--bs-gray-600);font-size: 12px;">{{ $recordOperation->time}}</td>
+                                </tr>
+                                <tr>
+                                    <td style="font-size: 12px;color: var(--bs-gray-600);text-align: left;"><strong>Extra Hour Charge</strong></td>
+                                    <td style="font-size: 12px;color: var(--bs-gray-600);"><strong> &#x20A6; {{number_format($plan->extra_hour)}}</strong></td>
+                                </tr>
+{{--                                <tr>--}}
+{{--                                    <td style="color: var(--bs-gray-600);font-size: 12px;text-align: left;">3 Adult (s)</td>--}}
+{{--                                    <td style="color: var(--bs-gray-600);font-size: 12px;">9,000</td>--}}
+{{--                                </tr>--}}
+                                <tr>
+                                    <td style="color: var(--bs-gray-600);font-size: 12px;text-align: left;"><strong>DISCOUNT</strong></td>
+                                    <td style="color: var(--bs-gray-600);font-size: 12px;"><strong>0%</strong></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-6" style="padding-right: 0px;border-bottom-width: 1px;border-bottom-style: none;background: var(--bs-white);">
+                        <h6 style="border-bottom-width: 1px;border-bottom-style: dashed;padding-top: 10px;padding-bottom: 10px;color: rgb(52,63,95);"><strong>Total:   &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </strong></h6>
+                    </div>
+                    <div class="col-6" style="padding-left: 0px;background: var(--bs-white);">
+                        <h6 class="text-center" style="border-bottom-width: 1px;border-bottom-style: dashed;padding-top: 10px;padding-bottom: 10px;color: rgb(52,63,95);"><strong> &#x20A6; {{number_format($plan->amount)}}</strong></h6>
+                    </div>
+                    <div class="col-12" style="background: var(--bs-white);border-bottom-right-radius: 10px;border-bottom-left-radius: 10px;">
+{{--                        {!! DNS1D::getBarcodeHTML('4445645656', 'UPCA') !!}--}}
+                        <img class="img-fluid d-inline" src="{{asset('new-assets/img/barcode%201.png')}}" style="width: 72px;">
+                        <img class="img-fluid d-inline" src="{{asset('new-assets/img/barcode%202.png')}}" style="width: 72px;">
+                        <img class="img-fluid d-inline" src="{{asset('new-assets/img/barcode%203.png')}}" style="height: 52.3594px;font-size: 8px;">
+                        <p style="font-size: 11px;color: rgb(161,162,163);letter-spacing: -1px;">Valid until Tuesday 28th after purchase</p>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
+</section>
     <script type="text/javascript">
 
         function changeFunc() {

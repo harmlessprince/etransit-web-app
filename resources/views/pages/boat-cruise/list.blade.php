@@ -155,7 +155,7 @@
                                 <div class="align-items-center align-content-center card-footer">
                                     <ul class="list-unstyled text-center d-md-inline-flex m-auto d-md-inline in" id="rating-1" display="inline-block" gap="20px">
                                         <li style="font-size: 14px;color: #afafb0;"><i class="fa fa-star" style="color: var(--bs-yellow);"></i>&nbsp;4.7/5 Ratings&nbsp; &nbsp; &nbsp; &nbsp;</li>
-                                        <li class="justify-content-end" style="font-size: 14px;color: #afafb0;"><i class="icon ion-location" style="color: var(--bs-orange);"></i>{{$boat->cruiselocation->destination}}.</li>
+                                        <li class="justify-content-end" style="font-size: 14px;color: #afafb0;"><i class="icon ion-location" style="color: var(--bs-orange);"></i>{{$boat->cruiselocation->destination}}</li>
                                     </ul>
                                 </div>
                             </div>

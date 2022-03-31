@@ -18,7 +18,9 @@ use App\Http\Controllers\Eticket\ManageRoles;
 use App\Http\Controllers\Eticket\StaffMgt;
 use App\Http\Controllers\Eticket\TourPackage;
 use App\Http\Controllers\Ferry;
+use App\Http\Controllers\FerryBookings;
 use App\Http\Controllers\Login;
+use App\Http\Controllers\Manifest;
 use App\Http\Controllers\Operator;
 use App\Http\Controllers\Page;
 use App\Http\Controllers\Parcel;
@@ -78,6 +80,9 @@ Route::get('/pick-up-city/{state_id}', [ParcelMgt::class ,'fetchCities']);
 Route::get('login/{provider}', [SocialController::class ,'redirect']);
 Route::get('login/{provider}/callback',[SocialController::class ,'Callback']);
 
+//ferry post
+Route::post('/ferry/bookings' , [FerryBookings::class ,'bookFerry']);
+
 //check PDF
 Route::get('check-pdf' , function(){
    return view('pdf.boat-cruise');
@@ -122,7 +127,12 @@ Route::group(['middleware' => ['auth','prevent-back-history']], function() {
     Route::post('send-parcel-info', [ParcelMgt::class ,'sendParcel']);
     Route::post('parcel-cash-payment' , [ParcelMgt::class , 'handleCashPayment'])->name('parcel-cash-payment');
 
-
+    //book ferry
+    Route::get('view-ferry-seats/{ferry_trip_id}/{tripType}',[FerryBookings::class , 'selectFerrySeat']);
+    Route::post('select-ferry-seat' , [FerryBookings::class , 'FerrySelectorTracker'])->name('select-ferry-seat');
+    Route::post('de-select-ferry-seat',[FerryBookings::class ,'deselectFerrySeat'])->name('de-select-ferry-seat');
+    Route::post('add-passenger-seat', [FerryBookings::class ,'bookTripForFerryPassenger'])->name('add-passenger-seat');
+    Route::post('ferry-cash-payment' ,[FerryBookings::class , 'handleFerryCashPayment']);
 
 
 });
@@ -134,18 +144,22 @@ Route::prefix('admin')->name('admin.')->group(function(){
     Route::get('' , [AdminLogin::class , 'showLoginForm'])->name('login.page');
     Route::post('/logout-admin',[AdminLogin::class , 'logout'] )->name('logout');
     Route::post('/login-user' , [AdminLogin::class , 'loginAdmin'])->name('login');
+
     //bulk import buses
     Route::get('import', [Vehicle::class, 'importExportView']);
     Route::get('export/vehicle', [Vehicle::class, 'exportVehicle'])->name('export.vehicle');
     Route::post('import/vehicle', [Vehicle::class, 'importVehicle'])->name('import.vehicle');
+
     //bulk import terminals
     Route::get('import-terminal', [Terminal::class, 'importExportViewTerminal']);
     Route::get('export/terminal', [Terminal::class, 'exportTerminal'])->name('export.terminal');
     Route::post('import/terminal', [Terminal::class, 'importTerminal'])->name('import.terminal');
+
     //bulk import hired-cars
     Route::get('import-export-cars', [Car::class, 'importExportViewCars']);
     Route::get('export/cars', [Car::class, 'exportCar'])->name('export.car');
     Route::post('import/cars', [Car::class, 'importCars'])->name('import.car');
+
     //bulk import schedule
     Route::get('import-export-schedule', [Schedule::class, 'importExportViewSchedule']);
     Route::get('export/schedule', [Schedule::class, 'exportSchedule'])->name('export.schedule');
@@ -155,6 +169,7 @@ Route::prefix('admin')->name('admin.')->group(function(){
 
 
         Route::get('/dashboard', [Dashboard::class, 'dashboard'])->name('dashboard');
+
         //vehicle management
         Route::get('/manage/vehicle', [Vehicle::class, 'manage'])->name('manage.vehicle');
         Route::get('/manage/tenant-bus' , [Vehicle::class , 'tenantBus'])->name('manage.bus');
@@ -165,6 +180,11 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::get('view-bus-schedule-page/{schedule_id}' , [Vehicle::class , 'viewBusSchedulePage']);
         Route::get('edit-bus/{bus_id}',[Vehicle::class ,'editBus']);
         Route::put('update-bus/{bus_id}',[Vehicle::class , 'updateBus']);
+
+        //check schedule manifest
+        Route::get('schedule-manifest/{schedule_id}', [Manifest::class , 'manifest']);
+        Route::get('fetch-bus-manifest/{schedule_id}', [Manifest::class ,'fetchBusManifest'])->name('fetch-bus-manifest');
+        Route::get('fetch-passenger-details/{seat_tracker_id}', [Manifest::class , 'fetchPassengerDetails']);
 
 
 

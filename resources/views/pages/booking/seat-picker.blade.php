@@ -241,10 +241,7 @@
                                 </div>
 
                                 <div class="passenger_details_form_input">
-
                                 </div>
-
-
                             </form>
                         </div>
                     </div>
@@ -364,8 +361,12 @@
                                         <div class="row d-md-flex">
                                             <div class="col-md-12"><label class="col-form-label" style="font-size: 14px;color: var(--bs-gray-500);">AGE GROUP</label></div>
                                             <div class="col-md-12 d-inline-flex" style="padding-right: 0px;padding-left: 5px;">
-                                                <div class="form-check d-inline-flex" style="margin-left: 1px;"><input class="form-check-input" type="checkbox" name="passenger_option[]" id="formCheck-1" style="background: rgba(255,255,255,0);"><label class="form-check-label" for="formCheck-1" style="font-size: 14px;">&nbsp; Adult</label></div>
-                                                <div class="form-check d-inline-flex" style="margin-left: 18px;"><input class="form-check-input" type="checkbox" name="passenger_option[]" id="formCheck-2" style="background: rgba(255,255,255,0);"><label class="form-check-label" for="formCheck-2" style="font-size: 14px;">&nbsp; Child</label></div>
+                                                <div class="form-check d-inline-flex" style="margin-left: 1px;">
+                                                    <input class="form-check-input" type="checkbox" name="passenger_option[]" value="adult" id="formCheck-1">
+                                                    <label class="form-check-label" for="formCheck-1" style="font-size: 14px;">&nbsp; Adult</label></div>
+                                                <div class="form-check d-inline-flex" style="margin-left: 18px;">
+                                                    <input class="form-check-input" type="checkbox" name="passenger_option[]" value="children" id="formCheck-2" >
+                                                    <label class="form-check-label" for="formCheck-2" style="font-size: 14px;">&nbsp; Child</label></div>
                                             </div>
                                         </div>
                                     </div>

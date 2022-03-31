@@ -10,6 +10,16 @@ class FerryTrip extends Model
     use HasFactory;
     protected  $guarded = ['id'];
 
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'event_date' => 'datetime',
+    ];
+
+
 
     public function ferry()
     {
