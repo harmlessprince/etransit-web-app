@@ -266,6 +266,34 @@
     }
 
 
+    function oneWayTrainTrip()
+    {
+        document.getElementById("one_way_train_trip").style.backgroundColor = "#343f5f";
+        document.getElementById("one_way_train_trip").style.borderColor = "#343f5f";
+        document.getElementById("one_way_train_trip").style.color = "#fff";
+
+        document.getElementById('train_trip_type').value = 1;
+
+        document.getElementById("return_train_trip").style.backgroundColor = "rgb(200,200,200)";
+        document.getElementById("return_train_trip").style.borderColor = "rgb(200,200,200)";
+        document.getElementById("return_train_trip").style.color = "#000";
+        document.getElementById("train_return_date").style.display = "none";
+    }
+
+    function ReturnTrainTrip()
+    {
+        document.getElementById("return_train_trip").style.backgroundColor = "#343f5f";
+        document.getElementById("return_train_trip").style.borderColor = "#343f5f";
+        document.getElementById("return_train_trip").style.color = "#fff";
+
+        document.getElementById('train_trip_type').value = 2;
+
+        document.getElementById("one_way_train_trip").style.backgroundColor = "rgb(200,200,200)";
+        document.getElementById("one_way_train_trip").style.borderColor = "rgb(200,200,200)";
+        document.getElementById("one_way_train_trip").style.color = "#000";
+        document.getElementById("train_return_date").style.display = "block";
+    }
+
 
 
     function trainnav()
@@ -280,6 +308,8 @@
         document.getElementById("bus_booking").style.backgroundColor = "#fff";
         document.getElementById("ferry_booking").style.backgroundColor = "#fff";
         document.getElementById("flight_booking").style.backgroundColor = "#fff";
+
+        document.getElementById('train_trip_type').value = 1;
     }
 
     function cruisenav()

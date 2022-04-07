@@ -363,7 +363,7 @@ label{
                                 success:function(data) {
                                     $('select[name="city"]').empty();
                                     $.each(data, function(key, value) {
-                                        console.log(value)
+                                       // console.log(value)
                                         $('select[name="city"]').append('<option value="'+ value.id +'">'+ value.name +'</option>');
                                     });
 

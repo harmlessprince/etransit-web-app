@@ -62,7 +62,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="align-text">
-                            <h1>100</h1>
+                            <h1>&#x20A6; {{number_format($transactionSum) }}</h1>
                             <h6>Transaction(s)</h6>
                         </div>
                     </div>

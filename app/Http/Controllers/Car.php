@@ -343,6 +343,7 @@ class Car extends Controller
 
                   //so check if the date selected does not match any date  already booked to be used
                   $findCarHistroryForThisDate = CarHistory::where('payment_status','!=','Unpaid')
+                                                             ->where('car_id',$plan->car_id)
                                                               ->where('date','=',$data['date'])
                                                               ->where('isConfirmed' ,'=','True')
                                                               ->first();
@@ -437,7 +438,8 @@ class Car extends Controller
        $transaction->service_id       =  $fetchService_id->service_id;
        $transaction->transaction_type = 'cash payment';
        $transaction->user_id          =  auth()->user()->id;
-//       $transaction->car_plan_id      =  $carHistory->car_plan_id;
+       $transaction->tenant_id        =  $carHistory->car->tenant_id;
+//       $transaction->car_plan_id   =  $carHistory->car_plan_id;
        $transaction->car_history_id   =  $history_id;
        $transaction->description      = 'A cash payment for made successfully';
 

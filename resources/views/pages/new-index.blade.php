@@ -124,8 +124,10 @@
                 <form method="POST" action="{{url('/bus/bookings')}}">
                     @csrf
                     <div class="row" style="background: #ffffff;padding-top: 20px;padding-bottom: 20px;border-style: none;border-bottom: 1px none rgb(217,218,220) ;">
-                        <div class="col"><button class="" type="button" id="one_way_trip" onclick="oneWayTrip()" style="margin-right: 5px;margin-left: 5px;width: 160px;border-style: none; border-bottom-style: none; padding:10px;">One way</button>
-                            <button class="getspace" id="return_trip" type="button" onclick="ReturnTrip()" style="margin-right: 5px;margin-left: 5px;width: 160px; border-style: none;border-bottom-style: none; padding:10px;">Round Trip</button></div>
+                        <div class="col">
+                            <button class="" type="button" id="one_way_trip" onclick="oneWayTrip()" style="margin-right: 5px;margin-left: 5px;width: 160px;border-style: none; border-bottom-style: none; padding:10px;">One way</button>
+                            <button class="getspace" id="return_trip" type="button" onclick="ReturnTrip()" style="margin-right: 5px;margin-left: 5px;width: 160px; border-style: none;border-bottom-style: none; padding:10px;">Round Trip</button>
+                        </div>
                         <input type="hidden" name="service_id"  value="{{$busService->id}}" />
                         <input type="hidden" name="trip_type" id="trip_type" class="one-way-trip-input" id="trip-form" value="" />
                     </div>
@@ -155,7 +157,9 @@
                             </div>
                             <div class="row" style="margin-bottom: 10px;">
                                 <div class="col-sm-6 col-md-4 createspace">
-                                    <label class="form-label d-block" style="margin-bottom: 8px;font-size: 14px;"><strong>LOCATION</strong></label>
+                                    <label class="form-label d-block" style="margin-bottom: 8px;font-size: 14px;">
+                                        <strong>LOCATION</strong>
+                                    </label>
                                     <span class="d-block" style="font-size: 9px;color: rgb(146,150,154);">TRAVELING FROM</span>
                                     <select class="form-select" name="destination_from"  style="border-style: none;border-right-style: solid;border-radius: 0px;">
                                        @foreach($locations as $location)
@@ -176,35 +180,68 @@
                 </form>
             </div>
             <div id="train_form">
-                <form method="POST" action="{{url('/bus/bookings')}}">
+                <form method="POST" action="{{url('/train/bookings')}}">
                     @csrf
                     <div class="row" style="background: #ffffff;padding-top: 20px;padding-bottom: 20px;border-style: none;border-bottom: 1px none rgb(217,218,220) ;">
-                        <div class="col"><button class="btn btn-primary" type="button" style="margin-right: 5px;margin-left: 5px;width: 160px;background: rgb(52,63,95);border-style: none;border-bottom-style: none;">One way</button><button class="btn btn-primary .getspace" type="button" style="margin-right: 5px;margin-left: 5px;width: 160px;background: rgb(200,200,200);border-style: none;border-bottom-style: none;">Round Trip</button></div>
+                        <div class="col">
+                            <button class="btn btn-primary" type="button" id="one_way_train_trip" style="margin-right: 5px;margin-left: 5px;width: 160px;background: rgb(52,63,95);border-style: none;border-bottom-style: none;" onclick="oneWayTrainTrip()">One way</button>
+                            <button class="btn btn-primary .getspace" id="return_train_trip" type="button" style="margin-right: 5px;margin-left: 5px;width: 160px;background: rgb(200,200,200);border-style: none;border-bottom-style: none;" onclick="ReturnTrainTrip()">Round Trip</button>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col">
                             <div class="row d-flex" style="background: #ffffff;border-style: none;border-bottom: 1px none rgb(217,218,220) ;">
-                                <div class="col-sm-6 col-md-4" style="padding-top: 10px;"><label class="form-label" style="font-size: 14px;"><strong>DEPARTURE DATE</strong></label><input class="form-control" id="datemob" type="date" style="border-style: none;border-right-style: solid;border-radius: 0px;"></div>
+                                <div class="col-sm-6 col-md-4" style="padding-top: 10px;">
+                                    <label class="form-label" style="font-size: 14px;">
+                                        <strong>DEPARTURE DATE</strong>
+                                    </label>
+                                    <input class="form-control" id="datemob" name="departure_date" type="date" style="border-style: none;border-right-style: solid;border-radius: 0px;">
+                                </div>
                                 <div class="col-sm-6 col-md-4 .getspace" style="padding-top: 10px;">
                                     <ul class="list-inline" id="listposition">
-                                        <li class="list-inline-item"><a class="text-decoration-none" href="#" style="color: var(--bs-orange);">TODAY</a></li>
+                                        <li class="list-inline-item">
+                                            <a class="text-decoration-none" href="#" style="color: var(--bs-orange);">TODAY</a>
+                                        </li>
                                         <li class="list-inline-item">|</li>
-                                        <li class="list-inline-item"><a class="text-decoration-none" href="#" style="color: var(--bs-dark);">TOMORROW</a></li>
+                                        <li class="list-inline-item">
+                                            <a class="text-decoration-none" href="#" style="color: var(--bs-dark);">TOMORROW</a>
+                                        </li>
                                     </ul>
+                                    <input type="hidden" name="tripType" id="train_trip_type"  value="" />
                                 </div>
-                                <div class="col-sm-6 col-md-4 getalign" style="padding-top: 10px;text-align: center;"><label class="form-label" style="font-size: 14px;">NO. OF PERSON</label><select class="form-select" style="text-align: center;border-style: none;border-bottom-style: solid;border-radius: 0px;">
+                                <div class="col-sm-6 col-md-4 getalign" style="padding-top: 10px;text-align: center;">
+                                    <label class="form-label" style="font-size: 14px;">NO. OF PERSON</label>
+                                    <select class="form-select" style="text-align: center;border-style: none;border-bottom-style: solid;border-radius: 0px;" name="passenger">
                                         <option value="1" selected="">1</option>
                                         <option value="2">2</option>
                                         <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10</option>
                                     </select></div>
                             </div>
                             <div class="row" style="margin-bottom: 10px;">
-                                <div class="col-sm-6 col-md-4 createspace"><label class="form-label d-block" style="margin-bottom: 8px;font-size: 14px;"><strong>LOCATION</strong></label><span class="d-block" style="font-size: 9px;color: rgb(146,150,154);">TRAVELING FROM</span><select class="form-select" style="border-style: none;border-right-style: solid;border-radius: 0px;">
-                                        <option value="Abia" selected="">Abia</option>
-                                    </select></div>
-                                <div class="col-sm-6 col-md-4"><span class="d-block" id="spanposition" style="font-size: 9px;color: rgb(146,150,154);">TRAVELING TO</span><select class="form-select" style="border-style: none;border-right-style: solid;border-radius: 0px;">
-                                        <option value="Lagos" selected="">Lagos</option>
-                                    </select></div>
+                                <div class="col-sm-6 col-md-4 createspace"><label class="form-label d-block" style="margin-bottom: 8px;font-size: 14px;">
+                                        <strong>LOCATION</strong></label>
+                                            <span class="d-block" style="font-size: 9px;color: rgb(146,150,154);">TRAVELING FROM</span>
+                                            <select class="form-select" style="border-style: none;border-right-style: solid;border-radius: 0px;" name="destination_from">
+                                                @foreach($train_locations as $train_location)
+                                                <option value="{{$train_location->id}}" selected="">{{$train_location->locations_state}}</option>
+                                                @endforeach
+                                             </select>
+                                    </div>
+                                <div class="col-sm-6 col-md-4">
+                                    <span class="d-block" id="spanposition" style="font-size: 9px;color: rgb(146,150,154);">TRAVELING TO</span>
+                                    <select class="form-select" style="border-style: none;border-right-style: solid;border-radius: 0px;" name="destination_to">
+                                        @foreach($train_locations as $train_location)
+                                            <option value="{{$train_location->id}}" selected="">{{$train_location->locations_state}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                                 <div class="col-sm-12 col-md-4 d-lg-flex justify-content-lg-center align-items-lg-end" style="text-align: center;padding-right: 5px;padding-left: 4px;"><button class="btn btn-primary" type="submit" style="margin-right: 5px;margin-left: 5px;width: auto;background: rgb(52,63,95);border-style: none;border-bottom-style: none;padding-right: 50px;padding-left: 50px;">PROCEED</button></div>
                             </div>
                         </div>

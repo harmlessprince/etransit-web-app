@@ -83,6 +83,12 @@ Route::get('login/{provider}/callback',[SocialController::class ,'Callback']);
 //ferry post
 Route::post('/ferry/bookings' , [FerryBookings::class ,'bookFerry']);
 
+//train bookings
+Route::post('train/bookings',[Train::class ,'checkSchedule']);
+//Route::get('train/seat-picker/{schedule_id}/{tripType}', [Train::class , 'trainSeatPicker'])->middleware('auth');
+
+
+
 //check PDF
 Route::get('check-pdf' , function(){
    return view('pdf.boat-cruise');
@@ -134,6 +140,15 @@ Route::group(['middleware' => ['auth','prevent-back-history']], function() {
     Route::post('add-passenger-seat', [FerryBookings::class ,'bookTripForFerryPassenger'])->name('add-passenger-seat');
     Route::post('ferry-cash-payment' ,[FerryBookings::class , 'handleFerryCashPayment']);
 
+    //train
+    Route::get('train/seat-picker/{schedule_id}/{train_id}/{tripType}', [Train::class , 'trainSeatPicker']);
+    Route::post('book/train/trip/{schedule_id}',[Train::class , 'passengerDetails']);
+    Route::post('train/select-seat',[Train::class , 'selectSeat'])->name('train.select-seat');
+    Route::post('train/de-select-seat',[Train::class ,'DeselectSeat'])->name('train.de-select-seat');
+    Route::post('train/cash-payment',[Train::class , 'handleCashPayment']);
+
+
+
 
 });
 
@@ -166,7 +181,6 @@ Route::prefix('admin')->name('admin.')->group(function(){
     Route::post('import/schedule', [Schedule::class, 'importSchedule'])->name('import.schedule');
 
     Route::group(['middleware' => ['admin','prevent-back-history','permissions']], function() {
-
 
         Route::get('/dashboard', [Dashboard::class, 'dashboard'])->name('dashboard');
 
@@ -300,6 +314,10 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::post('/manage/train/schedule', [Train::class , 'ScheduleTrainTrip']);
         Route::get('/manage/train/routes-fare' , [Train::class , 'manageRoute']);
         Route::post('/store/train/routes-fare' , [Train::class , 'storeRoute']);
+        Route::get('pick-up-route/{state_id}' , [Train::class , 'fetchStateRoutes']);
+
+        //check RouteFare attached to each schedule
+        Route::get('get-route-fares/{train_schedule_id}' , [Train::class , 'fetchRouteFaresForSchedule']);
 
         //manage customer
         Route::get('/customers',[Customer::class , 'customerIndex']);

@@ -44,31 +44,31 @@
     </div>
     <!-- Container-fluid starts-->
     <div class="container-fluid" >
-        <div class="row three-row-grid">
-            <div class="col-md-3 col-lg-3 col-xl-3 col-sm-3">
-                <a href="{{url('e-ticket/view-tenant-car-history/')}}">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="align-text">
-                                {{--                                <h1>{{$carHistories}}</h1>--}}
-                                <h6>Trip Histories</h6>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
+{{--        <div class="row three-row-grid">--}}
+{{--            <div class="col-md-3 col-lg-3 col-xl-3 col-sm-3">--}}
+{{--                <a href="{{url('e-ticket/view-tenant-car-history/')}}">--}}
+{{--                    <div class="card">--}}
+{{--                        <div class="card-body">--}}
+{{--                            <div class="align-text">--}}
+{{--                                --}}{{--                                <h1>{{$carHistories}}</h1>--}}
+{{--                                <h6>Trip Histories</h6>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </a>--}}
+{{--            </div>--}}
 
-            <div class="col-md-3 col-lg-3 col-xl-3 col-sm-3">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="align-text">
-                            <h1>100</h1>
-                            <h6>Transaction(s)</h6>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+{{--            <div class="col-md-3 col-lg-3 col-xl-3 col-sm-3">--}}
+{{--                <div class="card">--}}
+{{--                    <div class="card-body">--}}
+{{--                        <div class="align-text">--}}
+{{--                            <h1>100</h1>--}}
+{{--                            <h6>Transaction(s)</h6>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
 
         <div class="row">
             <div class="col-md-12 col-xl-12 col-lg-12 col-sm-12">

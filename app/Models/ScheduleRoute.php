@@ -14,8 +14,13 @@ class ScheduleRoute extends Model
         return $this->belongsTo(TrainSchedule::class , 'train_schedule_id');
     }
 
-    public function trainRoutes()
+//    public function trainRoutes()
+//    {
+//        return $this->belongsTo(TrainStop::class , 'train_stop_id');
+//    }
+
+    public function routeFare()
     {
-        return $this->belongsTo(TrainStop::class , 'train_stop_id');
+        return $this->belongsTo(RouteFare::class , 'route_fare_id');
     }
 }

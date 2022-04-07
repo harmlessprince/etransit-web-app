@@ -56,34 +56,10 @@
                 </div>
             </div>
             <div class="col-md-3 col-lg-3 col-xl-3 col-sm-3">
-                <a href="{{url('e-ticket/terminals')}}">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="align-text">
-{{--                                <h1>{{$terminalCount}}</h1>--}}
-                                <h6>Terminal(s)</h6>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-3 col-lg-3 col-xl-3 col-sm-3">
-                <a href="{{url('e-ticket/all-scheduled-trip')}}">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="align-text">
-{{--                                <h1>{{$schedule}}</h1>--}}
-                                <h6>Total Rental</h6>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-3 col-lg-3 col-xl-3 col-sm-3">
                 <div class="card">
                     <div class="card-body">
                         <div class="align-text">
-                            <h1>100</h1>
+                            <h1>&#x20A6; {{$transactionSum}}</h1>
                             <h6>Transaction(s)</h6>
                         </div>
                     </div>

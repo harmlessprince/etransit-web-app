@@ -147,29 +147,72 @@
             <div class="card-body">
                 <form method="post" action="{{url('/admin/store/train/routes-fare')}}">
                     @csrf
-                    <div class="car-box col-md-12">
-                        <div class="form-group">
-                            <label for="train_class">Location (City)</label>
-                            <select class="form-control" name="state" required>
-                                <option value=""> Select City</option>
-                                @foreach($locations as $location)
-                                    <option value="{{$location->id}}">{{$location->locations_state}}</option>
-                                @endforeach
-                            </select>
+                    <div class="row">
+                        <div class="col-md-6 col-lg-6 col-sm-6 col-xl-6">
+                            <div class="form-group">
+                                <label for="train_class">Location (City)</label>
+                                <select class="form-control" name="state" required>
+                                    <option value=""> Select City</option>
+                                    @foreach($locations as $location)
+                                        <option value="{{$location->id}}">{{$location->locations_state}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-6 col-sm-6 col-xl-6">
+                            <div class="form-group">
+                                <label for="class_id">Train Route (Terminal) </label>
+                                <select class="form-control @error('route_id')is-invalid @enderror" id="pickup" name="route_id">
+                                </select>
+                            </div>
+                            @if($errors->has('route_id'))
+                                <span class="invalid-feedback">
+                                <strong >{{ $errors->first('route_id') }}</strong>
+                            </span>
+                            @endif
                         </div>
                     </div>
-                    <div class="car-box col-md-12">
-                        <div class="form-group">
-                            <label for="class_id">Train Route </label>
-                            <select class="form-control" name="route_id" required>
-                                <option value=""> Select Route</option>
-                                @foreach($trainRoutes as $route)
-                                    <option value="{{$route->id}}">{{$route->stop_name}}</option>
-                                @endforeach
-                            </select>
+                   <div class="row">
+                       <div class="col-md-6 col-lg-6 col-sm-6 col-xl-6">
+                           <div class="form-group">
+                               <label for="train_class">Destination (City)</label>
+                               <select class="form-control" name="dest_state" required>
+                                   <option value=""> Select City</option>
+                                   @foreach($locations as $location)
+                                       <option value="{{$location->id}}">{{$location->locations_state}}</option>
+                                   @endforeach
+                               </select>
+                           </div>
+                       </div>
+                       <div class="col-md-6 col-lg-6 col-sm-6 col-xl-6">
+                           <div class="form-group">
+                               <label for="dest_terminal">Train Route (Destination Terminal) </label>
+                               <select class="form-control @error('dest_route_id')is-invalid @enderror" id="dest_terminal" name="dest_route_id">
+                               </select>
+                           </div>
+                           @if($errors->has('route_id'))
+                               <span class="invalid-feedback">
+                                <strong >{{ $errors->first('dest_route_id') }}</strong>
+                            </span>
+                           @endif
+                       </div>
+                   </div>
+                    <div class="row">
+                        <div class="car-box col-md-6 col-lg-6 col-sm-6 col-xl-6">
+                            <div class="form-group">
+                                <label for="amount_adult">Amount (Adult)</label>
+                                <input type="text" name="amount_adult" id="amount_adult" class="form-control" value="{{ old('amount_adult') }}" required />
+                            </div>
+                        </div>
+                        <div class="car-box col-md-6 col-lg-6 col-sm-6 col-xl-6">
+                            <div class="form-group">
+                                <label for="train_class">Amount (Child)</label>
+                                <input type="text" name="amount_child" id="amount_child" class="form-control" value="{{ old('amount_child') }}" required />
+                            </div>
                         </div>
                     </div>
-                    <div class="car-box col-md-12">
+
+                    <div class="col-md-12 col-lg-12 col-sm-12 col-xl-12">
                         <div class="form-group">
                             <label for="class_id">Class </label>
                             <select class="form-control" name="class_id" required>
@@ -180,18 +223,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="car-box col-md-12">
-                        <div class="form-group">
-                            <label for="amount_adult">Amount (Adult)</label>
-                            <input type="text" name="amount_adult" id="amount_adult" class="form-control" value="{{ old('amount_adult') }}" required />
-                        </div>
-                    </div>
-                    <div class="car-box col-md-12">
-                        <div class="form-group">
-                            <label for="train_class">Amount (Child)</label>
-                            <input type="text" name="amount_child" id="amount_child" class="form-control" value="{{ old('amount_child') }}" required />
-                        </div>
-                    </div>
+
                     <div class="col-md-4">
                         <button class="btn btn-success" id="coach">Add Farep</button>
                     </div>
@@ -214,6 +246,8 @@
                         <th scope="col">#</th>
                         <th scope="col">State</th>
                         <th scope="col">Stop</th>
+                        <th scope="col">State (destination)</th>
+                        <th scope="col">Stop (destination)</th>
                         <th scope="col">Class</th>
                         <th scope="col">Amount (Adult)</th>
                         <th scope="col">Amount (Child)</th>
@@ -226,6 +260,8 @@
                             <th scope="row">{{$index + 1}}</th>
                             <td>{{Ucfirst($stop->city->locations_state)}}</td>
                             <td>{{Ucfirst($stop->terminal->stop_name)}}</td>
+                            <td>{{Ucfirst($stop->destination->locations_state)}}</td>
+                            <td>{{Ucfirst($stop->destination_terminal->stop_name)}}</td>
                             <td>{{Ucfirst($stop->seatClass->class)}}</td>
                             <td>&#8358; {{number_format($stop->amount_adult)}}</td>
                             <td>&#8358; {{number_format($stop->amount_child)}}</td>
@@ -239,5 +275,54 @@
         </div>
     </div>
     </div>
+<script>
 
+    $(document).ready(function() {
+        $('select[name="state"]').on('change', function() {
+            var stateID = $(this).val();
+            if(stateID) {
+                $.ajax({
+                    url: '/admin/pick-up-route/'+stateID,
+                    type: "GET",
+                    dataType: "json",
+                    success:function(data) {
+                        $('select[name="route_id"]').empty();
+                        $.each(data, function(key, value) {
+                            console.log(value)
+                            $('select[name="route_id"]').append('<option value="'+ value.id +'">'+ value.stop_name +'</option>');
+                        });
+
+                    }
+                });
+            }else{
+                $('select[name="route_id"]').empty();
+            }
+        });
+    });
+
+
+    $(document).ready(function() {
+        $('select[name="dest_state"]').on('change', function() {
+            var stateID = $(this).val();
+            if(stateID) {
+                $.ajax({
+                    url: '/admin/pick-up-route/'+stateID,
+                    type: "GET",
+                    dataType: "json",
+                    success:function(data) {
+                        $('select[name="dest_route_id"]').empty();
+                        $.each(data, function(key, value) {
+                            console.log(value)
+                            $('select[name="dest_route_id"]').append('<option value="'+ value.id +'">'+ value.stop_name +'</option>');
+                        });
+
+                    }
+                });
+            }else{
+                $('select[name="dest_route_id"]').empty();
+            }
+        });
+    });
+
+</script>
 @endsection

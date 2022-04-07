@@ -144,80 +144,22 @@
         </div>
         <div class="card">
             <div class="card-body train_header_text" >
-               <div>
-                   <h2>{{$train->name}}</h2>
-               </div>
+                <div>
+                    <h2>{{$train->name}}</h2>
+                </div>
             </div>
         </div>
         <div class="card">
-
             <div class="card-body">
-                <form method="post" action="{{url('/admin/manage/train/schedule')}}">
-                    @csrf
-                    <div class="car-box col-md-12">
-                        <div class="form-group">
-                            <label for="boat_name">Pick Up</label>
-                            <select class="form-control" name="pickup">
-                                <option> Select Pick city </option>
-                                @foreach($locations as $location)
-                                    <option value="{{$location->id}}">{{$location->locations_state}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                    <div class="car-box col-md-12">
-                        <div class="form-group">
-                            <label for="seats">Final Destination</label>
-                            <select class="form-control" name="destination">
-                                <option> Select Destination City </option>
-                                @foreach($locations as $location)
-                                    <option value="{{$location->id}}">{{$location->locations_state}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-12 coach-box">
-                        <div class="car-box col-md-4">
-                            <div class="form-group">
-                                <label for="coach_type">Date</label>
-                                <input type="date" name="date" class="form-control" value="{{ old('date') }}" required/>
-                                <input type="hidden" name="train_id" value="{{$train->id}}" />
-                            </div>
-                        </div>
-                        <div class=" car-box col-md-4">
-                            <div class="form-group">
-                                <label for="coach_seats">Time Of Departure</label>
-                                <input type="time" name="time" id="time" class="form-control"  value="{{ old('time') }}" required />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="car-box col-md-12">
-                        <h3> Pick Route(s) </h3>
-                        <div id="route-list">
-                            @foreach($routeFare as $fare)
-                                <div class="form-group" >
-                                    <input type="checkbox" name="route[]" value="{{$fare->id}}"/> &nbsp; &nbsp; {{$fare->terminal->stop_name}} - {{$fare->destination_terminal->stop_name}}
-                                    ({{$fare->seatClass->class}}) - (&#8358; {{number_format($fare->amount_adult)}} -  &#8358; {{number_format($fare->amount_child)}} )
-                                </div>
-                            @endforeach
-                        </div>
-                    </div>
-{{--                    <div class="car-box col-md-12">--}}
-{{--                        <h3> Pick Route(s) </h3>--}}
-{{--                        <div id="route-list">--}}
-{{--                            @foreach($trainRoutes as $route)--}}
-{{--                                <div class="form-group" >--}}
-{{--                                    <input type="checkbox" name="route[]" value="{{$route->id}}"/> {{$route->stop_name}}--}}
-{{--                                </div>--}}
-{{--                            @endforeach--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-                    <div class="col-md-4 coach-btn">
-                        <button class="btn btn-success" >Schedule Trip</button>
-                    </div>
-                </form>
+                <div class="list-group">
+                    <h5  class="list-group-item active">
+                        Schedule Lists / Schedule Dates
+                    </h5>
+                    @foreach($schedules as $schedule)
+                    <a href="{{url('admin/get-route-fares/'. $schedule->id)}}" class="list-group-item">{{$schedule->departure_date->format('d F Y')}}</a>
+                    @endforeach
+                </div>
             </div>
-
         </div>
     </div>
 

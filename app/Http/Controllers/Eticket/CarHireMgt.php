@@ -9,6 +9,7 @@ use App\Models\CarHistory;
 use App\Models\CarImage;
 use App\Models\CarPlan;
 use App\Models\CarType;
+use App\Models\Transaction;
 use Carbon\Carbon;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Illuminate\Http\Request;
@@ -24,7 +25,9 @@ class CarHireMgt extends Controller
     {
         $cars = HiredCars::all();
         $CountCars = HiredCars::count();
-        return view('Eticket.car-hire.all-cars', compact('cars','CountCars'));
+        //find transactions that belongs to this service which is car hire service
+        $transactionSum = Transaction::where('tenant_id' , session()->get('tenant_id'))->where('service_id',6)->pluck('amount')->sum();
+        return view('Eticket.car-hire.all-cars', compact('cars','CountCars', 'transactionSum'));
     }
 
     public function createCars()
@@ -241,11 +244,18 @@ class CarHireMgt extends Controller
     public function viewCar($car_id)
     {
         $car = HiredCars::where('id', $car_id)->with('carclass','cartype')->first();
+
+        $carHistories = CarHistory::where('car_id', $car_id)->pluck('id');
+
+        //find transactions that belongs to this service which is car hire service
+        $transactionSum = Transaction::where('tenant_id' , session()->get('tenant_id'))
+                                     ->whereIn('car_history_id',$carHistories)->pluck('amount')->sum();
+
         $carPlans = CarPlan::where('car_id',$car_id)->get();
 
         $carHistories = CarHistory::where('car_id',$car_id)->count();
 
-        return view('Eticket.car-hire.view-car' , compact('car','carPlans','carHistories'));
+        return view('Eticket.car-hire.view-car' , compact('car','carPlans','carHistories', 'transactionSum'));
     }
 
     public function viewCarHistories($car_id)

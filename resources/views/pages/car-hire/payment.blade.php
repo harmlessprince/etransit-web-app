@@ -123,7 +123,7 @@
                                 <input type="hidden" name="plan_id" value="{{$plan->id}}"/>
                                 <input type="hidden" name="service" value="{{$service->name}}" />
                                 <input type="hidden" name="service_id" value="{{$service->id}}" />
-                                <input type="hidden" name="carhistory_id" value="{{$recordOperation->id}}" />
+                                <input type="hidden" name="car_history_id" value="{{$recordOperation->id}}" />
                                 <input type="submit" value="Buy Ticket Online" />
                             </form>
                         </div>

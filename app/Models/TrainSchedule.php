@@ -11,6 +11,16 @@ class TrainSchedule extends Model
 
     protected $guarded = ['id'];
 
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'departure_date' => 'datetime',
+    ];
+
+
     public function destination()
     {
         return $this->belongsTo(TrainLocation::class , 'destination_id');

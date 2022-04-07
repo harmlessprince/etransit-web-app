@@ -326,6 +326,8 @@ class Payment extends Controller
         $planId        = (int)   $data['data']['meta']['plan_id'];
 
         $carPlan = \App\Models\CarPlan::where('id' , $planId)->firstorfail();
+        $carHistory         =  CarHistory::where('id', $data['data']['meta']['car_history_id'])->first();
+
 
 
         if(!$carPlan)
@@ -345,6 +347,7 @@ class Payment extends Controller
             $transactions->status = 'Likely Fraud';
             $transactions->description = $data['data']['meta']['description'];
             $transactions->user_id = $data['data']['meta']['user_id'];
+            $transactions->tenant_id  =  $carHistory->car->tenant_id;
             $transactions->service_id = $serviceID;
             $transactions->isConfirmed = 'True';
             $transactions->save();
@@ -361,6 +364,7 @@ class Payment extends Controller
             $transactions->description = $data['data']['meta']['description'];
             $transactions->user_id = $data['data']['meta']['user_id'];
             $transactions->service_id = $serviceID;
+            $transactions->tenant_id  =  $carHistory->car->tenant_id;
             $transactions->isConfirmed = 'True';
             $transactions->save();
 

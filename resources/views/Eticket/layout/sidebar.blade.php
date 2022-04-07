@@ -47,15 +47,13 @@
                             </ul>
                         </li>
                     @endif
-
-                    @if(in_array('8',$serviceArray))
-                        <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"></i><span>Tour Management</span></a>
-                            <ul class="nav-submenu menu-content">
-                                <li><a href="{{url('/e-ticket/tour-packages')}}">Manage Tour</a></li>
-                            </ul>
-                        </li>
-                    @endif
-
+{{--                    @if(in_array('8',$serviceArray))--}}
+{{--                        <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"></i><span>Tour Management</span></a>--}}
+{{--                            <ul class="nav-submenu menu-content">--}}
+{{--                                <li><a href="{{url('/e-ticket/tour-packages')}}">Manage Tour</a></li>--}}
+{{--                            </ul>--}}
+{{--                        </li>--}}
+{{--                    @endif--}}
                     <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"></i><span>Staff Management</span></a>
                         <ul class="nav-submenu menu-content">
                             <li><a href="{{url('/e-ticket/staffs')}}">Manage Staff</a></li>
