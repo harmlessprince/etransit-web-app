@@ -141,7 +141,7 @@ Route::group(['middleware' => ['auth','prevent-back-history']], function() {
     Route::post('ferry-cash-payment' ,[FerryBookings::class , 'handleFerryCashPayment']);
 
     //train
-    Route::get('train/seat-picker/{schedule_id}/{train_id}/{tripType}', [Train::class , 'trainSeatPicker']);
+    Route::get('train/seat-picker/{schedule_id}/{train_id}/{tripType}/', [Train::class , 'trainSeatPicker']);
     Route::post('book/train/trip/{schedule_id}',[Train::class , 'passengerDetails']);
     Route::post('train/select-seat',[Train::class , 'selectSeat'])->name('train.select-seat');
     Route::post('train/de-select-seat',[Train::class ,'DeselectSeat'])->name('train.de-select-seat');

@@ -19,6 +19,7 @@ use Illuminate\Http\Request;
 use App\Models\Train as TrainTicket;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Session;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class Train extends Controller
@@ -309,8 +310,15 @@ class Train extends Controller
 
 //        dd($checkSchedule);
 
-        $returnDate = $request->return_date;
         $tripTypeId = $attr['tripType'];
+
+        if($tripTypeId == 2)
+        {
+            $setReturnDate = request()->session()->get('return_date');
+        }
+
+        $returnDate = $request->return_date;
+
 
         return view('pages.train.schedule',compact('checkSchedule','returnDate','tripTypeId'));
 
@@ -360,13 +368,13 @@ class Train extends Controller
         $trainSeatsPicker['first_class_seat'] = $trainSeatObjectFirstClass;
         $trainSeatsPicker['business_class_seat'] = $trainSeatObjectBusinessClass;
         $trainSeatsPicker['economy_class_seat'] = $trainSeatObjectEconomyClass;
+
         $schedule_id = $train_schedule_id;
-        $tranId = $train_id;
-        $trip_type = $tripTypeId;
+        $tranId      = $train_id;
+        $trip_type  = $tripTypeId;
 
 
         $routeFare = RouteFare::with('terminal','destination_terminal','seatClass')->get();
-
 
 
         return view('pages.train.seat-picker', compact('trainSeatsPicker','schedule_id','routeFare','tranId','trip_type','train_schedule_id'));
@@ -618,21 +626,30 @@ class Train extends Controller
                                 ->where('train_class_id',$selectedSeat[$i]->trainseat->class_id)->first();
 
 
-
+            $childFareTotal = "";
+            $adultFareTotal = "";
             if(strtolower($request->passenger_option[$i]) == 'children')
             {
                 array_push($totalFare ,  $tFare->amount_child);
+                $childFareTotal = $tFare->amount_child * $childrenCount;
             }else{
                 array_push($totalFare ,  $tFare->amount_adult);
+                $adultFareTotal = $tFare->amount_adult * $adultCount;
             }
         }
 
         $amount = array_sum($totalFare) * (int) $request->tripType;
         $ticketType = TripType::where('id', $request->tripType)->select('type')->firstorfail();
         $totalPasseneger = (int) $childrenCount + (int) $adultCount;
-        $adultFareTotal = $tFare->amount_adult * $adultCount;
-        $childFareTotal = $tFare->amount_child * $childrenCount;
-        $return_date = $request->return_date;
+
+//        $return_date = $request->return_date;
+
+        if(Session::has('setReturnDate'))
+        {
+            $return_date = request()->session()->get('setReturnDate');
+        }else{
+            $return_date = null;
+        }
 
         $service = \App\Models\Service::where('id',2)->first();
 

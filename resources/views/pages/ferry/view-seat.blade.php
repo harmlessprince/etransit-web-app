@@ -46,6 +46,16 @@
 </style>
 @section('content')
 <section style="padding-left: 0px;background: var(--bs-gray-100);">
+    @if($errors->any())
+        <div class="alert alert-danger">
+            <p><strong>Opps Something went wrong</strong></p>
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <form method="POST" action="{{url('add-passenger-seat')}}" id="form_submit">
         @csrf
         <input type="hidden" value="{{$tripType}}" name="tripType" id="tripType" />

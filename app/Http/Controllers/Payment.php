@@ -10,6 +10,8 @@ use App\Mail\CarHire;
 use App\Mail\TourPackages;
 use App\Models\CarHistory;
 use App\Models\Schedule;
+use App\Models\TrainSchedule;
+use App\Models\TrainSeatTracker;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -64,6 +66,8 @@ class Payment extends Controller
                 "adultCountFerry"    => request()->adultCountFerry ?? null,
                 "tripTypeFerry"      => request()->tripTypeFerry ?? null,
                 "fetchFerryScheduleDetailsID" => request()->fetchFerryScheduleDetailsID ?? null,
+                "train_schedule_id" => request()->train_schedule_id ?? null,
+                "totalPasseneger" => request()->totalPasseneger ?? null,
 
             ]
         ];
@@ -99,6 +103,9 @@ class Payment extends Controller
               switch($serviceId){
                   case 1 :
                       $this->busTickettingPayment($data);
+                      break;
+                  case 2:
+                      $this->handleTrainPayment($data);
                       break;
                   case 3:
                       $this->ferryPayment($data);
@@ -514,6 +521,73 @@ class Payment extends Controller
 
         DB::commit();
     }
+
+
+    public function handleTrainPayment($data)
+    {
+//        request()->validate([
+//            'amount'            => 'required',
+//            'service_id'        => 'required|integer',
+//            'train_schedule_id' => 'required|integer',
+//            'totalPasseneger'   => 'required|integer'
+//        ]);
+
+        DB::beginTransaction();
+        $transactions = new \App\Models\Transaction();
+        $transactions->reference          = Reference::generateTrnxRef();
+        $transactions->trx_ref            = $data['data']['tx_ref'];
+        $transactions->amount             =  (double) $data['data']['amount'];
+        $transactions->status             = 'Successful';
+        $transactions->description        = $data['data']['meta']['description'];
+        $transactions->user_id            = $data['data']['meta']['user_id'];
+        $transactions->service_id         = $data['data']['meta']['service_id'];
+        $transactions->train_schedule_id  = $data['data']['meta']['train_schedule_id'];
+        $transactions->save();
+
+
+
+
+
+        //find tain schedule and update the seat availability
+        $seat = TrainSchedule::where('id', $data['data']['meta']['train_schedule_id'])->first();
+        $availableSeats =  (int) $seat->seats_available - (int) $data['data']['meta']['totalPasseneger'];
+        $seat->update([
+            'seats_available' => $availableSeats
+        ]);
+
+        //fetch seat selected and book
+        $checkSeatsTracking = TrainSeatTracker::where('train_schedule_id',$data['data']['meta']['train_schedule_id'])
+            ->where('user_id', $data['data']['meta']['user_id'])
+            ->where('booked_status' , 1)->get();
+
+        foreach($checkSeatsTracking as $seatTracker)
+        {
+            $seatTracker->update([
+                'booked_status' => 2
+            ]);
+        }
+
+
+        $data["email"] =  $data['data']['meta']['user_email'];
+        $data['name']  =   $data['data']['meta']['user_name'];
+
+        $maildata = [
+            'name' => $data['name'],
+            'service' => 'Train Booking',
+            'transaction' => $transactions
+        ];
+
+        $email =  $data["email"];
+
+        Mail::to($email)->send(new \App\Mail\TrainTicket($maildata));
+
+        DB::commit();
+
+//        toastr()->success('Success !! Cash Payment made successfully');
+//        return redirect('/');
+
+    }
+
 
     public function flushSession()
     {

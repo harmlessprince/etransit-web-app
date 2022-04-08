@@ -249,6 +249,7 @@
                                     <input type="hidden" name="train_schedule_id" value="{{$fetchScheduleDetails->id}}" />
                                     <input type="hidden" name="childrenCount" value="{{$childrenCount}}"/>
                                     <input type="hidden" name="adultCount" value="{{$adultCount}}"/>
+                                    <input type="hidden" name="totalPasseneger" value="{{$totalPasseneger}}" />
                                     <input type="submit" value="Buy Ticket" />
                                 </form>
                             </div>

@@ -1,43 +1,3 @@
-{{--<!DOCTYPE html>--}}
-{{--<html lang="en">--}}
-
-{{--<head>--}}
-{{--    <meta charset="utf-8">--}}
-{{--    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">--}}
-{{--    <title>{{env('APP_NAME')}}</title>--}}
-{{--    <link rel="stylesheet" href="new-assets/bootstrap/css/bootstrap.min.css">--}}
-{{--    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface&amp;display=swap">--}}
-{{--    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Arsenal&amp;display=swap">--}}
-{{--    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Asap&amp;display=swap">--}}
-{{--    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cookie&amp;display=swap">--}}
-{{--    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:200,300,400,700&amp;display=swap">--}}
-{{--    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,400i,700,700i&amp;display=swap">--}}
-{{--    <link rel="stylesheet" href="new-assets/fonts/fontawesome-all.min.css">--}}
-{{--    <link rel="stylesheet" href="new-assets/fonts/font-awesome.min.css">--}}
-{{--    <link rel="stylesheet" href="new-assets/fonts/ionicons.min.css">--}}
-{{--    <link rel="stylesheet" href="new-assets/fonts/material-icons.min.css">--}}
-{{--    <link rel="stylesheet" href="new-assets/fonts/typicons.min.css">--}}
-{{--    <link rel="stylesheet" href="new-assets/fonts/fontawesome5-overrides.min.css">--}}
-{{--    <link rel="stylesheet" href="new-assets/css/Brands.css">--}}
-{{--    <link rel="stylesheet" href="new-assets/css/etransit-top-nav.css">--}}
-{{--    <link rel="stylesheet" href="new-assets/css/etransit-vehicle-slide.css">--}}
-{{--    <link rel="stylesheet" href="new-assets/css/Etransitnews.css">--}}
-{{--    <link rel="stylesheet" href="new-assets/css/Form-Input.css">--}}
-{{--    <link rel="stylesheet" href="https://unpkg.com/@bootstrapstudio/bootstrap-better-nav/dist/bootstrap-better-nav.min.css">--}}
-{{--    <link rel="stylesheet" href="new-assets/css/Login-Form-Dark.css">--}}
-{{--    <link rel="stylesheet" href="new-assets/css/MAV_LanguageSelectButton.css">--}}
-{{--    <link rel="stylesheet" href="new-assets/css/Modern-Contact-Form.css">--}}
-{{--    <link rel="stylesheet" href="new-assets/css/navbar.css">--}}
-{{--    <link rel="stylesheet" href="new-assets/css/Off-Canvas-Sidebar-Drawer-Navbar.css">--}}
-{{--    <link rel="stylesheet" href="new-assets/css/Responsive-Product-Slider.css">--}}
-{{--    <link rel="stylesheet" href="new-assets/css/Search-Input-Responsive-with-Icon.css">--}}
-{{--    <link rel="stylesheet" href="new-assets/css/styles.css">--}}
-{{--    <link rel="stylesheet" href="new-assets/css/Timeline-Steps.css">--}}
-{{--    <link rel="stylesheet" href="new-assets/css/Tricky-Grid---2-Column-on-Desktop--Tablet-Flip-Order-of-12-Column-rows-on-Mobile.css">--}}
-{{--    <link rel="stylesheet" href="new-assets/css/Ultimate-Testimonial-Slider-BS5.css">--}}
-{{--</head>--}}
-
-{{--<body>--}}
 @extends('layouts.app')
 <style>
     #ferry_form , #train_form{
@@ -58,6 +18,19 @@
     a, a:hover, a:focus, a:active {
         text-decoration: none !important;
         color: inherit !important;
+    }
+    #train_return_date{
+        display: none;
+    }
+    #one_way_train_trip{
+        background: #343f5f;
+        color:#fff;
+        padding:10px;
+    }
+    #return_train_trip{
+        color:#eee;
+        padding:10px;
+
     }
 </style>
 
@@ -80,27 +53,25 @@
     <div class="row">
         <div class="col" style="box-shadow: 1px 0px 7px rgb(103,103,103);border-radius: 10px;">
             <div class="row divshow" style="background: #ffffff;border-radius: 10px;border-bottom-right-radius: 0px;border-bottom-left-radius: 0px;border-color: rgba(33,37,41,0);border-bottom: 1px solid rgb(227,228,230);">
-                <div class="col-3 col-sm-3 col-xs-3 carhover" id="bus_booking"  onclick="busnav()" style="text-align: center;padding-top: 25px;padding-bottom: 12px;margin: 0px;border-right: 1px solid rgb(219,220,221);border-top-left-radius: 10px;"><img class="img-fluid" src="{{asset('new-assets/img/Layer%201dr.png')}}">
+                <div class="col-3 col-sm-3 col-xs-3 carhover" id="bus_booking"  onclick="busnav()" style="text-align: center;padding-top: 25px;padding-bottom: 12px;margin: 0px;border-right: 1px solid rgb(219,220,221);border-top-left-radius: 10px;">
+                    <img class="img-fluid" src="{{asset('new-assets/img/Layer%201dr.png')}}">
                     <div class="divline"></div>
-{{--                    style="border-color: rgb(52,63,95);color: rgb(23,31,72);"--}}
                     <p ><strong>BUS BOOKING</strong></p>
                 </div>
-                <div class="col-3 col-sm-3 col-xs-3 carhover" id="train_booking" onclick="trainnav()" style="text-align: center;padding-top: 12px;padding-bottom: 12px;border-right: 1px solid rgb(219,220,221) ;"><img class="img-fluid" src="{{asset('new-assets/img/2003.i602.001_railway_station_set_flat-11%20[Converted]%201.svg')}}">
+                <div class="col-3 col-sm-3 col-xs-3 carhover" id="train_booking" onclick="trainnav()" style="text-align: center;padding-top: 12px;padding-bottom: 12px;border-right: 1px solid rgb(219,220,221) ;">
+                    <img class="img-fluid" src="{{asset('new-assets/img/2003.i602.001_railway_station_set_flat-11%20[Converted]%201.svg')}}">
                     <div class="divline"></div>
-{{--                    style="color: rgb(23,31,72);"--}}
                     <p ><strong>TRAIN TICKET&nbsp;</strong></p>
                 </div>
-                <div class="col-3 col-sm-3 col-xs-3 carhover" id="ferry_booking" onclick="cruisenav()" style="text-align: center;padding-top: 25px;padding-bottom: 12px;border-right: 1px solid rgb(219,220,221) ;"><img class="img-fluid" src="{{asset('new-assets/img/10.svg')}}">
+                <div class="col-3 col-sm-3 col-xs-3 carhover" id="ferry_booking" onclick="cruisenav()" style="text-align: center;padding-top: 25px;padding-bottom: 12px;border-right: 1px solid rgb(219,220,221) ;">
+                    <img class="img-fluid" src="{{asset('new-assets/img/10.svg')}}">
                     <div class="divline"></div>
-{{--                    style="color: rgb(23,31,72);"--}}
                     <p ><strong>FERRY BOOKING</strong></p>
                 </div>
                 <div class="col-3 col-sm-3 col-xs-3 carhover" id="flight_booking"  style="text-align: center;padding-top: 25px;padding-bottom: 12px;border-top-right-radius: 10px;">
-{{--                    onclick="flightnav()"--}}
                     <a href="https://www.travelstart.com.ng/?affId=218470&utm_source=affiliate&utm_medium=218470" target="_blank">
                         <img class="img-fluid" src="{{asset('new-assets/img/Layer%201.png')}}">
                         <div class="divline"></div>
-                        {{--                    style="color: rgb(23,31,72);"--}}
                         <p ><strong>FLIGHT BOOKING</strong></p>
                     </a>
 
@@ -116,8 +87,10 @@
                 <div class="col-3 col-sm-3 col-xs-3" onclick="cruisenav()"  style="text-align: center;border-right: 1px solid rgb(219,220,221);padding-top: 15px;padding-bottom: 15px;">
                     <a ><i class="icon ion-android-boat" style="font-size: 36px;color: #e16803;"></i></a>
                 </div>
-                <div class="col-3 col-sm-3 col-xs-3" style="text-align: center;padding-top: 15px;padding-bottom: 15px;" onclick="flightnav()">
-                    <a  ><i class="material-icons" style="font-size: 36px;color: #e16803;">flight</i></a>
+                <div class="col-3 col-sm-3 col-xs-3" style="text-align: center;padding-top: 15px;padding-bottom: 15px;" >
+                    <a href="https://www.travelstart.com.ng/?affId=218470&utm_source=affiliate&utm_medium=218470" target="_blank">
+                        <i class="material-icons" style="font-size: 36px;color: #e16803;">flight</i>
+                    </a>
                 </div>
             </div>
             <div id="bus_form">
@@ -136,10 +109,12 @@
                             <div class="row d-flex" style="background: #ffffff;border-style: none;border-bottom: 1px none rgb(217,218,220) ;">
                                 <div class="col-sm-6 col-md-4" style="padding-top: 10px;">
                                     <label class="form-label" style="font-size: 14px;"><strong>DEPARTURE DATE</strong></label>
-                                    <input class="form-control" id="datemob" type="date" name="departure_date"  style="border-style: none;border-right-style: solid;border-radius: 0px;"></div>
+                                    <input class="form-control" id="datemob" type="date" name="departure_date"  style="border-style: none;border-right-style: solid;border-radius: 0px;">
+                                </div>
                                 <div class="col-sm-6 col-md-4" id="return_date_box" style="padding-top: 10px;">
                                     <label class="form-label" style="font-size: 14px;"><strong>RETURN DATE</strong></label>
-                                    <input class="form-control" id="datemob2" name="return_date"   type="date" style="border-style: none;border-right-style: solid;border-radius: 0px;"></div>
+                                    <input class="form-control" id="datemob2" name="return_date"   type="date" style="border-style: none;border-right-style: solid;border-radius: 0px;">
+                                </div>
                                 <div class="col-sm-6 col-md-4 getalign" style="padding-top: 10px;text-align: center;">
                                     <label class="form-label" style="font-size: 14px;">NO. OF PERSON</label>
                                     <select class="form-select" style="text-align: center;border-style: none;border-bottom-style: solid;border-radius: 0px;" name="number_of_passengers" required>
@@ -182,10 +157,12 @@
             <div id="train_form">
                 <form method="POST" action="{{url('/train/bookings')}}">
                     @csrf
+                    <input type="hidden" name="tripType" id="train_trip_type"  value="" />
                     <div class="row" style="background: #ffffff;padding-top: 20px;padding-bottom: 20px;border-style: none;border-bottom: 1px none rgb(217,218,220) ;">
                         <div class="col">
-                            <button class="btn btn-primary" type="button" id="one_way_train_trip" style="margin-right: 5px;margin-left: 5px;width: 160px;background: rgb(52,63,95);border-style: none;border-bottom-style: none;" onclick="oneWayTrainTrip()">One way</button>
-                            <button class="btn btn-primary .getspace" id="return_train_trip" type="button" style="margin-right: 5px;margin-left: 5px;width: 160px;background: rgb(200,200,200);border-style: none;border-bottom-style: none;" onclick="ReturnTrainTrip()">Round Trip</button>
+
+                            <button class="" type="button" id="one_way_train_trip" style="margin-right: 5px;margin-left: 5px;width: 160px;border-style: none;" onclick="oneWayTrainTrip()">One way</button>
+                            <button class="" id="return_train_trip" type="button" style="margin-right: 5px;margin-left: 5px;width: 160px;background: rgb(200,200,200);border-style: none;border-bottom-style: none;" onclick="ReturnTrainTrip()">Round Trip</button>
                         </div>
                     </div>
                     <div class="row">
@@ -197,19 +174,13 @@
                                     </label>
                                     <input class="form-control" id="datemob" name="departure_date" type="date" style="border-style: none;border-right-style: solid;border-radius: 0px;">
                                 </div>
-                                <div class="col-sm-6 col-md-4 .getspace" style="padding-top: 10px;">
-                                    <ul class="list-inline" id="listposition">
-                                        <li class="list-inline-item">
-                                            <a class="text-decoration-none" href="#" style="color: var(--bs-orange);">TODAY</a>
-                                        </li>
-                                        <li class="list-inline-item">|</li>
-                                        <li class="list-inline-item">
-                                            <a class="text-decoration-none" href="#" style="color: var(--bs-dark);">TOMORROW</a>
-                                        </li>
-                                    </ul>
-                                    <input type="hidden" name="tripType" id="train_trip_type"  value="" />
+                                <div class="col-sm-6 col-md-4" style="padding-top: 10px;">
+                                    <label class="form-label" style="font-size: 14px;">
+                                        <strong>RETURN DATE</strong>
+                                    </label>
+                                    <input class="form-control" id="train_return_date" name="return_date"  type="date" style="border-style: none;border-right-style: solid;border-radius: 0px;">
                                 </div>
-                                <div class="col-sm-6 col-md-4 getalign" style="padding-top: 10px;text-align: center;">
+                                <div class="col-sm-4 col-md-4 getalign" style="padding-top: 10px;text-align: center;">
                                     <label class="form-label" style="font-size: 14px;">NO. OF PERSON</label>
                                     <select class="form-select" style="text-align: center;border-style: none;border-bottom-style: solid;border-radius: 0px;" name="passenger">
                                         <option value="1" selected="">1</option>

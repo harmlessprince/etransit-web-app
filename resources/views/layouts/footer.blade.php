@@ -288,6 +288,8 @@
 
         document.getElementById('train_trip_type').value = 2;
 
+        document.getElementById("train_return_date").style.display = "block";
+
         document.getElementById("one_way_train_trip").style.backgroundColor = "rgb(200,200,200)";
         document.getElementById("one_way_train_trip").style.borderColor = "rgb(200,200,200)";
         document.getElementById("one_way_train_trip").style.color = "#000";
