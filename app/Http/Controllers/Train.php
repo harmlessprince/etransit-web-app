@@ -292,7 +292,7 @@ class Train extends Controller
             'tripType'          => 'required|integer',
             'passenger'         => 'required|integer',
             'departure_date'    => 'required|date',
-            'return_date'       => 'sometimes|date'
+            'return_date'       => 'sometimes'
         ]);
 
 
