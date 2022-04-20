@@ -122,6 +122,23 @@ class BoatCruise extends Controller
         return view('admin.boat-cruise.history', compact('boatHistory'));
     }
 
+    public function viewBoatSchedulesPaymentHistory($schedule_id)
+    {
+        $transactions = \App\Models\Transaction::where('boat_trip_id',$schedule_id)->with('user')->simplePaginate();
+        $transactionCount = \App\Models\Transaction::where('boat_trip_id',$schedule_id)->count();
+        $transactionSum = \App\Models\Transaction::where('boat_trip_id',$schedule_id)->pluck('amount')->sum();
+
+        return view('admin.boat-cruise.schedule-transactions', compact('transactions','transactionCount','transactionSum'));
+    }
+
+    public function viewBoatSchedules($boat_id)
+    {
+        $schedules = BoatTrip::where('boat_id',$boat_id)->with('boat')->orderBy('created_at','desc')->simplePaginate();
+
+        return view('admin.boat-cruise.boat-schedules' , compact('schedules'));
+
+    }
+
     public function editBoat($boat_id)
     {
         $boat = Boat::where('id', $boat_id)->firstorfail();
@@ -324,10 +341,11 @@ class BoatCruise extends Controller
         $transactions->reference = Reference::generateTrnxRef();
         $transactions->amount = (double) $amount;
         $transactions->status = 'Pending';
-        $transactions->description = 'Cash Payment';
+        $transactions->description = 'Cash Payment of ' . $amount .' paid successfully at ' . now()->format('Y F d : h:i:s');
         $transactions->user_id = auth()->user()->id;
         $transactions->service_id = $serviceId;
         $transactions->boat_trip_id = $trip->id;
+        $transactions->transaction_type = "cash payment";
         $transactions->save();
 
         $data["email"] =  auth()->user()->email;

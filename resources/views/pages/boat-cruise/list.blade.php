@@ -150,7 +150,7 @@
                                 </div>
                                 <div class="card-body" style="padding-top: 0px;">
                                     <h6 class="card-title">{{$boat->cruise_name}}</h6>
-                                    <h6>{{ \Illuminate\Support\Str::limit($boat->description, $limit = 150, $end = '...') }}</h6>
+                                    <h6>{!! \Illuminate\Support\Str::limit($boat->description, $limit = 150, $end = '...') !!} </h6>
                                 </div>
                                 <div class="align-items-center align-content-center card-footer">
                                     <ul class="list-unstyled text-center d-md-inline-flex m-auto d-md-inline in" id="rating-1" display="inline-block" gap="20px">

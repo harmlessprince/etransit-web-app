@@ -9,71 +9,6 @@
     }
 </style>
 @section('content')
-{{--    <div>--}}
-{{--        <div class="booking_bg"  style="background-image: url('{{ asset('/images/bg/tour.png')}}'); height:200px;" >--}}
-{{--            <div class="booking_hero_text">--}}
-{{--                <div class="booking_hero_icon">--}}
-{{--                    <a href="{{url('/')}}">--}}
-{{--                    <img src="{{asset('/images/icons/arrow_left_2.png')}}">--}}
-{{--                    </a>--}}
-{{--                </div>--}}
-{{--                <div class="booking_text">--}}
-{{--                    <h1>{{$service->name}}</h1>--}}
-{{--                    <span>Lorem ipsum text here  Lorem ipsum text here Lorem ipsum text here</span>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--        <div class="boat_cruise_box">--}}
-{{--            <div class="navigation">--}}
-{{--                <div class="nav_header">--}}
-{{--                    <h5>Filter Search</h5>--}}
-{{--                    <span>Clear</span>--}}
-{{--                </div>--}}
-{{--                <hr>--}}
-{{--            </div>--}}
-{{--            <div class="boat_list">--}}
-{{--                <div>--}}
-{{--                    <h3>Available Tours</h3>--}}
-{{--                </div>--}}
-{{--                <div>--}}
-{{--                    <input type="text" placeholder="search"  class="search_text"/>--}}
-{{--                </div>--}}
-{{--                <div class="boat_cruise_list">--}}
-{{--                    @foreach($tours as $index => $tour)--}}
-{{--                        <a href="{{url('/tour-packages/'.$tour->id.'/show')}}">--}}
-{{--                        <div class="boat_card">--}}
-{{--                            <div class="backgrund_img" >--}}
-{{--                                <img src="{{$tour->tourimages[0]->path}}" />--}}
-{{--                                <div class="price_tag">--}}
-{{--                                    <h5>{{$tour->name}}</h5>--}}
-{{--                                    <h5> &#x20A6; {{number_format($tour->amount_regular)}}  -  &#x20A6; {{number_format($tour->amount_standard)}}</h5>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-
-{{--                            <div class="ratings_box" >--}}
-{{--                                <h5>Harmony of seas</h5>--}}
-{{--                                <small>--}}
-{{--                                    {{ \Illuminate\Support\Str::limit($tour->description, $limit = 150, $end = '...') }}--}}
-{{--                                </small>--}}
-{{--                                <div class="ratings_location">--}}
-{{--                                    <div>--}}
-{{--                                        <img src="{{asset('/images/icons/ratings.png')}}" alt="ratings-img"/>--}}
-{{--                                        <small>4.7/5 Ratings</small>--}}
-{{--                                    </div>--}}
-{{--                                    <div>--}}
-{{--                                        <img src="{{asset('/images/icons/location.png')}}" alt="location-img"/>--}}
-{{--                                        <small>{{$tour->location}}</small>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                        </a>--}}
-{{--                    @endforeach--}}
-{{--                </div>--}}
-
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </div>--}}
 <section style="height: 226px;background: url('{{ asset('new-assets/img/tp.png')}}')  center / cover no-repeat;">
     <div class="d-flex d-sm-flex d-md-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center" style="height: 226px;background: rgba(11,8,8,0.73);">
         <div class="container d-md-flex justify-content-md-center align-items-md-center">
@@ -211,7 +146,7 @@
                                 </div>
                                 <div class="card-body" style="padding-top: 0px;">
                                     <h6 class="card-title" style="margin-top: 10px;">{{$tour->name}}</h6>
-                                    <p style="color: rgb(175,175,176);font-size: 14px;"> {{ \Illuminate\Support\Str::limit($tour->description, $limit = 150, $end = '...') }}</p>
+                                    <p style="color: rgb(175,175,176);font-size: 14px;"> {!! \Illuminate\Support\Str::limit($tour->description, $limit = 150, $end = '...') !!}  </p>
                                 </div>
                                 <div class="align-items-center align-content-center card-footer">
                                     <ul class="list-unstyled text-center d-md-inline-flex m-auto d-md-inline in" id="rating-1" display="inline-block" gap="20px">

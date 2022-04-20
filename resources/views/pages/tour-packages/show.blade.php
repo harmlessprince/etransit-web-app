@@ -198,7 +198,7 @@
                 <div class="row">
                     <div class="col">
                         <p style="color: var(--bs-gray-500);padding-left: 15px;padding-right: 15px;">
-                            {{$tour->description}}
+                           {!! $tour->description !!}
                         </p>
                     </div>
                 </div>

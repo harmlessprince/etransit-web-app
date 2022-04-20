@@ -18,6 +18,7 @@ class EticketPermissionSeeder extends Seeder
         Permission::create(['guard_name' => 'e-ticket','name' => 'e-ticket.dashboard']);
         Permission::create(['guard_name' => 'e-ticket','name' => 'e-ticket.fetch-buses']);
         Permission::create(['guard_name' => 'e-ticket','name' => 'e-ticket.fetch-tenant-buses']);
+        Permission::create(['guard_name' => 'e-ticket','name' => 'e-ticket.fetch-tenant-terminal']);
         Permission::create(['guard_name' => 'e-ticket','name' => 'e-ticket.view-tenant-bus']);
         Permission::create(['guard_name' => 'e-ticket','name' => 'e-ticket.edit-tenant-bus']);
         Permission::create(['guard_name' => 'e-ticket','name' => 'e-ticket.import.vehicle']);

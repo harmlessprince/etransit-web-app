@@ -257,11 +257,11 @@
                     if(data.success)
                     {
                         displaySuccessMessage(data.message)
-
+                        setTimeout(function(){ location.reload(true); }, 3000);
                     }else{
-                        displayErrorMessage(response.message);
+                        displayErrorMessage(data.message);
                     }
-                    setTimeout(function(){location.reload(true);}, 3000);
+                    setTimeout(function(){ location.reload(true); }, 3000);
                 }
             });
 

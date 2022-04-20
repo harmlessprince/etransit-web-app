@@ -116,14 +116,18 @@ class Tour extends Controller
     {
         $tourHistory = TourPackage::where('id' , $tour_id)->firstorfail();
 
-        return view('admin.tour.history' , compact('tourHistory'));
+        $transactions = \App\Models\Transaction::where('tour_id',$tour_id)->with('user')->simplePaginate(20);
+//        dd($transactions);
+        $transactionSum = \App\Models\Transaction::where('tour_id',$tour_id)->with('user')->pluck('amount')->sum();
+        $transactionCount = \App\Models\Transaction::where('tour_id',$tour_id)->with('user')->count();
+
+        return view('admin.tour.history' , compact('tourHistory','transactions','transactionSum','transactionCount'));
 
     }
 
 
     public function editTour($tour_id)
     {
-
         $tour = TourPackage::where('id', $tour_id)->with('tourimages')->firstorfail();
 
         return view('admin.tour.edit' , compact('tour'));
@@ -174,9 +178,9 @@ class Tour extends Controller
                 ]);
                 $name = $file->getClientOriginalName();
                 $uploadedFileUrl = Cloudinary::upload($file->getRealPath())->getSecurePath();
-                $tourImage = TourImage::where('boat_id',$tour_id)->get();
+                $tourImage = TourImage::where('tour_id',$tour_id)->get();
                 $tourImage[$index]->update([
-                    'boat_id' => $tour_id,
+                    'tour_id' => $tour_id,
                     'path'   => $uploadedFileUrl,
                 ]);
             }

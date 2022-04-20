@@ -234,128 +234,6 @@
 
 </style>
 @section('content')
-{{--    <div>--}}
-{{--        <div class="booking_bg"  style="background-image: url('{{ asset('/images/bg/boat_cruise.png')}}'); height:200px;" >--}}
-{{--            <div class="booking_hero_text">--}}
-{{--                <div class="booking_hero_icon">--}}
-{{--                    <a href="{{url('/')}}">--}}
-{{--                    <img src="{{asset('/images/icons/arrow_left_2.png')}}">--}}
-{{--                    </a>--}}
-{{--                </div>--}}
-{{--                <div class="booking_text">--}}
-{{--                    <h1>{{$service->name}}</h1>--}}
-{{--                    <span>Lorem ipsum text here  Lorem ipsum text here Lorem ipsum text here</span>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--        <div class="boat-container">--}}
-{{--            <div class="navigation">--}}
-{{--                <h3>Filter search</h3>--}}
-{{--            </div>--}}
-{{--            <div class="boat_info_box">--}}
-{{--               <div class="carousel-container">--}}
-{{--                   @php--}}
-{{--                       $images = json_decode($boat->boat->paths);--}}
-{{--                   @endphp--}}
-{{--                   @foreach($images as $image)--}}
-{{--                   <div class="item main">--}}
-{{--                      <img src="{{$image}}"  alt="'hero-img" />--}}
-{{--                   </div>--}}
-{{--                   @endforeach--}}
-{{--                   <div class="navigation-items">--}}
-{{--                       <div class="prev nav-btn"><</div>--}}
-{{--                       <div class="next nav-btn">></div>--}}
-{{--                   </div>--}}
-{{--               </div>--}}
-
-{{--                <div class="overview">--}}
-{{--                    <h4>Overview</h4>--}}
-{{--                    <h4>Review</h4>--}}
-{{--                </div>--}}
-{{--                <div class="rating_duration_box">--}}
-{{--                    <div class="duration">--}}
-{{--                        <div class="duration_box">--}}
-{{--                            <div class="outer_circle">--}}
-{{--                                <div class="inner_circle">--}}
-{{--                                    <img src="{{ asset('/images/icons/duration.png')}}"   />--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                            <div class="duration_text">--}}
-{{--                                <h6>DURATION</h6>--}}
-{{--                                <h6>4 Days</h6>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                    <div class="rating">--}}
-{{--                        <div class="boat_rating">--}}
-{{--                            <img src="{{ asset('/images/icons/boat_rating.png')}}"  width="35px" height="35px" />--}}
-{{--                        </div>--}}
-{{--                        <div class="rating_text">--}}
-{{--                            <h6>DURATION</h6>--}}
-{{--                            <h6>4 Days</h6>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--                <div class="description">--}}
-{{--                    <p>{{$boat->description}}</p>--}}
-{{--                </div>--}}
-{{--                <div class="price_per_trip">--}}
-{{--                    <h6>Price Per Trip</h6>--}}
-{{--                    <form id="payment_plan" method="post" action="{{url('/boat-cruise/'.$boat->id.'/payment-plan/'.$service->id)}}">--}}
-{{--                        @csrf--}}
-{{--                    <fieldset id="payemtn_option">--}}
-{{--                    <div class="regular_class">--}}
-{{--                        <div class="regular_input_field"><input type="radio" value="{{$boat->min_amount}}" name="amount" class="radioInput" /> Regular </div>--}}
-{{--                        <div><span>&#x20A6;{{number_format($boat->min_amount)}}</span> <span >per trip</span></div>--}}
-{{--                    </div>--}}
-{{--                    <div class="regular_class">--}}
-{{--                        <div class="regular_input_field"><input type="radio" value="{{$boat->max_amount}}" name="amount" class="radioInput"/> Standard </div>--}}
-{{--                        <div><span>&#x20A6;{{number_format($boat->max_amount)}}</span> <span >per trip</span></div>--}}
-{{--                    </div>--}}
-{{--                    </fieldset>--}}
-{{--                    </form>--}}
-{{--                </div>--}}
-{{--                <div class="popular_cruise">--}}
-{{--                    <h4>Popular Cruise</h4>--}}
-{{--                    <div class="popular_cruise_box">--}}
-{{--                        @for($i =0; $i < 5 ;$i++)--}}
-{{--                            <div class="boat_card">--}}
-{{--                                <div class="backgrund_img" >--}}
-{{--                                    <img src="{{ asset('/images/bg/mini_boat.png')}}" />--}}
-{{--                                    <div class="price_tag">--}}
-{{--                                        <h5>New Board</h5>--}}
-{{--                                        <h5>500,000 - 600,000</h5>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-
-{{--                                <div class="ratings_box" >--}}
-{{--                                    <h5>Harmony of seas</h5>--}}
-{{--                                    <small>--}}
-{{--                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor--}}
-{{--                                        incididunt ut labore et dolore mag--}}
-{{--                                    </small>--}}
-{{--                                    <div class="ratings_location">--}}
-{{--                                        <div>--}}
-{{--                                            <img src="{{asset('/images/icons/ratings.png')}}" alt="ratings-img"/>--}}
-{{--                                            <small>4.7/5 Ratings</small>--}}
-{{--                                        </div>--}}
-{{--                                        <div>--}}
-{{--                                            <img src="{{asset('/images/icons/location.png')}}" alt="location-img"/>--}}
-{{--                                            <small>Los Angeles , USA</small>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        @endfor--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--                <div class="add_payment">--}}
-{{--                    <button type="submit" form="payment_plan">Continue To Payment</button>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-
-{{--        </div>--}}
-{{--    </div>--}}
 <section style="height: 226px;background: url('{{ asset('images/bg/boat_cruise.png')}}');">
     <div class="d-flex d-sm-flex d-md-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center" style="height: 226px;background: rgba(11,8,8,0.73);">
         <div class="container d-md-flex justify-content-md-center align-items-md-center">
@@ -559,7 +437,7 @@
                 </div>
                 <div class="row">
                     <div class="col">
-                        <p style="color: var(--bs-gray-500);padding-left: 15px;padding-right: 15px;">Loren ipsum color sit amet, consectetur adipiscing elit, sed do eiusmod temper incididunt ut labore et dolore magna alipua. UT enim ad minim venial, puts nostrud exercitation ullamco laboris nisi ut alipuip ex ea commode consepuat. Duis aute inure dolor in reprehenderit in voluptate velit esse cillium dolore eu fugiat nulla pariatur. Exceptur sint occaecat non provident, sent in cuppa put officia mollit anim I'd eat laborum&nbsp;&nbsp;</p>
+                        <p style="color: var(--bs-gray-500);padding-left: 15px;padding-right: 15px;">{!! $boat->description !!}&nbsp;&nbsp;</p>
                     </div>
                 </div>
                 <div class="row" id="overviewlayout-1" style="margin-top: 10px;">
@@ -602,7 +480,8 @@
                                     <div class="row g-0 slider-row">
                                         <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-xxl-3 offset-sm-0">
                                             <div class="card-group">
-                                                <div class="card" style="margin: 10px;border-radius: 10px;margin-right: 10px;border-style: none;box-shadow: 1px 1px 10px 1px rgb(204,205,205);"><img class="img-fluid card-img-top w-100 d-block" style="border-top-left-radius: 7px;border-top-right-radius: 7px;" src="assets/img/Rectangle%202.1.png">
+                                                <div class="card" style="margin: 10px;border-radius: 10px;margin-right: 10px;border-style: none;box-shadow: 1px 1px 10px 1px rgb(204,205,205);">
+                                                    <img class="img-fluid card-img-top w-100 d-block" style="border-top-left-radius: 7px;border-top-right-radius: 7px;" src="{{asset('/new-assets/img/Rectangle%202.1.png')}}">
                                                     <div class="card-img-overlay text-end" style="border-style: solid;color: rgba(33,37,41,0);">
                                                         <p style="color: var(--bs-white);font-size: 10px;margin-bottom: 1px;"><strong>Starting from</strong></p><span style="color: var(--bs-white);"><strong>N40,000 - 70,000</strong></span>
                                                     </div>
@@ -620,7 +499,8 @@
                                         </div>
                                         <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-xxl-3 offset-sm-0">
                                             <div class="card-group">
-                                                <div class="card" style="margin: 10px;border-radius: 10px;margin-right: 10px;border-style: none;box-shadow: 1px 1px 10px 1px rgb(204,205,205);"><img class="img-fluid card-img-top w-100 d-block" style="border-top-left-radius: 7px;border-top-right-radius: 7px;" src="assets/img/Rectangle%202.1%20(1).png">
+                                                <div class="card" style="margin: 10px;border-radius: 10px;margin-right: 10px;border-style: none;box-shadow: 1px 1px 10px 1px rgb(204,205,205);">
+                                                    <img class="img-fluid card-img-top w-100 d-block" style="border-top-left-radius: 7px;border-top-right-radius: 7px;" src="{{asset('new-assets/img/Rectangle%202.1%20(1).png')}}">
                                                     <div class="card-img-overlay text-end" style="border-style: solid;color: rgba(33,37,41,0);">
                                                         <p style="color: var(--bs-white);font-size: 10px;margin-bottom: 1px;"><strong>Starting from</strong></p><span style="color: var(--bs-white);"><strong>N40,000 - 70,000</strong></span>
                                                     </div>
@@ -638,7 +518,8 @@
                                         </div>
                                         <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-xxl-3 offset-sm-0">
                                             <div class="card-group">
-                                                <div class="card" style="margin: 10px;border-radius: 10px;margin-right: 10px;box-shadow: 1px 1px 10px 1px rgb(204,205,205);border-style: none;"><img class="img-fluid card-img-top w-100 d-block" style="border-top-left-radius: 7px;border-top-right-radius: 7px;" src="assets/img/Rectangle%202.1%20(2).png">
+                                                <div class="card" style="margin: 10px;border-radius: 10px;margin-right: 10px;box-shadow: 1px 1px 10px 1px rgb(204,205,205);border-style: none;">
+                                                    <img class="img-fluid card-img-top w-100 d-block" style="border-top-left-radius: 7px;border-top-right-radius: 7px;" src="{{asset('new-assets/img/Rectangle%202.1%20(2).png')}}">
                                                     <div class="card-img-overlay text-end" style="border-style: solid;color: rgba(33,37,41,0);">
                                                         <p style="color: var(--bs-white);font-size: 10px;margin-bottom: 1px;"><strong>Starting from</strong></p><span style="color: var(--bs-white);"><strong>N40,000 - 70,000</strong></span>
                                                     </div>
@@ -656,7 +537,8 @@
                                         </div>
                                         <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-xxl-3 offset-sm-0">
                                             <div class="card-group">
-                                                <div class="card" style="margin: 10px;border-radius: 10px;margin-right: 10px;box-shadow: 1px 1px 10px 1px rgb(204,205,205);border-style: none;"><img class="img-fluid card-img-top w-100 d-block" style="border-top-left-radius: 7px;border-top-right-radius: 7px;" src="assets/img/Rectangle%202.1.png">
+                                                <div class="card" style="margin: 10px;border-radius: 10px;margin-right: 10px;box-shadow: 1px 1px 10px 1px rgb(204,205,205);border-style: none;">
+                                                    <img class="img-fluid card-img-top w-100 d-block" style="border-top-left-radius: 7px;border-top-right-radius: 7px;" src="{{asset('new-assets/img/Rectangle%202.1.png')}}">
                                                     <div class="card-img-overlay text-end" style="border-style: solid;color: rgba(33,37,41,0);">
                                                         <p style="color: var(--bs-white);font-size: 10px;margin-bottom: 1px;"><strong>Starting from</strong></p><span style="color: var(--bs-white);"><strong>N40,000 - 70,000</strong></span>
                                                     </div>
@@ -678,7 +560,8 @@
                                     <div class="row g-0 slider-row">
                                         <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-xxl-3 offset-sm-0">
                                             <div class="card-group">
-                                                <div class="card" style="margin: 10px;border-radius: 10px;margin-right: 10px;border-style: none;box-shadow: 1px 1px 10px 1px rgb(204,205,205);"><img class="img-fluid card-img-top w-100 d-block" style="border-top-left-radius: 7px;border-top-right-radius: 7px;" src="assets/img/Rectangle%202.1.png">
+                                                <div class="card" style="margin: 10px;border-radius: 10px;margin-right: 10px;border-style: none;box-shadow: 1px 1px 10px 1px rgb(204,205,205);">
+                                                    <img class="img-fluid card-img-top w-100 d-block" style="border-top-left-radius: 7px;border-top-right-radius: 7px;" src="{{asset('new-assets/img/Rectangle%202.1.png')}}">
                                                     <div class="card-img-overlay text-end" style="border-style: solid;color: rgba(33,37,41,0);">
                                                         <p style="color: var(--bs-white);font-size: 10px;margin-bottom: 1px;"><strong>Starting from</strong></p><span style="color: var(--bs-white);"><strong>N40,000 - 70,000</strong></span>
                                                     </div>
@@ -696,7 +579,8 @@
                                         </div>
                                         <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-xxl-3 offset-sm-0">
                                             <div class="card-group">
-                                                <div class="card" style="margin: 10px;border-radius: 10px;margin-right: 10px;border-style: none;box-shadow: 1px 1px 10px 1px rgb(204,205,205);"><img class="img-fluid card-img-top w-100 d-block" style="border-top-left-radius: 7px;border-top-right-radius: 7px;" src="assets/img/Rectangle%202.1%20(1).png">
+                                                <div class="card" style="margin: 10px;border-radius: 10px;margin-right: 10px;border-style: none;box-shadow: 1px 1px 10px 1px rgb(204,205,205);">
+                                                    <img class="img-fluid card-img-top w-100 d-block" style="border-top-left-radius: 7px;border-top-right-radius: 7px;" src="{{asset('new-assets/img/Rectangle%202.1%20(1).png')}}">
                                                     <div class="card-img-overlay text-end" style="border-style: solid;color: rgba(33,37,41,0);">
                                                         <p style="color: var(--bs-white);font-size: 10px;margin-bottom: 1px;"><strong>Starting from</strong></p><span style="color: var(--bs-white);"><strong>N40,000 - 70,000</strong></span>
                                                     </div>
@@ -714,7 +598,8 @@
                                         </div>
                                         <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-xxl-3 offset-sm-0">
                                             <div class="card-group">
-                                                <div class="card" style="margin: 10px;border-radius: 10px;margin-right: 10px;box-shadow: 1px 1px 10px 1px rgb(204,205,205);border-style: none;"><img class="img-fluid card-img-top w-100 d-block" style="border-top-left-radius: 7px;border-top-right-radius: 7px;" src="assets/img/Rectangle%202.1%20(2).png">
+                                                <div class="card" style="margin: 10px;border-radius: 10px;margin-right: 10px;box-shadow: 1px 1px 10px 1px rgb(204,205,205);border-style: none;">
+                                                    <img class="img-fluid card-img-top w-100 d-block" style="border-top-left-radius: 7px;border-top-right-radius: 7px;" src="{{asset('new-assets/img/Rectangle%202.1%20(2).png')}}">
                                                     <div class="card-img-overlay text-end" style="border-style: solid;color: rgba(33,37,41,0);">
                                                         <p style="color: var(--bs-white);font-size: 10px;margin-bottom: 1px;"><strong>Starting from</strong></p><span style="color: var(--bs-white);"><strong>N40,000 - 70,000</strong></span>
                                                     </div>
@@ -732,7 +617,7 @@
                                         </div>
                                         <div class="col-sm-6 col-md-3 col-lg-3 col-xl-3 col-xxl-3 offset-sm-0">
                                             <div class="card-group">
-                                                <div class="card" style="margin: 10px;border-radius: 10px;margin-right: 10px;box-shadow: 1px 1px 10px 1px rgb(204,205,205);border-style: none;"><img class="img-fluid card-img-top w-100 d-block" style="border-top-left-radius: 7px;border-top-right-radius: 7px;" src="assets/img/Rectangle%202.1.png">
+                                                <div class="card" style="margin: 10px;border-radius: 10px;margin-right: 10px;box-shadow: 1px 1px 10px 1px rgb(204,205,205);border-style: none;"><img class="img-fluid card-img-top w-100 d-block" style="border-top-left-radius: 7px;border-top-right-radius: 7px;" src="{{asset('new-assets/img/Rectangle%202.1.png')}}">
                                                     <div class="card-img-overlay text-end" style="border-style: solid;color: rgba(33,37,41,0);">
                                                         <p style="color: var(--bs-white);font-size: 10px;margin-bottom: 1px;"><strong>Starting from</strong></p><span style="color: var(--bs-white);"><strong>N40,000 - 70,000</strong></span>
                                                     </div>

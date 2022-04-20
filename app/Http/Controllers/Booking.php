@@ -53,6 +53,15 @@ class Booking extends Controller
 //                                            ->where('seats_available' , '>=', $data['number_of_passengers'])
 //                                            ->with('terminal','bus','destination','pickup','service')->get();
 
+
+         //check if the departure date has not already passed
+        if($request->departure_date < now()->format('Y-m-d'))
+        {
+            toastr()->error('Error !! You can\'t pick a departure date that has already passed');
+
+            return back();
+        }
+
         //fetch destination and pick up
         $pickUp = \App\Models\Destination::where('id',$data['destination_from'])->select('location')->first();
         $destination = \App\Models\Destination::where('id',$data['destination_to'])->select('location')->first();

@@ -151,8 +151,10 @@
                         <h6>Departure Date : {{$findSchedule->departure_date->format('Y-M-d')}}</h6>
                         <hr>
                         <h6>Departure Time : {{$findSchedule->departure_time}}</h6>
+                        @if(!is_null($findSchedule->return_date))
                         <hr>
                         <h6>Return Date : {{$findSchedule->return_date->format('Y-M-d')}}</h6>
+                        @endif
                         <hr>
                         <h6>Seats Available :{{$findSchedule->seats_available}} </h6>
                         <hr>

@@ -262,6 +262,8 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::get('boat/{boat_id}/history',[BoatCruise::class , 'boatHistory']);
         Route::get('/edit/{boat_id}/boat', [BoatCruise::class , 'editBoat']);
         Route::put('/update/{boat_id}/boat' ,[BoatCruise::class , 'updateBoat']);
+        Route::get('view-boat-schedules/{boat_id}', [BoatCruise::class , 'viewBoatSchedules']);
+        Route::get('view-boat-schedule-payment/{schedule_id}', [BoatCruise::class ,'viewBoatSchedulesPaymentHistory']);
 
         //tour management
         Route::get('manage/tour',[Tour::class , 'manageTour']);
@@ -283,6 +285,8 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::get('/manage/length' , [Parcel::class , 'manageLength']);
         Route::get('/manage/width' , [Parcel::class , 'manageWidth']);
         Route::post('/add/dimension/{slug}' , [Parcel::class , 'storeDimension']);
+        Route::get('manage/parcel/delivery/request', [Parcel::class ,'parcelDeliveryRequest']);
+        Route::get('manage/view-parcel/delivery/request/{delivery_id}', [Parcel::class ,'viewParcelDeliveryRequest']);
 
         //edit city
         Route::get('/edit-city/{city_id}/parcel' , [Parcel::class , 'editParcelCity']);
@@ -357,6 +361,11 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::get('fetch-permissions',[RoleMgt::class , 'fetchPermissions'])->name('fetch-permissions');
         Route::get('edit-permission/{id}', [RoleMgt::class , 'editPermission']);
         Route::put('update-permission/{id}',[RoleMgt::class ,'updatePermission']);
+
+        //all become partners
+        Route::get('/all-partners', [\App\Http\Controllers\Partner::class , 'partners']);
+        Route::get('fetch-all-become-partners', [\App\Http\Controllers\Partner::class ,'fetchBecomePartners'])->name('fetch-all-become-partners');
+        Route::get('view-partners/{partner_id}',[\App\Http\Controllers\Partner::class , 'viewPartner']);
 
 
     });

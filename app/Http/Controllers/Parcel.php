@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\City;
+use App\Models\DeliveryParcel;
 use App\Models\Height;
 use App\Models\Length;
 use App\Models\Service;
@@ -199,5 +200,26 @@ class Parcel extends Controller
         Alert::success('Success ', 'Updated successfully');
 
         return back();
+    }
+
+
+    public function parcelDeliveryRequest()
+    {
+        $deliveryParcelCount = DeliveryParcel::count();
+        $deliveryParcelSum = DeliveryParcel::pluck('amount')->sum();
+
+        $deliveries = DeliveryParcel::with('user','state','city','delivery_city','delivery_state')->simplePaginate(20);
+
+        return view('admin.parcel.delivery-request', compact('deliveryParcelCount','deliveryParcelSum','deliveries'));
+    }
+
+    public function viewParcelDeliveryRequest($delivery_id)
+    {
+         $delivery = DeliveryParcel::where('id', $delivery_id)
+                                    ->with('user','state','city','delivery_city','delivery_state','parcel')
+                                    ->first();
+
+
+        return view('admin.parcel.view-delivery-request', compact('delivery'));
     }
 }
