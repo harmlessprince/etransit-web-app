@@ -189,6 +189,20 @@ class Ferry extends Controller
 
     }
 
+
+    public function viewFerryScheduleEvent($ferry_id)
+    {
+
+       $schedules = FerryTrip::where('ferry_id' , $ferry_id)->with('ferry','destination','pickup','ferry_type')->orderby('created_at', 'desc')->simplePaginate(20);
+//dd($schedules);
+       return view('admin.ferry.each_ferry_schedules' , compact('schedules'));
+    }
+
+    public function viewFerryBookings($schedule_id)
+    {
+
+    }
+
     public function ferryHistory($ferry_id)
     {
 

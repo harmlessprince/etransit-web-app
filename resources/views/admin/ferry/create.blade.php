@@ -203,7 +203,7 @@
                     </div>
                     <div class="form-group">
                         <label for="description">Description</label>
-                        <textarea class="form-control" name="description" id="description" rows="10" cols="20" required >{{old('description')}}</textarea>
+                        <textarea class="ckeditor form-control" name="description" id="description" rows="10" cols="20" required >{{old('description')}}</textarea>
                     </div>
                     <button class="sumbit_request" type="submit">Add Ferry</button>
                 </form>
@@ -271,5 +271,10 @@
         });
 
     </script>
-
+    <script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.ckeditor').ckeditor();
+        });
+    </script>
 @endsection

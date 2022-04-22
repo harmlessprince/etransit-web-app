@@ -98,6 +98,7 @@ Route::group(['middleware' => ['auth','prevent-back-history']], function() {
 //    ,'must_verify'
 
     Route::get('profile/{user_id}',[UserProfile::class ,'myProfile']);
+
     Route::put('update-user-profile/{user_id}' ,[UserProfile::class ,'updateUserProfile']);
 
     Route::get('/seat-picker/{schedule_id}/{trip_type}', [Booking::class, 'seatSelector']);
@@ -303,6 +304,8 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::get('ferry/{ferry_id}/history', [Ferry::class , 'ferryHistory']);
         Route::post('/store/location',[Ferry::class , 'storeLocation']);
         Route::post('/schedule/ferry-event',[Ferry::class , 'scheduleEvent']);
+        Route::get('view-ferry-schedules/{ferry_id}',[Ferry::class , 'viewFerryScheduleEvent']);
+        Route::get('view-ferry-booking-schedule/{schedule_id}', [Ferry::class , 'viewFerryBookings']);
 
         //manage train
         Route::get('/manage/train'  ,[Train::class , 'index']);

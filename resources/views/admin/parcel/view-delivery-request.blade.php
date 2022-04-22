@@ -43,7 +43,7 @@
                     <div class="card-header card-no-border">
                         <div class="media">
                             <div class="media-body">
-                                <h5>Sender Details</h5>
+                                <h5>Account Details</h5>
                                 <hr>
                                 <h6>Name : {{$delivery->user->full_name}}</h6>
                                 <hr>
@@ -59,9 +59,9 @@
                                 <hr>
                                 <h6>Sender Landmark : {{$delivery->sender_landmark}}</h6>
                                 <hr>
-                                <h6>Receiver Name : {{$delivery->sender_name}}</h6>
+                                <h6>Sender Name : {{$delivery->sender_name}}</h6>
                                 <hr>
-                                <h6>Receiver Phone Number : {{$delivery->sender_phone_number}}</h6>
+                                <h6>Sender Phone Number : {{$delivery->sender_phone_number}}</h6>
                                 <hr>
                                 <h5>Delivery State</h5>
                                 <hr>

@@ -36,4 +36,9 @@ class FerryTrip extends Model
     {
         return $this->belongsTo(FerryLocation::class , 'ferry_pick_up_id');
     }
+
+    public function ferry_type()
+    {
+        return $this->belongsTo(FerryType::class , 'ferry_type_id');
+    }
 }

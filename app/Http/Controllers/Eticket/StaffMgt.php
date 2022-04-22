@@ -55,6 +55,7 @@ class StaffMgt extends Controller
         $staff->email = $request->email;
         $staff->phone_number = $request->phone_number;
         $staff->designation = $request->designation;
+        $staff->address = $request->address;
         $staff->employment_date = $request->employment_date;
         $staff->tenant_id = session()->get('tenant_id');
         $staff->save();

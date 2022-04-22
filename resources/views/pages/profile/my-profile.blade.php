@@ -18,8 +18,8 @@
                         <div class="row">
                             <div class="col-12"><img style="border-radius: 50px;font-size: 8px;width: 80px;height: 80px;box-shadow: 1px 1px 7px rgb(184,185,186);border: 5px solid var(--bs-gray-100) ;" src="{{asset('new-assets/img/tp6.png')}}"><i class="fa fa-camera" id="uploadicon" style="color: rgb(44,57,94);"></i></div>
                             <div class="col-12">
-                                <h6 style="margin-top: 14px;"><strong>Nick Grimes</strong></h6>
-                                <p>nickgrime@gmail.com</p>
+                                <h6 style="margin-top: 14px;"><strong>{{auth()->user()->full_name}}</strong></h6>
+                                <p>{{auth()->user()->email}}</p>
                             </div>
                         </div>
                     </div>
@@ -41,15 +41,15 @@
                         <div class="row">
                             <div class="col-12" style="margin-top: 10px;margin-bottom: 10px;">
                                 <label class="form-label" style="font-size: 14px;border-style: none;border-bottom-style: none;">FULL NAME</label>
-                                <input class="form-control form-control-sm" type="text" value="{{auth()->user()->full_name}}" style="border-radius: 0px;border-top-left-radius: 0px;border-top-right-radius: 0px;border-bottom-right-radius: 0px;border-top-style: none;border-top-color: var(--bs-gray-300);border-right-style: none;border-left-style: none;border-bottom-left-radius: 0px;">
+                                <input class="form-control form-control-sm" type="text" name="full_name" value="{{auth()->user()->full_name}}" style="border-radius: 0px;border-top-left-radius: 0px;border-top-right-radius: 0px;border-bottom-right-radius: 0px;border-top-style: none;border-top-color: var(--bs-gray-300);border-right-style: none;border-left-style: none;border-bottom-left-radius: 0px;">
                             </div>
                             <div class="col-12" style="margin-top: 10px;margin-bottom: 10px;">
                                 <label class="form-label" style="font-size: 14px;border-style: none;border-bottom-style: none;">ADDRESS</label>
-                                <input class="form-control form-control-sm" type="text" value="{{auth()->user()->address}}" style="border-radius: 0px;border-top-left-radius: 0px;border-top-right-radius: 0px;border-bottom-right-radius: 0px;border-top-style: none;border-top-color: var(--bs-gray-300);border-right-style: none;border-left-style: none;border-bottom-left-radius: 0px;">
+                                <input class="form-control form-control-sm" type="text" name="address" value="{{auth()->user()->address}}" style="border-radius: 0px;border-top-left-radius: 0px;border-top-right-radius: 0px;border-bottom-right-radius: 0px;border-top-style: none;border-top-color: var(--bs-gray-300);border-right-style: none;border-left-style: none;border-bottom-left-radius: 0px;">
                             </div>
                             <div class="col-12" style="margin-top: 10px;margin-bottom: 10px;">
                                 <label class="form-label" style="font-size: 14px;border-style: none;border-bottom-style: none;">PHONE NUMBER</label>
-                                <input class="form-control form-control-sm" type="text" value="{{auth()->user()->phone_number}}" style="border-radius: 0px;border-top-left-radius: 0px;border-top-right-radius: 0px;border-bottom-right-radius: 0px;border-top-style: none;border-top-color: var(--bs-gray-300);border-right-style: none;border-left-style: none;border-bottom-left-radius: 0px;">
+                                <input class="form-control form-control-sm" type="text" name="phone_number" value="{{auth()->user()->phone_number}}" style="border-radius: 0px;border-top-left-radius: 0px;border-top-right-radius: 0px;border-bottom-right-radius: 0px;border-top-style: none;border-top-color: var(--bs-gray-300);border-right-style: none;border-left-style: none;border-bottom-left-radius: 0px;">
                             </div>
                             <div class="col-12" style="margin-top: 10px;margin-bottom: 10px;">
                                 <label class="form-label" style="font-size: 14px;border-style: none;border-bottom-style: none;">EMAIL</label>
@@ -57,9 +57,14 @@
                             </div>
                             <div class="col-12" style="margin-top: 10px;margin-bottom: 10px;">
                                 <label class="form-label" style="font-size: 14px;border-style: none;border-bottom-style: none;">PASSWORD</label>
-                                <input class="form-control form-control-sm" type="text" style="border-radius: 0px;border-top-left-radius: 0px;border-top-right-radius: 0px;border-bottom-right-radius: 0px;border-top-style: none;border-top-color: var(--bs-gray-300);border-right-style: none;border-left-style: none;border-bottom-left-radius: 0px;">
+                                <input class="form-control form-control-sm" type="password" name="password" style="border-radius: 0px;border-top-left-radius: 0px;border-top-right-radius: 0px;border-bottom-right-radius: 0px;border-top-style: none;border-top-color: var(--bs-gray-300);border-right-style: none;border-left-style: none;border-bottom-left-radius: 0px;">
+                            </div>
+                            <div class="col-12" style="margin-top: 10px;margin-bottom: 10px;">
+                                <label class="form-label" style="font-size: 14px;border-style: none;border-bottom-style: none;">CONFIRM PASSWORD</label>
+                                <input class="form-control form-control-sm" type="password" name="confirm_password" style="border-radius: 0px;border-top-left-radius: 0px;border-top-right-radius: 0px;border-bottom-right-radius: 0px;border-top-style: none;border-top-color: var(--bs-gray-300);border-right-style: none;border-left-style: none;border-bottom-left-radius: 0px;">
                             </div>
                         </div>
+                        <button class="btn btn-primary" type="submit" style="font-size: 12px;width: 115px;padding-right: 0px;padding-left: 0px;background: rgb(52,63,95);">UPDATE</button>
                     </form>
                 </div>
             </div>

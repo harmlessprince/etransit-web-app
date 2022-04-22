@@ -19,7 +19,7 @@ class CreateStaffsTable extends Migration
             $table->string('full_name');
             $table->string('email');
             $table->string('phone_number');
-            $table->string('address');
+            $table->string('address')->nullable();
             $table->string('designation');
             $table->date('employment_date')->nullable();
             $table->date('termination_date')->nullable();
