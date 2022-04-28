@@ -120,8 +120,13 @@
 
     .center_not_found_data{
         display:flex;
-
-
+    }
+    .car_box{
+        width:400px;
+        height:400px;
+    }
+    a {
+        text-decoration:none !important;
     }
 </style>
 @push('css')
@@ -129,158 +134,6 @@
 @endpush
 
 @section('content')
-{{--    <div class="bookings_box">--}}
-{{--        <div class="booking_bg"  style="background-image: url('{{ asset('/images/bg/booking_hero.png')}}'); height:200px;" >--}}
-{{--            <div class="booking_hero_text">--}}
-{{--                <div class="booking_hero_icon">--}}
-{{--                    <a href="{{url('/')}}">--}}
-{{--                     <img src="{{asset('/images/icons/arrow_left_2.png')}}">--}}
-{{--                    </a>--}}
-{{--                </div>--}}
-{{--                <div class="booking_text">--}}
-{{--                    <h1>Car Hire</h1>--}}
-{{--                    <span>Lorem ipsum text here  Lorem ipsum text here Lorem ipsum text here</span>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-
-{{--        </div>--}}
-{{--        <div class="booking_nav_box">--}}
-{{--            <div class="booking_nav_content">--}}
-{{--                <div class="booking_nav_item">--}}
-{{--                    <div class="booking_nav_destination_from nav_item_bookings">--}}
-{{--                        <div class="">--}}
-{{--                            <span>From</span>--}}
-{{--                        </div>--}}
-{{--                        <div class="bookings_nav_text">--}}
-{{--                            <span>{{$pickUp->location}}</span>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                    <div class="booking_nav_destination_to nav_item_bookings">--}}
-{{--                        <div class="">--}}
-{{--                            <span>To</span>--}}
-{{--                        </div>--}}
-{{--                        <div class="bookings_nav_text">--}}
-{{--                            <span>{{$destination->location}}</span>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                    <div class="booking_nav_departure_date nav_item_bookings">--}}
-{{--                        <div class="">--}}
-{{--                            <span>Departure</span>--}}
-{{--                        </div>--}}
-{{--                        <div class="bookings_nav_text">--}}
-{{--                            <span>{{$data['departure_date']}}</span>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                    <div class="booking_nav_return_date nav_item_bookings">--}}
-{{--                        <div class="">--}}
-{{--                            <span>FROM</span>--}}
-{{--                        </div>--}}
-{{--                        <div class="bookings_nav_text">--}}
-{{--                            <span>Lagos Ikeja</span>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                    <div class="booking_nav_passenger_count nav_item_bookings">--}}
-{{--                        <div class="">--}}
-{{--                            <span>Passenger</span>--}}
-{{--                        </div>--}}
-{{--                        <div class="bookings_nav_text">--}}
-{{--                            <span>{{$data['number_of_passengers']}}</span>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-
-{{--               <div class="car_hire_container">--}}
-{{--                    <div class="car_hire_filter_box">--}}
-{{--                      <div class="filter_header">--}}
-{{--                          <div class="filter_text">--}}
-{{--                              <h6>FILTER SEARCH</h6>--}}
-{{--                          </div>--}}
-{{--                          <div class="clear_text">--}}
-{{--                              <small>clear</small>--}}
-{{--                          </div>--}}
-{{--                      </div>--}}
-{{--                        <hr>--}}
-{{--                    </div>--}}
-{{--               </div>--}}
-{{--            @if(count($cars) >  0)--}}
-{{--            @foreach($cars as $car)--}}
-{{--            <div class="cars_hire_body_box">--}}
-{{--               <div class="car_list">--}}
-{{--                   <div class="car_list_content">--}}
-{{--                       @if(!is_null($cars))--}}
-{{--                       <div class="car_img">--}}
-{{--                           <img src="{{$car->car_images[0]->path}}" alt="about-us-image"  />--}}
-{{--                       </div>--}}
-{{--                       @endif--}}
-{{--                       <div class="car_name_function_box">--}}
-{{--                           <div class="car_name"><h5>{{Ucfirst($car->car_name)}}</h5></div>--}}
-{{--                           <div class="car_description">--}}
-{{--                               <p>--}}
-{{--                                   {{ \Illuminate\Support\Str::limit($car->description, $limit = 150, $end = '...') }}--}}
-{{--                               </p>--}}
-{{--                           </div>--}}
-{{--                           <div class="car_functionality">--}}
-{{--                               <div>--}}
-{{--                                  <img src="{{asset('/images/icons/seat_2.png')}}" alt="about-us-image"   />--}}
-{{--                                   &#8358;  {{number_format($car->plans[0]->amount)}} Daily--}}
-{{--                               </div>--}}
-{{--                              <div>--}}
-{{--                                  <img src="{{asset('/images/icons/functional_2.png')}}" alt="about-us-image"   />  Functional--}}
-{{--                              </div>--}}
-{{--                               <div>--}}
-{{--                                   <img src="{{asset('/images/icons/seat_2.png')}}" alt="about-us-image"   /> {{$car->capacity}} Seat(s)--}}
-{{--                               </div>--}}
-{{--                               <div>--}}
-{{--                                   <img src="{{asset('/images/icons/seat_2.png')}}" alt="about-us-image"   />  {{$car->carclass->name}}--}}
-{{--                               </div>--}}
-{{--                               <div>--}}
-{{--                                   <img src="{{asset('/images/icons/functional_2.png')}}" alt="about-us-image"   />  {{$car->cartype->name}}--}}
-{{--                               </div>--}}
-{{--                               <div>--}}
-{{--                                   <img src="{{asset('/images/icons/seat_2.png')}}" alt="about-us-image"   />--}}
-{{--                                  A/C : {{$car->air_conditioning  == 1 ? 'True' : 'False'}}--}}
-{{--                               </div>--}}
-{{--                               <div>--}}
-{{--                                   <img src="{{asset('/images/icons/seat_2.png')}}" alt="about-us-image"   />  {{Ucfirst($car->transmission)}}--}}
-{{--                               </div>--}}
-{{--                               <div>--}}
-{{--                                   <img src="{{asset('/images/icons/functional_2.png')}}" alt="about-us-image"   /> Model : {{$car->model_year}}--}}
-{{--                               </div>--}}
-
-
-{{--                           </div>--}}
-{{--                       </div>--}}
-{{--                       <div class="car_booking_button">--}}
-{{--                           <a href="{{url('select/car-plan/'.$car->id)}}">--}}
-{{--                               <button>Book Now</button>--}}
-{{--                           </a>--}}
-{{--                       </div>--}}
-{{--                   </div>--}}
-{{--               </div>--}}
-{{--            </div>--}}
-{{--            @endforeach--}}
-{{--            @else--}}
-{{--                <div class="cars_hire_body_box">--}}
-{{--                    <div class="car_list">--}}
-{{--                        <div class="empty_img_box">--}}
-{{--                            <div class="empty_img">--}}
-{{--                                <img src="{{asset('/images/illustrations/empty.jpg')}}" alt="about-us-image"  width="500" height="500"  />--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            @endif--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--        <div class="pagination_box">--}}
-{{--           <div>--}}
-{{--               {{ $cars->links('vendor.pagination.custom') }}--}}
-{{--           </div>--}}
-{{--        </div>--}}
-{{--    </div>--}}
-
-
 <section style="height: 226px;background: url(&quot;../../new-assets/img/Rectangle%2015%20(2).png&quot;) center / cover no-repeat;">
     <div class="d-flex d-sm-flex d-md-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center" style="height: 226px;background: rgba(11,8,8,0.73);">
         <div class="container d-md-flex justify-content-md-center align-items-md-center">
@@ -436,7 +289,9 @@
                 <div class="row" style="padding: 3px;">
                     <div class="col" id="autopadding" style="padding: 20px;padding-top: 36px;padding-left: 38px;">
                         <div class="row" style="border-radius: 7px;box-shadow: 2px 1px 5px 1px rgb(226,226,227);padding: 17px;background: #ffffff;">
-                            <div class="col-sm-12 col-md-4 d-md-flex d-lg-flex justify-content-md-center justify-content-lg-center align-items-lg-center"><img src="{{$car->car_images[0]->path}}"></div>
+                            <div class="col-sm-12 col-md-4 d-md-flex d-lg-flex justify-content-md-center justify-content-lg-center align-items-lg-center car_box">
+                                <img src="{{$car->car_images[0]->path}}">
+                            </div>
                             <div class="col align-self-center">
                                 <div class="row">
                                     <div class="col-12">
@@ -481,8 +336,22 @@
                                 </div>
                             </div>
                             <div class="col-md-3 text-center d-md-flex align-items-md-center">
+                                <a href="{{url('view-car-details/'.$car->id)}}">
+                                    <button class="btn d-md-flex" type="button"
+                                            style="color: rgb(255,255,255);
+                                            background:rgb(52,63,95);
+                                            text-align: center;">
+                                        View
+                                    </button>
+                                </a>
+                                &nbsp; &nbsp;
                                 <a href="{{url('select/car-plan/'.$car->id)}}">
-                                    <button class="btn btn-primary d-md-flex" type="button" style="color: rgb(255,255,255);background: rgb(52,63,95);height: 29px;padding-top: 1px;width: 125.766px;text-align: center;">Book Now</button>
+                                    <button class="btn  d-md-flex" type="button"
+                                            style="color: rgb(255,255,255);
+                                                   background: rgb(52,63,95);
+                                                   text-align: center;">
+                                        Book Now
+                                    </button>
                                 </a>
                             </div>
                         </div>

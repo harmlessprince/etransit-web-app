@@ -241,8 +241,11 @@ class Car extends Controller
 
     public function carList()
     {
-        $cars = HiredCars::where('functional',1)->with('car_images','carclass','cartype','plans')->paginate(10);
-//dd($cars);
+        $cars = HiredCars::where('functional',1)
+                         ->where('car_availability',1)
+                         ->with('car_images','carclass','cartype','plans')
+                         ->paginate(10);
+
         return view('pages.car-hire.hire', compact('cars'));
     }
 
@@ -300,6 +303,13 @@ class Car extends Controller
         return view('pages.car-hire.plan', compact('car'));
     }
 
+    public function carDetails($car_id)
+    {
+        $car = HiredCars::where('id',$car_id)->with('plans','cartype','carclass','car_images')->first();
+//dd($car);
+        return view('pages.car-hire.details', compact('car'));
+    }
+
 
     public function pickPlan($plan_id)
     {
@@ -328,7 +338,7 @@ class Car extends Controller
               {
 
 
-                  if($data['time'] < $currentTime)
+                  if( $data['date'] <= $currentDate && $data['time'] < $currentTime)
                   {
                       toastr()->error('You can\'t pick a time that has already passed');
                       return back();

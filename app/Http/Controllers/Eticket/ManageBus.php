@@ -6,6 +6,7 @@ use App\Exports\VehicleExport;
 use App\Http\Controllers\Controller;
 use App\Imports\VehicleImport;
 use App\Models\Bus;
+use App\Models\BusType;
 use App\Models\Destination;
 use App\Models\Schedule;
 use App\Models\Tenant;
@@ -57,7 +58,8 @@ class ManageBus extends Controller
 
     public function addNewBus()
     {
-        return view('Eticket.bus.new');
+        $busTypes = BusType::all();
+        return view('Eticket.bus.new' , compact('busTypes'));
     }
 
     public function createTenantBus(Request $request)

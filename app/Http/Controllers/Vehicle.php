@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BusType;
+use App\Models\Destination;
 use App\Models\SeatTracker;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
@@ -170,6 +172,127 @@ class Vehicle extends Controller
         toastr()->success('Data saved successfully');
         return response()->json(['message' => 'uploaded successfully'], 200);
     }
+
+    public function allBusTypes()
+    {
+        return view('admin.vehicle.bus-type');
+    }
+
+    public function addBusType()
+    {
+        return view('admin.vehicle.add-bus-type');
+    }
+
+    public function storeBusType(Request $request)
+    {
+        $request->validate(['bus_type' => 'required']);
+
+        $newBusType = new BusType();
+        $newBusType->type = $request->bus_type;
+        $newBusType->save();
+
+        Alert::success('Success ', 'Bus Type Added successfully');
+
+        return redirect('admin/manage/bus-type');
+
+    }
+
+    public function busTypeFetch(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = BusType::latest()->get();
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function($row){
+                    $id = $row->id;
+                    $actionBtn = "<a href='/admin/update/bus-type/$id'  class='edit btn btn-success btn-sm'>Edit</a>";
+                    return $actionBtn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+    }
+
+    public function EditBusType(Request $request , $bus_type_id)
+    {
+        $busType = BusType::where('id', $bus_type_id)->first();
+
+        return view('admin.vehicle.edit-bus-type' , compact('busType'));
+    }
+
+    public function updateBusType(Request $request ,$bus_type_id)
+    {
+        $request->validate(['bus_type' => 'required']);
+
+        $busType = BusType::where('id', $bus_type_id)->first();
+
+        $busType->update(['type' => $request->bus_type]);
+
+        Alert::success('Success ', 'Bus Type Added successfully');
+
+        return redirect('admin/manage/bus-type');
+    }
+
+    public function destinations()
+    {
+        return view('admin.vehicle.bus-destination');
+    }
+
+    public function addBusLocation()
+    {
+        return view('admin.vehicle.add-bus-destination');
+    }
+
+    public function storeBusLocation(Request $request)
+    {
+        $request->validate(['location' => 'required']);
+        $location = new Destination();
+        $location->location = $request->location;
+        $location->save();
+        Alert::success('Success ', 'Location Added successfully');
+        return redirect('admin/manage/bus-destination');
+    }
+
+    public function fetchBusLocation(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = Destination::latest()->get();
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function($row){
+                    $id = $row->id;
+                    $actionBtn = "<a href='/admin/update/bus-location/$id'  class='edit btn btn-success btn-sm'>Edit</a>";
+                    return $actionBtn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+    }
+
+    public function updateBusLocation($location_id)
+    {
+        $location = Destination::where('id' , $location_id)->first();
+
+        return view('admin.vehicle.edit-bus-destination' , compact('location'));
+    }
+
+    public function editVehicleLocation(Request $request ,$location_id)
+    {
+        $request->validate(['location' => 'required']);
+
+        $location = Destination::where('id' , $location_id)->first();
+
+        $location->update(['location' => $request->location]);
+
+        Alert::success('Success ', 'Location Updated successfully');
+
+        return redirect('admin/manage/bus-destination');
+
+
+    }
+
+
+
 
 
 

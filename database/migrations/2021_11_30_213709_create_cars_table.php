@@ -29,6 +29,7 @@ class CreateCarsTable extends Migration
             $table->longText('description')->nullable();
             $table->unsignedBigInteger('functional')->default(1)->comment('0 = false , 1 = true');
             $table->unsignedBigInteger('air_conditioning')->default(1)->comment('0 = false , 1 = true');
+            $table->unsignedBigInteger('car_availability')->default(1)->comment('0 = false , 1 = true');
 
             $table->enum('booked_status',['true' , 'false'])->default('false');
             $table->timestamps();

@@ -134,7 +134,7 @@
                         <h6>Phone Number : {{$findSchedule->bus->driver->phone_number}} </h6>
                         <hr>
                         @else
-                            <h3>No Driver Assigned yet to this bus.    <a href="{{url('e-ticket/assign-driver/'.$findSchedule->bus->id)}}" class="btn btn-danger">Assign Driver</a></h3>
+                            <h3>No Driver Assigned yet to this Trip.    <a href="{{url('e-ticket/assign-driver/'.$findSchedule->bus->id)}}" class="btn btn-danger">Assign Driver</a></h3>
                         @endif
                     </div>
                 </div>

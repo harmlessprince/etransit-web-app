@@ -69,8 +69,24 @@
                 </div>
             </div>
         </div>
+        <div style="display:flex; justify-content: flex-end;">
+            @if($car->car_availability == 0)
+            <a href="{{url('e-ticket/toggle-car-availability/'.$car->id)}}"
 
+               class="btn btn-success btn-sm"
+               onclick="confirm('Are you sure you want to make this car available ?');">
+                Click To Make Available
+            </a>
+            @else
+                <a href="{{url('e-ticket/toggle-car-un-availability/'.$car->id)}}"
+                   class="btn btn-danger btn-sm"
+                   onclick="confirm('Are you sure you want to make this car un-available ?');">
+                    Click To Make Un-available
+                </a>
+            @endif
+        </div>
         <div class="row">
+
             <div class="col-md-6 col-xl-6 col-lg-6 col-sm-6">
                 <div class="card">
                     <div class="card-body">

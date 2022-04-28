@@ -243,7 +243,9 @@ class CarHireMgt extends Controller
 
     public function viewCar($car_id)
     {
+
         $car = HiredCars::where('id', $car_id)->with('carclass','cartype')->first();
+//        dd($car );
 
         $carHistories = CarHistory::where('car_id', $car_id)->pluck('id');
 
@@ -361,6 +363,27 @@ class CarHireMgt extends Controller
                 ->rawColumns(['action'])
                 ->make(true);
         }
+    }
+
+    public function toggleUnAvailability($car_id)
+    {
+        $car = HiredCars::where('id',$car_id)->first();
+
+        $car->update(['car_availability' => 1]);
+
+        Alert::success('Success ', 'The action you performed is successful');
+        return back();
+    }
+
+    public function toggleUnUnAvailability($car_id)
+    {
+        $car = HiredCars::where('id',$car_id)->first();
+
+        $car->update(['car_availability' => 0]);
+
+        Alert::success('Success ', 'The action you performed is successful');
+
+        return back();
     }
 
 }

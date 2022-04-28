@@ -119,6 +119,7 @@ Route::group(['middleware' => ['auth','prevent-back-history']], function() {
     Route::get('/pick-date' ,[Car::class ,'pickDate']);
     Route::post('/plan/{plan_id}',[Car::class , 'proceedToPaymentPlan']);
     Route::get('car-hire/cash/payment/{history_id}/method',[Car::class , 'makePayment']);
+    Route::get('view-car-details/{car_id}' , [Car::class , 'carDetails']);
 
 
     //select payment plan for boat cruise
@@ -195,6 +196,18 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::get('view-bus-schedule-page/{schedule_id}' , [Vehicle::class , 'viewBusSchedulePage']);
         Route::get('edit-bus/{bus_id}',[Vehicle::class ,'editBus']);
         Route::put('update-bus/{bus_id}',[Vehicle::class , 'updateBus']);
+        Route::get('manage/bus-type', [Vehicle::class , 'allBusTypes']);
+        Route::get('add/bus-type', [Vehicle::class , 'addBusType']);
+        Route::post('store-bus-tye', [Vehicle::class , 'storeBusType']);
+        Route::get('bus-type-fetch' , [Vehicle::class , 'busTypeFetch'])->name('fetch-bus-types');
+        Route::get('update/bus-type/{bus_type_id}' , [Vehicle::class , 'EditBusType']);
+        Route::put('update/{bus_type_id}/bus-type' , [Vehicle::class , 'updateBusType']);
+        Route::get('manage/bus-destination',[Vehicle::class , 'destinations']);
+        Route::get('add/bus-locations',[Vehicle::class , 'addBusLocation']);
+        Route::post('store-bus-location' ,[Vehicle::class , 'storeBusLocation']);
+        Route::get('fetch-all-bus-location' ,[Vehicle::class , 'fetchBusLocation'])->name('fetch_bus_location');
+        Route::get('update/bus-location/{location_id}', [Vehicle::class , 'updateBusLocation']);
+        Route::put('edit-bus-location/{location_id}' , [Vehicle::class , 'editVehicleLocation']);
 
         //check schedule manifest
         Route::get('schedule-manifest/{schedule_id}', [Manifest::class , 'manifest']);
@@ -487,6 +500,10 @@ Route::prefix('e-ticket')->name('e-ticket.')->group(function(){
         Route::get('confirm-pick-up/{car_history_id}', [CarHireMgt::class , 'confirmPickUp'])->name('confirm-pick-up');
 
         Route::get('mark-as-paid/{car_history_id}',[CarHireMgt::class , 'markAsPaid'])->name('mark-as-paid');
+
+        Route::get('toggle-car-availability/{car_id}',[CarHireMgt::class , 'toggleUnAvailability']);
+
+        Route::get('toggle-car-un-availability/{car_id}',[CarHireMgt::class , 'toggleUnUnAvailability']);
 
         //add tour
         Route::get('tour-packages',[TourPackage::class , 'allTours'])->name('all-tours');

@@ -10,6 +10,8 @@ class Destination extends Model
 {
     use HasFactory;
 
+    protected $guarded = ['id'];
+
     public function schedules()
     {
         return $this->hasMany(Schedule::class);

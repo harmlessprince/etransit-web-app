@@ -37,6 +37,8 @@
                         <ul class="nav-submenu menu-content">
 {{--                            <li><a href="{{url('/admin/manage/vehicle')}}">Manage Buses</a></li>--}}
                             <li><a href="{{url('/admin/manage/tenant-bus')}}">Manage Buses</a></li>
+                            <li><a href="{{url('/admin/manage/bus-type')}}">Buses Type</a></li>
+                            <li><a href="{{url('/admin/manage/bus-destination')}}">Bus Locations</a></li>
                             <li><a href="{{url('/admin/manage/bus-terminals')}}">Manage Bus Terminals</a></li>
                         </ul>
                     </li>

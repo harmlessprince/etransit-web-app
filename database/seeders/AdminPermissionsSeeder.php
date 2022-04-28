@@ -33,6 +33,12 @@ class AdminPermissionsSeeder extends Seeder
         Permission::create(['guard_name' => 'admin','name' => 'admin.add-service-to-tenant']);
         Permission::create(['guard_name' => 'admin','name' => 'admin.fetch-all-cars']);
         Permission::create(['guard_name' => 'admin','name' => 'admin.fetch-all-become-partners']);
+        Permission::create(['guard_name' => 'admin','name' => 'admin.fetch-bus-types']);
+        Permission::create(['guard_name' => 'admin','name' => 'admin.fetch_bus_location']);
+
+
+
+
 
 
 

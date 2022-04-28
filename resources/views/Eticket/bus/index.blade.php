@@ -112,8 +112,8 @@
                     <thead>
                     <tr>
                         <th>No</th>
-                        <th>Bus</th>
                         <th>Bus Type</th>
+                        <th>Bus Model</th>
                         <th>Car Registration</th>
                         <th>Seats</th>
                         <th>Wheels</th>
