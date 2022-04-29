@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -9,7 +10,25 @@ class UserProfile extends Controller
 {
     public function myProfile()
     {
-        return view('pages.profile.my-profile');
+        $services = Service::all();
+//        dd($services);
+
+        return view('pages.profile.my-profile' , compact('services'));
+    }
+
+
+    public function myTransactions($user_id , $service_id)
+    {
+        $transactions = \App\Models\Transaction::where('service_id', $service_id)
+                                    ->with('schedule','carhistory')->where('user_id',$user_id)
+                                    ->orderby('created_at','desc')->simplePaginate(25);
+//        dd( $transactions);
+//
+        $service = Service::where('id',$service_id)->first();
+
+
+        return view('pages.profile.my-transactions',compact('transactions','service_id','service'));
+
     }
 
     public function updateUserProfile(Request $request , $user_id)

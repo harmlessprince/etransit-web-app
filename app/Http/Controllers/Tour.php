@@ -62,7 +62,9 @@ class Tour extends Controller
             'duration'       => 'required',
             'location'       =>'required',
             'amount_regular' => 'required',
-            'amount_standard'  => 'required'
+            'amount_standard'  => 'required',
+            'duration_options' => 'required',
+            'description' => 'required'
         ]);
 
 
@@ -74,6 +76,7 @@ class Tour extends Controller
         $tour->tour_date        = $request->departure_date;
         $tour->tour_time        = $request->departure_time;
         $tour->duration         = abs($request->duration);
+        $tour->duration_options = $request->duration_options;
         $tour->service_id       = $request->service_id;
         $tour->amount_regular   = $request->amount_regular;
         $tour->amount_standard  = $request->amount_standard;

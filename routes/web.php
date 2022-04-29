@@ -100,6 +100,7 @@ Route::group(['middleware' => ['auth','prevent-back-history']], function() {
     Route::get('profile/{user_id}',[UserProfile::class ,'myProfile']);
 
     Route::put('update-user-profile/{user_id}' ,[UserProfile::class ,'updateUserProfile']);
+    Route::get('view-user-transaction/{user_id}/{service_id}' , [UserProfile::class , 'myTransactions']);
 
     Route::get('/seat-picker/{schedule_id}/{trip_type}', [Booking::class, 'seatSelector']);
 
@@ -339,6 +340,22 @@ Route::prefix('admin')->name('admin.')->group(function(){
         //check RouteFare attached to each schedule
         Route::get('get-route-fares/{train_schedule_id}' , [Train::class , 'fetchRouteFaresForSchedule']);
 
+        //edit train location
+        Route::get('edit-train-location/{train_location_id}' , [Train::class , 'editTrainLocation']);
+        Route::put('update-train-location/{train_location_id}' , [Train::class , 'updateTrainLocation']);
+        Route::delete('delete-train-location/{train_location_id}', [Train::class , 'destroyTrainLocation']);
+
+        //edit train terminal
+        Route::get('edit-train-terminal/{terminal_id}', [Train::class , 'EachStopEdit']);
+        Route::put('update-train-terminal/{stop_id}',[Train::class , 'updateEachStop']);
+        Route::delete('delete-train-terminal/{stop_id}' , [Train::class , 'destroyTrainTerminal']);
+
+        //edit train routes
+        Route::get('edit-train-route/{route_id}' , [Train::class , 'editRoute']);
+        Route::put('update-train-route/{route_id}', [Train::class , 'updateRoute']);
+        Route::delete('delete-train-route/{route_id}', [Train::class , 'destroyRouteFare']);
+
+
         //manage customer
         Route::get('/customers',[Customer::class , 'customerIndex']);
         Route::get('/customer/list', [Customer::class , 'customers'])->name('customers.list');
@@ -357,8 +374,6 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::get('get-operator-users/{id}',[Operator::class , 'fetchOperatorUser'])->name('get-operator-users');
         Route::get('operator-generate-password/{id}',[Operator::class , 'regeneratePassword']);
         Route::post('add-service-to-tenant' , [Operator::class ,'addServiceToOperator'])->name('add-service-to-tenant');
-
-
         Route::post('add-permissions-to-role',[RoleMgt::class ,'assignPermissionToRole']);
 
         //roles and permissions

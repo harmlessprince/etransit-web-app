@@ -265,7 +265,21 @@
                             <td>{{Ucfirst($stop->seatClass->class)}}</td>
                             <td>&#8358; {{number_format($stop->amount_adult)}}</td>
                             <td>&#8358; {{number_format($stop->amount_child)}}</td>
-                            <td>Edit|Delete</td>
+                            <td>
+                                <a href="{{url('admin/edit-train-route/'. $stop->id)}}" class="btn btn-success btn-sm">
+                                    Edit
+                                </a>
+                                <a
+                                    class="btn btn-danger btn-sm"
+                                    onclick="confirm('Are you sure you want to delete ?') ;deleteFunc() "
+                                    style="color:white;">
+                                    Delete
+                                </a>
+                                <form action="{{url('admin/delete-train-route/'. $stop->id)}}" id="delete-form" method="POST">
+                                    @method('DELETE')
+                                    @csrf
+                                </form>
+                            </td>
                         </tr>
                         </tbody>
                     @endforeach
@@ -323,6 +337,8 @@
             }
         });
     });
-
+    function deleteFunc() {
+        document.getElementById("delete-form").submit();
+    }
 </script>
 @endsection

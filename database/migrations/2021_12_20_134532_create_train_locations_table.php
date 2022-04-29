@@ -16,6 +16,7 @@ class CreateTrainLocationsTable extends Migration
         Schema::create('train_locations', function (Blueprint $table) {
             $table->id();
             $table->string('locations_state');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

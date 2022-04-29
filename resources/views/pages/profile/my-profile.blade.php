@@ -1,5 +1,16 @@
 @extends('layouts.app')
+<style>
+    .view_transactions {
+        color: #f8a159;;
+        text-decoration: none;
+    }
 
+    .view_transactions:hover {
+        color:#f8a159;;
+        text-decoration:none !important;
+        cursor:pointer;
+    }
+</style>
 @section('content')
     <section style="margin-top: 40px;margin-bottom: 40px;">
         <div class="container">
@@ -41,27 +52,49 @@
                         <div class="row">
                             <div class="col-12" style="margin-top: 10px;margin-bottom: 10px;">
                                 <label class="form-label" style="font-size: 14px;border-style: none;border-bottom-style: none;">FULL NAME</label>
-                                <input class="form-control form-control-sm" type="text" name="full_name" value="{{auth()->user()->full_name}}" style="border-radius: 0px;border-top-left-radius: 0px;border-top-right-radius: 0px;border-bottom-right-radius: 0px;border-top-style: none;border-top-color: var(--bs-gray-300);border-right-style: none;border-left-style: none;border-bottom-left-radius: 0px;">
+                                <input class="form-control form-control-sm"
+                                       type="text"
+                                       name="full_name"
+                                       value="{{auth()->user()->full_name}}"
+                                       style="border-radius: 0px;border-top-left-radius: 0px;border-top-right-radius: 0px;border-bottom-right-radius: 0px;border-top-style: none;border-top-color: var(--bs-gray-300);border-right-style: none;border-left-style: none;border-bottom-left-radius: 0px;">
                             </div>
                             <div class="col-12" style="margin-top: 10px;margin-bottom: 10px;">
                                 <label class="form-label" style="font-size: 14px;border-style: none;border-bottom-style: none;">ADDRESS</label>
-                                <input class="form-control form-control-sm" type="text" name="address" value="{{auth()->user()->address}}" style="border-radius: 0px;border-top-left-radius: 0px;border-top-right-radius: 0px;border-bottom-right-radius: 0px;border-top-style: none;border-top-color: var(--bs-gray-300);border-right-style: none;border-left-style: none;border-bottom-left-radius: 0px;">
+                                <input class="form-control form-control-sm"
+                                       type="text"
+                                       name="address"
+                                       value="{{auth()->user()->address}}"
+                                       style="border-radius: 0px;border-top-left-radius: 0px;border-top-right-radius: 0px;border-bottom-right-radius: 0px;border-top-style: none;border-top-color: var(--bs-gray-300);border-right-style: none;border-left-style: none;border-bottom-left-radius: 0px;">
                             </div>
                             <div class="col-12" style="margin-top: 10px;margin-bottom: 10px;">
                                 <label class="form-label" style="font-size: 14px;border-style: none;border-bottom-style: none;">PHONE NUMBER</label>
-                                <input class="form-control form-control-sm" type="text" name="phone_number" value="{{auth()->user()->phone_number}}" style="border-radius: 0px;border-top-left-radius: 0px;border-top-right-radius: 0px;border-bottom-right-radius: 0px;border-top-style: none;border-top-color: var(--bs-gray-300);border-right-style: none;border-left-style: none;border-bottom-left-radius: 0px;">
+                                <input class="form-control form-control-sm"
+                                       type="text" name="phone_number"
+                                       value="{{auth()->user()->phone_number}}"
+                                       style="border-radius: 0px;border-top-left-radius: 0px;border-top-right-radius: 0px;border-bottom-right-radius: 0px;border-top-style: none;border-top-color: var(--bs-gray-300);border-right-style: none;border-left-style: none;border-bottom-left-radius: 0px;">
                             </div>
                             <div class="col-12" style="margin-top: 10px;margin-bottom: 10px;">
                                 <label class="form-label" style="font-size: 14px;border-style: none;border-bottom-style: none;">EMAIL</label>
-                                <input class="form-control form-control-sm" type="text" value="{{auth()->user()->email}}" style="border-radius: 0px;border-top-left-radius: 0px;border-top-right-radius: 0px;border-bottom-right-radius: 0px;border-top-style: none;border-top-color: var(--bs-gray-300);border-right-style: none;border-left-style: none;border-bottom-left-radius: 0px;" readonly>
+                                <input
+                                    class="form-control form-control-sm"
+                                    type="text"
+                                    value="{{auth()->user()->email}}"
+                                    style="border-radius: 0px;border-top-left-radius: 0px;border-top-right-radius: 0px;border-bottom-right-radius: 0px;border-top-style: none;border-top-color: var(--bs-gray-300);border-right-style: none;border-left-style: none;border-bottom-left-radius: 0px;" readonly>
                             </div>
                             <div class="col-12" style="margin-top: 10px;margin-bottom: 10px;">
                                 <label class="form-label" style="font-size: 14px;border-style: none;border-bottom-style: none;">PASSWORD</label>
-                                <input class="form-control form-control-sm" type="password" name="password" style="border-radius: 0px;border-top-left-radius: 0px;border-top-right-radius: 0px;border-bottom-right-radius: 0px;border-top-style: none;border-top-color: var(--bs-gray-300);border-right-style: none;border-left-style: none;border-bottom-left-radius: 0px;">
+                                <input class="form-control form-control-sm"
+                                       type="password"
+                                       name="password"
+                                       style="border-radius: 0px;border-top-left-radius: 0px;border-top-right-radius: 0px;border-bottom-right-radius: 0px;border-top-style: none;border-top-color: var(--bs-gray-300);border-right-style: none;border-left-style: none;border-bottom-left-radius: 0px;">
                             </div>
                             <div class="col-12" style="margin-top: 10px;margin-bottom: 10px;">
                                 <label class="form-label" style="font-size: 14px;border-style: none;border-bottom-style: none;">CONFIRM PASSWORD</label>
-                                <input class="form-control form-control-sm" type="password" name="confirm_password" style="border-radius: 0px;border-top-left-radius: 0px;border-top-right-radius: 0px;border-bottom-right-radius: 0px;border-top-style: none;border-top-color: var(--bs-gray-300);border-right-style: none;border-left-style: none;border-bottom-left-radius: 0px;">
+                                <input class="form-control form-control-sm"
+                                       type="password"
+                                       name="confirm_password"
+                                       style="border-radius: 0px;border-top-left-radius: 0px;border-top-right-radius: 0px;border-bottom-right-radius: 0px;border-top-style: none;border-top-color: var(--bs-gray-300);border-right-style: none;border-left-style: none;border-bottom-left-radius: 0px;"
+                                >
                             </div>
                         </div>
                         <button class="btn btn-primary" type="submit" style="font-size: 12px;width: 115px;padding-right: 0px;padding-left: 0px;background: rgb(52,63,95);">UPDATE</button>
@@ -87,348 +120,44 @@
     <section id="payment" style="display: none;">
         <div class="container">
             <div class="row">
+                @foreach($services as $service)
                 <div class="col-md-4" style="padding-top: 5px;padding-left: 40px;padding-right: 40px;padding-bottom: 5px;">
                     <div class="row" style="border-radius: 10px;box-shadow: 1px 0px 10px rgb(231,232,232);padding: 15px;">
                         <div class="col">
                             <div class="row" style="border-bottom: 4px none rgb(120,120,120) ;">
                                 <div class="col" style="border-bottom: 1px solid rgb(208,208,208) ;">
-                                    <p style="font-size: 13px;margin-bottom: 1px;color: var(--bs-gray-600);">Bus Booking</p>
-                                    <p style="margin-bottom: 3px;"><strong>Ikeja Transit</strong></p>
-                                    <p style="font-size: 13px;margin-bottom: 5px;color: var(--bs-gray-600);">Round Trip</p>
-                                </div>
-                                <div class="col" style="border-bottom: 1px solid rgb(208,208,208) ;">
-                                    <p style="text-align: right;margin-bottom: 1px;margin-right: 17px;"><i class="fas fa-bus" style="border-radius: 20px;color: rgb(255,255,255);background: #f8a159;border: 10px solid #f8a159 ;"></i></p>
-                                    <p style="text-align: right;">June 26, 2022</p>
+                                    <p style="margin-bottom: 3px;"><strong>{{Ucfirst($service->name)}} Transaction</strong></p>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col" style="padding-left: 0px;border-bottom: 1px solid rgb(208,208,208) ;">
-                                    <ul class="timeline" style="border-color: rgb(248,161,89);">
-                                        <li class="from"><span class="d-block" style="font-size: 12px;color: var(--bs-gray-500);">From</span><span class="d-block" style="margin-bottom: 3px;">Aba, Abia</span><span class="d-block" id="to" style="font-size: 12px;color: var(--bs-gray-500);margin-top: 4px;">To</span></li>
-                                        <li class="to"><span class="d-block" style="margin-top: 0px;padding-top: 0px;">Lagos Ikeja&nbsp;</span></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col" style="padding-left: 0px;border-bottom: 1px dashed rgb(208,208,208) ;">
-                                    <div class="table-responsive">
-                                        <table class="table table-borderless">
-                                            <tbody>
-                                            <tr>
-                                                <td style="color: var(--bs-gray);font-size: 14px;">Number of passengers</td>
-                                                <td class="text-end" style="color: var(--bs-gray);font-size: 14px;">4</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="font-size: 14px;color: var(--bs-gray);">Discount</td>
-                                                <td class="text-end" style="color: var(--bs-gray);font-size: 14px;">0%</td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-6 d-md-flex" style="padding-left: 0px;border-bottom: 1px dashed rgb(208,208,208) ;">
-                                    <p style="color: #163a5e;margin-top: 5px;margin-bottom: 5px;">Total Price</p>
+                                    <p style="color: #163a5e;margin-top: 5px;margin-bottom: 5px;">Total Bookings</p>
                                 </div>
                                 <div class="col-6 d-md-flex justify-content-md-end" style="padding-left: 0px;border-bottom: 1px dashed rgb(208,208,208) ;">
                                     <p class="text-end" style="color: #163a5e;margin-top: 5px;margin-bottom: 5px;text-align: right;"><strong>N 69,400</strong></p>
                                 </div>
+                                <div class="col-6 d-md-flex" style="padding-left: 0px;border-bottom: 1px dashed rgb(208,208,208) ;">
+                                    <p style="color: #163a5e;margin-top: 5px;margin-bottom: 5px;">View Transactions</p>
+                                </div>
+                                <div class="col-6 d-md-flex justify-content-md-end" style="padding-left: 0px;border-bottom: 1px dashed rgb(208,208,208) ;">
+                                    <p class="text-end" style="color: #163a5e;margin-top: 5px;margin-bottom: 5px;text-align: right;">
+                                        <a href="{{url('view-user-transaction/'. auth()->user()->id . '/' . $service->id)}}" class="view_transactions">View</a>
+                                    </p>
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="col" style="padding-left: 0px;border-bottom: 1px none rgb(208,208,208) ;">
-                                    <p style="margin-top: 9px;margin-bottom: 7px;">Payment method</p>
                                     <div class="input-group mb-3"><span id="basic-addon1" class="input-group-text" style="margin-left: 0px;border-right-style: none;"><i class="fab fa-cc-mastercard" id="inputicon" style="margin-top: 1px;"></i></span><input class="placeholder form-control no-radius" type="text" id="removeradius" aria-label="Username" aria-describedby="basic-addon1" style="background: rgb(218,222,225);border: 2px solid rgb(206,212,218) ;border-right-style: solid;"></div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4" style="padding-top: 5px;padding-left: 40px;padding-right: 40px;padding-bottom: 5px;">
-                    <div class="row" style="border-radius: 10px;box-shadow: 1px 0px 10px rgb(231,232,232);padding: 15px;">
-                        <div class="col">
-                            <div class="row" style="border-bottom: 4px none rgb(120,120,120) ;">
-                                <div class="col" style="border-bottom: 1px solid rgb(208,208,208) ;">
-                                    <p style="font-size: 13px;margin-bottom: 1px;color: var(--bs-gray-600);">Bus Booking</p>
-                                    <p style="margin-bottom: 3px;"><strong>Ikeja Transit</strong></p>
-                                    <p style="font-size: 13px;margin-bottom: 5px;color: var(--bs-gray-600);">Round Trip</p>
-                                </div>
-                                <div class="col" style="border-bottom: 1px solid rgb(208,208,208) ;">
-                                    <p style="text-align: right;margin-bottom: 1px;margin-right: 17px;"><i class="fas fa-bus" style="border-radius: 20px;color: rgb(255,255,255);background: #f8a159;border: 10px solid #f8a159 ;"></i></p>
-                                    <p style="text-align: right;">June 26, 2022</p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col" style="padding-left: 0px;border-bottom: 1px solid rgb(208,208,208) ;">
-                                    <ul class="timeline" style="border-color: rgb(248,161,89);">
-                                        <li class="from"><span class="d-block" style="font-size: 12px;color: var(--bs-gray-500);">From</span><span class="d-block" style="margin-bottom: 3px;">Aba, Abia</span><span class="d-block" id="to-3" style="font-size: 12px;color: var(--bs-gray-500);margin-top: 4px;">To</span></li>
-                                        <li class="to"><span class="d-block" style="margin-top: 0px;padding-top: 0px;">Lagos Ikeja&nbsp;</span></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col" style="padding-left: 0px;border-bottom: 1px dashed rgb(208,208,208) ;">
-                                    <div class="table-responsive">
-                                        <table class="table table-borderless">
-                                            <tbody>
-                                            <tr>
-                                                <td style="color: var(--bs-gray);font-size: 14px;">Number of passengers</td>
-                                                <td class="text-end" style="color: var(--bs-gray);font-size: 14px;">4</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="font-size: 14px;color: var(--bs-gray);">Discount</td>
-                                                <td class="text-end" style="color: var(--bs-gray);font-size: 14px;">0%</td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-6 d-md-flex" style="padding-left: 0px;border-bottom: 1px dashed rgb(208,208,208) ;">
-                                    <p style="color: #163a5e;margin-top: 5px;margin-bottom: 5px;">Total Price</p>
-                                </div>
-                                <div class="col-6 d-md-flex justify-content-md-end" style="padding-left: 0px;border-bottom: 1px dashed rgb(208,208,208) ;">
-                                    <p class="text-end" style="color: #163a5e;margin-top: 5px;margin-bottom: 5px;text-align: right;"><strong>N 69,400</strong></p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col" style="padding-left: 0px;border-bottom: 1px none rgb(208,208,208) ;">
-                                    <p style="margin-top: 9px;margin-bottom: 7px;">Payment method</p>
-                                    <div class="input-group mb-3"><span id="basic-addon-3" class="input-group-text" style="margin-left: 0px;border-right-style: none;"><i class="fab fa-cc-mastercard" id="inputicon-3" style="margin-top: 1px;"></i></span><input class="placeholder form-control no-radius" type="text" id="removeradius-3" aria-label="Username" aria-describedby="basic-addon1" style="background: rgb(218,222,225);border: 2px solid rgb(206,212,218) ;border-right-style: solid;"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4" style="padding-top: 5px;padding-left: 40px;padding-right: 40px;padding-bottom: 5px;">
-                    <div class="row" style="border-radius: 10px;box-shadow: 1px 0px 10px rgb(231,232,232);padding: 15px;">
-                        <div class="col">
-                            <div class="row" style="border-bottom: 4px none rgb(120,120,120) ;">
-                                <div class="col" style="border-bottom: 1px solid rgb(208,208,208) ;">
-                                    <p style="font-size: 13px;margin-bottom: 1px;color: var(--bs-gray-600);">Bus Booking</p>
-                                    <p style="margin-bottom: 3px;"><strong>Ikeja Transit</strong></p>
-                                    <p style="font-size: 13px;margin-bottom: 5px;color: var(--bs-gray-600);">Round Trip</p>
-                                </div>
-                                <div class="col" style="border-bottom: 1px solid rgb(208,208,208) ;">
-                                    <p style="text-align: right;margin-bottom: 1px;margin-right: 17px;"><i class="fas fa-bus" style="border-radius: 20px;color: rgb(255,255,255);background: #f8a159;border: 10px solid #f8a159 ;"></i></p>
-                                    <p style="text-align: right;">June 26, 2022</p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col" style="padding-left: 0px;border-bottom: 1px solid rgb(208,208,208) ;">
-                                    <ul class="timeline" style="border-color: rgb(248,161,89);">
-                                        <li class="from"><span class="d-block" style="font-size: 12px;color: var(--bs-gray-500);">From</span><span class="d-block" style="margin-bottom: 3px;">Aba, Abia</span><span class="d-block" id="to-2" style="font-size: 12px;color: var(--bs-gray-500);margin-top: 4px;">To</span></li>
-                                        <li class="to"><span class="d-block" style="margin-top: 0px;padding-top: 0px;">Lagos Ikeja&nbsp;</span></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col" style="padding-left: 0px;border-bottom: 1px dashed rgb(208,208,208) ;">
-                                    <div class="table-responsive">
-                                        <table class="table table-borderless">
-                                            <tbody>
-                                            <tr>
-                                                <td style="color: var(--bs-gray);font-size: 14px;">Number of passengers</td>
-                                                <td class="text-end" style="color: var(--bs-gray);font-size: 14px;">4</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="font-size: 14px;color: var(--bs-gray);">Discount</td>
-                                                <td class="text-end" style="color: var(--bs-gray);font-size: 14px;">0%</td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-6 d-md-flex" style="padding-left: 0px;border-bottom: 1px dashed rgb(208,208,208) ;">
-                                    <p style="color: #163a5e;margin-top: 5px;margin-bottom: 5px;">Total Price</p>
-                                </div>
-                                <div class="col-6 d-md-flex justify-content-md-end" style="padding-left: 0px;border-bottom: 1px dashed rgb(208,208,208) ;">
-                                    <p class="text-end" style="color: #163a5e;margin-top: 5px;margin-bottom: 5px;text-align: right;"><strong>N 69,400</strong></p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col" style="padding-left: 0px;border-bottom: 1px none rgb(208,208,208) ;">
-                                    <p style="margin-top: 9px;margin-bottom: 7px;">Payment method</p>
-                                    <div class="input-group mb-3"><span id="basic-addon-2" class="input-group-text" style="margin-left: 0px;border-right-style: none;"><i class="fab fa-cc-mastercard" id="inputicon-2" style="margin-top: 1px;"></i></span><input class="placeholder form-control no-radius" type="text" id="removeradius-2" aria-label="Username" aria-describedby="basic-addon1" style="background: rgb(218,222,225);border: 2px solid rgb(206,212,218) ;border-right-style: solid;"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4" style="padding-top: 5px;padding-left: 40px;padding-right: 40px;padding-bottom: 5px;">
-                    <div class="row" style="border-radius: 10px;box-shadow: 1px 0px 10px rgb(231,232,232);padding: 15px;">
-                        <div class="col">
-                            <div class="row" style="border-bottom: 4px none rgb(120,120,120) ;">
-                                <div class="col" style="border-bottom: 1px solid rgb(208,208,208) ;">
-                                    <p style="font-size: 13px;margin-bottom: 1px;color: var(--bs-gray-600);">Bus Booking</p>
-                                    <p style="margin-bottom: 3px;"><strong>Ikeja Transit</strong></p>
-                                    <p style="font-size: 13px;margin-bottom: 5px;color: var(--bs-gray-600);">Round Trip</p>
-                                </div>
-                                <div class="col" style="border-bottom: 1px solid rgb(208,208,208) ;">
-                                    <p style="text-align: right;margin-bottom: 1px;margin-right: 17px;"><i class="fas fa-bus" style="border-radius: 20px;color: rgb(255,255,255);background: #f8a159;border: 10px solid #f8a159 ;"></i></p>
-                                    <p style="text-align: right;">June 26, 2022</p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col" style="padding-left: 0px;border-bottom: 1px solid rgb(208,208,208) ;">
-                                    <ul class="timeline" style="border-color: rgb(248,161,89);">
-                                        <li class="from"><span class="d-block" style="font-size: 12px;color: var(--bs-gray-500);">From</span><span class="d-block" style="margin-bottom: 3px;">Aba, Abia</span><span class="d-block" id="to-1" style="font-size: 12px;color: var(--bs-gray-500);margin-top: 4px;">To</span></li>
-                                        <li class="to"><span class="d-block" style="margin-top: 0px;padding-top: 0px;">Lagos Ikeja&nbsp;</span></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col" style="padding-left: 0px;border-bottom: 1px dashed rgb(208,208,208) ;">
-                                    <div class="table-responsive">
-                                        <table class="table table-borderless">
-                                            <tbody>
-                                            <tr>
-                                                <td style="color: var(--bs-gray);font-size: 14px;">Number of passengers</td>
-                                                <td class="text-end" style="color: var(--bs-gray);font-size: 14px;">4</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="font-size: 14px;color: var(--bs-gray);">Discount</td>
-                                                <td class="text-end" style="color: var(--bs-gray);font-size: 14px;">0%</td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-6 d-md-flex" style="padding-left: 0px;border-bottom: 1px dashed rgb(208,208,208) ;">
-                                    <p style="color: #163a5e;margin-top: 5px;margin-bottom: 5px;">Total Price</p>
-                                </div>
-                                <div class="col-6 d-md-flex justify-content-md-end" style="padding-left: 0px;border-bottom: 1px dashed rgb(208,208,208) ;">
-                                    <p class="text-end" style="color: #163a5e;margin-top: 5px;margin-bottom: 5px;text-align: right;"><strong>N 69,400</strong></p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col" style="padding-left: 0px;border-bottom: 1px none rgb(208,208,208) ;">
-                                    <p style="margin-top: 9px;margin-bottom: 7px;">Payment method</p>
-                                    <div class="input-group mb-3"><span id="basic-addon-1" class="input-group-text" style="margin-left: 0px;border-right-style: none;"><i class="fab fa-cc-mastercard" id="inputicon-1" style="margin-top: 1px;"></i></span><input class="placeholder form-control no-radius" type="text" id="removeradius-1" aria-label="Username" aria-describedby="basic-addon1" style="background: rgb(218,222,225);border: 2px solid rgb(206,212,218) ;border-right-style: solid;"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4" style="padding-top: 5px;padding-left: 40px;padding-right: 40px;padding-bottom: 5px;">
-                    <div class="row" style="border-radius: 10px;box-shadow: 1px 0px 10px rgb(231,232,232);padding: 15px;">
-                        <div class="col">
-                            <div class="row" style="border-bottom: 4px none rgb(120,120,120) ;">
-                                <div class="col" style="border-bottom: 1px solid rgb(208,208,208) ;">
-                                    <p style="font-size: 13px;margin-bottom: 1px;color: var(--bs-gray-600);">Bus Booking</p>
-                                    <p style="margin-bottom: 3px;"><strong>Ikeja Transit</strong></p>
-                                    <p style="font-size: 13px;margin-bottom: 5px;color: var(--bs-gray-600);">Round Trip</p>
-                                </div>
-                                <div class="col" style="border-bottom: 1px solid rgb(208,208,208) ;">
-                                    <p style="text-align: right;margin-bottom: 1px;margin-right: 17px;"><i class="fas fa-bus" style="border-radius: 20px;color: rgb(255,255,255);background: #f8a159;border: 10px solid #f8a159 ;"></i></p>
-                                    <p style="text-align: right;">June 26, 2022</p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col" style="padding-left: 0px;border-bottom: 1px solid rgb(208,208,208) ;">
-                                    <ul class="timeline" style="border-color: rgb(248,161,89);">
-                                        <li class="from"><span class="d-block" style="font-size: 12px;color: var(--bs-gray-500);">From</span><span class="d-block" style="margin-bottom: 3px;">Aba, Abia</span><span class="d-block" id="to-5" style="font-size: 12px;color: var(--bs-gray-500);margin-top: 4px;">To</span></li>
-                                        <li class="to"><span class="d-block" style="margin-top: 0px;padding-top: 0px;">Lagos Ikeja&nbsp;</span></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col" style="padding-left: 0px;border-bottom: 1px dashed rgb(208,208,208) ;">
-                                    <div class="table-responsive">
-                                        <table class="table table-borderless">
-                                            <tbody>
-                                            <tr>
-                                                <td style="color: var(--bs-gray);font-size: 14px;">Number of passengers</td>
-                                                <td class="text-end" style="color: var(--bs-gray);font-size: 14px;">4</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="font-size: 14px;color: var(--bs-gray);">Discount</td>
-                                                <td class="text-end" style="color: var(--bs-gray);font-size: 14px;">0%</td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-6 d-md-flex" style="padding-left: 0px;border-bottom: 1px dashed rgb(208,208,208) ;">
-                                    <p style="color: #163a5e;margin-top: 5px;margin-bottom: 5px;">Total Price</p>
-                                </div>
-                                <div class="col-6 d-md-flex justify-content-md-end" style="padding-left: 0px;border-bottom: 1px dashed rgb(208,208,208) ;">
-                                    <p class="text-end" style="color: #163a5e;margin-top: 5px;margin-bottom: 5px;text-align: right;"><strong>N 69,400</strong></p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col" style="padding-left: 0px;border-bottom: 1px none rgb(208,208,208) ;">
-                                    <p style="margin-top: 9px;margin-bottom: 7px;">Payment method</p>
-                                    <div class="input-group mb-3"><span id="basic-addon-5" class="input-group-text" style="margin-left: 0px;border-right-style: none;"><i class="fab fa-cc-mastercard" id="inputicon-5" style="margin-top: 1px;"></i></span><input class="placeholder form-control no-radius" type="text" id="removeradius-5" aria-label="Username" aria-describedby="basic-addon1" style="background: rgb(218,222,225);border: 2px solid rgb(206,212,218) ;border-right-style: solid;"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4" style="padding-top: 5px;padding-left: 40px;padding-right: 40px;padding-bottom: 5px;">
-                    <div class="row" style="border-radius: 10px;box-shadow: 1px 0px 10px rgb(231,232,232);padding: 15px;">
-                        <div class="col">
-                            <div class="row" style="border-bottom: 4px none rgb(120,120,120) ;">
-                                <div class="col" style="border-bottom: 1px solid rgb(208,208,208) ;">
-                                    <p style="font-size: 13px;margin-bottom: 1px;color: var(--bs-gray-600);">Bus Booking</p>
-                                    <p style="margin-bottom: 3px;"><strong>Ikeja Transit</strong></p>
-                                    <p style="font-size: 13px;margin-bottom: 5px;color: var(--bs-gray-600);">Round Trip</p>
-                                </div>
-                                <div class="col" style="border-bottom: 1px solid rgb(208,208,208) ;">
-                                    <p style="text-align: right;margin-bottom: 1px;margin-right: 17px;"><i class="fas fa-bus" style="border-radius: 20px;color: rgb(255,255,255);background: #f8a159;border: 10px solid #f8a159 ;"></i></p>
-                                    <p style="text-align: right;">June 26, 2022</p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col" style="padding-left: 0px;border-bottom: 1px solid rgb(208,208,208) ;">
-                                    <ul class="timeline" style="border-color: rgb(248,161,89);">
-                                        <li class="from"><span class="d-block" style="font-size: 12px;color: var(--bs-gray-500);">From</span><span class="d-block" style="margin-bottom: 3px;">Aba, Abia</span><span class="d-block" id="to-4" style="font-size: 12px;color: var(--bs-gray-500);margin-top: 4px;">To</span></li>
-                                        <li class="to"><span class="d-block" style="margin-top: 0px;padding-top: 0px;">Lagos Ikeja&nbsp;</span></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col" style="padding-left: 0px;border-bottom: 1px dashed rgb(208,208,208) ;">
-                                    <div class="table-responsive">
-                                        <table class="table table-borderless">
-                                            <tbody>
-                                            <tr>
-                                                <td style="color: var(--bs-gray);font-size: 14px;">Number of passengers</td>
-                                                <td class="text-end" style="color: var(--bs-gray);font-size: 14px;">4</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="font-size: 14px;color: var(--bs-gray);">Discount</td>
-                                                <td class="text-end" style="color: var(--bs-gray);font-size: 14px;">0%</td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-6 d-md-flex" style="padding-left: 0px;border-bottom: 1px dashed rgb(208,208,208) ;">
-                                    <p style="color: #163a5e;margin-top: 5px;margin-bottom: 5px;">Total Price</p>
-                                </div>
-                                <div class="col-6 d-md-flex justify-content-md-end" style="padding-left: 0px;border-bottom: 1px dashed rgb(208,208,208) ;">
-                                    <p class="text-end" style="color: #163a5e;margin-top: 5px;margin-bottom: 5px;text-align: right;"><strong>N 69,400</strong></p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col" style="padding-left: 0px;border-bottom: 1px none rgb(208,208,208) ;">
-                                    <p style="margin-top: 9px;margin-bottom: 7px;">Payment method</p>
-                                    <div class="input-group mb-3"><span id="basic-addon-4" class="input-group-text" style="margin-left: 0px;border-right-style: none;"><i class="fab fa-cc-mastercard" id="inputicon-4" style="margin-top: 1px;"></i></span><input class="placeholder form-control no-radius" type="text" id="removeradius-4" aria-label="Username" aria-describedby="basic-addon1" style="background: rgb(218,222,225);border: 2px solid rgb(206,212,218) ;border-right-style: solid;"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </section>

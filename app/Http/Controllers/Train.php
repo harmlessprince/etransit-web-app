@@ -119,7 +119,41 @@ class Train extends Controller
         $trainClass = TrainClass::all();
         $eachstop   = TrainStop::with('state','class')->get();
 
+
         return view('admin.train.location' , compact('locations','trainClass','eachstop'));
+    }
+
+    public function editTrainLocation($train_location_id)
+    {
+        $location = TrainLocation::find($train_location_id);
+
+        return view('admin.train.edit-location' , compact('location'));
+    }
+
+    public function updateTrainLocation(Request $request , $train_location_id)
+    {
+        $request->validate(['location' => 'required']);
+
+        $location = TrainLocation::find($train_location_id);
+
+        $location->update(['locations_state' => $request->location]);
+
+        Alert::success('Success', 'Train Location Updated Successfully');
+
+        return back();
+    }
+
+    public function destroyTrainLocation($train_location_id)
+    {
+        $location = TrainLocation::find($train_location_id);
+
+        $location->delete();
+
+        Alert::success('Success', 'Train Location deleted Successfully');
+
+        return back();
+
+
     }
 
 
@@ -139,9 +173,6 @@ class Train extends Controller
      $attr =  request()->validate([
                     'state' => 'required|integer' ,
                     'train_stop' => 'required|string'
-//                    'amount_adult' => 'required' ,
-//                    'amount_child' => 'required' ,
-//                    'class_id' => 'required|integer'
                     ]);
 
      DB::beginTransaction();
@@ -156,14 +187,104 @@ class Train extends Controller
       return back();
     }
 
+    public function EachStopEdit($stop_id)
+    {
+        $trainStop = TrainStop::where('id',$stop_id)->with('state')->first();
+        $locations = TrainLocation::all();
+
+
+        return view('admin.train.edit-train-terminal' , compact('trainStop','locations'));
+    }
+
+    public function updateEachStop(Request $request , $stop_id)
+    {
+        $request->validate(['terminal' => 'required' , 'state' => 'required|integer']);
+
+        $terminal = TrainStop::where('id', $stop_id)->first();
+
+        $terminal->update([
+            'train_location_id' => $request->state,
+            'stop_name' => $request->terminal
+        ]);
+
+        Alert::success('Success', 'Train Terminal Updated Successfully');
+
+        return back();
+    }
+
+    public function destroyTrainTerminal($stop_id)
+    {
+        $terminal = TrainStop::where('id', $stop_id)->first();
+
+        $terminal->delete();
+
+        Alert::success('Success', 'Train Terminal delete Successfully');
+
+        return back();
+
+    }
+
     public function manageRoute()
     {
         $locations = TrainLocation::all();
-        $routes = RouteFare::with('city','terminal','seatClass')->get();
+        $routes = RouteFare::with('city','terminal','seatClass','destination')->get();
         $trainClass = TrainClass::all();
         $trainRoutes = TrainStop::all();
 
         return view('admin.train.route' , compact('locations','trainRoutes','routes','trainClass'));
+    }
+
+    public function editRoute($route_id)
+    {
+        $route = RouteFare::where('id' , $route_id)->with('city','terminal','seatClass','destination')->first();
+        $locations = TrainLocation::all();
+        $trainClass = TrainClass::all();
+        $trainRoutes = TrainStop::all();
+
+        return view('admin.train.edit-route' , compact('route','locations','trainClass','trainRoutes'));
+    }
+
+
+    public function updateRoute(Request $request ,$route_id)
+    {
+        $request->validate([
+            'pickup_state' => 'required|integer',
+            'pickup_terminal' => 'required|integer',
+            'destination_location' => 'required|integer',
+            'destination_terminal' => 'required|integer',
+            'route_class' => 'required|integer',
+            'amount_adult' => 'required',
+            'amount_child' => 'required'
+        ]);
+
+        $updateRouteFare = RouteFare::where('id' , $route_id)->first();
+
+        $updateRouteFare->update([
+            'train_location_id' => $request->pickup_state,
+            'train_stop_id' => $request->pickup_terminal,
+            'train_destination_id' => $request->destination_location,
+            'train_terminal_destination_stop_id' => $request->destination_terminal,
+            'train_class_id' => $request->route_class,
+            'amount_adult' => $request->amount_adult,
+            'amount_child' => $request->amount_child
+        ]);
+
+
+        Alert::success('Success', 'Route Fare Updated  Successfully');
+
+        return redirect('admin/manage/train/routes-fare');
+
+    }
+
+
+    public function destroyRouteFare($route_id)
+    {
+        $deleteRouteFare = RouteFare::where('id' , $route_id)->first();
+        $deleteRouteFare->delete();
+
+        Alert::success('Success', 'Route Fare deleted  Successfully');
+
+        return redirect('admin/manage/train/routes-fare');
     }
 
     public function manageSchedule($train_id)
@@ -280,7 +401,7 @@ class Train extends Controller
     public function fetchRouteFaresForSchedule($train_schedule_id)
     {
         $routeFare = ScheduleRoute::where('train_schedule_id',$train_schedule_id)->with('routeFare')->get();
-        dd($routeFare);
+
     }
 
 

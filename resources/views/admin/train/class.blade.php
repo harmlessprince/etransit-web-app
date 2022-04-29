@@ -176,7 +176,7 @@
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Class</th>
-                            <th scope="col">Action</th>
+{{--                            <th scope="col">Action</th>--}}
                         </tr>
                         </thead>
                         @foreach($trainClass as $index => $class)
@@ -184,7 +184,7 @@
                         <tr>
                             <th scope="row">{{$index + 1}}</th>
                             <td>{{$class->class}}</td>
-                            <td>Edit|Delete</td>
+{{--                            <td>Edit|Delete</td>--}}
                         </tr>
                         </tbody>
                         @endforeach

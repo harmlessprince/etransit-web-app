@@ -20,6 +20,7 @@ class CreateToursTable extends Migration
             $table->date('tour_date');
             $table->time('tour_time');
             $table->string('duration');
+            $table->string('duration_options');
             $table->unsignedBigInteger('service_id');
             $table->longText('description');
             $table->double('amount_regular');

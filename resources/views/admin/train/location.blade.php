@@ -179,7 +179,23 @@
                         <tr>
                             <th scope="row">{{$index + 1}}</th>
                             <td>{{$location->locations_state}}</td>
-                            <td>Edit|Delete</td>
+                            <td>
+
+                                <a href="{{url('admin/edit-train-location/'. $location->id)}}" class="btn btn-success btn-sm">
+                                    Edit
+                                </a>
+
+{{--                                <a--}}
+{{--                                    class="btn btn-danger btn-sm"--}}
+{{--                                    onclick="confirm('Are you sure you want to delete ?') ;deleteFunc() "--}}
+{{--                                    style="color:white;">--}}
+{{--                                    Delete--}}
+{{--                                </a>--}}
+{{--                                <form action="{{url('admin/delete-train-location/'. $location->id)}}" id="delete-form" method="POST">--}}
+{{--                                    @method('DELETE')--}}
+{{--                                    @csrf--}}
+{{--                                </form>--}}
+                            </td>
                         </tr>
                         </tbody>
                     @endforeach
@@ -213,18 +229,6 @@
                             <input type="text" name="train_stop" id="train_stop" class="form-control" value="{{ old('train_stop') }}" placeholder="e.g Agege or Ibadan" required />
                         </div>
                     </div>
-{{--                    <div class="car-box col-md-12">--}}
-{{--                        <div class="form-group">--}}
-{{--                            <label for="amount_adult">Amount (Adult)</label>--}}
-{{--                            <input type="text" name="amount_adult" id="amount_adult" class="form-control" value="{{ old('amount_adult') }}" required />--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                    <div class="car-box col-md-12">--}}
-{{--                        <div class="form-group">--}}
-{{--                            <label for="train_class">Amount (Child)</label>--}}
-{{--                            <input type="text" name="amount_child" id="amount_child" class="form-control" value="{{ old('amount_child') }}" required />--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
                     <div class="col-md-4">
                         <button class="btn btn-success" id="coach">Add Each Stop</button>
                     </div>
@@ -250,21 +254,48 @@
                         <th scope="col">Action</th>
                     </tr>
                     </thead>
+                    @if(count($eachstop) > 0)
                         @foreach($eachstop as $index => $stop)
                             <tbody>
                             <tr>
                                 <th scope="row">{{$index + 1}}</th>
                                 <td>{{Ucfirst($stop->state->locations_state)}}</td>
                                 <td>{{Ucfirst($stop->stop_name)}}</td>
-                                <td>Edit|Delete</td>
+                                <td>
+                                    <a href="{{url('admin/edit-train-terminal/'.$stop->id)}}"
+                                       class="btn btn-success btn-sm">
+                                        Edit
+                                    </a>
+{{--                                    <a--}}
+{{--                                        class="btn btn-danger btn-sm"--}}
+{{--                                        onclick="confirm('Are you sure you want to delete ?') ;deleteFunc() "--}}
+{{--                                        style="color:white;">--}}
+{{--                                        Delete--}}
+{{--                                    </a>--}}
+{{--                                    <form action="{{url('admin/delete-train-terminal/'. $stop->id)}}" id="delete-terminal-form" method="POST">--}}
+{{--                                        @method('DELETE')--}}
+{{--                                        @csrf--}}
+{{--                                    </form>--}}
+                                </td>
                             </tr>
                             </tbody>
                         @endforeach
+                        @endif
                 </table>
             </div>
 
         </div>
     </div>
 
+<script>
+    function deleteFunc() {
+        document.getElementById("delete-form").submit();
+    }
 
+    function deleteFunc() {
+        document.getElementById("delete-terminal-form").submit();
+    }
+
+
+</script>
 @endsection
