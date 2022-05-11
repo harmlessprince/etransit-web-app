@@ -92,7 +92,7 @@
                     <li class="nav-item"><a class="nav-link" href="{{url('tour-packages')}}" style="color: #06044e;">Tour Packages</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{url('boat-cruise')}}" style="color: #06044e;">Boat Cruise</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{url('car-hire')}}" style="color: #06044e;">Hire A Vehicle</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#" style="color: #06044e;">Become A Partner<br></a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{url('partners')}}" style="color: #06044e;">Become A Partner<br></a></li>
                     <li class="nav-item"><a class="nav-link" href="{{url('parcel')}}" style="color: #06044e;">Parcel</a></li>
                     <li class="nav-item"></li>
                 </ul>

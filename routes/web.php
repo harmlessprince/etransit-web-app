@@ -88,6 +88,10 @@ Route::post('train/bookings',[Train::class ,'checkSchedule']);
 //Route::get('train/seat-picker/{schedule_id}/{tripType}', [Train::class , 'trainSeatPicker'])->middleware('auth');
 
 
+//partner page
+Route::get('partners',[\App\Http\Controllers\Partner::class ,'partnerPage']);
+Route::post('store/become-partners',[\App\Http\Controllers\Partner::class , 'becomePartners']);
+
 
 //check PDF
 Route::get('check-pdf' , function(){
@@ -397,6 +401,7 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::get('/all-partners', [\App\Http\Controllers\Partner::class , 'partners']);
         Route::get('fetch-all-become-partners', [\App\Http\Controllers\Partner::class ,'fetchBecomePartners'])->name('fetch-all-become-partners');
         Route::get('view-partners/{partner_id}',[\App\Http\Controllers\Partner::class , 'viewPartner']);
+        Route::get('enable-partner-as-operator/{partner_id}' , [\App\Http\Controllers\Partner::class , 'enablePartnerAsOperator']);
 
 
     });

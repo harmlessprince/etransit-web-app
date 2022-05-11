@@ -6,7 +6,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <h1 style="color: var(--bs-white);text-align: center;"><strong>Tour Packages&nbsp;</strong></h1>
-                    <p style="font-size: 20px;color: var(--bs-white);text-align: center;">Loren ipsum dolor</p>
+{{--                    <p style="font-size: 20px;color: var(--bs-white);text-align: center;">Loren ipsum dolor</p>--}}
                 </div>
             </div>
         </div>

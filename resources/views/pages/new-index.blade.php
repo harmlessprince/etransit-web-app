@@ -43,7 +43,7 @@
                 <div class="col-md-12">
                     <p style="font-size: 20px;color: var(--bs-white);text-align: center;">Our 24 Hour's Services</p>
                     <h1 style="color: var(--bs-white);text-align: center;"><strong>EASY, SAFE AND CONVENIENT</strong></h1>
-                    <p style="font-size: 20px;color: var(--bs-white);text-align: center;padding-right: 80px;padding-left: 80px;">Loren ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna lipua&nbsp;&nbsp;</p>
+{{--                    <p style="font-size: 20px;color: var(--bs-white);text-align: center;padding-right: 80px;padding-left: 80px;">Loren ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna lipua&nbsp;&nbsp;</p>--}}
                 </div>
             </div>
         </div>
