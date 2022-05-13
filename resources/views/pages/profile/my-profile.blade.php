@@ -10,6 +10,10 @@
         text-decoration:none !important;
         cursor:pointer;
     }
+    #data-wrapper{
+        display: flex;
+
+    }
 </style>
 @section('content')
     <section style="margin-top: 40px;margin-bottom: 40px;">
@@ -119,45 +123,20 @@
 
     <section id="payment" style="display: none;">
         <div class="container">
-            <div class="row">
-                @foreach($services as $service)
-                <div class="col-md-4" style="padding-top: 5px;padding-left: 40px;padding-right: 40px;padding-bottom: 5px;">
-                    <div class="row" style="border-radius: 10px;box-shadow: 1px 0px 10px rgb(231,232,232);padding: 15px;">
-                        <div class="col">
-                            <div class="row" style="border-bottom: 4px none rgb(120,120,120) ;">
-                                <div class="col" style="border-bottom: 1px solid rgb(208,208,208) ;">
-                                    <p style="margin-bottom: 3px;"><strong>{{Ucfirst($service->name)}} Transaction</strong></p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col" style="padding-left: 0px;border-bottom: 1px solid rgb(208,208,208) ;">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-6 d-md-flex" style="padding-left: 0px;border-bottom: 1px dashed rgb(208,208,208) ;">
-                                    <p style="color: #163a5e;margin-top: 5px;margin-bottom: 5px;">Total Bookings</p>
-                                </div>
-                                <div class="col-6 d-md-flex justify-content-md-end" style="padding-left: 0px;border-bottom: 1px dashed rgb(208,208,208) ;">
-                                    <p class="text-end" style="color: #163a5e;margin-top: 5px;margin-bottom: 5px;text-align: right;"><strong>N 69,400</strong></p>
-                                </div>
-                                <div class="col-6 d-md-flex" style="padding-left: 0px;border-bottom: 1px dashed rgb(208,208,208) ;">
-                                    <p style="color: #163a5e;margin-top: 5px;margin-bottom: 5px;">View Transactions</p>
-                                </div>
-                                <div class="col-6 d-md-flex justify-content-md-end" style="padding-left: 0px;border-bottom: 1px dashed rgb(208,208,208) ;">
-                                    <p class="text-end" style="color: #163a5e;margin-top: 5px;margin-bottom: 5px;text-align: right;">
-                                        <a href="{{url('view-user-transaction/'. auth()->user()->id . '/' . $service->id)}}" class="view_transactions">View</a>
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col" style="padding-left: 0px;border-bottom: 1px none rgb(208,208,208) ;">
-                                    <div class="input-group mb-3"><span id="basic-addon1" class="input-group-text" style="margin-left: 0px;border-right-style: none;"><i class="fab fa-cc-mastercard" id="inputicon" style="margin-top: 1px;"></i></span><input class="placeholder form-control no-radius" type="text" id="removeradius" aria-label="Username" aria-describedby="basic-addon1" style="background: rgb(218,222,225);border: 2px solid rgb(206,212,218) ;border-right-style: solid;"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            <div class="row" id="data-wrapper">
+                <!-- the content for transactions goes here -->
+            </div>
+            <div>
+                <div class="auto-load text-center">
+                    <svg version="1.1" id="L9" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                         x="0px" y="0px" height="60" viewBox="0 0 100 100" enable-background="new 0 0 0 0" xml:space="preserve">
+                            <path fill="#000"
+                                  d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50">
+                                <animateTransform attributeName="transform" attributeType="XML" type="rotate" dur="1s"
+                                                  from="0 50 50" to="360 50 50" repeatCount="indefinite" />
+                            </path>
+                        </svg>
                 </div>
-                @endforeach
             </div>
         </div>
     </section>
@@ -211,5 +190,39 @@
 
 
 
+    </script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        var ENDPOINT = "{{ url('/') }}";
+        var page = 1;
+        infinteLoadMore(page);
+        $(window).scroll(function () {
+            if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
+                page++;
+                infinteLoadMore(page);
+            }
+        });
+        function infinteLoadMore(page) {
+            $.ajax({
+                url: ENDPOINT + "/get-transactions?page=" + page,
+                datatype: "html",
+                type: "get",
+                beforeSend: function () {
+                    $('.auto-load').show();
+                }
+            })
+                .done(function (response) {
+                    if (response.length == 0) {
+                        $('.auto-load').html("We don't have more data to display :(");
+                        return;
+                    }
+                    $('.auto-load').hide();
+                    $("#data-wrapper").append(response);
+                })
+                .fail(function (jqXHR, ajaxOptions, thrownError) {
+                    console.log('Server error occured');
+                });
+        }
     </script>
 @endsection

@@ -104,7 +104,8 @@ Route::group(['middleware' => ['auth','prevent-back-history']], function() {
     Route::get('profile/{user_id}',[UserProfile::class ,'myProfile']);
 
     Route::put('update-user-profile/{user_id}' ,[UserProfile::class ,'updateUserProfile']);
-    Route::get('view-user-transaction/{user_id}/{service_id}' , [UserProfile::class , 'myTransactions']);
+    Route::get('get-transactions' , [UserProfile::class , 'getMyTransactions']);
+    Route::get('view-user-transaction/{transaction_id}/' , [UserProfile::class , 'myTransactions']);
 
     Route::get('/seat-picker/{schedule_id}/{trip_type}', [Booking::class, 'seatSelector']);
 
