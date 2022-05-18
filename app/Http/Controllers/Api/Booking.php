@@ -33,7 +33,7 @@ class Booking extends Controller
 
         $data = request()->validate([
                             'service_id'           => 'required',
-                            'return_date'          => 'sometimes|date',
+                            'return_date'          => 'sometimes',
                             'departure_date'       => 'required|date',
                             'destination_from'     => 'required|integer',
                             'destination_to'       => 'required|integer',
