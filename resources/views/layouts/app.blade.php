@@ -36,6 +36,7 @@
     <link rel="stylesheet" href="{{asset('new-assets/css/Ultimate-Testimonial-Slider-BS5.css')}}">
 {{--    <link href="{{asset('css/style.css')}}" rel="stylesheet"/>--}}
     <link href="{{asset('css/font.css')}}" rel="stylesheet"/>
+
     <style>
         body{
             font-family: metropolis-regular , Sans-Serif;
@@ -55,7 +56,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css" rel="stylesheet">
-
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" defer></script>
 
     @toastr_css
 

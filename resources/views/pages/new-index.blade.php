@@ -332,7 +332,9 @@
 <section class="discounts" style="background: #1f0844;height: 200px;">
     <div class="container" style="height: 200px;padding-right: 0px;padding-left: 0px;margin-right: 0px;margin-left: 197px;">
         <div class="row" style="height: 200px;">
-            <div class="col-3" style="height: 200px;"><img src="new-assets/img/favpng_toyota-hiace-car-van-toyota-camry%201.svg" style="margin-left: -196px;margin-top: 20px;"></div>
+            <div class="col-3" style="height: 200px;">
+                <img src="{{asset('new-assets/img/favpng_toyota-hiace-car-van-toyota-camry%201.svg')}}" style="margin-left: -196px;margin-top: 20px;">
+            </div>
             <div class="col-3 text-center" style="text-align: center;">
                 <p class="text-center" style="margin-top: 8px;"><span class="d-block" style="color: var(--bs-white);font-size: 14px;letter-spacing: 3px;">ENJOY</span><span class="d-block" style="color: var(--bs-white);font-weight: bold;letter-spacing: 2px;">30%</span><span class="d-block" style="color: var(--bs-white);font-weight: bold;letter-spacing: 6px;">DISCOUNT</span><span class="d-block" style="color: var(--bs-white);font-size: 12px;">ON</span><span class="d-block" style="color: var(--bs-white);letter-spacing: 3px;">YOUR</span><span class="d-block" style="color: var(--bs-white);letter-spacing: 2px;">INTERSTATE TRIP<br></span><span class="d-block" style="width: 152px;color: var(--bs-white);text-align: center;"></span><a href="{{route('register')}}" class="btn btn-primary"  style="height: 31px;padding-top: 2px;margin-top: 8px;background: #f1530f; color:white !important;">GET STARTED</a></p>
             </div>
@@ -362,12 +364,18 @@
                                     <div class="col-sm-3 col-md-3 col-lg-3 product-item">
                                         <div class="product-container" style="box-shadow: 1px 1px 7px rgb(162,164,167);padding: 10px;padding-top: 5px;padding-bottom: 5px;border-radius: 10px;">
                                             <div class="row">
-                                                <div class="col-md-12"><a class="product-image" style="margin-bottom:-10px;" href="#"><img class="rounded img-fluid" style="border: 6px none rgb(220,219,219) ;" src="new-assets/img/PngItem_3891621%201.svg"></a></div>
+                                                <div class="col-md-12">
+                                                    <a class="product-image" style="margin-bottom:-10px;" href="#">
+                                                        <img class="rounded img-fluid" style="border: 6px none rgb(220,219,219) ;" src="new-assets/img/PngItem_3891621%201.svg"></a>
+                                                </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-12 col-sm-12 col-md-12 col-lg-12" style="width:252px;padding-right:0px;padding-left:0px;font-size:3px;">
-                                                    <h2 class="text-nowrap fw-normal text-start" style="text-align: left;padding-left: 20px;"><a class="fw-normal text-start" style="color: rgb(8,1,1);font-size: 17px;font-family: Abel, sans-serif;margin-left: -2px;" href="#">Luxus RX 360<br></a></h2>
-                                                    <p style="color: rgb(25,25,25);font-size: 14px;">&nbsp; &nbsp; &nbsp;&nbsp;<i class="fa fa-question" style="color: rgb(217,135,60);"></i>&nbsp;Auto&nbsp; &nbsp;<i class="la la-automobile" style="color: rgb(217,135,60);"></i>&nbsp;7 Adult&nbsp; &nbsp;&nbsp;<i class="fa fa-asterisk" style="color: rgb(207,115,48);"></i>&nbsp; Fuctional</p>
+                                                    <h2 class="text-nowrap fw-normal text-start" style="text-align: left;padding-left: 20px;">
+                                                        <a class="fw-normal text-start" style="color: rgb(8,1,1);font-size: 17px;font-family: Abel, sans-serif;margin-left: -2px;" href="#">Luxus RX 360<br></a></h2>
+                                                    <p style="color: rgb(25,25,25);font-size: 14px;">&nbsp; &nbsp; &nbsp;&nbsp;<i class="fa fa-question" style="color: rgb(217,135,60);"></i>&nbsp;Auto&nbsp; &nbsp;
+                                                        <i class="la la-automobile" style="color: rgb(217,135,60);"></i>&nbsp;7 Adult&nbsp; &nbsp;&nbsp;
+                                                        <i class="fa fa-asterisk" style="color: rgb(207,115,48);"></i>&nbsp; Fuctional</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -375,12 +383,18 @@
                                     <div class="col-sm-3 col-md-3 col-lg-3 product-item">
                                         <div class="product-container" style="padding: 10px;padding-top: 5px;padding-bottom: 5px;border-radius: 10px;box-shadow: 1px 1px 7px rgb(162,164,167);">
                                             <div class="row">
-                                                <div class="col-md-12"><a class="product-image" style="margin-bottom:-10px;" href="#"><img class="rounded img-fluid" style="border: 6px none rgb(220,219,219) ;" src="new-assets/img/PngItem_3891621%201.svg"></a></div>
+                                                <div class="col-md-12">
+                                                    <a class="product-image" style="margin-bottom:-10px;" href="#">
+                                                        <img class="rounded img-fluid" style="border: 6px none rgb(220,219,219) ;" src="new-assets/img/PngItem_3891621%201.svg"></a>
+                                                </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-12 col-sm-12 col-md-12 col-lg-12" style="width:252px;padding-right:0px;padding-left:0px;font-size:3px;">
-                                                    <h2 class="text-nowrap fw-normal text-start" style="text-align: left;padding-left: 20px;"><a class="fw-normal text-start" style="color: rgb(8,1,1);font-size: 17px;font-family: Abel, sans-serif;margin-left: -2px;" href="#">Luxus RX 360<br></a></h2>
-                                                    <p style="color: rgb(25,25,25);font-size: 14px;">&nbsp; &nbsp; &nbsp;&nbsp;<i class="fa fa-question" style="color: rgb(217,135,60);"></i>&nbsp;Auto&nbsp; &nbsp;<i class="la la-automobile" style="color: rgb(217,135,60);"></i>&nbsp;7 Adult&nbsp; &nbsp;&nbsp;<i class="fa fa-asterisk" style="color: rgb(207,115,48);"></i>&nbsp; Fuctional</p>
+                                                    <h2 class="text-nowrap fw-normal text-start" style="text-align: left;padding-left: 20px;">
+                                                        <a class="fw-normal text-start" style="color: rgb(8,1,1);font-size: 17px;font-family: Abel, sans-serif;margin-left: -2px;" href="#">Luxus RX 360<br></a></h2>
+                                                    <p style="color: rgb(25,25,25);font-size: 14px;">&nbsp; &nbsp; &nbsp;&nbsp;<i class="fa fa-question" style="color: rgb(217,135,60);"></i>&nbsp;Auto&nbsp; &nbsp;
+                                                        <i class="la la-automobile" style="color: rgb(217,135,60);"></i>&nbsp;7 Adult&nbsp; &nbsp;&nbsp;<i class="fa fa-asterisk" style="color: rgb(207,115,48);"></i>&nbsp; Fuctional
+                                                    </p>
                                                 </div>
                                             </div>
                                         </div>
@@ -388,12 +402,18 @@
                                     <div class="col-sm-3 col-md-3 col-lg-3 product-item">
                                         <div class="product-container" style="padding: 10px;padding-top: 5px;padding-bottom: 5px;border-radius: 10px;box-shadow: 1px 1px 7px rgb(162,164,167);">
                                             <div class="row">
-                                                <div class="col-md-12"><a class="product-image" style="margin-bottom:-10px;" href="#"><img class="rounded img-fluid" style="border: 6px none rgb(220,219,219) ;" src="new-assets/img/PngItem_3891621%201.svg"></a></div>
+                                                <div class="col-md-12">
+                                                    <a class="product-image" style="margin-bottom:-10px;" href="#">
+                                                        <img class="rounded img-fluid" style="border: 6px none rgb(220,219,219) ;" src="new-assets/img/PngItem_3891621%201.svg"></a></div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-12 col-sm-12 col-md-12 col-lg-12" style="width:252px;padding-right:0px;padding-left:0px;font-size:3px;">
-                                                    <h2 class="text-nowrap fw-normal text-start" style="text-align: left;padding-left: 20px;"><a class="fw-normal text-start" style="color: rgb(8,1,1);font-size: 17px;font-family: Abel, sans-serif;margin-left: -2px;" href="#">Luxus RX 360<br></a></h2>
-                                                    <p style="color: rgb(25,25,25);font-size: 14px;">&nbsp; &nbsp; &nbsp;&nbsp;<i class="fa fa-question" style="color: rgb(217,135,60);"></i>&nbsp;Auto&nbsp; &nbsp;<i class="la la-automobile" style="color: rgb(217,135,60);"></i>&nbsp;7 Adult&nbsp; &nbsp;&nbsp;<i class="fa fa-asterisk" style="color: rgb(207,115,48);"></i>&nbsp; Fuctional</p>
+                                                    <h2 class="text-nowrap fw-normal text-start" style="text-align: left;padding-left: 20px;">
+                                                        <a class="fw-normal text-start" style="color: rgb(8,1,1);font-size: 17px;font-family: Abel, sans-serif;margin-left: -2px;" href="#">Luxus RX 360<br></a>
+                                                    </h2>
+                                                    <p style="color: rgb(25,25,25);font-size: 14px;">&nbsp; &nbsp; &nbsp;&nbsp;<i class="fa fa-question" style="color: rgb(217,135,60);"></i>&nbsp;Auto&nbsp; &nbsp;
+                                                        <i class="la la-automobile" style="color: rgb(217,135,60);"></i>&nbsp;7 Adult&nbsp; &nbsp;&nbsp;<i class="fa fa-asterisk" style="color: rgb(207,115,48);"></i>&nbsp; Fuctional
+                                                    </p>
                                                 </div>
                                             </div>
                                         </div>
@@ -401,12 +421,17 @@
                                     <div class="col-sm-3 col-md-3 col-lg-3 product-item">
                                         <div class="product-container" style="box-shadow: 1px 1px 7px rgb(162,164,167);border-radius: 10px;padding: 10px;padding-top: 5px;padding-bottom: 5px;">
                                             <div class="row">
-                                                <div class="col-md-12"><a class="product-image" style="margin-bottom:-10px;" href="#"><img class="rounded img-fluid" style="border: 6px none rgb(220,219,219) ;" src="new-assets/img/PngItem_3891621%201.svg"></a></div>
+                                                <div class="col-md-12"><a class="product-image" style="margin-bottom:-10px;" href="#">
+                                                        <img class="rounded img-fluid" style="border: 6px none rgb(220,219,219) ;" src="new-assets/img/PngItem_3891621%201.svg"></a>
+                                                </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-12 col-sm-12 col-md-12 col-lg-12" style="width:252px;padding-right:0px;padding-left:0px;font-size:3px;">
-                                                    <h2 class="text-nowrap fw-normal text-start" style="text-align: left;padding-left: 20px;"><a class="fw-normal text-start" style="color: rgb(8,1,1);font-size: 17px;font-family: Abel, sans-serif;margin-left: -2px;" href="#">Luxus RX 360<br></a></h2>
-                                                    <p style="color: rgb(25,25,25);font-size: 14px;">&nbsp; &nbsp; &nbsp;&nbsp;<i class="fa fa-question" style="color: rgb(217,135,60);"></i>&nbsp;Auto&nbsp; &nbsp;<i class="la la-automobile" style="color: rgb(217,135,60);"></i>&nbsp;7 Adult&nbsp; &nbsp;&nbsp;<i class="fa fa-asterisk" style="color: rgb(207,115,48);"></i>&nbsp; Fuctional</p>
+                                                    <h2 class="text-nowrap fw-normal text-start" style="text-align: left;padding-left: 20px;">
+                                                        <a class="fw-normal text-start" style="color: rgb(8,1,1);font-size: 17px;font-family: Abel, sans-serif;margin-left: -2px;" href="#">Luxus RX 360<br></a></h2>
+                                                    <p style="color: rgb(25,25,25);font-size: 14px;">&nbsp; &nbsp; &nbsp;&nbsp;<i class="fa fa-question" style="color: rgb(217,135,60);"></i>&nbsp;Auto&nbsp; &nbsp;
+                                                        <i class="la la-automobile" style="color: rgb(217,135,60);"></i>&nbsp;7 Adult&nbsp; &nbsp;&nbsp;<i class="fa fa-asterisk" style="color: rgb(207,115,48);"></i>&nbsp; Fuctional
+                                                    </p>
                                                 </div>
                                             </div>
                                         </div>
@@ -420,12 +445,18 @@
                                     <div class="col-sm-3 col-md-3 col-lg-3 product-item">
                                         <div class="product-container" style="padding: 10px;padding-top: 5px;padding-bottom: 5px;border-radius: 10px;box-shadow: 1px 1px 7px rgb(162,164,167);">
                                             <div class="row">
-                                                <div class="col-md-12"><a class="product-image" style="margin-bottom:-10px;" href="#"><img class="rounded img-fluid" style="border: 6px none rgb(220,219,219) ;" src="new-assets/img/PngItem_3891621%201.svg"></a></div>
+                                                <div class="col-md-12"><a class="product-image" style="margin-bottom:-10px;" href="#">
+                                                        <img class="rounded img-fluid" style="border: 6px none rgb(220,219,219) ;" src="new-assets/img/PngItem_3891621%201.svg"></a>
+                                                </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-12 col-sm-12 col-md-12 col-lg-12 text-start" style="width: 252px;padding-right: 0px;padding-left: 0px;font-size: 20px;text-align: left;">
-                                                    <h2 class="text-nowrap fw-normal text-start" style="text-align: left;padding-left: 20px;"><a class="fw-normal text-start" style="color: rgb(8,1,1);font-size: 17px;font-family: Abel, sans-serif;margin-left: -2px;" href="#">Luxus RX 360<br></a></h2>
-                                                    <p style="color: rgb(25,25,25);font-size: 14px;">&nbsp; &nbsp; &nbsp;&nbsp;<i class="fa fa-question" style="color: rgb(217,135,60);"></i>&nbsp;Auto&nbsp; &nbsp;<i class="la la-automobile" style="color: rgb(217,135,60);"></i>&nbsp;7 Adult&nbsp; &nbsp;&nbsp;<i class="fa fa-asterisk" style="color: rgb(207,115,48);"></i>&nbsp; Fuctional</p>
+                                                    <h2 class="text-nowrap fw-normal text-start" style="text-align: left;padding-left: 20px;">
+                                                        <a class="fw-normal text-start" style="color: rgb(8,1,1);font-size: 17px;font-family: Abel, sans-serif;margin-left: -2px;" href="#">Luxus RX 360<br></a></h2>
+                                                    <p style="color: rgb(25,25,25);font-size: 14px;">&nbsp; &nbsp; &nbsp;&nbsp;<i class="fa fa-question" style="color: rgb(217,135,60);"></i>&nbsp;Auto&nbsp; &nbsp;
+                                                        <i class="la la-automobile" style="color: rgb(217,135,60);"></i>&nbsp;7 Adult&nbsp; &nbsp;&nbsp;<i class="fa fa-asterisk" style="color: rgb(207,115,48);"></i>&nbsp;
+                                                        Fuctional
+                                                    </p>
                                                 </div>
                                             </div>
                                         </div>
@@ -433,12 +464,19 @@
                                     <div class="col-sm-3 col-md-3 col-lg-3 product-item">
                                         <div class="product-container" style="box-shadow: 1px 1px 7px rgb(162,164,167);border-radius: 10px;padding: 10px;padding-top: 5px;padding-bottom: 5px;">
                                             <div class="row">
-                                                <div class="col-md-12"><a class="product-image" style="margin-bottom:-10px;" href="#"><img class="rounded img-fluid" style="border: 6px none rgb(220,219,219) ;" src="new-assets/img/PngItem_3891621%201.svg"></a></div>
+                                                <div class="col-md-12"><a class="product-image" style="margin-bottom:-10px;" href="#">
+                                                        <img class="rounded img-fluid" style="border: 6px none rgb(220,219,219) ;" src="new-assets/img/PngItem_3891621%201.svg"></a>
+                                                </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-12 col-sm-12 col-md-12 col-lg-12" style="width:252px;padding-right:0px;padding-left:0px;font-size:3px;">
-                                                    <h2 class="text-nowrap fw-normal text-start" style="text-align: left;padding-left: 20px;"><a class="fw-normal text-start" style="color: rgb(8,1,1);font-size: 17px;font-family: Abel, sans-serif;margin-left: -2px;" href="#">Luxus RX 360<br></a></h2>
-                                                    <p style="color: rgb(25,25,25);font-size: 14px;">&nbsp; &nbsp; &nbsp;&nbsp;<i class="fa fa-question" style="color: rgb(217,135,60);"></i>&nbsp;Auto&nbsp; &nbsp;<i class="la la-automobile" style="color: rgb(217,135,60);"></i>&nbsp;7 Adult&nbsp; &nbsp;&nbsp;<i class="fa fa-asterisk" style="color: rgb(207,115,48);"></i>&nbsp; Fuctional</p>
+                                                    <h2 class="text-nowrap fw-normal text-start" style="text-align: left;padding-left: 20px;">
+                                                        <a class="fw-normal text-start" style="color: rgb(8,1,1);font-size: 17px;font-family: Abel, sans-serif;margin-left: -2px;" href="#">Luxus RX 360<br></a>
+                                                    </h2>
+                                                    <p style="color: rgb(25,25,25);font-size: 14px;">&nbsp; &nbsp; &nbsp;&nbsp;<i class="fa fa-question" style="color: rgb(217,135,60);"></i>&nbsp;Auto&nbsp; &nbsp;
+                                                        <i class="la la-automobile" style="color: rgb(217,135,60);"></i>&nbsp;7 Adult&nbsp; &nbsp;&nbsp;<i class="fa fa-asterisk" style="color: rgb(207,115,48);"></i>&nbsp;
+                                                        Fuctional
+                                                    </p>
                                                 </div>
                                             </div>
                                         </div>
@@ -446,12 +484,20 @@
                                     <div class="col-sm-3 col-md-3 col-lg-3 product-item">
                                         <div class="product-container" style="padding: 10px;padding-top: 5px;padding-bottom: 5px;border-radius: 10px;box-shadow: 1px 1px 7px rgb(162,164,167);">
                                             <div class="row">
-                                                <div class="col-md-12"><a class="product-image" style="margin-bottom:-10px;" href="#"><img class="rounded img-fluid" style="border: 6px none rgb(220,219,219) ;" src="new-assets/img/PngItem_3891621%201.svg"></a></div>
+                                                <div class="col-md-12">
+                                                    <a class="product-image" style="margin-bottom:-10px;" href="#">
+                                                        <img class="rounded img-fluid" style="border: 6px none rgb(220,219,219) ;" src="new-assets/img/PngItem_3891621%201.svg"></a>
+                                                </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-12 col-sm-12 col-md-12 col-lg-12" style="width:252px;padding-right:0px;padding-left:0px;font-size:3px;">
-                                                    <h2 class="text-nowrap fw-normal text-start" style="text-align: left;padding-left: 20px;"><a class="fw-normal text-start" style="color: rgb(8,1,1);font-size: 17px;font-family: Abel, sans-serif;margin-left: -2px;" href="#">Luxus RX 360<br></a></h2>
-                                                    <p style="color: rgb(25,25,25);font-size: 14px;">&nbsp; &nbsp; &nbsp;&nbsp;<i class="fa fa-question" style="color: rgb(217,135,60);"></i>&nbsp;Auto&nbsp; &nbsp;<i class="la la-automobile" style="color: rgb(217,135,60);"></i>&nbsp;7 Adult&nbsp; &nbsp;&nbsp;<i class="fa fa-asterisk" style="color: rgb(207,115,48);"></i>&nbsp; Fuctional</p>
+                                                    <h2 class="text-nowrap fw-normal text-start" style="text-align: left;padding-left: 20px;">
+                                                        <a class="fw-normal text-start" style="color: rgb(8,1,1);font-size: 17px;font-family: Abel, sans-serif;margin-left: -2px;" href="#">Luxus RX 360<br></a>
+                                                    </h2>
+                                                    <p style="color: rgb(25,25,25);font-size: 14px;">&nbsp; &nbsp; &nbsp;&nbsp;<i class="fa fa-question" style="color: rgb(217,135,60);"></i>&nbsp;Auto&nbsp; &nbsp;
+                                                        <i class="la la-automobile" style="color: rgb(217,135,60);"></i>&nbsp;7 Adult&nbsp; &nbsp;&nbsp;<i class="fa fa-asterisk" style="color: rgb(207,115,48);"></i>&nbsp;
+                                                        Fuctional
+                                                    </p>
                                                 </div>
                                             </div>
                                         </div>
@@ -459,12 +505,19 @@
                                     <div class="col-sm-3 col-md-3 col-lg-3 product-item">
                                         <div class="product-container" style="padding: 10px;padding-top: 5px;padding-bottom: 5px;border-radius: 10px;box-shadow: 1px 1px 7px rgb(162,164,167);">
                                             <div class="row">
-                                                <div class="col-md-12"><a class="product-image" style="margin-bottom:-10px;" href="#"><img class="rounded img-fluid" style="border: 6px none rgb(220,219,219) ;" src="new-assets/img/PngItem_3891621%201.svg"></a></div>
+                                                <div class="col-md-12"><a class="product-image" style="margin-bottom:-10px;" href="#">
+                                                        <img class="rounded img-fluid" style="border: 6px none rgb(220,219,219) ;" src="new-assets/img/PngItem_3891621%201.svg"></a>
+                                                </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-12 col-sm-12 col-md-12 col-lg-12" style="width:252px;padding-right:0px;padding-left:0px;font-size:3px;">
-                                                    <h2 class="text-nowrap fw-normal text-start" style="text-align: left;padding-left: 20px;"><a class="fw-normal text-start" style="color: rgb(8,1,1);font-size: 17px;font-family: Abel, sans-serif;margin-left: -2px;" href="#">Luxus RX 360<br></a></h2>
-                                                    <p style="color: rgb(25,25,25);font-size: 14px;">&nbsp; &nbsp; &nbsp;&nbsp;<i class="fa fa-question" style="color: rgb(217,135,60);"></i>&nbsp;Auto&nbsp; &nbsp;<i class="la la-automobile" style="color: rgb(217,135,60);"></i>&nbsp;7 Adult&nbsp; &nbsp;&nbsp;<i class="fa fa-asterisk" style="color: rgb(207,115,48);"></i>&nbsp; Fuctional</p>
+                                                    <h2 class="text-nowrap fw-normal text-start" style="text-align: left;padding-left: 20px;">
+                                                        <a class="fw-normal text-start" style="color: rgb(8,1,1);font-size: 17px;font-family: Abel, sans-serif;margin-left: -2px;" href="#">Luxus RX 360<br></a>
+                                                    </h2>
+                                                    <p style="color: rgb(25,25,25);font-size: 14px;">&nbsp; &nbsp; &nbsp;&nbsp;
+                                                        <i class="fa fa-question" style="color: rgb(217,135,60);"></i>&nbsp;Auto&nbsp; &nbsp;<i class="la la-automobile" style="color: rgb(217,135,60);"></i>&nbsp;7 Adult&nbsp; &nbsp;&nbsp;<i class="fa fa-asterisk" style="color: rgb(207,115,48);"></i>&nbsp;
+                                                        Fuctional
+                                                    </p>
                                                 </div>
                                             </div>
                                         </div>

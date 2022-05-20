@@ -58,7 +58,8 @@ Route::get('/', [Page::class ,'index'])->name('home');
 //Route::get('/register',[Login::class, 'register']);
 // The callback url after a payment
 Route::get('/rave/callback', [Payment::class, 'callback'])->name('callback');
-Route::post('/bus/bookings' , [Booking::class , 'bookingRequest'])->name('bus.booking');
+Route::post('/bus/bookings/' , [Booking::class , 'bookingRequest'])->name('bus.booking');
+Route::post('/bus/filter-bookings/{operator?}/{bus_type?}' , [Booking::class , 'bookingFilterRequest'])->name('filter-bus');
 
 Auth::routes();
 

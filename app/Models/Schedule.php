@@ -17,8 +17,8 @@ class Schedule extends Model
      * @var array
      */
     protected $casts = [
-        'departure_date' => 'datetime',
-        'return_date' => 'datetime',
+        'departure_date' => 'datetime:Y-m-d',
+        'return_date' => 'datetime:Y-m-d',
     ];
 
     public function terminal()

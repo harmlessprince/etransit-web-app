@@ -67,7 +67,65 @@ class Booking extends Controller
              $tripType = $request->trip_type;
              $returnDate = $request->return_date;
 
-             return  response()->json(['success'=>true ,'data' => compact('checkSchedule','tripType','returnDate')]);
+            $operators  = \App\Models\Tenant::inRandomOrder()
+                        ->limit(10)
+                        ->get();
+
+            $busTypes = \App\Models\BusType::inRandomOrder()
+                                                ->limit(10)
+                                                ->get();
+
+             return  response()->json(['success'=>true ,'data' => compact('checkSchedule','tripType','returnDate','operators','busTypes')]);
+    }
+
+    public function bookingFilterRequest()
+    {
+
+        $departureDate = request()->departure_date;
+
+        $checkSchedule =  Schedule::where('departure_date', request()->departure_date)
+            ->with('terminal','bus','destination','pickup','service')->get();
+
+        if(!is_null(request()->bus_operator) && request()->trip_type ==  1)
+        {
+
+            $checkSchedule =  Schedule::where('departure_date', request()->departure_date)
+                ->whereIn('tenant_id', request()->bus_operator)
+                ->with('terminal','bus','destination','pickup','service')->get();
+
+
+        }
+
+        if(!is_null(request()->bus_operator) && !is_null(request()->bus_type) && request()->trip_type ==  1)
+        {
+            $checkSchedule =  Schedule::where('departure_date', request()->departure_date)
+                ->whereIn('tenant_id', request()->bus_operator)
+                ->with('terminal','destination','pickup','service','bus')->whereHas('bus', function($query){
+                    $query->whereIn('bus_type',request()->bus_type);
+                })->get();
+
+        }
+
+        if(!is_null(request()->bus_type) )
+        {
+            $checkSchedule =  Schedule::where('departure_date', request()->departure_date)
+                ->with('terminal','destination','pickup','service','bus')->whereHas('bus', function($query){
+                    $query->whereIn('bus_type',request()->bus_type);
+                })->get();
+        }
+
+        $operators  = \App\Models\Tenant::inRandomOrder()
+            ->limit(10)
+            ->get();
+
+        $busTypes = \App\Models\BusType::inRandomOrder()
+            ->limit(10)
+            ->get();
+
+        $tripTypeId = 1;
+
+        return  response()->json(['success'=>true ,'data' => compact('checkSchedule','operators','busTypes','tripTypeId','departureDate')]);
+
     }
 
 

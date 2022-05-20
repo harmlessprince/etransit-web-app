@@ -55,6 +55,7 @@ Route::group(['prefix' => 'v1'], function() {
     //bookings
     Route::get('/book/{service}/service' , [Booking::class , 'bookingForService']);
     Route::post('/book/trip' , [Booking::class , 'bookTrip']);
+    Route::post('/bus/filter-bookings/' , [Booking::class , 'bookingFilterRequest'])->name('filter-bus');
 
     //car hiree endpoint
     Route::get('/car/types',[Car::class , 'CarType']);

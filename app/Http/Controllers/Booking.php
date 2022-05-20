@@ -17,35 +17,81 @@ class Booking extends Controller
     public function bookingRequest(Request $request)
     {
 
-        $data = request()->validate([
-            'service_id'           => 'required',
-            'return_date'          => 'sometimes',
-            'departure_date'       => 'required',
-            'destination_from'     => 'required|integer',
-            'destination_to'       => 'required|integer',
-            'number_of_passengers' => 'required',
-            'trip_type'            => 'required',
-        ]);
+        if(!$request->expectsJson())
+        {
+            $data = request()->validate([
+                'service_id'           => 'required',
+                'return_date'          => 'sometimes',
+                'departure_date'       => 'required',
+                'destination_from'     => 'required|integer',
+                'destination_to'       => 'required|integer',
+                'number_of_passengers' => 'required',
+                'trip_type'            => 'required',
+            ]);
+        }
 
 
-        $data['return_date'] != null ? $request->session()->put('return_date', $data['return_date']) : $returnDate = null;
+
+        $request->return_date != null ? $request->session()->put('return_date', $request->return_date) : $returnDate = null;
 
         //ensure the query does not return a data if the date the user picked has passed
         //to avoid booking a ride that has already passed or left
 
-        (int)  $data['trip_type'] ==  1  ? $checkSchedule =  Schedule::where('departure_date', $data['departure_date'])
-                                               //  ->whereDate('departure_date','>=', $data['departure_date'])
-                                                ->where('pickup_id', $data['destination_from'])
-                                                ->where('destination_id',$data['destination_to'])
-                                                ->where('seats_available' , '>=', $data['number_of_passengers'])
-                                                ->with('terminal','bus','destination','pickup','service')->get()
+//        (int)  $data['trip_type'] ==  1  ? $checkSchedule =  Schedule::where('departure_date', $data['departure_date'])
+//                                               //  ->whereDate('departure_date','>=', $data['departure_date'])
+//                                                ->where('pickup_id', $data['destination_from'])
+//                                                ->where('destination_id',$data['destination_to'])
+//                                                ->where('seats_available' , '>=', $data['number_of_passengers'])
+//                                                ->with('terminal','bus','destination','pickup','service')->get()
+//
+//                                                : $checkSchedule =  Schedule::where('departure_date',$data['departure_date'])
+//                                                ->where('return_date',$data['return_date'])
+//                                                ->where('destination_id', $data['destination_to'])
+//                                                ->where('seats_available' , '>=', $data['number_of_passengers'])
+//                                                ->where('pickup_id',$data['destination_from'])
+//                                                 ->with('terminal','bus','destination','pickup','service')->get();
+//
+        if($request->trip_type ==  1 )
+        {
+            $checkSchedule =  Schedule::where('departure_date', $request->departure_date)
+                //  ->whereDate('departure_date','>=', $data['departure_date'])
+                ->where('pickup_id', $request->destination_from)
+                ->where('destination_id',$request->destination_to)
+                ->where('seats_available' , '>=', $request->number_of_passengers)
+                ->with('terminal','bus','destination','pickup','service')->get();
 
-                                                : $checkSchedule =  Schedule::where('departure_date',$data['departure_date'])
-                                                ->where('return_date',$data['return_date'])
-                                                ->where('destination_id', $data['destination_to'])
-                                                ->where('seats_available' , '>=', $data['number_of_passengers'])
-                                                ->where('pickup_id',$data['destination_from'])
-                                                 ->with('terminal','bus','destination','pickup','service')->get();
+        }elseif($request->trip_type ==  2)
+        {
+            $checkSchedule =  Schedule::where('departure_date',$request->departure_date)
+                ->where('return_date',$request->return_date)
+                ->where('destination_id', $request->destination_to)
+                ->where('seats_available' , '>=', $request->number_of_passengers)
+                ->where('pickup_id',$request->destination_from)
+                ->with('terminal','bus','destination','pickup','service')->get();
+        }
+
+        if(!is_null(request()->bus_operator) && $request->trip_type ==  1)
+        {
+            $checkSchedule =  Schedule::where('departure_date', $request->departure_date)
+                ->whereIn('tenant_id', request()->bus_operator)
+                //  ->whereDate('departure_date','>=', $data['departure_date'])
+                ->where('pickup_id', $request->destination_from)
+                ->where('destination_id',$request->destination_to)
+                ->where('seats_available' , '>=', $request->number_of_passengers)
+                ->with('terminal','bus','destination','pickup','service')->get();
+        }
+
+
+
+        $operators  = \App\Models\Tenant::inRandomOrder()
+                                                ->limit(10)
+                                                ->get();
+
+        $busTypes = \App\Models\BusType::inRandomOrder()
+                                                ->limit(10)
+                                                ->get();
+//        dd( $busTypes );
+
 
 //        $checkSchedule =  Schedule::where('departure_date', $data['departure_date'])
 //                                            ->where('pickup_id', $data['destination_from'])
@@ -76,7 +122,57 @@ class Booking extends Controller
          $tripTypeId = $data['trip_type'];
 
         return view('pages.booking.booking', compact('checkSchedule','data' ,'tripType',
-            'service' ,'destination' ,'pickUp','tripTypeId'));
+            'service' ,'destination' ,'pickUp','tripTypeId','operators','busTypes'));
+    }
+
+
+    public function bookingFilterRequest()
+    {
+
+        $departureDate = request()->departure_date;
+
+        $checkSchedule =  Schedule::where('departure_date', request()->departure_date)
+                          ->with('terminal','bus','destination','pickup','service')->get();
+
+        if(!is_null(request()->bus_operator) && request()->trip_type ==  1)
+        {
+
+            $checkSchedule =  Schedule::where('departure_date', request()->departure_date)
+                ->whereIn('tenant_id', request()->bus_operator)
+                ->with('terminal','bus','destination','pickup','service')->get();
+
+
+        }
+
+        if(!is_null(request()->bus_operator) && !is_null(request()->bus_type) && request()->trip_type ==  1)
+        {
+            $checkSchedule =  Schedule::where('departure_date', request()->departure_date)
+                ->whereIn('tenant_id', request()->bus_operator)
+                ->with('terminal','destination','pickup','service','bus')->whereHas('bus', function($query){
+                    $query->whereIn('bus_type',request()->bus_type);
+                })->get();
+
+        }
+
+        if(!is_null(request()->bus_type) )
+        {
+            $checkSchedule =  Schedule::where('departure_date', request()->departure_date)
+                ->with('terminal','destination','pickup','service','bus')->whereHas('bus', function($query){
+                    $query->whereIn('bus_type',request()->bus_type);
+                })->get();
+        }
+
+        $operators  = \App\Models\Tenant::inRandomOrder()
+            ->limit(10)
+            ->get();
+
+        $busTypes = \App\Models\BusType::inRandomOrder()
+            ->limit(10)
+            ->get();
+
+
+        $tripTypeId = 1;
+        return view('pages.booking.filter', compact('checkSchedule','operators','busTypes','tripTypeId','departureDate'));
     }
 
 
