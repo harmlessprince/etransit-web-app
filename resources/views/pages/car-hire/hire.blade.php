@@ -122,8 +122,8 @@
         display:flex;
     }
     .car_box{
-        width:400px;
-        height:400px;
+        width:400px !important;
+        height:400px !important;
     }
     a {
         text-decoration:none !important;
@@ -290,7 +290,7 @@
                     <div class="col" id="autopadding" style="padding: 20px;padding-top: 36px;padding-left: 38px;">
                         <div class="row" style="border-radius: 7px;box-shadow: 2px 1px 5px 1px rgb(226,226,227);padding: 17px;background: #ffffff;">
                             <div class="col-sm-12 col-md-4 d-md-flex d-lg-flex justify-content-md-center justify-content-lg-center align-items-lg-center car_box">
-                                <img src="{{$car->car_images[0]->path}}">
+                                <img src="{{$car->car_images[0]->path}}" width="200" height="200">
                             </div>
                             <div class="col align-self-center">
                                 <div class="row">

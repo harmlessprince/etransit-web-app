@@ -7,6 +7,10 @@
     .card-title{
         color: #000 !important;
     }
+    .display_row{
+        display:grid;
+        grid-row: auto;
+    }
 </style>
 @section('content')
 <section style="height: 226px;background: url('{{ asset('new-assets/img/tp.png')}}')  center / cover no-repeat;">
@@ -134,29 +138,33 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row col-md-12 col-lg-12 col-sm-12 col-xs-12" >
                     @foreach($tours as $index => $tour)
                         <a class="anchor" href="{{url('/tour-packages/'.$tour->id.'/show')}}">
                            <div class="col-md-6 col-lg-6 col-xl-6 col-xxl-6" id="cruisedisplay-1" style="margin-left: 0px;">
-                        <div class="card-group">
-                            <div class="card" style="margin: 10px;border-radius: 10px;margin-right: 10px;border-style: none;box-shadow: 1px 1px 10px 1px rgb(204,205,205);">
-                                <img class="img-fluid card-img-top w-100 d-block" style="border-top-left-radius: 7px;border-top-right-radius: 7px;" src="{{$tour->tourimages[0]->path}}">
-                                <div class="card-img-overlay text-end" style="border-style: solid;color: rgba(33,37,41,0);">
-                                    <p style="color: var(--bs-white);font-size: 10px;margin-bottom: 1px;"><strong>Starting from</strong></p><span style="color: var(--bs-white);"><strong> &#x20A6; {{number_format($tour->amount_regular)}}  -  &#x20A6; {{number_format($tour->amount_standard)}}</strong></span>
-                                </div>
-                                <div class="card-body" style="padding-top: 0px;">
-                                    <h6 class="card-title" style="margin-top: 10px;">{{$tour->name}}</h6>
-                                    <p style="color: rgb(175,175,176);font-size: 14px;"> {!! \Illuminate\Support\Str::limit($tour->description, $limit = 150, $end = '...') !!}  </p>
-                                </div>
-                                <div class="align-items-center align-content-center card-footer">
-                                    <ul class="list-unstyled text-center d-md-inline-flex m-auto d-md-inline in" id="rating-1" display="inline-block" gap="20px">
-                                        <li style="font-size: 14px;color: #afafb0;"><i class="fa fa-star" style="color: var(--bs-yellow);"></i>&nbsp;4.7/5 Ratings&nbsp; &nbsp; &nbsp; &nbsp;</li>
-                                        <li class="justify-content-end" style="font-size: 14px;color: #afafb0;"><i class="icon ion-location" style="color: var(--bs-orange);"></i>&nbsp;{{$tour->location}}</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                               <div class="card-group">
+                                <div class="card" style="margin: 10px;border-radius: 10px;margin-right: 10px;border-style: none;box-shadow: 1px 1px 10px 1px rgb(204,205,205);">
+                                    <img class="img-fluid card-img-top w-100 d-block" style="border-top-left-radius: 7px;border-top-right-radius: 7px;" src="{{$tour->tourimages[0]->path}}">
+                                    <div class="card-img-overlay text-end" style="border-style: solid;color: rgba(33,37,41,0);">
+                                        <p style="color: var(--bs-white);font-size: 10px;margin-bottom: 1px;">
+                                            <strong>Starting from</strong>
+                                        </p>
+                                        <span style="color: var(--bs-white);"><strong> &#x20A6; {{number_format($tour->amount_regular)}}  -  &#x20A6; {{number_format($tour->amount_standard)}}</strong>
+                                        </span>
+                                    </div>
+                                    <div class="card-body" style="padding-top: 0px;">
+                                        <h6 class="card-title" style="margin-top: 10px;">{{$tour->name}}</h6>
+                                        <p style="color: rgb(175,175,176);font-size: 14px;"> {!! \Illuminate\Support\Str::limit($tour->description, $limit = 150, $end = '...') !!}  </p>
+                                    </div>
+                                    <div class="align-items-center align-content-center card-footer">
+                                        <ul class="list-unstyled text-center d-md-inline-flex m-auto d-md-inline in" id="rating-1" display="inline-block" gap="20px">
+{{--                                            <li style="font-size: 14px;color: #afafb0;"><i class="fa fa-star" style="color: var(--bs-yellow);"></i>&nbsp;4.7/5 Ratings&nbsp; &nbsp; &nbsp; &nbsp;</li>--}}
+                                            <li class="justify-content-end" style="font-size: 14px;color: #afafb0;"><i class="icon ion-location" style="color: var(--bs-orange);"></i>&nbsp;{{$tour->location}}</li>
+                                        </ul>
+                                    </div>
+                                  </div>
+                               </div>
+                           </div>
                         </a>
                     @endforeach
                 </div>
