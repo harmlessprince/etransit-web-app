@@ -125,7 +125,7 @@
                                 @php
                                     $image = json_decode($boat->boat->paths);
                                 @endphp
-                                <img class="img-fluid card-img-top w-100 d-block" style="border-top-left-radius: 7px;border-top-right-radius: 7px;" src="{{ $image[$i]}}" />
+                                <img class="img-fluid card-img-top w-100 d-block" style="border-top-left-radius: 7px;border-top-right-radius: 7px;" src="{{ $image[0] ?? null}}" />
                                 <div class="card-img-overlay text-end" style="border-style: solid;color: rgba(33,37,41,0);">
                                     <p style="color: var(--bs-white);font-size: 10px;margin-bottom: 1px;"><strong>Starting from</strong></p><span style="color: var(--bs-white);"><strong>&#x20A6; {{number_format($boat->min_amount)}} - &#x20A6; {{number_format($boat->max_amount)}}</strong></span>
                                 </div>
