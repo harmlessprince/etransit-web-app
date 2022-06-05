@@ -163,7 +163,7 @@
                     <div class="col-md-auto"><a class="text-decoration-none" href="#" style="color: #ed954d;">Clear all</a></div>
                 </div>
                 <hr>
-                <form method="post" action="{{url('filter-cars')}}">
+                <form method="get" action="{{url('filter-cars')}}">
                     @csrf
                 <div class="row" style="margin-bottom: 11px;">
                     <div class="col">
@@ -237,6 +237,7 @@
                         </tbody>
                     </table>
                 </div>
+
                 <div class="col" x-data="{ show: false }">
                     <button class="btn btn-primary" type="submit" style="font-size: 10px;background: rgba(13,110,253,0);color: var(--bs-gray-900);border-color: #010000;border-right-color: var(--bs-gray-900);" @click="showSomet()">Filter</button>
                 </div>
@@ -246,22 +247,50 @@
             <div class="col-sm-6 col-md-9" id="cruisedisplay" style="padding-left: 0px;padding-right: 0px;">
                 <div class="row" id="optionline-1" style="padding-left: 0px;padding-right: 0px;margin-top: 0px;margin-bottom: 15px;margin-left: 10px;margin-right: 0px;background: var(--bs-gray-200);">
                     <div class="col" style="background: var(--bs-gray-200);border-right: 1px none #bebebe;">
-                        <div class="dropdown" id="targetcenter-1" style="border-style: none;background: rgba(238,238,238,0);"><button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="color: rgb(136,136,136);background: rgba(238,238,238,0);border-style: none;">&nbsp;Select vehicle type&nbsp;</button>
-                            <div class="dropdown-menu"><a class="dropdown-item" href="#">First Item</a><a class="dropdown-item" href="#">Second Item</a><a class="dropdown-item" href="#">Third Item</a></div>
+                        <div class="dropdown" id="targetcenter-1" style="border-style: none;background: rgba(238,238,238,0);">
+                            <button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="color: rgb(136,136,136);background: rgba(238,238,238,0);border-style: none;">&nbsp;Select vehicle type&nbsp;</button>
+                            <div class="dropdown-menu">
+                                @foreach($carTypes as $type)
+                                    <form action="{{url('car-hire')}}">
+                                        @csrf
+                                        <input value="{{$type->id}}" type="hidden" name="class_type">
+                                        <button class="dropdown-item btn" type="submit">{{$type->name}}</button>
+                                    </form>
+                                @endforeach
+                            </div>
                         </div>
-                        <p style="font-weight: bold;text-align: left;margin-left: 20px;">SUV</p>
+{{--                        <p style="font-weight: bold;text-align: left;margin-left: 20px;">SUV</p>--}}
                     </div>
                     <div class="col" style="background: var(--bs-gray-200);border-right: 1px solid #bebebe;">
-                        <div class="dropdown" style="border-style: none;background: rgba(238,238,238,0);"><button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="color: rgb(136,136,136);background: rgba(238,238,238,0);border-style: none;">Select class</button>
-                            <div class="dropdown-menu"><a class="dropdown-item" href="#">First Item</a><a class="dropdown-item" href="#">Second Item</a><a class="dropdown-item" href="#">Third Item</a></div>
+                        <div class="dropdown" style="border-style: none;background: rgba(238,238,238,0);">
+                            <button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="color: rgb(136,136,136);background: rgba(238,238,238,0);border-style: none;">Select class</button>
+                            <div class="dropdown-menu">
+                                    @foreach($carClasses as $classType)
+                                        <form action="{{url('car-hire')}}">
+                                            @csrf
+                                            <input value="{{$classType->id}}" type="hidden" name="class_class">
+                                            <button class="dropdown-item btn" type="submit">{{$classType->name}}</button>
+                                        </form>
+                                    @endforeach
+                            </div>
                         </div>
-                        <p style="font-weight: bold;text-align: left;margin-left: 12px;">Executive</p>
+{{--                        <p style="font-weight: bold;text-align: left;margin-left: 12px;">Executive</p>--}}
                     </div>
                     <div class="col" style="background: var(--bs-gray-200);">
-                        <div class="dropdown" id="targetcenter-3" style="border-style: none;background: rgba(238,238,238,0);text-align: center;"><button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="color: rgb(136,136,136);background: rgba(238,238,238,0);border-style: none;text-align: left;">Type of Rental</button>
-                            <div class="dropdown-menu"><a class="dropdown-item" href="#">First Item</a><a class="dropdown-item" href="#">Second Item</a><a class="dropdown-item" href="#">Third Item</a></div>
+
+                        <div class="dropdown" id="targetcenter-3" style="border-style: none;background: rgba(238,238,238,0);text-align: center;">
+                            <button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="color: rgb(136,136,136);background: rgba(238,238,238,0);border-style: none;text-align: left;">Seat Capacity</button>
+                             <div class="dropdown-menu">
+                                     @for($i = 1 ; $i <= 10 ; $i++)
+                                     <form action="{{url('car-hire')}}">
+                                         @csrf
+                                         <input value="{{$i}}" type="hidden" name="seat_capacity">
+                                         <button class="dropdown-item btn" type="submit">{{$i}}</button>
+                                     </form>
+                                     @endfor
+                             </div>
                         </div>
-                        <p style="font-weight: bold;text-align: left;margin-bottom: 0px;margin-left: 0px;padding-left: 35px;">Daily</p>
+{{--                        <p style="font-weight: bold;text-align: left;margin-bottom: 0px;margin-left: 0px;padding-left: 35px;">Daily</p>--}}
                     </div>
                     <div class="col mx-auto" style="background: var(--bs-gray-200);">
                         <div class="dropdown" style="border-style: none;background: rgba(238,238,238,0);"><button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="color: rgb(136,136,136);background: rgba(238,238,238,0);border-style: none;">Sort by</button>

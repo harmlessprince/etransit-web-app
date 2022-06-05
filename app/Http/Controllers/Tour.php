@@ -32,12 +32,16 @@ class Tour extends Controller
         if(!is_null(request()->tour_dates))
         {
             $tours  = TourPackage::with('tourimages')
-                                    ->whereIn('tour_type',request()->tour_dates)
+                                    ->whereIn('tour_date',request()->tour_dates)
                                     ->paginate(20);
         }
 
         if(!is_null(request()->tour_dates) && !is_null(request()->tour_types) )
         {
+            $tours  = TourPackage::with('tourimages')
+                ->whereIn('tour_date',request()->tour_dates)
+                ->whereIn('tour_type',request()->tour_types)
+                ->paginate(20);
 
         }
 

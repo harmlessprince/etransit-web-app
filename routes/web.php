@@ -61,11 +61,11 @@ Route::get('/rave/callback', [Payment::class, 'callback'])->name('callback');
 Route::post('/bus/bookings/' , [Booking::class , 'bookingRequest'])->name('bus.booking');
 Route::post('/bus/filter-bookings/{operator?}/{bus_type?}' , [Booking::class , 'bookingFilterRequest'])->name('filter-bus');
 
-Route::post('filter-cars',[Car::class , 'carList']);
+Route::get('filter-cars/{seat_capacity?}/{class_type?}',[Car::class , 'carList']);
 
 Auth::routes();
 
-Route::get('/car-hire', [Car::class , 'carList']);
+Route::get('/car-hire/{seat_capacity?}/{class_type?}', [Car::class , 'carList']);
 //boat cruise
 Route::get('/boat-cruise',[BoatCruise::class , 'boatCruiseList']);
 //add boat id later on
@@ -75,6 +75,7 @@ Route::get('/boat-cruise/{id}/show',[BoatCruise::class , 'boatCruiseShow']);
 Route::get('/tour-packages', [Tour::class , 'tourPackageList']);
 Route::get('/tour-packages/{tour_id}/show', [Tour::class , 'tourPackageShow']);
 Route::get('tour-packages/filter',[Tour::class , 'filterTourSearch'])->name('filter-tour');
+Route::get('boats-cruise/filter',[BoatCruise::class , 'filterBoatTripSearch'])->name('filter-boat');
 
 
 //manage parcel

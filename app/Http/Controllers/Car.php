@@ -239,12 +239,12 @@ class Car extends Controller
     }
 
 
-    public function carList()
+    public function carList($seat_capacity= null , $class_type = null)
     {
         $cars = HiredCars::where('functional',1)
                          ->where('car_availability',1)
                          ->with('car_images','carclass','cartype','plans')
-                         ->paginate(3);
+                         ->paginate(20);
 
 
         if(!is_null(request()->car_types) )
@@ -254,7 +254,7 @@ class Car extends Controller
                 ->where('car_availability',1)
                 ->whereIn('car_type_id',request()->car_types)
                 ->with('car_images','carclass','cartype','plans')
-                ->paginate(3);
+                ->paginate(20);
         }
 
 
@@ -265,7 +265,7 @@ class Car extends Controller
                 ->where('car_availability',1)
                 ->whereIn('transmission',request()->transmissions)
                 ->with('car_images','carclass','cartype','plans')
-                ->paginate(3);
+                ->paginate(20);
         }
 
         if(!is_null(request()->transmissions) && !is_null(request()->car_types) )
@@ -276,15 +276,57 @@ class Car extends Controller
                 ->whereIn('transmission',request()->transmissions)
                 ->whereIn('car_type_id',request()->car_types)
                 ->with('car_images','carclass','cartype','plans')
-                ->paginate(3);
+                ->paginate(20);
+        }
+
+        if(!is_null(request()->locations) )
+        {
+
+            $cars = HiredCars::where('functional',1)
+                ->where('car_availability',1)
+                ->whereIn('state_id',request()->locations)
+                ->with('car_images','carclass','cartype','plans' ,'tenant')
+                ->paginate(20);
+
+        }
+
+        if(!is_null(request()->seat_capacity) )
+        {
+
+            $cars = HiredCars::where('functional',1)
+                ->where('car_availability',1)
+                ->where('capacity',request()->seat_capacity)
+                ->with('car_images','carclass','cartype','plans' ,'tenant')
+                ->paginate(20);
+
+        }
+
+        if(!is_null(request()->class_class))
+        {
+            $cars = HiredCars::where('functional',1)
+                ->where('car_availability',1)
+                ->where('car_class_id',request()->class_class)
+                ->with('car_images','carclass','cartype','plans' ,'tenant')
+                ->paginate(20);
+        }
+
+        if(!is_null(request()->class_type))
+        {
+            $cars = HiredCars::where('functional',1)
+                ->where('car_availability',1)
+                ->where('car_type_id',request()->class_type)
+                ->with('car_images','carclass','cartype','plans' ,'tenant')
+                ->paginate(20);
         }
 
 
         $catType = CarType::limit(10)->get();
         $transmission = ['automatic' , 'manual'];
         $states = \App\Models\Destination::inRandomOrder()->limit(10)->get();
+        $carClasses =  CarClass::all();
+        $carTypes = CarType::all();
 
-        return view('pages.car-hire.hire', compact('cars','catType','transmission','states'));
+        return view('pages.car-hire.hire', compact('cars','catType','transmission','states','carClasses','carTypes'));
     }
 
 

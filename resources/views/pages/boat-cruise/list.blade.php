@@ -7,6 +7,11 @@
     .card-title{
         color: #000 !important;
     }
+    .search-container {
+        max-width: 600px;
+        z-index:1000;
+        background: #eee !important;
+    }
 </style>
 @section('content')
 <section style="height: 226px;background: url('{{ asset('images/bg/boat_cruise.png')}}') center / cover no-repeat;">
@@ -34,100 +39,76 @@
                 <hr>
                 <div class="row" style="margin-bottom: 11px;">
                     <div class="col">
-                        <p style="margin-top: 4px;margin-bottom: 0px;font-size: 13px;"><strong>Star Rating</strong></p>
-                    </div>
-                    <div class="col" style="text-align: right;">
-                        <div class="dropdown" style="height: 24px;"><button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="color: var(--bs-dark);background: var(--bs-white);border-color: rgba(249,249,249,0);height: 24px;padding-top: 1px;">Reset</button>
-                            <div class="dropdown-menu"><a class="dropdown-item" href="#">First Item</a><a class="dropdown-item" href="#">Second Item</a><a class="dropdown-item" href="#">Third Item</a></div>
-                        </div>
+                        <p style="margin-top: 4px;margin-bottom: 0px;font-size: 13px;"><strong>Locations</strong></p>
                     </div>
                 </div>
+                <form action="{{url('boat-cruise')}}">
                 <div class="row">
                     <div class="col">
                         <div class="table-responsive">
                             <table class="table table-borderless">
                                 <tbody>
                                 <tr>
-                                    <td><span><i class="fa fa-star" style="color: var(--bs-yellow);--bs-warning: #ffc107;--bs-warning-rgb: 255,193,7;"></i></span><span><i class="fa fa-star" style="color: var(--bs-yellow);padding-right: 5px;padding-left: 5px;"></i></span><span><i class="fa fa-star" style="color: var(--bs-yellow);"></i></span><span><i class="fa fa-star" style="color: var(--bs-yellow);padding-right: 5px;padding-left: 5px;"></i></span><span><i class="fa fa-star" style="color: #afafb0;"></i></span></td>
-                                    <td style="text-align: right;color: #afafb0;">&amp; Above</td>
-                                </tr>
-                                <tr>
-                                    <td><span><i class="fa fa-star" style="color: var(--bs-yellow);"></i></span><span><i class="fa fa-star" style="color: var(--bs-yellow);padding-right: 5px;padding-left: 5px;"></i></span><span><i class="fa fa-star" style="color: var(--bs-yellow);"></i></span><span><i class="fa fa-star" style="color: #afafb0;padding-right: 5px;padding-left: 5px;"></i></span><span><i class="fa fa-star" style="color: #afafb0;"></i></span></td>
-                                    <td style="text-align: right;color: #afafb0;">&amp; Above</td>
-                                </tr>
-                                <tr>
-                                    <td><span><i class="fa fa-star" style="color: var(--bs-yellow);"></i></span><span><i class="fa fa-star" style="color: var(--bs-yellow);padding-right: 5px;padding-left: 5px;"></i></span><span><i class="fa fa-star" style="color: #afafb0;"></i></span><span><i class="fa fa-star" style="color: #afafb0;padding-right: 5px;padding-left: 5px;"></i></span><span><i class="fa fa-star" style="color: #afafb0;"></i></span></td>
-                                    <td style="text-align: right;color: #afafb0;">&amp; Above</td>
-                                </tr>
-                                <tr>
-                                    <td><span><i class="fa fa-star" style="color: var(--bs-yellow);"></i></span><span><i class="fa fa-star" style="color: #afafb0;padding-right: 5px;padding-left: 5px;"></i></span><span><i class="fa fa-star" style="color: #afafb0;"></i></span><span><i class="fa fa-star" style="color: #afafb0;padding-right: 5px;padding-left: 5px;"></i></span><span><i class="fa fa-star" style="color: #afafb0;"></i></span></td>
-                                    <td style="text-align: right;color: #afafb0;">&amp; Above</td>
+                                @foreach($locations as $location)
+                                    <tr>
+                                        <td>
+                                            <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-8">
+                                                <input class="form-check-input" type="checkbox" name="locations[]" value="{{$location->id}}" id="formCheck-2">
+                                            </div>
+                                        </td>
+                                        <td style="text-align: right;color: #000;">{{Ucfirst($location->destination)}}</td>
+                                    </tr>
+                                    @endforeach
                                 </tr>
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
-                <div class="row" style="margin-bottom: 10px;">
-                    <div class="col">
-                        <p style="margin-top: 4px;margin-bottom: 0px;font-size: 13px;"><strong>Price Range</strong></p>
-                    </div>
-                    <div class="col" style="text-align: right;">
-                        <div class="dropdown" style="height: 24px;"><button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="color: var(--bs-dark);background: var(--bs-white);border-color: rgba(249,249,249,0);height: 24px;padding-top: 1px;">Reset</button>
-                            <div class="dropdown-menu"><a class="dropdown-item" href="#">First Item</a><a class="dropdown-item" href="#">Second Item</a><a class="dropdown-item" href="#">Third Item</a></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col"><input class="form-range" type="range"></div>
-                </div>
+
                 <hr>
-                <div class="row">
+                <div class="row" style="margin-bottom: 11px;">
                     <div class="col">
-                        <p style="margin-top: 4px;margin-bottom: 0px;font-size: 13px;"><strong>Price Range</strong></p>
-                    </div>
-                    <div class="col" style="text-align: right;">
-                        <div class="dropdown" style="height: 24px;"><button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="color: var(--bs-dark);background: var(--bs-white);border-color: rgba(249,249,249,0);height: 24px;padding-top: 1px;">Reset</button>
-                            <div class="dropdown-menu"><a class="dropdown-item" href="#">First Item</a><a class="dropdown-item" href="#">Second Item</a><a class="dropdown-item" href="#">Third Item</a></div>
-                        </div>
+                        <p style="margin-top: 4px;margin-bottom: 0px;font-size: 13px;"><strong>Cruise Dates</strong></p>
                     </div>
                 </div>
+
                 <div class="table-responsive">
                     <table class="table table-borderless">
                         <tbody>
                         <tr>
-                            <td>
-                                <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-2"><label class="form-check-label" for="formCheck-2" style="color: #afafb0;">Wonderful</label></div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-1"><label class="form-check-label" for="formCheck-1" style="color: #afafb0;">Very Good</label></div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-4"><label class="form-check-label" for="formCheck-4" style="color: #afafb0;">Good</label></div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-3"><label class="form-check-label" for="formCheck-3" style="color: #afafb0;">Pleasant</label></div>
-                            </td>
-                        </tr>
+                        @foreach($boatCruise as $boat)
+                            <tr>
+                                <td>
+                                    <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-8">
+                                        <input class="form-check-input" type="checkbox" name="boat_dates[]" value="{{$boat->departure_date}}" id="formCheck-2">
+                                    </div>
+                                </td>
+                                <td style="text-align: right;color: #000;">{{Ucfirst($boat->departure_date->format('Y-F-d'))}}</td>
+                            </tr>
+                            @endforeach
+                            </tr>
                         </tbody>
                     </table>
                 </div>
+                <div class="col" x-data="{ show: false }">
+                    <button class="btn btn-primary" type="submit" style="font-size: 10px;background: rgba(13,110,253,0);color: var(--bs-gray-900);border-color: #010000;border-right-color: var(--bs-gray-900);" >Filter</button>
+                </div>
+                </form>
             </div>
+
             <div class="col-sm-6 col-md-9" id="cruisedisplay">
                 <div class="row" style="padding-left: 0px;padding-right: 0px;margin-top: 15px;margin-bottom: 15px;">
-                    <h5 id="mddisplay">AVALIABLE CRUISE</h5>
+                    <h5 id="mddisplay">AVAILABLE CRUISE</h5>
                     <div class="col">
                         <div class="row text-start d-md-flex justify-content-start align-content-start justify-content-md-start" style="margin-right: 0px;margin-left: 0px;">
                             <div class="col-md-10 offset-md-1" style="padding-right: 0px;padding-left: 0px;">
                                 <div class="card m-auto" style="max-width:850px">
-                                    <div class="card-body text-start placeholder border rounded-0 d-md-flex align-items-start align-content-start" style="height: 40px;padding-top: 5px;background: var(--bs-gray-100);border-radius: 7px;">
-                                        <form class="d-flex align-items-center"><i class="fas fa-search d-none d-sm-block h4 text-body m-0" style="font-size: 15.704px;"></i><input class="form-control form-control-lg flex-shrink-1 form-control-borderless" type="search" placeholder="Search Cruise" name="searchbar" style="height: 29px;padding-top: 0px;padding-bottom: 1px;min-height: 29px;font-size: 14px;background: var(--bs-gray-100);"></form>
+                                    <div class="card-body text-start placeholder border rounded-0 d-md-flex align-items-start align-content-start search-container" style="height: 40px;padding-top: 5px;background: var(--bs-gray-100);border-radius: 7px;">
+                                        <form class="d-flex align-items-center">
+                                            <i class="fas fa-search d-none d-sm-block h4 text-body m-0" style="font-size: 15.704px;"></i>
+                                            <input class="form-control form-control-lg flex-shrink-1 form-control-borderless search-container" type="search" id="search_boat" placeholder="Search Cruise" name="searchbar" style="height: 29px;padding-top: 0px;padding-bottom: 1px;min-height: 29px;font-size: 14px;background: var(--bs-gray-100);">
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -154,7 +135,6 @@
                                 </div>
                                 <div class="align-items-center align-content-center card-footer">
                                     <ul class="list-unstyled text-center d-md-inline-flex m-auto d-md-inline in" id="rating-1" display="inline-block" gap="20px">
-                                        <li style="font-size: 14px;color: #afafb0;"><i class="fa fa-star" style="color: var(--bs-yellow);"></i>&nbsp;4.7/5 Ratings&nbsp; &nbsp; &nbsp; &nbsp;</li>
                                         <li class="justify-content-end" style="font-size: 14px;color: #afafb0;"><i class="icon ion-location" style="color: var(--bs-orange);"></i>{{$boat->cruiselocation->destination}}</li>
                                     </ul>
                                 </div>
@@ -171,4 +151,18 @@
 </section>
 
 
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js"></script>
+<script type="text/javascript">
+    var route = "{{ url('boats-cruise/filter') }}";
+    $('#search_boat').typeahead({
+        source: function (query, process) {
+            return $.get(route, {
+                query: query
+            }, function (data) {
+                return process(data);
+            });
+        }
+    });
+</script>
 @endsection
