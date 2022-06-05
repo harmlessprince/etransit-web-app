@@ -105,6 +105,7 @@
                                         </td>
                                     </tr>
                                 @endforeach
+
                                 @if(!is_null($checkSchedule))
                                     <input type="hidden" name="departure_date" value="{{$departureDate}}"/>
                                     <input type="hidden" name="trip_type" value="1" />

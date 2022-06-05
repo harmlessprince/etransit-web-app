@@ -121,6 +121,7 @@ class Booking extends Controller
 
          $tripTypeId = $data['trip_type'];
 
+
         return view('pages.booking.booking', compact('checkSchedule','data' ,'tripType',
             'service' ,'destination' ,'pickUp','tripTypeId','operators','busTypes'));
     }
@@ -129,15 +130,25 @@ class Booking extends Controller
     public function bookingFilterRequest()
     {
 
+
+        $nowDate = now()->format('Y-m-d');
+
         $departureDate = request()->departure_date;
 
-        $checkSchedule =  Schedule::where('departure_date', request()->departure_date)
-                          ->with('terminal','bus','destination','pickup','service')->get();
+        if(!is_null(request()->bus_operator))
+        {
+            $checkSchedule =  Schedule::whereIn('tenant_id', request()->bus_operator)
+                ->whereDate('departure_date','>=',$nowDate)
+                ->with('terminal','bus','destination','pickup','service')->get();
+        }
+
+
+
 
         if(!is_null(request()->bus_operator) && request()->trip_type ==  1)
         {
 
-            $checkSchedule =  Schedule::where('departure_date', request()->departure_date)
+            $checkSchedule =  Schedule::whereDate('departure_date','>=',$nowDate)
                 ->whereIn('tenant_id', request()->bus_operator)
                 ->with('terminal','bus','destination','pickup','service')->get();
 
@@ -146,7 +157,7 @@ class Booking extends Controller
 
         if(!is_null(request()->bus_operator) && !is_null(request()->bus_type) && request()->trip_type ==  1)
         {
-            $checkSchedule =  Schedule::where('departure_date', request()->departure_date)
+            $checkSchedule =  Schedule::whereDate('departure_date','>=',$nowDate)
                 ->whereIn('tenant_id', request()->bus_operator)
                 ->with('terminal','destination','pickup','service','bus')->whereHas('bus', function($query){
                     $query->whereIn('bus_type',request()->bus_type);
@@ -156,11 +167,13 @@ class Booking extends Controller
 
         if(!is_null(request()->bus_type) )
         {
-            $checkSchedule =  Schedule::where('departure_date', request()->departure_date)
+
+            $checkSchedule =  Schedule::whereDate('departure_date','>=',$nowDate)
                 ->with('terminal','destination','pickup','service','bus')->whereHas('bus', function($query){
                     $query->whereIn('bus_type',request()->bus_type);
                 })->get();
         }
+
 
         $operators  = \App\Models\Tenant::inRandomOrder()
             ->limit(10)
@@ -170,10 +183,13 @@ class Booking extends Controller
             ->limit(10)
             ->get();
 
-
         $tripTypeId = 1;
+
         return view('pages.booking.filter', compact('checkSchedule','operators','busTypes','tripTypeId','departureDate'));
     }
+
+
+
 
 
     public function seatSelector($schedule_id , $tripType)

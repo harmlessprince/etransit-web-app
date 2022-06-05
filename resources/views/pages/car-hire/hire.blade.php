@@ -128,10 +128,16 @@
     a {
         text-decoration:none !important;
     }
+    .my-active span{
+        background-color: #5cb85c !important;
+        color: white !important;
+        border-color: #5cb85c !important;
+    }
 </style>
-@push('css')
 
-@endpush
+
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
 
 @section('content')
 <section style="height: 226px;background: url(&quot;../../new-assets/img/Rectangle%2015%20(2).png&quot;) center / cover no-repeat;">
@@ -157,14 +163,11 @@
                     <div class="col-md-auto"><a class="text-decoration-none" href="#" style="color: #ed954d;">Clear all</a></div>
                 </div>
                 <hr>
+                <form method="post" action="{{url('filter-cars')}}">
+                    @csrf
                 <div class="row" style="margin-bottom: 11px;">
                     <div class="col">
-                        <p style="margin-top: 4px;margin-bottom: 0px;font-size: 13px;"><strong>Star Rating</strong></p>
-                    </div>
-                    <div class="col" style="text-align: right;">
-                        <div class="dropdown" style="height: 24px;"><button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="color: #ed954d;background: var(--bs-white);border-color: rgba(249,249,249,0);height: 24px;padding-top: 1px;">Reset</button>
-                            <div class="dropdown-menu"><a class="dropdown-item" href="#">First Item</a><a class="dropdown-item" href="#">Second Item</a><a class="dropdown-item" href="#">Third Item</a></div>
-                        </div>
+                        <p style="margin-top: 4px;margin-bottom: 0px;font-size: 13px;"><strong>Vehicle type</strong></p>
                     </div>
                 </div>
                 <div class="row">
@@ -172,90 +175,74 @@
                         <div class="table-responsive">
                             <table class="table table-borderless">
                                 <tbody>
+                                @foreach($catType as $type)
                                 <tr>
                                     <td>
-                                        <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-8"><label class="form-check-label" for="formCheck-8">Air Peace</label></div>
+                                        <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-8">
+                                            <input class="form-check-input" type="checkbox" name="car_types[]" value="{{$type->id}}" id="formCheck-2">
+                                        </div>
                                     </td>
-                                    <td style="text-align: right;color: #afafb0;">from N 80,000</td>
+                                    <td style="text-align: right;color: #000;">{{Ucfirst($type->name)}}</td>
                                 </tr>
-                                <tr>
-                                    <td>
-                                        <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-9"><label class="form-check-label" for="formCheck-9">Africa World Airlines</label></div>
-                                    </td>
-                                    <td style="text-align: right;color: #afafb0;">from N 80,000</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-7"><label class="form-check-label" for="formCheck-7">Hahn Air Systems</label></div>
-                                    </td>
-                                    <td style="text-align: right;color: #afafb0;">from N 80,000</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-10"><label class="form-check-label" for="formCheck-10">Ethiopian</label></div>
-                                    </td>
-                                    <td style="text-align: right;color: #afafb0;">from N 80,000</td>
-                                </tr>
+                                @endforeach
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
-                <div class="row" style="margin-bottom: 10px;">
+                <div class="row" style="margin-bottom: 11px;">
                     <div class="col">
-                        <p style="margin-top: 4px;margin-bottom: 0px;font-size: 13px;"><strong>Price Range</strong></p>
-                    </div>
-                    <div class="col" style="text-align: right;">
-                        <div class="dropdown" style="height: 24px;"><button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="color: #ef954d;background: var(--bs-white);border-color: rgba(249,249,249,0);height: 24px;padding-top: 1px;">Reset</button>
-                            <div class="dropdown-menu"><a class="dropdown-item" href="#">First Item</a><a class="dropdown-item" href="#">Second Item</a><a class="dropdown-item" href="#">Third Item</a></div>
-                        </div>
+                        <p style="margin-top: 4px;margin-bottom: 0px;font-size: 13px;"><strong>Transmission</strong></p>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col"><input class="form-range" type="range"></div>
+                    <div class="col">
+                        <div class="table-responsive">
+                            <table class="table table-borderless">
+                                <tbody>
+                                @foreach($transmission as $trans)
+                                    <tr>
+                                        <td>
+                                            <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-8">
+                                                <input class="form-check-input" type="checkbox" name="transmissions[]" value="{{$trans}}" id="formCheck-2">
+                                            </div>
+                                        </td>
+                                        <td style="text-align: right;color: #000;">{{Ucfirst($trans)}}</td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
                 <hr>
                 <div class="row">
                     <div class="col">
-                        <p style="margin-top: 4px;margin-bottom: 0px;font-size: 13px;"><strong>Cabin</strong></p>
-                    </div>
-                    <div class="col" style="text-align: right;">
-                        <div class="dropdown" style="height: 24px;"><button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="color: #ef954d;background: var(--bs-white);border-color: rgba(249,249,249,0);height: 24px;padding-top: 1px;">Reset</button>
-                            <div class="dropdown-menu"><a class="dropdown-item" href="#">First Item</a><a class="dropdown-item" href="#">Second Item</a><a class="dropdown-item" href="#">Third Item</a></div>
-                        </div>
+                        <p style="margin-top: 4px;margin-bottom: 0px;font-size: 13px;"><strong>Locations</strong></p>
                     </div>
                 </div>
                 <div class="table-responsive">
                     <table class="table table-borderless">
                         <tbody>
-                        <tr>
-                            <td>
-                                <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-2"><label class="form-check-label" for="formCheck-2" style="color: #afafb0;">First Class</label></div>
-                            </td>
-                            <td>55</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-1"><label class="form-check-label" for="formCheck-1" style="color: #afafb0;">Business Class</label></div>
-                            </td>
-                            <td>77</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-4"><label class="form-check-label" for="formCheck-4" style="color: #afafb0;">Economy</label></div>
-                            </td>
-                            <td>44</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-3"><label class="form-check-label" for="formCheck-3" style="color: #afafb0;">Premium Economy</label></div>
-                            </td>
-                            <td>57</td>
-                        </tr>
+                        @foreach($states as $state)
+                            <tr>
+                                <td>
+                                    <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-8">
+                                        <input class="form-check-input" type="checkbox" name="locations[]" value="{{$state->id}}" id="formCheck-2">
+                                    </div>
+                                </td>
+                                <td style="text-align: right;color: #000;">{{Ucfirst($state->location)}}</td>
+                            </tr>
+                        @endforeach
                         </tbody>
                     </table>
                 </div>
+                <div class="col" x-data="{ show: false }">
+                    <button class="btn btn-primary" type="submit" style="font-size: 10px;background: rgba(13,110,253,0);color: var(--bs-gray-900);border-color: #010000;border-right-color: var(--bs-gray-900);" @click="showSomet()">Filter</button>
+                </div>
+                </form>
             </div>
+
             <div class="col-sm-6 col-md-9" id="cruisedisplay" style="padding-left: 0px;padding-right: 0px;">
                 <div class="row" id="optionline-1" style="padding-left: 0px;padding-right: 0px;margin-top: 0px;margin-bottom: 15px;margin-left: 10px;margin-right: 0px;background: var(--bs-gray-200);">
                     <div class="col" style="background: var(--bs-gray-200);border-right: 1px none #bebebe;">

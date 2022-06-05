@@ -19,11 +19,36 @@ class Tour extends Controller
 {
     public function tourPackageList()
     {
-
+//return request();
         $service = Service::where('id', 8)->firstorfail();
-        $tours  = TourPackage::with('tourimages')->get();
+        $tours  = TourPackage::with('tourimages')->paginate(20);
+        $tour_types = ['international', 'domestic'];
 
-        return view('pages.tour-packages.list', compact('service','tours'));
+        if(!is_null(request()->tour_types) )
+        {
+            $tours  = TourPackage::with('tourimages')->whereIn('tour_type',request()->tour_types)->paginate(20);
+        }
+
+        if(!is_null(request()->tour_dates))
+        {
+            $tours  = TourPackage::with('tourimages')
+                                    ->whereIn('tour_type',request()->tour_dates)
+                                    ->paginate(20);
+        }
+
+        if(!is_null(request()->tour_dates) && !is_null(request()->tour_types) )
+        {
+
+        }
+
+        return view('pages.tour-packages.list', compact('service','tours','tour_types'));
+    }
+
+    public function filterTourSearch(Request $request)
+    {
+        $query = $request->get('query');
+        $filterResult = TourPackage::where('name', 'LIKE', '%'. $query. '%')->get();
+        return response()->json($filterResult);
     }
 
 
@@ -33,8 +58,10 @@ class Tour extends Controller
         $service = Service::where('id', 8)->firstorfail();
 
         $tour  = TourPackage::where('id',$tour_id)->with('tourimages')->first();
+        $tours  = TourPackage::with('tourimages')->paginate(20);
+        $tour_types = ['international', 'domestic'];
 
-        return view('pages.tour-packages.show', compact('service','tour'));
+        return view('pages.tour-packages.show', compact('service','tour','tours','tour_types'));
     }
 
     public function manageTour()
@@ -64,7 +91,8 @@ class Tour extends Controller
             'amount_regular' => 'required',
             'amount_standard'  => 'required',
             'duration_options' => 'required',
-            'description' => 'required'
+            'description' => 'required',
+            'tour_type' => 'required',
         ]);
 
 
@@ -81,6 +109,7 @@ class Tour extends Controller
         $tour->amount_regular   = $request->amount_regular;
         $tour->amount_standard  = $request->amount_standard;
         $tour->description      = $request->description;
+        $tour->tour_type        = $request->tour_type;
         $tour->save();
 
         $images = array();

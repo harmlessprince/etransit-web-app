@@ -184,7 +184,18 @@
                             </div>
                         </div>
                     </div>
+                    <div class="car-box col-md-12">
+                        <div class="form-group">
+                            <label for="tour_type">Tour Type</label>
+                            <select class="form-control" name="tour_type" id="tour_type">
+                                <option value="">Select Tour Type</option>
+                                <option value="domestic">Domestic</option>
+                                <option value="international">International</option>
 
+                            </select>
+
+                        </div>
+                    </div>
                     <div class="car-box col-md-12">
                         <div class="form-group">
                             <label for="amount_regular">Amount (Regular)</label>

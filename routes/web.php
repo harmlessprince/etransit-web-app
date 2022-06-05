@@ -61,6 +61,8 @@ Route::get('/rave/callback', [Payment::class, 'callback'])->name('callback');
 Route::post('/bus/bookings/' , [Booking::class , 'bookingRequest'])->name('bus.booking');
 Route::post('/bus/filter-bookings/{operator?}/{bus_type?}' , [Booking::class , 'bookingFilterRequest'])->name('filter-bus');
 
+Route::post('filter-cars',[Car::class , 'carList']);
+
 Auth::routes();
 
 Route::get('/car-hire', [Car::class , 'carList']);
@@ -72,6 +74,7 @@ Route::get('/boat-cruise/{id}/show',[BoatCruise::class , 'boatCruiseShow']);
 //tours packages
 Route::get('/tour-packages', [Tour::class , 'tourPackageList']);
 Route::get('/tour-packages/{tour_id}/show', [Tour::class , 'tourPackageShow']);
+Route::get('tour-packages/filter',[Tour::class , 'filterTourSearch'])->name('filter-tour');
 
 
 //manage parcel

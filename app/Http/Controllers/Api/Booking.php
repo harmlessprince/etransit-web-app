@@ -75,6 +75,9 @@ class Booking extends Controller
                                                 ->limit(10)
                                                 ->get();
 
+
+
+
              return  response()->json(['success'=>true ,'data' => compact('checkSchedule','tripType','returnDate','operators','busTypes')]);
     }
 

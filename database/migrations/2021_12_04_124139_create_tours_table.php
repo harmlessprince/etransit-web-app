@@ -25,6 +25,7 @@ class CreateToursTable extends Migration
             $table->longText('description');
             $table->double('amount_regular');
             $table->double('amount_standard');
+            $table->double('tour_type')->nullable();
 //            $table->unsignedBigInteger('tenant_id');
             $table->timestamps();
 

@@ -244,9 +244,47 @@ class Car extends Controller
         $cars = HiredCars::where('functional',1)
                          ->where('car_availability',1)
                          ->with('car_images','carclass','cartype','plans')
-                         ->paginate(10);
+                         ->paginate(3);
 
-        return view('pages.car-hire.hire', compact('cars'));
+
+        if(!is_null(request()->car_types) )
+        {
+
+            $cars = HiredCars::where('functional',1)
+                ->where('car_availability',1)
+                ->whereIn('car_type_id',request()->car_types)
+                ->with('car_images','carclass','cartype','plans')
+                ->paginate(3);
+        }
+
+
+        if(!is_null(request()->transmissions) )
+        {
+
+            $cars = HiredCars::where('functional',1)
+                ->where('car_availability',1)
+                ->whereIn('transmission',request()->transmissions)
+                ->with('car_images','carclass','cartype','plans')
+                ->paginate(3);
+        }
+
+        if(!is_null(request()->transmissions) && !is_null(request()->car_types) )
+        {
+
+            $cars = HiredCars::where('functional',1)
+                ->where('car_availability',1)
+                ->whereIn('transmission',request()->transmissions)
+                ->whereIn('car_type_id',request()->car_types)
+                ->with('car_images','carclass','cartype','plans')
+                ->paginate(3);
+        }
+
+
+        $catType = CarType::limit(10)->get();
+        $transmission = ['automatic' , 'manual'];
+        $states = \App\Models\Destination::inRandomOrder()->limit(10)->get();
+
+        return view('pages.car-hire.hire', compact('cars','catType','transmission','states'));
     }
 
 
