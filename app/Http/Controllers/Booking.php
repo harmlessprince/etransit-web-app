@@ -150,7 +150,11 @@ class Booking extends Controller
 
             $checkSchedule =  Schedule::withoutGlobalScopes()->whereDate('departure_date','>=',$nowDate)
                 ->whereIn('tenant_id', request()->bus_operator)
-                ->with('terminal','bus','destination','pickup','service','tenant')->get();
+                ->with(['terminal','bus','destination','pickup','service','tenant' ,'bus' => function($query){
+                    $query->withoutGlobalScopes()->get();
+                }])->with(['terminal' => function($query){
+                    $query->withoutGlobalScopes()->get();
+                }])->get();
 
 
         }
@@ -160,8 +164,10 @@ class Booking extends Controller
             $checkSchedule =  Schedule::withoutGlobalScopes()->whereDate('departure_date','>=',$nowDate)
                 ->whereIn('tenant_id', request()->bus_operator)
                 ->with('terminal','tenant','destination','pickup','service','bus')->whereHas('bus', function($query){
-                    $query->whereIn('bus_type',request()->bus_type)->get();
-                })->get();
+                    $query->withoutGlobalScopes()->whereIn('bus_type',request()->bus_type)->get();
+                })->with(['tenant','destination','pickup','service','terminal'=> function($query){
+                    $query->withoutGlobalScopes()->get();
+                }])->get();
 
         }
 
@@ -169,9 +175,14 @@ class Booking extends Controller
         {
 
             $checkSchedule =  Schedule::withoutGlobalScopes()->whereDate('departure_date','>=',$nowDate)
-                ->with('terminal','tenant','destination','pickup','service','bus')->whereHas('bus', function($query){
-                    $query->whereIn('bus_type',request()->bus_type)->get();
-                })->get();
+                ->with(['terminal','tenant','destination','pickup','service','bus' => function($query){
+                    $query->withoutGlobalScopes()->whereIn('bus_type',request()->bus_type)->get();
+                }])->with(['tenant','destination','pickup','service','terminal'=> function($query){
+                    $query->withoutGlobalScopes()->get();
+                }])->get();
+
+
+
         }
 
 
