@@ -50,35 +50,35 @@ class Booking extends Controller
 //                                                ->where('seats_available' , '>=', $data['number_of_passengers'])
 //                                                ->where('pickup_id',$data['destination_from'])
 //                                                 ->with('terminal','bus','destination','pickup','service')->get();
-//
+////
         if($request->trip_type ==  1 )
         {
-            $checkSchedule =  Schedule::where('departure_date', $request->departure_date)
+            $checkSchedule =  Schedule::withoutGlobalScopes()->where('departure_date', $request->departure_date)
                 //  ->whereDate('departure_date','>=', $data['departure_date'])
                 ->where('pickup_id', $request->destination_from)
                 ->where('destination_id',$request->destination_to)
                 ->where('seats_available' , '>=', $request->number_of_passengers)
-                ->with('terminal','bus','destination','pickup','service')->get();
+                ->with('terminal','bus','destination','pickup','service','tenant')->get();
 
         }elseif($request->trip_type ==  2)
         {
-            $checkSchedule =  Schedule::where('departure_date',$request->departure_date)
+            $checkSchedule =  Schedule::withoutGlobalScopes()->where('departure_date',$request->departure_date)
                 ->where('return_date',$request->return_date)
                 ->where('destination_id', $request->destination_to)
                 ->where('seats_available' , '>=', $request->number_of_passengers)
                 ->where('pickup_id',$request->destination_from)
-                ->with('terminal','bus','destination','pickup','service')->get();
+                ->with('terminal','bus','destination','pickup','service','tenant')->get();
         }
 
         if(!is_null(request()->bus_operator) && $request->trip_type ==  1)
         {
-            $checkSchedule =  Schedule::where('departure_date', $request->departure_date)
+            $checkSchedule =  Schedule::withoutGlobalScope()->where('departure_date', $request->departure_date)
                 ->whereIn('tenant_id', request()->bus_operator)
                 //  ->whereDate('departure_date','>=', $data['departure_date'])
                 ->where('pickup_id', $request->destination_from)
                 ->where('destination_id',$request->destination_to)
                 ->where('seats_available' , '>=', $request->number_of_passengers)
-                ->with('terminal','bus','destination','pickup','service')->get();
+                ->with('terminal','bus','destination','pickup','service','tenant')->get();
         }
 
 
@@ -137,9 +137,9 @@ class Booking extends Controller
 
         if(!is_null(request()->bus_operator))
         {
-            $checkSchedule =  Schedule::whereIn('tenant_id', request()->bus_operator)
+            $checkSchedule =  Schedule::withoutGlobalScope()->whereIn('tenant_id', request()->bus_operator)
                 ->whereDate('departure_date','>=',$nowDate)
-                ->with('terminal','bus','destination','pickup','service')->get();
+                ->with('terminal','bus','destination','pickup','service','tenant')->get();
         }
 
 
@@ -148,18 +148,18 @@ class Booking extends Controller
         if(!is_null(request()->bus_operator) && request()->trip_type ==  1)
         {
 
-            $checkSchedule =  Schedule::whereDate('departure_date','>=',$nowDate)
+            $checkSchedule =  Schedule::withoutGlobalScope()->whereDate('departure_date','>=',$nowDate)
                 ->whereIn('tenant_id', request()->bus_operator)
-                ->with('terminal','bus','destination','pickup','service')->get();
+                ->with('terminal','bus','destination','pickup','service','tenant')->get();
 
 
         }
 
         if(!is_null(request()->bus_operator) && !is_null(request()->bus_type) && request()->trip_type ==  1)
         {
-            $checkSchedule =  Schedule::whereDate('departure_date','>=',$nowDate)
+            $checkSchedule =  Schedule::withoutGlobalScope()->whereDate('departure_date','>=',$nowDate)
                 ->whereIn('tenant_id', request()->bus_operator)
-                ->with('terminal','destination','pickup','service','bus')->whereHas('bus', function($query){
+                ->with('terminal','tenant','destination','pickup','service','bus')->whereHas('bus', function($query){
                     $query->whereIn('bus_type',request()->bus_type);
                 })->get();
 
@@ -168,8 +168,8 @@ class Booking extends Controller
         if(!is_null(request()->bus_type) )
         {
 
-            $checkSchedule =  Schedule::whereDate('departure_date','>=',$nowDate)
-                ->with('terminal','destination','pickup','service','bus')->whereHas('bus', function($query){
+            $checkSchedule =  Schedule::withoutGlobalScope()->whereDate('departure_date','>=',$nowDate)
+                ->with('terminal','tenant','destination','pickup','service','bus')->whereHas('bus', function($query){
                     $query->whereIn('bus_type',request()->bus_type);
                 })->get();
         }
