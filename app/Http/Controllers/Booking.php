@@ -160,7 +160,7 @@ class Booking extends Controller
             $checkSchedule =  Schedule::withoutGlobalScopes()->whereDate('departure_date','>=',$nowDate)
                 ->whereIn('tenant_id', request()->bus_operator)
                 ->with('terminal','tenant','destination','pickup','service','bus')->whereHas('bus', function($query){
-                    $query->whereIn('bus_type',request()->bus_type);
+                    $query->whereIn('bus_type',request()->bus_type)->get();
                 })->get();
 
         }
@@ -170,7 +170,7 @@ class Booking extends Controller
 
             $checkSchedule =  Schedule::withoutGlobalScopes()->whereDate('departure_date','>=',$nowDate)
                 ->with('terminal','tenant','destination','pickup','service','bus')->whereHas('bus', function($query){
-                    $query->whereIn('bus_type',request()->bus_type);
+                    $query->whereIn('bus_type',request()->bus_type)->get();
                 })->get();
         }
 
