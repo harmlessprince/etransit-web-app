@@ -47,20 +47,20 @@ class Booking extends Controller
                                                                                   ->where('seats_available' , '>=', $data['number_of_passengers'])
             //                                                                      ->select('fare_adult','terminal_id','bus_id','id',
             //                                                                          'destination_id','pickup_id','fare_children')
-                                                                                  ->with(['terminal','destination','pickup','service' ,'tenant','bus' ])->get()
-//                => function($query){
-//        $query->with('tenant')->first();
-//    }]
+                                                                                  ->with(['terminal','destination','pickup','service' ,'tenant','bus'   => function($query){
+                                                                                                                            $query->with('tenant')->get();
+                                                                                                                        }])->get()
+
 
                                          : $checkSchedule     =  Schedule::withoutGlobalScopes()->where('departure_date',$data['departure_date'])
                                                                                           ->where('return_date',$data['return_date'])
                                                                                           ->where('destination_id', $data['destination_to'])
                                                                                           ->where('seats_available' , '>=', $data['number_of_passengers'])
                                                                                           ->where('pickup_id',$data['destination_from'])
-                                                                                          ->with(['terminal','tenant','destination','pickup','service','bus'])->get();
-//        => function($query){
-//        $query->with('tenant')->first();
-//    }]
+                                                                                          ->with(['terminal','tenant','destination','pickup','service','bus'  => function($query){
+                                                                                              $query->with('tenant')->get();
+                                                                                          }])->get();
+
              if($checkSchedule->isEmpty())
              {
                return response()->json(['success' => false , 'message' => 'We dont\'t have any result for your query at the moment']);
