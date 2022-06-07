@@ -28,21 +28,21 @@
                 <div class="col flex-column">
                     <h5 style="color: var(--bs-orange);height: 26px;"><strong>COMPANY</strong></h5>
                     <ul class="list-unstyled">
-                        <li style="margin-bottom: 10px;"><a class="text-decoration-none" href="#" style="color: var(--bs-gray-100);">ABOUT US</a></li>
-                        <li style="margin-bottom: 10px;"><a class="text-decoration-none" href="#" style="color: var(--bs-gray-100);">COMMUNITY BLOG</a></li>
-                        <li style="margin-bottom: 10px;"><a class="text-decoration-none" href="#" style="margin-bottom: 10px;color: var(--bs-gray-100);">REWARDS</a></li>
-                        <li style="margin-bottom: 10px;"><a class="text-decoration-none" href="#" style="color: var(--bs-gray-100);">WORK WITH US</a></li>
-                        <li><a class="text-decoration-none" href="#" style="color: var(--bs-gray-100);">MEET THE TEAM</a></li>
+                        <li style="margin-bottom: 10px;"><a class="text-decoration-none" href="#" style="color: var(--bs-gray-100) !important;">ABOUT US</a></li>
+                        <li style="margin-bottom: 10px;"><a class="text-decoration-none" href="#" style="color: var(--bs-gray-100) !important;">COMMUNITY BLOG</a></li>
+                        <li style="margin-bottom: 10px;"><a class="text-decoration-none" href="#" style="margin-bottom: 10px;color: var(--bs-gray-100) !important;">REWARDS</a></li>
+                        <li style="margin-bottom: 10px;"><a class="text-decoration-none" href="#" style="color: var(--bs-gray-100) !important;">WORK WITH US</a></li>
+                        <li><a class="text-decoration-none" href="#" style="color: var(--bs-gray-100) !important;">MEET THE TEAM</a></li>
                     </ul>
                 </div>
                 <div class="col">
                     <h5 style="color: var(--bs-orange);"><strong>SUPPORT</strong></h5>
                     <ul class="list-unstyled">
-                        <li style="margin-bottom: 10px;"><a class="text-decoration-none" href="#" style="color: var(--bs-gray-100);">ACCOUNT</a></li>
-                        <li style="margin-bottom: 10px;"><a class="text-decoration-none" href="#" style="color: var(--bs-gray-100);">LEGAL</a></li>
-                        <li style="margin-bottom: 10px;"><a class="text-decoration-none" href="#" style="margin-bottom: 10px;color: var(--bs-gray-100);">CONTACT</a></li>
-                        <li style="margin-bottom: 10px;"><a class="text-decoration-none" href="#" style="color: var(--bs-gray-100);">AFFILIATE PROGRAM</a></li>
-                        <li><a class="text-decoration-none" href="#" style="color: var(--bs-gray-100);">PRIVACY POLICY</a></li>
+                        <li style="margin-bottom: 10px;"><a class="text-decoration-none" href="#" style="color: var(--bs-gray-100) !important;">ACCOUNT</a></li>
+                        <li style="margin-bottom: 10px;"><a class="text-decoration-none" href="#" style="color: var(--bs-gray-100) !important;">LEGAL</a></li>
+                        <li style="margin-bottom: 10px;"><a class="text-decoration-none" href="#" style="margin-bottom: 10px;color: var(--bs-gray-100)!important;">CONTACT</a></li>
+                        <li style="margin-bottom: 10px;"><a class="text-decoration-none" href="#" style="color: var(--bs-gray-100) !important;">AFFILIATE PROGRAM</a></li>
+                        <li><a class="text-decoration-none" href="#" style="color: var(--bs-gray-100) !important;">PRIVACY POLICY</a></li>
                     </ul>
                 </div>
             </div>
