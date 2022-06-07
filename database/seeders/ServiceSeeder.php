@@ -33,7 +33,7 @@ class ServiceSeeder extends Seeder
             'name' => "Hotel Booking"
         ]);
         Service::create([
-            'name' => "Car Hire"
+            'name' => "Hire Vehicle"
         ]);
 
         Service::create([
