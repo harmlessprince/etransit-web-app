@@ -10,7 +10,7 @@ class Service extends Controller
 {
     public function services()
     {
-      $services  =  ETransitService::all();
+      $services  =  ETransitService::where('status','active')->all();
 
       return response()->json(['success' => true , 'data' => compact('services')], 200);
     }
@@ -21,7 +21,7 @@ class Service extends Controller
        $data = request()->validate(['search' => 'required']);
 
                   !$data ?  abort(404)
-                    : $result = ETransitService::query()
+                    : $result = ETransitService::where('status','active')->query()
                                 ->whereLike('name', $data['search'])
                                 ->get();
 
