@@ -163,6 +163,7 @@ Route::group(['middleware' => ['auth','prevent-back-history']], function() {
 
 
 
+
 });
 
 
@@ -283,6 +284,7 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::post('/schedule/boat-cruise-event',[BoatCruise::class , 'addBoatSchedule'])->name('cruise.event');
         Route::get('manage/boat-location', [BoatCruise::class , 'addCruiseLocation']);
         Route::post('/add/cruise-location', [BoatCruise::class , 'storeCruiseLocation']);
+
         //boat management
         Route::get('boat/{boat_id}/history',[BoatCruise::class , 'boatHistory']);
         Route::get('/edit/{boat_id}/boat', [BoatCruise::class , 'editBoat']);
@@ -408,6 +410,10 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::get('fetch-all-become-partners', [\App\Http\Controllers\Partner::class ,'fetchBecomePartners'])->name('fetch-all-become-partners');
         Route::get('view-partners/{partner_id}',[\App\Http\Controllers\Partner::class , 'viewPartner']);
         Route::get('enable-partner-as-operator/{partner_id}' , [\App\Http\Controllers\Partner::class , 'enablePartnerAsOperator']);
+
+        //switch service on or off
+        Route::get('all-services', [\App\Http\Controllers\ServiceManagent::class ,'allServices']);
+        Route::post('activate-deactivate-service',[\App\Http\Controllers\ServiceManagent::class ,'activateOrDeactivateService']);
 
 
     });
