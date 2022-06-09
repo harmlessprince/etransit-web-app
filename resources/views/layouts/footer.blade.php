@@ -100,12 +100,14 @@
                 <li class="d-md-flex justify-content-md-start align-items-md-center" id="sidehover-8" style="height: 34px;">
                     <a class="text-decoration-none" href="{{url('parcel')}}" style="font-weight: bold;">Send Parcel</a>
                 </li>
+                @if(!auth()->check())
                 <a href="{{url('/login')}}">
                     <button class="btn btn-primary" type="button" style="height: 30px;padding-top: 2px;background: #e7710f;">&nbsp; Log in&nbsp;&nbsp;</button>
                 </a>
                 <a href="{{url('/register')}}">
                     <button class="btn btn-primary" type="button" style="height: 30px;padding-top: 2px;margin-left: 20px;border-color: var(--bs-orange);background: rgba(13,110,253,0);">&nbsp;Sign Up&nbsp;</button>
                 </a>
+                @endif
             </ul>
         </nav>
         <p class="d-md-flex me-auto" id="faicon-1" style="text-align: left;color: #090b39;margin-top: 100px;margin-left: 0px;width: 293.703px;margin-bottom: 0px;background: var(--bs-body-bg);margin-right: auto;">&nbsp;<a href="#"><i class="fa fa-facebook d-md-flex align-items-md-end" style="padding-top: 5px;font-size: 25px;margin-right: 15px;"></i></a>
