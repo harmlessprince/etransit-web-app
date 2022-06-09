@@ -92,6 +92,11 @@
                             <li><a href="{{url('/admin/customers')}}">Manage Customers</a></li>
                         </ul>
                     </li>
+                    <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"></i><span>Service Management</span></a>
+                        <ul class="nav-submenu menu-content">
+                            <li><a href="{{url('/admin/all-services')}}">Manage Service</a></li>
+                        </ul>
+                    </li>
                     <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"></i><span>Transactions</span></a>
                         <ul class="nav-submenu menu-content">
                             <li><a href="{{url('/admin/transactions')}}">Manage Transactions</a></li>

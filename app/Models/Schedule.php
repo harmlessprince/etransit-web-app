@@ -56,6 +56,12 @@ class Schedule extends Model
         return $this->hasMany(Transaction::class);
     }
 
+    public function tenant()
+    {
+        return $this->belongsTo(Tenant::class);
+    }
+
+
     /**
      * The "booted" method of the model.
      *

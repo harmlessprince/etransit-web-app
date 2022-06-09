@@ -26,17 +26,42 @@ class BoatCruise extends Controller
         $boatCruise = BoatTrip::with('boat','cruiselocation')->get();
 
 
+        if(!is_null(request()->locations))
+        {
+            $boatCruise = BoatTrip::whereIn('cruise_destination_id',request()->locations)->with('boat','cruiselocation')->get();
+        }
 
-        return view('pages.boat-cruise.list', compact('service','boatCruise'));
+        if(!is_null(request()->boat_dates))
+        {
+            $boatCruise = BoatTrip::whereIn('departure_date',request()->boat_dates)->with('boat','cruiselocation')->get();
+        }
+
+        if(!is_null(request()->boat_dates) && !is_null(request()->locations))
+        {
+            $boatCruise = BoatTrip::whereIn('departure_date',request()->boat_dates)->whereIn('cruise_destination_id',request()->locations)->with('boat','cruiselocation')->get();
+        }
+
+        $locations = CruiseDestination::all();
+
+
+        return view('pages.boat-cruise.list', compact('service','boatCruise','locations'));
+    }
+
+    public function filterBoatTripSearch(Request $request)
+    {
+        $query = $request->get('query');
+        $filterResult = BoatTrip::where('cruise_name', 'LIKE', '%'. $query. '%')->get();
+        return response()->json($filterResult);
     }
 
 
     public function boatCruiseShow($id)
     {
         $service = Service::where('id', 7)->firstorfail();
+        $locations = CruiseDestination::all();
         $boat = BoatTrip::where('id', $id)->with('boat','cruiselocation')->first();
 
-        return view('pages.boat-cruise.show', compact('service','boat'));
+        return view('pages.boat-cruise.show', compact('service','boat','locations'));
     }
 
 

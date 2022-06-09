@@ -49,7 +49,8 @@
         </div>
     </div>
 </section>
-<div class="container menudisplay menu" id="menumenudisplay" style="padding-right: 100px;padding-left: 100px;border-radius: 10px;">
+<div class="container menudisplay menu" id="menumenudisplay" style="border-radius: 10px;">
+{{--    padding-right: 100px;padding-left: 100px;--}}
     <div class="row">
         <div class="col" style="box-shadow: 1px 0px 7px rgb(103,103,103);border-radius: 10px;">
             <div class="row divshow" style="background: #ffffff;border-radius: 10px;border-bottom-right-radius: 0px;border-bottom-left-radius: 0px;border-color: rgba(33,37,41,0);border-bottom: 1px solid rgb(227,228,230);">

@@ -44,6 +44,11 @@
         h1, h2,h3,h4,h5,h6{
             font-family: metropolis-semi-bold , Sans-Serif;
         }
+        @media only screen and (max-device-width: 412px) {
+            .auth_class{
+                display:none !important;
+            }
+        }
     </style>
 
 

@@ -175,7 +175,7 @@
                             <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
                                 <img src="{{asset('new-assets/img/pngaaa%201.png')}}"></div>
                             <div class="col align-self-center">
-                                <h5 class="text-start">{{$schedule->terminal->terminal_name}}</h5>
+                                <h5 class="text-start">{{$schedule->terminal->terminal_name ?? null}}</h5>
                                 <p class="text-start" style="font-size: 17px;">
                                     <span>{{$schedule->pickup->location}} </span><span>&nbsp;&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-arrow-right">
                                                 <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"></path>
@@ -195,8 +195,9 @@
                             </div>
                             <div class="col">
                                 <h5 class="text-start">Operator</h5>
-                                <p class="text-start" style="font-size: 17px;">@if(!is_null($schedule->bus->tenant->image_url))<span>&nbsp; <img src="{{$schedule->bus->tenant->image_url}}" alt="company-logo" width="25px" height="25px"/>&nbsp;&nbsp;</span>@endif
-                                    <span>{{$schedule->bus->tenant->display_name}}</span></p>
+                                <p class="text-start" style="font-size: 17px;">@if(!is_null($schedule->tenant->image_url))<span>&nbsp;
+                                        <img src="{{$schedule->tenant->image_url}}" alt="company-logo" width="25px" height="25px"/>&nbsp;&nbsp;</span>@endif
+                                    <span>{{$schedule->tenant->display_name}}</span></p>
                             </div>
                             <div class="col text-center">
                                 <p class="text-center">Adult&nbsp;&nbsp;<span style="color: rgb(52,63,95);"><strong>&#x20A6; {{number_format($schedule->fare_adult)}}</strong></span>&nbsp;</p>

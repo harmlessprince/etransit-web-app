@@ -44,6 +44,11 @@
         h1, h2,h3,h4,h5,h6{
             font-family: metropolis-semi-bold , Sans-Serif;
         }
+        @media only screen and (max-device-width: 412px) {
+            .auth_class{
+                display:none !important;
+            }
+        }
     </style>
 </head>
 
@@ -71,7 +76,7 @@
                 <div class="col">
                     <div class="row">
                         @if(!Auth::check())
-                            <div class="col-12 justify-content-lg-center align-items-lg-center"  style="text-align: center;padding-top: 9px;padding-bottom: 9px;">
+                            <div class="col-12 justify-content-lg-center align-items-lg-center auth_class"  style="text-align: center;padding-top: 9px;padding-bottom: 9px;">
                                 <a href="{{url('/login')}}">
                                     <button class="btn btn-primary" type="button" style="height: 30px;padding-top: 2px;background: #e7710f;">&nbsp; Log in&nbsp;&nbsp;</button>
                                 </a>
@@ -140,6 +145,7 @@
     @endif
     <div class="container">
         <div class="row">
+            <div class="col-sm-3" style="padding: 50px;padding-top: 50px;padding-bottom: 50px;background: var(--bs-gray-100);"></div>
             <div class="col-sm-6" style="padding: 50px;padding-top: 50px;padding-bottom: 50px;background: var(--bs-gray-100);">
                 <div class="row">
                     <div class="col">
@@ -179,6 +185,13 @@
                                     <input class="form-control form-control-sm" type="text" name="company_address" value="{{old('company_address')}}" style="border-top-style: none;border-right-style: none;border-left-style: none;border-radius: 0px;border-top-left-radius: 0px;border-top-right-radius: 0px;border-bottom-right-radius: 0px;border-bottom-left-radius: 1px;background: rgba(255,255,255,0);">
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-12">
+                                    <label class="form-label" for="notes" style="font-size: 14px;color: var(--bs-gray-500);padding-top: 20px;">Notes</label>
+                                    <input class="form-control form-control-sm" type="text" name="notes" id="notes"
+                                              style="border-top-style: none;border-right-style: none;border-left-style: none;border-radius: 0px;border-top-left-radius: 0px;border-top-right-radius: 0px;border-bottom-right-radius: 0px;border-bottom-left-radius: 1px;background: rgba(255,255,255,0);">
+                                </div>
+                            </div>
                             <div class="row" style="margin-bottom: 20px;">
                                 <div class="col" style="margin-top: 44px;">
                                     <h6 style="text-align: center;">How would you like to partiner with us?&nbsp;</h6>
@@ -195,21 +208,13 @@
                                         <input class="form-check-input" type="checkbox" name="car_hire" id="formCheck-2">
                                         <label class="form-check-label" for="formCheck-2">Car Hire Partner</label>
                                     </div>
-{{--                                    <div class="form-check">--}}
-{{--                                        <input class="form-check-input" type="checkbox" name="boat_cruise" id="formCheck-3">--}}
-{{--                                        <label class="form-check-label" for="formCheck-3">Boat Cruise Partner</label>--}}
-{{--                                    </div>--}}
-{{--                                    <div class="form-check">--}}
-{{--                                        <input class="form-check-input" type="checkbox" name="hotel_bookings" id="formCheck-4">--}}
-{{--                                        <label class="form-check-label" for="formCheck-4">Hotel Partner</label>--}}
-{{--                                    </div>--}}
                                 </div>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
-            <div class="col-sm-6" id="secondtab" style="padding: 50px;padding-top: 50px;padding-bottom: 50px;background: #ffffff;text-align: center;margin-top: 0px;"></div>
+{{--            <div class="col-sm-6" id="secondtab" style="padding: 50px;padding-top: 50px;padding-bottom: 50px;background: #ffffff;text-align: center;margin-top: 0px;"></div>--}}
         </div>
         <div class="row">
             <div class="col-12 d-md-flex justify-content-center align-items-center align-content-center align-self-center justify-content-md-center" style="text-align: center;margin-top: 14px;padding-bottom: 17px;">
@@ -218,20 +223,20 @@
         </div>
     </div>
 </section>
-<section style="background: #eeeeee;padding: 0px 0px 0px;padding-top: 20px;margin-top: 0px;">
-    <div class="container">
-        <div class="row" style="padding-bottom: 10px;">
-            <div class="col-sm-6 d-md-flex flex-column align-content-center align-self-center">
-                <h3 class="text-center" style="color: rgb(17,15,126);margin-top: 10px;"><strong>GET UPDATES AND MORE</strong></h3>
-                <p class="text-center">THOUGHFUL THOUGHT TO YOU INBOX</p>
-            </div>
-            <div class="col-sm-6 d-inline-flex d-md-flex align-items-md-center" id="divemail">
-                <form><input type="email" id="emailinput" placeholder="YOUR EMAIL" inputmode="email" style="background: rgb(238,238,238);border-top-style: none;border-right-style: none;border-left-style: none;height: 41px;width: 250px;"></form>
-                <button class="btn btn-primary" type="button" style="height: 31px;width: 113.5px;margin-left: -60px;padding-top: 3px;background: var(--bs-orange);border-top-style: none;">SUBSCRIBE</button>
-            </div>
-        </div>
-    </div>
-</section>
+{{--<section style="background: #eeeeee;padding: 0px 0px 0px;padding-top: 20px;margin-top: 0px;">--}}
+{{--    <div class="container">--}}
+{{--        <div class="row" style="padding-bottom: 10px;">--}}
+{{--            <div class="col-sm-6 d-md-flex flex-column align-content-center align-self-center">--}}
+{{--                <h3 class="text-center" style="color: rgb(17,15,126);margin-top: 10px;"><strong>GET UPDATES AND MORE</strong></h3>--}}
+{{--                <p class="text-center">THOUGHFUL THOUGHT TO YOU INBOX</p>--}}
+{{--            </div>--}}
+{{--            <div class="col-sm-6 d-inline-flex d-md-flex align-items-md-center" id="divemail">--}}
+{{--                <form><input type="email" id="emailinput" placeholder="YOUR EMAIL" inputmode="email" style="background: rgb(238,238,238);border-top-style: none;border-right-style: none;border-left-style: none;height: 41px;width: 250px;"></form>--}}
+{{--                <button class="btn btn-primary" type="button" style="height: 31px;width: 113.5px;margin-left: -60px;padding-top: 3px;background: var(--bs-orange);border-top-style: none;">SUBSCRIBE</button>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </div>--}}
+{{--</section>--}}
 <section style="background: #262466;">
     <footer id="footerid" style="background: url('{{ asset('/new-assets/img/footerimage.png')}}')  center / cover no-repeat, #20225f;padding: 40px;padding-bottom: 40px;border-style: none;border-top-width: 15px;max-height: auto;">
         <div class="container" style="padding-bottom: 20px;">
@@ -326,6 +331,15 @@
 <script src="https://unpkg.chttps://unpkg.com/@bootstrapstudio/bootstrap-better-nav/dist/bootstrap-better-nav.min.jsom/@bootstrapstudio/bootstrap-better-nav/dist/bootstrap-better-nav.min.js" type="module"></script>
 <script src="https://unpkg.com/@bootstrapstudio/bootstrap-better-nav/dist/bootstrap-better-nav.min.js" type="module"></script>
 <script src="{{asset('login-assets/js/Ultimate-Testimonial-Slider-BS5.js')}}"></script>
+<script>
+    $('document').ready(function()
+    {
+        $('textarea').each(function(){
+                $(this).val($(this).val().trim());
+            }
+        );
+    });
+</script>
 </body>
 
 </html>

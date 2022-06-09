@@ -105,6 +105,7 @@
                                         </td>
                                     </tr>
                                 @endforeach
+
                                 @if(!is_null($checkSchedule))
                                     <input type="hidden" name="departure_date" value="{{$departureDate}}"/>
                                     <input type="hidden" name="trip_type" value="1" />
@@ -188,8 +189,8 @@
                                         </div>
                                         <div class="col">
                                             <h5 class="text-start">Operator</h5>
-                                            <p class="text-start" style="font-size: 17px;">@if(!is_null($schedule->bus->tenant->image_url))<span>&nbsp; <img src="{{$schedule->bus->tenant->image_url}}" alt="company-logo" width="25px" height="25px"/>&nbsp;&nbsp;</span>@endif
-                                                <span>{{$schedule->bus->tenant->display_name}}</span></p>
+                                            <p class="text-start" style="font-size: 17px;">@if(!is_null($schedule->tenant->image_url))<span>&nbsp; <img src="{{$schedule->tenant->image_url}}" alt="company-logo" width="25px" height="25px"/>&nbsp;&nbsp;</span>@endif
+                                                <span>{{$schedule->tenant->display_name}}</span></p>
                                         </div>
                                         <div class="col text-center">
                                             <p class="text-center">Adult&nbsp;&nbsp;<span style="color: rgb(52,63,95);"><strong>&#x20A6; {{number_format($schedule->fare_adult)}}</strong></span>&nbsp;</p>
