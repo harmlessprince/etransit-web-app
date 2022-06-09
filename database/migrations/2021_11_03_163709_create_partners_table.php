@@ -22,6 +22,7 @@ class CreatePartnersTable extends Migration
             $table->string('phone_number')->unique();
             $table->string('bus_service')->nullable();
             $table->string('car_hire_service')->nullable();
+            $table->string('notes')->nullable();
             $table->timestamps();
         });
     }

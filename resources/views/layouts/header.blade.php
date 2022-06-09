@@ -7,7 +7,7 @@
                         <i class="fa fa-facebook" style="padding-top: 5px;"></i>
                         <i class="fa fa-linkedin" style="color: rgb(255, 255, 255);padding-top: 5px;"></i>&nbsp;
                         <i class="fa fa-google-plus justify-content-center align-items-center align-content-center" style="padding-top: 5px;"></i>&nbsp; &nbsp; |&nbsp;
-                        hello@etransitafrica.com&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</p>
+                        hello@etransitafrica.com &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</p>
                 </div>
                 <div class="col-3 col-sm-auto" id="currency" style="text-align: center;">
                     <div class="dropdown" id="reducebutton-1" style="padding-top: 6px;padding-bottom: 6px;">

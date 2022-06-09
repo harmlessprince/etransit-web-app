@@ -95,10 +95,10 @@
                     <a class="text-decoration-none" href="#" style="font-weight: bold;">Hotel Booking</a>
                 </li>
                 <li class="d-md-flex justify-content-md-start align-items-md-center" id="sidehover-7" style="height: 34px;">
-                    <a class="text-decoration-none" href="#" style="font-weight: bold;">Become A Partner</a>
+                    <a class="text-decoration-none" href="{{url('partners')}}" style="font-weight: bold;">Become A Partner</a>
                 </li>
                 <li class="d-md-flex justify-content-md-start align-items-md-center" id="sidehover-8" style="height: 34px;">
-                    <a class="text-decoration-none" href="#" style="font-weight: bold;">Send Parcel</a>
+                    <a class="text-decoration-none" href="{{url('parcel')}}" style="font-weight: bold;">Send Parcel</a>
                 </li>
                 <a href="{{url('/login')}}">
                     <button class="btn btn-primary" type="button" style="height: 30px;padding-top: 2px;background: #e7710f;">&nbsp; Log in&nbsp;&nbsp;</button>
