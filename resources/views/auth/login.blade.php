@@ -43,6 +43,9 @@
         h1, h2,h3,h4,h5,h6{
             font-family: metropolis-semi-bold , Sans-Serif;
         }
+        .google_btn{
+            text-decoration: none !important;
+        }
     </style>
 </head>
 
@@ -55,7 +58,7 @@
                     <p id="faicon" style="text-align: center;color: var(--bs-white);margin-top: 9px;margin-left: 7px;width: 293.703px;margin-bottom: 22px;">
                         <i class="fa fa-facebook" style="padding-top: 5px;"></i>&nbsp; &nbsp;&nbsp;
                         <i class="fa fa-linkedin" style="color: rgb(255, 255, 255);padding-top: 5px;"></i>&nbsp; &nbsp; &nbsp;
-                        <i class="fa fa-google-plus justify-content-center align-items-center align-content-center" style="padding-top: 5px;"></i>&nbsp; &nbsp; |&nbsp; hello@etransitafrica.com&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</p>
+                        <i class="fa fa-google-plus justify-content-center align-items-center align-content-center" style="padding-top: 5px;"></i>|&nbsp; hello@etransitafrica.com</p>
                 </div>
                 <div class="col-auto col-sm-auto" id="currency" style="text-align: center;">
                     <div class="dropdown" id="reducebutton-1" style="padding-top: 6px;padding-bottom: 6px;">
@@ -128,9 +131,18 @@
                            @enderror
                        </div>
 
-                        <p class="d-flex d-sm-flex d-md-flex d-lg-flex justify-content-center justify-content-sm-center justify-content-md-center justify-content-lg-center" style="text-align: center;margin-bottom: 5px;"><button class="btn btn-primary d-block d-lg-flex" type="submit" style="height: 30px;padding-top: 0px;padding-right: 80px;padding-left: 80px;margin-top: 21px;background: #dc6513;">LOG IN</button></p>
+                        <p class="d-flex d-sm-flex d-md-flex d-lg-flex justify-content-center justify-content-sm-center justify-content-md-center justify-content-lg-center" style="text-align: center;margin-bottom: 5px;">
+                            <button class="btn btn-primary d-block d-lg-flex" type="submit" style="height: 30px;padding-top: 0px;padding-right: 80px;padding-left: 80px;margin-top: 21px;background: #dc6513;">LOG IN</button></p>
 {{--                        <span class="d-block d-lg-flex justify-content-lg-center" style="text-align: center;font-size: 13px;">Or</span>--}}
-{{--                        <p class="d-flex d-sm-flex d-md-flex d-lg-flex justify-content-center justify-content-sm-center justify-content-md-center justify-content-lg-center" style="text-align: center;"><button class="btn btn-primary d-block d-lg-flex" type="button" style="margin-top: 5px;height: 30px;padding-top: 1px;padding-right: 25px;padding-left: 25px;background: #eb5757;">LOG IN WITH GOOGLE</button></p>--}}
+                        <p class="d-flex d-sm-flex d-md-flex d-lg-flex justify-content-center justify-content-sm-center justify-content-md-center justify-content-lg-center"
+                           style="text-align: center;">
+                            <a href="{{url('login/google')}}" class="google_btn">
+                                <button class="btn btn-primary d-block d-lg-flex" type="button"
+                                        style="margin-top: 5px;height: 30px;padding-top: 1px;padding-right: 25px;padding-left: 25px;background: #eb5757;">LOG IN WITH GOOGLE
+                                </button>
+                            </a>
+                        </p>
+                        <p style="text-align: center;color: var(--bs-gray-500);">Forgot your account?&nbsp;&nbsp;<a href="{{route('password.request')}}" style="color: rgb(231,113,15);">Reset Password</a>&nbsp;</p>
 {{--                        <p class="d-flex d-sm-flex d-md-flex d-lg-flex justify-content-center justify-content-sm-center justify-content-md-center justify-content-lg-center" style="text-align: center;"><button class="btn btn-primary d-block d-lg-flex" type="button" style="height: 30px;padding-top: 1px;padding-right: 18px;padding-left: 18px;">LOG IN WITH FACEBOOK</button></p>--}}
                     </form>
                 </div>
@@ -158,7 +170,8 @@
                 <li id="sidehover-6" class="text-decoration-none" style="height: 34px;">
                     <a class="text-decoration-none" href="#" style="font-weight: bold;">Become A Partner</a></li>
                 <li class="d-md-flex justify-content-md-start align-items-md-center" id="sidehover-7" style="height: 34px;">
-                    <a class="text-decoration-none" href="{{url('parcel')}}" style="font-weight: bold;">Parcel</a></li>
+                    <a class="text-decoration-none" href="{{url('parcel')}}" style="font-weight: bold;">Parcel</a>
+                </li>
             </ul>
             <div class="col-12 d-lg-flex justify-content-lg-center align-items-lg-center" style="text-align: center;padding-top: 9px;padding-bottom: 9px;"><button class="btn btn-primary" type="button" style="height: 30px;padding-top: 2px;margin-left: 20px;border-color: var(--bs-orange);background: rgba(13,110,253,0);color: rgb(231,113,15);">&nbsp;Sign Up&nbsp;</button></div>
         </nav>

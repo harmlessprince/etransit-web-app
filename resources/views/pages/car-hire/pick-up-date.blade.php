@@ -10,7 +10,7 @@
         grid-template-columns: repeat(2 , 1fr);
         margin-bottom: 100px;
     }
-    #date , #time{
+    #date , #time , #days{
         border:none ;
         border-bottom: 1px solid #DC6513 !important;
         outline:none;
@@ -50,6 +50,10 @@
                    <div class="form-group">
                        <label for="time">Pick Up Time</label>
                        <input type="time" name="time" id="time" class="form-control" required/>
+                   </div>
+                   <div class="form-group">
+                       <label for="days">Number of Days</label>
+                       <input type="number" name="days" id="days" class="form-control" required/>
                    </div>
                    <br>
                    <div class="pick_btn">

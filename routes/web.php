@@ -50,7 +50,7 @@ use App\Http\Controllers\Vehicle;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Auth::routes(['verify' => true]);
 //normal  user routes
 Route::get('/', [Page::class ,'index'])->name('home');
 
@@ -63,7 +63,7 @@ Route::post('/bus/filter-bookings/{operator?}/{bus_type?}' , [Booking::class , '
 
 Route::get('filter-cars/{seat_capacity?}/{class_type?}',[Car::class , 'carList']);
 
-Auth::routes();
+//Auth::routes();
 
 Route::get('/car-hire/{seat_capacity?}/{class_type?}', [Car::class , 'carList']);
 //boat cruise
@@ -103,8 +103,8 @@ Route::get('check-pdf' , function(){
    return view('pdf.boat-cruise');
 });
 
-Route::group(['middleware' => ['auth','prevent-back-history']], function() {
-//    ,'must_verify'
+Route::group(['middleware' => ['auth','prevent-back-history','must_verify']], function() {
+
 
     Route::get('profile/{user_id}',[UserProfile::class ,'myProfile']);
 

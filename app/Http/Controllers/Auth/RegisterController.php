@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Classes\VerificationToken;
 use App\Http\Controllers\Controller;
+use App\Mail\VerificationToken as VerificationTokenMail;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
@@ -68,7 +71,7 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
 
-        return User::create([
+        $data = User::create([
             'full_name' => $data['full_name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
@@ -76,6 +79,15 @@ class RegisterController extends Controller
             'phone_number' => $data['phone_number'],
             'username' => $data['username'],
         ]);
+
+//        $verifyToken = VerificationToken::generate();
+//
+//        $maildata = [
+//            'verify_token' => $verifyToken
+//        ];
+//        Mail::to($data['email'])->send(new VerificationTokenMail($maildata));
+
+        return $data;
     }
 
 }

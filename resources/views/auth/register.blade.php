@@ -45,6 +45,9 @@
         h1, h2,h3,h4,h5,h6{
             font-family: metropolis-semi-bold , Sans-Serif;
         }
+        .google_btn{
+            text-decoration: none !important;
+        }
     </style>
 </head>
 
@@ -173,8 +176,17 @@
                         <p class="d-flex d-sm-flex d-md-flex d-lg-flex justify-content-center justify-content-sm-center justify-content-md-center justify-content-lg-center" style="text-align: center;margin-bottom: 5px;">
                             <button class="btn btn-primary d-block d-lg-flex" type="submit" style="height: 30px;padding-top: 0px;padding-right: 80px;padding-left: 80px;margin-top: 21px;background: #dc6513;">SIGN UP</button></p>
 {{--                        <span class="d-block d-lg-flex justify-content-lg-center" style="text-align: center;font-size: 13px;">Or</span>--}}
-{{--                        <p class="d-flex d-sm-flex d-md-flex d-lg-flex justify-content-center justify-content-sm-center justify-content-md-center justify-content-lg-center" style="text-align: center;">--}}
-{{--                            <button class="btn btn-primary d-block d-lg-flex" type="button" style="margin-top: 5px;height: 30px;padding-top: 1px;padding-right: 25px;padding-left: 25px;background: #eb5757;">SIGN UP WITH GOOGLE</button></p>--}}
+                        <p class="d-flex d-sm-flex d-md-flex d-lg-flex justify-content-center justify-content-sm-center justify-content-md-center justify-content-lg-center" style="text-align: center;">
+                            <a href="{{url('login/google')}}" class="google_btn">
+                            <button class="btn btn-primary d-block d-lg-flex" type="button" style="margin-top: 5px;height: 30px;padding-top: 1px;padding-right: 25px;padding-left: 25px;background: #eb5757;">
+                                SIGN UP WITH GOOGLE
+                            </button>
+                            </a>
+                        </p>
+                        <p style="text-align: center;color: var(--bs-gray-500);">Forgot your account?&nbsp;&nbsp; <br>
+                            <a href="{{route('password.request')}}" style="color: rgb(231,113,15);">Reset Password</a>&nbsp;
+                        </p>
+
 {{--                        <p class="d-flex d-sm-flex d-md-flex d-lg-flex justify-content-center justify-content-sm-center justify-content-md-center justify-content-lg-center" style="text-align: center;">--}}
 {{--                            <button class="btn btn-primary d-block d-lg-flex" type="button" style="height: 30px;padding-top: 1px;padding-right: 18px;padding-left: 18px;">SIGN UP WITH FACEBOOK</button></p>--}}
                     </form>

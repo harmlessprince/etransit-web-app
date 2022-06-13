@@ -33,7 +33,7 @@
                         </div>
                         @else
                         <div class="col-12 justify-content-lg-center align-items-lg-center" style="text-align: center;margin-top:5px;">
-                            <img class="rounded-circle img-fluid" width="30" height="30" src="{{asset('new-assets/img/Testimonial%20male%20white.svg')}}" style="border: 2px solid var(--bs-white) ;">
+                            <img class="rounded-circle img-fluid" width="30" height="30" src="{{asset('new-assets/img/user.png')}}" style="border: 2px solid var(--bs-white) ;">
                             <span style="color: var(--bs-white);margin-left: 10px;" class="btn dropdown-toggle" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
                                 <strong>{{auth()->user()->full_name}}</strong></span>
                             <ul style="background: #343f5f;" class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">

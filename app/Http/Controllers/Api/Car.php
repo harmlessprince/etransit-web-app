@@ -89,7 +89,8 @@ class Car extends Controller
     {
         $data =  request()->validate([
             'date' => 'required',
-            'time' => 'required'
+            'time' => 'required',
+            'days' => 'required'
         ]);
 
 
@@ -161,6 +162,7 @@ class Car extends Controller
                 $bookingRecord->user_id       =  auth()->user()->id;
                 $bookingRecord->date          =  $data['date'];
                 $bookingRecord->time          =  $data['time'];
+                $bookingRecord->days          =  $data['days'];
                 $bookingRecord->returnTime    =  $returnTime ;
                 $bookingRecord->returnDate    =  $returnDate;
 
