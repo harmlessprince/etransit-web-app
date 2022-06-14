@@ -159,7 +159,7 @@ Route::group(['middleware' => ['auth','prevent-back-history','verified']], funct
     Route::post('train/select-seat',[Train::class , 'selectSeat'])->name('train.select-seat');
     Route::post('train/de-select-seat',[Train::class ,'DeselectSeat'])->name('train.de-select-seat');
     Route::post('train/cash-payment',[Train::class , 'handleCashPayment']);
-    
+
 });
 
 
