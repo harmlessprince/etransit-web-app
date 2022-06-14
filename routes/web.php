@@ -103,7 +103,7 @@ Route::get('check-pdf' , function(){
    return view('pdf.boat-cruise');
 });
 
-Route::group(['middleware' => ['auth','prevent-back-history','must_verify']], function() {
+Route::group(['middleware' => ['auth','prevent-back-history','verified']], function() {
 
 
     Route::get('profile/{user_id}',[UserProfile::class ,'myProfile']);
@@ -159,11 +159,7 @@ Route::group(['middleware' => ['auth','prevent-back-history','must_verify']], fu
     Route::post('train/select-seat',[Train::class , 'selectSeat'])->name('train.select-seat');
     Route::post('train/de-select-seat',[Train::class ,'DeselectSeat'])->name('train.de-select-seat');
     Route::post('train/cash-payment',[Train::class , 'handleCashPayment']);
-
-
-
-
-
+    
 });
 
 
