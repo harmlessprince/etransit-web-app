@@ -107,7 +107,7 @@
                             <span>Partners</span>
                         </a>
                         <ul class="nav-submenu menu-content">
-                            <li><a href="{{url('/admin/all-partners')}}">Partners</a></li>
+                            <li><a href="{{url('/admin/all-partners')}}">Partnership</a></li>
                         </ul>
                     </li>
                     <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"></i><span>Operator</span></a>
