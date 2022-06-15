@@ -70,7 +70,9 @@ class Car extends Controller
                                                 ->where('car_class_id',$selectCarClass)
                                                 ->with('car_images','plans')->paginate(20);
 
-        return response()->json(['success' => true, compact('cars')]);
+        $states = Destination::all();
+
+        return response()->json(['success' => true, compact('cars','states')]);
     }
 
     public function fetchCarState()
