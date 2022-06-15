@@ -107,6 +107,7 @@ Route::group(['prefix' => 'v1'], function() {
         Route::get('/pick-car-plan/{plan_id}' , [Car::class , 'pickPlan']);
         Route::post('/book-date/{plan_id}' ,[Car::class,'bookADate']);
         Route::get('/car-hire/handle-cash-payment/{history_id}' ,[Car::class,'makeCashPayment']);
+        Route::get('/fetch-hired-car/state' ,[Car::class,'fetchCarState']);
 
         // boat cruise module
         Route::post('/boat-cruise/{trip_id}/payment-plan/{service_id}',[BoatCruise::class , 'addPayment']);

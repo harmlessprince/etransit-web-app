@@ -10,6 +10,7 @@ use App\Models\CarClass;
 use App\Models\CarHistory;
 use App\Models\CarPlan;
 use App\Models\CarType;
+use App\Models\Destination;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -64,15 +65,24 @@ class Car extends Controller
     public function carList($selected_car_type_id , $selectCarClass)
     {
 
-        $cars = HiredCars::where('functional',1)->where('car_type_id' , $selected_car_type_id)
-                                        ->where('car_class_id',$selectCarClass)->with('car_images','plans')->paginate(20);
+
+        $cars = HiredCars::withoutGlobalScopes()->where('functional',1)->where('car_type_id' , $selected_car_type_id)
+                                                ->where('car_class_id',$selectCarClass)
+                                                ->with('car_images','plans')->paginate(20);
 
         return response()->json(['success' => true, compact('cars')]);
     }
 
+    public function fetchCarState()
+    {
+        $states = Destination::all();
+
+        return response()->json(['success' => true, compact('states')]);
+    }
+
     public function selectPlan($car_id)
     {
-        $car = HiredCars::where('id',$car_id)->with('plans','cartype','carclass')->first();
+        $car = HiredCars::withoutGlobalScopes()->where('id',$car_id)->with('plans','cartype','carclass')->first();
 
         return response()->json(['success' =>true , compact('car')]);
     }

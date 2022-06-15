@@ -241,7 +241,7 @@ class Car extends Controller
 
     public function carList($seat_capacity= null , $class_type = null)
     {
-        $cars = HiredCars::where('functional',1)
+        $cars = HiredCars::withoutGlobalScopes()->where('functional',1)
                          ->where('car_availability',1)
                          ->with('car_images','carclass','cartype','plans')
                          ->paginate(20);
@@ -250,7 +250,7 @@ class Car extends Controller
         if(!is_null(request()->car_types) )
         {
 
-            $cars = HiredCars::where('functional',1)
+            $cars = HiredCars::withoutGlobalScopes()->where('functional',1)
                 ->where('car_availability',1)
                 ->whereIn('car_type_id',request()->car_types)
                 ->with('car_images','carclass','cartype','plans')
@@ -261,7 +261,7 @@ class Car extends Controller
         if(!is_null(request()->transmissions) )
         {
 
-            $cars = HiredCars::where('functional',1)
+            $cars = HiredCars::withoutGlobalScopes()->where('functional',1)
                 ->where('car_availability',1)
                 ->whereIn('transmission',request()->transmissions)
                 ->with('car_images','carclass','cartype','plans')
@@ -271,7 +271,7 @@ class Car extends Controller
         if(!is_null(request()->transmissions) && !is_null(request()->car_types) )
         {
 
-            $cars = HiredCars::where('functional',1)
+            $cars = HiredCars::withoutGlobalScopes()->where('functional',1)
                 ->where('car_availability',1)
                 ->whereIn('transmission',request()->transmissions)
                 ->whereIn('car_type_id',request()->car_types)
@@ -282,7 +282,7 @@ class Car extends Controller
         if(!is_null(request()->locations) )
         {
 
-            $cars = HiredCars::where('functional',1)
+            $cars = HiredCars::withoutGlobalScopes()->where('functional',1)
                 ->where('car_availability',1)
                 ->whereIn('state_id',request()->locations)
                 ->with('car_images','carclass','cartype','plans' ,'tenant')
@@ -293,7 +293,7 @@ class Car extends Controller
         if(!is_null(request()->seat_capacity) )
         {
 
-            $cars = HiredCars::where('functional',1)
+            $cars = HiredCars::withoutGlobalScopes()->where('functional',1)
                 ->where('car_availability',1)
                 ->where('capacity',request()->seat_capacity)
                 ->with('car_images','carclass','cartype','plans' ,'tenant')
@@ -303,7 +303,7 @@ class Car extends Controller
 
         if(!is_null(request()->class_class))
         {
-            $cars = HiredCars::where('functional',1)
+            $cars = HiredCars::withoutGlobalScopes()->where('functional',1)
                 ->where('car_availability',1)
                 ->where('car_class_id',request()->class_class)
                 ->with('car_images','carclass','cartype','plans' ,'tenant')
@@ -312,7 +312,7 @@ class Car extends Controller
 
         if(!is_null(request()->class_type))
         {
-            $cars = HiredCars::where('functional',1)
+            $cars = HiredCars::withoutGlobalScopes()->where('functional',1)
                 ->where('car_availability',1)
                 ->where('car_type_id',request()->class_type)
                 ->with('car_images','carclass','cartype','plans' ,'tenant')
