@@ -29,6 +29,7 @@ class CreateCarHistoriesTable extends Migration
             $table->time('drpOffTime')->nullable()->comment('Time admin confirmed drop off');
             $table->time('time')->comment('pick up time');
             $table->string('days');
+            $table->string('number_of_cars')->nullable();
             $table->string('numbers_of_hours_delayed')->nullable();
             $table->unsignedBigInteger('isReturned')->default(0)->comment('0 means not returned , 1 means returned');
             $table->enum('isConfirmed',['True', 'False'])->default('False')->comment('confirmation is the ride is already book for the date');

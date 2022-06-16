@@ -102,7 +102,8 @@ class Car extends Controller
         $data =  request()->validate([
             'date' => 'required',
             'time' => 'required',
-            'days' => 'required'
+            'days' => 'required',
+            'number_of_cars' => 'sometimes'
         ]);
 
 
@@ -175,6 +176,7 @@ class Car extends Controller
                 $bookingRecord->date          =  $data['date'];
                 $bookingRecord->time          =  $data['time'];
                 $bookingRecord->days          =  $data['days'];
+                $bookingRecord->number_of_cars = request()->number_of_cars;
                 $bookingRecord->returnTime    =  $returnTime ;
                 $bookingRecord->returnDate    =  $returnDate;
 

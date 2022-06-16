@@ -405,7 +405,8 @@ class Car extends Controller
               $data =  request()->validate([
                     'date' => 'required',
                     'time' => 'required',
-                    'days' => 'required'
+                    'days' => 'required',
+                    'number_of_cars' => 'sometimes'
                 ]);
 
 
@@ -486,6 +487,7 @@ class Car extends Controller
                     $recordOperation->date          =  $data['date'];
                     $recordOperation->time          =  $data['time'];
                     $recordOperation->days          =  $data['days'];
+                    $recordOperation->number_of_cars = request()->number_of_cars;
                     $recordOperation->returnTime    =  $returnTime ;
                     $recordOperation->returnDate    =  $returnDate;
 
