@@ -175,15 +175,16 @@ class Car extends Controller
                 $bookingRecord->user_id       =  auth()->user()->id;
                 $bookingRecord->date          =  $data['date'];
                 $bookingRecord->time          =  $data['time'];
-                $bookingRecord->days          =  $data['days'];
-                $bookingRecord->number_of_cars = request()->number_of_cars;
+                $bookingRecord->days          =  abs($data['days']);
+                $bookingRecord->number_of_cars = abs(request()->number_of_cars);
                 $bookingRecord->returnTime    =  $returnTime ;
                 $bookingRecord->returnDate    =  $returnDate;
 
                 $bookingRecord->save();
                 $bookingRecord->with('carplan','car')->first();
+                $totalPlan = $plan * abs($data['days']) * !is_null(request()->number_of_cars) ? abs(request()->number_of_cars) : 1;
 
-                return response()->json(['success' => true ,compact('bookingRecord','plan','service')]);
+                return response()->json(['success' => true ,compact('bookingRecord','plan','totalPlan','service')]);
             }else{
 
                 return response()->json(['success' => false , 'message' => 'This car is not available for this period , please select another date ']);

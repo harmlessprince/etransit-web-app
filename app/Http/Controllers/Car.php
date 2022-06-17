@@ -440,7 +440,7 @@ class Car extends Controller
                                                               ->where('isConfirmed' ,'=','True')
                                                               ->first();
 
-                  $Carplan = $plan->plan;
+                  $Carplan = $plan->plan ;
 
 
                   switch ($Carplan) {
@@ -486,8 +486,8 @@ class Car extends Controller
                     $recordOperation->user_id       =  auth()->user()->id;
                     $recordOperation->date          =  $data['date'];
                     $recordOperation->time          =  $data['time'];
-                    $recordOperation->days          =  $data['days'];
-                    $recordOperation->number_of_cars = request()->number_of_cars;
+                    $recordOperation->days          =  abs($data['days']);
+                    $recordOperation->number_of_cars = abs(request()->number_of_cars);
                     $recordOperation->returnTime    =  $returnTime ;
                     $recordOperation->returnDate    =  $returnDate;
 
