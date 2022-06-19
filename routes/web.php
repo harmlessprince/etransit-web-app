@@ -254,6 +254,7 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::post('add/car-class' , [Car::class , 'saveCarClass']);
         Route::get('manage/car-type' , [Car::class , 'carType']);
         Route::post('add/car-type' , [Car::class , 'saveCarType']);
+        Route::get('view/car/{id}',[Car::class , 'viewTenantCar']);
 
 
         Route::get('add/car-hire',[Car::class ,'addCar']);

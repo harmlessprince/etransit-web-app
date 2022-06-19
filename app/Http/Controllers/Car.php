@@ -75,12 +75,18 @@ class Car extends Controller
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
                     $id = $row->id;
-                    $actionBtn = "<a href='/admin/$id'  class='edit btn btn-success btn-sm'>Edit</a> <a href='/admin/$id'  class='edit btn btn-success btn-sm'>View</a>";
+                    $actionBtn = "<a href='/admin/view/car/$id'  class='edit btn btn-success btn-sm'>View</a>";
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])
                 ->make(true);
         }
+    }
+    public function viewTenantCar($id)
+    {
+        $car = HiredCars::withoutGlobalScopes()->where('id',$id)->with('carclass','cartype','tenant','carHistory','plans')->first();
+//dd($car);
+        return view('admin.cars.single-car',compact('car'));
     }
 
     public function carClass()
