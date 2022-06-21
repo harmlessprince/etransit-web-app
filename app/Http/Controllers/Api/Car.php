@@ -10,6 +10,7 @@ use App\Models\CarClass;
 use App\Models\CarHistory;
 use App\Models\CarPlan;
 use App\Models\CarType;
+use App\Models\Destination;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -64,15 +65,26 @@ class Car extends Controller
     public function carList($selected_car_type_id , $selectCarClass)
     {
 
-        $cars = HiredCars::where('functional',1)->where('car_type_id' , $selected_car_type_id)
-                                        ->where('car_class_id',$selectCarClass)->with('car_images','plans')->paginate(20);
 
-        return response()->json(['success' => true, compact('cars')]);
+        $cars = HiredCars::withoutGlobalScopes()->where('functional',1)->where('car_type_id' , $selected_car_type_id)
+                                                ->where('car_class_id',$selectCarClass)
+                                                ->with('car_images','plans')->paginate(20);
+
+        $states = Destination::all();
+
+        return response()->json(['success' => true, compact('cars','states')]);
+    }
+
+    public function fetchCarState()
+    {
+        $states = Destination::all();
+
+        return response()->json(['success' => true, compact('states')]);
     }
 
     public function selectPlan($car_id)
     {
-        $car = HiredCars::where('id',$car_id)->with('plans','cartype','carclass')->first();
+        $car = HiredCars::withoutGlobalScopes()->where('id',$car_id)->with('plans','cartype','carclass')->first();
 
         return response()->json(['success' =>true , compact('car')]);
     }
@@ -89,7 +101,9 @@ class Car extends Controller
     {
         $data =  request()->validate([
             'date' => 'required',
-            'time' => 'required'
+            'time' => 'required',
+            'days' => 'required',
+            'number_of_cars' => 'sometimes'
         ]);
 
 
@@ -161,13 +175,16 @@ class Car extends Controller
                 $bookingRecord->user_id       =  auth()->user()->id;
                 $bookingRecord->date          =  $data['date'];
                 $bookingRecord->time          =  $data['time'];
+                $bookingRecord->days          =  abs($data['days']);
+                $bookingRecord->number_of_cars = abs(request()->number_of_cars);
                 $bookingRecord->returnTime    =  $returnTime ;
                 $bookingRecord->returnDate    =  $returnDate;
 
                 $bookingRecord->save();
                 $bookingRecord->with('carplan','car')->first();
+                $extraAmount =  abs($data['days']) * !is_null(request()->number_of_cars) ? abs(request()->number_of_cars) : 1;
 
-                return response()->json(['success' => true ,compact('bookingRecord','plan','service')]);
+                return response()->json(['success' => true ,compact('bookingRecord','plan','extraAmount','service')]);
             }else{
 
                 return response()->json(['success' => false , 'message' => 'This car is not available for this period , please select another date ']);

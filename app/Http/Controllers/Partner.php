@@ -64,8 +64,7 @@ class Partner extends Controller
                         'company_address' => 'required',
                         'bus_partner'      => 'sometimes',
                         'phone_number' => 'required|unique:partners',
-                        'car_hire' => 'sometimes',
-                        'notes' => 'sometimes'
+                        'car_hire' => 'sometimes'
                     ]);
 
       $newPartner = new BecomePartner();
@@ -74,7 +73,6 @@ class Partner extends Controller
       $newPartner->email = $data['email'];
       $newPartner->phone_number = $data['phone_number'];
       $newPartner->company_address = $data['company_address'];
-      $newPartner->notes = $data['notes'];
       $newPartner->bus_service = !is_null($request->bus_partner) ? true : null;
       $newPartner->car_hire_service = !is_null($request->car_hire) ? true : null ;
       $newPartner->save();

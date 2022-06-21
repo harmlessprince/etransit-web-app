@@ -46,6 +46,11 @@ class Car extends Model
         return $this->belongsTo(Tenant::class);
     }
 
+    public function carHistory()
+    {
+        return $this->HasMany(CarHistory::class);
+    }
+
 
     /**
      * The "booted" method of the model.

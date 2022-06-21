@@ -50,7 +50,7 @@ use App\Http\Controllers\Vehicle;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Auth::routes(['verify' => true]);
 //normal  user routes
 Route::get('/', [Page::class ,'index'])->name('home');
 
@@ -63,7 +63,7 @@ Route::post('/bus/filter-bookings/{operator?}/{bus_type?}' , [Booking::class , '
 
 Route::get('filter-cars/{seat_capacity?}/{class_type?}',[Car::class , 'carList']);
 
-Auth::routes();
+//Auth::routes();
 
 Route::get('/car-hire/{seat_capacity?}/{class_type?}', [Car::class , 'carList']);
 //boat cruise
@@ -103,8 +103,8 @@ Route::get('check-pdf' , function(){
    return view('pdf.boat-cruise');
 });
 
-Route::group(['middleware' => ['auth','prevent-back-history']], function() {
-//    ,'must_verify'
+Route::group(['middleware' => ['auth','prevent-back-history','verified']], function() {
+
 
     Route::get('profile/{user_id}',[UserProfile::class ,'myProfile']);
 
@@ -159,10 +159,6 @@ Route::group(['middleware' => ['auth','prevent-back-history']], function() {
     Route::post('train/select-seat',[Train::class , 'selectSeat'])->name('train.select-seat');
     Route::post('train/de-select-seat',[Train::class ,'DeselectSeat'])->name('train.de-select-seat');
     Route::post('train/cash-payment',[Train::class , 'handleCashPayment']);
-
-
-
-
 
 });
 
@@ -258,6 +254,7 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::post('add/car-class' , [Car::class , 'saveCarClass']);
         Route::get('manage/car-type' , [Car::class , 'carType']);
         Route::post('add/car-type' , [Car::class , 'saveCarType']);
+        Route::get('view/car/{id}',[Car::class , 'viewTenantCar']);
 
 
         Route::get('add/car-hire',[Car::class ,'addCar']);

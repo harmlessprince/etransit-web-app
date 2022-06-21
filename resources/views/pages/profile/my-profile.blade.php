@@ -31,7 +31,9 @@
                 <div class="col-md-3" style="margin-bottom: 30px;">
                     <div class="text-center" style="padding-top: 30px;padding-bottom: 30px;box-shadow: 1px 1px 10px 1px rgb(232,232,232);border-radius: 10px;">
                         <div class="row">
-                            <div class="col-12"><img style="border-radius: 50px;font-size: 8px;width: 80px;height: 80px;box-shadow: 1px 1px 7px rgb(184,185,186);border: 5px solid var(--bs-gray-100) ;" src="{{asset('new-assets/img/tp6.png')}}"><i class="fa fa-camera" id="uploadicon" style="color: rgb(44,57,94);"></i></div>
+                            <div class="col-12"><img style="border-radius: 50px;font-size: 8px;width: 80px;height: 80px;box-shadow: 1px 1px 7px rgb(184,185,186);border: 5px solid var(--bs-gray-100) ;" src="{{asset('new-assets/img/user.png')}}">
+{{--                                <i class="fa fa-camera" id="uploadicon" style="color: rgb(44,57,94);"></i>--}}
+                            </div>
                             <div class="col-12">
                                 <h6 style="margin-top: 14px;"><strong>{{auth()->user()->full_name}}</strong></h6>
                                 <p>{{auth()->user()->email}}</p>
@@ -40,7 +42,7 @@
                     </div>
                     <div class="row" style="margin-top: 10px;">
                         <div class="col d-lg-flex justify-content-lg-center" style="text-align: center;">
-                            <button class="btn btn-primary" type="button" style="font-size: 12px;width: 115px;padding-right: 0px;padding-left: 0px;background: rgb(52,63,95);">SAVE CHANGES</button>
+{{--                            <button class="btn btn-primary" type="button" style="font-size: 12px;width: 115px;padding-right: 0px;padding-left: 0px;background: rgb(52,63,95);">SAVE CHANGES</button>--}}
                         </div>
 {{--                        <div class="col d-lg-flex justify-content-lg-center" style="text-align: center;"><button class="btn btn-primary" type="button" style="font-size: 12px;width: 115px;color: var(--bs-gray);background: rgba(13,110,253,0);border-color: var(--bs-gray-500);">CANCEL</button></div>--}}
                     </div>

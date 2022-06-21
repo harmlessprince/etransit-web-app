@@ -21,7 +21,8 @@ class UserSeeder extends Seeder
             'address'      => 'User addres',
             'username'     => 'testuser',
             'phone_number' => '09000000',
-            'password'     => Hash::make('password')
+            'password'     => Hash::make('password'),
+            "email_verified_at" => now(),
         ]);
     }
 }

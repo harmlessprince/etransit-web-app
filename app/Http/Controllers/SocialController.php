@@ -24,19 +24,18 @@ class SocialController extends Controller
 
         if($users){
             Auth::login($users);
-
             return redirect('/');
         }else{
             $user = User::create([
                 'full_name'         => $userSocial->getName(),
-                'email_verified_at' => Carbon::now(),
+                'email_verified_at'  => Carbon::now(),
                 'email'             => $userSocial->getEmail(),
                 'password'          => Hash::make($userSocial->getEmail()),
                 'image'             => $userSocial->getAvatar(),
                 'provider_id'       => $userSocial->getId(),
                 'provider'          => $provider,
             ]);
-            return redirect()->route('home');
+            return redirect('/');
         }
     }
 }
