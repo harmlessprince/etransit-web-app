@@ -15,11 +15,11 @@ class ReturnUUIDTracker
         $no = (string)random_int(000000000000000, 999999999999999);
 
         if (strlen($no) != 15) {
-            return self::generateTrnxRef();
+            return self::generate();
         }
 
         if (\App\Models\Schedule::where('return_uuid_tracker', $no)->count() > 0) {
-            return self::generateTrnxRef();
+            return self::generate();
         }
 
         return $no;

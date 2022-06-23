@@ -19,7 +19,8 @@ class DatabaseSeeder extends Seeder
 //        $this->call(TerminalSeeder::class);
         $this->call(AdminPermissionsSeeder::class);
         $this->call(TripTypeSeeder::class);
-        $this->call(DestinationSeeder::class);
+        $this->call(BusTypeSeeder::class);
+//        $this->call(DestinationSeeder::class);
         $this->call(PickUpSeeder::class);
 //        $this->call(RoleSeeder::class);
         $this->call(AdminSeeder::class);
@@ -27,6 +28,7 @@ class DatabaseSeeder extends Seeder
 //        $this->call(EticketRoleSeeder::class);
         $this->call(EticketPermissionSeeder::class);
         $this->call(OperatorSeeder::class);
+        $this->call(ScheduleSeeder::class);
 
     }
 }
