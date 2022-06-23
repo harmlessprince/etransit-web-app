@@ -53,7 +53,7 @@ class DataImport implements ToCollection,WithHeadingRow
            $scheduledata->bus_model = $row['bus_model'];
            $scheduledata->bus_type = $row['bus_type'];
 
-           $out->writeln("terminal: ".$row['terminal'].", operator: ".$scheduledata->operator);
+           //$out->writeln("terminal: ".$row['terminal'].", operator: ".$scheduledata->operator);
         
            $password = "0peratorPa$$";
            
@@ -68,7 +68,7 @@ class DataImport implements ToCollection,WithHeadingRow
 
 
            if(is_null($tenant)){
-               $out->writeln("null");
+               //$out->writeln("null");
                $tenant = new Tenant;
                $tenant->company_name = $scheduledata->operator;
                $tenant->address = $scheduledata->terminal_address;
@@ -93,7 +93,7 @@ class DataImport implements ToCollection,WithHeadingRow
                }
                
             }else{
-                $out->writeln("not null");
+               // $out->writeln("not null");
             }
               
            if($tenant){
