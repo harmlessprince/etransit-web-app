@@ -15,6 +15,7 @@ use App\Http\Controllers\Eticket\EticketSchedule;
 use App\Http\Controllers\Eticket\EticketTerminal;
 use App\Http\Controllers\Eticket\ManageBus;
 use App\Http\Controllers\Eticket\ManageRoles;
+use App\Http\Controllers\Eticket\ManageTransaction;
 use App\Http\Controllers\Eticket\StaffMgt;
 use App\Http\Controllers\Eticket\TourPackage;
 use App\Http\Controllers\Ferry;
@@ -553,6 +554,10 @@ Route::prefix('e-ticket')->name('e-ticket.')->group(function(){
 
         Route::get('view-role/{role_id}', [ManageRoles::class ,'viewRole'])->name('view-role');
         Route::post('add-permissions-to-role', [ManageRoles::class ,'addPermisisonToRole'])->name('add-permission-to-role');
+
+        //transaction
+        Route::get('transactions',[ManageTransaction::class , 'allTransactions']);
+        Route::get('view-transaction/{transaction_id}',[ManageTransaction::class  ,'viewTransaction']);
 
 
     });
