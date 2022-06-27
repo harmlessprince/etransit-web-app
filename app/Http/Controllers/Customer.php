@@ -40,7 +40,9 @@ class Customer extends Controller
             $query->with('service')->limit(5)->latest()->get();
         }])->firstorfail();
 
-        return view('admin.customer.view' , compact('user'));
+        $totalTransactions = \App\Models\Transaction::where('user_id',$customer_id)->pluck('amount')->sum();
+
+        return view('admin.customer.view' , compact('user','totalTransactions'));
     }
 
 
