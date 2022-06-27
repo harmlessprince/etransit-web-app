@@ -372,6 +372,8 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::get('/customer/{customer_id}', [Customer::class , 'getCustomer']);
         Route::get('suspend-user/{customer_id}' , [Customer::class , 'suspendUser']);
         Route::get('activate-user/{customer_id}' , [Customer::class , 'activateUser']);
+        Route::get('view-customer-transaction/{customer_id}' , [Customer::class , 'customerTransaction']);
+        Route::get('fetch-customer-transaction-history/{customer_id}' , [Customer::class , 'fetchCustomerTransaction']);
 
         //manage operators
         Route::get('manage/operators',[Operator::class , 'operators']);
