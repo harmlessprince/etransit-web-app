@@ -608,6 +608,7 @@ class Booking extends Controller
         $maildata = [
             'name' => auth()->user()->full_name,
             'service' => 'Bus Booking',
+            'reference' => $transactions->reference,
             'transaction' => $transactions,
             'seatTrackers' => $seatTracker,
             'adultFare' => $adultFare,

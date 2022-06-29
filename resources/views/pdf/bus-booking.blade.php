@@ -38,6 +38,14 @@
     <div>
         <div class="receipt_column">
             <div >
+                <small>REFERENCE</small>
+            </div>
+            <div class="float-right">
+                <small>{{$data['reference']}}</small>
+            </div>
+        </div>
+        <div class="receipt_column">
+            <div >
                 <small>DEPARTURE DATE</small>
             </div>
             <div class="float-right">
