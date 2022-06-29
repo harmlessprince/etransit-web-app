@@ -157,6 +157,15 @@
                                 </div>
                             </div>
                     </div>
+
+                    <div class="row">
+                        <div class="col-md-6 colm-sm-6 col-lg-6 col-xl-6 col-xs-6">
+                            <div class="form-group">
+                                <label for="self_drive">Enable Self Drive</label>
+                                <input type="checkbox"  name="self_drive" id="self_drive" @if($editCar->self_drive == 'active') checked @endif>
+                            </div>
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label for="description">Description</label>
                         <textarea class="ckeditor form-control" name="description" id="description" rows="10" cols="20" required>{{ $editCar->description }}</textarea>
