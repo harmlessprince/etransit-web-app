@@ -14,6 +14,7 @@
 </section>
 <section style="background: #262466;">
     <footer id="footerid" style="background: url('{{ asset('/new-assets/img/footerimage.png')}}')  center / cover no-repeat, #20225f;padding: 40px;padding-bottom: 40px;border-style: none;border-top-width: 15px;max-height: auto;">
+
         <div class="container" style="padding-bottom: 20px;">
             <div class="row d-flex d-md-flex">
                 <div class="col">
@@ -57,6 +58,7 @@
                     </ul>
                 </div>
             </div>
+
             <div class="row" style="margin-top: 57px;">
                 <div class="col">
                     <p style="color: var(--bs-gray-100);">Copyright <?php echo date('Y'); ?> by E-transit Africa</p>
@@ -67,6 +69,14 @@
             </div>
         </div>
     </footer>
+    <div style="position:relative; top:-4em; display:flex;justify-content: flex-end; margin-right:10px;">
+        @php
+          $whatsappNumber =  env('WHATSAPP_NUMBER');
+        @endphp
+        <a href="https://api.whatsapp.com/send?phone=85264318721">
+            <img src="{{asset('images/whatsapp.png')}}" />
+        </a>
+    </div>
 </section>
 <div class="offcanvas offcanvas-end" tabindex="-1" data-bs-scroll="true" data-bs-backdrop="false" id="offcanvas-1">
     <div class="offcanvas-header">
