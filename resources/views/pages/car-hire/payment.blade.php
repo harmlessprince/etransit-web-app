@@ -177,8 +177,8 @@
                                     <td style="color: var(--bs-gray-600);font-size: 12px;">{{ $recordOperation->days}}</td>
                                 </tr>
                                 <tr>
-                                    <td style="font-size: 12px;color: var(--bs-gray-600);text-align: left;"><strong>Number Of Cars</strong></td>
-                                    <td style="font-size: 12px;color: var(--bs-gray-600);"><strong> {{$recordOperation->number_of_cars}}</strong></td>
+                                    <td style="font-size: 12px;color: var(--bs-gray-600);text-align: left;"><strong>Pick Up Address</strong></td>
+                                    <td style="font-size: 12px;color: var(--bs-gray-600);"><strong> {{$recordOperation->pickup_address}}</strong></td>
                                 </tr>
 {{--                                <tr>--}}
 {{--                                    <td style="color: var(--bs-gray-600);font-size: 12px;text-align: left;">3 Adult (s)</td>--}}
@@ -196,7 +196,7 @@
                         <h6 style="border-bottom-width: 1px;border-bottom-style: dashed;padding-top: 10px;padding-bottom: 10px;color: rgb(52,63,95);"><strong>Total:   &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </strong></h6>
                     </div>
                     <div class="col-6" style="padding-left: 0px;background: var(--bs-white);">
-                        <h6 class="text-center" style="border-bottom-width: 1px;border-bottom-style: dashed;padding-top: 10px;padding-bottom: 10px;color: rgb(52,63,95);"><strong> &#x20A6; {{number_format($plan->amount * $recordOperation->number_of_cars * $recordOperation->days)}}</strong></h6>
+                        <h6 class="text-center" style="border-bottom-width: 1px;border-bottom-style: dashed;padding-top: 10px;padding-bottom: 10px;color: rgb(52,63,95);"><strong> &#x20A6; {{number_format($plan->amount  * $recordOperation->days)}}</strong></h6>
                     </div>
                     <div class="col-12" style="background: var(--bs-white);border-bottom-right-radius: 10px;border-bottom-left-radius: 10px;">
 {{--                        {!! DNS1D::getBarcodeHTML('4445645656', 'UPCA') !!}--}}

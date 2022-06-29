@@ -56,8 +56,12 @@
                        <input type="number" name="days" id="days" class="form-control" required/>
                    </div>
                    <div class="form-group">
-                       <label for="number_of_cars">Number of Cars</label>
-                       <input type="number" name="number_of_cars" id="number_of_cars" class="form-control" value="1" required/>
+                       <label for="pickup_address">Pickup Address</label>
+                       <input type="text" name="pickup_address" id="pickup_address" class="form-control" required/>
+                   </div>
+{{--                   <div class="form-group">--}}
+{{--                       <label for="number_of_cars">Number of Cars</label>--}}
+{{--                       <input type="number" name="number_of_cars" id="number_of_cars" class="form-control" value="1" required/>--}}
                    </div>
                    <br>
                    <div class="pick_btn">

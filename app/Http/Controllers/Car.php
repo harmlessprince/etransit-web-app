@@ -412,7 +412,7 @@ class Car extends Controller
                     'date' => 'required',
                     'time' => 'required',
                     'days' => 'required',
-                    'number_of_cars' => 'sometimes'
+                    'pickup_address' => 'required'
                 ]);
 
 
@@ -493,7 +493,7 @@ class Car extends Controller
                     $recordOperation->date          =  $data['date'];
                     $recordOperation->time          =  $data['time'];
                     $recordOperation->days          =  abs($data['days']);
-                    $recordOperation->number_of_cars = abs(request()->number_of_cars);
+                    $recordOperation->pickup_address = $data['pickup_address'];
                     $recordOperation->returnTime    =  $returnTime ;
                     $recordOperation->returnDate    =  $returnDate;
 
@@ -564,7 +564,9 @@ class Car extends Controller
     public function onTrip()
     {
 
-        $carsOnTripCurrently = CarHistory::where('available_status','On Trip')->with('car','carplan','user')->orderby('returnDate','desc')->get();
+        $carsOnTripCurrently = CarHistory::where('available_status','On Trip')
+                                                ->with('car','carplan','user')
+                                                ->orderby('returnDate','desc')->get();
 
         return view('admin.cars.on-trip', compact('carsOnTripCurrently'));
     }
@@ -573,8 +575,7 @@ class Car extends Controller
     public function tripDetails($carhistory_id)
     {
 
-        $car = CarHistory::where('id', $carhistory_id)->with('user','carplan','car')
-                                                                                ->first();
+        $car = CarHistory::where('id', $carhistory_id)->with('user','carplan','car')->first();
 
         return view('admin.cars.details',compact('car'));
     }
