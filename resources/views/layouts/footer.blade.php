@@ -70,10 +70,8 @@
         </div>
     </footer>
     <div style="position:relative; top:-4em; display:flex;justify-content: flex-end; margin-right:10px;">
-        @php
-          $whatsappNumber =  env('WHATSAPP_NUMBER');
-        @endphp
-        <a href="https://api.whatsapp.com/send?phone=85264318721">
+{{--        85264318721--}}
+        <a href="https://api.whatsapp.com/send?phone=2349025318877" target="_blank">
             <img src="{{asset('images/whatsapp.png')}}" />
         </a>
     </div>
