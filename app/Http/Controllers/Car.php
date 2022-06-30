@@ -497,7 +497,7 @@ class Car extends Controller
                     $recordOperation->pickup_address = $data['pickup_address'];
                     $recordOperation->returnTime    =  $returnTime ;
                     $recordOperation->returnDate    =  $returnDate;
-                    $recordOperation->self_drive    =  $data['self_drive'] == "on" ? 'active' : 'inactive';
+                    $recordOperation->self_drive    =  !is_null($request->self_drive) == "on" ? 'active' : 'inactive';
                     $recordOperation->save();
                     $recordOperation->with('carplan','car')->first();
 

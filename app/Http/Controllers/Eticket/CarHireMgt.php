@@ -80,7 +80,7 @@ class CarHireMgt extends Controller
         $car->car_registration = $data['car_registration'];
         $car->model_year       = $data['model_year'];
         $car->transmission     = $data['transmission'];
-        $car->self_drive       = $data['self_drive'] == "on" ? 'active' : 'inactive';
+        $car->self_drive       = !is_null($request->self_drive) == "on" ? 'active' : 'inactive';
         $car->state_id         = $data['operating_state'];
         $car->save();
 
@@ -192,7 +192,7 @@ class CarHireMgt extends Controller
             'model_year'       => $data['model_year'],
             'transmission'     => $data['transmission'],
             'state_id'         => $data['operating_state'],
-            'self_drive'       => $data['self_drive'] == "on" ? 'active' : 'inactive',
+            'self_drive'       => !is_null($request->self_drive) == "on" ? 'active' : 'inactive',
         ]);
 
         Alert::success('Success ', 'Car updated successfully');
