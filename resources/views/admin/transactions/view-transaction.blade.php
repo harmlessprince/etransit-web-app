@@ -29,6 +29,17 @@
     <!-- Container-fluid starts-->
     <div class="container-fluid" >
         <div class="row">
+            <div class="col-md-12">
+                <div class="bus_event ">
+                    @if($transaction->status == 'Pending')
+                        <div class="schedules">
+                            <a href="{{url('admin/approve-payment/'.$transaction->id)}}" class="btn btn-success">Approve Transaction</a>
+                        </div>
+                    @endif
+                </div>
+            </div>
+        </div>
+        <div class="row">
             <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
                 <div class="card">
                     <div class="card-body">
