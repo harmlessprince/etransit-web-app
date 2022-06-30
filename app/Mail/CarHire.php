@@ -33,7 +33,7 @@ class CarHire extends Mailable
         $data = $this->data;
 
         $customPaper = array(0,0,567.00,283.80);
-        $pdf = PDF::loadView('pdf.car-hire', compact('data'))->setPaper($customPaper, 'landscape');;
+        $pdf = PDF::loadView('pdf.car-hire', compact('data'))->setPaper($customPaper, 'landscape');
 
         return $this->markdown('emails.carehire')
                         ->subject('Etransit Car Hire Ticket')

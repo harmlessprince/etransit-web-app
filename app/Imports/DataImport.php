@@ -10,6 +10,7 @@ use App\Models\BusType;
 use App\Models\Eticket;
 use App\Models\Terminal;
 use App\Models\Destination;
+use App\Models\ServiceTenant;
 use Illuminate\Validation\Rule;
 use App\Classes\ReturnUUIDTracker;
 use Database\Seeders\ScheduleData;
@@ -31,7 +32,7 @@ class DataImport implements ToCollection,WithHeadingRow
     public function collection( Collection $rows)
     {
         $out = new \Symfony\Component\Console\Output\ConsoleOutput();
-        foreach($rows as $row){ 
+        foreach($rows as $row){
 
            $scheduledata = new ScheduleData();
            $scheduledata->terminal = $row['terminal'];
@@ -54,16 +55,16 @@ class DataImport implements ToCollection,WithHeadingRow
            $scheduledata->bus_type = $row['bus_type'];
 
            //$out->writeln("terminal: ".$row['terminal'].", operator: ".$scheduledata->operator);
-        
+
            $password = "0peratorPa$$";
-           
+
            $tenant = Tenant::where('company_name', $scheduledata->operator)->first();
            $pickup = Pickup::where('location',$scheduledata->pickup)->first();
            $destination = Destination::where('location',$scheduledata->destination)->first();
-           
-           
 
-           
+
+
+
 
 
 
@@ -77,40 +78,48 @@ class DataImport implements ToCollection,WithHeadingRow
                $tenant->save();
                $eticket = new Eticket;
                $eticket->full_name = $scheduledata->operator;
-               $eticket->email     = trim($scheduledata->operator)."@etransitafrica.com";
+               $eticket->email     = str_replace(' ','',$scheduledata->operator)."@etransitafrica.com";
                $eticket->password  = Hash::make($password);
                $eticket->tenant_id = $tenant->id;
                $eticket->save();
-   
+
                $role =  Role::create(['guard_name' => 'e-ticket', 'name' => 'Super Admin ' . $tenant->display_name, 'tenant_id' => $tenant->id]);
-   
+
                $eticket->assignRole($role);
-   
+
                $permissions = Permission::where('guard_name', 'e-ticket')->get();
-   
+
                foreach ($permissions as $permission) {
                    $role->givePermissionTo($permission);
                }
-               
+                //activate bus service for new operator
+                $service = \App\Models\Service::where('name' , 'Bus Booking')->first();
+                $newserviceTenant = new ServiceTenant();
+                $newserviceTenant->service_id = $service->id;
+                $newserviceTenant->tenant_id  = $tenant->id;
+                $newserviceTenant->save();
+
             }else{
                // $out->writeln("not null");
             }
-              
+
            if($tenant){
 
             $terminal = Terminal::where('tenant_id',$tenant->id)->where('terminal_name',$scheduledata->terminal)->first();
             $bus = Bus::where('bus_registration',$scheduledata->number_plate)->where('tenant_id',$tenant->id)->first();
-           
-           }        
+
+           }
            if(is_null($pickup)){
                $pickup =  Pickup::create([
                 'location' => $scheduledata->pickup,
             ]);
+            if(is_null(Destination::where('location',$scheduledata->pickup)->first()))  Destination::create(['location' => $scheduledata->pickup]);
            }
            if(is_null($destination)){
             $destination =  Destination::create([
                 'location' => $scheduledata->destination,
             ]);
+            if(is_null(Pickup::where('location',$scheduledata->destination)->first()))  Pickup::create(['location' => $scheduledata->pickup]);
            }
            if(is_null($terminal)){
             $terminal = Terminal::create([
@@ -189,16 +198,16 @@ class DataImport implements ToCollection,WithHeadingRow
                     $seatTracker->seat_position = $i + 1;
                     $seatTracker->save();
                 }
-                
-            
 
-            
+
+
+
         }
      }
-        
-     
+
+
     }
 
-    
+
 
 }

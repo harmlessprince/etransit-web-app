@@ -209,7 +209,7 @@
                             <form>
                                 <div class="row">
                                     <div class="col" style="margin-top: 44px;">
-                                        <h6>PASSANGER # 1 DETAILS</h6>
+                                        <h6>PASSENGER # 1 DETAILS</h6>
                                     </div>
                                 </div>
                                 <div class="row">

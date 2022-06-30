@@ -488,10 +488,21 @@ Route::prefix('e-ticket')->name('e-ticket.')->group(function(){
 
 
 
+
         //check schedule manifest
         Route::get('schedule-manifest/{schedule_id}', [EticketManifest::class , 'manifest']);
         Route::get('fetch-bus-manifest/{schedule_id}', [EticketManifest::class ,'fetchBusManifest'])->name('fetch-bus-manifest');
         Route::get('fetch-passenger-details/{seat_tracker_id}', [EticketManifest::class , 'fetchPassengerDetails']);
+
+        //add passengers to schedule
+        Route::get('add-passenger/{schedule_id}',[EticketManifest::class, 'addPassenger']);
+        Route::post('add-passengers/{schedule_id}/{trip_type}',[EticketManifest::class, 'addPassengers'])->name('add-passengers');
+        //select seats
+        Route::post('/seat-selector-tracker',[EticketManifest::class ,'selectorTracker'])->name('select-seat');
+
+        Route::post('/deselect-seat' ,[EticketManifest::class , 'deselectSeat'])->name('deselect-seat');
+
+        Route::get('/printreceipt/{invoiceId}',[EticketManifest::class, 'printTicket']);
 
         //manage staffs
         Route::get('staffs' , [StaffMgt::class , 'allStaff']);

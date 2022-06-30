@@ -52,6 +52,10 @@ class EticketPermissionSeeder extends Seeder
         Permission::create(['guard_name' => 'e-ticket','name' => 'e-ticket.fetch-roles']);
         Permission::create(['guard_name' => 'e-ticket','name' => 'e-ticket.view-role']);
         Permission::create(['guard_name' => 'e-ticket','name' => 'e-ticket.add-permission-to-role']);
+        Permission::create(['guard_name' => 'e-ticket','name' => 'e-ticket.add-passengers']);
+        Permission::create(['guard_name' => 'e-ticket','name' => 'e-ticket.select-seat']);
+        Permission::create(['guard_name' => 'e-ticket','name' => 'e-ticket.deselect-seat']);
+
 
 
 

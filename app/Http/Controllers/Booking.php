@@ -220,16 +220,18 @@ class Booking extends Controller
         ]);
 
 
-    DB::beginTransaction();
+        DB::beginTransaction();
 
       $seat = \App\Models\SeatTracker::where('id' ,$data['seat_id'])->first();
 
        if($seat->booked_status != 2)
        {
-           $seat->update([
-               'booked_status' => 1,
-               'user_id' => $request->user_id
-           ]);
+            $seat->update([
+                'booked_status' => 1,
+                'user_id' => $request->user_id
+            ]);
+           
+
 
 
            if((int)$request->trip_type == 2)
@@ -246,10 +248,11 @@ class Booking extends Controller
                            ->where('seat_position', $seat->seat_position)->first();
 
                        if ($findReturnScheduleTripSeat) {
-                           $findReturnScheduleTripSeat->update([
-                               'booked_status' => 1,
-                               'user_id' => $request->user_id
-                           ]);
+
+                            $findReturnScheduleTripSeat->update([
+                                'booked_status' => 1,
+                                'user_id' => $request->user_id
+                            ]);
                        }
                    }
 
@@ -272,13 +275,14 @@ class Booking extends Controller
             'trip_type' => 'required'
         ]);
 
-        $seat = \App\Models\SeatTracker::where('id' ,$data['seat_id'])->where('user_id',$request->user_id)->first();
+        if(!isset($request->onsite_customer_id)) $seat = \App\Models\SeatTracker::where('id' ,$data['seat_id'])->where('user_id',$request->user_id)->first();
 
         if($seat->booked_status != 2)
         {
             $seat->update([
                 'booked_status' => 0,
-                'user_id' => null
+                'user_id' => null,
+                'onsite_customer_id' => null
             ]);
 
             if((int)$request->trip_type == 2)
@@ -300,7 +304,8 @@ class Booking extends Controller
                     {
                         $findReturnScheduleTripSeat->update([
                             'booked_status' => 0,
-                            'user_id' => null
+                            'user_id' => null,
+                            'onsite_customer_id'=> null
                         ]);
                     }
                 }

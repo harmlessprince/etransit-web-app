@@ -178,6 +178,9 @@
                                 <h4>Seat Information</h4>
                             </div>
                             <div>
+                                <a href="{{url('e-ticket/add-passenger/'.$findSchedule->id)}}" class="btn btn-primary">Add Passengers</a>
+                            </div>
+                            <div>
                                 <a href="{{url('e-ticket/schedule-manifest/'.$findSchedule->id)}}" class="btn btn-success">Check Manifest</a>
                             </div>
                         </div>
