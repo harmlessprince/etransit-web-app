@@ -176,7 +176,7 @@ class Car extends Controller
                 $bookingRecord->date          =  $data['date'];
                 $bookingRecord->time          =  $data['time'];
                 $bookingRecord->days          =  abs($data['days']);
-                $bookingRecord->number_of_cars = abs(request()->number_of_cars);
+//                $bookingRecord->number_of_cars = abs(request()->number_of_cars);
                 $bookingRecord->pickup_address = $data['pickup_address'];
                 $bookingRecord->returnTime    =  $returnTime ;
                 $bookingRecord->self_drive    = !is_null($request->self_drive) == "on" ? 'active' : 'inactive';
