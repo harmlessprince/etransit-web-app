@@ -19,6 +19,7 @@
 @section('content')
 
         <div class="container-fluid">
+
             <div class="page-header">
                 <div class="row">
                     <div class="col-6">
@@ -30,6 +31,16 @@
                     </div>
                 </div>
             </div>
+            @if($errors->any())
+                <div class="alert alert-danger">
+                    <p><strong>Opps Something went wrong</strong></p>
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <div class="card col-md-12 col-lg-12 col-sm-12 col-xl-12 col-xs-12">
                 <div class="card-body">
                    <form action="{{url('admin/transactions')}}">
@@ -85,14 +96,14 @@
                                        <option value="online">Card Payment</option>
                                    </select>
                                </div>
-{{--                               <div class="form-group">--}}
-{{--                                   <label>Reference</label>--}}
-{{--                                   <input type="text" class="form-control" name="start_dateeee"/>--}}
-{{--                               </div>--}}
+                               <div class="form-group">
+                                   <label>Operator's Email</label>
+                                   <input type="email" class="form-control" name="operator_email"/>
+                               </div>
                            </div>
                            <div class="search_btn">
                                <button class="btn btn-success">Search Filter</button>
-                               <button class="btn btn-danger">Reset Filter</button>
+{{--                               <button class="btn btn-danger" onClick="refreshTransactionPage()">Reset Filter</button>--}}
                            </div>
 
                        </div>
@@ -100,8 +111,53 @@
                    </form>
                 </div>
             </div>
+            <div class="card col-md-12 col-lg-12 col-sm-12 col-xl-12 col-xs-12">
+                <h3>Report Generation ( CSV )</h3>
+                <div class="card-body">
+                    <form action="{{url('admin/export-transaction')}}" onSubmit="exportTasks(event.target)">
+                        @csrf
+                        <div style="display:flex;justify-content: center;">
+                            <div>
+                                <div class="form-group">
+                                    <label>Start Date</label>
+                                    <input type="date" class="form-control" name="start_date"/>
+                                </div>
+
+                            </div>
+                            <div>
+                                <div class="form-group">
+                                    <label>End Date</label>
+                                    <input type="date" class="form-control" name="end_date"/>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="form-group">
+                                    <label>Payment Type</label>
+                                    <select class="form-control" name="payment_type">
+                                        <option value="">Select Status</option>
+                                        <option value="cash payment">Cash Payment</option>
+                                        <option value="online">Card Payment</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Operator's Email</label>
+                                <input type="email" class="form-control" name="operator_email"/>
+                            </div>
+                            <div class="form-group">
+                                <label>Set Paginator</label>
+                                <input type="number" class="form-control" name="set_paginator"/>
+                            </div>
+                        </div>
+                        <div style="display: flex; justify-content: center">
+                            <button class="btn btn-success">Generate Report</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
 
             <div class="transaction_table">
+{{--                <span data-href="/admin/export-transaction" id="export" class="btn btn-success btn-sm" onclick="exportTasks(event.target);">Export</span>--}}
                 <div class="card col-md-12 col-lg-12 col-sm-12 col-xl-12 col-xs-12">
                     <div class="card-body">
                 <table class="table table-striped">
@@ -144,5 +200,20 @@
             </div>
         </div>
 
-
 @endsection
+
+<script>
+    function refreshTransactionPage(event)
+    {
+        event.preventDefault();
+        console.log(e)
+        alert('fff');
+
+        // location.reload();
+    }
+
+    function exportTasks(_this) {
+        let _url = $(_this).data('href');
+        window.location.href = _url;
+    }
+</script>

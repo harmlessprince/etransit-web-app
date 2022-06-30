@@ -24,45 +24,48 @@
         <div class="nav-right col-8 pull-right right-menu">
             <ul class="nav-menus">
                 <li><span class="header-search"><i data-feather="search"></i></span></li>
-                <li class="onhover-dropdown">
-                    <div class="notification-box"><i data-feather="bell"></i><span class="badge badge-pill badge-secondary">4</span></div>
-                    <ul class="notification-dropdown onhover-show-div">
-                        <li class="bg-primary">
-                            <h6 class="f-18 mb-0">Notitication</h6>
-                            <p class="mb-0">You have 4 new notification</p>
-                        </li>
-                        <li>
-                            <p class="mb-0"><i class="fa fa-circle-o mr-3 font-primary"> </i>Delivery processing <span class="pull-right">10 min.</span></p>
-                        </li>
-                        <li>
-                            <p class="mb-0"><i class="fa fa-circle-o mr-3 font-success"></i>Order Complete<span class="pull-right">1 hr</span></p>
-                        </li>
-                        <li>
-                            <p class="mb-0"><i class="fa fa-circle-o mr-3 font-info"></i>Tickets Generated<span class="pull-right">3 hr</span></p>
-                        </li>
-                        <li>
-                            <p class="mb-0"><i class="fa fa-circle-o mr-3 font-danger"></i>Delivery Complete<span class="pull-right">6 hr</span></p>
-                        </li>
-                        <li><a class="btn btn-primary" href="#">Check all notification</a>
-                            <!--a.f-15.f-w-500.txt-dark(href="#") Check all notification-->
-                        </li>
-                    </ul>
-                </li>
+{{--                <li class="onhover-dropdown">--}}
+{{--                    <div class="notification-box"><i data-feather="bell"></i><span class="badge badge-pill badge-secondary">4</span></div>--}}
+{{--                    <ul class="notification-dropdown onhover-show-div">--}}
+{{--                        <li class="bg-primary">--}}
+{{--                            <h6 class="f-18 mb-0">Notitication</h6>--}}
+{{--                            <p class="mb-0">You have 4 new notification</p>--}}
+{{--                        </li>--}}
+{{--                        <li>--}}
+{{--                            <p class="mb-0"><i class="fa fa-circle-o mr-3 font-primary"> </i>Delivery processing <span class="pull-right">10 min.</span></p>--}}
+{{--                        </li>--}}
+{{--                        <li>--}}
+{{--                            <p class="mb-0"><i class="fa fa-circle-o mr-3 font-success"></i>Order Complete<span class="pull-right">1 hr</span></p>--}}
+{{--                        </li>--}}
+{{--                        <li>--}}
+{{--                            <p class="mb-0"><i class="fa fa-circle-o mr-3 font-info"></i>Tickets Generated<span class="pull-right">3 hr</span></p>--}}
+{{--                        </li>--}}
+{{--                        <li>--}}
+{{--                            <p class="mb-0"><i class="fa fa-circle-o mr-3 font-danger"></i>Delivery Complete<span class="pull-right">6 hr</span></p>--}}
+{{--                        </li>--}}
+{{--                        <li><a class="btn btn-primary" href="#">Check all notification</a>--}}
+{{--                            --}}
+{{--                        </li>--}}
+{{--                    </ul>--}}
+{{--                </li>--}}
                 <li>
                     <div class="mode"><i class="fa fa-moon-o"></i></div>
                 </li>
 
                 <li class="maximize"><a class="text-dark" href="#!" onclick="javascript:toggleFullScreen()"><i data-feather="maximize"></i></a></li>
                 <li class="profile-nav onhover-dropdown p-0">
-                    <div class="media profile-media"><img class="b-r-10" src="../assets/images/dashboard/profile.jpg" alt="">
-                        <div class="media-body"><span>Admin Name</span>
-                            <p class="mb-0 font-roboto">Admin <i class="middle fa fa-angle-down"></i></p>
+                    <div class="media profile-media">
+{{--                        <img class="b-r-10" src="../assets/images/dashboard/profile.jpg" alt="">--}}
+                        <div class="media-body"><span>{{auth()->guard('admin')->user()->email}}</span>
+                            <p class="mb-0 font-roboto">{{auth()->guard('admin')->user()->roles[0]->name}}
+                                <i class="middle fa fa-angle-down"></i>
+                            </p>
                         </div>
                     </div>
                     <ul class="profile-dropdown onhover-show-div">
-                        <li><i data-feather="user"></i><span>Account </span></li>
-                        <li><i data-feather="mail"></i><span>Inbox</span></li>
-                        <li><i data-feather="file-text"></i><span>Taskboard</span></li>
+{{--                        <li><i data-feather="user"></i><span>Account </span></li>--}}
+{{--                        <li><i data-feather="mail"></i><span>Inbox</span></li>--}}
+{{--                        <li><i data-feather="file-text"></i><span>Taskboard</span></li>--}}
                         <li><i data-feather="settings"></i><span>Settings</span></li>
                         <li><i data-feather="log-in"> </i><span>
                         <a href="{{ route('admin.logout') }}"

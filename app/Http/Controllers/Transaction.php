@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Eticket;
 use App\Models\Service;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Transaction as Tranx;
+use PdfReport;
+
 use RealRashid\SweetAlert\Facades\Alert;
 
 class Transaction extends Controller
@@ -158,7 +161,20 @@ class Transaction extends Controller
 //                return back();
             }
 
+        }
 
+        if(!is_null(request()->operator_email))
+        {
+            $operator = Eticket::where('email', request()->operator_email)->first();
+            if($operator){
+                $transactions  = Tranx::with('schedule','user')
+                    ->where('tenant_id',$operator->id)
+                    ->orderBy('created_at','desc')
+                    ->Simplepaginate(30);
+            }else{
+                Alert::error('Error', 'User with the email not found');
+//                return back();
+            }
         }
 
 
@@ -188,6 +204,63 @@ class Transaction extends Controller
             'isConfirmed' => 'True'
         ]);
         Alert::success('Success', 'Transaction approved successfully');
+        return back();
+    }
+
+    public function exportCsv(Request $request)
+    {
+        $request->validate([
+            'start_date' => 'required',
+            'end_date' => 'required',
+        ]);
+
+        $defaultPaginator = 100;
+        $setPaginator = $request->set_paginator ?? $defaultPaginator;
+
+
+        $operator = Eticket::where('email', request()->operator_email)->with('tenant')->first();
+
+
+        if(!$operator){
+            Alert::error('Error', 'Operator with the email not found');
+        }else{
+            $fileName = $operator->tenant->display_name.' Transaction Report.csv';
+            $transactions  = Tranx::with('schedule','user')
+                ->whereDate('created_at','>=',request()->start_date)
+                ->whereDate('created_at','<=',request()->end_date)
+                ->where('tenant_id',$operator->id)
+                ->orderBy('created_at','desc')
+                ->take($setPaginator)->get();
+
+            $headers = array(
+                "Content-type"        => "text/csv",
+                "Content-Disposition" => "attachment; filename=$fileName",
+                "Pragma"              => "no-cache",
+                "Cache-Control"       => "must-revalidate, post-check=0, pre-check=0",
+                "Expires"             => "0"
+            );
+
+            $columns = array('Reference', 'Amount', 'Status', 'CustomerEmail', 'TransactionDate');
+
+            $callback = function() use($transactions , $columns) {
+                $file = fopen('php://output', 'w');
+                fputcsv($file, $columns);
+                foreach ($transactions  as $transaction) {
+                    $row['Reference']    = $transaction->reference;
+                    $row['Amount']  = $transaction->amount;
+                    $row['Status']    = $transaction->status;
+                    $row['Customer Email']  = $transaction->user->email;
+                    $row['Transaction Date']  =  $transaction->created_at;
+
+                    fputcsv($file, array($row['Reference'], $row['Amount'], $row['Status'], $row['Customer Email'], $row['Transaction Date']));
+
+                }
+
+                fclose($file);
+            };
+
+            return response()->stream($callback, 200, $headers);
+        }
         return back();
     }
 }

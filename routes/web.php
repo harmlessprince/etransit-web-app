@@ -97,6 +97,7 @@ Route::post('train/bookings',[Train::class ,'checkSchedule']);
 //partner page
 Route::get('partners',[\App\Http\Controllers\Partner::class ,'partnerPage']);
 Route::post('store/become-partners',[\App\Http\Controllers\Partner::class , 'becomePartners']);
+Route::get('/admin/export-transaction', [Transaction::class , 'exportCsv']);
 
 
 //check PDF
@@ -245,6 +246,7 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::get('view-transaction/{transaction_id}',[Transaction::class ,'viewTransaction']);
         //aprove transaction
         Route::get('approve-payment/{transaction_id}',[Transaction::class , 'approveTransaction']);
+//        Route::get('/export-transaction', [Transaction::class , 'exportCsv']);
 
 
 
