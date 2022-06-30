@@ -172,7 +172,7 @@ class Transaction extends Controller
                     ->orderBy('created_at','desc')
                     ->Simplepaginate(30);
             }else{
-                Alert::error('Error', 'User with the email not found');
+                Alert::error('Error', 'Operator with the email not found');
 //                return back();
             }
         }
@@ -217,20 +217,18 @@ class Transaction extends Controller
         $defaultPaginator = 100;
         $setPaginator = $request->set_paginator ?? $defaultPaginator;
 
-
         $operator = Eticket::where('email', request()->operator_email)->with('tenant')->first();
-
 
         if(!$operator){
             Alert::error('Error', 'Operator with the email not found');
         }else{
             $fileName = $operator->tenant->display_name.' Transaction Report.csv';
             $transactions  = Tranx::with('schedule','user')
-                ->whereDate('created_at','>=',request()->start_date)
-                ->whereDate('created_at','<=',request()->end_date)
-                ->where('tenant_id',$operator->id)
-                ->orderBy('created_at','desc')
-                ->take($setPaginator)->get();
+                                    ->whereDate('created_at','>=',request()->start_date)
+                                    ->whereDate('created_at','<=',request()->end_date)
+                                    ->where('tenant_id',$operator->id)
+                                    ->orderBy('created_at','desc')
+                                    ->take($setPaginator)->get();
 
             $headers = array(
                 "Content-type"        => "text/csv",

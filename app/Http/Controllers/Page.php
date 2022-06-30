@@ -31,7 +31,10 @@ class Page extends Controller
         $ferryLocations = FerryLocation::all();
 
         $train_locations = \App\Models\TrainLocation::all();
+        $cars =  \App\Models\Car::take(4)->inRandomOrder()->with('car_images')->get();
+        $cars_selection2 =  \App\Models\Car::take(4)->inRandomOrder()->with('car_images')->get();
+//        dd($cars);
 
-        return view('pages.new-index',compact('busService','locations','tripTypes','pickups' ,'ferryLocations','ferryTypes','FerryService','train_locations'));
+        return view('pages.new-index',compact('busService','locations','tripTypes','pickups' ,'ferryLocations','ferryTypes','FerryService','train_locations','cars','cars_selection2'));
     }
 }
