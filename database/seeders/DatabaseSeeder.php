@@ -28,7 +28,7 @@ class DatabaseSeeder extends Seeder
 //        $this->call(EticketRoleSeeder::class);
         $this->call(EticketPermissionSeeder::class);
         $this->call(OperatorSeeder::class);
-        $this->call(ScheduleSeeder::class);
+//        $this->call(ScheduleSeeder::class);
 
     }
 }
