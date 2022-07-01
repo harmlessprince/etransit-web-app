@@ -521,6 +521,7 @@ class Car extends Controller
     {
 
        $carHistory         =  CarHistory::where('id', $history_id)->first();
+
        $fetchService_id    =  HiredCars::where('id', $carHistory->car_id)->select('service_id')->first();
        $checkServicePlan   =  CarPlan::where('id' , $carHistory->car_plan_id)->first();
 
@@ -549,7 +550,14 @@ class Car extends Controller
         $maildata = [
             'name' => auth()->user()->full_name,
             'service' => 'Car Hire',
-            'transaction' => $transaction
+            'reference' => $transaction->reference,
+            'transaction' => $transaction,
+            'plan' => $checkServicePlan->amount,
+            'payment_method' => 'cash payment',
+            'total_payment' =>$checkServicePlan->amount * $carHistory->days,
+            'pickup_date' => $carHistory->returnDate->format('Y-m-d'),
+            'pickup_time' => $carHistory->returnTime->format('h:i:s'),
+            'number_of_days' => $carHistory->days
         ];
 
         $email = auth()->user()->email;
