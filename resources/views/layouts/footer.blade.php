@@ -123,33 +123,33 @@
             <a href="#"><i class="fa fa-google-plus d-md-flex justify-content-center align-items-center align-content-center" style="padding-top: 5px;font-size: 25px;"></i></a></p>
     </div>
 </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+{{--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>--}}
 <script src="{{asset('new-assets/owlcarousel/owl.carousel.min.js')}}"></script>
 <script src="{{asset('new-assets/bootstrap/js/bootstrap.min.js')}}"></script>
 <script src="{{asset('new-assets/js/Off-Canvas-Sidebar-Drawer-Navbar.js')}}"></script>
 <script src="{{asset('new-assets/js/Off-Canvas-Sidebar-Drawer-Navbar-1.js')}}"></script>
 <script src="https://unpkg.chttps://unpkg.com/@bootstrapstudio/bootstrap-better-nav/dist/bootstrap-better-nav.min.jsom/@bootstrapstudio/bootstrap-better-nav/dist/bootstrap-better-nav.min.js" type="module"></script>
 <script src="https://unpkg.com/@bootstrapstudio/bootstrap-better-nav/dist/bootstrap-better-nav.min.js" type="module"></script>
-<script src="{{asset('new-assets/js/Ultimate-Testimonial-Slider-BS5.js')}}"></script>
+{{--<script src="{{asset('new-assets/js/Ultimate-Testimonial-Slider-BS5.js')}}"></script>--}}
 <script type="text/javascript">
     $(document).ready(function(){
-        $(".owl-carousel").owlCarousel({
-            responsiveClass:true,
-            responsive:{
-                0:{
-                items:1,
-                nav:true
-                },
-                568:{
-                items:3,
-                nav: true
-                },
-                768 :{
-                items:,
-                nav:true,
-                }
-            }
-        });
+        // $(".owl-carousel").owlCarousel({
+        //     responsiveClass:true,
+        //     responsive:{
+        //         0:{
+        //         items:1,
+        //         nav:true
+        //         },
+        //         568:{
+        //         items:3,
+        //         nav: true
+        //         },
+        //         768 :{
+        //         items:,
+        //         nav:true,
+        //         }
+        //     }
+        // });
     });
 
     function busnav()

@@ -446,7 +446,7 @@
                 </div>
             </div>
         </div>
-     <!--   <div class="row" style="margin-top: 30px;">
+     <div class="row" style="margin-top: 30px;">
             <div class="col">
                 <div class="carousel slide" data-bs-ride="carousel" id="carousel-2">
                     <div class="carousel-inner">
@@ -632,6 +632,5 @@
             <div class="col" style="text-align: center;"><img class="img-fluid" src="{{asset('new-assets/img/client4%201.svg')}}"></div>
         </div>
     </div>
--->
 </section>
 @endsection
