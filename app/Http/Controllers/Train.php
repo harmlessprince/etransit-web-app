@@ -86,7 +86,7 @@ class Train extends Controller
 
         DB::commit();
 
-        Alert::success('Success', 'Ferry Added Successfully');
+        Alert::success('Success', 'Train Added Successfully');
 
         return back();
 
@@ -639,7 +639,7 @@ class Train extends Controller
 
 
         $routeFare = RouteFare::whereIn('id' ,$request->route_id)->with('terminal','destination_terminal','seatClass')->get();
-//        dd($routeFare[0]->seatClass->class);
+        //        dd($routeFare[0]->seatClass->class);
 
         $searchSeatTrackerClass = [];
         foreach($selectedSeat as $class)
@@ -763,7 +763,7 @@ class Train extends Controller
         $ticketType = TripType::where('id', $request->tripType)->select('type')->firstorfail();
         $totalPasseneger = (int) $childrenCount + (int) $adultCount;
 
-//        $return_date = $request->return_date;
+     //        $return_date = $request->return_date;
 
         if(Session::has('setReturnDate'))
         {
@@ -775,7 +775,7 @@ class Train extends Controller
         $service = \App\Models\Service::where('id',2)->first();
 
         DB::commit();
-//        dd($service);
+    //        dd($service);
 
         return view('pages.train.payment' ,compact('childrenCount','fetchScheduleDetails','adultCount',
             'childrenCount','amount','selectedSeat','ticketType' , 'totalPasseneger','return_date' ,'routeFare','adultFareTotal' ,'childFareTotal' ,'service') );

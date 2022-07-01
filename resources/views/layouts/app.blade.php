@@ -34,6 +34,8 @@
     <link rel="stylesheet" href="{{asset('new-assets/css/Timeline-Steps.css')}}">
     <link rel="stylesheet" href="{{asset('new-assets/css/Tricky-Grid---2-Column-on-Desktop--Tablet-Flip-Order-of-12-Column-rows-on-Mobile.css')}}">
     <link rel="stylesheet" href="{{asset('new-assets/css/Ultimate-Testimonial-Slider-BS5.css')}}">
+    <link rel="stylesheet" href="{{asset("new-assets/owlcarousel/assets/owl.carousel.min.css")}}">
+    <link rel="stylesheet" href="{{asset("new-assets/owlcarousel/assets/owl.theme.default.min.css")}}">
 {{--    <link href="{{asset('css/style.css')}}" rel="stylesheet"/>--}}
     <link href="{{asset('css/font.css')}}" rel="stylesheet"/>
 

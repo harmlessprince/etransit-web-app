@@ -166,6 +166,8 @@ class Operator extends Controller
                 $eticket->password = Hash::make($password);
                 $eticket->tenant_id = $tenant->id;
                 $eticket->save();
+
+                
             }
 
         $maildata = [

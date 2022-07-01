@@ -56,4 +56,7 @@
         }
     </style>
     @cloudinaryJS
+   
+    @toaster_js
+    @toaster_render
 </head>
