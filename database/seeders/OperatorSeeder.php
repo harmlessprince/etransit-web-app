@@ -25,7 +25,7 @@ class OperatorSeeder extends Seeder
     {
 
 
-        $password  =   'password';
+        $password  =   'pa$$word';
         $tenant = new Tenant();
         $tenant->company_name = 'GOD IS GOOD MOTORS';
         $tenant->address ='IKEJA LAGOS';
@@ -55,7 +55,7 @@ class OperatorSeeder extends Seeder
             $role->givePermissionTo($permission);
         }
 
-        $password  =   'password';
+        $password  =   'pa$$word';
         $tenant = new Tenant();
         $tenant->company_name = 'AGUFURE MOTORS';
         $tenant->address ='IKEJA LAGOS';

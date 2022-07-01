@@ -3,7 +3,7 @@
         <div class="row" style="padding-bottom: 10px;">
             <div class="col-sm-6 d-md-flex flex-column align-content-center align-self-center">
                 <h3 class="text-center" style="color: rgb(17,15,126);margin-top: 10px;"><strong>GET UPDATES AND MORE</strong></h3>
-                <p class="text-center">THOUGHFUL THOUGHT TO YOU INBOX</p>
+                <p class="text-center">THOUGHTFUL THOUGHT TO YOU INBOX</p>
             </div>
             <div class="col-sm-6 d-inline-flex d-md-flex align-items-md-center" id="divemail">
                 <form><input type="email" id="emailinput" placeholder="YOUR EMAIL" inputmode="email" style="background: rgb(238,238,238);border-top-style: none;border-right-style: none;border-left-style: none;height: 41px;width: 250px;"></form>
