@@ -1,4 +1,4 @@
-@extends('admin.layout.app')
+@extends('Eticket.layout.app')
 <style>
     .bus_event{
         display: flex;
@@ -28,17 +28,17 @@
     </div>
     <!-- Container-fluid starts-->
     <div class="container-fluid" >
-        <div class="row">
-            <div class="col-md-12">
-                <div class="bus_event ">
-                    @if($transaction->status == 'Pending')
-                        <div class="schedules">
-                            <a href="{{url('admin/approve-payment/'.$transaction->id)}}" class="btn btn-success">Approve Transaction</a>
-                        </div>
-                    @endif
-                </div>
-            </div>
-        </div>
+{{--        <div class="row">--}}
+{{--            <div class="col-md-12">--}}
+{{--                <div class="bus_event ">--}}
+{{--                    @if($transaction->status == 'Pending')--}}
+{{--                        <div class="schedules">--}}
+{{--                            <a href="{{url('admin/approve-payment/'.$transaction->id)}}" class="btn btn-success">Approve Transaction</a>--}}
+{{--                        </div>--}}
+{{--                    @endif--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
         <div class="row">
             <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
                 <div class="card">
@@ -51,11 +51,11 @@
                         <hr>
                         <h6>Status : {{$transaction->status}}</h6>
                         <hr>
-{{--                        <h6>Transaction Type : {{$transaction->transaction_type}}</h6>--}}
-{{--                        <hr>--}}
+                        {{--                        <h6>Transaction Type : {{$transaction->transaction_type}}</h6>--}}
+                        {{--                        <hr>--}}
                         @if(!is_null($transaction->passenger_count))
-                        <h6>Passenger Count : {{$transaction->passenger_count}}</h6>
-                        <hr>
+                            <h6>Passenger Count : {{$transaction->passenger_count}}</h6>
+                            <hr>
                         @endif
                         <h6>Payment Confirmation : {{$transaction->isConfirmed}}</h6>
                         <hr>
@@ -81,20 +81,20 @@
 
         <div class="row">
             @if(!is_null($transaction->schedule))
-            <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
-                <div class="card">
-                    <div class="card-body">
-                        <h4>Operator Information</h4>
-                        <br>
-                        <h6>Company's Name : {{$transaction->tenant->company_name}}</h6>
-                        <hr>
-                        <h6>Display Name :  {{$transaction->tenant->display_name}}</h6>
-                        <hr>
-                        <h6>Address : {{$transaction->tenant->address}}</h6>
-                        <hr>
+                <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4>Operator Information</h4>
+                            <br>
+                            <h6>Company's Name : {{$transaction->tenant->company_name}}</h6>
+                            <hr>
+                            <h6>Display Name :  {{$transaction->tenant->display_name}}</h6>
+                            <hr>
+                            <h6>Address : {{$transaction->tenant->address}}</h6>
+                            <hr>
+                        </div>
                     </div>
                 </div>
-            </div>
             @endif
             @if(!is_null($transaction->schedule))
                 <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
@@ -130,32 +130,32 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
 
-{{--    <script type="text/javascript">--}}
-{{--        $(function () {--}}
-{{--            $.noConflict();--}}
+    {{--    <script type="text/javascript">--}}
+    {{--        $(function () {--}}
+    {{--            $.noConflict();--}}
 
-{{--            var table = $('.yajra-datatable').DataTable({--}}
-{{--                processing: true,--}}
-{{--                serverSide: true,--}}
-{{--                ajax: "{{ route('e-ticket.fetch-tenant-buses') }}",--}}
-{{--                columns: [--}}
-{{--                    {data: 'DT_RowIndex', name: 'DT_RowIndex'},--}}
-{{--                    {data: 'car_type', name: 'car_type'},--}}
-{{--                    {data: 'car_model', name: 'car_model'},--}}
-{{--                    {data: 'car_registration', name: 'car_registration'},--}}
-{{--                    {data: 'seater', name: 'seater'},--}}
-{{--                    {data: 'wheels', name: 'wheels'},--}}
+    {{--            var table = $('.yajra-datatable').DataTable({--}}
+    {{--                processing: true,--}}
+    {{--                serverSide: true,--}}
+    {{--                ajax: "{{ route('e-ticket.fetch-tenant-buses') }}",--}}
+    {{--                columns: [--}}
+    {{--                    {data: 'DT_RowIndex', name: 'DT_RowIndex'},--}}
+    {{--                    {data: 'car_type', name: 'car_type'},--}}
+    {{--                    {data: 'car_model', name: 'car_model'},--}}
+    {{--                    {data: 'car_registration', name: 'car_registration'},--}}
+    {{--                    {data: 'seater', name: 'seater'},--}}
+    {{--                    {data: 'wheels', name: 'wheels'},--}}
 
-{{--                    {--}}
-{{--                        data: 'action',--}}
-{{--                        name: 'action',--}}
-{{--                        orderable: true,--}}
-{{--                        searchable: true--}}
-{{--                    },--}}
+    {{--                    {--}}
+    {{--                        data: 'action',--}}
+    {{--                        name: 'action',--}}
+    {{--                        orderable: true,--}}
+    {{--                        searchable: true--}}
+    {{--                    },--}}
 
-{{--                ]--}}
-{{--            });--}}
+    {{--                ]--}}
+    {{--            });--}}
 
-{{--        });--}}
-{{--    </script>--}}
+    {{--        });--}}
+    {{--    </script>--}}
 @endsection

@@ -257,6 +257,13 @@
                                         <option value="1">1</option>
                                         <option value="2">2</option>
                                         <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10</option>
                                     </select>
                                 </div>
                                 <div class="col-sm-3 col-md-3 getalign" style="padding-top: 10px;text-align: center;"><label class="form-label" style="font-size: 14px;">Ferry Types</label>
@@ -446,87 +453,37 @@
                         <div class="carousel-item active">
                             <div class="container">
                                 <div class="row product-list">
+                                    @foreach($cars as $index  => $car)
                                     <div class="col-sm-3 col-md-3 col-lg-3 product-item">
                                         <div class="product-container" style="box-shadow: 1px 1px 7px rgb(162,164,167);padding: 10px;padding-top: 5px;padding-bottom: 5px;border-radius: 10px;">
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <a class="product-image" style="margin-bottom:-10px;" href="#">
-                                                        <img class="rounded img-fluid" style="border: 6px none rgb(220,219,219) ;" src="new-assets/img/PngItem_3891621%201.svg"></a>
+                                                    <a class="product-image" style="margin-bottom:-10px;" href="{{'view-car-details/'. $car->id}}">
+                                                        <img class="rounded img-fluid" style="border: 6px none rgb(220,219,219) ;"
+                                                             src="{{$car->car_images[0]->path}}">
+                                                    </a>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-12 col-sm-12 col-md-12 col-lg-12" style="width:252px;padding-right:0px;padding-left:0px;font-size:3px;">
                                                     <h2 class="text-nowrap fw-normal text-start" style="text-align: left;padding-left: 20px;">
-                                                        <a class="fw-normal text-start" style="color: rgb(8,1,1);font-size: 17px;font-family: Abel, sans-serif;margin-left: -2px;" href="#">Luxus RX 360<br></a></h2>
-                                                    <p style="color: rgb(25,25,25);font-size: 14px;">&nbsp; &nbsp; &nbsp;&nbsp;<i class="fa fa-question" style="color: rgb(217,135,60);"></i>&nbsp;Auto&nbsp; &nbsp;
-                                                        <i class="la la-automobile" style="color: rgb(217,135,60);"></i>&nbsp;7 Adult&nbsp; &nbsp;&nbsp;
+                                                        <a class="fw-normal text-start" style="color: rgb(8,1,1);font-size: 17px;font-family: Abel, sans-serif;margin-left: -2px;" href="#">{{$car->car_name}}<br></a></h2>
+                                                    <p style="color: rgb(25,25,25);font-size: 14px;">&nbsp; &nbsp; &nbsp;&nbsp;<i class="fa fa-question" style="color: rgb(217,135,60);"></i>&nbsp;{{Ucfirst($car->transmission)}} &nbsp;
+                                                        <i class="la la-automobile" style="color: rgb(217,135,60);"></i>&nbsp;{{$car->capacity}} Adult&nbsp;
                                                         <i class="fa fa-asterisk" style="color: rgb(207,115,48);"></i>&nbsp; Fuctional</p>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-3 col-md-3 col-lg-3 product-item">
-                                        <div class="product-container" style="padding: 10px;padding-top: 5px;padding-bottom: 5px;border-radius: 10px;box-shadow: 1px 1px 7px rgb(162,164,167);">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <a class="product-image" style="margin-bottom:-10px;" href="#">
-                                                        <img class="rounded img-fluid" style="border: 6px none rgb(220,219,219) ;" src="new-assets/img/PngItem_3891621%201.svg"></a>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-12 col-sm-12 col-md-12 col-lg-12" style="width:252px;padding-right:0px;padding-left:0px;font-size:3px;">
-                                                    <h2 class="text-nowrap fw-normal text-start" style="text-align: left;padding-left: 20px;">
-                                                        <a class="fw-normal text-start" style="color: rgb(8,1,1);font-size: 17px;font-family: Abel, sans-serif;margin-left: -2px;" href="#">Luxus RX 360<br></a></h2>
-                                                    <p style="color: rgb(25,25,25);font-size: 14px;">&nbsp; &nbsp; &nbsp;&nbsp;<i class="fa fa-question" style="color: rgb(217,135,60);"></i>&nbsp;Auto&nbsp; &nbsp;
-                                                        <i class="la la-automobile" style="color: rgb(217,135,60);"></i>&nbsp;7 Adult&nbsp; &nbsp;&nbsp;<i class="fa fa-asterisk" style="color: rgb(207,115,48);"></i>&nbsp; Fuctional
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-3 col-md-3 col-lg-3 product-item">
-                                        <div class="product-container" style="padding: 10px;padding-top: 5px;padding-bottom: 5px;border-radius: 10px;box-shadow: 1px 1px 7px rgb(162,164,167);">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <a class="product-image" style="margin-bottom:-10px;" href="#">
-                                                        <img class="rounded img-fluid" style="border: 6px none rgb(220,219,219) ;" src="new-assets/img/PngItem_3891621%201.svg"></a></div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-12 col-sm-12 col-md-12 col-lg-12" style="width:252px;padding-right:0px;padding-left:0px;font-size:3px;">
-                                                    <h2 class="text-nowrap fw-normal text-start" style="text-align: left;padding-left: 20px;">
-                                                        <a class="fw-normal text-start" style="color: rgb(8,1,1);font-size: 17px;font-family: Abel, sans-serif;margin-left: -2px;" href="#">Luxus RX 360<br></a>
-                                                    </h2>
-                                                    <p style="color: rgb(25,25,25);font-size: 14px;">&nbsp; &nbsp; &nbsp;&nbsp;<i class="fa fa-question" style="color: rgb(217,135,60);"></i>&nbsp;Auto&nbsp; &nbsp;
-                                                        <i class="la la-automobile" style="color: rgb(217,135,60);"></i>&nbsp;7 Adult&nbsp; &nbsp;&nbsp;<i class="fa fa-asterisk" style="color: rgb(207,115,48);"></i>&nbsp; Fuctional
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-3 col-md-3 col-lg-3 product-item">
-                                        <div class="product-container" style="box-shadow: 1px 1px 7px rgb(162,164,167);border-radius: 10px;padding: 10px;padding-top: 5px;padding-bottom: 5px;">
-                                            <div class="row">
-                                                <div class="col-md-12"><a class="product-image" style="margin-bottom:-10px;" href="#">
-                                                        <img class="rounded img-fluid" style="border: 6px none rgb(220,219,219) ;" src="new-assets/img/PngItem_3891621%201.svg"></a>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-12 col-sm-12 col-md-12 col-lg-12" style="width:252px;padding-right:0px;padding-left:0px;font-size:3px;">
-                                                    <h2 class="text-nowrap fw-normal text-start" style="text-align: left;padding-left: 20px;">
-                                                        <a class="fw-normal text-start" style="color: rgb(8,1,1);font-size: 17px;font-family: Abel, sans-serif;margin-left: -2px;" href="#">Luxus RX 360<br></a></h2>
-                                                    <p style="color: rgb(25,25,25);font-size: 14px;">&nbsp; &nbsp; &nbsp;&nbsp;<i class="fa fa-question" style="color: rgb(217,135,60);"></i>&nbsp;Auto&nbsp; &nbsp;
-                                                        <i class="la la-automobile" style="color: rgb(217,135,60);"></i>&nbsp;7 Adult&nbsp; &nbsp;&nbsp;<i class="fa fa-asterisk" style="color: rgb(207,115,48);"></i>&nbsp; Fuctional
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    @endforeach
                                 </div>
                             </div><img class="w-100 d-block d-none" src="http://placeholdit.imgix.net/~text?txtsize=42&amp;txt=Carousel+Image&amp;w=1400&amp;h=600" alt="Slide Image">
                         </div>
                         <div class="carousel-item">
                             <div class="container">
                                 <div class="row product-list">
+                                    @foreach($cars_selection2 as $index  => $car)
+
                                     <div class="col-sm-3 col-md-3 col-lg-3 product-item">
                                         <div class="product-container" style="padding: 10px;padding-top: 5px;padding-bottom: 5px;border-radius: 10px;box-shadow: 1px 1px 7px rgb(162,164,167);">
                                             <div class="row">
@@ -570,45 +527,89 @@
                                         <div class="product-container" style="padding: 10px;padding-top: 5px;padding-bottom: 5px;border-radius: 10px;box-shadow: 1px 1px 7px rgb(162,164,167);">
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <a class="product-image" style="margin-bottom:-10px;" href="#">
-                                                        <img class="rounded img-fluid" style="border: 6px none rgb(220,219,219) ;" src="new-assets/img/PngItem_3891621%201.svg"></a>
+                                                    <a class="product-image" style="margin-bottom:-10px;" href="{{'view-car-details/'. $car->id}}">
+                                                        <img class="rounded img-fluid"
+                                                             style="border: 6px none rgb(220,219,219) ;" src="{{$car->car_images[0]->path}}"></a>
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-12 col-sm-12 col-md-12 col-lg-12" style="width:252px;padding-right:0px;padding-left:0px;font-size:3px;">
+                                                <div class="col-12 col-sm-12 col-md-12 col-lg-12 text-start" style="width: 252px;padding-right: 0px;padding-left: 0px;font-size: 20px;text-align: left;">
                                                     <h2 class="text-nowrap fw-normal text-start" style="text-align: left;padding-left: 20px;">
-                                                        <a class="fw-normal text-start" style="color: rgb(8,1,1);font-size: 17px;font-family: Abel, sans-serif;margin-left: -2px;" href="#">Luxus RX 360<br></a>
-                                                    </h2>
-                                                    <p style="color: rgb(25,25,25);font-size: 14px;">&nbsp; &nbsp; &nbsp;&nbsp;<i class="fa fa-question" style="color: rgb(217,135,60);"></i>&nbsp;Auto&nbsp; &nbsp;
-                                                        <i class="la la-automobile" style="color: rgb(217,135,60);"></i>&nbsp;7 Adult&nbsp; &nbsp;&nbsp;<i class="fa fa-asterisk" style="color: rgb(207,115,48);"></i>&nbsp;
+                                                        <a class="fw-normal text-start" style="color: rgb(8,1,1);font-size: 17px;font-family: Abel, sans-serif;margin-left: -2px;" href="#">{{$car->car_name}}<br></a></h2>
+                                                    <p style="color: rgb(25,25,25);font-size: 14px;">&nbsp; &nbsp; &nbsp;&nbsp;<i class="fa fa-question" style="color: rgb(217,135,60);"></i>&nbsp;{{Ucfirst($car->transmission)}} &nbsp;
+                                                        <i class="la la-automobile" style="color: rgb(217,135,60);"></i>&nbsp;{{$car->capacity}} Adult
+                                                        <i class="fa fa-asterisk" style="color: rgb(207,115,48);"></i>&nbsp;
                                                         Fuctional
                                                     </p>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-3 col-md-3 col-lg-3 product-item">
-                                        <div class="product-container" style="padding: 10px;padding-top: 5px;padding-bottom: 5px;border-radius: 10px;box-shadow: 1px 1px 7px rgb(162,164,167);">
-                                            <div class="row">
-                                                <div class="col-md-12"><a class="product-image" style="margin-bottom:-10px;" href="#">
-                                                        <img class="rounded img-fluid" style="border: 6px none rgb(220,219,219) ;" src="new-assets/img/PngItem_3891621%201.svg"></a>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-12 col-sm-12 col-md-12 col-lg-12" style="width:252px;padding-right:0px;padding-left:0px;font-size:3px;">
-                                                    <h2 class="text-nowrap fw-normal text-start" style="text-align: left;padding-left: 20px;">
-                                                        <a class="fw-normal text-start" style="color: rgb(8,1,1);font-size: 17px;font-family: Abel, sans-serif;margin-left: -2px;" href="#">Luxus RX 360<br></a>
-                                                    </h2>
-                                                    <p style="color: rgb(25,25,25);font-size: 14px;">&nbsp; &nbsp; &nbsp;&nbsp;
-                                                        <i class="fa fa-question" style="color: rgb(217,135,60);"></i>&nbsp;Auto&nbsp; &nbsp;<i class="la la-automobile" style="color: rgb(217,135,60);"></i>&nbsp;7 Adult&nbsp; &nbsp;&nbsp;<i class="fa fa-asterisk" style="color: rgb(207,115,48);"></i>&nbsp;
-                                                        Fuctional
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    @endforeach
+{{--                                    <div class="col-sm-3 col-md-3 col-lg-3 product-item">--}}
+{{--                                        <div class="product-container" style="box-shadow: 1px 1px 7px rgb(162,164,167);border-radius: 10px;padding: 10px;padding-top: 5px;padding-bottom: 5px;">--}}
+{{--                                            <div class="row">--}}
+{{--                                                <div class="col-md-12"><a class="product-image" style="margin-bottom:-10px;" href="#">--}}
+{{--                                                        <img class="rounded img-fluid" style="border: 6px none rgb(220,219,219) ;" src="new-assets/img/PngItem_3891621%201.svg"></a>--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
+{{--                                            <div class="row">--}}
+{{--                                                <div class="col-12 col-sm-12 col-md-12 col-lg-12" style="width:252px;padding-right:0px;padding-left:0px;font-size:3px;">--}}
+{{--                                                    <h2 class="text-nowrap fw-normal text-start" style="text-align: left;padding-left: 20px;">--}}
+{{--                                                        <a class="fw-normal text-start" style="color: rgb(8,1,1);font-size: 17px;font-family: Abel, sans-serif;margin-left: -2px;" href="#">Luxus RX 360<br></a>--}}
+{{--                                                    </h2>--}}
+{{--                                                    <p style="color: rgb(25,25,25);font-size: 14px;">&nbsp; &nbsp; &nbsp;&nbsp;<i class="fa fa-question" style="color: rgb(217,135,60);"></i>&nbsp;Auto&nbsp; &nbsp;--}}
+{{--                                                        <i class="la la-automobile" style="color: rgb(217,135,60);"></i>&nbsp;7 Adult&nbsp; &nbsp;&nbsp;<i class="fa fa-asterisk" style="color: rgb(207,115,48);"></i>&nbsp;--}}
+{{--                                                        Fuctional--}}
+{{--                                                    </p>--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                    <div class="col-sm-3 col-md-3 col-lg-3 product-item">--}}
+{{--                                        <div class="product-container" style="padding: 10px;padding-top: 5px;padding-bottom: 5px;border-radius: 10px;box-shadow: 1px 1px 7px rgb(162,164,167);">--}}
+{{--                                            <div class="row">--}}
+{{--                                                <div class="col-md-12">--}}
+{{--                                                    <a class="product-image" style="margin-bottom:-10px;" href="#">--}}
+{{--                                                        <img class="rounded img-fluid" style="border: 6px none rgb(220,219,219) ;" src="new-assets/img/PngItem_3891621%201.svg"></a>--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
+{{--                                            <div class="row">--}}
+{{--                                                <div class="col-12 col-sm-12 col-md-12 col-lg-12" style="width:252px;padding-right:0px;padding-left:0px;font-size:3px;">--}}
+{{--                                                    <h2 class="text-nowrap fw-normal text-start" style="text-align: left;padding-left: 20px;">--}}
+{{--                                                        <a class="fw-normal text-start" style="color: rgb(8,1,1);font-size: 17px;font-family: Abel, sans-serif;margin-left: -2px;" href="#">Luxus RX 360<br></a>--}}
+{{--                                                    </h2>--}}
+{{--                                                    <p style="color: rgb(25,25,25);font-size: 14px;">&nbsp; &nbsp; &nbsp;&nbsp;<i class="fa fa-question" style="color: rgb(217,135,60);"></i>&nbsp;Auto&nbsp; &nbsp;--}}
+{{--                                                        <i class="la la-automobile" style="color: rgb(217,135,60);"></i>&nbsp;7 Adult&nbsp; &nbsp;&nbsp;<i class="fa fa-asterisk" style="color: rgb(207,115,48);"></i>&nbsp;--}}
+{{--                                                        Fuctional--}}
+{{--                                                    </p>--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                    <div class="col-sm-3 col-md-3 col-lg-3 product-item">--}}
+{{--                                        <div class="product-container" style="padding: 10px;padding-top: 5px;padding-bottom: 5px;border-radius: 10px;box-shadow: 1px 1px 7px rgb(162,164,167);">--}}
+{{--                                            <div class="row">--}}
+{{--                                                <div class="col-md-12"><a class="product-image" style="margin-bottom:-10px;" href="#">--}}
+{{--                                                        <img class="rounded img-fluid" style="border: 6px none rgb(220,219,219) ;" src="new-assets/img/PngItem_3891621%201.svg"></a>--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
+{{--                                            <div class="row">--}}
+{{--                                                <div class="col-12 col-sm-12 col-md-12 col-lg-12" style="width:252px;padding-right:0px;padding-left:0px;font-size:3px;">--}}
+{{--                                                    <h2 class="text-nowrap fw-normal text-start" style="text-align: left;padding-left: 20px;">--}}
+{{--                                                        <a class="fw-normal text-start" style="color: rgb(8,1,1);font-size: 17px;font-family: Abel, sans-serif;margin-left: -2px;" href="#">Luxus RX 360<br></a>--}}
+{{--                                                    </h2>--}}
+{{--                                                    <p style="color: rgb(25,25,25);font-size: 14px;">&nbsp; &nbsp; &nbsp;&nbsp;--}}
+{{--                                                        <i class="fa fa-question" style="color: rgb(217,135,60);"></i>&nbsp;Auto&nbsp; &nbsp;<i class="la la-automobile" style="color: rgb(217,135,60);"></i>&nbsp;7 Adult&nbsp; &nbsp;&nbsp;<i class="fa fa-asterisk" style="color: rgb(207,115,48);"></i>&nbsp;--}}
+{{--                                                        Fuctional--}}
+{{--                                                    </p>--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
                                 </div>
-                            </div><img class="w-100 d-block d-none" src="http://placeholdit.imgix.net/~text?txtsize=42&amp;txt=Carousel+Image&amp;w=1400&amp;h=600" alt="Slide Image">
+                            </div>
+                            <img class="w-100 d-block d-none" src="http://placeholdit.imgix.net/~text?txtsize=42&amp;txt=Carousel+Image&amp;w=1400&amp;h=600" alt="Slide Image">
                         </div>
                     </div>
                     <div><a class="carousel-control-prev" href="#carousel-2" role="button" data-bs-slide="prev" style="background-image:url(&quot;0&quot;);"><span class="carousel-control-prev-icon"></span><span class="visually-hidden">Previous</span></a><a class="carousel-control-next" href="#carousel-2" role="button" data-bs-slide="next" style="background-image:url(&quot;o&quot;);"><span class="carousel-control-next-icon"></span><span class="visually-hidden">Next</span></a></div>

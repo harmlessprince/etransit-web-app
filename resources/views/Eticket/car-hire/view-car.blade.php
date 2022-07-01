@@ -109,6 +109,8 @@
                         <h6>Currently Booked : {{$car->booked_status == 'false' ? 'Not Booked' : 'Booked'}}</h6>
                         <hr>
                         <h6>Extra Hour : {{$carPlans[0]->extra_hour}}</h6>
+                        <hr>
+                        <h6>Self Drive : {{ $car->self_drive == "active" ? 'True' : 'False'}}</h6>
 
                     </div>
                 </div>

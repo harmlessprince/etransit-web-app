@@ -27,6 +27,7 @@ class CreateCarsTable extends Migration
             $table->integer('capacity')->comment('the seat capacity');
             $table->string('image_url')->nullable();
             $table->longText('description')->nullable();
+            $table->enum('self_drive',['active','inactive'])->default('inactive');
             $table->unsignedBigInteger('functional')->default(1)->comment('0 = false , 1 = true');
             $table->unsignedBigInteger('air_conditioning')->default(1)->comment('0 = false , 1 = true');
             $table->unsignedBigInteger('car_availability')->default(1)->comment('0 = false , 1 = true');

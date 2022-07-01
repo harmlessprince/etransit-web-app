@@ -40,7 +40,9 @@ class Customer extends Controller
             $query->with('service')->limit(5)->latest()->get();
         }])->firstorfail();
 
-        return view('admin.customer.view' , compact('user'));
+        $totalTransactions = \App\Models\Transaction::where('user_id',$customer_id)->pluck('amount')->sum();
+
+        return view('admin.customer.view' , compact('user','totalTransactions'));
     }
 
 
@@ -66,6 +68,32 @@ class Customer extends Controller
 
         return back();
 
+    }
+
+
+    public function customerTransaction($customer_id)
+    {
+        $user = User::find($customer_id);
+
+        return view('admin.customer.tranx', compact('user'));
+    }
+
+
+    public function fetchCustomerTransaction(Request $request ,$customer_id)
+    {
+        if ($request->ajax()) {
+            $data = \App\Models\Transaction::where('user_id',$customer_id)->latest()->get();
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function($row){
+                    $id = $row->id;
+                    $actionBtn = "<a href='/admin/view-transaction/$id' class='success btn btn-success btn-sm'>View</a>";
+//                    "<a href='/admin/customer/$id'  class='edit btn btn-success btn-sm'>Edit</a> <a href='/admin/customer/$id' class='delete btn btn-danger btn-sm'>View</a>";
+                    return $actionBtn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
     }
 
 

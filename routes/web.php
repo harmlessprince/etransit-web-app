@@ -15,6 +15,7 @@ use App\Http\Controllers\Eticket\EticketSchedule;
 use App\Http\Controllers\Eticket\EticketTerminal;
 use App\Http\Controllers\Eticket\ManageBus;
 use App\Http\Controllers\Eticket\ManageRoles;
+use App\Http\Controllers\Eticket\ManageTransaction;
 use App\Http\Controllers\Eticket\StaffMgt;
 use App\Http\Controllers\Eticket\TourPackage;
 use App\Http\Controllers\Ferry;
@@ -96,6 +97,7 @@ Route::post('train/bookings',[Train::class ,'checkSchedule']);
 //partner page
 Route::get('partners',[\App\Http\Controllers\Partner::class ,'partnerPage']);
 Route::post('store/become-partners',[\App\Http\Controllers\Partner::class , 'becomePartners']);
+Route::get('/admin/export-transaction', [Transaction::class , 'exportCsv']);
 
 
 //check PDF
@@ -244,6 +246,7 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::get('view-transaction/{transaction_id}',[Transaction::class ,'viewTransaction']);
         //aprove transaction
         Route::get('approve-payment/{transaction_id}',[Transaction::class , 'approveTransaction']);
+//        Route::get('/export-transaction', [Transaction::class , 'exportCsv']);
 
 
 
@@ -371,6 +374,8 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::get('/customer/{customer_id}', [Customer::class , 'getCustomer']);
         Route::get('suspend-user/{customer_id}' , [Customer::class , 'suspendUser']);
         Route::get('activate-user/{customer_id}' , [Customer::class , 'activateUser']);
+        Route::get('view-customer-transaction/{customer_id}' , [Customer::class , 'customerTransaction']);
+        Route::get('fetch-customer-transaction-history/{customer_id}' , [Customer::class , 'fetchCustomerTransaction']);
 
         //manage operators
         Route::get('manage/operators',[Operator::class , 'operators']);
@@ -564,6 +569,10 @@ Route::prefix('e-ticket')->name('e-ticket.')->group(function(){
 
         Route::get('view-role/{role_id}', [ManageRoles::class ,'viewRole'])->name('view-role');
         Route::post('add-permissions-to-role', [ManageRoles::class ,'addPermisisonToRole'])->name('add-permission-to-role');
+
+        //transaction
+        Route::get('transactions',[ManageTransaction::class , 'allTransactions']);
+        Route::get('view-transaction/{transaction_id}',[ManageTransaction::class  ,'viewTransaction']);
 
 
     });

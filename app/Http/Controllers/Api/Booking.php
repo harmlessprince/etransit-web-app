@@ -501,6 +501,7 @@ class Booking extends Controller
             'service' => 'Bus Booking',
             'transaction' => $transactions,
             'seatTrackers' => $seatTracker,
+            'reference' => $transactions->reference,
             'adultFare' => $adultFare,
             'childFare'=>$childrenFare,
             'tripType' => $tripType,

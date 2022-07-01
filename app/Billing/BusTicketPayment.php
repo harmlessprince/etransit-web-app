@@ -96,6 +96,7 @@ class BusTicketPayment
                     'name' =>  $data['name'] ,
                     'service' => 'Bus Booking',
                     'transaction' => $transactions,
+                    'reference' => $transactions->reference,
                     'seatTrackers' => $seatTracker,
                     'adultFare' => $adultFare,
                     'childFare'=>$childrenFare,
