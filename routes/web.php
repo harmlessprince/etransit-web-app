@@ -55,6 +55,10 @@ Auth::routes(['verify' => true]);
 //normal  user routes
 Route::get('/', [Page::class ,'index'])->name('home');
 
+Route::get('test/pdf' , function(){
+    return view('pdf.test-pdf');
+});
+
 //Route::get('/login',[Login::class , 'login']);
 //Route::get('/register',[Login::class, 'register']);
 // The callback url after a payment
@@ -484,7 +488,8 @@ Route::prefix('e-ticket')->name('e-ticket.')->group(function(){
 
         //schedule trip for buses
         Route::get('/schedule/{bus_id}',[ManageBus::class , 'scheduleTrip']);
-        Route::post('add-eticket-schedule', [EticketSchedule::class , 'addEticketSchedule'])->name('add-eticket-schedule');
+        Route::post('add-eticket-schedule', [EticketSchedule::class , 'addEticketSchedule']);
+//        ->name('add-eticket-schedule');
         Route::get('all-scheduled-trip',[EticketSchedule::class , 'allScheduledTrip']);
         Route::get('fetch-scheduled-trip', [EticketSchedule::class, 'fetchAllSchedules'])->name('fetch-scheduled-trip');
         Route::get('view-each-schedule/{schedule_id}' , [EticketSchedule::class , 'viewEachSchedule']);

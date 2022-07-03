@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
         $this->call(AdminPermissionsSeeder::class);
         $this->call(TripTypeSeeder::class);
         $this->call(BusTypeSeeder::class);
-//        $this->call(DestinationSeeder::class);
+        $this->call(DestinationSeeder::class);
 //       $this->call(PickUpSeeder::class);
 //        $this->call(RoleSeeder::class);
         $this->call(AdminSeeder::class);

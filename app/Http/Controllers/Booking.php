@@ -80,8 +80,7 @@ class Booking extends Controller
                 ->where('seats_available' , '>=', $request->number_of_passengers)
                 ->with('terminal','bus','destination','pickup','service','tenant')->get();
         }
-
-
+        
 
         $operators  = \App\Models\Tenant::inRandomOrder()
                                                 ->limit(10)
@@ -230,7 +229,7 @@ class Booking extends Controller
                 'booked_status' => 1,
                 'user_id' => $request->user_id
             ]);
-           
+
 
 
 

@@ -138,7 +138,7 @@
                         <ul class="timeline" style="border-color: rgb(248,161,89);margin-left: -4.7031px;">
                             <li class="from">
                                 <span class="d-block" style="font-size: 12px;color: var(--bs-gray-500);text-align: left;">From</span>
-                                <span class="d-block" style="margin-bottom: 3px;text-align: left;">{{$fetchScheduleDetails->pickup->location}}</span>
+                                <span class="d-block" style="margin-bottom: 3px;text-align: left;">{{$fetchScheduleDetails->pickup->location ?? null}}</span>
                                 <span class="d-block" id="to" style="font-size: 12px;color: var(--bs-gray-500);margin-top: 4px;">To</span></li>
                             <li class="to"><span class="d-block" style="margin-top: 0px;padding-top: 0px;text-align: left;">{{$fetchScheduleDetails->destination->location}}&nbsp;</span></li>
                         </ul><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-arrow-down-up" id="directing" style="font-size: 23px;">
