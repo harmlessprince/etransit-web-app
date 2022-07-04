@@ -523,6 +523,9 @@ Route::prefix('e-ticket')->name('e-ticket.')->group(function(){
         Route::put('store-update/{staff_id}', [StaffMgt::class , 'updateStaff']);
         Route::get('view-staff/{staff_id}', [StaffMgt::class , 'viewStaff']);
         Route::get('terminate/{staff_id}/appointment',[StaffMgt::class ,'terminateAppointment']);
+        Route::get('enable/{staff_id}/appointment',[StaffMgt::class ,'enableAppointment']);
+        Route::get('assign-role/{staff_id}/',[StaffMgt::class ,'assignRole']);
+        Route::post('assign-staff-to-role/{staff_id}',[StaffMgt::class ,'assignUserRole']);
 
 
         //mage car hire routes
