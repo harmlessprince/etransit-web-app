@@ -91,9 +91,9 @@ class EticketSchedule extends Controller
             return response()->json(['success' => true , 'message' => 'Trip has been scheduled successfully']);
         } catch (\Exception $e) {
             DB::rollback();
-            Log::info($e->getMessage());
+//            Log::info($e->getMessage());
 
-            return response()->json(['success' => false , 'message' =>  'Could not save the event .Try again'.$e->getMessage()]);
+            return response()->json(['success' => false , 'message' =>  'Could not save the event .Try again']);
 
         }
     }
