@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Models\OnsiteInvoice;
 use App\Models\Tenant;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Mail;
 use PDF;
@@ -101,12 +102,25 @@ class EticketManifest extends Controller
             $newCustomer = $customer;
             $customer = $customer->id;
         }
+        //find seats selected on user's device
+        if(Cookie::has('seats')){
+            $seatsondevice = json_decode(Cookie::get('seats'));
+            if(count($seatsondevice) < 1){
+                toastr()->error('No seats selected. Please select seat(s)');
+                return back();
+            }
+
+        }else{
+            toastr()->error('No seats selected. Please select seat(s)');
+            return back();
+        }
 
         //find if the seats selected matches the number of passengers listed
         $selectedSeat = SeatTracker::where('schedule_id', $schedule_id)
             //->where('onsite_customer_id', $customer)
             ->where('tenant_id', session()->get('tenant_id'))
-            ->where('booked_status', 1)->get();
+            ->where('booked_status', 1)
+            ->whereIn('id',$seatsondevice)->get();
 
         if ((int)$trip_type == 2) {
             $checkSchedule = Schedule::find($schedule_id);
@@ -178,7 +192,7 @@ class EticketManifest extends Controller
                 }
             }
 
-            toastr()->error('Number of seats selected must match the passenger count');
+            toastr()->error('Number of seats selected must match the number of passengers');
             return  back();
         }
 
@@ -201,7 +215,7 @@ class EticketManifest extends Controller
                     ]);
                 }
             }
-            toastr()->error('Please ensure the gender option is not more than the number of passenger intended for booking');
+            toastr()->error('Please ensure the gender option is chosen for each passenger');
             return  back();
         } else {
 
@@ -303,7 +317,10 @@ class EticketManifest extends Controller
             //update the status of seat tracker to booked after payment from selected
             //0 = available 1 = selected 2 = booked
             $seatTracker = \App\Models\SeatTracker::where('user_id', session()->get('tenant_id'))
-                ->where('schedule_id', $schedule_id)->where('bus_id', $fetchScheduleDetails->bus_id)->get();
+                ->where('schedule_id', $schedule_id)
+                ->where('bus_id', $fetchScheduleDetails->bus_id)
+                ->whereIn('id', $seatsondevice)
+                ->get();
 
             for ($i = 0; $i < count($seatTracker); $i++) {
                 $seatTracker[$i]->update([
@@ -428,6 +445,15 @@ class EticketManifest extends Controller
                 'tenant_id' => $request->tenant_id
                 //'onsite_customer_id' => $request->tenant_id
             ]);
+            if(Cookie::has('seats')){
+                $seats = json_decode(Cookie::get('seats'));
+                array_push($seats, $data['seat_id']);
+                $seatscookie = cookie('seats',json_encode($seats),30);
+            }else{
+                $seats = [];
+                array_push($seats, $data['seat_id']);
+                $seatscookie = cookie('seats',json_encode($seats),30);
+            }
 
            if((int)$request->trip_type == 2)
            {
@@ -456,7 +482,7 @@ class EticketManifest extends Controller
            }
            DB::commit();
 
-           return response()->json(['success' => true , 'message' => 'Seat Selected successfully']);
+           return response()->json(['success' => true , 'message' => 'Seat Selected successfully'])->withCookie($seatscookie);
        }
 
         return response()->json(['success' => false , 'message' => 'Seat has already been booked']);
@@ -479,6 +505,11 @@ class EticketManifest extends Controller
                 'user_id' => null,
                 'onsite_customer_id' => null
             ]);
+            $seats = json_decode(Cookie::get('seats'));
+            $seatskey =array_search($data['seat_id'], $seats);
+            unset($seats[$seatskey]);
+            $modifiedseats = array_values($seats);
+            $modifiedseatscookie = cookie('seats',json_encode($modifiedseats),30);
 
             if((int)$request->trip_type == 2)
             {
@@ -506,7 +537,7 @@ class EticketManifest extends Controller
                 }
 
             }
-            return response()->json(['success' => true , 'message' => 'Seat de-selected successfully']);
+            return response()->json(['success' => true , 'message' => 'Seat de-selected successfully'])->withCookie('seats');
         }
         return response()->json(['success' => false , 'message' => 'Seat has already been booked']);
     }
