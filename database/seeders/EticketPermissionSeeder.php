@@ -57,9 +57,5 @@ class EticketPermissionSeeder extends Seeder
         Permission::create(['guard_name' => 'e-ticket','name' => 'e-ticket.deselect-seat']);
 
 
-
-
-
-
     }
 }

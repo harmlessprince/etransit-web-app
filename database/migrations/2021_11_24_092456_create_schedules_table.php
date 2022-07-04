@@ -32,11 +32,11 @@ class CreateSchedulesTable extends Migration
             $table->unsignedBigInteger('seats_available')->comment("Numbers of seat available");;
             $table->timestamps();
 
-            $table->foreign('terminal_id')->references('id')->on('terminals')->onDelete('cascade');
-            $table->foreign('service_id')->references('id')->on('services')->onDelete('cascade');
-            $table->foreign('bus_id')->references('id')->on('buses')->onDelete('cascade');
-            $table->foreign('pickup_id')->references('id')->on('pickups')->onDelete('cascade');
-            $table->foreign('destination_id')->references('id')->on('destinations')->onDelete('cascade');
+//            $table->foreign('terminal_id')->references('id')->on('terminals')->onDelete('cascade');
+//            $table->foreign('service_id')->references('id')->on('services')->onDelete('cascade');
+//            $table->foreign('bus_id')->references('id')->on('buses')->onDelete('cascade');
+//            $table->foreign('pickup_id')->references('id')->on('pickups')->onDelete('cascade');
+//            $table->foreign('destination_id')->references('id')->on('destinations')->onDelete('cascade');
         });
     }
 

@@ -254,6 +254,9 @@ return [
         'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+        'PdfReport' => Jimmyjs\ReportGenerator\Facades\PdfReportFacade::class,
+        'ExcelReport' => Jimmyjs\ReportGenerator\Facades\ExcelReportFacade::class,
+        'CSVReport' => Jimmyjs\ReportGenerator\Facades\CSVReportFacade::class,
 //        'PDF' => Barryvdh\Snappy\Facades\SnappyPdf::class,
 //        'SnappyImage' => Barryvdh\Snappy\Facades\SnappyImage::class,
 

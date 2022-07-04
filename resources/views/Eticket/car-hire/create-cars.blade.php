@@ -191,6 +191,14 @@
                               </div>
                           </div>
                       </div>
+                        <div class="row">
+                            <div class="col-md-6 colm-sm-6 col-lg-6 col-xl-6 col-xs-6">
+                                <div class="form-group">
+                                    <label for="self_drive">Enable Self Drive</label>
+                                    <input type="checkbox"  name="self_drive" id="self_drive"  >
+                                </div>
+                            </div>
+                        </div>
 
 
                     </div>

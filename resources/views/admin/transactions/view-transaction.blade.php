@@ -32,9 +32,9 @@
             <div class="col-md-12">
                 <div class="bus_event ">
                     @if($transaction->status == 'Pending')
-                    <div class="schedules">
-                        <a href="{{url('admin/approve-payment/'.$transaction->id)}}" class="btn btn-success">Approve Transaction</a>
-                    </div>
+                        <div class="schedules">
+                            <a href="{{url('admin/approve-payment/'.$transaction->id)}}" class="btn btn-success">Approve Transaction</a>
+                        </div>
                     @endif
                 </div>
             </div>

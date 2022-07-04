@@ -3,7 +3,7 @@
         <div class="row" style="padding-bottom: 10px;">
             <div class="col-sm-6 d-md-flex flex-column align-content-center align-self-center">
                 <h3 class="text-center" style="color: rgb(17,15,126);margin-top: 10px;"><strong>GET UPDATES AND MORE</strong></h3>
-                <p class="text-center">THOUGHFUL THOUGHT TO YOU INBOX</p>
+                <p class="text-center">THOUGHTFUL THOUGHT TO YOU INBOX</p>
             </div>
             <div class="col-sm-6 d-inline-flex d-md-flex align-items-md-center" id="divemail">
                 <form><input type="email" id="emailinput" placeholder="YOUR EMAIL" inputmode="email" style="background: rgb(238,238,238);border-top-style: none;border-right-style: none;border-left-style: none;height: 41px;width: 250px;"></form>
@@ -14,6 +14,7 @@
 </section>
 <section style="background: #262466;">
     <footer id="footerid" style="background: url('{{ asset('/new-assets/img/footerimage.png')}}')  center / cover no-repeat, #20225f;padding: 40px;padding-bottom: 40px;border-style: none;border-top-width: 15px;max-height: auto;">
+
         <div class="container" style="padding-bottom: 20px;">
             <div class="row d-flex d-md-flex">
                 <div class="col">
@@ -57,6 +58,7 @@
                     </ul>
                 </div>
             </div>
+
             <div class="row" style="margin-top: 57px;">
                 <div class="col">
                     <p style="color: var(--bs-gray-100);">Copyright <?php echo date('Y'); ?> by E-transit Africa</p>
@@ -67,6 +69,12 @@
             </div>
         </div>
     </footer>
+    <div style="position:relative; top:-4em; display:flex;justify-content: flex-end; margin-right:10px;">
+{{--        85264318721--}}
+        <a href="https://api.whatsapp.com/send?phone=2349025318877" target="_blank">
+            <img src="{{asset('images/whatsapp.png')}}" />
+        </a>
+    </div>
 </section>
 <div class="offcanvas offcanvas-end" tabindex="-1" data-bs-scroll="true" data-bs-backdrop="false" id="offcanvas-1">
     <div class="offcanvas-header">
@@ -115,33 +123,33 @@
             <a href="#"><i class="fa fa-google-plus d-md-flex justify-content-center align-items-center align-content-center" style="padding-top: 5px;font-size: 25px;"></i></a></p>
     </div>
 </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+{{--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>--}}
 <script src="{{asset('new-assets/owlcarousel/owl.carousel.min.js')}}"></script>
 <script src="{{asset('new-assets/bootstrap/js/bootstrap.min.js')}}"></script>
 <script src="{{asset('new-assets/js/Off-Canvas-Sidebar-Drawer-Navbar.js')}}"></script>
 <script src="{{asset('new-assets/js/Off-Canvas-Sidebar-Drawer-Navbar-1.js')}}"></script>
 <script src="https://unpkg.chttps://unpkg.com/@bootstrapstudio/bootstrap-better-nav/dist/bootstrap-better-nav.min.jsom/@bootstrapstudio/bootstrap-better-nav/dist/bootstrap-better-nav.min.js" type="module"></script>
 <script src="https://unpkg.com/@bootstrapstudio/bootstrap-better-nav/dist/bootstrap-better-nav.min.js" type="module"></script>
-<script src="{{asset('new-assets/js/Ultimate-Testimonial-Slider-BS5.js')}}"></script>
+{{--<script src="{{asset('new-assets/js/Ultimate-Testimonial-Slider-BS5.js')}}"></script>--}}
 <script type="text/javascript">
     $(document).ready(function(){
-        $(".owl-carousel").owlCarousel({
-            responsiveClass:true,
-            responsive:{
-                0:{
-                items:1,
-                nav:true
-                },
-                568:{
-                items:3,
-                nav: true
-                },
-                768 :{
-                items:,
-                nav:true,
-                }
-            }
-        });
+        // $(".owl-carousel").owlCarousel({
+        //     responsiveClass:true,
+        //     responsive:{
+        //         0:{
+        //         items:1,
+        //         nav:true
+        //         },
+        //         568:{
+        //         items:3,
+        //         nav: true
+        //         },
+        //         768 :{
+        //         items:,
+        //         nav:true,
+        //         }
+        //     }
+        // });
     });
 
     function busnav()

@@ -307,6 +307,7 @@ class Payment extends Controller
                 'name' =>  $data['data']['meta']['user_name'],
                 'service' => 'Bus Booking',
                 'transaction' => $transactions,
+                'reference' => $transactions->reference,
                 'seatTrackers' => $seatTracker,
                 'adultFare' => $adultFare,
                 'childFare'=>$childrenFare,
@@ -381,8 +382,15 @@ class Payment extends Controller
 
             $maildata = [
                 'name' =>  $data['data']['meta']['user_name'],
+                'reference' => $transactions->reference,
                 'service' => 'Car Hire',
                 'transaction' => $transactions,
+                'plan' => $carPlan->amount,
+                'payment_method' => 'cash payment',
+                'total_payment' => $data['data']['amount'],
+                'pickup_date' => $carHistory->returnDate->format('Y-m-d'),
+                'pickup_time' => $carHistory->returnTime->format('h:i:s'),
+                'number_of_days' => $carHistory->days
 
             ];
 

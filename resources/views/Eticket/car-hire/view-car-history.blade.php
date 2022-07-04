@@ -116,6 +116,8 @@
                     <hr>
                     <h6>Expected Return Time  : {{$carHistory->returnTime->format('H:i:s')}}</h6>
                     <hr>
+                    <h6>Self Drive Option  : {{$carHistory->self_drive == 'active' ? 'True' : 'False'}}</h6>
+                    <br>
                     @if(!is_null($carHistory->dropOffDate))
                     <h6>Drop Off Date : {{$carHistory->dropOffDate->format('Y F d')}} </h6>
                     <hr>

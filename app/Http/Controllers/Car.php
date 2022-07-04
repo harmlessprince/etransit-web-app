@@ -412,7 +412,8 @@ class Car extends Controller
                     'date' => 'required',
                     'time' => 'required',
                     'days' => 'required',
-                    'number_of_cars' => 'sometimes'
+                    'pickup_address' => 'required',
+                    'self_drive' => 'sometimes'
                 ]);
 
 
@@ -493,10 +494,10 @@ class Car extends Controller
                     $recordOperation->date          =  $data['date'];
                     $recordOperation->time          =  $data['time'];
                     $recordOperation->days          =  abs($data['days']);
-                    $recordOperation->number_of_cars = abs(request()->number_of_cars);
+                    $recordOperation->pickup_address = $data['pickup_address'];
                     $recordOperation->returnTime    =  $returnTime ;
                     $recordOperation->returnDate    =  $returnDate;
-
+                    $recordOperation->self_drive    =  !is_null($request->self_drive) == "on" ? 'active' : 'inactive';
                     $recordOperation->save();
                     $recordOperation->with('carplan','car')->first();
 
@@ -520,6 +521,7 @@ class Car extends Controller
     {
 
        $carHistory         =  CarHistory::where('id', $history_id)->first();
+
        $fetchService_id    =  HiredCars::where('id', $carHistory->car_id)->select('service_id')->first();
        $checkServicePlan   =  CarPlan::where('id' , $carHistory->car_plan_id)->first();
 
@@ -548,7 +550,14 @@ class Car extends Controller
         $maildata = [
             'name' => auth()->user()->full_name,
             'service' => 'Car Hire',
-            'transaction' => $transaction
+            'reference' => $transaction->reference,
+            'transaction' => $transaction,
+            'plan' => $checkServicePlan->amount,
+            'payment_method' => 'cash payment',
+            'total_payment' =>$checkServicePlan->amount * $carHistory->days,
+            'pickup_date' => $carHistory->returnDate->format('Y-m-d'),
+            'pickup_time' => $carHistory->returnTime->format('h:i:s'),
+            'number_of_days' => $carHistory->days
         ];
 
         $email = auth()->user()->email;
@@ -564,7 +573,9 @@ class Car extends Controller
     public function onTrip()
     {
 
-        $carsOnTripCurrently = CarHistory::where('available_status','On Trip')->with('car','carplan','user')->orderby('returnDate','desc')->get();
+        $carsOnTripCurrently = CarHistory::where('available_status','On Trip')
+                                                ->with('car','carplan','user')
+                                                ->orderby('returnDate','desc')->get();
 
         return view('admin.cars.on-trip', compact('carsOnTripCurrently'));
     }
@@ -573,8 +584,7 @@ class Car extends Controller
     public function tripDetails($carhistory_id)
     {
 
-        $car = CarHistory::where('id', $carhistory_id)->with('user','carplan','car')
-                                                                                ->first();
+        $car = CarHistory::where('id', $carhistory_id)->with('user','carplan','car')->first();
 
         return view('admin.cars.details',compact('car'));
     }

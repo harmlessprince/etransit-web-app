@@ -15,6 +15,7 @@ use App\Http\Controllers\Eticket\EticketSchedule;
 use App\Http\Controllers\Eticket\EticketTerminal;
 use App\Http\Controllers\Eticket\ManageBus;
 use App\Http\Controllers\Eticket\ManageRoles;
+use App\Http\Controllers\Eticket\ManageTransaction;
 use App\Http\Controllers\Eticket\StaffMgt;
 use App\Http\Controllers\Eticket\TourPackage;
 use App\Http\Controllers\Ferry;
@@ -53,6 +54,10 @@ use App\Http\Controllers\Vehicle;
 Auth::routes(['verify' => true]);
 //normal  user routes
 Route::get('/', [Page::class ,'index'])->name('home');
+
+Route::get('test/pdf' , function(){
+    return view('pdf.test-pdf');
+});
 
 //Route::get('/login',[Login::class , 'login']);
 //Route::get('/register',[Login::class, 'register']);
@@ -96,6 +101,7 @@ Route::post('train/bookings',[Train::class ,'checkSchedule']);
 //partner page
 Route::get('partners',[\App\Http\Controllers\Partner::class ,'partnerPage']);
 Route::post('store/become-partners',[\App\Http\Controllers\Partner::class , 'becomePartners']);
+Route::get('/admin/export-transaction', [Transaction::class , 'exportCsv']);
 
 
 //check PDF
@@ -244,6 +250,7 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::get('view-transaction/{transaction_id}',[Transaction::class ,'viewTransaction']);
         //aprove transaction
         Route::get('approve-payment/{transaction_id}',[Transaction::class , 'approveTransaction']);
+//        Route::get('/export-transaction', [Transaction::class , 'exportCsv']);
 
 
 
@@ -371,6 +378,8 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::get('/customer/{customer_id}', [Customer::class , 'getCustomer']);
         Route::get('suspend-user/{customer_id}' , [Customer::class , 'suspendUser']);
         Route::get('activate-user/{customer_id}' , [Customer::class , 'activateUser']);
+        Route::get('view-customer-transaction/{customer_id}' , [Customer::class , 'customerTransaction']);
+        Route::get('fetch-customer-transaction-history/{customer_id}' , [Customer::class , 'fetchCustomerTransaction']);
 
         //manage operators
         Route::get('manage/operators',[Operator::class , 'operators']);
@@ -479,7 +488,8 @@ Route::prefix('e-ticket')->name('e-ticket.')->group(function(){
 
         //schedule trip for buses
         Route::get('/schedule/{bus_id}',[ManageBus::class , 'scheduleTrip']);
-        Route::post('add-eticket-schedule', [EticketSchedule::class , 'addEticketSchedule'])->name('add-eticket-schedule');
+        Route::post('add-eticket-schedule', [EticketSchedule::class , 'addEticketSchedule']);
+//        ->name('add-eticket-schedule');
         Route::get('all-scheduled-trip',[EticketSchedule::class , 'allScheduledTrip']);
         Route::get('fetch-scheduled-trip', [EticketSchedule::class, 'fetchAllSchedules'])->name('fetch-scheduled-trip');
         Route::get('view-each-schedule/{schedule_id}' , [EticketSchedule::class , 'viewEachSchedule']);
@@ -513,6 +523,9 @@ Route::prefix('e-ticket')->name('e-ticket.')->group(function(){
         Route::put('store-update/{staff_id}', [StaffMgt::class , 'updateStaff']);
         Route::get('view-staff/{staff_id}', [StaffMgt::class , 'viewStaff']);
         Route::get('terminate/{staff_id}/appointment',[StaffMgt::class ,'terminateAppointment']);
+        Route::get('enable/{staff_id}/appointment',[StaffMgt::class ,'enableAppointment']);
+        Route::get('assign-role/{staff_id}/',[StaffMgt::class ,'assignRole']);
+        Route::post('assign-staff-to-role/{staff_id}',[StaffMgt::class ,'assignUserRole']);
 
 
         //mage car hire routes
@@ -564,6 +577,10 @@ Route::prefix('e-ticket')->name('e-ticket.')->group(function(){
 
         Route::get('view-role/{role_id}', [ManageRoles::class ,'viewRole'])->name('view-role');
         Route::post('add-permissions-to-role', [ManageRoles::class ,'addPermisisonToRole'])->name('add-permission-to-role');
+
+        //transaction
+        Route::get('transactions',[ManageTransaction::class , 'allTransactions']);
+        Route::get('view-transaction/{transaction_id}',[ManageTransaction::class  ,'viewTransaction']);
 
 
     });

@@ -177,7 +177,7 @@
                             <div class="col align-self-center">
                                 <h5 class="text-start">{{$schedule->terminal->terminal_name ?? null}}</h5>
                                 <p class="text-start" style="font-size: 17px;">
-                                    <span>{{$schedule->pickup->location}} </span><span>&nbsp;&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-arrow-right">
+                                    <span>{{$schedule->pickup->location ?? null}} </span><span>&nbsp;&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16" class="bi bi-arrow-right">
                                                 <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"></path>
                                             </svg>&nbsp;&nbsp;</span><span>{{$schedule->destination->location}} </span></p>
                                 <label class="form-label" style="background: var(--bs-orange);border-radius: 6px;">&nbsp;&nbsp;<i class="fa fa-star"></i> A\C&nbsp; &nbsp;</label>

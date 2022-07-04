@@ -3,12 +3,18 @@
 namespace App\Http\Controllers\Eticket;
 
 use App\Http\Controllers\Controller;
+use App\Mail\EticketUser;
+use App\Models\Eticket;
 use App\Models\Staff;
 
 use App\Models\Tenant;
 use Illuminate\Http\Request;
 use DataTables;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 use RealRashid\SweetAlert\Facades\Alert;
+use Spatie\Permission\Models\Role;
 
 class StaffMgt extends Controller
 {
@@ -115,6 +121,67 @@ class StaffMgt extends Controller
             'termination_date' => now(),
         ]);
         Alert::success('Success ', 'Staff Appointment terminated successfully');
+        return back();
+    }
+
+
+    public function enableAppointment($staff_id)
+    {
+        $staff = Staff::find($staff_id);
+
+        $staff->update([
+            'termination_date' => null,
+        ]);
+        Alert::success('Success ', 'Staff Appointment has been approved successfully');
+        return back();
+    }
+
+    public function assignRole($staff_id)
+    {
+        $staff = Staff::find($staff_id);
+        $roles =  Role::where(['guard_name' => 'e-ticket'])->where('tenant_id', session()->get('tenant_id'))->get();
+
+
+        return view('Eticket.staff.assign-role',compact('staff','roles'));
+    }
+
+    public function assignUserRole(Request $request , $staff_id)
+    {
+
+        request()->validate([
+            'role' => 'required|integer',
+        ]);
+
+        $staff = Staff::find($staff_id);
+        $tenant = Tenant::where('id',session()->get('tenant_id'))->first();
+
+        $password = Str::random(6);
+
+        if($staff)
+        {
+            $eticket = new Eticket;
+            $eticket->full_name = $staff->full_name;
+            $eticket->email = $staff->email;
+            $eticket->password = Hash::make($password);
+            $eticket->tenant_id = session()->get('tenant_id');
+            $eticket->save();
+        }
+
+
+        $role =  Role::where(['guard_name' => 'e-ticket'])->where('tenant_id',$tenant->id)->first();
+
+        $eticket->assignRole($role);
+
+        $maildata = [
+            'name' =>  $staff->full_name,
+            'email' => $staff->email,
+            'password' => $password,
+        ];
+
+        Mail::to($staff->email)->send(new EticketUser($maildata));
+
+        Alert::success('Success ', 'User has been assign a role successfully');
+
         return back();
     }
 }

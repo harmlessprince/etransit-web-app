@@ -9,6 +9,7 @@ use App\Models\SeatTracker;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use DataTables;
+use Illuminate\Support\Facades\Log;
 
 class EticketSchedule extends Controller
 {
@@ -90,7 +91,7 @@ class EticketSchedule extends Controller
             return response()->json(['success' => true , 'message' => 'Trip has been scheduled successfully']);
         } catch (\Exception $e) {
             DB::rollback();
-//            $e->getMessage()
+//            Log::info($e->getMessage());
 
             return response()->json(['success' => false , 'message' =>  'Could not save the event .Try again']);
 

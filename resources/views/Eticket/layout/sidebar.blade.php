@@ -54,11 +54,18 @@
 {{--                            </ul>--}}
 {{--                        </li>--}}
 {{--                    @endif--}}
+                    <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"></i><span>Transaction</span></a>
+                        <ul class="nav-submenu menu-content">
+                            <li><a href="{{url('/e-ticket/transactions')}}">Manage Transactions</a></li>
+                        </ul>
+                    </li>
                     <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"></i><span>Staff Management</span></a>
                         <ul class="nav-submenu menu-content">
                             <li><a href="{{url('/e-ticket/staffs')}}">Manage Staff</a></li>
                         </ul>
                     </li>
+
+
 
                     <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"></i><span>Roles Management</span></a>
                         <ul class="nav-submenu menu-content">
