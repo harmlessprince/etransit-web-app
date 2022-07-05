@@ -149,7 +149,8 @@ class Payment extends Controller
 
 
         //find the schedule to get the actual amount stored in the database
-        $tripSchedule = \App\Models\Schedule::where('id', $scheduleId)->select('fare_adult', 'fare_children', 'id', 'seats_available','departure_date','return_date','bus_id','return_uuid_tracker')->first();
+        $tripSchedule = \App\Models\Schedule::where('id', $scheduleId)->select('fare_adult', 'fare_children', 'id', 'seats_available','departure_date',
+            'return_date','bus_id','return_uuid_tracker','pickup_id','destination_id')->with('destination','pickup')->first();
         !$tripSchedule ? abort('404') : '';
         $adultFare = (double)$tripSchedule->fare_adult;
         $childrenFare = (double)$tripSchedule->fare_children;
@@ -316,6 +317,8 @@ class Payment extends Controller
                 'childrenCount' => $childrenCount,
                 'tripSchedule' => $tripSchedule,
                 'totalAmount' => $data['data']['amount'],
+                'destination' =>  $tripSchedule->destination->location,
+                'pickup'=>  $tripSchedule->pickup->location
             ];
             $email = $data['data']['meta']['user_email'];
 
