@@ -290,9 +290,10 @@ class Tour extends Controller
     private function handlePayment($amount , $serviceId , $trip)
     {
         DB::beginTransaction();
+        $reference = Reference::generateTrnxRef();
         $service = Service::where('id', 8)->firstorfail();
         $transactions = new \App\Models\Transaction();
-        $transactions->reference = Reference::generateTrnxRef();
+        $transactions->reference = $reference;
         $transactions->amount = (double) $amount;
         $transactions->status = 'Pending';
         $transactions->description = 'Cash Payment for '. $service->name . ' made on ' . now();
@@ -308,7 +309,13 @@ class Tour extends Controller
         $maildata = [
             'name' =>  $data['name'] ,
             'service' => 'Tour Package',
-            'transaction' => $transactions
+            'transaction' => $transactions,
+            'reference'=> $reference,
+            'tour_name' => $trip->name,
+            'location' => $trip->location,
+            'tour_date' => $trip->tour_date->format('M-d-Y'),
+            'tour_time' => $trip->tour_time->format('h:i:s'),
+            'totalAmount' => $amount
         ];
 
         Mail::to($data["email"])->send(new TourPackages($maildata));

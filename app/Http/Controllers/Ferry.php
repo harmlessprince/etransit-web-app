@@ -207,4 +207,55 @@ class Ferry extends Controller
     {
 
     }
+
+
+    public function editFerryType($id)
+    {
+
+        $ferryType =  FerryType::where('id',$id)->first();
+
+
+        return view('admin.ferry.edit-ferry-type' , compact('ferryType'));
+    }
+
+    public function updateFerryType(Request $request , $id)
+    {
+        $request->validate([
+            'ferry_type' => 'required'
+        ]);
+
+        $ferryTypeEdit = FerryType::where('id',$id)->first();
+        $ferryTypeEdit->update([
+            'name' => $request->ferry_type
+        ]);
+
+        Alert::success('Success ', 'Ferry Type Updated successfully');
+        return back();
+
+    }
+
+    public function editFerryLocation($id)
+    {
+
+        $ferryLocation =  FerryLocation::where('id',$id)->first();
+
+
+        return view('admin.ferry.edit-ferry-location' , compact('ferryLocation'));
+    }
+
+    public function updateFerryLocation(Request $request , $id)
+    {
+        $request->validate([
+            'ferry_location' => 'required'
+        ]);
+
+        $ferryTypeEdit = FerryLocation::where('id',$id)->first();
+        $ferryTypeEdit->update([
+            'name' => $request->ferry_location
+        ]);
+
+        Alert::success('Success ', 'Ferry Location  Updated successfully');
+        return back();
+
+    }
 }

@@ -181,8 +181,9 @@ class ParcelMgt extends Controller
     private function handlePayment($amount , $serviceId , $parcel)
     {
         DB::beginTransaction();
+        $reference = Reference::generateTrnxRef();
         $transactions = new \App\Models\Transaction();
-        $transactions->reference = Reference::generateTrnxRef();
+        $transactions->reference = $reference;
         $transactions->amount = (double) $amount;
         $transactions->status = 'Pending';
         $transactions->description = 'Cash Payment';
@@ -194,11 +195,16 @@ class ParcelMgt extends Controller
 
         $data["email"] =  auth()->user()->email;
         $data['name']  =  auth()->user()->full_name;
+        $findParcel = DeliveryParcel::where('id', $parcel->id)->with('city','delivery_city')->firstorfail();
 
         $maildata = [
             'name' =>   $data['name'] ,
             'service' => 'Parcel delivery Service',
-            'transaction' => $transactions
+            'transaction' => $transactions,
+            'reference' => $reference,
+            'totalAmount' => $amount,
+            'delivery_city' => $findParcel->delivery_city->name,
+            'pickup_city' => $findParcel->city->name
         ];
 
         $email =  $data["email"];

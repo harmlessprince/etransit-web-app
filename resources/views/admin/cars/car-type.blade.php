@@ -150,7 +150,9 @@
                                 <tr>
                                     <th scope="row">{{$index+1}}</th>
                                     <td>{{$carType->name}}</td>
-                                    <td>Edit Delete</td>
+                                    <td>
+                                        <a href="{{url('/admin/edit/car_type/'.$carType->id)}}" class="bnt btn-success btn-sm">Edit</a>
+                                    </td>
                                 </tr>
                             @endforeach
                             </tbody>

@@ -87,7 +87,6 @@
                                 </select>
                             </div>
 
-
                             <div class="payment_button" id="online_payment">
                                 <form method="POST" action="{{ route('pay') }}" id="paymentForm">
                                     {{ csrf_field() }}

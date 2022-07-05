@@ -362,8 +362,9 @@ class BoatCruise extends Controller
     private function handlePayment($amount , $serviceId , $trip)
     {
         DB::beginTransaction();
+        $reference = Reference::generateTrnxRef();
         $transactions = new \App\Models\Transaction();
-        $transactions->reference = Reference::generateTrnxRef();
+        $transactions->reference = $reference;
         $transactions->amount = (double) $amount;
         $transactions->status = 'Pending';
         $transactions->description = 'Cash Payment of ' . $amount .' paid successfully at ' . now()->format('Y F d : h:i:s');
@@ -381,7 +382,14 @@ class BoatCruise extends Controller
         $maildata = [
             'name' => auth()->user()->full_name,
             'service' => 'Boat Cruise',
-            'transaction' => $transactions
+            'transaction' => $transactions,
+            'reference' => $reference,
+            'totalAmount' => $amount,
+            'cruise_name' => $trip->cruise_name,
+            'cruise_destination' => $trip->cruiselocation->destination,
+            'boat_name' => $trip->boat->name,
+            'departure_date' => $trip->departure_date->format('M-d-Y'),
+            'departure_time' => $trip->departure_time->format('h:i:s')
         ];
 
         $email = auth()->user()->email;
@@ -389,6 +397,31 @@ class BoatCruise extends Controller
         Mail::to($email)->send(new BoatCruiseBooking($maildata));
 
         DB::commit();
+
+    }
+
+
+    public function editBoatLocation($id)
+    {
+
+        $boatLocation =  CruiseDestination::where('id',$id)->first();
+
+        return view('admin.boat-cruise.edit-boat-location' , compact('boatLocation'));
+    }
+
+    public function updateBoatLocation(Request $request , $id)
+    {
+        $request->validate([
+            'boat_location' => 'required'
+        ]);
+
+        $carTypeEdit =  CruiseDestination::where('id',$id)->first();
+        $carTypeEdit->update([
+            'destination' => $request->boat_location
+        ]);
+
+        Alert::success('Success ', 'Boat Location Updated successfully');
+        return back();
 
     }
 

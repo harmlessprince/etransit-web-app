@@ -279,6 +279,12 @@ Route::prefix('admin')->name('admin.')->group(function(){
 
         Route::get('on-trips-car' ,[Car::class , 'onTripCars']);
 
+        Route::get('edit/car_class/{id}',[Car::class , 'editCarClass']);
+        Route::put('update_car_class/{id}',[Car::class ,'updateCarClass']);
+
+        Route::get('edit/car_type/{id}',[Car::class , 'editCarType']);
+        Route::put('update_car_type/{id}',[Car::class ,'updateCarType']);
+
 
         //manage boat cruise
         Route::get("/manage/boat-cruise" , [BoatCruise::class , 'index']);
@@ -295,6 +301,9 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::put('/update/{boat_id}/boat' ,[BoatCruise::class , 'updateBoat']);
         Route::get('view-boat-schedules/{boat_id}', [BoatCruise::class , 'viewBoatSchedules']);
         Route::get('view-boat-schedule-payment/{schedule_id}', [BoatCruise::class ,'viewBoatSchedulesPaymentHistory']);
+
+        Route::get('edit/boat_location/{id}',[BoatCruise::class , 'editBoatLocation']);
+        Route::put('update_boat_location/{id}',[BoatCruise::class ,'updateBoatLocation']);
 
         //tour management
         Route::get('manage/tour',[Tour::class , 'manageTour']);
@@ -336,6 +345,13 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::post('/schedule/ferry-event',[Ferry::class , 'scheduleEvent']);
         Route::get('view-ferry-schedules/{ferry_id}',[Ferry::class , 'viewFerryScheduleEvent']);
         Route::get('view-ferry-booking-schedule/{schedule_id}', [Ferry::class , 'viewFerryBookings']);
+
+
+        Route::get('edit/ferry_type/{id}',[Ferry::class , 'editFerryType']);
+        Route::put('update_ferry_type/{id}',[Ferry::class ,'updateFerryType']);
+
+        Route::get('edit/ferry_location/{id}',[Ferry::class , 'editFerryLocation']);
+        Route::put('update_ferry_location/{id}',[Ferry::class ,'updateFerryLocation']);
 
         //manage train
         Route::get('/manage/train'  ,[Train::class , 'index']);

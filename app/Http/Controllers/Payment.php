@@ -8,8 +8,10 @@ use App\Mail\BoatCruiseBooking;
 use App\Mail\BusBooking;
 use App\Mail\CarHire;
 use App\Mail\TourPackages;
+use App\Models\BoatTrip;
 use App\Models\CarHistory;
 use App\Models\Schedule;
+use App\Models\Tour as TourPackage;
 use App\Models\TrainSchedule;
 use App\Models\TrainSeatTracker;
 use App\Models\User;
@@ -411,8 +413,9 @@ class Payment extends Controller
     public function boatCruisePayment($data)
     {
         DB::beginTransaction();
+        $reference = Reference::generateTrnxRef();
         $transactions = new \App\Models\Transaction();
-        $transactions->reference = Reference::generateTrnxRef();
+        $transactions->reference = $reference;
         $transactions->trx_ref = $data['data']['tx_ref'];
         $transactions->amount = (double) $data['data']['amount'];
         $transactions->status = 'Successful';
@@ -426,10 +429,19 @@ class Payment extends Controller
         $data["email"] =  $data['data']['meta']['user_email'];
         $data['name']  =  $data['data']['meta']['user_name'];
 
+        $trip =  BoatTrip::where('id', $data['data']['meta']['boatTrip_id'])->with('boat','cruiselocation')->firstorfail();
+
         $maildata = [
-            'name' =>  $data['name'],
+            'name' => $data['data']['meta']['user_name'],
             'service' => 'Boat Cruise',
-            'transaction' => $transactions
+            'transaction' => $transactions,
+            'reference' => $reference,
+            'totalAmount' => $data['data']['amount'],
+            'cruise_name' => $trip->cruise_name,
+            'cruise_destination' => $trip->cruiselocation->destination,
+            'boat_name' => $trip->boat->name,
+            'departure_date' => $trip->departure_date->format('M-d-Y'),
+            'departure_time' => $trip->departure_time->format('h:i:s')
         ];
 
         $email =   $data["email"];
@@ -444,18 +456,20 @@ class Payment extends Controller
         DB::beginTransaction();
 
         $tripSchedule = \App\Models\FerryTrip::where('id', $data['data']['meta']['fetchFerryScheduleDetailsID'])
-            ->select('amount_adult', 'amount_children', 'id', 'number_of_passengers', 'ferry_id')
-            ->first();
+                                        ->select('amount_adult', 'amount_children', 'id', 'number_of_passengers', 'ferry_id'
+                                        ,'event_date','event_time','ferry_pick_up_id','ferry_destination_id')
+                                        ->with('destination','pickup')
+                                        ->first();
 
         $service = \App\Models\Service::where('id', $data['data']['meta']['service_id'])->first();
 
         $childrenCountFerry    = (int)   $data['data']['meta']['childrenCountFerry'];
         $adultCountFerry       = (int)   $data['data']['meta']['adultCountFerry'];
-
+        $reference = Reference::generateTrnxRef();
 
         $transactions = new \App\Models\Transaction();
 
-        $transactions->reference     = Reference::generateTrnxRef();
+        $transactions->reference     = $reference;
         $transactions->amount        = (double) $data['data']['amount'];
         $transactions->trx_ref       = $data['data']['tx_ref'];
         $transactions->status        = 'Successful';
@@ -465,13 +479,23 @@ class Payment extends Controller
         $transactions->ferry_trip_id = $data['data']['meta']['ferry_trip_id'];
         $transactions->save();
 
-        $data["email"] =  auth()->user()->email;
-        $data['name']  =  auth()->user()->full_name;
+        $data["email"] =  $data['data']['meta']['email'];
+        $data['name']  =  $data['data']['meta']['user_name'];
 
         $maildata = [
-            'name' => auth()->user()->full_name,
+            'name' => $data['data']['meta']['user_name'],
             'service' => 'Ferry Booking',
-            'transaction' => $transactions
+            'transaction' => $transactions,
+            'reference' => $reference,
+            'totalAmount' =>  $data['data']['amount'],
+            'childrenCount' =>  $data['data']['meta']['childrenCountFerry'],
+            'adultCount' => $data['data']['meta']['adultCountFerry'],
+            'childFare' =>  $tripSchedule->amount_children,
+            'adultFare' =>  $tripSchedule->amount_adult,
+            'event_date' => $tripSchedule->event_date->format('M-d-Y'),
+            'event_time' => $tripSchedule->event_time,
+            'pickup' => $tripSchedule->pickup->locations,
+            'destination' => $tripSchedule->destination->locations
         ];
 
         $email = $data["email"];
@@ -509,8 +533,9 @@ class Payment extends Controller
     public function tourPackagePayment($data)
     {
         DB::beginTransaction();
+        $reference = Reference::generateTrnxRef();
         $transactions = new \App\Models\Transaction();
-        $transactions->reference = Reference::generateTrnxRef();
+        $transactions->reference = $reference;
         $transactions->trx_ref = $data['data']['tx_ref'];
         $transactions->amount = (double) $data['data']['amount'];
         $transactions->status = 'Successful';
@@ -523,10 +548,18 @@ class Payment extends Controller
         $data["email"] =  $data['data']['meta']['user_email'];
         $data['name']  =  $data['data']['meta']['user_name'];
 
+        $trip = TourPackage::where('id',  $data['data']['meta']['tour_id'])->firstorfail();
+
         $maildata = [
             'name' =>  $data['name'] ,
             'service' => 'Tour Package',
-            'transaction' => $transactions
+            'transaction' => $transactions,
+            'reference'=> $reference,
+            'tour_name' => $trip->name,
+            'location' => $trip->location,
+            'tour_date' => $trip->tour_date->format('M-d-Y'),
+            'tour_time' => $trip->tour_time->format('h:i:s'),
+            'totalAmount' => $data['data']['amount'],
         ];
 
         Mail::to($data["email"])->send(new TourPackages($maildata));
