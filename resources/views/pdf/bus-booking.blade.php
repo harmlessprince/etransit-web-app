@@ -201,7 +201,7 @@
                                             <tbody>
                                             <tr>
                                                 <td>
-                                                    Lagos - Ibadan<br>
+                                                    {{$data['pickup']}} - {{$data['destination']}}<br>
                                                     @if($data['adultCount'] > 0)
                                                     {{$data['adultCount']}} Adult<br>
                                                     @endif
