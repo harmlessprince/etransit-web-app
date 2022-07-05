@@ -524,8 +524,8 @@ Route::prefix('e-ticket')->name('e-ticket.')->group(function(){
         Route::get('view-staff/{staff_id}', [StaffMgt::class , 'viewStaff']);
         Route::get('terminate/{staff_id}/appointment',[StaffMgt::class ,'terminateAppointment']);
         Route::get('enable/{staff_id}/appointment',[StaffMgt::class ,'enableAppointment']);
-        Route::get('assign-role/{staff_id}/',[StaffMgt::class ,'assignRole']);
-        Route::post('assign-staff-to-role/{staff_id}',[StaffMgt::class ,'assignUserRole']);
+        Route::get('assign-role/{staff_id}/',[StaffMgt::class ,'assignRole'])->name('assign-role');
+        Route::post('assign-staff-to-role/{staff_id}',[StaffMgt::class ,'assignUserRole'])->name('add-role');
 
 
         //mage car hire routes
@@ -572,6 +572,9 @@ Route::prefix('e-ticket')->name('e-ticket.')->group(function(){
 
         //manage roles
         Route::get('roles',[ManageRoles::class , 'roles'])->name('all-roles');
+        Route::get('add-new-role',[ManageRoles::class ,'addNewRole'])->name('add-new-role');
+
+        Route::post('store-new-role',[ManageRoles::class ,'storeRole'])->name('store-new-role');
 
         Route::get('fetch-roles',[ManageRoles::class , 'fetchRoles'])->name('fetch-roles');
 
