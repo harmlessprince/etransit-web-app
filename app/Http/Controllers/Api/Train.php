@@ -65,7 +65,52 @@ class Train extends Controller
                                                  $query->with('trainclass')->get();
                               }])->get();
 
-        return  response()->json(['success' => true , 'data' => compact('trainSeats',)]);
+
+
+
+        $trainSeatObjectFirstClass = new \stdClass();
+        $trainSeatObjectEconomyClass = new \stdClass();
+        $trainSeatObjectBusinessClass = new \stdClass();
+
+        foreach($trainSeats  as $index => $seat) {
+
+            if($seat->trainseat->trainclass->class  == 'First Class')
+            {
+                $trainSeatObjectFirstClass->$index['id'] = $seat->id;
+                $trainSeatObjectFirstClass->$index['coach_type'] = Ucfirst($seat->trainseat->coach_type) . Ucfirst($seat->trainseat->coach_number);
+                $trainSeatObjectFirstClass->$index['class'] = 'First Class';
+                $trainSeatObjectFirstClass->$index['booked_status'] = $seat->booked_status;
+
+
+            }elseif($seat->trainseat->trainclass->class  == 'Business Class')
+            {
+                $trainSeatObjectBusinessClass->$index['id'] = $seat->id;
+                $trainSeatObjectBusinessClass->$index['coach_type'] = Ucfirst($seat->trainseat->coach_type) . Ucfirst($seat->trainseat->coach_number);
+                $trainSeatObjectBusinessClass->$index['class'] = 'Business Class';
+                $trainSeatObjectBusinessClass->$index['booked_status'] = $seat->booked_status;
+
+            }elseif($seat->trainseat->trainclass->class  == "Economy")
+            {
+                $trainSeatObjectEconomyClass->$index['id'] = $seat->id;
+                $trainSeatObjectEconomyClass->$index['coach_type'] = Ucfirst($seat->trainseat->coach_type) . Ucfirst($seat->trainseat->coach_number);
+                $trainSeatObjectEconomyClass->$index['class'] = 'Economy';
+                $trainSeatObjectEconomyClass->$index['booked_status'] = $seat->booked_status;
+            }
+
+
+        }
+
+        $trainSeatsPicker['first_class_seat'] = $trainSeatObjectFirstClass;
+        $trainSeatsPicker['business_class_seat'] = $trainSeatObjectBusinessClass;
+        $trainSeatsPicker['economy_class_seat'] = $trainSeatObjectEconomyClass;
+
+        $schedule_id = $train_schedule_id;
+        $tranId      = $train_id;
+//        $trip_type  = $tripTypeId;
+
+        $routeFare = RouteFare::with('terminal','destination_terminal','seatClass')->get();
+
+        return  response()->json(['success' => true , 'data' => compact('trainSeats','trainSeatsPicker','schedule_id','routeFare','tranId')]);
     }
 
 
