@@ -1,486 +1,4 @@
-{{--<style>--}}
-{{--    .receipt_column{--}}
-{{--        display:flex;--}}
-{{--        padding-bottom:20px;--}}
-{{--    }--}}
-
-{{--    .float-right{--}}
-{{--        float: right;--}}
-{{--        display: inline-block--}}
-
-
-{{--    }--}}
-
-{{--    .float-right:after {--}}
-{{--        content: "";--}}
-{{--        display: table;--}}
-{{--        clear: both;--}}
-{{--    }--}}
-{{--    .container{--}}
-{{--        width:100%;--}}
-
-{{--    }--}}
-{{--    .receipt_header {--}}
-{{--        margin-left: 40%;--}}
-{{--    }--}}
-{{--    .receipt_validity{--}}
-{{--        margin-left: 30%;--}}
-{{--    }--}}
-{{--    .barcode_receipt{--}}
-{{--        margin-left: 20%;--}}
-{{--    }--}}
-{{--</style>--}}
-
-{{--<div class="container">--}}
-{{--    <div class="receipt_header receipt_column">--}}
-{{--        <h3>Etransit</h3>--}}
-{{--    </div>--}}
-{{--    <table>--}}
-{{--        <tr>--}}
-{{--            <td>--}}
-{{--                <small>Reference</small>--}}
-{{--            </td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td>--}}
-{{--                <small>{{$data['reference']}}</small>--}}
-{{--            </td>--}}
-{{--        </tr>--}}
-{{--        <tr>--}}
-{{--            <td>--}}
-{{--               <small>Departure Date</small>--}}
-{{--            </td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td>--}}
-{{--               <small>{{$data['tripSchedule']->departure_date->format('Y-m-d')}}</small>--}}
-{{--            </td>--}}
-{{--        </tr>--}}
-{{--        @if($data['tripType'] == 2)--}}
-{{--        <tr>--}}
-{{--            <td><small>Return Date</small></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td><small>{{$data['tripSchedule']->return_date}}</small></td>--}}
-{{--        </tr>--}}
-{{--        <tr>--}}
-{{--            <td><small>Type</small></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td><small>Round Trip</small></td>--}}
-{{--        </tr>--}}
-{{--        @else--}}
-{{--        <tr>--}}
-{{--            <td><small>Type</small></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td><small>One Way</small></td>--}}
-{{--        </tr>--}}
-{{--        @endif--}}
-{{--        @if($data['adultCount'] > 0)--}}
-{{--            <tr>--}}
-{{--                <td><small>Adult</small></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td> <small>{{$data['adultCount']}}</small> </td>--}}
-{{--            </tr>--}}
-{{--            <tr>--}}
-{{--                <td><small>Amount Adult</small></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td><small>{{$data['adultFare']}}</small></td>--}}
-{{--            </tr>--}}
-{{--        @endif--}}
-{{--        @if($data['childrenCount'] > 0)--}}
-{{--            <tr>--}}
-{{--                <td>Child(ren)</td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td><small>{{$data['childrenCount']}}</small></td>--}}
-{{--            </tr>--}}
-{{--            <tr>--}}
-{{--                <td>Amount Child(ren)</td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td></td>--}}
-{{--                <td><small>{{$data['childFare']}}</small></td>--}}
-{{--            </tr>--}}
-{{--        @endif--}}
-{{--        <tr>--}}
-{{--            <td><small>Total</small></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td></td>--}}
-{{--            <td><small>{{number_format($data['totalAmount'])}}</small></td>--}}
-{{--        </tr>--}}
-{{--    </table>--}}
-{{--    <div>--}}
-{{--        <div class="receipt_column">--}}
-{{--            <div >--}}
-{{--                <small>REFERENCE</small>--}}
-{{--            </div>--}}
-{{--            <div class="float-right">--}}
-{{--                <small>{{$data['reference']}}</small>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--        <div class="receipt_column">--}}
-{{--            <div >--}}
-{{--                <small>DEPARTURE DATE</small>--}}
-{{--            </div>--}}
-{{--            <div class="float-right">--}}
-{{--                <small>{{$data['tripSchedule']->departure_date}}</small>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--        @if($data['tripType'] == 2)--}}
-{{--        <div class="receipt_column">--}}
-{{--            <div >--}}
-{{--                <small>RETURN DATE</small>--}}
-{{--            </div>--}}
-{{--            <div class="float-right">--}}
-{{--                <small>{{$data['tripSchedule']->return_date}}</small>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--        <div class="receipt_column">--}}
-{{--            <div>--}}
-{{--                <small>Type</small>--}}
-{{--            </div>--}}
-{{--            <div class="float-right">--}}
-{{--                <small>Round Trip</small>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--        @else--}}
-{{--        <div class="receipt_column">--}}
-{{--            <div>--}}
-{{--                <small>Type</small>--}}
-{{--            </div>--}}
-{{--            <div class="float-right">--}}
-{{--                <small>One Way</small>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--        @endif--}}
-
-{{--       @if($data['adultCount'] > 0)--}}
-{{--        <div class="receipt_column">--}}
-{{--            <div>--}}
-{{--                <small>Adult</small>--}}
-{{--            </div>--}}
-{{--            <div class="transport_amount float-right">--}}
-{{--                <small> {{$data['adultCount']}}</small>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--        @endif--}}
-
-{{--        @if($data['childrenCount'] > 0)--}}
-{{--            <div class="receipt_column">--}}
-{{--                <div>--}}
-{{--                    <small>Adult</small>--}}
-{{--                </div>--}}
-{{--                <div class="transport_amount float-right">--}}
-{{--                    <small> {{$data['childrenCount']}}</small>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        @endif--}}
-{{--        @if($data['adultCount'] > 0)--}}
-{{--            <div class="receipt_column">--}}
-{{--                <div>--}}
-{{--                    <small>Amount (Adult)</small>--}}
-{{--                </div>--}}
-{{--                <div class="transport_amount float-right">--}}
-{{--                    <small> {{$data['adultFare']}}</small>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        @endif--}}
-
-{{--        @if($data['childrenCount'] > 0)--}}
-{{--            <div class="receipt_column">--}}
-{{--                <div>--}}
-{{--                    <small>Amount (Child)</small>--}}
-{{--                </div>--}}
-{{--                <div class="transport_amount float-right">--}}
-{{--                    <small> {{$data['childFare']}}</small>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        @endif--}}
-
-{{--        <div class="receipt_column">--}}
-{{--            <div >--}}
-{{--                <small>Discount</small>--}}
-{{--            </div>--}}
-{{--            <div class="transport_amount float-right">--}}
-{{--                <small> 0%</small>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--        <hr>--}}
-{{--        <div class="receipt_column">--}}
-{{--            <div >--}}
-{{--                <small>--}}
-{{--                    Total--}}
-{{--                </small>--}}
-{{--            </div>--}}
-{{--            <div class="price_box float-right" >--}}
-{{--                <small>--}}
-{{--                     {{number_format($data['totalAmount'])}}--}}
-{{--                </small>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--        <hr>--}}
-{{--        <div class="barcode_receipt receipt_column">--}}
-{{--            <div class="barcode_img">{!! DNS1D::getBarcodeHTML('4445645656', 'UPCA') !!}</div>--}}
-{{--        </div>--}}
-{{--    </div>--}}
-{{--</div>--}}
-
-
-
-    <!Doctype html>
+<!Doctype html>
 <html>
 <head>
     <style>
@@ -627,32 +145,17 @@
                 <div class="card-body p-0">
                     <div class="invoice-container">
                         <div class="invoice-header">
-                            <!-- Row start -->
-                            <div class="row gutters">
-                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                                    <div class="custom-actions-btns mb-5">
-                                        <a href="#" class="btn btn-primary">
-                                            <i class="icon-download"></i> Download
-                                        </a>
-                                        <a href="#" class="btn btn-secondary">
-                                            <i class="icon-printer"></i> Print
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Row end -->
-                            <!-- Row start -->
                             <div class="row gutters">
                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
                                     <a href="index.html" class="invoice-logo">
-                                        Etransit
+                                        {{env('APP_NAME')}}
                                     </a>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6">
                                     <address class="text-right">
-                                        Maxwell admin Inc, 45 NorthWest Street.<br>
-                                        Sunrise Blvd, San Francisco.<br>
-                                        00000 00000
+                                        Brown Street Ikeja.<br>
+                                        Lagos Island ,Lagos<br>
+                                        +2348109474664
                                     </address>
                                 </div>
                             </div>
@@ -662,16 +165,20 @@
                                 <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
                                     <div class="invoice-details">
                                         <address>
-                                            Alex Maxwell<br>
-                                            150-600 Church Street, Florida, USA
+                                            {{$data['name']}}<br>
+{{--                                            150-600 Church Street, Florida, USA--}}
                                         </address>
                                     </div>
                                 </div>
                                 <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
                                     <div class="invoice-details">
                                         <div class="invoice-num">
-                                            <div>Invoice - #009</div>
-                                            <div>January 10th 2020</div>
+                                            <div>{{$data['service']}} Invoice - #{{$data['reference']}}</div>
+                                            <div>Departure Date - {{$data['tripSchedule']->departure_date->format('M-d-Y')}}</div>
+                                            @if($data['tripType'] == 2)
+                                            <div>Return Date - {{$data['tripSchedule']->return_date->format('M-d-Y')}}</div>
+                                            @endif
+                                            <div> Transaction Date - {{now()->format('M-d-Y')}}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -687,73 +194,67 @@
                                             <thead>
                                             <tr>
                                                 <th>Booking Details</th>
-                                                <th>Product ID</th>
-                                                <th>Quantity</th>
-                                                <th>Sub Total</th>
+                                                <th colspan="2">Sub Total</th>
+                                                <th>Grand Total</th>
                                             </tr>
                                             </thead>
                                             <tbody>
                                             <tr>
                                                 <td>
-                                                    Lagos - Ibadan
-                                                    <p class="m-0 text-muted">
-                                                        Reference site about Lorem Ipsum, giving information on its origins.
-                                                    </p>
+                                                    Lagos - Ibadan<br>
+                                                    @if($data['adultCount'] > 0)
+                                                    {{$data['adultCount']}} Adult<br>
+                                                    @endif
+                                                    @if($data['childrenCount'] > 0)
+                                                    {{$data['childrenCount']}} Child(ren)<br>
+                                                    @endif
                                                 </td>
-                                                <td>#50000981</td>
-                                                <td>9</td>
-                                                <td>$5000.00</td>
-                                            </tr>
-                                            <tr>
+
                                                 <td>
-                                                    Maxwell Admin Template
-                                                    <p class="m-0 text-muted">
-                                                        As well as a random Lipsum generator.
-                                                    </p>
+                                                    @if($data['adultCount'] > 0)
+                                                        <h5 class="text-success">
+                                                            <strong>
+                                                               N {{$data['adultFare']}}
+                                                            </strong>
+                                                        </h5>
+                                                    @endif
+                                                    @if($data['childrenCount'] > 0)
+                                                        <h5 class="text-success">
+                                                            <strong>
+                                                              N  {{$data['childFare']}}
+                                                            </strong>
+                                                        </h5>
+                                                    @endif
                                                 </td>
-                                                <td>#50000126</td>
-                                                <td>5</td>
-                                                <td>$100.00</td>
                                             </tr>
-                                            <tr>
-                                                <td>
-                                                    Unify Admin Template
-                                                    <p class="m-0 text-muted">
-                                                        Lorem ipsum has become the industry standard.
-                                                    </p>
-                                                </td>
-                                                <td>#50000821</td>
-                                                <td>6</td>
-                                                <td>$49.99</td>
-                                            </tr>
+
                                             <tr>
                                                 <td>&nbsp;</td>
                                                 <td colspan="2">
-                                                    <p>
-                                                        Subtotal<br>
-                                                        Shipping &amp; Handling<br>
-                                                        Tax<br>
-                                                    </p>
-                                                    <h5 class="text-success"><strong>Grand Total</strong></h5>
                                                 </td>
                                                 <td>
                                                     <p>
-                                                        $5000.00<br>
-                                                        $100.00<br>
-                                                        $49.00<br>
+
                                                     </p>
-                                                    <h5 class="text-success"><strong>$5150.99</strong></h5>
+                                                    <h5 class="text-success"><strong>N{{number_format($data['totalAmount'])}}</strong></h5>
                                                 </td>
                                             </tr>
+{{--                                            <tr>--}}
+{{--                                                <td>--}}
+{{--                                                    Seat Number(s)--}}
+{{--                                                </td>--}}
+{{--                                                <td colspan="3">--}}
+{{--                                                    @foreach($data['seatTrackers'] as $seatData)--}}
+{{--                                                    {{$seatData->seat_position}} ,--}}
+{{--                                                    @endforeach--}}
+{{--                                                </td>--}}
+{{--                                            </tr>--}}
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
                             </div>
                             <!-- Row end -->
-                        </div>
-                        <div class="invoice-footer">
-                            Thank you for your Business.
                         </div>
                     </div>
                 </div>

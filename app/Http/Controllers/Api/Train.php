@@ -54,6 +54,7 @@ class Train extends Controller
                                                 ->with(['destination','pickup','train'])->get();
 
         $returnDate = $request->return_date;
+
         return response()->json(['success' => true ,'data' => compact('checkSchedule','returnDate')]);
     }
 
