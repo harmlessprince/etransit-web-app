@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Weight extends Model
 {
     use HasFactory;
+    protected $guarded = ['id'];
+
+    public function state()
+    {
+        return $this->belongsTo(State::class);
+    }
 }

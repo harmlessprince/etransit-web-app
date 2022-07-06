@@ -111,7 +111,7 @@
                     <h3>{{env('APP_NAME')}}</h3>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{url('/admin/manage/vehicle')}}"><i data-feather="home"></i></a></li>
-                        <li class="breadcrumb-item">Add City</li>
+                        <li class="breadcrumb-item">Edit Length</li>
                     </ol>
                 </div>
 {{--                <div class="col-6">--}}
@@ -170,30 +170,25 @@
         </div>
         <div class="card">
             <div class="card-body">
-                <form method="post" action="{{url('/admin/update-city/'.$city->id.'/parcel')}}" enctype="multipart/form-data">
+                <form method="post" action="{{url('/admin/update-length/'.$length->id.'/parcel')}}" enctype="multipart/form-data">
                     @csrf
                     {{ method_field('PUT') }}
                     <div class="car-box col-md-12">
                         <div class="form-group">
-                            <label for="boat_name">State</label>
-                           <select class="form-control" name="state">
-                               <option value="{{$city->state->id}}">{{ $city->state->name }}</option>
-                               @foreach($states as $state)
-                                   <option value="{{$state->id}}">{{$state->name}}</option>
-                               @endforeach
-                           </select>
+                            <label for="boat_name">Min Length</label>
+                            <input class="form-control" name="min_length"  type="text" value="{{$length->min_length}}">
                         </div>
                     </div>
                     <div class="car-box col-md-12">
                         <div class="form-group">
-                         <label for="boat_name">City</label>
-                          <input class="form-control" name="city"  type="text" value="{{$city->name}}">
+                            <label for="boat_name">Max Length</label>
+                            <input class="form-control" name="max_length"  type="text" value="{{$length->max_length}}">
                         </div>
                     </div>
                     <div class="car-box col-md-12">
                     <div class="form-group">
                         <label for="amount">Amount</label>
-                        <input type="text" name="amount" id="amount" class="form-control" value="{{ $city->amount }}" required />
+                        <input type="text" name="amount" id="amount" class="form-control" value="{{ $length->amount }}" required />
                     </div>
                     </div>
                     <button class="sumbit_request" type="submit">Update</button>

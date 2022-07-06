@@ -156,7 +156,7 @@
                                     <td>{{$city->state->name}}</td>
                                     <td>{{Ucfirst($city->name)}}</td>
                                     <td>&#8358; {{number_format($city->amount)}}</td>
-                                    <td><a href="{{url('/admin/edit-city/'. $city->id. '/parcel')}}">Edit </a>|Delete</td>
+                                    <td><a href="{{url('/admin/edit-city/'. $city->id. '/parcel')}}" class="btn btn-sm btn-success">Edit </a></td>
                                 </tr>
                             @endforeach
                             </tbody>

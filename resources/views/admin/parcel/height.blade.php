@@ -117,7 +117,7 @@
                     <h3>{{env('APP_NAME')}}</h3>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{url('/admin/manage/vehicle')}}"><i data-feather="home"></i></a></li>
-                        <li class="breadcrumb-item">Add Height</li>
+                        <li class="breadcrumb-item">Edit Height</li>
                     </ol>
                 </div>
             </div>
@@ -156,7 +156,7 @@
                                     <td>{{$height->min_height}}</td>
                                     <td>{{$height->max_height}}</td>
                                     <td>&#8358; {{number_format($height->amount)}}</td>
-                                    <td>Edit|Delete</td>
+                                    <td><a href="{{url('/admin/edit-height/'. $height->id. '/parcel')}}" class="btn btn-sm btn-success">Edit </a></td>
                                 </tr>
                             @endforeach
                             </tbody>

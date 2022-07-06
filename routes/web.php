@@ -332,6 +332,19 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::get('/edit-city/{city_id}/parcel' , [Parcel::class , 'editParcelCity']);
         Route::put('/update-city/{city_id}/parcel' , [Parcel::class , 'updateParcelCity']);
 
+        Route::get('/edit-height/{height_id}/parcel' , [Parcel::class , 'editParcelHeight']);
+        Route::put('/update-height/{height_id}/parcel' , [Parcel::class , 'updateParcelHeight']);
+
+        Route::get('/edit-length/{length_id}/parcel' , [Parcel::class , 'editParcelLength']);
+        Route::put('/update-length/{length_id}/parcel' , [Parcel::class , 'updateParcelLength']);
+
+        Route::get('/edit-weight/{weight_id}/parcel' , [Parcel::class , 'editParcelWeight']);
+        Route::put('/update-weight/{weight_id}/parcel' , [Parcel::class , 'updateParcelWeight']);
+
+
+        Route::get('/edit-width/{width_id}/parcel' , [Parcel::class , 'editParcelWidth']);
+        Route::put('/update-width/{width_id}/parcel' , [Parcel::class , 'updateParcelWidth']);
+
         //ferry management
         Route::get('/manage/ferry',[Ferry::class , 'index']);
         Route::get('/add/ferry',[Ferry::class , 'create']);

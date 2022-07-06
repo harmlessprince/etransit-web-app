@@ -156,7 +156,9 @@
                                     <td>{{$weight->min_weight}}</td>
                                     <td>{{$weight->max_weight}}</td>
                                     <td>&#8358; {{number_format($weight->amount)}}</td>
-                                    <td>Edit|Delete</td>
+                                    <td>
+                                    <td><a href="{{url('/admin/edit-weight/'. $weight->id. '/parcel')}}" class="btn btn-sm btn-success">Edit </a></td>
+                                    </td>
                                 </tr>
                             @endforeach
                             </tbody>
