@@ -119,7 +119,7 @@
                                 <input type="hidden" name="name" value="{{auth()->user()->full_name}}" placeholder="Name" />
                                 <input type="hidden" name="email" type="email" value="{{auth()->user()->email}}" placeholder="Your Email" />
                                 <input type="hidden" name="phone" type="tel" value="{{auth()->user()->phone_number}}" placeholder="Phone number" />
-                                <input type="hidden" name="amount" value="{{$plan->amount * $recordOperation->number_of_cars * $recordOperation->days}}"/>
+                                <input type="hidden" name="amount" value="{{$plan->amount * $recordOperation->days}}"/>
                                 <input type="hidden" name="plan_id" value="{{$plan->id}}"/>
                                 <input type="hidden" name="service" value="{{$service->name}}" />
                                 <input type="hidden" name="service_id" value="{{$service->id}}" />
