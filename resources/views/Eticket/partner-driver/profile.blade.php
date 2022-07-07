@@ -98,7 +98,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="{{route('e-ticket.set-drivers-rate')}}">
+            <form method="POST" action="{{route('e-ticket.set-drivers-rate')}}">
                 @csrf
                 <input hidden value="{{$driver->id}}" name="id">
                 <div class="modal-body">
