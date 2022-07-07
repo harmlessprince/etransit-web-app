@@ -29,7 +29,7 @@ class BusTicketPayment
         $serviceId = (int)$data['data']['meta']['service_id'];
 
 //find the schedule to get the actual amount stored in the database
-        $tripSchedule = \App\Models\Schedule::where('id', $scheduleId)->select('fare_adult', 'fare_children', 'id', 'seats_available', 'bus_id')->first();
+        $tripSchedule = \App\Models\Schedule::where('id', $scheduleId)->select('fare_adult', 'fare_children', 'id', 'seats_available', 'bus_id','pickup_id','destination_id')->with('destination','pickup')->first();
         $adultFare = (double)$tripSchedule->fare_adult;
         $childrenFare = (double)$tripSchedule->fare_children;
 
@@ -105,6 +105,8 @@ class BusTicketPayment
                     'childrenCount' => $childrenCount,
                     'tripSchedule' => $tripSchedule,
                     'totalAmount' => $data['data']['amount'],
+                    'destination' =>  $tripSchedule->destination->location,
+                    'pickup'=>  $tripSchedule->pickup->location
                 ];
                 $email = $data['data']['meta']['user_email'];
 

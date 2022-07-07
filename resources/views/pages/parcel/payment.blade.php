@@ -71,8 +71,9 @@
     }
 </style>
 @section('content')
-    <div class="payment-box container">
-        <div class="payment">
+    <div class="payment-box container row col-md-12">
+        <div class="col-md-2"></div>
+        <div class="payment col-md-4">
             <h3>PAYMENT</h3>
             <p>Hire Our vehicles for your various trips and occasion </p>
             <h5>SELECT PAYMENT METHOD</h5>
@@ -114,7 +115,7 @@
                 <img src="{{asset('images/icons/visa.png')}}" width="70" height="50"/>
             </div>
         </div>
-        <div class="receipt-box">
+        <div class="receipt-box col-md-6">
            <div class="parcel_receipt_box">
              <div class="parcel_receipt_header">
                  <div class="parcel_header_summary">

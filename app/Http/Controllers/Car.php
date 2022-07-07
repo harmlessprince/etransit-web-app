@@ -552,7 +552,8 @@ class Car extends Controller
             'service' => 'Car Hire',
             'reference' => $transaction->reference,
             'transaction' => $transaction,
-            'plan' => $checkServicePlan->amount,
+            'plan' => $checkServicePlan->plan,
+            'plan_amount' => $checkServicePlan->amount,
             'payment_method' => 'cash payment',
             'total_payment' =>$checkServicePlan->amount * $carHistory->days,
             'pickup_date' => $carHistory->returnDate->format('Y-m-d'),
@@ -588,5 +589,56 @@ class Car extends Controller
 
         return view('admin.cars.details',compact('car'));
     }
+
+    public function editCarClass($id)
+    {
+
+        $carClassEdit =  CarClass::where('id',$id)->first();
+
+        return view('admin.cars.edit-car-class' , compact('carClassEdit'));
+    }
+
+    public function updateCarClass(Request $request , $id)
+    {
+        $request->validate([
+            'car_class' => 'required'
+        ]);
+
+        $carClassEdit =  CarClass::where('id',$id)->first();
+        $carClassEdit->update([
+            'name' => $request->car_class
+        ]);
+
+        Alert::success('Success ', 'Car Class Updated successfully');
+        return back();
+
+    }
+
+    public function editCarType($id)
+    {
+
+        $carTypeEdit =  CarType::where('id',$id)->first();
+
+
+        return view('admin.cars.edit-car-type' , compact('carTypeEdit'));
+    }
+
+    public function updateCarType(Request $request , $id)
+    {
+        $request->validate([
+            'car_type' => 'required'
+        ]);
+
+        $carTypeEdit =  CarType::where('id',$id)->first();
+        $carTypeEdit->update([
+            'name' => $request->car_type
+        ]);
+
+        Alert::success('Success ', 'Car Type Updated successfully');
+        return back();
+
+    }
+
+
 
 }

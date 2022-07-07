@@ -9,4 +9,5 @@ class CarClass extends Model
 {
     use HasFactory;
     protected $table = 'car_classes';
+    protected $guarded = ['id'];
 }

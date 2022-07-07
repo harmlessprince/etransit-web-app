@@ -36,15 +36,20 @@ class ManageRoles extends Controller
         }
     }
 
+    public function addNewRole()
+    {
+        return view('Eticket.Roles.new-role');
+    }
+
     public function storeRole(Request $request)
     {
         request()->validate(['role' => 'required']);
         $tenant = Tenant::where('id',session()->get('tenant_id'))->first();
-        $role =  Role::create(['guard_name' => 'e-ticket', 'name' => $request->role.''.$tenant->display_name , 'tenant_id' => session()->get('tenant_id')]);
+        $role =  Role::create(['guard_name' => 'e-ticket', 'name' => $request->role.' '.$tenant->display_name , 'tenant_id' => session()->get('tenant_id')]);
 
         Alert::success('Success ', 'Role added successfully');
 
-        return redirect('admin/roles');
+        return redirect('e-ticket/roles');
     }
 
     public function viewRole($role_id)

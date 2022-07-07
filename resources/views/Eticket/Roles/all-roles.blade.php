@@ -40,7 +40,14 @@
         </div>
     </div>
     <!-- Container-fluid starts-->
+
     <div class="container-fluid" >
+        <div style="display: flex;justify-content: flex-end;">
+            <div>
+                <a href="{{url('e-ticket/add-new-role')}}" class="btn btn-success">Add New Role</a>
+            </div>
+        </div>
+        <br>
         <div class="card">
             <div class="card-body">
                 <table class="table table-bordered yajra-datatable">

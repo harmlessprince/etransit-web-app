@@ -156,7 +156,9 @@
                                     <td>{{$width->min_width}}</td>
                                     <td>{{$width->max_width}}</td>
                                     <td>&#8358; {{number_format($width->amount)}}</td>
-                                    <td>Edit|Delete</td>
+                                    <td>
+                                    <td><a href="{{url('/admin/edit-width/'. $width->id. '/parcel')}}" class="btn btn-sm btn-success">Edit </a></td>
+                                    </td>
                                 </tr>
                             @endforeach
                             </tbody>

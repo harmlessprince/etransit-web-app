@@ -156,7 +156,9 @@
                                     <td>{{$length->min_length}}</td>
                                     <td>{{$length->max_length}}</td>
                                     <td>&#8358; {{number_format($length->amount)}}</td>
-                                    <td>Edit|Delete</td>
+                                    <td>
+                                    <td><a href="{{url('/admin/edit-length/'. $length->id. '/parcel')}}" class="btn btn-sm btn-success">Edit </a></td>
+                                    </td>
                                 </tr>
                             @endforeach
                             </tbody>

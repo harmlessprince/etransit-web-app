@@ -8,6 +8,7 @@ namespace App\Billing;
 
 use App\Classes\Reference;
 use App\Mail\TourPackages;
+use App\Models\Tour as TourPackage;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use App\Models\Transaction;
@@ -19,8 +20,9 @@ class TourPayment
     {
 
         DB::beginTransaction();
+        $reference = Reference::generateTrnxRef();
         $transactions = new Transaction();
-        $transactions->reference = Reference::generateTrnxRef();
+        $transactions->reference = $reference;
         $transactions->trx_ref = $data['data']['tx_ref'];
         $transactions->amount = (double) $data['data']['amount'];
 
@@ -35,11 +37,21 @@ class TourPayment
         $data["email"] = $data['data']['meta']['user_email'];
         $data['name']  =  $data['data']['meta']['user_name'];
 
+
+        $trip = TourPackage::where('id',  $data['data']['meta']['tour_id'])->firstorfail();
+
         $maildata = [
-            'name' =>  $data['data']['meta']['user_name'],
+            'name' =>  $data['name'] ,
             'service' => 'Tour Package',
-            'transaction' => $transactions
+            'transaction' => $transactions,
+            'reference'=> $reference,
+            'tour_name' => $trip->name,
+            'location' => $trip->location,
+            'tour_date' => $trip->tour_date->format('M-d-Y'),
+            'tour_time' => $trip->tour_time->format('h:i:s'),
+            'totalAmount' => $data['data']['amount'],
         ];
+
 
 
         Mail::to($data["email"])->send(new TourPackages($maildata));

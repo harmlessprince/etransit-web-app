@@ -184,7 +184,9 @@
                                 <tr>
                                     <th scope="row">{{$index+1}}</th>
                                     <td>{{$location->destination}}</td>
-                                    <td>Edit Delete</td>
+                                    <td>
+                                        <a href="{{url('admin/edit/boat_location/'.$location->id)}}" class="btn btn-sm btn-success">Edit</a>
+                                    </td>
                                 </tr>
                             @endforeach
                             </tbody>

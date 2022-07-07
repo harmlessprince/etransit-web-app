@@ -42,7 +42,7 @@ class Vehicle extends Controller
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
                     $id = $row->id;
-                    $actionBtn = "<a href='/admin/edit-bus/$id'  class='edit btn btn-success btn-sm'>Edit</a> <a href='/admin/manage/view-tenant-bus/$id'  class='edit btn btn-success btn-sm'>View</a>";
+                    $actionBtn = "<a href='/admin/manage/view-tenant-bus/$id'  class='edit btn btn-success btn-sm'>View</a>";
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])

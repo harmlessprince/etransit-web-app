@@ -286,6 +286,12 @@ Route::prefix('admin')->name('admin.')->group(function(){
 
         Route::get('on-trips-car' ,[Car::class , 'onTripCars']);
 
+        Route::get('edit/car_class/{id}',[Car::class , 'editCarClass']);
+        Route::put('update_car_class/{id}',[Car::class ,'updateCarClass']);
+
+        Route::get('edit/car_type/{id}',[Car::class , 'editCarType']);
+        Route::put('update_car_type/{id}',[Car::class ,'updateCarType']);
+
 
         //manage boat cruise
         Route::get("/manage/boat-cruise" , [BoatCruise::class , 'index']);
@@ -302,6 +308,9 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::put('/update/{boat_id}/boat' ,[BoatCruise::class , 'updateBoat']);
         Route::get('view-boat-schedules/{boat_id}', [BoatCruise::class , 'viewBoatSchedules']);
         Route::get('view-boat-schedule-payment/{schedule_id}', [BoatCruise::class ,'viewBoatSchedulesPaymentHistory']);
+
+        Route::get('edit/boat_location/{id}',[BoatCruise::class , 'editBoatLocation']);
+        Route::put('update_boat_location/{id}',[BoatCruise::class ,'updateBoatLocation']);
 
         //tour management
         Route::get('manage/tour',[Tour::class , 'manageTour']);
@@ -330,6 +339,19 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::get('/edit-city/{city_id}/parcel' , [Parcel::class , 'editParcelCity']);
         Route::put('/update-city/{city_id}/parcel' , [Parcel::class , 'updateParcelCity']);
 
+        Route::get('/edit-height/{height_id}/parcel' , [Parcel::class , 'editParcelHeight']);
+        Route::put('/update-height/{height_id}/parcel' , [Parcel::class , 'updateParcelHeight']);
+
+        Route::get('/edit-length/{length_id}/parcel' , [Parcel::class , 'editParcelLength']);
+        Route::put('/update-length/{length_id}/parcel' , [Parcel::class , 'updateParcelLength']);
+
+        Route::get('/edit-weight/{weight_id}/parcel' , [Parcel::class , 'editParcelWeight']);
+        Route::put('/update-weight/{weight_id}/parcel' , [Parcel::class , 'updateParcelWeight']);
+
+
+        Route::get('/edit-width/{width_id}/parcel' , [Parcel::class , 'editParcelWidth']);
+        Route::put('/update-width/{width_id}/parcel' , [Parcel::class , 'updateParcelWidth']);
+
         //ferry management
         Route::get('/manage/ferry',[Ferry::class , 'index']);
         Route::get('/add/ferry',[Ferry::class , 'create']);
@@ -343,6 +365,13 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::post('/schedule/ferry-event',[Ferry::class , 'scheduleEvent']);
         Route::get('view-ferry-schedules/{ferry_id}',[Ferry::class , 'viewFerryScheduleEvent']);
         Route::get('view-ferry-booking-schedule/{schedule_id}', [Ferry::class , 'viewFerryBookings']);
+
+
+        Route::get('edit/ferry_type/{id}',[Ferry::class , 'editFerryType']);
+        Route::put('update_ferry_type/{id}',[Ferry::class ,'updateFerryType']);
+
+        Route::get('edit/ferry_location/{id}',[Ferry::class , 'editFerryLocation']);
+        Route::put('update_ferry_location/{id}',[Ferry::class ,'updateFerryLocation']);
 
         //manage train
         Route::get('/manage/train'  ,[Train::class , 'index']);
@@ -546,8 +575,8 @@ Route::prefix('e-ticket')->name('e-ticket.')->group(function(){
         Route::get('view-staff/{staff_id}', [StaffMgt::class , 'viewStaff']);
         Route::get('terminate/{staff_id}/appointment',[StaffMgt::class ,'terminateAppointment']);
         Route::get('enable/{staff_id}/appointment',[StaffMgt::class ,'enableAppointment']);
-        Route::get('assign-role/{staff_id}/',[StaffMgt::class ,'assignRole']);
-        Route::post('assign-staff-to-role/{staff_id}',[StaffMgt::class ,'assignUserRole']);
+        Route::get('assign-role/{staff_id}/',[StaffMgt::class ,'assignRole'])->name('assign-role');
+        Route::post('assign-staff-to-role/{staff_id}',[StaffMgt::class ,'assignUserRole'])->name('add-role');
 
 
         //mage car hire routes
@@ -599,6 +628,9 @@ Route::prefix('e-ticket')->name('e-ticket.')->group(function(){
 
         //manage roles
         Route::get('roles',[ManageRoles::class , 'roles'])->name('all-roles');
+        Route::get('add-new-role',[ManageRoles::class ,'addNewRole'])->name('add-new-role');
+
+        Route::post('store-new-role',[ManageRoles::class ,'storeRole'])->name('store-new-role');
 
         Route::get('fetch-roles',[ManageRoles::class , 'fetchRoles'])->name('fetch-roles');
 

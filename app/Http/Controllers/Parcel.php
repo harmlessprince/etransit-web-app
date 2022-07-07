@@ -203,6 +203,125 @@ class Parcel extends Controller
     }
 
 
+    public function editParcelHeight($height_id)
+    {
+        $height = Height::where('id' , $height_id)->firstorfail();
+
+
+        return view('admin.parcel.edit-height' , compact('height'));
+    }
+
+    public function updateParcelHeight(Request $request , $height_id)
+    {
+        request()->validate([
+            'min_height' => 'required|integer',
+            'max_height'  => 'required|integer',
+            'amount' => 'required'
+        ]);
+
+        $findCity = Height::where('id' , $height_id)->firstorfail();
+
+        $findCity->update([
+            'min_height' => $request->min_height,
+            'max_height'     => $request->max_height,
+            'amount' => $request->amount
+        ]);
+
+        Alert::success('Success ', 'Updated successfully');
+
+        return back();
+    }
+
+
+    public function editParcelLength($length_id)
+    {
+        $length = Length::where('id' , $length_id)->firstorfail();
+
+
+        return view('admin.parcel.edit-length' , compact('length'));
+    }
+
+    public function updateParcelLength(Request $request , $length_id)
+    {
+        request()->validate([
+            'max_length' => 'required|integer',
+            'min_length'  => 'required|integer',
+            'amount' => 'required'
+        ]);
+
+        $findCity = Length::where('id' , $length_id)->firstorfail();
+
+        $findCity->update([
+            'min_length' => $request->min_length,
+            'max_length'     => $request->max_length,
+            'amount' => $request->amount
+        ]);
+
+        Alert::success('Success ', 'Updated successfully');
+
+        return back();
+    }
+
+
+
+    public function editParcelWidth($width_id)
+    {
+        $width = Width::where('id' , $width_id)->firstorfail();
+
+        return view('admin.parcel.edit-width' , compact('width'));
+    }
+
+    public function updateParcelWidth(Request $request , $width_id)
+    {
+        request()->validate([
+            'min_width' => 'required|integer',
+            'max_width'  => 'required|integer',
+            'amount' => 'required'
+        ]);
+
+        $findWidth = Width::where('id' , $width_id)->firstorfail();
+
+        $findWidth->update([
+            'min_width' => $request->min_width,
+            'max_width'     => $request->max_width,
+            'amount' => $request->amount
+        ]);
+
+        Alert::success('Success ', 'Updated successfully');
+
+        return back();
+    }
+
+
+    public function editParcelWeight($weight_id)
+    {
+        $weight = Weight::where('id' , $weight_id)->firstorfail();
+
+
+        return view('admin.parcel.edit-weight' , compact('weight'));
+    }
+
+    public function updateParcelWeight(Request $request , $weight_id)
+    {
+        request()->validate([
+            'min_weight' => 'required|integer',
+            'max_weight'  => 'required|string',
+            'amount' => 'required'
+        ]);
+
+        $findWeight = Weight::where('id' , $weight_id)->firstorfail();
+
+        $findWeight->update([
+            'min_weight' => $request->min_weight,
+            'max_weight'     => $request->max_weight,
+            'amount' => $request->amount
+        ]);
+
+        Alert::success('Success ', 'Updated successfully');
+
+        return back();
+    }
+
     public function parcelDeliveryRequest()
     {
         $deliveryParcelCount = DeliveryParcel::count();

@@ -11,6 +11,7 @@ namespace App\Billing;
 use App\Classes\Reference;
 use App\Mail\BoatCruiseBooking;
 use App\Mail\BusBooking;
+use App\Models\BoatTrip;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use PDF;
@@ -20,8 +21,10 @@ class BoatCruise
     public static function handleCruisePayment($data)
     {
         DB::beginTransaction();
+        $reference =  Reference::generateTrnxRef();
+
         $transactions = new \App\Models\Transaction();
-        $transactions->reference = Reference::generateTrnxRef();
+        $transactions->reference =$reference;
         $transactions->trx_ref = $data['data']['tx_ref'];
         $transactions->amount = (double) $data['data']['amount'];
 
@@ -35,13 +38,22 @@ class BoatCruise
 
         $data["email"] =   $data['data']['meta']['user_email'];
         $data['name']  =   $data['data']['meta']['user_name'];
-        
-        $maildata = [
-            'name' =>  $data['name'],
-            'service' => 'Boat Cruise',
-            'transaction' => $transactions
-        ];
 
+
+        $trip =  BoatTrip::where('id', $data['data']['meta']['boat_cruise_id'])->with('boat','cruiselocation')->firstorfail();
+
+        $maildata = [
+            'name' => $data['data']['meta']['user_name'],
+            'service' => 'Boat Cruise',
+            'transaction' => $transactions,
+            'reference' => $reference,
+            'totalAmount' => $data['data']['amount'],
+            'cruise_name' => $trip->cruise_name,
+            'cruise_destination' => $trip->cruiselocation->destination,
+            'boat_name' => $trip->boat->name,
+            'departure_date' => $trip->departure_date->format('M-d-Y'),
+            'departure_time' => $trip->departure_time->format('h:i:s')
+        ];
         $email =   $data["email"];
 
         Mail::to($email)->send(new BoatCruiseBooking($maildata));
