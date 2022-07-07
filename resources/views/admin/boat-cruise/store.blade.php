@@ -176,19 +176,6 @@
     </div>
 
     <script type="text/javascript">
-
-        $('#buttonID').click(function(e){
-            e.preventDefault();
-            $('.add_file').append(`<div >
-                        <div class="gender_section" style="margin-top:10px;">
-                            <div class="passenger_type radio-group">
-                                <div class="passenger_options custom-file-upload">
-                                    <input type="file" name="images[]"  required/>
-                                </div>
-                            </div>
-                        </div>
-                    </div>`);
-        });
         $(function() {
             var previewImages = function(input, imgPreviewPlaceholder) {
                 if (input.files) {

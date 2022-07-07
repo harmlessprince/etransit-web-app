@@ -45,5 +45,8 @@ class ServiceSeeder extends Seeder
         Service::create([
             'name' => "Parcel"
         ]);
+        Service::create([
+            'name' => "Driver"
+        ]);
     }
 }

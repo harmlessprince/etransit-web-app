@@ -84,14 +84,14 @@ class Parcel extends Controller
     {
         $heights = Height::all();
 
-        return view('admin.parcel.height' , compact('heights',));
+        return view('admin.parcel.height' , compact('heights'));
     }
 
     public function manageWeight()
     {
         $weights = Weight::all();
 
-        return view('admin.parcel.weight' , compact('weights',));
+        return view('admin.parcel.weight' , compact('weights'));
 
     }
 
@@ -99,7 +99,7 @@ class Parcel extends Controller
     {
         $lengths = Length::all();
 
-        return view('admin.parcel.length' , compact('lengths',));
+        return view('admin.parcel.length' , compact('lengths'));
 
     }
 
@@ -107,7 +107,7 @@ class Parcel extends Controller
     {
         $widths = Width::all();
 
-        return view('admin.parcel.width' , compact('widths',));
+        return view('admin.parcel.width' , compact('widths'));
     }
 
     public function storeDimension(Request $request , $slug)

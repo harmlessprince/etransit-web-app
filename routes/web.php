@@ -14,6 +14,7 @@ use App\Http\Controllers\Eticket\EticketManifest;
 use App\Http\Controllers\Eticket\EticketSchedule;
 use App\Http\Controllers\Eticket\EticketTerminal;
 use App\Http\Controllers\Eticket\ManageBus;
+use App\Http\Controllers\Eticket\ManageDriver;
 use App\Http\Controllers\Eticket\ManageRoles;
 use App\Http\Controllers\Eticket\ManageTransaction;
 use App\Http\Controllers\Eticket\StaffMgt;
@@ -26,6 +27,7 @@ use App\Http\Controllers\Operator;
 use App\Http\Controllers\Page;
 use App\Http\Controllers\Parcel;
 use App\Http\Controllers\ParcelMgt;
+use App\Http\Controllers\PartnerDriver;
 use App\Http\Controllers\Payment;
 use App\Http\Controllers\RoleMgt;
 use App\Http\Controllers\SocialController;
@@ -100,8 +102,13 @@ Route::post('train/bookings',[Train::class ,'checkSchedule']);
 
 //partner page
 Route::get('partners',[\App\Http\Controllers\Partner::class ,'partnerPage']);
+Route::get('partners/driver', [\App\Http\Controllers\Partner::class ,'driverPartnerPage']);
+Route::get('partners/drivers/', [\App\Http\Controllers\Partner::class ,'driverPartnerPage']);
 Route::post('store/become-partners',[\App\Http\Controllers\Partner::class , 'becomePartners']);
+Route::post('partners/driver/register',[\App\Http\Controllers\Partner::class , 'registerDriverApplication']);
 Route::get('/admin/export-transaction', [Transaction::class , 'exportCsv']);
+
+
 
 
 //check PDF
@@ -371,6 +378,15 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::put('update-train-route/{route_id}', [Train::class , 'updateRoute']);
         Route::delete('delete-train-route/{route_id}', [Train::class , 'destroyRouteFare']);
 
+        //manage Drivers
+
+        Route::get('/manage/drivers',[PartnerDriver::class, 'drivers']);
+        Route::get('/manage/drivers/fetch-drivers', [PartnerDriver::class, 'fetchDrivers'])->name('fetch-drivers');
+        Route::get('/manage/drivers/{driver_id}',[PartnerDriver::class, 'driverDetails']);
+        Route::get('/add/drivers',[PartnerDriver::class, 'onboardDriver']);
+        Route::post('/store/driver',[PartnerDriver::class, 'StoreOnboardDriver']);
+        Route::post('drivers/edit-rate',[PartnerDriver::class, 'editRate'])->name('set-drivers-rate');
+
 
         //manage customer
         Route::get('/customers',[Customer::class , 'customerIndex']);
@@ -416,6 +432,12 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::get('fetch-all-become-partners', [\App\Http\Controllers\Partner::class ,'fetchBecomePartners'])->name('fetch-all-become-partners');
         Route::get('view-partners/{partner_id}',[\App\Http\Controllers\Partner::class , 'viewPartner']);
         Route::get('enable-partner-as-operator/{partner_id}' , [\App\Http\Controllers\Partner::class , 'enablePartnerAsOperator']);
+
+        //partner drivers
+        Route::get('/all-partner-drivers', [\App\Http\Controllers\Partner::class , 'newDrivers']);
+        Route::get('fetch-all-driver-applications', [\App\Http\Controllers\Partner::class ,'fetchDriverApplications'])->name('fetch-driver-applications');
+        Route::get('/view-partner/driver/{partner_drver_id}',[\App\Http\Controllers\Partner::class , 'viewDriver']);
+        Route::get('/partner/approve-driver/{partner_driver_id}' , [\App\Http\Controllers\Partner::class , 'approveDriverApplication']);
 
         //switch service on or off
         Route::get('all-services', [\App\Http\Controllers\ServiceManagent::class ,'allServices']);
@@ -557,6 +579,11 @@ Route::prefix('e-ticket')->name('e-ticket.')->group(function(){
         Route::get('toggle-car-availability/{car_id}',[CarHireMgt::class , 'toggleUnAvailability']);
 
         Route::get('toggle-car-un-availability/{car_id}',[CarHireMgt::class , 'toggleUnUnAvailability']);
+
+        //manage driver profile
+
+        Route::get('partner-driver/profile/{driver_id}',[ManageDriver::class, 'driverDetails'])->name('partner-driver-view-profile');
+        Route::post('partner-driver/edit-rate',[PartnerDriver::class, 'editRate'])->name('set-drivers-rate');
 
         //add tour
         Route::get('tour-packages',[TourPackage::class , 'allTours'])->name('all-tours');
