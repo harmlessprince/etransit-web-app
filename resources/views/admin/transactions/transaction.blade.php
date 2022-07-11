@@ -182,7 +182,7 @@
                                     <td>{{$transaction->service->name}}</td>
                                     <td>{{$transaction->reference}}</td>
 {{--                                    <td>{{$transaction->trx_ref}}</td>--}}
-                                    <td>{{$transaction->user->full_name}}</td>
+                                    <td>{{$transaction->user->full_name ?? $transaction->onsite_customer->full_name}}</td>
                                     <td>{{$transaction->status}}</td>
                                     <td>{{$transaction->created_at->diffforhumans()}}</td>
                                     <td>

@@ -71,7 +71,7 @@
     </footer>
     <div style="position:relative; top:-4em; display:flex;justify-content: flex-end; margin-right:10px;">
 {{--        85264318721--}}
-        <a href="https://api.whatsapp.com/send?phone=2349025318877" target="_blank">
+        <a href="https://api.whatsapp.com/send?phone=2348064304717" target="_blank">
             <img src="{{asset('images/whatsapp.png')}}" />
         </a>
     </div>
@@ -123,7 +123,7 @@
             <a href="#"><i class="fa fa-google-plus d-md-flex justify-content-center align-items-center align-content-center" style="padding-top: 5px;font-size: 25px;"></i></a></p>
     </div>
 </div>
-{{--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>--}}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="{{asset('new-assets/owlcarousel/owl.carousel.min.js')}}"></script>
 <script src="{{asset('new-assets/bootstrap/js/bootstrap.min.js')}}"></script>
 <script src="{{asset('new-assets/js/Off-Canvas-Sidebar-Drawer-Navbar.js')}}"></script>
@@ -309,7 +309,7 @@
     }
 
 </script>
-
+{{--@jquery--}}
 @toastr_js
 @toastr_render
 

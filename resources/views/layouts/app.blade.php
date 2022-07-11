@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>{{env('APP_NAME')}}</title>
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('images/favicon.ico') }}">
     <link rel="stylesheet" href="{{asset('new-assets/bootstrap/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface&amp;display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Arsenal&amp;display=swap">
@@ -38,6 +39,9 @@
     <link rel="stylesheet" href="{{asset("new-assets/owlcarousel/assets/owl.theme.default.min.css")}}">
 {{--    <link href="{{asset('css/style.css')}}" rel="stylesheet"/>--}}
     <link href="{{asset('css/font.css')}}" rel="stylesheet"/>
+
+
+
 
     <style>
         body{

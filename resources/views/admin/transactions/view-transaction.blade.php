@@ -71,9 +71,9 @@
                     <div class="card-body">
                         <h4>User Information</h4>
                         <hr>
-                        <h6>Full Name : {{ $transaction->user->full_name }}</h6>
+                        <h6>Full Name : {{ $transaction->user->full_name ?? $transaction->onsite_customer->name }}</h6>
                         <hr>
-                        <h6>Email : {{ $transaction->user->email }}</h6>
+                        <h6>Email : {{ $transaction->user->email ?? $transaction->onsite_customer->email }}</h6>
                     </div>
                 </div>
             </div>

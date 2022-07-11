@@ -121,7 +121,7 @@
                                 <td>&#8358; {{number_format($transaction->amount)}}</td>
                                 <td>{{$transaction->service->name}}</td>
                                 <td>{{$transaction->reference}}</td>
-                                <td>{{$transaction->user->full_name}}</td>
+                                <td>{{$transaction->user->full_name ?? $transaction->onsite_customer->name}}</td>
                                 <td>{{$transaction->status}}</td>
                                 <td>{{$transaction->created_at->diffforhumans()}}</td>
                                 <td>
