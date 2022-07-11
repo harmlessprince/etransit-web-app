@@ -482,6 +482,7 @@
                         <div class="carousel-item">
                             <div class="container">
                                 <div class="row product-list">
+
                                     @foreach($cars_selection2 as $index  => $car)
 
                                     <div class="col-sm-3 col-md-3 col-lg-3 product-item">
