@@ -161,8 +161,8 @@
 {{--                                                    @endforeach--}}
 
                                                     @foreach($routeFare as $index => $fare)
-                                                                <option  value="{{$fare[$index]->id}}">{{$fare[$index]->terminal->stop_name}} - {{$fare[$index]->destination_terminal->stop_name}}
-                                                                    ({{$fare[$index]->seatClass->class}}) - (&#8358; {{number_format($fare[$index]->amount_adult)}} (Adult Fare) -  &#8358; {{number_format($fare[$index]->amount_child)}} (Children Fare) )</option>
+                                                                <option  value="{{$fare->id}}">{{$fare->terminal->stop_name}} - {{$fare->destination_terminal->stop_name}}
+                                                                    ({{$fare->seatClass->class}}) - (&#8358; {{number_format($fare->amount_adult)}} (Adult Fare) -  &#8358; {{number_format($fare->amount_child)}} (Children Fare) )</option>
                                                     @endforeach
                                                 </select>
                                             </div>
