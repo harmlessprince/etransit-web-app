@@ -504,7 +504,7 @@ class Train extends Controller
 //        {
 //
 //        }
-        dd( $routeFare[0]->routeFare );
+//        dd( $routeFare[0]->routeFare );
 
 
 

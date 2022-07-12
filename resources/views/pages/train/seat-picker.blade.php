@@ -152,8 +152,12 @@
                                                 <select class="form-control" name="route_id[]">
                                                     <option value="">Select a route</option>
                                                     @foreach($routeFare as $index => $fare)
-                                                    <option  value="{{$fare[$index]->id}}">{{$fare[$index]->terminal->stop_name}} - {{$fare[$index]->destination_terminal->stop_name}}
-                                                        ({{$fare[$index]->seatClass->class}}) - (&#8358; {{number_format($fare[$index]->amount_adult)}} (Adult Fare) -  &#8358; {{number_format($fare[$index]->amount_child)}} (Children Fare) )</option>
+                                                        @foreach($fare[$index] as $i => $scheduleFare)
+                                                            <option  value="{{$scheduleFare->id}}">{{$scheduleFare->terminal->stop_name}} - {{$scheduleFare->destination_terminal->stop_name}}
+                                                                ({{$scheduleFare->seatClass->class}}) - (&#8358; {{number_format($scheduleFare->amount_adult)}} (Adult Fare) -  &#8358; {{number_format($scheduleFare->amount_child)}} (Children Fare) )</option>
+{{--                                                    <option  value="{{$fare[$index]->id}}">{{$fare[$index]->terminal->stop_name}} - {{$fare[$index]->destination_terminal->stop_name}}--}}
+{{--                                                        ({{$fare[$index]->seatClass->class}}) - (&#8358; {{number_format($fare[$index]->amount_adult)}} (Adult Fare) -  &#8358; {{number_format($fare[$index]->amount_child)}} (Children Fare) )</option>--}}
+                                                        @endforeach
                                                     @endforeach
                                                 </select>
                                             </div>
