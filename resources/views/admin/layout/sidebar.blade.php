@@ -87,6 +87,11 @@
                             <li><a href="{{url('/admin/manage/train/routes-fare')}}">Manage Routes Fare</a></li>
                         </ul>
                     </li>
+                    <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"></i><span>Driver Management</span></a>
+                        <ul class="nav-submenu menu-content">
+                            <li><a href="{{url('/admin/manage/drivers')}}">Manage Drivers</a></li>
+                        </ul>
+                    </li>
                     <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"></i><span>Customers</span></a>
                         <ul class="nav-submenu menu-content">
                             <li><a href="{{url('/admin/customers')}}">Manage Customers</a></li>
@@ -102,12 +107,10 @@
                             <li><a href="{{url('/admin/transactions')}}">Manage Transactions</a></li>
                         </ul>
                     </li>
-                    <li class="dropdown"><a class="nav-link menu-title" href="#">
-                            <i data-feather="box"></i>
-                            <span>Partners</span>
-                        </a>
+                    <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"></i> <span>Partners</span></a>
                         <ul class="nav-submenu menu-content">
-                            <li><a href="{{url('/admin/all-partners')}}">Partnership</a></li>
+                            <li><a href="{{url('/admin/all-partners')}}">Partnership </a></li>
+                            <li><a href="{{url('/admin/all-partner-drivers')}}">Driver Partnerships </a></li>
                         </ul>
                     </li>
                     <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"></i><span>Operator</span></a>

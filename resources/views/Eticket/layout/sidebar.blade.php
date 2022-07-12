@@ -47,13 +47,16 @@
                             </ul>
                         </li>
                     @endif
-{{--                    @if(in_array('8',$serviceArray))--}}
-{{--                        <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"></i><span>Tour Management</span></a>--}}
-{{--                            <ul class="nav-submenu menu-content">--}}
-{{--                                <li><a href="{{url('/e-ticket/tour-packages')}}">Manage Tour</a></li>--}}
-{{--                            </ul>--}}
-{{--                        </li>--}}
-{{--                    @endif--}}
+                    @if(in_array('10',$serviceArray))
+                        @php
+                            $driver_id = \App\Models\PartnerDriver::where('tenant_id',session()->get('tenant_id'))->first()->id;
+                        @endphp
+                        <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"></i><span>Driver Management</span></a>
+                            <ul class="nav-submenu menu-content">
+                                <li><a href="{{route('e-ticket.partner-driver-view-profile', $driver_id)}}">My Profile</a></li>
+                            </ul>
+                        </li>
+                   @endif
                     <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"></i><span>Transaction</span></a>
                         <ul class="nav-submenu menu-content">
                             <li><a href="{{url('/e-ticket/transactions')}}">Manage Transactions</a></li>

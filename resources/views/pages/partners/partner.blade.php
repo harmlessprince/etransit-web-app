@@ -26,6 +26,7 @@
         </div>
     @endif
     <div class="container">
+
         <div class="row">
             <div class="col-sm-3" style="padding: 50px;padding-top: 50px;padding-bottom: 50px;background: var(--bs-gray-100);"></div>
             <div class="col-sm-6" style="padding: 50px;padding-top: 50px;padding-bottom: 50px;background: var(--bs-gray-100);">
@@ -36,7 +37,11 @@
                             <div class="row">
                                 <div class="col" style="margin-top: 44px;">
                                     <h6 style="text-align: center;">Fill Form To Get Started</h6>
-                                    <p style="font-size: 14px;text-align: center;color: rgb(170,170,170);">Hire our vehicles for your various trips and occasion</p>
+                                      <div class="btn-group py-5 d-flex justify-content-center" style="text-align: center;">
+                                        <a href="#" class="btn btn-outline-primary active" aria-current="page">I am a vehicle owner/operator</a>
+                                        <a href="{{url('partners/driver')}}" class="btn btn-outline-primary ">I am a driver</a>
+                                        </div>
+                                    <p style="font-size: 14px;text-align: center;color: rgb(170,170,170);"> Earn reliable income on your vehicle or other assets via our commission based partnership scheme </p>
                                 </div>
                             </div>
                             <div class="row">
