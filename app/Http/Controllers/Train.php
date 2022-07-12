@@ -500,7 +500,11 @@ class Train extends Controller
                                 $query->with('terminal','destination_terminal','seatClass')->get();
                             }])->get();
 
-        dd( $routeFare );
+//        foreach($routeFare as $index => $newFare)
+//        {
+//            
+//        }
+        dd( $routeFare->routeFare );
 
 
 
