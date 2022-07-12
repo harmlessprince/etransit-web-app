@@ -495,16 +495,12 @@ class Train extends Controller
         $trip_type  = $tripTypeId;
 
 
-//        $routeFare = RouteFare::with('terminal','destination_terminal','seatClass')->get();
-        $routeFare = ScheduleRoute::where('train_schedule_id',$train_schedule_id)->with(['routeFare' => function($query){
-                                $query->with('terminal','destination_terminal','seatClass')->get();
-                            }])->get();
+        $routeFare = RouteFare::with('terminal','destination_terminal','seatClass')->get();
+//        $routeFare = ScheduleRoute::where('train_schedule_id',$train_schedule_id)->with(['routeFare' => function($query){
+//                                $query->with('terminal','destination_terminal','seatClass')->get();
+//                            }])->get();
 
-//        foreach($routeFare as $index => $newFare)
-//        {
-//
-//        }
-//        dd( $routeFare[0]->routeFare );
+
 
 
 
