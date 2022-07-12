@@ -497,9 +497,11 @@ class Train extends Controller
 
 //        $routeFare = RouteFare::with('terminal','destination_terminal','seatClass')->get();
         $routeFare = ScheduleRoute::where('train_schedule_id',$train_schedule_id)->with(['routeFare' => function($query){
-            $query->with('terminal','destination_terminal','seatClass')->get();
-        }])->get();
-      
+                                $query->with('terminal','destination_terminal','seatClass')->get();
+                            }])->get();
+
+        dd( $routeFare );
+
 
 
         return view('pages.train.seat-picker', compact('trainSeatsPicker','schedule_id','routeFare','tranId','trip_type','train_schedule_id'));
