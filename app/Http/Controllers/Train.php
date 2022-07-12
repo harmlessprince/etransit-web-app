@@ -496,7 +496,9 @@ class Train extends Controller
 
 
 //        $routeFare = RouteFare::with('terminal','destination_terminal','seatClass')->get();
-        $routeFare = ScheduleRoute::with('routeFare')->get();
+        $routeFare = ScheduleRoute::where('train_schedule_id',$train_schedule_id)->with(['routeFare' => function($query){
+            $query->with('terminal','destination_terminal','seatClass')->get();
+        }])->get();
         dd($routeFare);
 
 
