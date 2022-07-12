@@ -164,7 +164,8 @@ class Train extends Controller
 
     public function routeSelector($train_schedule_id)
     {
-        $fetchRoutes = ScheduleRoute::where('train_schedule_id', $train_schedule_id)->with('trainRoutes')->get();
+        $fetchRoutes = ScheduleRoute::where('train_schedule_id', $train_schedule_id)->with('routeFare')->get();
+//        trainRoutes
 
         return response()->json(['success' => true , 'data' => compact('fetchRoutes')]);
     }
