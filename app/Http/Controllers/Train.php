@@ -502,9 +502,9 @@ class Train extends Controller
 
 //        foreach($routeFare as $index => $newFare)
 //        {
-//            
+//
 //        }
-        dd( $routeFare->routeFare );
+        dd( $routeFare[0]->routeFare );
 
 
 
