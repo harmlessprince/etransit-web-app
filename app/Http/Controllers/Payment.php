@@ -59,7 +59,7 @@ class Payment extends Controller
                 'user_email'         => auth()->user()->email,
                 'user_name'          => auth()->user()->full_name,
                 'plan_id'            => request()->plan_id ?? null ,
-                'car_history_id'     => request()->carhistory_id ?? null ,
+                'car_history_id'     => request()->car_history_id ?? null ,
                 'cruiseType'         => request()->cruiseType ?? null,
                 'boatTrip_id'        => request()->boatTrip_id ?? null,
                 'tour_id'            => request()->tour_id ?? null,
@@ -337,10 +337,8 @@ class Payment extends Controller
 
         $serviceID     = (int)   $data['data']['meta']['service_id'];
         $planId        = (int)   $data['data']['meta']['plan_id'];
-
-        $carPlan = \App\Models\CarPlan::where('id' , $planId)->firstorfail();
-        $carHistory         =  CarHistory::where('id', $data['data']['meta']['car_history_id'])->first();
-
+        $carPlan       = \App\Models\CarPlan::where('id' , $planId)->firstorfail();
+        $carHistory    =  CarHistory::where('id', $data['data']['meta']['car_history_id'])->first();
 
 
         if(!$carPlan)
