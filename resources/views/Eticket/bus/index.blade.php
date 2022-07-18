@@ -108,7 +108,7 @@
         </div>
         <div class="card">
             <div class="card-body">
-                <table class="table table-bordered yajra-datatable">
+                <table class="table table-bordered table-responsive yajra-datatable">
                     <thead>
                     <tr>
                         <th>No</th>
@@ -117,7 +117,7 @@
                         <th>Car Registration</th>
                         <th>Seats</th>
                         <th>Wheels</th>
-                        <th>Action</th>
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -133,12 +133,20 @@
     <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
 
     <script type="text/javascript">
         $(function () {
             $.noConflict();
 
             var table = $('.yajra-datatable').DataTable({
+                responsive: {
+                    details: {
+                        display: $.fn.dataTable.Responsive.display.childRowImmediate,
+                        type: 'none',
+                        target: ''
+                    }
+                },
                 processing: true,
                 serverSide: true,
                 ajax: "{{ route('e-ticket.fetch-tenant-buses') }}",
@@ -156,6 +164,12 @@
                         orderable: true,
                         searchable: true
                     },
+
+                ],
+                columnDefs: [
+                    { responsivePriority: 1, targets: 1 },
+                    { responsivePriority: 2, targets: 2 },
+                    { responsivePriority: 3, targets: 3 }
 
                 ]
             });

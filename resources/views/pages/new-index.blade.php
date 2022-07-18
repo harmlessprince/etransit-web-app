@@ -1,5 +1,6 @@
 @extends('layouts.app')
 <style>
+
     #ferry_form , #train_form{
         display:none;
     }
@@ -32,6 +33,11 @@
         padding:10px;
 
     }
+    @@media only screen and (max-width: 700px){
+        .mobile-copy{
+            display: none;
+        }
+    }
 </style>
 
 @section('content')
@@ -43,7 +49,7 @@
                 <div class="col-md-12">
                     <p style="font-size: 20px;color: var(--bs-white);text-align: center;">Your 24/7 one-stop transportation and logistics service</p>
                     <h1 style="color: var(--bs-white);text-align: center;"><strong>EASY SAFE CONVENIENT</strong></h1>
-                   <p style="font-size: 20px;color: var(--bs-white);text-align: center;padding-right: 80px;padding-left: 80px;">Hire a vehicle,send a parcel, book a bus,flight,boat cruise or ferry instantly at your fingertips. No queues. No delays.&nbsp;&nbsp;</p>
+                  {{----}}  <p style="font-size: 20px;color: var(--bs-white);text-align: center;padding-right: 80px;padding-left: 80px;" class="mobile-copy">Hire a vehicle,send a parcel, book a bus,flight,boat cruise or ferry instantly at your fingertips. No queues. No delays.&nbsp;&nbsp;</p>
                 </div>
             </div>
         </div>
