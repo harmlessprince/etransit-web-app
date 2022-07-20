@@ -13,7 +13,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <h1 style="color: var(--bs-white);text-align: center;"><strong>Ferry Booking&nbsp;</strong></h1>
-                        <p style="font-size: 20px;color: var(--bs-white);text-align: center;">Loren ipsum dolor</p>
+{{--                        <p style="font-size: 20px;color: var(--bs-white);text-align: center;">Loren ipsum dolor</p>--}}
                     </div>
                 </div>
             </div>
@@ -30,123 +30,37 @@
                         <div class="col-md-auto"><a class="text-decoration-none" href="#" style="color: #ed954d;">Clear all</a></div>
                     </div>
                     <hr>
-                    <div class="row" style="margin-bottom: 11px;">
-                        <div class="col">
-                            <p style="margin-top: 4px;margin-bottom: 0px;font-size: 13px;"><strong>Star Rating</strong></p>
-                        </div>
-                        <div class="col" style="text-align: right;">
-                            <div class="dropdown" style="height: 24px;"><button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="color: #ed954d;background: var(--bs-white);border-color: rgba(249,249,249,0);height: 24px;padding-top: 1px;">Reset</button>
-                                <div class="dropdown-menu"><a class="dropdown-item" href="#">First Item</a><a class="dropdown-item" href="#">Second Item</a><a class="dropdown-item" href="#">Third Item</a></div>
-                            </div>
-                        </div>
-                    </div>
+                    <form  action="{{url('ferry/bookings')}}">
+                        @csrf
                     <div class="row">
                         <div class="col">
                             <div class="table-responsive">
                                 <table class="table table-borderless">
                                     <tbody>
+                                    @foreach( $ferryLocation as $location)
                                     <tr>
                                         <td>
-                                            <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-8"><label class="form-check-label" for="formCheck-8">Air Peace</label></div>
+                                            <div class="form-check">
+                                                <input class="form-check-input"name="locations[]" value="{{$location->id}}" type="checkbox" id="formCheck-8">
+                                                <label class="form-check-label" for="formCheck-8"></label>
+                                            </div>
                                         </td>
-                                        <td style="text-align: right;color: #afafb0;">from N 80,000</td>
+                                        <td style="text-align: right;color: #afafb0;">{{$location->locations}}</td>
                                     </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-9"><label class="form-check-label" for="formCheck-9">Africa World Airlines</label></div>
-                                        </td>
-                                        <td style="text-align: right;color: #afafb0;">from N 80,000</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-7"><label class="form-check-label" for="formCheck-7">Hahn Air Systems</label></div>
-                                        </td>
-                                        <td style="text-align: right;color: #afafb0;">from N 80,000</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-10"><label class="form-check-label" for="formCheck-10">Ethiopian</label></div>
-                                        </td>
-                                        <td style="text-align: right;color: #afafb0;">from N 80,000</td>
-                                    </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
-                    <div class="row" style="margin-bottom: 10px;">
-                        <div class="col">
-                            <p style="margin-top: 4px;margin-bottom: 0px;font-size: 13px;"><strong>Price Range</strong></p>
-                        </div>
-                        <div class="col" style="text-align: right;">
-                            <div class="dropdown" style="height: 24px;"><button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="color: #ef954d;background: var(--bs-white);border-color: rgba(249,249,249,0);height: 24px;padding-top: 1px;">Reset</button>
-                                <div class="dropdown-menu"><a class="dropdown-item" href="#">First Item</a><a class="dropdown-item" href="#">Second Item</a><a class="dropdown-item" href="#">Third Item</a></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col"><input class="form-range" type="range"></div>
-                    </div>
                     <hr>
+
                     <div class="row">
-                        <div class="col">
-                            <p style="margin-top: 4px;margin-bottom: 0px;font-size: 13px;"><strong>Cabin</strong></p>
-                        </div>
-                        <div class="col" style="text-align: right;">
-                            <div class="dropdown" style="height: 24px;"><button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="color: #ef954d;background: var(--bs-white);border-color: rgba(249,249,249,0);height: 24px;padding-top: 1px;">Reset</button>
-                                <div class="dropdown-menu"><a class="dropdown-item" href="#">First Item</a><a class="dropdown-item" href="#">Second Item</a><a class="dropdown-item" href="#">Third Item</a></div>
-                            </div>
-                        </div>
+                        <div class="col" style="margin-top: 8px;">
+                            <button class="btn btn-primary" type="submit"
+                                    style="font-size: 10px;background: var(--bs-orange);color: var(--bs-gray-900);width: 68.25px;border-style: none;border-color: rgba(1,0,0,0);border-right-color: var(--bs-gray-900);">Submit</button></div>
                     </div>
-                    <div class="table-responsive">
-                        <table class="table table-borderless">
-                            <tbody>
-                            <tr>
-                                <td>
-                                    <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-2"><label class="form-check-label" for="formCheck-2" style="color: #afafb0;">First Class</label></div>
-                                </td>
-                                <td>55</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-1"><label class="form-check-label" for="formCheck-1" style="color: #afafb0;">Business Class</label></div>
-                                </td>
-                                <td>77</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-4"><label class="form-check-label" for="formCheck-4" style="color: #afafb0;">Economy</label></div>
-                                </td>
-                                <td>44</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-3"><label class="form-check-label" for="formCheck-3" style="color: #afafb0;">Premium Economy</label></div>
-                                </td>
-                                <td>57</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <hr>
-                    <div class="row" style="margin-bottom: 10px;">
-                        <div class="col">
-                            <p style="margin-top: 4px;margin-bottom: 0px;font-size: 13px;"><strong>Stops</strong></p>
-                        </div>
-                        <div class="col" style="text-align: right;">
-                            <div class="dropdown" style="height: 24px;"><button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="color: var(--bs-dark);background: var(--bs-white);border-color: rgba(249,249,249,0);height: 24px;padding-top: 1px;">Reset</button>
-                                <div class="dropdown-menu"><a class="dropdown-item" href="#">First Item</a><a class="dropdown-item" href="#">Second Item</a><a class="dropdown-item" href="#">Third Item</a></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col"><button class="btn btn-primary" type="button" style="font-size: 10px;background: rgba(13,110,253,0);color: var(--bs-gray-900);border-color: #010000;border-right-color: var(--bs-gray-900);">1 Stop</button></div>
-                        <div class="col"><button class="btn btn-primary" type="button" style="font-size: 10px;background: rgba(13,110,253,0);color: var(--bs-gray-900);border-color: #010000;border-right-color: var(--bs-gray-900);width: 54.25px;">2 Stop</button></div>
-                        <div class="col"><button class="btn btn-primary" type="button" style="font-size: 10px;background: rgba(13,110,253,0);color: var(--bs-gray-900);border-color: #010000;border-right-color: var(--bs-gray-900);width: 54.25px;">Any</button></div>
-                    </div>
-                    <div class="row">
-                        <div class="col" style="margin-top: 8px;"><button class="btn btn-primary" type="button" style="font-size: 10px;background: var(--bs-orange);color: var(--bs-gray-900);width: 68.25px;border-style: none;border-color: rgba(1,0,0,0);border-right-color: var(--bs-gray-900);">No Stop</button></div>
-                    </div>
+                    </form>
                 </div>
                 <div class="col-sm-6 col-md-9" id="cruisedisplay" style="padding-left: 0px;padding-right: 0px;">
                     <div class="row" id="optionline-1" style="padding-left: 0px;padding-right: 0px;margin-top: 0px;margin-bottom: 15px;margin-left: 10px;margin-right: 0px;background: var(--bs-gray-200);">

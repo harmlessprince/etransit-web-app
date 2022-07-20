@@ -3,13 +3,16 @@
 namespace App\Http\Controllers\Eticket;
 
 use App\Classes\ReturnUUIDTracker;
+use App\Exports\ScheduleExport;
 use App\Http\Controllers\Controller;
+use App\Imports\ScheduleImport;
 use App\Models\Schedule as EventSchedule;
 use App\Models\SeatTracker;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use DataTables;
 use Illuminate\Support\Facades\Log;
+use Maatwebsite\Excel\Facades\Excel;
 
 class EticketSchedule extends Controller
 {
@@ -155,6 +158,42 @@ class EticketSchedule extends Controller
                 ->rawColumns(['action'])
                 ->make(true);
         }
+    }
+
+
+    public function importExportViewSchedule()
+    {
+        return view('Eticket.schedule.import');
+    }
+
+    public function exportSchedule()
+    {
+
+        $schedules =   DB::table('schedules')
+            ->select('terminal_name','name','buses.bus_registration as Number Plate','pickups.location as pickup'
+                ,'destinations.location','fare_adult','fare_children','departure_date','departure_time')
+            ->join('terminals', 'schedules.terminal_id', '=', 'terminals.id')
+            ->join('services', 'schedules.service_id', '=', 'services.id')
+            ->join('buses', 'schedules.bus_id', '=', 'buses.id')
+            ->join('pickups', 'schedules.pickup_id', '=', 'pickups.id')
+            ->join('destinations', 'schedules.destination_id', '=', 'destinations.id')
+            ->get();
+
+        return Excel::download(new ScheduleExport( $schedules), 'schedule.csv');
+    }
+
+
+    public function importSchedule(Request $request)
+    {
+        $request->validate([
+            'excel_file' => 'required|file|mimes:xls,xlsx,csv'
+        ]);
+
+        Excel::import(new ScheduleImport,request()->file('excel_file'));
+
+        toastr()->success('Data saved successfully');
+
+        return response()->json(['message' => 'uploaded successfully'], 200);
     }
 
 }

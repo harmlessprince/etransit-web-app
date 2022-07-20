@@ -93,7 +93,7 @@ Route::get('login/{provider}', [SocialController::class ,'redirect']);
 Route::get('login/{provider}/callback',[SocialController::class ,'Callback']);
 
 //ferry post
-Route::post('/ferry/bookings' , [FerryBookings::class ,'bookFerry']);
+Route::match(array('GET','POST'),'/ferry/bookings' , [FerryBookings::class ,'bookFerry']);
 
 //train bookings
 Route::post('train/bookings',[Train::class ,'checkSchedule']);
@@ -488,6 +488,10 @@ Route::prefix('e-ticket')->name('e-ticket.')->group(function(){
 
     //import and export buses
     Route::get('export/vehicle', [ManageBus::class, 'exportVehicle'])->name('export.vehicle');
+
+    Route::get('import-export-schedule', [EticketSchedule::class, 'importExportViewSchedule']);
+    Route::get('export/schedule', [EticketSchedule::class, 'exportSchedule'])->name('export.schedule');
+    Route::post('import/schedule', [EticketSchedule::class, 'importSchedule'])->name('import.schedule');
 
 
     Route::group(['middleware' => ['e-ticket','prevent-back-history','check-if-session-is-set','tenant_permissions']], function() {

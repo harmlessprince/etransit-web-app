@@ -95,7 +95,7 @@
             <div class="col-md-12 col-xl-12 col-lg-12 col-sm-12">
                <div class="add_bus_btn">
                    <div class="space-left">
-                       <a href="{{url('e-ticket/import')}}" class="btn btn-success">Bulk Upload</a>
+                       <a href="{{url('e-ticket/import-export-schedule')}}" class="btn btn-success">Bulk Upload Schedules</a>
                    </div>
                    <div class="space-left">
                        <a href="{{url('e-ticket/add-new-tenant-bus')}}" class="btn btn-success">Add Bus(es)</a>

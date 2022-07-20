@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Classes\Reference;
+use App\Models\FerryLocation;
 use App\Models\FerryTrip;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -48,7 +49,10 @@ class FerryBookings extends Controller
 
         $returnDate = $request->return_date;
 
-        return  view('pages.ferry.schedules' ,compact('checkSchedule','tripType','returnDate'));
+        $ferryLocation = FerryLocation::all();
+
+
+        return  view('pages.ferry.schedules' ,compact('checkSchedule','tripType','returnDate','ferryLocation'));
     }
 
 

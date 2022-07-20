@@ -17,7 +17,7 @@ class TrainSchedule extends Model
      * @var array
      */
     protected $casts = [
-        'departure_date' => 'datetime',
+        'departure_date' => 'datetime:Y-m-d',
     ];
 
 
