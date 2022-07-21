@@ -491,7 +491,8 @@ Route::prefix('e-ticket')->name('e-ticket.')->group(function(){
 
     Route::get('import-export-schedule', [EticketSchedule::class, 'importExportViewSchedule']);
     Route::get('export/schedule', [EticketSchedule::class, 'exportSchedule'])->name('export.schedule');
-    Route::post('import/schedule', [EticketSchedule::class, 'importSchedule'])->name('import.schedule');
+    Route::post('import/e-ticket/schedule', [EticketSchedule::class, 'importSchedule']);
+    //->name('import.schedule');
 
 
     Route::group(['middleware' => ['e-ticket','prevent-back-history','check-if-session-is-set','tenant_permissions']], function() {

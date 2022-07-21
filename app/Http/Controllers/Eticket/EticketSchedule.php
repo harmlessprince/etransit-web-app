@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\DB;
 use DataTables;
 use Illuminate\Support\Facades\Log;
 use Maatwebsite\Excel\Facades\Excel;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class EticketSchedule extends Controller
 {
@@ -185,15 +186,18 @@ class EticketSchedule extends Controller
 
     public function importSchedule(Request $request)
     {
+
         $request->validate([
             'excel_file' => 'required|file|mimes:xls,xlsx,csv'
         ]);
 
         Excel::import(new ScheduleImport,request()->file('excel_file'));
 
-        toastr()->success('Data saved successfully');
+//        toastr()->success('Data saved successfully');
+        Alert::success('Success', 'Transaction approved successfully');
+        return back();
 
-        return response()->json(['message' => 'uploaded successfully'], 200);
+//        return response()->json(['message' => 'uploaded successfully'], 200);
     }
 
 }

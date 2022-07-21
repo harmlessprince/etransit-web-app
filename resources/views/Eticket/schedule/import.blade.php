@@ -6,6 +6,27 @@
         margin-bottom: 20px;
     }
 
+     .file-upload{
+         height:400px;
+         width: 100%;
+         border: 1px dotted #DC6513;;
+         border-radius: 20px;
+     }
+
+
+    .image-button{
+        display:flex;
+        justify-content: center;
+        margin-top: 100px;
+
+    }
+    .progress-bar-container{
+        display:flex;
+        justify-content: center;
+    }
+
+
+
 </style>
 @section('content')
     <div class="container-fluid">
@@ -62,7 +83,27 @@
         <div class="card ">
             <div class="card-body">
                 <div id="app">
-                    <bus-schedules-upload></bus-schedules-upload>
+{{--                    <bus-schedules-upload></bus-schedules-upload>--}}
+                    <div class="file-upload">
+                        <form action="{{url('e-ticket/import/e-ticket/schedule')}}"  method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div class="form-group" >
+                                <div class="image-button">
+                                    <img :src="'/assets/images/file/file.png'"   alt="image"  onclick="chooseFile();"  />
+                                </div>
+                                <input name="excel_file" type="file" class="form-control" v-on:change="onImageChange" ref="excel_file" id="fileInput" hidden >
+                                <br/>
+                                <div class="progress-bar-container">
+{{--                                    <progress max="100" :value.prop="uploadPercentage"></progress>--}}
+                                    <br>
+                                </div>
+                                <div style="display: flex;justify-content: center;" >
+                                    <button class="btn btn-sm btn-success btn-submit"  @click="uploadImage"  >Click To Upload File</button>
+                                </div >
+                            </div>
+
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
