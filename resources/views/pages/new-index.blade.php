@@ -42,7 +42,7 @@
 
 @section('content')
 
-<section style="height: 400px;background: url(&quot;../new-assets/img/Rectangle%203.png&quot;) center / cover no-repeat;" >
+<section style="height: 400px;background: url(&quot;../new-assets/img/Rectangle%203.png&quot;) center / cover no-repeat; " >
     <div class="d-flex d-sm-flex d-md-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center" style="height: 400px;background: rgba(11,8,8,0.73);">
         <div class="container d-md-flex justify-content-md-center align-items-md-center">
             <div class="row">

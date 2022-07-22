@@ -69,8 +69,8 @@
                       <div class="row">
                           <div class="col-md-6 colm-sm-6 col-lg-6 col-xl-6 col-xs-6">
                               <div class="form-group">
-                                  <label>Car Brand</label>
-                                  <input type="text" name="car_brand" id="car_brand" class="form-control" value="{{ old('car_brand') }}"  required/>
+                                  <label>Car Brand and Model</label>
+                                  <input type="text" name="car_brand" id="car_brand" class="form-control" value="{{ old('car_brand') }}" placeholder="e.g Toyota Coroll" required/>
                               </div>
                           </div>
                           <div class="col-md-6 colm-sm-6 col-lg-6 col-xl-6 col-xs-6">
@@ -134,7 +134,7 @@
 
                         <div class="col-md-6 colm-sm-6 col-lg-6 col-xl-6 col-xs-6">
                             <div class="form-group">
-                                <label for="daily_rentals">Daily Rentals</label>
+                                <label for="daily_rentals">Daily Rentals Rate(Within area of operation)</label>
                                 <input type="text" class="form-control" name="daily_rentals" id="daily_rentals" value="{{ old('daily_rentals') }}"  required/>
                             </div>
                         </div>
@@ -143,14 +143,14 @@
                       <div class="row">
                           <div class="col-md-6 colm-sm-6 col-lg-6 col-xl-6 col-xs-6">
                               <div class="form-group">
-                                  <label for="extra_hour">Extra Hour</label>
+                                  <label for="extra_hour">Fees per Extra Hour</label>
                                   <input type="text" class="form-control" name="extra_hour" id="extra_hour" value="{{ old('extra_hour') }}"  required/>
                               </div>
                           </div>
 
                           <div class="col-md-6 colm-sm-6 col-lg-6 col-xl-6 col-xs-6">
                               <div class="form-group">
-                                  <label for="sw_region_fare">SW Region (Fare)r</label>
+                                  <label for="sw_region_fare">SW Region (Fare)</label>
                                   <input type="text" class="form-control" name="sw_region_fare" id="sw_region_fare" value="{{ old('sw_region_fare') }}"  required/>
                               </div>
                           </div>
