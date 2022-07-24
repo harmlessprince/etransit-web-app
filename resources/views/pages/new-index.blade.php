@@ -1,5 +1,6 @@
 @extends('layouts.app')
 <style>
+
     #ferry_form , #train_form{
         display:none;
     }
@@ -32,18 +33,23 @@
         padding:10px;
 
     }
+    @@media only screen and (max-width: 700px){
+        .mobile-copy{
+            display: none;
+        }
+    }
 </style>
 
 @section('content')
 
-<section style="height: 400px;background: url(&quot;../new-assets/img/Rectangle%203.png&quot;) center / cover no-repeat;" >
+<section style="height: 400px;background: url(&quot;../new-assets/img/Rectangle%203.png&quot;) center / cover no-repeat; " >
     <div class="d-flex d-sm-flex d-md-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center" style="height: 400px;background: rgba(11,8,8,0.73);">
         <div class="container d-md-flex justify-content-md-center align-items-md-center">
             <div class="row">
                 <div class="col-md-12">
                     <p style="font-size: 20px;color: var(--bs-white);text-align: center;">Your 24/7 one-stop transportation and logistics service</p>
                     <h1 style="color: var(--bs-white);text-align: center;"><strong>EASY SAFE CONVENIENT</strong></h1>
-                   <p style="font-size: 20px;color: var(--bs-white);text-align: center;padding-right: 80px;padding-left: 80px;">Hire a vehicle,send a parcel, book a bus,flight,boat cruise or ferry instantly at your fingertips. No queues. No delays.&nbsp;&nbsp;</p>
+                  {{----}}  <p style="font-size: 20px;color: var(--bs-white);text-align: center;padding-right: 80px;padding-left: 80px;" class="mobile-copy">Hire a vehicle,send a parcel, book a bus,flight,boat cruise or ferry instantly at your fingertips. No queues. No delays.&nbsp;&nbsp;</p>
                 </div>
             </div>
         </div>
