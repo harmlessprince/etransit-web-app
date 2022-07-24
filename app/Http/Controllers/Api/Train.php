@@ -438,7 +438,7 @@ class Train extends Controller
                 'user_id' => null
             ]);
         }
-    
+
         return  response()->json(['Error' => false , 'message' => 'Please ensure the gender option is not more than the number of passenger intended for booking']);
     }else{
 
@@ -514,8 +514,8 @@ class Train extends Controller
 
 
         return response()->json(['success' => true ,
-           'data' => compact('childrenCount','fetchScheduleDetails','adultCount',
-                'childrenCount','amount','selectedSeat','ticketType' , 'totalPasseneger','return_date') ]);
+           'data' => compact('childrenCount','fetchScheduleDetails','adultCount','adultFareTotal',
+             'childFareTotal',   'childrenCount','amount','selectedSeat','ticketType' , 'totalPasseneger','return_date') ]);
     }
 
 
@@ -529,8 +529,9 @@ class Train extends Controller
         ]);
 
         DB::beginTransaction();
+        $reference = Reference::generateTrnxRef();
         $transactions = new \App\Models\Transaction();
-        $transactions->reference          = Reference::generateTrnxRef();
+        $transactions->reference          = $reference;
         $transactions->amount             = (double) $request->amount;
         $transactions->status             = 'Pending';
         $transactions->description        = 'Cash Payment';
@@ -567,10 +568,21 @@ class Train extends Controller
         $data["email"] =  auth()->user()->email;
         $data['name']  =  auth()->user()->full_name;
 
+
+
         $maildata = [
             'name' => auth()->user()->full_name,
             'service' => 'Train Booking',
-            'transaction' => $transactions
+            'transaction' => $transactions,
+            'reference' =>  $reference,
+            'departure_date' =>$seat->departure_date->format('Y-m-d'),
+            'departure_time' => $seat->departure_time,
+            'totalAmount' => $request->amount,
+            'childrenCount' => request()->childrenCount,
+            'adultCount' => request()->adultCount,
+            'childFare' => request()->childrenFare,
+            'adultFare' => request()->adultFare,
+            'return_date' => request()->return_date
         ];
 
         $email =  $data["email"];

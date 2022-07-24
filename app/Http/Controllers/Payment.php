@@ -70,6 +70,9 @@ class Payment extends Controller
                 "fetchFerryScheduleDetailsID" => request()->fetchFerryScheduleDetailsID ?? null,
                 "train_schedule_id" => request()->train_schedule_id ?? null,
                 "totalPasseneger" => request()->totalPasseneger ?? null,
+                "childrenFareTotal" => request()->childrenFareTotal ?? null,
+                "adultFareTotal" => request()->adultFareTotal ?? null,
+                "return_date" => request()->return_date ?? null,
 
             ]
         ];
@@ -576,8 +579,9 @@ class Payment extends Controller
 //        ]);
 
         DB::beginTransaction();
+        $reference = Reference::generateTrnxRef();
         $transactions = new \App\Models\Transaction();
-        $transactions->reference          = Reference::generateTrnxRef();
+        $transactions->reference          = $reference;
         $transactions->trx_ref            = $data['data']['tx_ref'];
         $transactions->amount             =  (double) $data['data']['amount'];
         $transactions->status             = 'Successful';
@@ -615,11 +619,19 @@ class Payment extends Controller
         $data['name']  =   $data['data']['meta']['user_name'];
 
         $maildata = [
-            'name' => $data['name'],
+            'name' => auth()->user()->full_name,
             'service' => 'Train Booking',
-            'transaction' => $transactions
+            'transaction' => $transactions,
+            'reference' =>  $reference,
+            'departure_date' =>$seat->departure_date->format('Y-m-d'),
+            'departure_time' => $seat->departure_time,
+            'totalAmount' =>  $data['data']['amount'],
+            'childrenCount' =>  $data['data']['meta']['childrenCount'],
+            'adultCount' =>  $data['data']['meta']['adultCount'],
+            'childFare' =>  $data['data']['meta']['childrenFareTotal'],
+            'adultFare' =>  $data['data']['meta']['adultFareTotal'],
+            'return_date' =>  $data['data']['meta']['return_date'],
         ];
-
         $email =  $data["email"];
 
         Mail::to($email)->send(new \App\Mail\TrainTicket($maildata));

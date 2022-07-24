@@ -140,13 +140,13 @@
     {{--    </div>--}}
 
 
-    <section style="height: 226px;background: url('../new-assets/img/Rectangle%2015%20(2).png') center / cover no-repeat;">
+    <section style="height: 226px;background:   url('{{ asset('new-assets/img/Rectangle%2015%20(2).png')}}') center / cover no-repeat;">
         <div class="d-flex d-sm-flex d-md-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center" style="height: 226px;background: rgba(11,8,8,0.73);">
             <div class="container d-md-flex justify-content-md-center align-items-md-center">
                 <div class="row">
                     <div class="col-md-12">
-                        <h1 style="color: var(--bs-white);text-align: center;"><strong>Bus Booking&nbsp;</strong></h1>
-                        <p style="font-size: 20px;color: var(--bs-white);text-align: center;">Loren ipsum dolor</p>
+                        <h1 style="color: var(--bs-white);text-align: center;"><strong>Train Booking&nbsp;</strong></h1>
+{{--                        <p style="font-size: 20px;color: var(--bs-white);text-align: center;">Loren ipsum dolor</p>--}}
                     </div>
                 </div>
             </div>
@@ -165,129 +165,55 @@
                     <hr>
                     <div class="row" style="margin-bottom: 11px;">
                         <div class="col">
-                            <p style="margin-top: 4px;margin-bottom: 0px;font-size: 13px;"><strong>Star Rating</strong></p>
+                            <p style="margin-top: 4px;margin-bottom: 0px;font-size: 13px;"><strong>Departure States</strong></p>
                         </div>
                         <div class="col" style="text-align: right;">
-                            <div class="dropdown" style="height: 24px;"><button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="color: #ed954d;background: var(--bs-white);border-color: rgba(249,249,249,0);height: 24px;padding-top: 1px;">Reset</button>
-                                <div class="dropdown-menu"><a class="dropdown-item" href="#">First Item</a><a class="dropdown-item" href="#">Second Item</a><a class="dropdown-item" href="#">Third Item</a></div>
-                            </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">
-                            <div class="table-responsive">
-                                <table class="table table-borderless">
-                                    <tbody>
-                                    <tr>
-                                        <td>
-                                            <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-8"><label class="form-check-label" for="formCheck-8">Air Peace</label></div>
-                                        </td>
-                                        <td style="text-align: right;color: #afafb0;">from N 80,000</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-9"><label class="form-check-label" for="formCheck-9">Africa World Airlines</label></div>
-                                        </td>
-                                        <td style="text-align: right;color: #afafb0;">from N 80,000</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-7"><label class="form-check-label" for="formCheck-7">Hahn Air Systems</label></div>
-                                        </td>
-                                        <td style="text-align: right;color: #afafb0;">from N 80,000</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-10"><label class="form-check-label" for="formCheck-10">Ethiopian</label></div>
-                                        </td>
-                                        <td style="text-align: right;color: #afafb0;">from N 80,000</td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                            <form method="POST" action="{{url('train/bookings/filter')}}">
+                                @csrf
+                                <div class="table-responsive">
+                                    <table class="table table-borderless">
+                                        <tbody>
+                                        @foreach( $trainStops as $state)
+                                        <tr>
+                                            <td>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" value="{{$state->id}}" name="terminals[]" id="formCheck-8">
+                                                </div>
+                                            </td>
+                                            <td style="text-align: right;color: #afafb0;">{{$state->locations_state}}</td>
+                                        </tr>
+                                        @endforeach
+                                        <input type="hidden" name="departure_date"  value="{{$departure_date}}" />
+{{--                                        <input type="hidden" name="departure" value="{{$departure_date}}"/>--}}
+                                        <input type="hidden" name="destination_to" value="{{$destination_to}}"/>
+                                        <input type="hidden" name="tripType" value="{{$tripTypeId}}" />
+                                        </tbody>
+                                    </table>
+                                    <div class="col"><button class="btn btn-primary" type="submit" style="font-size: 10px;background: rgba(13,110,253,0);color: var(--bs-gray-900);border-color: #010000;border-right-color: var(--bs-gray-900);">Filter</button></div>
+                                </div>
+                            </form>
                         </div>
                     </div>
-                    <div class="row" style="margin-bottom: 10px;">
-                        <div class="col">
-                            <p style="margin-top: 4px;margin-bottom: 0px;font-size: 13px;"><strong>Price Range</strong></p>
-                        </div>
-                        <div class="col" style="text-align: right;">
-                            <div class="dropdown" style="height: 24px;"><button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="color: #ef954d;background: var(--bs-white);border-color: rgba(249,249,249,0);height: 24px;padding-top: 1px;">Reset</button>
-                                <div class="dropdown-menu"><a class="dropdown-item" href="#">First Item</a><a class="dropdown-item" href="#">Second Item</a><a class="dropdown-item" href="#">Third Item</a></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col"><input class="form-range" type="range"></div>
-                    </div>
-                    <hr>
-                    <div class="row">
-                        <div class="col">
-                            <p style="margin-top: 4px;margin-bottom: 0px;font-size: 13px;"><strong>Cabin</strong></p>
-                        </div>
-                        <div class="col" style="text-align: right;">
-                            <div class="dropdown" style="height: 24px;"><button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="color: #ef954d;background: var(--bs-white);border-color: rgba(249,249,249,0);height: 24px;padding-top: 1px;">Reset</button>
-                                <div class="dropdown-menu"><a class="dropdown-item" href="#">First Item</a><a class="dropdown-item" href="#">Second Item</a><a class="dropdown-item" href="#">Third Item</a></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="table-responsive">
-                        <table class="table table-borderless">
-                            <tbody>
-                            <tr>
-                                <td>
-                                    <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-2"><label class="form-check-label" for="formCheck-2" style="color: #afafb0;">First Class</label></div>
-                                </td>
-                                <td>55</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-1"><label class="form-check-label" for="formCheck-1" style="color: #afafb0;">Business Class</label></div>
-                                </td>
-                                <td>77</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-4"><label class="form-check-label" for="formCheck-4" style="color: #afafb0;">Economy</label></div>
-                                </td>
-                                <td>44</td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-3"><label class="form-check-label" for="formCheck-3" style="color: #afafb0;">Premium Economy</label></div>
-                                </td>
-                                <td>57</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <hr>
-                    <div class="row" style="margin-bottom: 10px;">
-                        <div class="col">
-                            <p style="margin-top: 4px;margin-bottom: 0px;font-size: 13px;"><strong>Stops</strong></p>
-                        </div>
-                        <div class="col" style="text-align: right;">
-                            <div class="dropdown" style="height: 24px;"><button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="color: var(--bs-dark);background: var(--bs-white);border-color: rgba(249,249,249,0);height: 24px;padding-top: 1px;">Reset</button>
-                                <div class="dropdown-menu"><a class="dropdown-item" href="#">First Item</a><a class="dropdown-item" href="#">Second Item</a><a class="dropdown-item" href="#">Third Item</a></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col"><button class="btn btn-primary" type="button" style="font-size: 10px;background: rgba(13,110,253,0);color: var(--bs-gray-900);border-color: #010000;border-right-color: var(--bs-gray-900);">1 Stop</button></div>
-                        <div class="col"><button class="btn btn-primary" type="button" style="font-size: 10px;background: rgba(13,110,253,0);color: var(--bs-gray-900);border-color: #010000;border-right-color: var(--bs-gray-900);width: 54.25px;">2 Stop</button></div>
-                        <div class="col"><button class="btn btn-primary" type="button" style="font-size: 10px;background: rgba(13,110,253,0);color: var(--bs-gray-900);border-color: #010000;border-right-color: var(--bs-gray-900);width: 54.25px;">Any</button></div>
-                    </div>
-                    <div class="row">
-                        <div class="col" style="margin-top: 8px;"><button class="btn btn-primary" type="button" style="font-size: 10px;background: var(--bs-orange);color: var(--bs-gray-900);width: 68.25px;border-style: none;border-color: rgba(1,0,0,0);border-right-color: var(--bs-gray-900);">No Stop</button></div>
-                    </div>
+
+
                 </div>
                 <div class="col-sm-6 col-md-9" id="cruisedisplay" style="padding-left: 0px;padding-right: 0px;">
                     <div class="row" id="optionline-1" style="padding-left: 0px;padding-right: 0px;margin-top: 0px;margin-bottom: 15px;margin-left: 10px;margin-right: 0px;background: var(--bs-gray-200);">
                         <div class="col" style="background: var(--bs-gray-200);border-right: 1px none #bebebe;">
-                            <div class="dropdown" id="targetcenter-1" style="border-style: none;background: rgba(238,238,238,0);"><button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="color: rgb(136,136,136);background: rgba(238,238,238,0);border-style: none;">&nbsp;From</button>
-                                <div class="dropdown-menu"><a class="dropdown-item" href="#">First Item</a><a class="dropdown-item" href="#">Second Item</a><a class="dropdown-item" href="#">Third Item</a></div>
+                            <div class="dropdown" id="targetcenter-1" style="border-style: none;background: rgba(238,238,238,0);">
+                                <button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="color: rgb(136,136,136);background: rgba(238,238,238,0);border-style: none;">&nbsp;From</button>
+{{--                                <div class="dropdown-menu">--}}
+{{--                                    <a class="dropdown-item" href="#">First Item</a>--}}
+{{--                                    <a class="dropdown-item" href="#">Second Item</a>--}}
+{{--                                    <a class="dropdown-item" href="#">Third Item</a>--}}
+{{--                                </div>--}}
                             </div>
-                            <p style="font-weight: bold;text-align: center;">Lagos<span style="color: rgb(146,144,144);margin-left: 5px;">Ikeja</span></p>
+
+                            <p style="font-weight: bold;text-align: center;">{{$checkSchedule[0]->pickup->locations_state ?? null}} <span style="color: rgb(146,144,144);margin-left: 5px;"></span></p>
                         </div>
                         <div class="col d-lg-flex justify-content-lg-center align-items-lg-center" style="background: var(--bs-gray-200);">
                             <p style="color: rgb(121,122,122);text-align: center;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" style="font-size: 33px;">
@@ -297,30 +223,30 @@
                         </div>
                         <div class="col" style="background: var(--bs-gray-200);border-right: 1px solid #bebebe;">
                             <div class="dropdown" style="border-style: none;background: rgba(238,238,238,0);"><button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="color: rgb(136,136,136);background: rgba(238,238,238,0);border-style: none;">To&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</button>
-                                <div class="dropdown-menu"><a class="dropdown-item" href="#">First Item</a><a class="dropdown-item" href="#">Second Item</a><a class="dropdown-item" href="#">Third Item</a></div>
+{{--                                <div class="dropdown-menu"><a class="dropdown-item" href="#">First Item</a><a class="dropdown-item" href="#">Second Item</a><a class="dropdown-item" href="#">Third Item</a></div>--}}
                             </div>
-                            <p style="font-weight: bold;text-align: center;">Abia<span style="color: rgb(146,144,144);margin-left: 5px;">Aba</span></p>
+                            <p style="font-weight: bold;text-align: center;">{{$checkSchedule[0]->destination->locations_state ?? null}}<span style="color: rgb(146,144,144);margin-left: 5px;"></span></p>
                         </div>
                         <div class="col" style="background: var(--bs-gray-200);">
                             <div class="dropdown" style="border-style: none;background: rgba(238,238,238,0);"><button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="color: rgb(136,136,136);background: rgba(238,238,238,0);border-style: none;">Departure&nbsp;&nbsp;</button>
-                                <div class="dropdown-menu"><a class="dropdown-item" href="#">First Item</a><a class="dropdown-item" href="#">Second Item</a><a class="dropdown-item" href="#">Third Item</a></div>
+{{--                                <div class="dropdown-menu"><a class="dropdown-item" href="#">First Item</a><a class="dropdown-item" href="#">Second Item</a><a class="dropdown-item" href="#">Third Item</a></div>--}}
                             </div>
-                            <p style="font-weight: bold;text-align: left;margin-bottom: 0px;">&nbsp; &nbsp;June 28, 2021</p>
-                            <p style="color: rgb(121,122,122);">&nbsp; &nbsp;Tuesday</p>
+                            <p style="font-weight: bold;text-align: left;margin-bottom: 0px;">&nbsp; &nbsp;{{ $departure_date ??  null}}</p>
+{{--                            <p style="color: rgb(121,122,122);">&nbsp; &nbsp;Tuesday</p>--}}
                         </div>
-                        <div class="col" style="background: var(--bs-gray-200);">
-                            <div class="dropdown" id="targetcenter-3" style="border-style: none;background: rgba(238,238,238,0);text-align: center;"><button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="color: rgb(136,136,136);background: rgba(238,238,238,0);border-style: none;">Return&nbsp;&nbsp;</button>
-                                <div class="dropdown-menu"><a class="dropdown-item" href="#">First Item</a><a class="dropdown-item" href="#">Second Item</a><a class="dropdown-item" href="#">Third Item</a></div>
-                            </div>
-                            <p style="font-weight: bold;text-align: center;margin-bottom: 0px;">1</p>
-                        </div>
-                        <div class="col mx-auto" style="background: var(--bs-gray-200);">
-                            <div class="dropdown" style="border-style: none;background: rgba(238,238,238,0);"><button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="color: rgb(136,136,136);background: rgba(238,238,238,0);border-style: none;">Passenger and class</button>
-                                <div class="dropdown-menu"><a class="dropdown-item" href="#">First Item</a><a class="dropdown-item" href="#">Second Item</a><a class="dropdown-item" href="#">Third Item</a></div>
-                            </div>
-                            <p style="font-weight: bold;text-align: left;margin-bottom: 0px;">&nbsp; &nbsp;1 Adult</p>
-                            <p style="color: rgb(121,122,122);">&nbsp; &nbsp;Business class</p>
-                        </div>
+{{--                        <div class="col" style="background: var(--bs-gray-200);">--}}
+{{--                            <div class="dropdown" id="targetcenter-3" style="border-style: none;background: rgba(238,238,238,0);text-align: center;"><button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="color: rgb(136,136,136);background: rgba(238,238,238,0);border-style: none;">Return&nbsp;&nbsp;</button>--}}
+{{--                                <div class="dropdown-menu"><a class="dropdown-item" href="#">First Item</a><a class="dropdown-item" href="#">Second Item</a><a class="dropdown-item" href="#">Third Item</a></div>--}}
+{{--                            </div>--}}
+{{--                            <p style="font-weight: bold;text-align: center;margin-bottom: 0px;">1</p>--}}
+{{--                        </div>--}}
+{{--                        <div class="col mx-auto" style="background: var(--bs-gray-200);">--}}
+{{--                            <div class="dropdown" style="border-style: none;background: rgba(238,238,238,0);"><button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="color: rgb(136,136,136);background: rgba(238,238,238,0);border-style: none;">Passenger and class</button>--}}
+{{--                                <div class="dropdown-menu"><a class="dropdown-item" href="#">First Item</a><a class="dropdown-item" href="#">Second Item</a><a class="dropdown-item" href="#">Third Item</a></div>--}}
+{{--                            </div>--}}
+{{--                            <p style="font-weight: bold;text-align: left;margin-bottom: 0px;">&nbsp; &nbsp;1 Adult</p>--}}
+{{--                            <p style="color: rgb(121,122,122);">&nbsp; &nbsp;Business class</p>--}}
+{{--                        </div>--}}
                     </div>
                     @if(count($checkSchedule) > 0)
                         @foreach($checkSchedule as $schedule)

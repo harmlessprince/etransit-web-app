@@ -51,10 +51,23 @@
                 <div class="col">
                     <h3 style="font-weight: bold;color: var(--bs-gray-100);">FOLLOW US ON</h3>
                     <ul class="list-inline">
-                        <li class="list-inline-item"><i class="fa fa-twitter" style="font-size: 30px;color: var(--bs-gray-100);margin-right: 10px;"></i></li>
-                        <li class="list-inline-item"><i class="fa fa-facebook-square" style="color: var(--bs-gray-100);font-size: 30px;margin-right: 10px;"></i></li>
+
+                        <li class="list-inline-item">
+                            <a href="https://twitter.com/etransitafrica" target="_blank">
+                               <i class="fa fa-twitter" style="font-size: 30px;color: var(--bs-gray-100);margin-right: 10px;"></i>
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="https://web.facebook.com/etransitafrica" target="_blank">
+                            <i class="fa fa-facebook-square" style="color: var(--bs-gray-100);font-size: 30px;margin-right: 10px;"></i>
+                            </a>
+                        </li>
                         <li class="list-inline-item"><i class="fa fa-youtube-play" style="color: var(--bs-gray-100);font-size: 30px;margin-right: 10px;"></i></li>
-                        <li class="list-inline-item"><i class="fa fa-instagram" style="color: var(--bs-gray-100);font-size: 30px;"></i></li>
+                        <li class="list-inline-item">
+                            <a href="https://www.instagram.com/etransitafrica/" target="_blank">
+                            <i class="fa fa-instagram" style="color: var(--bs-gray-100);font-size: 30px;"></i>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>

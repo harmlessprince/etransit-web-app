@@ -439,10 +439,48 @@ class Train extends Controller
         }
 
         $returnDate = $request->return_date;
+        $departure_date = $attr['departure_date'];
+        $passenger = $attr['passenger'];
+        $destination_to = $attr['destination_to'];
+        $trainStops = \App\Models\TrainLocation::take(10)->get();
+
+        return view('pages.train.schedule',compact('checkSchedule','returnDate','tripTypeId','trainStops','departure_date','passenger','destination_to'));
+
+    }
 
 
-        return view('pages.train.schedule',compact('checkSchedule','returnDate','tripTypeId'));
+    public function checkScheduleFilter()
+    {
 
+       $checkSchedule =  TrainSchedule::where('departure_date', request()->departure_date)
+//            ->where('pickup_id', $attr['destination_from'])
+            ->whereIn('destination_id',request()->terminals)
+//            ->where('seats_available' , '>=', request()->passenger)
+            ->with(['destination','pickup','train'])->get();
+
+
+
+
+//        dd($checkSchedule);
+
+        $tripTypeId = request()->tripType;
+
+        if($tripTypeId == 2)
+        {
+            $returnDate = request()->session()->get('return_date');
+        }else{
+            $returnDate = null;
+        }
+
+
+
+        $departure_date = request()->departure_date;
+        $passenger = request()->passenger;
+        $destination_to = request()->destination_to;
+
+        $trainStops = \App\Models\TrainLocation::take(10)->get();
+
+        return view('pages.train.schedule',compact('checkSchedule','returnDate','tripTypeId','trainStops','departure_date','passenger','destination_to'));
     }
 
 
@@ -499,6 +537,8 @@ class Train extends Controller
 //        $routeFare = ScheduleRoute::where('train_schedule_id',$train_schedule_id)->with(['routeFare' => function($query){
 //                                $query->with('terminal','destination_terminal','seatClass')->get();
 //                            }])->get();
+//        $routeCount = count( $routeFare);
+//        dd( $routeFare[0]->routeFare);
 
 
 
@@ -780,6 +820,12 @@ class Train extends Controller
 
         $service = \App\Models\Service::where('id',2)->first();
 
+        session()->put('adultFare', $adultFareTotal);
+        session()->put('childrenFare',$childFareTotal);
+        session()->put('adultCount',$adultCount);
+        session()->put('childrenCount',$childrenCount);
+        session()->put('return_date', $return_date);
+
         DB::commit();
     //        dd($service);
 
@@ -799,8 +845,9 @@ class Train extends Controller
         ]);
 
         DB::beginTransaction();
+        $reference = Reference::generateTrnxRef();
         $transactions = new \App\Models\Transaction();
-        $transactions->reference          = Reference::generateTrnxRef();
+        $transactions->reference          = $reference;
         $transactions->amount             = (double) $request->amount;
         $transactions->status             = 'Pending';
         $transactions->description        = 'Cash Payment';
@@ -837,10 +884,57 @@ class Train extends Controller
         $data["email"] =  auth()->user()->email;
         $data['name']  =  auth()->user()->full_name;
 
+        if(Session::has('setReturnDate'))
+        {
+            $return_date = request()->session()->get('setReturnDate');
+        }else{
+            $return_date = null;
+        }
+
+        if(Session::has('adultFare'))
+        {
+           $adultFare =  request()->session()->get('adultFare');
+        }else{
+            $adultFare = null;
+        }
+
+
+        if(Session::has('childrenFare'))
+        {
+            $childrenFare =  request()->session()->get('childrenFare');
+        }else{
+            $childrenFare = null;
+        }
+
+
+        if(Session::has('adultCount'))
+        {
+            $adultCount =  request()->session()->get('adultCount');
+        }else{
+            $adultCount = 0;
+        }
+
+
+        if(Session::has('childrenCount'))
+        {
+            $childrenCount =  request()->session()->get('childrenCount');
+        }else{
+            $childrenCount = 0;
+        }
+
         $maildata = [
             'name' => auth()->user()->full_name,
             'service' => 'Train Booking',
-            'transaction' => $transactions
+            'transaction' => $transactions,
+            'reference' =>  $reference,
+            'departure_date' =>$seat->departure_date->format('Y-m-d'),
+            'departure_time' => $seat->departure_time,
+            'totalAmount' => $request->amount,
+            'childrenCount' => $childrenCount,
+            'adultCount' => $adultCount,
+            'childFare' => $childrenFare,
+            'adultFare' => $adultFare,
+            'return_date' => $return_date
         ];
 
         $email =  $data["email"];

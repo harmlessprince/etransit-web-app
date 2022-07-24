@@ -187,17 +187,35 @@ class EticketSchedule extends Controller
     public function importSchedule(Request $request)
     {
 
-        $request->validate([
-            'excel_file' => 'required|file|mimes:xls,xlsx,csv'
-        ]);
+//        $request->validate([
+//            'excel_file' => 'required|file|mimes:xls,xlsx,csv'
+//        ]);
 
         Excel::import(new ScheduleImport,request()->file('excel_file'));
 
 //        toastr()->success('Data saved successfully');
-        Alert::success('Success', 'Transaction approved successfully');
+        Alert::success('Success', 'Data imported successfully');
         return back();
 
 //        return response()->json(['message' => 'uploaded successfully'], 200);
+    }
+
+
+    public function updateScheduleStatus(Request $request ,$schedule_id)
+    {
+        $request->validate([
+            'status' => 'required'
+        ]);
+
+        $findSchedule = EventSchedule::where('id',$schedule_id)->first();
+
+        $findSchedule->update([
+            'trip_status' => $request->status
+        ]);
+
+        Alert::success('Success', 'Status updated successfully');
+
+        return back();
     }
 
 }

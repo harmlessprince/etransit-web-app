@@ -250,6 +250,9 @@
                                     <input type="hidden" name="childrenCount" value="{{$childrenCount}}"/>
                                     <input type="hidden" name="adultCount" value="{{$adultCount}}"/>
                                     <input type="hidden" name="totalPasseneger" value="{{$totalPasseneger}}" />
+                                    <input type="hidden" name="childrenFareTotal" value="{{$childFareTotal}}"/>
+                                    <input type="hidden" name="adultFareTotal" value="{{$adultFareTotal}}" />
+                                    <input type="hidden" name="return_date" value="{{$return_date}}" />
                                     <input type="submit" value="Buy Ticket" />
                                 </form>
                             </div>

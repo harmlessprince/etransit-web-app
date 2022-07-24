@@ -55,7 +55,7 @@ class ScheduleImport implements ToModel ,WithStartRow
             'destination_id'     => $row['destination_id'],
             'fare_adult'         => $row[5],
             'fare_children'      => $row[6],
-            'departure_date'     =>   $formattedDate,
+            'departure_date'     => $formattedDate,
             'departure_time'     => $row[8],
             'tenant_id'          =>  $row['tenant_id'],
             'seats_available'    => $row['number_of_seats']

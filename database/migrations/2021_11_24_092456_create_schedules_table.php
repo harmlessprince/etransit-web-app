@@ -27,6 +27,7 @@ class CreateSchedulesTable extends Migration
             $table->date('return_date')->nullable();
             $table->time('departure_time');
             $table->time('return_time')->nullable();
+            $table->enum('trip_status',['pending','trip in progress','canceled', 'completed'])->default('pending');
             $table->string('return_uuid_tracker')->nullable()->comment('to track the ID of a bus that has both departure and return date');
             $table->string('isReturn')->default(0)->comment('return should be  1 for true / 0 for false for return trip for same bus ID');
             $table->unsignedBigInteger('seats_available')->comment("Numbers of seat available");;

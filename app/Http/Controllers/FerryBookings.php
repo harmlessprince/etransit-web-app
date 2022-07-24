@@ -48,11 +48,57 @@ class FerryBookings extends Controller
         }
 
         $returnDate = $request->return_date;
+        $passengerCount = $data['number_of_passengers'];
+        $ferryType = $data['ferry_type'];
+
+        $pickup = $data['destination_from'];
+        $destination = $data['destination_to'];
+
+        $departureDate =  $data['departure_date'];
 
         $ferryLocation = FerryLocation::all();
 
 
-        return  view('pages.ferry.schedules' ,compact('checkSchedule','tripType','returnDate','ferryLocation'));
+        return  view('pages.ferry.schedules' ,compact('checkSchedule','tripType','returnDate','ferryLocation','passengerCount','ferryType','pickup','destination','departureDate'));
+    }
+
+
+
+    public function ferryBookingFilter()
+    {
+        $tripType = request()->trip_type;
+
+        if($tripType == 1)
+        {
+            $checkSchedule =  FerryTrip::where('event_date', request()->departure_date)
+                ->whereIn('ferry_pick_up_id', request()->locations)
+//                ->where('ferry_destination_id',$data['destination_to'])
+                ->where('ferry_type_id',request()->ferryType)
+                ->where('number_of_passengers' , '>=', request()->passengerCount)
+                ->with('ferry','destination','pickup')->get();
+        }else{
+
+//            $checkSchedule =  FerryTrip::where('event_date',$data['departure_date'])
+//                ->where('ferry_pick_up_id', $data['destination_from'])
+//                ->where('ferry_destination_id',$data['destination_to'])
+//                ->where('ferry_type_id',$data['ferry_type'])
+//                ->where('number_of_passengers' , '>=', $data['number_of_passengers'])
+//                ->with('ferry','destination','pickup')->get();
+        }
+
+        $returnDate =request()->returnDate;
+
+        $passengerCount = request()->passengerCount;
+        $ferryType = request()->ferryType;
+
+        $pickup = request()->pick_up_id;
+        $destination =  request()->destination_id;
+        $departureDate =  request()->departure_date;
+
+        $ferryLocation = FerryLocation::all();
+
+
+        return  view('pages.ferry.schedules' ,compact('checkSchedule','tripType','returnDate','ferryLocation','passengerCount','ferryType','pickup','destination','departureDate'));
     }
 
 

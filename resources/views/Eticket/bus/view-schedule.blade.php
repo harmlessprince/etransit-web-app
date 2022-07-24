@@ -166,6 +166,26 @@
                         <h6>Bus Model : {{$findSchedule->bus->bus_model}}</h6>
                         <hr>
                         <h6>Bus Type : {{$findSchedule->bus->bus_type}}</h6>
+                        <hr>
+                        <h6>Trip Status : {{Ucfirst($findSchedule->trip_status)}}</h6>
+                        <hr>
+                        <h6>Update Trip Schedule Status</h6>
+                          <form action="{{url('e-ticket/update-schedule-status/'.$findSchedule->id)}}" method="POST">
+                              @csrf
+                              <select class="form-control" name="status">
+                                  <option value="">Update Schedule Status</option>
+                                  <option value="pending">Pending</option>
+                                  <option value="trip in progress">Trip In Progress</option>
+                                  <option value="canceled">Canceled</option>
+                                  <option value="completed">Completed</option>
+                              </select>
+                              @if($errors->has('status'))
+                                  <div class="error text-danger">{{ $errors->first('status') }}</div>
+                              @endif
+                              <br>
+                              <button class="btn btn-success">Update Status</button>
+                          </form>
+
                     </div>
                 </div>
             </div>

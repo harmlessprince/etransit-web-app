@@ -94,9 +94,11 @@ Route::get('login/{provider}/callback',[SocialController::class ,'Callback']);
 
 //ferry post
 Route::match(array('GET','POST'),'/ferry/bookings' , [FerryBookings::class ,'bookFerry']);
+Route::get('ferry/booking/filter',[FerryBookings::class ,'ferryBookingFilter']);
 
 //train bookings
 Route::post('train/bookings',[Train::class ,'checkSchedule']);
+Route::post('train/bookings/filter',[Train::class ,'checkScheduleFilter']);
 //Route::get('train/seat-picker/{schedule_id}/{tripType}', [Train::class , 'trainSeatPicker'])->middleware('auth');
 
 
@@ -551,6 +553,7 @@ Route::prefix('e-ticket')->name('e-ticket.')->group(function(){
         Route::get('view-each-schedule/{schedule_id}' , [EticketSchedule::class , 'viewEachSchedule']);
         Route::get('view-bus-each-schedule/{bus_id}', [EticketSchedule::class , 'viewBusSchedule']);
         Route::get('view-bus-schedules/{bus_id}', [EticketSchedule::class , 'viewEachBusSchedule'])->name('view-bus-schedules');
+        Route::post('update-schedule-status/{schedule_id}',[EticketSchedule::class , 'updateScheduleStatus']);
 
 
 
