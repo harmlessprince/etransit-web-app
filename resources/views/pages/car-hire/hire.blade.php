@@ -292,12 +292,13 @@
                         </div>
 {{--                        <p style="font-weight: bold;text-align: left;margin-bottom: 0px;margin-left: 0px;padding-left: 35px;">Daily</p>--}}
                     </div>
-                    <div class="col mx-auto" style="background: var(--bs-gray-200);">
+                   {{-- <div class="col mx-auto" style="background: var(--bs-gray-200);">
                         <div class="dropdown" style="border-style: none;background: rgba(238,238,238,0);"><button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="color: rgb(136,136,136);background: rgba(238,238,238,0);border-style: none;">Sort by</button>
                             <div class="dropdown-menu"><a class="dropdown-item" href="#">First Item</a><a class="dropdown-item" href="#">Second Item</a><a class="dropdown-item" href="#">Third Item</a></div>
                         </div>
                         <p style="font-weight: bold;text-align: left;margin-bottom: 0px;padding-left: 12px;">Cheapest</p>
                     </div>
+                --}}
 
                 </div>
                 @if(count($cars) >  0)
@@ -319,30 +320,30 @@
                                     </div>
                                     <div class="col-12">
                                         <div class="row">
-                                            <div class="col-6"><span><i class="icon ion-speedometer" style="font-size: 23px;color: var(--bs-orange);"></i></span>
+                                            <div class="col-6"><span><i class="icon ion-ios-cart" style="font-size: 23px;color: var(--bs-orange);"></i></span>
                                                 <span style="margin-left: 5px;">&#8358;  {{number_format($car->plans[0]->amount)}} Daily</span>
                                             </div>
                                             <div class="col-6 d-md-flex align-items-md-center">
-                                                <span><i class="typcn typcn-adjust-brightness" style="font-size: 23px;color: var(--bs-orange);"></i></span>
-                                                <span>{{Ucfirst($car->transmission)}}</span>
+                                                <span><i class="icon ion-ios-cog" style="font-size: 23px;color: var(--bs-orange);"></i></span>
+                                                <span> {{Ucfirst($car->transmission)}}</span>
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-6"><span><i class="icon ion-speedometer" style="font-size: 23px;color: var(--bs-orange);"></i></span>
+                                            <div class="col-6"><span><i class="icon ion-star" style="font-size: 23px;color: var(--bs-orange);"></i></span>
                                                 <span style="margin-left: 5px;">{{Ucfirst($car->carclass->name)}}</span>
                                             </div>
                                             <div class="col-6 d-md-flex align-items-md-center">
-                                                <span><i class="typcn typcn-adjust-brightness" style="font-size: 23px;color: var(--bs-orange);"></i></span>
-                                                <span>{{Ucfirst($car->cartype->name)}}</span>
+                                                <span><i class="icon ion-model-s" style="font-size: 23px;color: var(--bs-orange);"></i></span>
+                                                <span> {{Ucfirst($car->cartype->name)}}</span>
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-6"><span><i class="icon ion-speedometer" style="font-size: 23px;color: var(--bs-orange);"></i></span>
-                                                <span style="margin-left: 5px;"> A/C : {{$car->air_conditioning  == 1 ? 'True' : 'False'}}</span>
+                                            <div class="col-6"><span><i class="icon ion-ios-snowy" style="font-size: 25px;color: var(--bs-orange);"></i></span>
+                                                <span style="margin-left: 5px;"> A/C : {{$car->air_conditioning  == 1 ? 'Available' : 'NO'}}</span>
                                             </div>
                                             <div class="col-6 d-md-flex align-items-md-center">
-                                                <span><i class="typcn typcn-adjust-brightness" style="font-size: 23px;color: var(--bs-orange);"></i></span>
-                                                <span>Model : {{$car->model_year}}</span>
+                                                <span><i class="icon ion-ios-speedometer" style="font-size: 23px;color: var(--bs-orange);"></i></span>
+                                                <span> Model: {{$car->model_year}}</span>
                                             </div>
                                         </div>
                                         <div class="row">

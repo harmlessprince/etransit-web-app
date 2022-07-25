@@ -63,7 +63,7 @@
     <link rel="stylesheet" href="{{asset('login-assets/csss/Ultimate-Testimonial-Slider-BS5.css')}}">
     <style>
         body {
-            background-image: url("../login-assets/img/Rectangle%203.png");
+            background-image: url('../login-assets/img/SignIn.png');
             background-repeat: no-repeat;
             background-attachment: fixed;
             background-size: cover;
