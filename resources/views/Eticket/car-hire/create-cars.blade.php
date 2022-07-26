@@ -70,7 +70,7 @@
                           <div class="col-md-6 colm-sm-6 col-lg-6 col-xl-6 col-xs-6">
                               <div class="form-group">
                                   <label>Car Brand and Model</label>
-                                  <input type="text" name="car_brand" id="car_brand" class="form-control" value="{{ old('car_brand') }}" placeholder="e.g Toyota Coroll" required/>
+                                  <input type="text" name="car_brand" id="car_brand" class="form-control" value="{{ old('car_brand') }}" placeholder="e.g Toyota Corolla" required/>
                               </div>
                           </div>
                           <div class="col-md-6 colm-sm-6 col-lg-6 col-xl-6 col-xs-6">
@@ -151,7 +151,7 @@
                           <div class="col-md-6 colm-sm-6 col-lg-6 col-xl-6 col-xs-6">
                               <div class="form-group">
                                   <label for="sw_region_fare">SW Region (Fare)</label>
-                                  <input type="text" class="form-control" name="sw_region_fare" id="sw_region_fare" value="{{ old('sw_region_fare') }}"  required/>
+                                  <input type="text" class="form-control" name="sw_region_fare" id="sw_region_fare" value="{{ old('sw_region_fare') }}"  />
                               </div>
                           </div>
                       </div>
@@ -160,14 +160,14 @@
                            <div class="col-md-6 colm-sm-6 col-lg-6 col-xl-6 col-xs-6">
                                <div class="form-group">
                                    <label for="se_region_fare">SE Region (Fare)</label>
-                                   <input type="text" class="form-control" name="se_region_fare" id="se_region_fare" value="{{ old('se_region_fare') }}"  required/>
+                                   <input type="text" class="form-control" name="se_region_fare" id="se_region_fare" value="{{ old('se_region_fare') }}"  />
                                </div>
                            </div>
 
                            <div class="col-md-6 colm-sm-6 col-lg-6 col-xl-6 col-xs-6">
                                <div class="form-group">
                                    <label for="ss_region_fare">SS Region (Fare)</label>
-                                   <input type="text" class="form-control" name="ss_region_fare" id="ss_region_fare" value="{{ old('ss_region_fare') }}"  required/>
+                                   <input type="text" class="form-control" name="ss_region_fare" id="ss_region_fare" value="{{ old('ss_region_fare') }}"  />
                                </div>
                            </div>
                        </div>
@@ -176,7 +176,7 @@
                           <div class="col-md-6 colm-sm-6 col-lg-6 col-xl-6 col-xs-6">
                               <div class="form-group">
                                   <label for="nc_region_fare">NC Region (Fare)</label>
-                                  <input type="text" class="form-control" name="nc_region_fare" id="nc_region_fare" value="{{ old('nc_region_fare') }}"  required/>
+                                  <input type="text" class="form-control" name="nc_region_fare" id="nc_region_fare" value="{{ old('nc_region_fare') }}" />
                               </div>
                           </div>
                           <div class="col-md-6 colm-sm-6 col-lg-6 col-xl-6 col-xs-6">

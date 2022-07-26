@@ -16,7 +16,7 @@
         border-radius: 10px;
     }
 
-    .plan_header , .plan_header_text ,.plan_pice ,.plans_options
+    .plan_header , .plan_header_text ,.plan_price ,.plans_options,.plan_description
     {
         display:grid;
         text-align: center;
@@ -25,13 +25,20 @@
     {
         padding:20px;
     }
-    .plan_pice
+    .plan_price
     {
         color:#000000;
     }
     .plans_options
     {
         font-size:20px;
+    }
+    .plan_description{
+        font-size: 15px
+    }
+    .plan_description small
+    {
+        font-size: 8px;
     }
     .plans_options small
     {
@@ -57,7 +64,7 @@
         border:1px solid white;
         cursor:pointer;
     }
-    .plan_header h4 , span , .plan_header_text small , .plan_pice h2 , .plans_options small
+    .plan_header h4 , span , .plan_header_text small , .plan_price h2 , .plans_options small, .plan_description
     {
         color:white;
     }
@@ -88,12 +95,22 @@
                         <span></span>
                     </div>
                 </div>
+                <div class="plan_description">
+                    @if ($car->plans[$i]->plan == "Daily Rentals")
+                        <h6>Vehicle only available within {{ Ucfirst($car->state->location) }} </h6>
+                        <small>*Extra Hour Charges apply over rental period, driver's accomodation must be provided</small>
+                        @else
+                        <h6>Vehicle can be driven to and within {{Ucfirst($car->plans[$i]->plan)}} region </h6>
+                        <small>*Extra Hour Charges apply over rental period, driver's accomodation must be provided</small>
+                    @endif
+
+                </div>
                 <div class="plan_header_text">
                     <small>
 {{--                        {{ \Illuminate\Support\Str::limit($car->description, $limit = 150, $end = '...') }}--}}
                     </small>
                 </div>
-                <div class="plan_pice">
+                <div class="plan_price">
                     <h2><sup>&#8358; </sup> {{number_format($car->plans[$i]->amount)}}</h2>
                 </div>
                 <div class="plans_options">
@@ -104,7 +121,7 @@
                     @if(!empty($car->plans[$i]->extra_hour))
                     <div>
                         <img src="{{asset('images/icons/plan_options_white.png')}}" alt="plan-icon"/>
-                        <small>Extra Hour :<sup>&#8358; </sup>  {{number_format($car->plans[$i]->extra_hour)}}</small>
+                        <small>Extra Hour Charge :<sup>&#8358; </sup>  {{number_format($car->plans[$i]->extra_hour)}} per hour</small>
                     </div>
                     @endif
                     @if($car->plans[$i]->plan == "Daily Rentals")
@@ -116,7 +133,7 @@
                 </div>
                 <div class="payment_box">
                     <a href="{{url('/select/plan/'. $car->plans[$i]->id)}}">
-                        <button>PICK A PLAN</button>
+                        <button>CHOOSE PLAN</button>
                     </a>
                 </div>
             </div>
@@ -133,7 +150,7 @@
 {{--                    sed do eiusmod tempor--}}
 {{--                    incididunt ut labore et dolore magna aliqua.</small>--}}
 {{--            </div>--}}
-{{--            <div class="plan_pice">--}}
+{{--            <div class="r">--}}
 {{--                <h2><sup>&#8358; </sup> {{number_format($car->sw_fare)}}</h2>--}}
 {{--            </div>--}}
 {{--            <div class="plans_options">--}}
@@ -164,7 +181,7 @@
 {{--                    sed do eiusmod tempor--}}
 {{--                    incididunt ut labore et dolore magna aliqua.</small>--}}
 {{--            </div>--}}
-{{--            <div class="plan_pice">--}}
+{{--            <div class="r">--}}
 {{--                <h2><sup>&#8358; </sup> {{number_format($car->ss_fare)}}</h2>--}}
 {{--            </div>--}}
 {{--            <div class="plans_options">--}}
@@ -195,7 +212,7 @@
 {{--                    sed do eiusmod tempor--}}
 {{--                    incididunt ut labore et dolore magna aliqua.</small>--}}
 {{--            </div>--}}
-{{--            <div class="plan_pice">--}}
+{{--            <div class="r">--}}
 {{--                <h2><sup>&#8358; </sup> {{number_format($car->se_fare)}}</h2>--}}
 {{--            </div>--}}
 {{--            <div class="plans_options">--}}
@@ -226,7 +243,7 @@
 {{--                    sed do eiusmod tempor--}}
 {{--                    incididunt ut labore et dolore magna aliqua.</small>--}}
 {{--            </div>--}}
-{{--            <div class="plan_pice">--}}
+{{--            <div class="r">--}}
 {{--                <h2><sup>&#8358; </sup>{{number_format($car->nc_fare)}}</h2>--}}
 {{--            </div>--}}
 {{--            <div class="plans_options">--}}

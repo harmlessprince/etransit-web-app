@@ -195,7 +195,7 @@
             @if(!empty($findPaymentOption->extra_hour))
             <div class="car_info">
                 <img src="{{asset('images/icons/plan_options.png')}}" alt="plan-icon"/>
-                <small>Extra Hour : &#8358; {{$findPaymentOption->extra_hour}}</small>
+                <small>Extra Hour : &#8358; {{$findPaymentOption->extra_hour}} <sup>Per Hour</sup></small>
             </div>
             @endif
 {{--            <div class="car_info">--}}

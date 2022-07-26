@@ -51,10 +51,10 @@ class CarHireMgt extends Controller
             'car_class' => 'required|integer',
             'daily_rentals' => 'required',
             'extra_hour' => 'required',
-            'sw_region_fare' => 'required',
-            'ss_region_fare' => 'required',
-            'se_region_fare' => 'required',
-            'nc_region_fare' => 'required',
+            'sw_region_fare' => 'sometimes',
+            'ss_region_fare' => 'sometimes',
+            'se_region_fare' => 'sometimes',
+            'nc_region_fare' => 'sometimes',
             'description'=> 'required',
             'capacity' => 'required',
             'car_brand' => 'required',
@@ -117,38 +117,50 @@ class CarHireMgt extends Controller
         $Dailyplan->tenant_id  = $car->tenant_id;
         $Dailyplan->car_id     = $car->id;
         $Dailyplan->save();
+        if(isset($data['sw_region_fare'])){
+            $SWPlan = new \App\Models\CarPlan();
+            $SWPlan->plan   = 'South West';
+            $SWPlan->amount = $data['sw_region_fare'];
+            $SWPlan->extra_hour = $data['extra_hour'];
+            $SWPlan->tenant_id = $car->tenant_id;
+            $SWPlan->car_id = $car->id;
+            $SWPlan->save();
+        }
 
-        $SWPlan = new \App\Models\CarPlan();
-        $SWPlan->plan   = 'South West';
-        $SWPlan->amount = $data['sw_region_fare'];
-        $SWPlan->extra_hour = $data['extra_hour'];
-        $SWPlan->tenant_id = $car->tenant_id;
-        $SWPlan->car_id = $car->id;
-        $SWPlan->save();
+        if(isset($data['ss_region_fare'])){
+            $SSPlan = new \App\Models\CarPlan();
+            $SSPlan->plan   = 'South South';
+            $SSPlan->amount = $data['ss_region_fare'];
+            $SSPlan->extra_hour = $data['extra_hour'];
+            $SSPlan->tenant_id = $car->tenant_id;
+            $SSPlan->car_id = $car->id;
+            $SSPlan->save();
+        }
 
-        $SSPlan = new \App\Models\CarPlan();
-        $SSPlan->plan   = 'South South';
-        $SSPlan->amount = $data['ss_region_fare'];
-        $SSPlan->extra_hour = $data['extra_hour'];
-        $SSPlan->tenant_id = $car->tenant_id;
-        $SSPlan->car_id = $car->id;
-        $SSPlan->save();
+        if(isset($data['se_region_fare'])){
+            $SEPlan = new \App\Models\CarPlan();
+            $SEPlan->plan   = 'South East';
+            $SEPlan->amount = $data['se_region_fare'];
+            $SEPlan->extra_hour = $data['extra_hour'];
+            $SEPlan->tenant_id = $car->tenant_id;
+            $SEPlan->car_id = $car->id;
+            $SEPlan->save();
+        }
 
-        $SEPlan = new \App\Models\CarPlan();
-        $SEPlan->plan   = 'South East';
-        $SEPlan->amount = $data['se_region_fare'];
-        $SEPlan->extra_hour = $data['extra_hour'];
-        $SEPlan->tenant_id = $car->tenant_id;
-        $SEPlan->car_id = $car->id;
-        $SEPlan->save();
+        if(isset($data['nc_region_fare'])){
+            $NCPlan = new \App\Models\CarPlan();
+            $NCPlan->plan   = 'North Central';
+            $NCPlan->amount = $data['nc_region_fare'];
+            $NCPlan->extra_hour = $data['extra_hour'];
+            $NCPlan->tenant_id = $car->tenant_id;
+            $NCPlan->car_id = $car->id;
+            $NCPlan->save();
+        }
 
-        $NCPlan = new \App\Models\CarPlan();
-        $NCPlan->plan   = 'North Central';
-        $NCPlan->amount = $data['nc_region_fare'];
-        $NCPlan->extra_hour = $data['extra_hour'];
-        $NCPlan->tenant_id = $car->tenant_id;
-        $NCPlan->car_id = $car->id;
-        $NCPlan->save();
+
+
+
+
         DB::commit();
         Alert::success('Success ', 'Car added successfully');
         return  redirect('e-ticket/car-hire');
