@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Eticket;
 
-use App\Http\Controllers\Controller;
-use App\Models\Destination;
-use App\Models\Terminal;
-use Illuminate\Http\Request;
-use RealRashid\SweetAlert\Facades\Alert;
 use DataTables;
+use App\Models\Terminal;
+use App\Classes\NyscRepo;
+use App\Models\Destination;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class EticketTerminal extends Controller
 {
@@ -82,5 +83,24 @@ class EticketTerminal extends Controller
         Alert::success('Success ', 'Terminal updated successfully');
 
         return redirect('e-ticket/terminals');
+    }
+
+    public function addNyscHub(){
+        $hubs = NyscHub::with('location:location')->get();
+        $locations = Destination::whereDoesntHave('nyscHub')->get();
+        return view('Eticket.terminal.add-nysc-hub', compact('hubs','locations'));
+    }
+
+    public function storeNyscHub(Request $request){
+       $checkLocation = NyscHub::where('location_id',$request->location_id)->count();
+       if($checkLocation<1){
+            NyscRepo::addHub($request->location_id,$request->terminal_name,$request->terminal_address);
+            Alert::success('Success', 'Hub added successfully');
+       }
+       else{
+           Alert::error('Error', 'Hub already exists for this location');
+
+       }
+       return redirect('e-ticket/nysc/hubs');
     }
 }

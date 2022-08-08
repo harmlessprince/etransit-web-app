@@ -35,6 +35,7 @@
                             <li><a href="{{url('/e-ticket/buses')}}">Manage Buses</a></li>
                             <li><a href="{{url('/e-ticket/drivers')}}">Manage Drivers</a></li>
                             <li><a href="{{url('/e-ticket/terminals')}}">Manage Terminals</a></li>
+                           {{-- <li><a href="{{url('e-ticket/nysc/hubs')}}">Manage NYSC Hubs</a></li> --}}
                             <li><a href="{{url('/e-ticket/locations')}}">Manage Locations</a></li>
                         </ul>
                     </li>
