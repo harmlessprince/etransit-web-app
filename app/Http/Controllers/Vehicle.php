@@ -2,21 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Classes\NyscRepo;
+use DataTables;
+use App\Models\Bus;
 use App\Models\BusType;
+use App\Models\NyscHub;
+use App\Models\NyscCamp;
+use App\Models\Schedule;
+use App\Models\Terminal;
+use App\Classes\NyscRepo;
 use App\Models\Destination;
 use App\Models\SeatTracker;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
-use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\VehicleExport;
 use App\Imports\VehicleImport;
-use App\Models\Bus;
-use App\Models\NyscCamp;
-use App\Models\NyscHub;
-use App\Models\Terminal;
-use App\Models\Transaction;
-use App\Models\Schedule;
-use DataTables;
+use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class Vehicle extends Controller
@@ -258,20 +259,20 @@ class Vehicle extends Controller
     }
 
     public function addNyscCamp(){
-        $camps = NyscCamp::with('location:location')->get();
+        $camps = NyscCamp::with('location')->get();
         return view('admin.vehicle.add-nysc-camp',compact('camps'));
     }
     public function storeNyscCamp(Request $request){
         $request->validate(
             [
-                'name' => 'required|string',
+                'name' => 'required|string|unique:destinations,location',
 
             ]
         );
         DB::beginTransaction();
-        $loc = Destination::create([
-            'location' => $request->name
-        ]);
+        $loc = new Destination();
+        $loc->location = 'NYSC Camp: '.$request->name;
+        $loc->save();
         if($loc){
             NyscCamp::create([
                 'location_id' => $loc->id
@@ -281,7 +282,7 @@ class Vehicle extends Controller
         return redirect('admin/nysc/locations');
     }
     public function addNyscHub(){
-        $hubs = NyscHub::with('location:location')->get();
+        $hubs = NyscHub::with('location')->get();
         $locations = Destination::whereDoesntHave('nyscHub')->get();
         return view('admin.vehicle.add-nysc-hub', compact('hubs','locations'));
     }
@@ -337,10 +338,11 @@ class Vehicle extends Controller
     }
 
     public function nyscHome(){
-        $camps = NyscCamp::with('location:location')->get();
-        $hubs = NyscHub::with('location:location')->get();
+        $camps = NyscCamp::with('location')->get();
+        $hubs = NyscHub::with('location')->get();
+        $busService = \App\Models\Service::where('id' , 1)->first();
 
-        return view('pages.nysc.home',compact('camps','hubs'));
+        return view('pages.nysc.home',compact('camps','hubs','busService'));
     }
 
 

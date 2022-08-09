@@ -241,7 +241,7 @@ Route::prefix('admin')->name('admin.')->group(function(){
          Route::get('/nysc/locations',[Vehicle::class, 'addNyscCamp']);
          Route::post('/nysc/store-camp/',[Vehicle::class, 'storeNyscCamp']);
          Route::get('/nysc/hubs',[Vehicle::class, 'addNyscHub']);
-         Route::post('/nysc/store-hubs',[Vehicle::class, 'addNyscHub']);
+         Route::post('/nysc/store-hub',[Vehicle::class, 'storeNyscHub']);
 
         //check schedule manifest
         Route::get('schedule-manifest/{schedule_id}', [Manifest::class , 'manifest']);
@@ -548,7 +548,7 @@ Route::prefix('e-ticket')->name('e-ticket.')->group(function(){
         Route::put('update-tenant-terminal/{terminal_id}', [EticketTerminal::class , 'updateTerminal']);
         //NYSC
         Route::get('/nysc/hubs',[EticketTerminal::class, 'addNyscHub']);
-        Route::post('/nysc/store-hubs',[EticketTerminal::class, 'addNyscHub']);
+        Route::post('/nysc/store-hubs',[EticketTerminal::class, 'storeNyscHub']);
 
 
         //manage e-tickets locations

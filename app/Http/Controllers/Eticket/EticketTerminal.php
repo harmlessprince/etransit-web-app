@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Eticket;
 
 use DataTables;
+use App\Models\NyscHub;
 use App\Models\Terminal;
 use App\Classes\NyscRepo;
 use App\Models\Destination;
@@ -86,7 +87,7 @@ class EticketTerminal extends Controller
     }
 
     public function addNyscHub(){
-        $hubs = NyscHub::with('location:location')->get();
+        $hubs = NyscHub::with('location')->get();
         $locations = Destination::whereDoesntHave('nyscHub')->get();
         return view('Eticket.terminal.add-nysc-hub', compact('hubs','locations'));
     }

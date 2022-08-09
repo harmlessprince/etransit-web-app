@@ -1,4 +1,4 @@
-@extends('admin.layout.app')
+@extends('Eticket.layout.app')
 <style>
     input{
         border:0 !important;
@@ -15,6 +15,7 @@
     .add_camp_btn{
         display: flex;
         justify-content: flex-end;
+        margin-bottom: 8px;
     }
 </style>
 @section('content')
@@ -50,7 +51,7 @@
             <div class="col-md-12 col-xl-12 col-lg-12 col-sm-12">
                <div class="add_camp_btn">
                    <div class="space-left">
-                       <a class="btn btn-success" data-bs-toggle="modal" data-bs-target="#add-hub-modal">Add Camp</a>
+                       <a class="btn btn-success" data-toggle="modal" data-target="#add-hub-modal">Add NYSC Hub</a>
                    </div>
                </div>
             </div>
@@ -79,53 +80,51 @@
             </div>
         </div>
 
-            <div class="modal fade" id="add-camp-modal" tabindex="-1" aria-labelledby="addCampLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Add NYSC Hub</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="card">
-                                <div class="card-body">
-                                    <form action="{{url('admin/nysc/store-camp/')}}" method="post">
-                                        @csrf
 
-                                        <div class="form-group">
-                                            <label for="location">Select Hub Location </label>
-                                            <input type="text" class="form-control" name="name" id="location"
-                                                placeholder="NYSC Camp(state)" />
-                                            <select class="form-select" size="5" aria-label="Select Hub Location"
-                                                name="location_id">
-                                                <option selected>Pick Location</option>
-                                                @foreach ($locations as $location )
-                                                <option value="{{$location->id}}">{{$location->location}}</option>
-                                                @endforeach
-                                            </select>
-                                            <div class="form-group">
-                                                <label for="terminal_name">Terminal Name</label>
-                                                <input type="text" class="form-control" name="terminal_name" id="terminal_name" />
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="terminal_address">Terminal Address</label>
-                                                <input type="text" class="form-control" name="terminal_address"
-                                                    id="terminal_address" />
-                                            </div>
-                                        </div>
-                                        <div class="submit_button">
-                                            <button class="btn btn-success">Submit</button>
-                                        </div>
-                                    </form>
+
+    </div>
+
+    <div class="modal fade" id="add-hub-modal" tabindex="-1" aria-labelledby="addCampLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add NYSC Hub</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="card">
+                        <div class="card-body">
+                            <form action="{{url('e-ticket/nysc/store-hubs')}}" method="post">
+                                @csrf
+
+                                <div class="form-group">
+                                    <label for="location">Select Hub Location </label>
+                                    <select id="location" class="form-control" size="5" aria-label="Select Hub Location"
+                                        name="location_id">
+                                        <option selected>Pick Location</option>
+                                        @foreach ($locations as $location )
+                                        <option value="{{$location->id}}">{{$location->location}}</option>
+                                        @endforeach
+                                    </select>
+                                    <div class="form-group">
+                                        <label for="terminal_name">Terminal Name</label>
+                                        <input type="text" class="form-control" name="terminal_name" id="terminal_name" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="terminal_address">Terminal Address</label>
+                                        <input type="text" class="form-control" name="terminal_address"
+                                            id="terminal_address" />
+                                    </div>
                                 </div>
-                            </div>
+                                <div class="submit_button">
+                                    <button class="btn btn-success">Submit</button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
-
-    </div>
-
+        </div>
     </div>
 
 @endsection

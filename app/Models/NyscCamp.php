@@ -9,8 +9,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class NyscCamp extends Model
 {
     use HasFactory;
+    protected $guarded = ['id'];
 
     public function location(){
-        $this->belongsTo(Destination::class);
+       return $this->belongsTo(Destination::class);
     }
 }

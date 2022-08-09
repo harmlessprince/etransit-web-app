@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class NyscOperator extends Model
 {
     use HasFactory;
+    protected $guarded = ['id'];
 
     public function tenant()
     {
