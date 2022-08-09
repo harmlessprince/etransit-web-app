@@ -50,7 +50,7 @@ class CarHireMgt extends Controller
             'car_type' => 'required|integer',
             'car_class' => 'required|integer',
             'daily_rentals' => 'required',
-            'extra_hour' => 'required',
+            'extra_hour' => 'required|regex:/^\d+(\.\d{1,2})?$/',
             'sw_region_fare' => 'sometimes',
             'ss_region_fare' => 'sometimes',
             'se_region_fare' => 'sometimes',
@@ -226,11 +226,11 @@ class CarHireMgt extends Controller
     {
 
         $data  = request()->validate([
-            'Daily_Rentals' => 'required',
-            'South_West'    => 'required',
-            'South_South'   => 'required',
-            'South_East'    => 'required',
-            'North_Central' => 'required',
+            'Daily_Rentals' => 'sometimes',
+            'South_West'    => 'sometimes',
+            'South_South'   => 'sometimes',
+            'South_East'    => 'sometimes',
+            'North_Central' => 'sometimes',
         ]);
 
         DB::beginTransaction();
@@ -240,11 +240,32 @@ class CarHireMgt extends Controller
         $updateSERental  = CarPlan::where('car_id',$car_id)->where('plan' ,'South East')->first();
         $updateNCRental  = CarPlan::where('car_id',$car_id)->where('plan' ,'North Central')->first();
 
-        $updateDailyRental->update(['amount' => $data['Daily_Rentals']]);
-        $updateSWRental->update(['amount' => $data['South_West']]);
-        $updateSSRental->update(['amount' => $data['South_South']]);
-        $updateSERental->update(['amount' => $data['South_East']]);
-        $updateNCRental->update(['amount' => $data['North_Central']]);
+        if(!empty($data['Daily_Rentals']))
+        {
+            $updateDailyRental->update(['amount' => $data['Daily_Rentals']]);
+        }
+
+        if(!empty($data['South_West']))
+        {
+            $updateSWRental->update(['amount' => $data['South_West'] ]);
+        }
+
+
+        if(!empty( $data['South_South']))
+        {
+            $updateSSRental->update(['amount' => $data['South_South']  ]);
+        }
+
+        if(!empty($data['South_East']))
+        {
+            $updateSERental->update(['amount' => $data['South_East']]);
+        }
+
+        if(!empty( $data['North_Central']))
+        {
+            $updateNCRental->update(['amount' => $data['North_Central']]);
+        }
+
         DB::commit();
 
         Alert::success('Success ', 'Car Plans updated successfully');
@@ -398,6 +419,53 @@ class CarHireMgt extends Controller
 
         Alert::success('Success ', 'The action you performed is successful');
 
+        return back();
+    }
+
+    public function editCarImage($car_id)
+    {
+        $carPath = CarImage::where('car_id', $car_id)->get();
+        $images = [];
+        $ids = [];
+
+        foreach($carPath as $img)
+        {
+            array_push($images , $img->path);
+            array_push($ids , $img->id);
+        }
+
+
+        return view('Eticket.car-hire.edit-car-image', compact('car_id', 'images','ids'));
+    }
+
+
+    public function updateCarImage(Request $request , $car_id)
+    {
+
+        DB::beginTransaction();
+
+        $images = array();
+
+        if($files = $request->file('images')){
+
+            foreach($files as $index =>  $file){
+                $request->validate([
+                    'images' => 'required|array',
+                    'images.*' => '|mimes:jpg,jpeg,png|max:4048',
+                ]);
+                $name = $file->getClientOriginalName();
+                $uploadedFileUrl = Cloudinary::upload($file->getRealPath())->getSecurePath();
+                $carImage = CarImage::where('id',$request->ids[$index])->firstorfail();
+                $carImage->update([
+                    'path'   =>  $uploadedFileUrl,
+                ]);
+
+            }
+
+        }
+        DB::commit();
+
+        Alert::success('Success ', 'Car Image update was  successful');
         return back();
     }
 

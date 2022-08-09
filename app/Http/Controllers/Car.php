@@ -250,7 +250,7 @@ class Car extends Controller
         $cars = HiredCars::withoutGlobalScopes()->where('functional',1)
                          ->where('car_availability',1)
                          ->with('car_images','carclass','cartype','plans')
-                         ->paginate(20);
+                         ->paginate(1);
 
 
         if(!is_null(request()->car_types) )

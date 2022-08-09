@@ -155,7 +155,7 @@
 <section style="margin: 20px;border-style: none;margin-bottom: 30px;">
     <div class="container">
         <div class="row">
-            <div class="col-sm-6 col-md-3 flex-grow-0 flex-shrink-1 flex-wrap" style="box-shadow: 1px 1px 6px 1px rgb(228,228,230);padding-top: 15px;padding-bottom: 15px;border-radius: 9px;min-height: 500px;max-height: 900px;margin-bottom: 10px;height: 750px;background: #ffffff;">
+            <div class="col-sm-6 col-md-3 flex-grow-0 flex-shrink-1 flex-wrap" style="box-shadow: 1px 1px 6px 1px rgb(228,228,230);padding-top: 15px;padding-bottom: 15px;border-radius: 9px;margin-bottom: 10px;height: 750px;background: #ffffff;">
                 <div class="row">
                     <div class="col">
                         <p style="margin-bottom: 0PX;font-size: 14px;"><strong>FILTER SEARCH</strong></p>
@@ -393,7 +393,7 @@
         </div>
         <div class="pagination_box">
             <div>
-                {{ $cars->links('vendor.pagination.custom') }}
+                {{ $cars->links('vendor.pagination.default') }}
             </div>
         </div>
     </div>
