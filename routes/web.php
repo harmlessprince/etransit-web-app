@@ -632,6 +632,9 @@ Route::prefix('e-ticket')->name('e-ticket.')->group(function(){
 
         Route::get('toggle-car-un-availability/{car_id}',[CarHireMgt::class , 'toggleUnUnAvailability']);
 
+        Route::get('update-car-image/{car_id}',[CarHireMgt::class, 'editCarImage']);
+        Route::put('update/{car_id}/car-image',[CarHireMgt::class, 'updateCarImage']);
+
         //manage driver profile
 
         Route::get('partner-driver/profile/{driver_id}',[ManageDriver::class, 'driverDetails'])->name('partner-driver-view-profile');

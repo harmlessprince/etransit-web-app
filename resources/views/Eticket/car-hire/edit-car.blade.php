@@ -68,7 +68,7 @@
                             <a href="{{url('e-ticket/edit-car-plan/'.$editCar->id)}}" class="btn btn-success">Update Car Plans</a>
                         </div>
                         <div class="space-left">
-                            <a href="{{url('e-ticket/add-car')}}" class="btn btn-success">Update Car Images</a>
+                            <a href="{{url('e-ticket/update-car-image/'.$editCar->id)}}" class="btn btn-success">Update Car Images</a>
                         </div>
                     </div>
                 </div>

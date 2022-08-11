@@ -50,7 +50,7 @@ class CarHireMgt extends Controller
             'car_type' => 'required|integer',
             'car_class' => 'required|integer',
             'daily_rentals' => 'required',
-            'extra_hour' => 'required',
+            'extra_hour' => 'required|regex:/^\d+(\.\d{1,2})?$/',
             'sw_region_fare' => 'sometimes',
             'ss_region_fare' => 'sometimes',
             'se_region_fare' => 'sometimes',
@@ -226,7 +226,7 @@ class CarHireMgt extends Controller
     {
 
         $data  = request()->validate([
-            'Daily_Rentals' => 'required',
+            'Daily_Rentals' => 'sometimes',
             'South_West'    => 'sometimes',
             'South_South'   => 'sometimes',
             'South_East'    => 'sometimes',
@@ -409,6 +409,53 @@ class CarHireMgt extends Controller
 
         Alert::success('Success ', 'The action you performed is successful');
 
+        return back();
+    }
+
+    public function editCarImage($car_id)
+    {
+        $carPath = CarImage::where('car_id', $car_id)->get();
+        $images = [];
+        $ids = [];
+
+        foreach($carPath as $img)
+        {
+            array_push($images , $img->path);
+            array_push($ids , $img->id);
+        }
+
+
+        return view('Eticket.car-hire.edit-car-image', compact('car_id', 'images','ids'));
+    }
+
+
+    public function updateCarImage(Request $request , $car_id)
+    {
+
+        DB::beginTransaction();
+
+        $images = array();
+
+        if($files = $request->file('images')){
+
+            foreach($files as $index =>  $file){
+                $request->validate([
+                    'images' => 'required|array',
+                    'images.*' => '|mimes:jpg,jpeg,png|max:4048',
+                ]);
+                $name = $file->getClientOriginalName();
+                $uploadedFileUrl = Cloudinary::upload($file->getRealPath())->getSecurePath();
+                $carImage = CarImage::where('id',$request->ids[$index])->firstorfail();
+                $carImage->update([
+                    'path'   =>  $uploadedFileUrl,
+                ]);
+
+            }
+
+        }
+        DB::commit();
+
+        Alert::success('Success ', 'Car Image update was  successful');
         return back();
     }
 
