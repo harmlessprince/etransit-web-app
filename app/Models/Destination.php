@@ -21,5 +21,10 @@ class Destination extends Model
     {
         return $this->hasMany(Terminal::class);
     }
-
+    public function nyscHub(){
+        return $this->hasMany(NyscHub::class,'location_id','id');
+    }
+    public function nyscCamp(){
+        return $this->hasOne(NyscCamp::class);
+    }
 }

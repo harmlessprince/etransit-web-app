@@ -110,6 +110,9 @@ Route::post('store/become-partners',[\App\Http\Controllers\Partner::class , 'bec
 Route::post('partners/driver/register',[\App\Http\Controllers\Partner::class , 'registerDriverApplication']);
 Route::get('/admin/export-transaction', [Transaction::class , 'exportCsv']);
 
+//NYSC page
+Route::get('nysc',[\App\Http\Controllers\Vehicle::class ,'NyscHome']);
+
 
 
 
@@ -231,6 +234,14 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::get('fetch-all-bus-location' ,[Vehicle::class , 'fetchBusLocation'])->name('fetch_bus_location');
         Route::get('update/bus-location/{location_id}', [Vehicle::class , 'updateBusLocation']);
         Route::put('edit-bus-location/{location_id}' , [Vehicle::class , 'editVehicleLocation']);
+
+
+
+         //nysc vehicle management
+         Route::get('/nysc/locations',[Vehicle::class, 'addNyscCamp']);
+         Route::post('/nysc/store-camp/',[Vehicle::class, 'storeNyscCamp']);
+         Route::get('/nysc/hubs',[Vehicle::class, 'addNyscHub']);
+         Route::post('/nysc/store-hub',[Vehicle::class, 'storeNyscHub']);
 
         //check schedule manifest
         Route::get('schedule-manifest/{schedule_id}', [Manifest::class , 'manifest']);
@@ -535,6 +546,10 @@ Route::prefix('e-ticket')->name('e-ticket.')->group(function(){
         Route::get('fetch-tenant-terminal' , [EticketTerminal::class , 'fetchTerminal'])->name('fetch-tenant-terminal');
         Route::get('edit-tenant-terminal/{terminal_id}', [EticketTerminal::class , 'editTerminal']);
         Route::put('update-tenant-terminal/{terminal_id}', [EticketTerminal::class , 'updateTerminal']);
+        //NYSC
+        Route::get('/nysc/hubs',[EticketTerminal::class, 'addNyscHub']);
+        Route::post('/nysc/store-hubs',[EticketTerminal::class, 'storeNyscHub']);
+
 
         //manage e-tickets locations
         Route::get('locations' , [EticketLocation::class , 'manageLocations']);

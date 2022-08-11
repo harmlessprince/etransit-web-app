@@ -2,18 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use DataTables;
+use App\Models\Bus;
 use App\Models\BusType;
+use App\Models\NyscHub;
+use App\Models\NyscCamp;
+use App\Models\Schedule;
+use App\Models\Terminal;
+use App\Classes\NyscRepo;
 use App\Models\Destination;
 use App\Models\SeatTracker;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
-use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\VehicleExport;
 use App\Imports\VehicleImport;
-use App\Models\Bus;
-use App\Models\Terminal;
-use App\Models\Transaction;
-use App\Models\Schedule;
-use DataTables;
+use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class Vehicle extends Controller
@@ -254,6 +258,47 @@ class Vehicle extends Controller
         return redirect('admin/manage/bus-destination');
     }
 
+    public function addNyscCamp(){
+        $camps = NyscCamp::with('location')->get();
+        return view('admin.vehicle.add-nysc-camp',compact('camps'));
+    }
+    public function storeNyscCamp(Request $request){
+        $request->validate(
+            [
+                'name' => 'required|string|unique:destinations,location',
+
+            ]
+        );
+        DB::beginTransaction();
+        $loc = new Destination();
+        $loc->location = 'NYSC Camp: '.$request->name;
+        $loc->save();
+        if($loc){
+            NyscCamp::create([
+                'location_id' => $loc->id
+            ]);
+        }
+        DB::commit();
+        return redirect('admin/nysc/locations');
+    }
+    public function addNyscHub(){
+        $hubs = NyscHub::with('location')->get();
+        $locations = Destination::whereDoesntHave('nyscHub')->get();
+        return view('admin.vehicle.add-nysc-hub', compact('hubs','locations'));
+    }
+    public function storeNyscHub(Request $request){
+       $checkLocation = NyscHub::where('location_id',$request->location_id)->count();
+       if($checkLocation<1){
+            NyscRepo::addHub($request->location_id);
+            Alert::success('Success', 'Hub added successfully');
+       }
+       else{
+           Alert::error('Error', 'Hub already exists for this location');
+
+       }
+       return redirect('admin/nysc/hubs');
+    }
+
     public function fetchBusLocation(Request $request)
     {
         if ($request->ajax()) {
@@ -291,6 +336,15 @@ class Vehicle extends Controller
 
 
     }
+
+    public function nyscHome(){
+        $camps = NyscCamp::with('location')->get();
+        $hubs = NyscHub::with('location')->get();
+        $busService = \App\Models\Service::where('id' , 1)->first();
+
+        return view('pages.nysc.home',compact('camps','hubs','busService'));
+    }
+
 
 
 

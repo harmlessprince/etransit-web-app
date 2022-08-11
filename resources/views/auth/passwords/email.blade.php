@@ -32,8 +32,8 @@
     <link rel="stylesheet" href="{{asset('loginassets/csss/Tricky-Grid---2-Column-on-Desktop--Tablet-Flip-Order-of-12-Column-rows-on-Mobile.css')}}">
     <link rel="stylesheet" href="{{asset('login-assets/csss/Ultimate-Testimonial-Slider-BS5.css')}}">
     <style>
-        body {
-            background-image: url("../login-assets/img/Rectangle%203.png");
+       body {
+            background-image: url("{{asset('login-assets/img/SignIn.jpg')}}");
             background-repeat: no-repeat;
             background-attachment: fixed;
             background-size: cover;

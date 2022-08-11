@@ -234,37 +234,27 @@ class CarHireMgt extends Controller
         ]);
 
         DB::beginTransaction();
-        $updateDailyRental  = CarPlan::where('car_id',$car_id)->where('plan' ,'Daily Rentals')->first();
-        $updateSWRental  = CarPlan::where('car_id',$car_id)->where('plan' ,'South West')->first();
-        $updateSSRental  = CarPlan::where('car_id',$car_id)->where('plan' ,'South South')->first();
-        $updateSERental  = CarPlan::where('car_id',$car_id)->where('plan' ,'South East')->first();
-        $updateNCRental  = CarPlan::where('car_id',$car_id)->where('plan' ,'North Central')->first();
-
-        if(!empty($data['Daily_Rentals']))
-        {
-            $updateDailyRental->update(['amount' => $data['Daily_Rentals']]);
+        if(isset($data['sw_region_fare'])){
+            $updateSWRental  = CarPlan::where('car_id',$car_id)->where('plan' ,'South West')->first();
+            $updateSWRental->update(['amount' => $data['South_West']]);
         }
 
-        if(!empty($data['South_West']))
-        {
-            $updateSWRental->update(['amount' => $data['South_West'] ]);
+        if(isset($data['ss_region_fare'])){
+            $updateSSRental  = CarPlan::where('car_id',$car_id)->where('plan' ,'South South')->first();
+            $updateSSRental->update(['amount' => $data['South_South']]);
         }
 
-
-        if(!empty( $data['South_South']))
-        {
-            $updateSSRental->update(['amount' => $data['South_South']  ]);
-        }
-
-        if(!empty($data['South_East']))
-        {
+        if(isset($data['se_region_fare'])){
+            $updateSERental  = CarPlan::where('car_id',$car_id)->where('plan' ,'South East')->first();
             $updateSERental->update(['amount' => $data['South_East']]);
         }
 
-        if(!empty( $data['North_Central']))
-        {
+        if(isset($data['nc_region_fare'])){
+            $updateNCRental  = CarPlan::where('car_id',$car_id)->where('plan' ,'North Central')->first();
             $updateNCRental->update(['amount' => $data['North_Central']]);
         }
+        $updateDailyRental  = CarPlan::where('car_id',$car_id)->where('plan' ,'Daily Rentals')->first();
+        $updateDailyRental->update(['amount' => $data['Daily_Rentals']]);
 
         DB::commit();
 

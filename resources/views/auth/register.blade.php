@@ -102,7 +102,7 @@
     <div class="container">
         <div class="row" style="margin-top: 3%;margin-bottom: 0%;">
             <div class="col justify-content-center signup-image">
-                <img src="{{ asset('login-assets/img/SignUp.png')}}" class="img-fluid">
+                <img src="{{ asset('login-assets/img/SignUp.jpg')}}" class="img-fluid">
             </div>
 
             <div class="col d-flex d-sm-flex d-md-flex justify-content-center justify-content-sm-center justify-content-md-center" style="background: rgba(255,255,255,0);">

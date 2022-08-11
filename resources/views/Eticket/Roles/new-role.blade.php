@@ -54,7 +54,7 @@
                                 <input type="text" class="form-control" name="role"  id="role"/>
                             </div>
                             <div class="submit_button">
-                                <button class="btn btn-success">Add Roler</button>
+                                <button class="btn btn-success">Add Role</button>
                             </div>
                         </form>
                     </div>
