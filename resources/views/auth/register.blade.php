@@ -148,6 +148,15 @@
                                 </span>
                           @enderror
                       </div>
+                      <div class="form-group">
+                        <label class="form-label" style="margin-top: 5px;margin-bottom: 0px;">NATIONAL IDENTIFICATION NUMBER</label>
+                        <input class="form-control form-control-sm @error('nin') is-invalid @enderror" name="nin" type="text" style="border-top-style: none;border-right-style: none;border-left-style: none;">
+                        @error('nin')
+                        <span class="invalid-feedback" role="alert">
+                                  <strong>{{ $message }}</strong>
+                              </span>
+                        @enderror
+                    </div>
                         <div class="form-group">
                             <label class="form-label" style="margin-top: 5px;margin-bottom: 0px;">USERNAME</label>
                             <input class="form-control form-control-sm @error('username') is-invalid @enderror" value="{{old('username')}}" name="username" type="text" style="border-top-style: none;border-right-style: none;border-left-style: none;">
