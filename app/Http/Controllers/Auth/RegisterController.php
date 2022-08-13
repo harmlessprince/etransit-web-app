@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Models\User;
 use App\Classes\VerificationToken;
 use App\Http\Controllers\Controller;
-use App\Mail\VerificationToken as VerificationTokenMail;
-use App\Providers\RouteServiceProvider;
-use App\Models\User;
-use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Crypt;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Foundation\Auth\RegistersUsers;
+use App\Mail\VerificationToken as VerificationTokenMail;
 
 class RegisterController extends Controller
 {
@@ -58,7 +59,8 @@ class RegisterController extends Controller
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'username' => ['required','string','max:25', 'unique:users'],
             'address' => ['required','string'],
-            'phone_number' => ['required','unique:users']
+            'phone_number' => ['required','unique:users'],
+            'nin' => ['required','digits:11']
         ]);
     }
 
@@ -69,8 +71,7 @@ class RegisterController extends Controller
      * @return \App\Models\User
      */
     protected function create(array $data)
-    {
-
+    {   $nin = Crypt::encryptString($data['nin']);
         $data = User::create([
             'full_name' => $data['full_name'],
             'email' => $data['email'],
@@ -78,6 +79,7 @@ class RegisterController extends Controller
             'address' => $data['address'],
             'phone_number' => $data['phone_number'],
             'username' => $data['username'],
+            'nin' => $nin
         ]);
 
 //        $verifyToken = VerificationToken::generate();
