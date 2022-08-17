@@ -15,6 +15,7 @@ use App\Http\Controllers\Api\Profile;
 use App\Http\Controllers\Api\Service;
 use App\Http\Controllers\Api\SocialController;
 use App\Http\Controllers\Api\Tour;
+use App\Http\Controllers\Api\TrackingConsole;
 use App\Http\Controllers\Api\Train;
 use App\Http\Controllers\Api\Transaction;
 use Illuminate\Http\Request;
@@ -85,6 +86,9 @@ Route::group(['prefix' => 'v1'], function() {
     Route::get('/train-bookings' , [Train::class , 'bookTrain']);
     Route::post('/check/train-schedule', [Train::class , 'checkSchedule']);
 
+
+    Route::post('record-active/tracking/{tracker_id}',[TrackingConsole::class,'recordActiveTracking']);
+
 //    Route::middleware('jwt.verify')->group( function () {
     Route::group(['middleware' => ['jwt.verify','is_banned','must_verify']], function () {
 
@@ -142,6 +146,11 @@ Route::group(['prefix' => 'v1'], function() {
 
         //fetch user transaction
         Route::get('my-transactions' , [Transaction::class ,'userTransactions']);
+
+        //track user
+        Route::post('initiate-tracking',[TrackingConsole::class , 'trackUser']);
+
+        Route::post('start-tracking',[TrackingConsole::class , 'initiateTracking']);
 
     });
 

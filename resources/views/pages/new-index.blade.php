@@ -13,6 +13,9 @@
     #return_date_box{
         display:none;
     }
+    body{
+     width:100%;
+    }
     #ferry_return_date{
         display: none;
     }
@@ -38,6 +41,7 @@
             display: none;
         }
     }
+
 </style>
 
 @section('content')
@@ -337,7 +341,7 @@
     <div class="container">
         <div class="row">
             <div class="col" style="padding-top: 12px;padding-bottom: 11px;">
-                <h1 style="text-align: center;"><strong>About US</strong></h1>
+                <h1 style="text-align: center;"><strong>About US </strong></h1>
                 <p style="text-align: center;">WELCOME TO E-TRANSIT</p>
             </div>
         </div>

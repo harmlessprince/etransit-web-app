@@ -68,9 +68,9 @@ class Schedule extends Model
      *
      * @return void
      */
-//    protected static function booted()
-//    {
-////        static::addGlobalScope(new TenantScope);
-//    }
+   protected static function booted()
+   {
+       static::addGlobalScope(new TenantScope);
+   }
 
 }
