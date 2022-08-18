@@ -388,7 +388,7 @@
                                     <div class="col-sm-12 col-md-4 d-md-flex d-lg-flex justify-content-md-center justify-content-lg-center align-items-lg-center"></div>
                                     <div class="col align-self-center">
                                         <div class="center_not_found_data">
-                                            <img src="{{asset('/images/illustrations/empty.jpg')}}" alt="about-us-image"  width="500" height="500"  />
+                                            <img src="{{asset('/images/illustrations/empty.jpg')}}" alt="about-us-image"  width="70%" height="80%"  />
                                         </div>
                                     </div>
                                 </div>

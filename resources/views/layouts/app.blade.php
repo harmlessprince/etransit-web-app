@@ -57,7 +57,7 @@
         }
         .whatsappBtn{
             position:fixed;
-            top:60%;
+            top:90%;
             left:90%;
             display:flex;
             justify-content: flex-end;

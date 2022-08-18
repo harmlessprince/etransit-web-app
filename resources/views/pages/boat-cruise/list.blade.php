@@ -97,6 +97,8 @@
                 </form>
             </div>
 
+
+
             <div class="col-sm-6 col-md-9" id="cruisedisplay">
                 <div class="row" style="padding-left: 0px;padding-right: 0px;margin-top: 15px;margin-bottom: 15px;">
                     <h5 id="mddisplay">AVAILABLE CRUISE</h5>
@@ -164,5 +166,6 @@
             });
         }
     });
+
 </script>
 @endsection
