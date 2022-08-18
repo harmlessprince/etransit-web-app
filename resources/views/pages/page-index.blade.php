@@ -147,7 +147,7 @@
             <div>
                 <div class="about_us_content about_us_text">
                     <div>
-                        <h5 class="about_e_transit_header">ABOUT <br/> <span class="about_e_transit"> E-TRANSIT </span></h5>
+                        <h5 class="about_e_transit_header">ABOUT  <br/> <span class="about_e_transit"> E-TRANSIT </span></h5>
                     </div>
                     <div>
                         <p class="about_paragragh">

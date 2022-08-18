@@ -82,7 +82,7 @@
             </div>
         </div>
     </footer>
-    <div style="position:relative; top:-4em; display:flex;justify-content: flex-end; margin-right:10px;">
+    <div class="whatsappBtn">
 {{--        85264318721--}}
         <a href="https://api.whatsapp.com/send?phone=2348064304717" target="_blank">
             <img src="{{asset('images/whatsapp.png')}}" />

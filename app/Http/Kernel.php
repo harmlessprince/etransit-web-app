@@ -83,5 +83,6 @@ class Kernel extends HttpKernel
         'check-if-session-is-set' => \App\Http\Middleware\CheckIfSessionIsSet::class,
         'is_banned' =>   \App\Http\Middleware\CheckBanned::class,
         'tenant_permissions' => \App\Http\Middleware\EticketPermissionMiddleware::class,
+        'request_authorization_pin' =>  \App\Http\Middleware\RequestForAuthorizationPin::class,
     ];
 }

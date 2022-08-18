@@ -50,7 +50,7 @@ class ScheduleExport implements FromCollection , WithHeadings, WithEvents
             'Destination',
             'Fare (Adult)',
             'Fare (Child)',
-            'Departure Date',
+            'Departure Date (Y-m-d)',
             'Departure Time',
         ];
     }

@@ -49,8 +49,9 @@ class Operator extends Controller
     public function viewOperator($id)
     {
         $tenant = Tenant::find($id);
-        $busCount = Bus::count();
+        $busCount = Bus::withoutGlobalScopes()->where('tenant_id',$tenant->id)->count();
         $terminalCount = Terminal::withoutGlobalScopes()->where('tenant_id',$tenant->id)->count();
+        $transactionSum = \App\Models\Transaction::withoutGlobalScopes()->where('tenant_id',$tenant->id)->pluck('amount')->sum();
 
         $tenantServiceObject = new \stdClass();
 
@@ -73,7 +74,7 @@ class Operator extends Controller
             }
         }
 
-        return view('admin.operator.view-operator', compact('tenant','busCount','terminalCount','tenantServiceObject'));
+        return view('admin.operator.view-operator', compact('tenant','busCount','terminalCount','tenantServiceObject','transactionSum'));
     }
 
 
@@ -167,7 +168,7 @@ class Operator extends Controller
                 $eticket->tenant_id = $tenant->id;
                 $eticket->save();
 
-                
+
             }
 
         $maildata = [

@@ -80,6 +80,16 @@
         <div class="button-box" >
             <a href="{{url('/e-ticket/export/schedule')}}" class="btn btn-success btn-sm"  style="margin-right:10px;">Download Excel File</a>&nbsp;
         </div>
+        @if($errors->any())
+            <div class="alert alert-danger">
+                <p><strong>Opps Something went wrong</strong></p>
+                <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+                </ul>
+            </div>
+        @endif
         <div class="card ">
             <div class="card-body">
                 <div id="app">

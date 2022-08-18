@@ -187,9 +187,9 @@ class EticketSchedule extends Controller
     public function importSchedule(Request $request)
     {
 
-//        $request->validate([
-//            'excel_file' => 'required|file|mimes:xls,xlsx,csv'
-//        ]);
+       $request->validate([
+           'excel_file' => 'required|file|mimes:xls,xlsx,csv'
+       ]);
 
         Excel::import(new ScheduleImport,request()->file('excel_file'));
 

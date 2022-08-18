@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminLogin;
+use App\Http\Controllers\AuthorizationConsole;
 use App\Http\Controllers\Eticket\CarHireMgt;
 use App\Http\Controllers\BoatCruise;
 use App\Http\Controllers\Booking;
@@ -58,7 +59,12 @@ Auth::routes(['verify' => true]);
 Route::get('/', [Page::class ,'index'])->name('home');
 
 Route::get('test/pdf' , function(){
-    return view('pdf.test-pdf');
+
+    $time = strtotime('2022-08-15');
+
+$newformat = date('Y-m-d',$time);
+return $newformat ;
+    // return view('pdf.test-pdf');
 });
 
 //Route::get('/login',[Login::class , 'login']);
@@ -112,6 +118,13 @@ Route::get('/admin/export-transaction', [Transaction::class , 'exportCsv']);
 
 //NYSC page
 Route::get('nysc',[\App\Http\Controllers\Vehicle::class ,'NyscHome']);
+
+//tracker Route
+
+Route::get('authorization/page',[AuthorizationConsole::class , 'authorizeTrustee']);
+Route::post('send/authorization/request',[AuthorizationConsole::class ,'AcceptAuthorizationRequest']);
+Route::get('tracker/{tracker_id}/user',[\App\Http\Controllers\TrackingConsole::class , 'trackingPage'])->middleware('request_authorization_pin');
+
 
 
 
@@ -569,8 +582,6 @@ Route::prefix('e-ticket')->name('e-ticket.')->group(function(){
         Route::get('view-bus-each-schedule/{bus_id}', [EticketSchedule::class , 'viewBusSchedule']);
         Route::get('view-bus-schedules/{bus_id}', [EticketSchedule::class , 'viewEachBusSchedule'])->name('view-bus-schedules');
         Route::post('update-schedule-status/{schedule_id}',[EticketSchedule::class , 'updateScheduleStatus']);
-
-
 
 
         //check schedule manifest

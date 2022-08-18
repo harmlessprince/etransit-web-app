@@ -13,6 +13,9 @@
     #return_date_box{
         display:none;
     }
+    body{
+     width:100%;
+    }
     #ferry_return_date{
         display: none;
     }
@@ -39,6 +42,7 @@
             display: none;
         }
     }
+
 </style>
 
 @section('content')
@@ -339,6 +343,7 @@
         <div class="row">
             <div class="col" style="padding-top: 12px;padding-bottom: 11px;">
                 <h1 style="text-align: center;"><strong>About US</strong>
+
             </div>
         </div>
         <div class="row">

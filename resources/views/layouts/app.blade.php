@@ -58,6 +58,14 @@
                 display:none !important;
             }
         }
+        .whatsappBtn{
+            position:fixed;
+            top:90%;
+            left:90%;
+            display:flex;
+            justify-content: flex-end;
+            margin-right:10px;
+        }
     </style>
 
 
