@@ -5,14 +5,14 @@
                 <div class="col-sm-auto col-md-7 col-lg-7 col-xl-7 col-xxl-7" id="topparagrahp" style="height: 49px;">
                     <p id="faicon" style="text-align: center;color: var(--bs-white);margin-top: 9px;margin-left: 7px;width: 293.703px;margin-bottom: 22px;">
                         <a href="https://web.facebook.com/etransitafrica" target="_blank">
-                            <i class="fa fa-facebook" style="padding-top: 5px;"></i>
+                            <i class="fa fa-facebook" style="color: rgb(255, 255, 255);padding-top: 5px;"></i>
                         </a>
 
                         <a href="https://twitter.com/etransitafrica" target="_blank">
                         <i class="fa fa-twitter" style="color: rgb(255, 255, 255);padding-top: 5px;"></i>&nbsp;
                         </a>
                         <a href="https://www.instagram.com/etransitafrica/" target="_blank">
-                        <i class="fa fa-instagram justify-content-center align-items-center align-content-center" style="padding-top: 5px;"></i>
+                        <i class="fa fa-instagram justify-content-center align-items-center align-content-center" style="color: rgb(255, 255, 255);padding-top: 5px;"></i>
                         </a>
                             &nbsp; &nbsp; |&nbsp;
                         hello@etransitafrica.com &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</p>
