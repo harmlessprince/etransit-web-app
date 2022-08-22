@@ -105,7 +105,25 @@ class EticketSchedule extends Controller
 
     public function allScheduledTrip()
     {
-        return view('Eticket.bus.all-schedule-trip');
+        $findSchedule = EventSchedule::where('tenant_id',session()->get('tenant_id'))->with(['pickup','destination','bus','terminal'])->get();
+        $isEmptySeatAvailable = false;
+
+
+        $emptySeatCount = [];
+        foreach( $findSchedule->chunk(30) as $index => $schedule)
+        {
+           foreach($schedule as $i => $sch){
+               $seatTracker = SeatTracker::where('schedule_id',$sch->id)->get();
+               if(count($seatTracker) < 1)
+               {
+                   $isEmptySeatAvailable = true;
+                   array_push( $emptySeatCount ,  $i);
+               }
+           }
+        }
+        $seatCount = count( $emptySeatCount);
+
+        return view('Eticket.bus.all-schedule-trip', compact('seatCount','isEmptySeatAvailable'));
     }
 
     public function fetchAllSchedules(Request $request)
@@ -133,6 +151,26 @@ class EticketSchedule extends Controller
         $seatTracker = SeatTracker::where('schedule_id',$schedule_id)->get();
 
         return view('Eticket.bus.view-schedule', compact('findSchedule', 'seatTracker'));
+    }
+
+    public function generateSeatTrackerForScheduleWithEmptySeat($schedule_id)
+    {
+
+
+        $findSchedule = EventSchedule::where('id',$schedule_id)->select('bus_id','seats_available')->first();
+
+        $seatCount = (int) $findSchedule->seats_available;
+        for($i = 0 ; $i < $seatCount ; $i++)
+        {
+            $seatTracker = new \App\Models\SeatTracker();
+            $seatTracker->schedule_id = $schedule_id;
+            $seatTracker->bus_id      = (int)  $findSchedule->bus_id;
+            $seatTracker->seat_position = $i + 1;
+            $seatTracker->save();
+        }
+
+        Alert::success('Success',  $findSchedule->seats_available.' Seat(s) generated  successfully');
+        return back();
     }
 
     public function viewBusSchedule($bus_id)
@@ -215,6 +253,58 @@ class EticketSchedule extends Controller
 
         Alert::success('Success', 'Status updated successfully');
 
+        return back();
+    }
+
+    public function globalSeatTracker()
+    {
+        $findSchedule = EventSchedule::where('tenant_id',session()->get('tenant_id'))->with(['pickup','destination','bus','terminal'])->get();
+
+        $emptySeatScheduleId = [];
+
+        foreach( $findSchedule->chunk(30) as $index => $schedule)
+        {
+            foreach($schedule as $i => $sch){
+
+                $seatTracker = SeatTracker::where('schedule_id',$sch->id)->get();
+
+                if(count($seatTracker) < 1)
+                {
+                    array_push(  $emptySeatScheduleId ,  $sch->id);
+                }
+            }
+        }
+
+        $emptySeatSchedules =   EventSchedule::whereIn('id', $emptySeatScheduleId)->with(['pickup','destination','bus','terminal'])->get();
+
+        return view('Eticket.bus.load-empty-seat',compact('emptySeatSchedules'));
+    }
+
+    public function globalSeatGenerator()
+    {
+        $findSchedule = EventSchedule::where('tenant_id',session()->get('tenant_id'))->with(['pickup','destination','bus','terminal'])->get();
+
+        foreach( $findSchedule->chunk(30) as $index => $schedule)
+        {
+            foreach($schedule as $index => $sch)
+            {
+                $seatTracker = SeatTracker::where('schedule_id',$sch->id)->get();
+
+                if(count($seatTracker) < 1)
+                {
+                    $seatCount = (int) $sch->seats_available;
+                    for($i = 0 ; $i < $seatCount ; $i++)
+                    {
+                        $seatTracker = new \App\Models\SeatTracker();
+                        $seatTracker->schedule_id = $sch->id;
+                        $seatTracker->bus_id      = (int)  $sch->bus_id;
+                        $seatTracker->seat_position = $i + 1;
+                        $seatTracker->save();
+                    }
+                }
+            }
+        }
+        Alert::success('Success', 'All Empty seats has been set successfully');
         return back();
     }
 

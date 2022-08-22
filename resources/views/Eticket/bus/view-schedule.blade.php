@@ -197,12 +197,20 @@
                             <div>
                                 <h4>Seat Information</h4>
                             </div>
-                            <div>
+                            <div style="margin-right:1em;">
                                 <a href="{{url('e-ticket/add-passenger/'.$findSchedule->id)}}" class="btn btn-primary">Add Passengers</a>
                             </div>
-                            <div>
+                            <div  style="margin-right:1em;">
                                 <a href="{{url('e-ticket/schedule-manifest/'.$findSchedule->id)}}" class="btn btn-success">Check Manifest</a>
                             </div>
+                            @if(count($seatTracker) < 1)
+                            <div  style="margin-right:1em;">
+                                <a href="{{url('e-ticket/generate-schedule-empty-seat/'.$findSchedule->id)}}"
+                                   onclick="alert('Are you sure you want to generate seat for this schedule?')"
+                                   class="btn btn-danger">Generate Seat</a>
+                            </div>
+                            @endif
+
                         </div>
                         <hr>
                         <div class="center_item">
@@ -223,7 +231,8 @@
                             <hr>
                             <div class="seat_box">
                                 @foreach($seatTracker as $tracker)
-                                <a href="{{$tracker->id}}"  @if($tracker->booked_status == 0)  class="available seat_picked"
+{{--                                    {{$tracker->id}}--}}
+                                <a href="#"  @if($tracker->booked_status == 0)  class="available seat_picked"
                                      @elseif($tracker->booked_status == 1) class="selected seat_picked"
                                      @elseif($tracker->booked_status == 2) class="booked seat_picked"  @endif >{{$tracker->seat_position}}</a>
 {{--                                    data-toggle="modal" data-target="#passengerDetails"--}}

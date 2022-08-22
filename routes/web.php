@@ -126,9 +126,6 @@ Route::post('send/authorization/request',[AuthorizationConsole::class ,'AcceptAu
 Route::get('tracker/{tracker_id}/user',[\App\Http\Controllers\TrackingConsole::class , 'trackingPage'])->middleware('request_authorization_pin');
 
 
-
-
-
 //check PDF
 Route::get('check-pdf' , function(){
    return view('pdf.boat-cruise');
@@ -582,6 +579,10 @@ Route::prefix('e-ticket')->name('e-ticket.')->group(function(){
         Route::get('view-bus-each-schedule/{bus_id}', [EticketSchedule::class , 'viewBusSchedule']);
         Route::get('view-bus-schedules/{bus_id}', [EticketSchedule::class , 'viewEachBusSchedule'])->name('view-bus-schedules');
         Route::post('update-schedule-status/{schedule_id}',[EticketSchedule::class , 'updateScheduleStatus']);
+        //generate seat for  schedules with empty seats
+        Route::get('generate-schedule-empty-seat/{schedule_id}',[EticketSchedule::class , 'generateSeatTrackerForScheduleWithEmptySeat']);
+        Route::get('global-seat-tracker-settings',[EticketSchedule::class , 'globalSeatTracker']);
+        Route::get('generate-all-schedules-empty-seat',[EticketSchedule::class , 'globalSeatGenerator']);
 
 
         //check schedule manifest

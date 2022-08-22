@@ -54,7 +54,7 @@ class TrackingRepository implements TrackingInterface
         {
             DB::beginTransaction();
             $findAnyUserLastTracking->update(['status'=>'active']);
-            $this-> recordActiveTrackingSession($findAnyUserLastTracking->id , $locationDetails);
+            $this->recordActiveTrackingSession($findAnyUserLastTracking->id , $locationDetails);
             $this->notificationTrigger($findAnyUserLastTracking->id);
             DB::commit();
 
