@@ -63,8 +63,9 @@ class BoatCruise extends Controller
     {
 
         DB::beginTransaction();
+        $reference = Reference::generateTrnxRef();
         $transactions = new \App\Models\Transaction();
-        $transactions->reference = Reference::generateTrnxRef();
+        $transactions->reference = $reference;
         $transactions->amount = (double) $amount;
         $transactions->status = 'Pending';
         $transactions->description = 'Cash Payment';
@@ -77,9 +78,16 @@ class BoatCruise extends Controller
         $data['name']  =  auth()->user()->full_name;
 
         $maildata = [
-            'name' => $data['name'],
+            'name' => auth()->user()->full_name,
             'service' => 'Boat Cruise',
-            'transaction' => $transactions
+            'transaction' => $transactions,
+            'reference' => $reference,
+            'totalAmount' => $amount,
+            'cruise_name' => $trip->cruise_name,
+            'cruise_destination' => $trip->cruiselocation->destination,
+            'boat_name' => $trip->boat->name,
+            'departure_date' => $trip->departure_date->format('M-d-Y'),
+            'departure_time' => $trip->departure_time->format('h:i:s')
         ];
 
         Mail::to($data["email"])->send(new BoatCruiseBooking($maildata));

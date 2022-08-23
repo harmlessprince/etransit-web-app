@@ -19,14 +19,19 @@ class FerryPayment
     public static function handlePayment($data ,$tripType , $fetchScheduleDetailsID)
     {
         DB::beginTransaction();
-        $tripSchedule = \App\Models\FerryTrip::where('id', $fetchScheduleDetailsID)->select('amount_adult', 'amount_children', 'id', 'number_of_passengers', 'ferry_id')->first();
+        $tripSchedule = \App\Models\FerryTrip::where('id', $fetchScheduleDetailsID)
+            ->select('amount_adult', 'amount_children', 'id', 'number_of_passengers', 'ferry_id' ,'event_date',
+                'event_time','ferry_pick_up_id','ferry_destination_id')
+                            ->with('destination','pickup')
+                            ->first();
 
         $childrenCount = (int)$data['data']['meta']['childrenCount'];
         $adultCount = (int)$data['data']['meta']['adultCount'];
 
 
+        $reference = Reference::generateTrnxRef();
         $transactions = new \App\Models\Transaction();
-        $transactions->reference = Reference::generateTrnxRef();
+        $transactions->reference =  $reference;
         $transactions->trx_ref = $data['data']['tx_ref'];
         $transactions->amount = (double) $data['data']['amount'];
 
@@ -42,9 +47,19 @@ class FerryPayment
         $data['name']  =   $data['data']['meta']['user_name'];
 
         $maildata = [
-            'name' => $data['name'] ,
+            'name' => auth()->user()->full_name,
             'service' => 'Ferry Booking',
-            'transaction' => $transactions
+            'transaction' => $transactions,
+            'reference' => $reference,
+            'totalAmount' =>  $data['data']['amount'],
+            'childrenCount' =>  $data['data']['meta']['childrenCountFerry'],
+            'adultCount' => $data['data']['meta']['adultCountFerry'],
+            'childFare' =>  $tripSchedule->amount_children,
+            'adultFare' =>  $tripSchedule->amount_adult,
+            'event_date' => $tripSchedule->event_date->format('M-d-Y'),
+            'event_time' => $tripSchedule->event_time,
+            'pickup' => $tripSchedule->pickup->locations,
+            'destination' => $tripSchedule->destination->locations
         ];
         $email = $data["email"];
 

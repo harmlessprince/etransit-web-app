@@ -29,8 +29,9 @@ class TrainTicketPayment
 
 
             DB::beginTransaction();
+            $reference =  Reference::generateTrnxRef();
             $transactions = new \App\Models\Transaction();
-            $transactions->reference = Reference::generateTrnxRef();
+            $transactions->reference =$reference;
             $transactions->trx_ref = $data['data']['tx_ref'];
             $transactions->amount = $data['data']['amount'];
             $transactions->status = 'Successful';
@@ -69,11 +70,20 @@ class TrainTicketPayment
             $data['email']  =   $data['data']['meta']['user_email'];
 
             $maildata = [
-                'name' => auth()->user()->full_name,
+                'name' => $data['name'] ,
                 'service' => 'Train Booking',
-                'transaction' => $transactions
+                'transaction' => $transactions,
+                'reference' =>  $reference,
+                'departure_date' =>$seat->departure_date->format('Y-m-d'),
+                'departure_time' => $seat->departure_time,
+                'totalAmount' =>  $data['data']['amount'],
+                'childrenCount' =>  $data['data']['meta']['childrenCount'],
+                'adultCount' =>  $data['data']['meta']['adultCount'],
+                'childFare' =>  $data['data']['meta']['childrenFareTotal'],
+                'adultFare' =>  $data['data']['meta']['adultFareTotal'],
+                'return_date' =>  $data['data']['meta']['return_date'],
             ];
-    
+
 
             Mail::to($data['email'] )->send(new \App\Mail\TrainTicket($maildata));
 

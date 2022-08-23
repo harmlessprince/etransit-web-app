@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class Tenant extends Model
 {
     use HasFactory;
-    
+
     protected $guarded = ['id'];
 
     public function eticketusers()
@@ -20,6 +20,11 @@ class Tenant extends Model
     public function buses()
     {
         return $this->hasMany(Bus::class);
+    }
+
+    public function services()
+    {
+        return $this->belongsToMany(Service::class ,'service_tenant');
     }
 
 

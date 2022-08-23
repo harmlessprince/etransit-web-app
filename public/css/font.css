@@ -1,0 +1,25 @@
+@font-face {
+    font-family: metropolis-regular;
+    src: url('/fonts/Metropolis-Regular.otf');
+    font-weight: 400;
+
+}
+
+@font-face {
+    font-family: metropolis-extra-bold;
+    src: url('/fonts/Metropolis-ExtraBold.otf');
+    font-weight: 800;
+}
+
+@font-face {
+    font-family: metropolis-medium;
+    src: url('/fonts/Metropolis-Medium.otf');
+    font-weight: 500;
+}
+
+
+@font-face {
+    font-family: metropolis-semi-bold;
+    src: url('/fonts/Metropolis-SemiBold.otf');
+    font-weight: 600;
+}

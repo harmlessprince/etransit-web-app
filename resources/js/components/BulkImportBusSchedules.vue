@@ -11,10 +11,11 @@
                     <progress max="100" :value.prop="uploadPercentage"></progress>
                     <br>
                 </div>
+
             </div>
             <div  style="display:flex; justify-content: center;" v-if="image">
                 <button class="btn btn-sm btn-success btn-submit"  @click="uploadImage"  >Click To Upload File</button>
-            </div>
+            </div >
         </form>
     </div>
 </template>
@@ -40,8 +41,10 @@ export default {
             e.preventDefault()
             let formData = new FormData();
             formData.append('excel_file', this.image);
-            axios.post('/admin/import/schedule', formData, {
-                headers: { 'content-type': 'multipart/form-data' },
+            axios.post('/e-ticket/import/schedule', formData, {
+                headers: { 'content-type': 'multipart/form-data',
+                           'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                        },
                 onUploadProgress: function( progressEvent ) {
                     this.uploadPercentage = parseInt( Math.round( ( progressEvent.loaded / progressEvent.total ) * 100 ) );
                 }.bind(this)

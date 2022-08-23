@@ -21,6 +21,8 @@ class CreateTrainPassengersTable extends Migration
             $table->string('full_name');
             $table->string('gender');
             $table->string('passenger_age_range')->comment('adult or children');
+            $table->string('next_of_kin_full_name');
+            $table->string('next_of_kin_phone_number');
 
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

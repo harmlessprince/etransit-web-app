@@ -127,29 +127,13 @@
     <div class="container-fluid" >
         <div class="button-box" >
             <div>
-                <a href="{{url('admin/cars/on-trip')}}">
-                    <button class="btn s add-terminal-button btn-sm" >Currently On Trip</button>
-                </a>
-            </div>
-            <div>
-                <a href="{{url('/admin/import-export-cars')}}" class="btn bulk-upload-button btn-sm"  style="margin-right:10px;">Bulk Import Boat</a>&nbsp;
-
                 <a href="{{url('admin/add/ferry')}}">
-                    <button class="btn s add-terminal-button btn-sm"  >Add Ferry</button>
+                <button class="btn s add-terminal-button btn-sm"  >Add Ferry</button>
                 </a>
-
-                {{--                data-toggle="modal" data-target="#vehicleModal"--}}
             </div>
         </div>
         <div class="card">
             <div class="card-body">
-                <div style="display: flex; justify-content: flex-end; margin-bottom: 20px;">
-                    <div class="otn-group col-md-4" style="display: flex;" >
-                        <input type="text" name="search" placeholder="Search with Registration Number , Car Type or Model ..." id="search-box" class="form-control"/>
-                        <button class="btn btn-sm btn-primary">Search</button>
-                    </div>
-                </div>
-
                 <div class="vehicle-box">
                     @if(count($ferries) > 0)
                         @foreach($ferries as $ferry)

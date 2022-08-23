@@ -86,8 +86,9 @@
                         <th>Full Name</th>
                         <th>Gender</th>
                         <th>Age Range</th>
-                        <th>Booked By</th>
+                        <th>Contact</th>
                         <th>Seat Position</th>
+                        <th>Next Of Kin</th>
 {{--                        <th>Booked Status</th>--}}
                         <th>Action</th>
                     </tr>
@@ -119,8 +120,9 @@
                     {data: 'full_name', name: 'full_name'},
                     {data: 'gender', name: 'gender'},
                     {data: 'passenger_age_range', name: 'passenger_age_range'},
-                    {data: 'user.email', name: 'user.email'},
+                    {data: 'contact', name: 'contact'},
                     {data: 'seat_position.seat_position', name: 'seat_position.seat_position'},
+                    {data: 'nextOfKin', name: 'nextOfKin'},
                     // {data: 'seat_position.booked_status', name: 'seat_position.booked_status'},
 
                     {

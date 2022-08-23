@@ -1,0 +1,462 @@
+.brands {
+  color: #313437;
+  background-color: #fff;
+}
+
+.brands a {
+  display: block;
+  text-align: center;
+  padding: 40px 0;
+}
+
+@media (max-width:767px) {
+  .brands a {
+    padding: 30px 0;
+  }
+}
+
+.brands a img {
+  display: inline-block;
+  margin: 10px 20px;
+  vertical-align: middle;
+}
+
+@media (max-width: 576px) {
+  #optionline-1 {
+    margin-left: auto;
+  }
+}
+
+@media (max-width: 576px) {
+  #autopadding {
+    padding-left: 0px;
+  }
+}
+
+@media (max-width: 576px) {
+  #secondtab {
+    padding-left: 50px;
+  }
+}
+
+@media (max-width: 576px) {
+  #secondtab {
+    padding-left: 50px;
+  }
+}
+
+@media (max-width: 576px) {
+  #prenav {
+    padding: 0px;
+    margin: 0px;
+  }
+}
+
+@media (min-width: 768px) {
+  #prenavlist {
+    /*margin: 0px;*/
+    padding: 50px;
+    width: 70px;
+  }
+}
+
+@media (max-width: 576px) {
+  #middlelist {
+    margin-left: 15px;
+  }
+}
+
+#uploadbutton {
+  position: absolute;
+  margin-left: -3px;
+  margin-top: 78px;
+}
+
+#circlediv {
+  position: absolute;
+  margin-left: 82px;
+  margin-top: -31px;
+}
+
+#uploadicon {
+  position: absolute;
+  margin-top: 80px;
+}
+
+.timeline-steps.timeline-step {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  margin: 1rem;
+}
+
+.getposition {
+  position: absolute;
+  vertical-align: middle;
+  border: solid;
+  z-index: -1;
+  margin-top: -100px;
+}
+
+.divshow {
+  border: solid;
+}
+
+.divlineT {
+  vertical-align: middle;
+  /*max-width: 86px;*/
+  width: 56px;
+  position: relative;
+  border: solid;
+  margin-left: 38%;
+  margin-right: 50%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.divline {
+  vertical-align: middle;
+  /*max-width: 86px;*/
+  width: 56px;
+  position: relative;
+  border: solid;
+  margin-left: 38%;
+  margin-right: 50%;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+@media (min-width: 768px) {
+  .menu {
+    margin-top: -100px;
+  }
+}
+
+@media (min-width: 992px) {
+  #listposition {
+    margin-top: 38px;
+  }
+}
+
+@media (min-width: 992px) {
+  #spanposition {
+    margin-top: 28px;
+  }
+}
+
+@media (max-width: 576px) {
+  .divshow {
+    display: inline-flex;
+  }
+}
+
+@media (max-width: 576px) {
+  .menu {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+}
+
+@media (max-width: 576px) {
+  .divshow {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .divshows {
+    display: none;
+  }
+}
+
+@media (max-width: 576px) {
+  .menu {
+    padding-right: 12px;
+    padding-left: 12px;
+  }
+}
+
+@media (min-width: 768px) {
+  .divshows {
+    display: none;
+  }
+}
+
+@media (max-width: 300px) {
+  #menumenudisplay {
+    padding-right: 12px;
+    padding-left: 12px;
+    border-radius: 10px;
+  }
+}
+
+@media (max-width: 576px) {
+  #menumenudisplay {
+    padding-right: 12px;
+    padding-left: 12px;
+    border-radius: 10px;
+  }
+}
+
+@media (max-width: 576px) {
+  .getspace {
+    margin-top: 20px;
+    /*padding-top: 20px;*/
+  }
+}
+
+.timeline {
+  width: 80%;
+  height: auto;
+  margin: 0 auto;
+  position: relative;
+}
+
+.timeline ul {
+  list-style: none;
+}
+
+.timeline {
+}
+
+.timeline ul li {
+  margin-bottom: 20px;
+  padding: 20px;
+}
+
+.timeline-content ul li:nth-child(odd) {
+  float: left;
+  transform: translateX(-30px);
+}
+
+.timeline-content ul li:nth-child(even) {
+  float: right;
+  /*transform: translateX(20px);*/
+}
+
+.timeline-content ul li {
+  position: relative;
+  width: 50%;
+}
+
+@media (max-width: 576px) {
+  .timeline::before {
+    content: '';
+    position: absolute;
+    height: 100px;
+    width: 2px;
+    background-color: #6f7a85;
+    left: 65%;
+    transform: translateX(33%);
+  }
+}
+
+@media (min-width: 768px) {
+  .timeline::before {
+    content: '';
+    position: absolute;
+    height: 100px;
+    width: 2px;
+    background-color: #6f7a85;
+    left: 38%;
+    transform: translateX(30%);
+  }
+}
+
+.timeline-content {
+}
+
+.timeline {
+}
+
+@media (min-width: 768px) {
+  .doojoro {
+    margin-left: -39px;
+  }
+}
+
+.tryluck a:nth-child(odd) {
+  float: left;
+}
+
+.tryluck a:nth-child(even) {
+  float: right;
+}
+
+#overwritesbutton {
+  position: absolute;
+  z-index: 2;
+  margin-top: 131px;
+  margin-left: 226px;
+}
+
+#overwrites {
+  position: absolute;
+  z-index: 2;
+  margin-top: 70px;
+  margin-left: 144px;
+}
+
+#overwrite {
+  position: absolute;
+  z-index: 2;
+  margin-top: 32px;
+  margin-left: 175px;
+}
+
+.carhover:hover * {
+  /*background: #343f5f;*/
+  color: #dc6513;
+  border-color: #dc6513;
+}
+
+.carhover:hover {
+  background-color: #343f5f;
+}
+
+.carhover div:hover {
+  border-color: #dc6513;
+  background-color: #dc6513;
+}
+
+
+#carhoverA:hover * {
+  /*background: #343f5f;*/
+  color: #dc6513;
+  border-color: #dc6513;
+}
+
+#carhoverA:hover {
+  background-color: #343f5f;
+}
+
+#carhoverA div:hover {
+  border-color: #dc6513;
+  background-color: #dc6513;
+}
+
+
+#carhoverB:hover * {
+  /*background: #343f5f;*/
+  color: #dc6513;
+  border-color: #dc6513;
+}
+
+#carhoverB:hover {
+  background-color: #343f5f;
+}
+
+#carhoverB div:hover {
+  border-color: #dc6513;
+  background-color: #dc6513;
+}
+
+#carhoverC:hover * {
+  /*background: #343f5f;*/
+  color: #dc6513;
+  border-color: #dc6513;
+}
+
+#carhoverC:hover {
+  background-color: #343f5f;
+}
+
+#carhoverC div:hover {
+  border-color: #dc6513;
+  background-color: #dc6513;
+}
+
+@media (max-width: 576px) {
+  .discounts {
+    display: none;
+  }
+}
+
+@media (max-width: 576px) {
+  #menumenudisplay {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+@media (max-width: 576px) {
+  #menumenudisplay {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+@media (max-width: 576px) {
+  #menumenudisplay {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+@media (max-width: 576px) {
+  #menudisplay {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+@media (max-width: 576px) {
+  #menu {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+@media (max-width: 576px) {
+  #datemob {
+    border-style: solid;
+    border: 1px;
+    border-left: solid;
+    border-color: #6f7a85;
+  }
+}
+
+@media (max-width: 576px) {
+  .getalign {
+    align-content: start;
+    align-items: start;
+    text-align: left;
+  }
+}
+
+@media (max-width: 576px) {
+  .createspace {
+    margin-top: 20px;
+  }
+}
+
+@media (min-width: 576px) {
+  #menumenudisplay {
+    padding-left: 130px;
+    padding-right: 130px;
+  }
+}
+
+@media (max-width: 576px) {
+  #websignupdiv {
+    display: none;
+  }
+}
+
+#flightform {
+  display: none;
+}
+
+#cruiseform {
+  display: none;
+}
+
+#trainform {
+  display: none;
+}
+
+#flighttrip {
+  display: none;
+}
+

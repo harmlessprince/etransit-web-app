@@ -10,7 +10,7 @@ use Laravel\Sanctum\HasApiTokens;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 
-class User extends Authenticatable  implements JWTSubject
+class User extends Authenticatable  implements JWTSubject , MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -30,7 +30,9 @@ class User extends Authenticatable  implements JWTSubject
         'verification_token',
         'email_verified_at',
         'provider',
-        'provider_id'
+        'provider_id',
+        'banned_status',
+        'nin'
     ];
 
     /**
@@ -78,5 +80,10 @@ class User extends Authenticatable  implements JWTSubject
     public function transactions()
     {
         return $this->hasMany(Transaction::class);
+    }
+
+    public function trackers()
+    {
+        return $this->hasMany(Tracker::class);
     }
 }

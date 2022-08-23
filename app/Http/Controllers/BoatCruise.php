@@ -26,17 +26,42 @@ class BoatCruise extends Controller
         $boatCruise = BoatTrip::with('boat','cruiselocation')->get();
 
 
+        if(!is_null(request()->locations))
+        {
+            $boatCruise = BoatTrip::whereIn('cruise_destination_id',request()->locations)->with('boat','cruiselocation')->get();
+        }
 
-        return view('pages.boat-cruise.list', compact('service','boatCruise'));
+        if(!is_null(request()->boat_dates))
+        {
+            $boatCruise = BoatTrip::whereIn('departure_date',request()->boat_dates)->with('boat','cruiselocation')->get();
+        }
+
+        if(!is_null(request()->boat_dates) && !is_null(request()->locations))
+        {
+            $boatCruise = BoatTrip::whereIn('departure_date',request()->boat_dates)->whereIn('cruise_destination_id',request()->locations)->with('boat','cruiselocation')->get();
+        }
+
+        $locations = CruiseDestination::all();
+
+
+        return view('pages.boat-cruise.list', compact('service','boatCruise','locations'));
+    }
+
+    public function filterBoatTripSearch(Request $request)
+    {
+        $query = $request->get('query');
+        $filterResult = BoatTrip::where('cruise_name', 'LIKE', '%'. $query. '%')->get();
+        return response()->json($filterResult);
     }
 
 
     public function boatCruiseShow($id)
     {
         $service = Service::where('id', 7)->firstorfail();
+        $locations = CruiseDestination::all();
         $boat = BoatTrip::where('id', $id)->with('boat','cruiselocation')->first();
 
-        return view('pages.boat-cruise.show', compact('service','boat'));
+        return view('pages.boat-cruise.show', compact('service','boat','locations'));
     }
 
 
@@ -120,6 +145,23 @@ class BoatCruise extends Controller
         $boatHistory = Boat::where('id', $boat_id)->firstorfail();
 
         return view('admin.boat-cruise.history', compact('boatHistory'));
+    }
+
+    public function viewBoatSchedulesPaymentHistory($schedule_id)
+    {
+        $transactions = \App\Models\Transaction::where('boat_trip_id',$schedule_id)->with('user')->simplePaginate();
+        $transactionCount = \App\Models\Transaction::where('boat_trip_id',$schedule_id)->count();
+        $transactionSum = \App\Models\Transaction::where('boat_trip_id',$schedule_id)->pluck('amount')->sum();
+
+        return view('admin.boat-cruise.schedule-transactions', compact('transactions','transactionCount','transactionSum'));
+    }
+
+    public function viewBoatSchedules($boat_id)
+    {
+        $schedules = BoatTrip::where('boat_id',$boat_id)->with('boat')->orderBy('created_at','desc')->simplePaginate();
+
+        return view('admin.boat-cruise.boat-schedules' , compact('schedules'));
+
     }
 
     public function editBoat($boat_id)
@@ -320,14 +362,16 @@ class BoatCruise extends Controller
     private function handlePayment($amount , $serviceId , $trip)
     {
         DB::beginTransaction();
+        $reference = Reference::generateTrnxRef();
         $transactions = new \App\Models\Transaction();
-        $transactions->reference = Reference::generateTrnxRef();
+        $transactions->reference = $reference;
         $transactions->amount = (double) $amount;
         $transactions->status = 'Pending';
-        $transactions->description = 'Cash Payment';
+        $transactions->description = 'Cash Payment of ' . $amount .' paid successfully at ' . now()->format('Y F d : h:i:s');
         $transactions->user_id = auth()->user()->id;
         $transactions->service_id = $serviceId;
         $transactions->boat_trip_id = $trip->id;
+        $transactions->transaction_type = "cash payment";
         $transactions->save();
 
         $data["email"] =  auth()->user()->email;
@@ -338,7 +382,14 @@ class BoatCruise extends Controller
         $maildata = [
             'name' => auth()->user()->full_name,
             'service' => 'Boat Cruise',
-            'transaction' => $transactions
+            'transaction' => $transactions,
+            'reference' => $reference,
+            'totalAmount' => $amount,
+            'cruise_name' => $trip->cruise_name,
+            'cruise_destination' => $trip->cruiselocation->destination,
+            'boat_name' => $trip->boat->name,
+            'departure_date' => $trip->departure_date->format('M-d-Y'),
+            'departure_time' => $trip->departure_time->format('h:i:s')
         ];
 
         $email = auth()->user()->email;
@@ -346,6 +397,31 @@ class BoatCruise extends Controller
         Mail::to($email)->send(new BoatCruiseBooking($maildata));
 
         DB::commit();
+
+    }
+
+
+    public function editBoatLocation($id)
+    {
+
+        $boatLocation =  CruiseDestination::where('id',$id)->first();
+
+        return view('admin.boat-cruise.edit-boat-location' , compact('boatLocation'));
+    }
+
+    public function updateBoatLocation(Request $request , $id)
+    {
+        $request->validate([
+            'boat_location' => 'required'
+        ]);
+
+        $carTypeEdit =  CruiseDestination::where('id',$id)->first();
+        $carTypeEdit->update([
+            'destination' => $request->boat_location
+        ]);
+
+        Alert::success('Success ', 'Boat Location Updated successfully');
+        return back();
 
     }
 

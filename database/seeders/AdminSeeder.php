@@ -23,12 +23,13 @@ class AdminSeeder extends Seeder
 
        $user =  Admin::create([
             'email' => 'admin@admin.com',
-            'password' => Hash::make('password')
+            'password' => Hash::make('pa$$word')
         ]);
         $role = Role::create(['guard_name' => 'admin','name' => 'Super Admin']);
+
         $user->assignRole($role);
 
-        $permissions = Permission::all();
+        $permissions = Permission::where('guard_name' ,'=','admin')->get();
 
         foreach($permissions as $permission)
         {

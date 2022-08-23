@@ -17,6 +17,7 @@ class CreateTrainStopsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('train_location_id');
             $table->string('stop_name');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

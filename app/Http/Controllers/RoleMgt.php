@@ -37,7 +37,7 @@ class RoleMgt extends Controller
     public function fetchRoles(Request $request)
     {
         if ($request->ajax()) {
-            $data = Role::get();
+            $data = Role::where('guard_name','admin')->get();
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
@@ -81,7 +81,7 @@ class RoleMgt extends Controller
     public function fetchPermissions(Request $request)
     {
         if ($request->ajax()) {
-            $data = Permission::get();
+            $data = Permission::where('guard_name','admin')->get();
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
@@ -163,7 +163,7 @@ class RoleMgt extends Controller
     public function viewRole($id)
     {
         $role = Role::find($id);
-        $permissions = Permission::all();
+        $permissions = Permission::where('guard_name','admin')->get();
 
         $permissionObject = new \stdClass();
 

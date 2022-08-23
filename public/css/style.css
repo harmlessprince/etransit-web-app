@@ -12,14 +12,10 @@ body{
 .hero-bg-section{
     position: relative;
 }
-.hero-bg{
-    background-image: url("/images/bg/hero-bg.png");
-    width: 100%;
-    height:700px !important;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    position: relative;
+
+#footerid{
+    background-image: url("new-assets/img/footerimage.png");
+;
 }
 .footer_bottom{
     background-image: url("/images/bg/footer_bg.png");

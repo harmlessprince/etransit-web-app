@@ -134,7 +134,7 @@
                         <h6>Phone Number : {{$findSchedule->bus->driver->phone_number}} </h6>
                         <hr>
                         @else
-                            <h3>No Driver Assigned yet to this bus.    <a href="{{url('e-ticket/assign-driver/'.$findSchedule->bus->id)}}" class="btn btn-danger">Assign Driver</a></h3>
+                            <h3>No Driver Assigned yet to this Trip.    <a href="{{url('e-ticket/assign-driver/'.$findSchedule->bus->id)}}" class="btn btn-danger">Assign Driver</a></h3>
                         @endif
                     </div>
                 </div>
@@ -154,8 +154,10 @@
                         <h6>Departure Date : {{$findSchedule->departure_date->format('Y-M-d')}}</h6>
                         <hr>
                         <h6>Departure Time : {{$findSchedule->departure_time}}</h6>
+                        @if(!is_null($findSchedule->return_date))
                         <hr>
                         <h6>Return Date : {{$findSchedule->return_date->format('Y-M-d')}}</h6>
+                        @endif
                         <hr>
                         <h6>Seats Available :{{$findSchedule->seats_available}} </h6>
                         <hr>
@@ -164,6 +166,26 @@
                         <h6>Bus Model : {{$findSchedule->bus->bus_model}}</h6>
                         <hr>
                         <h6>Bus Type : {{$findSchedule->bus->bus_type}}</h6>
+                        <hr>
+                        <h6>Trip Status : {{Ucfirst($findSchedule->trip_status)}}</h6>
+                        <hr>
+                        <h6>Update Trip Schedule Status</h6>
+                          <form action="{{url('e-ticket/update-schedule-status/'.$findSchedule->id)}}" method="POST">
+                              @csrf
+                              <select class="form-control" name="status">
+                                  <option value="">Update Schedule Status</option>
+                                  <option value="pending">Pending</option>
+                                  <option value="trip in progress">Trip In Progress</option>
+                                  <option value="canceled">Canceled</option>
+                                  <option value="completed">Completed</option>
+                              </select>
+                              @if($errors->has('status'))
+                                  <div class="error text-danger">{{ $errors->first('status') }}</div>
+                              @endif
+                              <br>
+                              <button class="btn btn-success">Update Status</button>
+                          </form>
+
                     </div>
                 </div>
             </div>
@@ -175,9 +197,20 @@
                             <div>
                                 <h4>Seat Information</h4>
                             </div>
-                            <div>
+                            <div style="margin-right:1em;">
+                                <a href="{{url('e-ticket/add-passenger/'.$findSchedule->id)}}" class="btn btn-primary">Add Passengers</a>
+                            </div>
+                            <div  style="margin-right:1em;">
                                 <a href="{{url('e-ticket/schedule-manifest/'.$findSchedule->id)}}" class="btn btn-success">Check Manifest</a>
                             </div>
+                            @if(count($seatTracker) < 1)
+                            <div  style="margin-right:1em;">
+                                <a href="{{url('e-ticket/generate-schedule-empty-seat/'.$findSchedule->id)}}"
+                                   onclick="alert('Are you sure you want to generate seat for this schedule?')"
+                                   class="btn btn-danger">Generate Seat</a>
+                            </div>
+                            @endif
+
                         </div>
                         <hr>
                         <div class="center_item">
@@ -198,7 +231,8 @@
                             <hr>
                             <div class="seat_box">
                                 @foreach($seatTracker as $tracker)
-                                <a href="{{$tracker->id}}"  @if($tracker->booked_status == 0)  class="available seat_picked"
+{{--                                    {{$tracker->id}}--}}
+                                <a href="#"  @if($tracker->booked_status == 0)  class="available seat_picked"
                                      @elseif($tracker->booked_status == 1) class="selected seat_picked"
                                      @elseif($tracker->booked_status == 2) class="booked seat_picked"  @endif >{{$tracker->seat_position}}</a>
 {{--                                    data-toggle="modal" data-target="#passengerDetails"--}}

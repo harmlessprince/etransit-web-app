@@ -32,9 +32,9 @@
             <div class="col-md-12">
                 <div class="bus_event ">
                     @if($transaction->status == 'Pending')
-                    <div class="schedules">
-                        <a href="{{url('admin/approve-payment/'.$transaction->id)}}" class="btn btn-success">Approve Transaction</a>
-                    </div>
+                        <div class="schedules">
+                            <a href="{{url('admin/approve-payment/'.$transaction->id)}}" class="btn btn-success">Approve Transaction</a>
+                        </div>
                     @endif
                 </div>
             </div>
@@ -71,9 +71,9 @@
                     <div class="card-body">
                         <h4>User Information</h4>
                         <hr>
-                        <h6>Full Name : {{ $transaction->user->full_name }}</h6>
+                        <h6>Full Name : {{ $transaction->user->full_name ?? $transaction->onsite_customer->name }}</h6>
                         <hr>
-                        <h6>Email : {{ $transaction->user->email }}</h6>
+                        <h6>Email : {{ $transaction->user->email ?? $transaction->onsite_customer->email }}</h6>
                     </div>
                 </div>
             </div>

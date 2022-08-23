@@ -111,7 +111,7 @@
                     <h3>{{env('APP_NAME')}}</h3>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{url('/admin/manage/vehicle')}}"><i data-feather="home"></i></a></li>
-                        <li class="breadcrumb-item">Add Boat</li>
+                        <li class="breadcrumb-item">Add City</li>
                     </ol>
                 </div>
 {{--                <div class="col-6">--}}

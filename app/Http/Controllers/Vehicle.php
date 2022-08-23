@@ -2,16 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use DataTables;
+use App\Models\Bus;
+use App\Models\BusType;
+use App\Models\NyscHub;
+use App\Models\NyscCamp;
+use App\Models\Schedule;
+use App\Models\Terminal;
+use App\Classes\NyscRepo;
+use App\Models\Destination;
 use App\Models\SeatTracker;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
-use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\VehicleExport;
 use App\Imports\VehicleImport;
-use App\Models\Bus;
-use App\Models\Terminal;
-use App\Models\Transaction;
-use App\Models\Schedule;
-use DataTables;
+use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class Vehicle extends Controller
@@ -40,7 +46,8 @@ class Vehicle extends Controller
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
                     $id = $row->id;
-                    $actionBtn = "<a href='/admin/edit-bus/$id'  class='edit btn btn-success btn-sm'>Edit</a> <a href='/admin/manage/view-tenant-bus/$id'  class='edit btn btn-success btn-sm'>View</a>";
+                    $actionBtn = "<a href='/admin/manage/view-tenant-bus/$id'  class='edit btn btn-success btn-sm'>View</a>";
+//                    <a href='/admin/edit-bus/$id'  class='edit btn btn-success btn-sm'>Edit</a>
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])
@@ -170,6 +177,177 @@ class Vehicle extends Controller
         toastr()->success('Data saved successfully');
         return response()->json(['message' => 'uploaded successfully'], 200);
     }
+
+    public function allBusTypes()
+    {
+        return view('admin.vehicle.bus-type');
+    }
+
+    public function addBusType()
+    {
+        return view('admin.vehicle.add-bus-type');
+    }
+
+    public function storeBusType(Request $request)
+    {
+        $request->validate(['bus_type' => 'required']);
+
+        $newBusType = new BusType();
+        $newBusType->type = $request->bus_type;
+        $newBusType->save();
+
+        Alert::success('Success ', 'Bus Type Added successfully');
+
+        return redirect('admin/manage/bus-type');
+
+    }
+
+    public function busTypeFetch(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = BusType::latest()->get();
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function($row){
+                    $id = $row->id;
+                    $actionBtn = "<a href='/admin/update/bus-type/$id'  class='edit btn btn-success btn-sm'>Edit</a>";
+                    return $actionBtn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+    }
+
+    public function EditBusType(Request $request , $bus_type_id)
+    {
+        $busType = BusType::where('id', $bus_type_id)->first();
+
+        return view('admin.vehicle.edit-bus-type' , compact('busType'));
+    }
+
+    public function updateBusType(Request $request ,$bus_type_id)
+    {
+        $request->validate(['bus_type' => 'required']);
+
+        $busType = BusType::where('id', $bus_type_id)->first();
+
+        $busType->update(['type' => $request->bus_type]);
+
+        Alert::success('Success ', 'Bus Type Added successfully');
+
+        return redirect('admin/manage/bus-type');
+    }
+
+    public function destinations()
+    {
+        return view('admin.vehicle.bus-destination');
+    }
+
+    public function addBusLocation()
+    {
+        return view('admin.vehicle.add-bus-destination');
+    }
+
+    public function storeBusLocation(Request $request)
+    {
+        $request->validate(['location' => 'required']);
+        $location = new Destination();
+        $location->location = $request->location;
+        $location->save();
+        Alert::success('Success ', 'Location Added successfully');
+        return redirect('admin/manage/bus-destination');
+    }
+
+    public function addNyscCamp(){
+        $camps = NyscCamp::with('location')->get();
+        return view('admin.vehicle.add-nysc-camp',compact('camps'));
+    }
+    public function storeNyscCamp(Request $request){
+        $request->validate(
+            [
+                'name' => 'required|string|unique:destinations,location',
+
+            ]
+        );
+        DB::beginTransaction();
+        $loc = new Destination();
+        $loc->location = 'NYSC Camp: '.$request->name;
+        $loc->save();
+        if($loc){
+            NyscCamp::create([
+                'location_id' => $loc->id
+            ]);
+        }
+        DB::commit();
+        return redirect('admin/nysc/locations');
+    }
+    public function addNyscHub(){
+        $hubs = NyscHub::with('location')->get();
+        $locations = Destination::whereDoesntHave('nyscHub')->get();
+        return view('admin.vehicle.add-nysc-hub', compact('hubs','locations'));
+    }
+    public function storeNyscHub(Request $request){
+       $checkLocation = NyscHub::where('location_id',$request->location_id)->count();
+       if($checkLocation<1){
+            NyscRepo::addHub($request->location_id);
+            Alert::success('Success', 'Hub added successfully');
+       }
+       else{
+           Alert::error('Error', 'Hub already exists for this location');
+
+       }
+       return redirect('admin/nysc/hubs');
+    }
+
+    public function fetchBusLocation(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = Destination::latest()->get();
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function($row){
+                    $id = $row->id;
+                    $actionBtn = "<a href='/admin/update/bus-location/$id'  class='edit btn btn-success btn-sm'>Edit</a>";
+                    return $actionBtn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+    }
+
+    public function updateBusLocation($location_id)
+    {
+        $location = Destination::where('id' , $location_id)->first();
+
+        return view('admin.vehicle.edit-bus-destination' , compact('location'));
+    }
+
+    public function editVehicleLocation(Request $request ,$location_id)
+    {
+        $request->validate(['location' => 'required']);
+
+        $location = Destination::where('id' , $location_id)->first();
+
+        $location->update(['location' => $request->location]);
+
+        Alert::success('Success ', 'Location Updated successfully');
+
+        return redirect('admin/manage/bus-destination');
+
+
+    }
+
+    public function nyscHome(){
+        $camps = NyscCamp::with('location')->get();
+        $hubs = NyscHub::with('location')->get();
+        $busService = \App\Models\Service::where('id' , 1)->first();
+
+        return view('pages.nysc.home',compact('camps','hubs','busService'));
+    }
+
+
+
+
 
 
 

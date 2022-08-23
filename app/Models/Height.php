@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Height extends Model
 {
     use HasFactory;
+
+    protected $guarded = ['id'];
+
+    public function state()
+    {
+        return $this->belongsTo(State::class);
+    }
 }

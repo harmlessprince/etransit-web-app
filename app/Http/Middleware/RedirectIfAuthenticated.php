@@ -29,7 +29,6 @@ class RedirectIfAuthenticated
 
         if($guard == 'e-ticket' && Auth::guard($guard)->check())
         {
-
             return  redirect(RouteServiceProvider::TICKET_HOME);
         }
 

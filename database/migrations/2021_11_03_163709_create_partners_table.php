@@ -17,8 +17,12 @@ class CreatePartnersTable extends Migration
             $table->id();
             $table->string('full_name');
             $table->string('company_name');
-            $table->string('email');
-            $table->string('phone_number');
+            $table->longText('company_address');
+            $table->string('email')->unique();
+            $table->string('phone_number')->unique();
+            $table->string('bus_service')->nullable();
+            $table->string('car_hire_service')->nullable();
+            $table->string('notes')->nullable();
             $table->timestamps();
         });
     }

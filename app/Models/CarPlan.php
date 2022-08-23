@@ -9,6 +9,7 @@ class CarPlan extends Model
 {
     use HasFactory;
     protected $table = 'car_plans';
+    protected $guarded = ['id'];
 
     public function car()
     {
@@ -19,4 +20,6 @@ class CarPlan extends Model
     {
         return $this->belongsTo(CarHistory::class);
     }
+
+
 }

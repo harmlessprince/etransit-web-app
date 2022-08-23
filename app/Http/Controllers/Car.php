@@ -25,15 +25,68 @@ use App\Models\Transaction;
 use DateTime;
 use Carbon\Carbon;
 use RealRashid\SweetAlert\Facades\Alert;
+use DataTables;
 
 
 class Car extends Controller
 {
     public function allCars()
     {
-        $cars  = HiredCars::with('carclass','cartype')->get();
 
-        return view('admin.cars.cars', compact('cars'));
+//        $cars  = HiredCars::withoutGlobalScopes()->orderby('id','desc')->with('carclass','cartype')->get();
+        $offTripCount = CarHistory::where('available_status', 'Off Trip')->count();
+        $onTripCount = CarHistory::where('available_status', 'On Trip')->count();
+        $transactions = Transaction::where('service_id',6)->pluck('amount')->sum();
+
+        return view('admin.cars.cars', compact('onTripCount','offTripCount','transactions'));
+    }
+
+    public function offTripCars()
+    {
+        return view('admin.cars.off-trip');
+    }
+
+    public function onTripCars()
+    {
+        return view('admin.cars.on-trip');
+    }
+
+    public function fetchAllOffTripCars(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = CarHistory::where('available_status','=', 'Off Trip')->with('car')->get();
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function($row){
+                    $id = $row->id;
+                    $actionBtn = "<a href='/admin/$id'  class='edit btn btn-success btn-sm'>Edit</a> <a href='/admin/$id'  class='edit btn btn-success btn-sm'>View</a>";
+                    return $actionBtn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+    }
+
+    public function fetchAllTenantCars(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = HiredCars::withoutGlobalScopes()->orderby('id','desc')->with('carclass','cartype')->get();
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function($row){
+                    $id = $row->id;
+                    $actionBtn = "<a href='/admin/view/car/$id'  class='edit btn btn-success btn-sm'>View</a>";
+                    return $actionBtn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+    }
+    public function viewTenantCar($id)
+    {
+        $car = HiredCars::withoutGlobalScopes()->where('id',$id)->with('carclass','cartype','tenant','carHistory','plans')->first();
+//dd($car);
+        return view('admin.cars.single-car',compact('car'));
     }
 
     public function carClass()
@@ -185,19 +238,101 @@ class Car extends Controller
               $NCPlan->save();
         DB::commit();
 
-        Alert::success('Success ', 'Boat added successfully');
+        Alert::success('Success ', 'Car added successfully');
 
         return  back();
 
     }
 
 
-    public function carList()
+    public function carList($seat_capacity= null , $class_type = null)
     {
-        $cars = HiredCars::where('functional',1)->with('car_images','carclass','cartype','plans')->paginate(10);
+        $cars = HiredCars::withoutGlobalScopes()->where('functional',1)
+                         ->where('car_availability',1)
+                         ->with('car_images','carclass','cartype','plans')
+                         ->paginate(20);
 
-//dd($cars);
-        return view('pages.car-hire.hire', compact('cars'));
+
+        if(!is_null(request()->car_types) )
+        {
+
+            $cars = HiredCars::withoutGlobalScopes()->where('functional',1)
+                ->where('car_availability',1)
+                ->whereIn('car_type_id',request()->car_types)
+                ->with('car_images','carclass','cartype','plans')
+                ->paginate(20);
+        }
+
+
+        if(!is_null(request()->transmissions) )
+        {
+
+            $cars = HiredCars::withoutGlobalScopes()->where('functional',1)
+                ->where('car_availability',1)
+                ->whereIn('transmission',request()->transmissions)
+                ->with('car_images','carclass','cartype','plans')
+                ->paginate(20);
+        }
+
+        if(!is_null(request()->transmissions) && !is_null(request()->car_types) )
+        {
+
+            $cars = HiredCars::withoutGlobalScopes()->where('functional',1)
+                ->where('car_availability',1)
+                ->whereIn('transmission',request()->transmissions)
+                ->whereIn('car_type_id',request()->car_types)
+                ->with('car_images','carclass','cartype','plans')
+                ->paginate(20);
+        }
+
+        if(!is_null(request()->locations) )
+        {
+
+            $cars = HiredCars::withoutGlobalScopes()->where('functional',1)
+                ->where('car_availability',1)
+                ->whereIn('state_id',request()->locations)
+                ->with('car_images','carclass','cartype','plans' ,'tenant')
+                ->paginate(20);
+
+        }
+
+        if(!is_null(request()->seat_capacity) )
+        {
+
+            $cars = HiredCars::withoutGlobalScopes()->where('functional',1)
+                ->where('car_availability',1)
+                ->where('capacity',request()->seat_capacity)
+                ->with('car_images','carclass','cartype','plans' ,'tenant')
+                ->paginate(20);
+
+        }
+
+        if(!is_null(request()->class_class))
+        {
+            $cars = HiredCars::withoutGlobalScopes()->where('functional',1)
+                ->where('car_availability',1)
+                ->where('car_class_id',request()->class_class)
+                ->with('car_images','carclass','cartype','plans' ,'tenant')
+                ->paginate(20);
+        }
+
+        if(!is_null(request()->class_type))
+        {
+            $cars = HiredCars::withoutGlobalScopes()->where('functional',1)
+                ->where('car_availability',1)
+                ->where('car_type_id',request()->class_type)
+                ->with('car_images','carclass','cartype','plans' ,'tenant')
+                ->paginate(20);
+        }
+
+
+        $catType = CarType::limit(10)->get();
+        $transmission = ['automatic' , 'manual'];
+        $states = \App\Models\Destination::inRandomOrder()->limit(10)->get();
+        $carClasses =  CarClass::all();
+        $carTypes = CarType::all();
+
+        return view('pages.car-hire.hire', compact('cars','catType','transmission','states','carClasses','carTypes'));
     }
 
 
@@ -248,9 +383,17 @@ class Car extends Controller
 
     public function selectPlan($car_id)
     {
+
         $car = HiredCars::where('id',$car_id)->with('plans','cartype','carclass')->first();
 
         return view('pages.car-hire.plan', compact('car'));
+    }
+
+    public function carDetails($car_id)
+    {
+        $car = HiredCars::where('id',$car_id)->with('plans','cartype','carclass','car_images')->first();
+//dd($car);
+        return view('pages.car-hire.details', compact('car'));
     }
 
 
@@ -267,7 +410,10 @@ class Car extends Controller
     {
               $data =  request()->validate([
                     'date' => 'required',
-                    'time' => 'required'
+                    'time' => 'required',
+                    'days' => 'required',
+                    'pickup_address' => 'required',
+                    'self_drive' => 'sometimes'
                 ]);
 
 
@@ -275,9 +421,17 @@ class Car extends Controller
               $currentDate = \Carbon\Carbon::now()->format('Y-m-d');
               $currentTime = \Carbon\Carbon::now()->format('H:i');
 
-              if( $data['date'] >= $currentDate  && $data['time'] >= $currentTime )
+
+
+              if( $data['date'] >= $currentDate)
               {
 
+
+                  if( $data['date'] <= $currentDate && $data['time'] < $currentTime)
+                  {
+                      toastr()->error('You can\'t pick a time that has already passed');
+                      return back();
+                  }
                   $plan =  CarPlan::where('id' , $plan_id)->with('car')->firstorfail();
                   $service = \App\Models\Service::where('id' , $plan->car->service_id)->firstorfail();
 
@@ -288,11 +442,12 @@ class Car extends Controller
 
                   //so check if the date selected does not match any date  already booked to be used
                   $findCarHistroryForThisDate = CarHistory::where('payment_status','!=','Unpaid')
+                                                             ->where('car_id',$plan->car_id)
                                                               ->where('date','=',$data['date'])
                                                               ->where('isConfirmed' ,'=','True')
                                                               ->first();
 
-                  $Carplan = $plan->plan;
+                  $Carplan = $plan->plan ;
 
 
                   switch ($Carplan) {
@@ -338,9 +493,11 @@ class Car extends Controller
                     $recordOperation->user_id       =  auth()->user()->id;
                     $recordOperation->date          =  $data['date'];
                     $recordOperation->time          =  $data['time'];
+                    $recordOperation->days          =  abs($data['days']);
+                    $recordOperation->pickup_address = $data['pickup_address'];
                     $recordOperation->returnTime    =  $returnTime ;
                     $recordOperation->returnDate    =  $returnDate;
-
+                    $recordOperation->self_drive    =  !is_null($request->self_drive) == "on" ? 'active' : 'inactive';
                     $recordOperation->save();
                     $recordOperation->with('carplan','car')->first();
 
@@ -353,7 +510,7 @@ class Car extends Controller
 
 
               }else{
-                  toastr()->error('You can\'t pick a date or time that has already passed');
+                  toastr()->error('You can\'t pick a date  that has already passed');
                   return back();
               }
 
@@ -364,6 +521,7 @@ class Car extends Controller
     {
 
        $carHistory         =  CarHistory::where('id', $history_id)->first();
+
        $fetchService_id    =  HiredCars::where('id', $carHistory->car_id)->select('service_id')->first();
        $checkServicePlan   =  CarPlan::where('id' , $carHistory->car_plan_id)->first();
 
@@ -382,7 +540,8 @@ class Car extends Controller
        $transaction->service_id       =  $fetchService_id->service_id;
        $transaction->transaction_type = 'cash payment';
        $transaction->user_id          =  auth()->user()->id;
-//       $transaction->car_plan_id      =  $carHistory->car_plan_id;
+       $transaction->tenant_id        =  $carHistory->car->tenant_id;
+//       $transaction->car_plan_id   =  $carHistory->car_plan_id;
        $transaction->car_history_id   =  $history_id;
        $transaction->description      = 'A cash payment for made successfully';
 
@@ -391,7 +550,15 @@ class Car extends Controller
         $maildata = [
             'name' => auth()->user()->full_name,
             'service' => 'Car Hire',
-            'transaction' => $transaction
+            'reference' => $transaction->reference,
+            'transaction' => $transaction,
+            'plan' => $checkServicePlan->plan,
+            'plan_amount' => $checkServicePlan->amount,
+            'payment_method' => 'cash payment',
+            'total_payment' =>$checkServicePlan->amount * $carHistory->days,
+            'pickup_date' => $carHistory->returnDate->format('Y-m-d'),
+            'pickup_time' => $carHistory->returnTime->format('h:i:s'),
+            'number_of_days' => $carHistory->days
         ];
 
         $email = auth()->user()->email;
@@ -407,7 +574,9 @@ class Car extends Controller
     public function onTrip()
     {
 
-        $carsOnTripCurrently = CarHistory::where('available_status','On Trip')->with('car','carplan','user')->orderby('returnDate','desc')->get();
+        $carsOnTripCurrently = CarHistory::where('available_status','On Trip')
+                                                ->with('car','carplan','user')
+                                                ->orderby('returnDate','desc')->get();
 
         return view('admin.cars.on-trip', compact('carsOnTripCurrently'));
     }
@@ -416,10 +585,60 @@ class Car extends Controller
     public function tripDetails($carhistory_id)
     {
 
-        $car = CarHistory::where('id', $carhistory_id)->with('user','carplan','car')
-                                                                                ->first();
+        $car = CarHistory::where('id', $carhistory_id)->with('user','carplan','car')->first();
 
         return view('admin.cars.details',compact('car'));
     }
+
+    public function editCarClass($id)
+    {
+
+        $carClassEdit =  CarClass::where('id',$id)->first();
+
+        return view('admin.cars.edit-car-class' , compact('carClassEdit'));
+    }
+
+    public function updateCarClass(Request $request , $id)
+    {
+        $request->validate([
+            'car_class' => 'required'
+        ]);
+
+        $carClassEdit =  CarClass::where('id',$id)->first();
+        $carClassEdit->update([
+            'name' => $request->car_class
+        ]);
+
+        Alert::success('Success ', 'Car Class Updated successfully');
+        return back();
+
+    }
+
+    public function editCarType($id)
+    {
+
+        $carTypeEdit =  CarType::where('id',$id)->first();
+
+
+        return view('admin.cars.edit-car-type' , compact('carTypeEdit'));
+    }
+
+    public function updateCarType(Request $request , $id)
+    {
+        $request->validate([
+            'car_type' => 'required'
+        ]);
+
+        $carTypeEdit =  CarType::where('id',$id)->first();
+        $carTypeEdit->update([
+            'name' => $request->car_type
+        ]);
+
+        Alert::success('Success ', 'Car Type Updated successfully');
+        return back();
+
+    }
+
+
 
 }

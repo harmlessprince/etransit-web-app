@@ -55,7 +55,11 @@
                          </div>
                          <div class="form-group">
                              <label for="bus_type">Bus Type</label>
-                             <input type="text" class="form-control" name="bus_type" value="{{old('bus_type')}}" id="bus_type"/>
+                             <select id="bus_type" class="form-control" name="bus_type">
+                                 @foreach($busTypes as $type)
+                                     <option value="{{$type->type}}">{{$type->type}}</option>
+                                 @endforeach
+                             </select>
                          </div>
                          <div class="form-group">
                              <label for="registration">Bus Registration</label>

@@ -150,7 +150,9 @@
                                 <tr>
                                     <th scope="row">{{$index+1}}</th>
                                     <td>{{$location->locations}}</td>
-                                    <td>Edit Delete</td>
+                                    <td>
+                                        <a href="{{url('admin/edit/ferry_location/'.$location->id)}}" class="btn btn-sm btn-success">Edit</a>
+                                    </td>
                                 </tr>
                             @endforeach
                             </tbody>

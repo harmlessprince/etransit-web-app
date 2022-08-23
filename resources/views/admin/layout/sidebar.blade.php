@@ -1,16 +1,28 @@
 <header class="main-nav">
-    <div class="logo-wrapper"><a href="{{url('/admin/dashboard')}}"><img class="img-fluid for-light" src="{{asset('/images/logo/et-logo.png')}}" alt=""><img class="img-fluid for-dark" src="../assets/images/logo/logo_dark.png" alt=""></a>
+    <div class="logo-wrapper"><a href="{{url('/admin/dashboard')}}">
+            <img class="img-fluid for-light" src="{{asset('/images/logo/et-logo.png')}}" alt="">
+            <img class="img-fluid for-dark"  src="{{asset('/images/logo/et-logo.png')}}"  alt=""></a>
         <div class="back-btn"><i class="fa fa-angle-left"></i></div>
-        <div class="toggle-sidebar"><i class="status_toggle middle" data-feather="grid" id="sidebar-toggle"> </i></div>
+        <div class="toggle-sidebar"><i class="status_toggle middle" data-feather="grid" id="sidebar-toggle"> </i>
+        </div>
     </div>
-    <div class="logo-icon-wrapper"><a href="{{url('/admin/dashboard')}}"><img class="img-fluid" src="{{asset('/images/logo/et-logo.png')}}" alt=""></a></div>
+    <div class="logo-icon-wrapper">
+        <a href="{{url('/admin/dashboard')}}">
+            <img class="img-fluid" src="{{asset('/images/logo/et-logo.png')}}" alt="">
+        </a>
+    </div>
     <nav>
         <div class="main-navbar">
             <div class="left-arrow" id="left-arrow"><i data-feather="arrow-left"></i></div>
             <div id="mainnav">
                 <ul class="nav-menu custom-scrollbar">
-                    <li class="back-btn"><a href="{{url('/admin/dashboard')}}"><img class="img-fluid" src="{{asset('assets/images/logo/logo-icon.png')}}" alt=""></a>
-                        <div class="mobile-back text-right"><span>Back</span><i class="fa fa-angle-right pl-2" aria-hidden="true"></i></div>
+                    <li class="back-btn">
+                        <a href="{{url('/admin/dashboard')}}">
+                            <img class="img-fluid" src="{{asset('assets/images/logo/logo-icon.png')}}" alt="">
+                        </a>
+                        <div class="mobile-back text-right"><span>Back</span>
+                            <i class="fa fa-angle-right pl-2" aria-hidden="true"></i>
+                        </div>
                     </li>
                     <li class="sidebar-title">
                         <div>
@@ -25,6 +37,8 @@
                         <ul class="nav-submenu menu-content">
 {{--                            <li><a href="{{url('/admin/manage/vehicle')}}">Manage Buses</a></li>--}}
                             <li><a href="{{url('/admin/manage/tenant-bus')}}">Manage Buses</a></li>
+                            <li><a href="{{url('/admin/manage/bus-type')}}">Buses Type</a></li>
+                            <li><a href="{{url('/admin/manage/bus-destination')}}">Bus Locations</a></li>
                             <li><a href="{{url('/admin/manage/bus-terminals')}}">Manage Bus Terminals</a></li>
                         </ul>
                     </li>
@@ -55,6 +69,7 @@
                             <li><a href="{{url('/admin/manage/height')}}">Manage Height</a></li>
                             <li><a href="{{url('/admin/manage/length')}}">Manage Length</a></li>
                             <li><a href="{{url('/admin/manage/width')}}">Manage Width</a></li>
+                            <li><a href="{{url('/admin/manage/parcel/delivery/request')}}">View Parcel Delivery Request</a></li>
                         </ul>
                     </li>
                     <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"></i><span>Ferry Management</span></a>
@@ -72,9 +87,19 @@
                             <li><a href="{{url('/admin/manage/train/routes-fare')}}">Manage Routes Fare</a></li>
                         </ul>
                     </li>
+                    <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"></i><span>Driver Management</span></a>
+                        <ul class="nav-submenu menu-content">
+                            <li><a href="{{url('/admin/manage/drivers')}}">Manage Drivers</a></li>
+                        </ul>
+                    </li>
                     <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"></i><span>Customers</span></a>
                         <ul class="nav-submenu menu-content">
                             <li><a href="{{url('/admin/customers')}}">Manage Customers</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"></i><span>Service Management</span></a>
+                        <ul class="nav-submenu menu-content">
+                            <li><a href="{{url('/admin/all-services')}}">Manage Service</a></li>
                         </ul>
                     </li>
                     <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"></i><span>Transactions</span></a>
@@ -82,28 +107,35 @@
                             <li><a href="{{url('/admin/transactions')}}">Manage Transactions</a></li>
                         </ul>
                     </li>
-{{--                    <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"></i><span>Terminals</span></a>--}}
-{{--                        <ul class="nav-submenu menu-content">--}}
-{{--                            <li><a href="{{url('/admin/manage/terminals')}}">All Terminals</a></li>--}}
-{{--                        </ul>--}}
-{{--                    </li>--}}
+                    <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"></i> <span>Partners</span></a>
+                        <ul class="nav-submenu menu-content">
+                            <li><a href="{{url('/admin/all-partners')}}">Partnership </a></li>
+                            <li><a href="{{url('/admin/all-partner-drivers')}}">Driver Partnerships </a></li>
+                        </ul>
+                    </li>
                     <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"></i><span>Operator</span></a>
                         <ul class="nav-submenu menu-content">
                             <li><a href="{{url('/admin/manage/operators')}}">All Operators</a></li>
                         </ul>
                     </li>
                     <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="file-text"></i><span>Roles</span></a>
-                        <ul class="nav-submenu menu-content">
-                            <li><a class="" href="{{url('admin/roles')}}">All Roles</a> </li>
-                        </ul>
-                    </li>
+                            <ul class="nav-submenu menu-content">
+                                <li><a class="" href="{{url('admin/roles')}}">All Roles</a> </li>
+                            </ul>
+                        </li>
                     <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="server"></i><span>Permissions</span></a>
-                        <ul class="nav-submenu menu-content">
-                            <li><a  href="{{url('admin/permissions')}}">All Permissions</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
+                            <ul class="nav-submenu menu-content">
+                                <li><a  href="{{url('admin/permissions')}}">All Permissions</a></li>
+                            </ul>
+                        </li>
+                    <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="server"></i><span>NYSC Trips</span></a>
+                            <ul class="nav-submenu menu-content">
+                                <li><a href="{{url('admin/nysc/locations')}}">Camps</a></li>
+                                <li><a href="{{url('admin/nysc/hubs')}}">Hubs</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
             <div class="right-arrow" id="right-arrow"><i data-feather="arrow-right"></i></div>
         </div>
     </nav>

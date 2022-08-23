@@ -151,8 +151,10 @@
                         <h6>Departure Date : {{$findSchedule->departure_date->format('Y-M-d')}}</h6>
                         <hr>
                         <h6>Departure Time : {{$findSchedule->departure_time}}</h6>
+                        @if(!is_null($findSchedule->return_date))
                         <hr>
                         <h6>Return Date : {{$findSchedule->return_date->format('Y-M-d')}}</h6>
+                        @endif
                         <hr>
                         <h6>Seats Available :{{$findSchedule->seats_available}} </h6>
                         <hr>
@@ -173,7 +175,7 @@
                                 <h4>Seat Information</h4>
                             </div>
                             <div>
-                                <a href="{{url('e-ticket/schedule-manifest/'.$findSchedule->id)}}" class="btn btn-success">Check Manifest</a>
+                                <a href="{{url('admin/schedule-manifest/'.$findSchedule->id)}}" class="btn btn-success">Check Manifest</a>
                             </div>
                         </div>
                         <hr>

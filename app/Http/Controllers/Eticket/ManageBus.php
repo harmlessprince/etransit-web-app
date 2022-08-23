@@ -2,14 +2,18 @@
 
 namespace App\Http\Controllers\Eticket;
 
+use App\Exports\VehicleExport;
 use App\Http\Controllers\Controller;
+use App\Imports\VehicleImport;
 use App\Models\Bus;
+use App\Models\BusType;
 use App\Models\Destination;
 use App\Models\Schedule;
 use App\Models\Tenant;
 use App\Models\Terminal;
 use Illuminate\Http\Request;
 use DataTables;
+use Maatwebsite\Excel\Facades\Excel;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\Models\Driver;
 
@@ -20,6 +24,7 @@ class ManageBus extends Controller
         $busCount = Bus::count();
         $terminalCount = Terminal::count();
         $schedule = Schedule::count();
+
 
 
         return view('Eticket.bus.index' , compact('busCount','terminalCount','schedule'));
@@ -35,6 +40,7 @@ class ManageBus extends Controller
                 ->addColumn('action', function($row){
                     $id = $row->id;
                     $actionBtn = "<a href='/e-ticket/edit-tenant-bus/$id'  class='edit btn btn-success btn-sm'>Edit</a> <a href='/e-ticket/view-tenant-bus/$id' class='delete btn btn-primary btn-sm'>View</a>";
+
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])
@@ -53,7 +59,8 @@ class ManageBus extends Controller
 
     public function addNewBus()
     {
-        return view('Eticket.bus.new');
+        $busTypes = BusType::all();
+        return view('Eticket.bus.new' , compact('busTypes'));
     }
 
     public function createTenantBus(Request $request)
@@ -187,6 +194,57 @@ class ManageBus extends Controller
 
         return redirect('e-ticket/buses');
     }
+
+
+    public function importExportView()
+    {
+        return view('Eticket.bus.import-bus');
+    }
+
+    public function addVehicle(Request $data)
+    {
+
+        $vehicle = new Bus();
+        $vehicle->bus_type = $data['bus_type'];
+        $vehicle->bus_model = $data['bus_model'];
+        $vehicle->bus_registration = $data['bus_registration'];
+        $vehicle->air_conditioning = $data['Ac_status'];
+        $vehicle->wheels = $data['wheels'];
+        $vehicle->seater = $data['seats'];
+        $vehicle->tenant_id = session()->get('tenant_id');
+        $vehicle->save();
+
+        toastr()->success('Data saved successfully');
+        return response()->json(['success' => true , 'message' => 'Vehicle saved successfully']);
+
+    }
+
+    /**
+     * @return \Illuminate\Support\Collection
+     */
+    public function exportVehicle()
+    {
+        $vehicles = Bus::select(["id", "bus_type", "bus_model", "bus_registration" , "air_conditioning" , "wheels","seater"])->get();
+
+        return Excel::download(new VehicleExport($vehicles), 'bus.xlsx');
+
+    }
+
+    /**
+     * @return \Illuminate\Support\Collection
+     */
+    public function importVehicle(Request $request)
+    {
+
+        $request->validate([
+            'excel_file' => 'required|file|mimes:xls,xlsx,csv'
+        ]);
+
+        Excel::import(new VehicleImport,request()->file('excel_file'));
+        toastr()->success('Data saved successfully');
+        return response()->json(['message' => 'uploaded successfully'], 200);
+    }
+
 
 
     private function validateBuRequest($request)

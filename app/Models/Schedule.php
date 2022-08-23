@@ -17,8 +17,8 @@ class Schedule extends Model
      * @var array
      */
     protected $casts = [
-        'departure_date' => 'datetime',
-        'return_date' => 'datetime',
+        'departure_date' => 'datetime:Y-m-d',
+        'return_date' => 'datetime:Y-m-d',
     ];
 
     public function terminal()
@@ -38,7 +38,8 @@ class Schedule extends Model
 
     public function pickup()
     {
-        return $this->belongsTo(Pickup::class);
+        return $this->belongsTo(Destination::class ,'pickup_id');
+//        return $this->belongsTo(Pickup::class);
     }
 
     public function service()
@@ -56,14 +57,20 @@ class Schedule extends Model
         return $this->hasMany(Transaction::class);
     }
 
+    public function tenant()
+    {
+        return $this->belongsTo(Tenant::class);
+    }
+
+
     /**
      * The "booted" method of the model.
      *
      * @return void
      */
-    protected static function booted()
-    {
-        static::addGlobalScope(new TenantScope);
-    }
+   protected static function booted()
+   {
+       static::addGlobalScope(new TenantScope);
+   }
 
 }

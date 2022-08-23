@@ -160,8 +160,7 @@
     <div class="container-fluid" >
         <div class="button-box" >
             <div>
-                <a href="{{url('/admin/import-export-cars')}}" class="btn bulk-upload-button btn-sm"  style="margin-right:10px;">Bulk Import Boat</a>&nbsp;
-
+{{--                <a href="{{url('/admin/import-export-cars')}}" class="btn bulk-upload-button btn-sm"  style="margin-right:10px;">Bulk Import Boat</a>&nbsp;--}}
                 <a href="{{url('admin/add/tour')}}">
                     <button class="btn s add-terminal-button btn-sm"  >Add Tour</button>
                 </a>
