@@ -42,6 +42,50 @@
         }
     }
 
+
+
+
+
+    /* The Modal (background) */
+    .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        padding-top: 100px; /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    }
+
+    /* Modal Content */
+    .modal-content {
+        /*background-color: #fefefe;*/
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+    }
+
+    /* The Close Button */
+    .close {
+        color: #aaaaaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+    }
+</style>
+
 </style>
 
 @section('content')
@@ -643,5 +687,57 @@
             <div class="col" style="text-align: center;"><img class="img-fluid" src="{{asset('new-assets/img/client4%201.svg')}}"></div>
         </div>
     </div>
+
+
+    <!-- Trigger/Open The Modal -->
+{{--    <button id="myBtn">Open Modal</button>--}}
+
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+        <!-- Modal content -->
+        <div class="row">
+            <div class="col-md-3 col-xl-3 col-lg-3 col-xl-3 col-sm-3"></div>
+            <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
+
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal()">&times;</span>
+                    <a href="{{env('APP_URl')}}/view-car-details/100 ">
+                       <img src="{{asset('images/jeep.jpg')}}" width="100%" height="100%" />
+                    </a>
+                </div>
+
+            </div>
+            <div class="col-md-3 col-xl-3 col-lg-3 col-xl-3 col-sm-3"></div>
+        </div>
+    </div>
 </section>
+
+
+<script>
+
+    let counter = 0;
+    var modal = document.getElementById("myModal");
+
+    var span = document.getElementsByClassName("close")[0];
+
+    addEventListener('load', (event) => {
+        setInterval(function() {
+            counter++;
+            (counter < 3) ? modal.style.display = "block" : modal.style.display = "none";
+        }, 10000);
+    });
+
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+    function closeModal()
+    {
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+    }
+</script>
 @endsection
