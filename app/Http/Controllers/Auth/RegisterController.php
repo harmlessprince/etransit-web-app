@@ -71,7 +71,15 @@ class RegisterController extends Controller
      * @return \App\Models\User
      */
     protected function create(array $data)
-    {   $nin = Crypt::encryptString($data['nin']);
+
+    {
+        if(isset($data['nin']))
+        {
+            $nin = Crypt::encryptString($data['nin']);
+        }
+        else{
+            $nin = null;
+        }
         $data = User::create([
             'full_name' => $data['full_name'],
             'email' => $data['email'],
@@ -80,7 +88,7 @@ class RegisterController extends Controller
             'phone_number' => $data['phone_number'],
             'username' => $data['username'],
             'nin' => $nin
-        ]);
+    ]);
 
 //        $verifyToken = VerificationToken::generate();
 //

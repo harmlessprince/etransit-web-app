@@ -44,6 +44,9 @@
 
 
     <style>
+        html,body{
+            overflow-x: hidden;
+        }
         body{
             font-family: metropolis-regular , Sans-Serif;
         }
