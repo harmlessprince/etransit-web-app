@@ -54,9 +54,9 @@ class TrackingConsole extends Controller
 
     public function recordActiveTracking(Request $request , $tracker_id)
     {
-        $this->validateRequest($request);;
+        $data =  $this->validateRequest($request);;
 
-        $recordActiveTracking  =  $this->trackingRepository->recordActiveTrackingSession($request , $tracker_id);
+        $recordActiveTracking  =  $this->trackingRepository->recordActiveTrackingSession($tracker_id ,$data);
 
         if($recordActiveTracking)
         {

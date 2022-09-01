@@ -72,7 +72,7 @@ class TrackingRepository implements TrackingInterface
 
         DB::beginTransaction();
         $recordTracking = new TrackingRecord();
-        $recordTracking->tracker_id =  $tracker_id;
+        $recordTracking->tracker_id = $tracker_id;
         $recordTracking->longitude  = $locationDetails['longitude'];
         $recordTracking->latitude   = $locationDetails['latitude'];
         $recordTracking->location   = $locationDetails['location'];
@@ -81,6 +81,11 @@ class TrackingRepository implements TrackingInterface
         DB::commit();
 
         return  $recordTracking;
+    }
+
+    public function  endActiveTrackingSession($tracker_id , $tracker_type)
+    {
+
     }
 
 
