@@ -13,7 +13,7 @@ class TrackingConsole extends Controller
 
         $locations = [];
 
-       $trackingRecord = \App\Models\TrackingRecord::where('tracker_id',$tracker_id)->select('location','longitude','latitude','created_at')->orderby('desc','asc')->get();
+       $trackingRecord = \App\Models\TrackingRecord::where('tracker_id',$tracker_id)->select('location','longitude','latitude','created_at')->orderby('created_at','desc')->get();
        //use tracker to find User
        $trackedUser = Tracker::where('id',$tracker_id)->with('user')->first();
 
