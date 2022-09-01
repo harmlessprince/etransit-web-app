@@ -83,9 +83,19 @@ class TrackingRepository implements TrackingInterface
         return  $recordTracking;
     }
 
-    public function  endActiveTrackingSession($tracker_id , $tracker_type)
+    public function  endActiveTrackingSession($tracker_id)
     {
+        $tracker = Tracker::where('id',$tracker_id)->first();
 
+        if($tracker)
+        {
+            $tracker->update(['status' => 'inactive']);
+            $response = ['success' => true , 'message' =>  'You have ended this tracking session successfully'];
+        }else{
+            $response = ['success' => true , 'message' =>  'An issue occurred while trying to end your tracking session , please try again'];
+        }
+
+       return  $response;
     }
 
 

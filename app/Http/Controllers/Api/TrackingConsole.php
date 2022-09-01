@@ -68,6 +68,20 @@ class TrackingConsole extends Controller
     }
 
 
+    public function endActiveTrackingSession($tracker_id)
+    {
+        $endActiveTracking  =  $this->trackingRepository-> endActiveTrackingSession($tracker_id);
+
+        if($endActiveTracking)
+        {
+            return response()->json(['success' => true , 'message' =>  $endActiveTracking['message']]);
+        }else{
+            return response()->json(['success' => true , 'message' =>  $endActiveTracking['message']]);
+        }
+
+    }
+
+
 
     private function validateRequest($request)
     {

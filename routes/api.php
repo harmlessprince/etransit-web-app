@@ -152,6 +152,9 @@ Route::group(['prefix' => 'v1'], function() {
 
         Route::post('start-tracking',[TrackingConsole::class , 'initiateTracking']);
 
+        //end tracking
+        Route::get('end-active-tracking/{tracker_id}',[TrackingConsole::class ,'endActiveTrackingSession']);
+
     });
 
 

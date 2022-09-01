@@ -148,8 +148,8 @@
     function initMap() {
         const myLatLng = { lat: 9.0820, lng: 8.6753 };
         const map = new google.maps.Map(document.getElementById("map"), {
-            zoom: 5,
-            center: myLatLng,
+              zoom: 5,
+              center: myLatLng,
         });
 
         var locations =  <?php print  json_encode($locations); ?>

@@ -10,5 +10,5 @@ interface TrackingInterface
 
     public function recordActiveTrackingSession($tracker_id , $locationDetails);
 
-    public function endActiveTrackingSession($tracker_id ,$tracking_type);
+    public function endActiveTrackingSession($tracker_id);
 }
