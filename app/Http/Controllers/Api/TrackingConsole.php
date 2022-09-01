@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Interfaces\TrackingInterface;
+use App\Models\Tracker;
+use App\Models\TrackingRecord;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -79,6 +81,36 @@ class TrackingConsole extends Controller
             return response()->json(['success' => true , 'message' =>  $endActiveTracking['message']]);
         }
 
+    }
+
+    public function previousTrackingSessions($limit=20)
+    {
+        $user = auth()->user();
+
+        $findPreviousTrackingSession = Tracker::where('user_id',$user->id)
+                                                ->where('status','inactive')
+                                                ->simplepaginate($limit);
+
+        return response()->json(['success' => true , 'data' => compact('findPreviousTrackingSession')]);
+    }
+
+    public function activeSessionTracking($limit=20)
+    {
+        $user = auth()->user();
+
+        $findActiveTrackingSession = Tracker::where('user_id',$user->id)
+            ->where('status','active')
+            ->simplepaginate($limit);
+
+        return response()->json(['success' => true , 'data' => compact('findActiveTrackingSession')]);
+    }
+
+
+    public function TrackingRecord($tracker_id , $limit=20)
+    {
+        $trackingRecords = TrackingRecord::where('tracker_id',$tracker_id)->simplePaginate($limit);
+
+        return response()->json(['success' => true , 'data' => compact('trackingRecords')]);
     }
 
 

@@ -85,7 +85,7 @@ class TrackingRepository implements TrackingInterface
 
     public function  endActiveTrackingSession($tracker_id)
     {
-        $tracker = Tracker::where('id',$tracker_id)->first();
+        $tracker = Tracker::where('id',$tracker_id)->where('status','active')->first();
 
         if($tracker)
         {
