@@ -101,7 +101,7 @@
             #locations_box
             {
                 margin-top: 40px;
-                height: 20vh;
+                height: 30vh;
                 overflow: scroll;
             }
             .detailsSection{
