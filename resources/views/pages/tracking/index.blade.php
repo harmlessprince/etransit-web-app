@@ -182,7 +182,7 @@
 <script>
     setInterval(function () {
         location.reload();
-    }, 3000)
+    }, 30000 * 2)
 </script>
 
 </body>
