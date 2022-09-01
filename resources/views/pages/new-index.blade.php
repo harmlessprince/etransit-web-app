@@ -732,8 +732,7 @@
             modal.style.display = "none";
         }
     }
-
-    function closeModal()
+    closeModal = () =>
     {
         span.onclick = function() {
             modal.style.display = "none";

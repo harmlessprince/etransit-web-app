@@ -101,13 +101,7 @@ class TrackingRepository implements TrackingInterface
             case('email'):
                 //only trigger email once
                 if(count($trackingRecord) <= 1){
-                    $maildata = [
-                        'url' => env('APP_URL'). '/tracker/'.$tracker_id.'/user',
-                        'otp' => $otp,
-                        'trustee_name'=>  $findTrustee->full_name,
-                        'tracked_user' =>  $findUserInitiatedTracking->full_name
-                    ];
-                    Mail::to($findTrustee->email)->send(new TrackingNotificationTrigger($maildata));
+                   $this->triggerEmail($findTrustee,$otp,$findUserInitiatedTracking,$tracker_id);
                 }
                 $msg = "sent";
                 break;
@@ -118,10 +112,27 @@ class TrackingRepository implements TrackingInterface
                 $msg = 'Send both sms and email';
                 break;
             default:
+                if(count($trackingRecord) <= 1){
+                    $this->triggerEmail($findTrustee,$otp,$findUserInitiatedTracking,$tracker_id);
+                }
                 $msg = 'send just email.';
         }
 
         return $msg;
+
+    }
+
+    private function triggerEmail($findTrustee,$otp,$findUserInitiatedTracking,$tracker_id)
+    {
+            $maildata = [
+                'url' => env('APP_URL'). '/tracker/'.$tracker_id.'/user',
+                'otp' => $otp,
+                'trustee_name'=>  $findTrustee->full_name,
+                'tracked_user' =>  $findUserInitiatedTracking->full_name,
+            ];
+
+            Mail::to($findTrustee->email)->send(new TrackingNotificationTrigger($maildata));
+
 
     }
 
