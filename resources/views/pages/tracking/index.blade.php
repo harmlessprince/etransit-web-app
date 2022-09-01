@@ -179,6 +179,11 @@
 
 <script type="text/javascript"
         src="https://maps.google.com/maps/api/js?key={{ env('GOOGLE_MAP_KEY') }}&callback=initMap" ></script>
+<script>
+    setInterval(function () {
+        location.reload();
+    }, 30000)
+</script>
 
 </body>
 </html>
