@@ -86,16 +86,19 @@ class TrackingRepository implements TrackingInterface
 
     private function notificationTrigger($tracker_id)
     {
-        $otp = GenerateAuthorizationOtp::generate();
+
+        $trackingRecord = TrackingRecord::where('tracker_id',$tracker_id)->where('notification_triger','active')->get();
 
         $findTrustee = UserTrustee::where('tracker_id',$tracker_id)->first();
         $tracker = Tracker::where('id',$tracker_id)->first();
-
         $findUserInitiatedTracking = $tracker->user;
 
-        $findTrustee->update(['code' => $otp]);
+        if(count($trackingRecord) < 1)
+        {
+            $otp = GenerateAuthorizationOtp::generate();
+            $findTrustee->update(['code' => $otp]);
+        }
 
-        $trackingRecord = TrackingRecord::where('tracker_id',$tracker_id)->where('notification_triger','active')->get();
 
         switch(env('TRACKER_TRIGGER_NOTIFIER')) {
             case('email'):
