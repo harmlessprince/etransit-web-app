@@ -11,7 +11,9 @@
         html, body {
             margin:0px;
             height:100%;
-            background: #fff !important;
+            background:linear-gradient(to right,  #e7efff , #fff);
+            font-size: 16px;
+            font-family: 'Courier New', Courier, monospace;
         }
         #map {
             height:100vh;
@@ -19,7 +21,7 @@
         }
         .trackerSection{
             display:grid;
-            grid-template-columns: repeat(12,1fr);
+            grid-template-columns: repeat(13,1fr);
 
         }
         .mapSection{
@@ -28,6 +30,7 @@
         .detailsSection{
             height:100vh;
             width: 100%;
+
         }
         .detailsSection .footer{
             position: fixed;
@@ -36,13 +39,75 @@
             background-color:white;
             color: #000;
             padding:35px;
-            border:1px solid grey;
-            text-align: center;
-            border-radius: 15px;
+            /*border:1px solid grey;*/
+
+            /*border-radius: 15px;*/
+        }
+        .detailsSection{
+            grid-column: 10/13;
+            background:linear-gradient(to right,  #e7efff , #fff);
+
+        }
+        .detailsSection h6 ,  .detailsSection small{
+            margin-left: 10px;
+            margin-top: 20px;
+        }
+        .detailsSection small{
+            color: #DC6513;
+        }
+        .detailsSection .footer{
+            background:linear-gradient(to right,  #e7efff , #fff);
         }
         .detailsSection .footer p {
             position: absolute;
 
+        }
+        .detailsSection h6{
+            margin-top: 20px;
+        }
+        .location_name , .location_time{
+            margin-left: 20px;
+        }
+        #locations_box
+        {
+            margin-top: 40px;
+            height: 80vh;
+            overflow: scroll;
+
+
+        }
+        .location_inner_box{
+            display: flex;
+            box-shadow: 5px 5px 5px 5px  #e7efff;
+            background:linear-gradient(to right,  #e7efff , #fff);
+            padding:10px;
+            margin-top:10px;
+        }
+        .orange_dot{
+            background: #DC6513;
+            width:10px;
+            height:10px;
+            border-radius: 50%;
+            margin-left:10px;
+            margin-top:9px;
+        }
+
+        @media screen and (max-width: 768px) {
+            .trackerSection{
+                display:flex;
+                flex-direction: column;
+            }
+
+            #locations_box
+            {
+                margin-top: 40px;
+                height: 20vh;
+                overflow: scroll;
+            }
+            .detailsSection{
+                height:50vh;
+                width: 100%;
+            }
         }
     </style>
 </head>
@@ -54,10 +119,26 @@
         <div id="map"></div>
     </section>
     <section class="detailsSection">
-        <h4>Some locationa</h4>
-        <div class="footer">
-            <p>sartjsjdjdjsjjsjdjd</p>
+        <div>
+            <h6><b>Tracking ID</b></h6>
+           <small><b>{{$tracker_id}}</b></small>
         </div>
+        <div id="locations_box">
+            @foreach($locations as $index =>  $location)
+                <div class="location_inner_box">
+                    <div class="orange_dot"></div>
+                    <div>
+                        <div class="location_name"><p><b>{{$location[0]}}</b></p></div>
+                        <div class="location_time"><p><b>{{$location[3]}} - {{$location[4]}}</b></p></div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+        <div class="footer">
+               <div >
+                   <p><b>{{$trackedUser->user->full_name }} : {{$trackedUser->user->email}}</b></p>
+               </div>
+       </div>
     </section>
 </section>
 

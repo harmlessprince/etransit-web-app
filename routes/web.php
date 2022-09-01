@@ -123,7 +123,8 @@ Route::get('nysc',[\App\Http\Controllers\Vehicle::class ,'NyscHome']);
 
 Route::get('authorization/page',[AuthorizationConsole::class , 'authorizeTrustee']);
 Route::post('send/authorization/request',[AuthorizationConsole::class ,'AcceptAuthorizationRequest']);
-Route::get('tracker/{tracker_id}/user',[\App\Http\Controllers\TrackingConsole::class , 'trackingPage'])->middleware('request_authorization_pin');
+Route::get('tracker/{tracker_id}/user',[\App\Http\Controllers\TrackingConsole::class , 'trackingPage']);
+//->middleware('request_authorization_pin');
 
 
 //check PDF
