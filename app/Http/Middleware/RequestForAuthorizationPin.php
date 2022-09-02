@@ -27,7 +27,7 @@ class RequestForAuthorizationPin
 
            if(!$userTrusteeCode)
            {
-               Alert::error('Oops ', 'Incorrect Token');
+               Alert::error('Oops ', 'Incorrect OTP');
                return back();
            }
 
