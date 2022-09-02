@@ -108,11 +108,8 @@ class TrackingRepository implements TrackingInterface
         $tracker = Tracker::where('id',$tracker_id)->first();
         $findUserInitiatedTracking = $tracker->user;
         $otp = GenerateAuthorizationOtp::generate();
-        if(count($trackingRecord) < 1)
-        {
+        $findTrustee->update(['code' => $otp]);
 
-            $findTrustee->update(['code' => $otp]);
-        }
 
 
         switch(env('TRACKER_TRIGGER_NOTIFIER')) {
