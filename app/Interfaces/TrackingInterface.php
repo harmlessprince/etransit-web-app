@@ -4,7 +4,7 @@ namespace App\Interfaces;
 
 interface TrackingInterface
 {
-    public function trackUser($user , $trackingDetails);
+    public function trackUser($user , $trackingDetails , $transaction_id);
 
     public function initiateTracking($user_id, $locationDetails);
 

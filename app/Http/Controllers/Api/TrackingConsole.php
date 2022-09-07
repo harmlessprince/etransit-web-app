@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Interfaces\TrackingInterface;
+use App\Models\Passenger;
 use App\Models\Tracker;
 use App\Models\TrackingRecord;
 use Illuminate\Http\JsonResponse;
@@ -20,19 +21,24 @@ class TrackingConsole extends Controller
     }
 
 
-    public function trackUser(Request $request) : JsonResponse
+    public function trackUser(Request $request,$transaction_id = null) : JsonResponse
     {
         $trackingDetails = $request->validate([
                 'purpose_of_movement' => 'required',
                 'destination_description' => 'required',
                 'next_of_kin_name'=> 'required',
-                'next_of_kin_email' => 'required',
+                'next_of_kin_email' => 'sometimes',
                 'next_of_kin_phone_number' => 'required',
                 'tracking_type' => 'required',
             ]);
 
 
-        $trackingIsInitiated =  $this->trackingRepository->trackUser(auth()->user()->id ,$trackingDetails);
+        $trackingIsInitiated =  $this->trackingRepository->trackUser(auth()->user()->id ,$trackingDetails , $transaction_id);
+
+        if(!$trackingIsInitiated)
+        {
+            return response()->json(['success' => false , 'message' =>  $trackingIsInitiated['message']]);
+        }
 
         return response()->json(['success' => true , 'message' => 'tracking set successfully']);
     }
@@ -111,6 +117,22 @@ class TrackingConsole extends Controller
         $trackingRecords = TrackingRecord::where('tracker_id',$tracker_id)->simplePaginate($limit);
 
         return response()->json(['success' => true , 'data' => compact('trackingRecords')]);
+    }
+
+    public function prefillTrusteeInfo($transaction_id)
+    {
+        $transaction = Transaction::where('id',$transaction_id)
+                            ->select('schedule_id','service_id')->first();
+        $data['name'] = null;
+        $data['phone_number'] = null;
+        if($transaction->service_id == 1)
+        {
+            $fetchPassengerTrustee = Passenger::where('schedule_id',$transaction->schedule_id)->first();
+            $data['name'] =  $fetchPassengerTrustee->next_of_kin_name;
+            $data['phone_number'] =  $fetchPassengerTrustee-> next_of_kin_number;
+        }
+
+        return response()->json(['success' => true , 'data' => compact('data')]);
     }
 
 

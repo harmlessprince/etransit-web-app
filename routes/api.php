@@ -148,7 +148,9 @@ Route::group(['prefix' => 'v1'], function() {
         Route::get('my-transactions' , [Transaction::class ,'userTransactions']);
 
         //track user
-        Route::post('initiate-tracking',[TrackingConsole::class , 'trackUser']);
+        Route::get('prefill_trustee_info/{transaction_id}',[TrackingConsole::class , 'prefillTrusteeInfo']);
+
+        Route::post('initiate-tracking/{transaction_id?}',[TrackingConsole::class , 'trackUser']);
 
         Route::post('start-tracking',[TrackingConsole::class , 'initiateTracking']);
 

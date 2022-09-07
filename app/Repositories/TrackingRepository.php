@@ -7,6 +7,7 @@ use App\Interfaces\TrackingInterface;
 use App\Mail\TrackingNotificationTrigger;
 use App\Models\Tracker;
 use App\Models\TrackingRecord;
+use App\Models\Transaction;
 use App\Models\UserTrustee;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -15,7 +16,7 @@ use Illuminate\Support\Facades\Mail;
 
 class TrackingRepository implements TrackingInterface
 {
-    public function trackUser($userId , $trackingDetails)
+    public function trackUser($userId , $trackingDetails , $transaction_id)
     {
         DB::beginTransaction();
         $tracker = new Tracker();
@@ -23,14 +24,66 @@ class TrackingRepository implements TrackingInterface
         $tracker->tracking_type = $trackingDetails['tracking_type'];
         $tracker->purpose_of_movement =  $trackingDetails['purpose_of_movement'];
         $tracker->destination_description =  $trackingDetails['destination_description'];
+
+        if($transaction_id != null)
+        {
+               $trackingTransaction =  Transaction::where('id',$transaction_id)
+                                                    ->select('service_id','schedule_id','car_history_id','tour_id',
+                                                        'boat_trip_id','delivery_parcel_id','ferry_trip_id','train_schedule_id')->first();
+
+               if(!$trackingTransaction)
+               {
+                  return    $response = ['success' => false , 'message' =>  'Transaction could not be fetched'];
+               }
+
+                switch($trackingTransaction->service_id) {
+                    case 1:
+                        //bus service
+                        $tracker->service_id  =  $trackingTransaction->service_id;
+                        $tracker->schedule_id =  $trackingTransaction->schedule_id;
+                        break;
+                    case 2:
+                        //train service
+                        $tracker->service_id        =  $trackingTransaction->service_id;
+                        $tracker->train_schedule_id =  $trackingTransaction->train_schedule_id;
+                        break;
+                    case 3:
+                        //ferry
+                        $tracker->service_id    =  $trackingTransaction->service_id;
+                        $tracker->ferry_trip_id =  $trackingTransaction->ferry_trip_id;
+                        break;
+                    case 6:
+                        //car hire
+                        $tracker->service_id     =  $trackingTransaction->service_id;
+                        $tracker->car_history_id =  $trackingTransaction->car_history_id;
+                        break;
+                    case 7:
+                        //boat cruise
+                        $tracker->service_id   =  $trackingTransaction->service_id;
+                        $tracker->boat_trip_id =  $trackingTransaction->boat_trip_id;
+                        break;
+                    case 8:
+                        //tour
+                        $tracker->service_id =  $trackingTransaction->service_id;
+                        $tracker->tour_id    =  $trackingTransaction->tour_id;
+                        break;
+                    case 9:
+                        //parcel
+                        $tracker->service_id           =  $trackingTransaction->service_id;
+                        $tracker->delivery_parcel_id   =  $trackingTransaction->delivery_parcel_id;
+                        break;
+                    default:
+                        return   $response = ['success' => false , 'message' =>  'An issue occurred with the transaction ID passed'];
+                }
+        }
         $tracker->save();
         if($tracker)
         {
             $trustee = new UserTrustee();
-            $trustee->full_name = $trackingDetails['next_of_kin_name'];
-            $trustee->email = $trackingDetails['next_of_kin_email'];
+            $trustee->full_name    = $trackingDetails['next_of_kin_name'];
+            $trustee->email        = $trackingDetails['next_of_kin_email'];
             $trustee->phone_number = $trackingDetails['next_of_kin_phone_number'];
-            $trustee->tracker_id  = $tracker->id;
+            $trustee->tracker_id   = $tracker->id;
             $trustee->save();
         }
         DB::commit();
