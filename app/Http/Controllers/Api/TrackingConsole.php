@@ -40,7 +40,7 @@ class TrackingConsole extends Controller
             return response()->json(['success' => false , 'message' =>  $trackingIsInitiated['message']]);
         }
 
-        return response()->json(['success' => true , 'message' => 'tracking set successfully']);
+        return response()->json(['success' => true , 'message' => 'tracking set successfully','data' => compact('trackingIsInitiated')]);
     }
 
 
