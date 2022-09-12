@@ -22,7 +22,7 @@ class TrackingConsole extends Controller
        $data['pickup'] = null;
        $data['destination'] = null;
        $data['departureTime'] = null;
-        $data['departureDate'] = null;
+       $data['departureDate'] = null;
 
        if($transactionId != null)
        {

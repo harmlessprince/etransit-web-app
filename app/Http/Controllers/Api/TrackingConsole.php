@@ -169,7 +169,7 @@ class TrackingConsole extends Controller
                 $data['allData']  =  $fetchTransaction;
         }
 
-        return $fetchTransaction->schedule->terminal;
+        
         return response()->json(['success' => true , 'data' => compact('data')]);
 
 

@@ -24,7 +24,7 @@ class SmsGateWayTrigger
                 ],
             ]
         );
-        
+
         $body = $response->getBody();
 
         return  $body;
