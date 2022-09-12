@@ -168,7 +168,8 @@ class TrackingConsole extends Controller
             default:
                 $data['allData']  =  $fetchTransaction;
         }
-        
+
+        return $fetchTransaction->schedule->terminal;
         return response()->json(['success' => true , 'data' => compact('data')]);
 
 

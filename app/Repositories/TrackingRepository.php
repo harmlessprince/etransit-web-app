@@ -31,6 +31,7 @@ class TrackingRepository implements TrackingInterface
                                                     ->select('service_id','schedule_id','car_history_id','tour_id',
                                                         'boat_trip_id','delivery_parcel_id','ferry_trip_id','train_schedule_id')->first();
 
+               session()->put(['isSet_transaction_id', $transaction_id]);
                if(!$trackingTransaction)
                {
                   return    $response = ['success' => false , 'message' =>  'Transaction could not be fetched'];
@@ -192,12 +193,25 @@ class TrackingRepository implements TrackingInterface
 
     private function triggerEmail($findTrustee,$otp,$findUserInitiatedTracking,$tracker_id)
     {
+
+        if(session()->has('isSet_transaction_id'))
+        {
+            $getTransactionId = session()->get('isSet_transaction_id');
+            $maildata = [
+                'url' => env('APP_URL'). '/tracker/'.$tracker_id.'/user/'.$getTransactionId,
+                'otp' => $otp,
+                'trustee_name'=>  $findTrustee->full_name,
+                'tracked_user' =>  $findUserInitiatedTracking->full_name,
+            ];
+        }else{
             $maildata = [
                 'url' => env('APP_URL'). '/tracker/'.$tracker_id.'/user',
                 'otp' => $otp,
                 'trustee_name'=>  $findTrustee->full_name,
                 'tracked_user' =>  $findUserInitiatedTracking->full_name,
             ];
+        }
+
 
             Mail::to($findTrustee->email)->send(new TrackingNotificationTrigger($maildata));
 

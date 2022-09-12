@@ -16,7 +16,7 @@
             font-family: 'Courier New', Courier, monospace;
         }
         #map {
-            height:100vh;
+            height:calc(100vh + 130px);
             width: 100%;
         }
         .trackerSection{
@@ -45,24 +45,32 @@
         }
         .detailsSection{
             grid-column: 10/13;
-            background:linear-gradient(to right,  #e7efff , #fff);
+            /*background:linear-gradient(to right,  #e7efff , #fff);*/
 
         }
-        .detailsSection h6 ,  .detailsSection small{
+        .detailsSection h6 ,  .detailsSection small ,  .detailsSection h3 ,.pickup_destination_point{
             margin-left: 10px;
             margin-top: 20px;
         }
         .detailsSection small{
             color: #DC6513;
         }
+        .pickup_destination_point{
+            display: flex;
+        }
+        .pickup_destination_point .orange_dot , .pickup_destination_point  .orange_outter_circle , .purpose_of_movement h5
+        , .purpose_of_movement p{
+            margin-right: 2rem;
+            margin-left: 1rem;
+        }
         .detailsSection .footer{
-            background:linear-gradient(to right,  #e7efff , #fff);
+            /*background:linear-gradient(to right,  #e7efff , #fff);*/
         }
         .detailsSection .footer p {
             position: absolute;
 
         }
-        .detailsSection h6{
+        .detailsSection h6,  .detailsSection h3{
             margin-top: 20px;
         }
         .location_name , .location_time{
@@ -79,12 +87,20 @@
         .location_inner_box{
             display: flex;
             box-shadow: 5px 5px 5px 5px  #e7efff;
-            background:linear-gradient(to right,  #e7efff , #fff);
+            /*background:linear-gradient(to right,  #e7efff , #fff);*/
             padding:10px;
             margin-top:10px;
         }
         .orange_dot{
             background: #DC6513;
+            width:10px;
+            height:10px;
+            border-radius: 50%;
+            margin-left:10px;
+            margin-top:9px;
+        }
+        .orange_outter_circle{
+            border: 1px solid #DC6513;
             width:10px;
             height:10px;
             border-radius: 50%;
@@ -98,6 +114,11 @@
                 flex-direction: column;
             }
 
+            #map {
+                height:75vh;
+                width: 100%;
+            }
+
             #locations_box
             {
                 margin-top: 40px;
@@ -105,8 +126,13 @@
                 overflow: scroll;
             }
             .detailsSection{
+                border-radius:30px;
                 height:50vh;
                 width: 100%;
+            }
+            .purpose_of_movement{
+                display: flex;
+                flex-direction: column;
             }
         }
     </style>
@@ -123,6 +149,28 @@
             <h6><b>Tracking ID</b></h6>
            <small><b>{{$tracker_id}}</b></small>
         </div>
+
+        @if( $data['departureTime'] != null)
+            <div>
+                <h3><b>Time {{ $data['departureTime'] }}</b></h3>
+               <div class="destination_details">
+                   <div class="pickup_destination_point">
+                       <div class="orange_dot"></div>
+                       <div>{{ $data['pickup'] }}</div>
+                   </div>
+
+                   <div class="pickup_destination_point">
+                       <div class="orange_outter_circle"></div>
+                       <div>{{  $data['destination'] }}</div>
+                   </div>
+                   <br>
+                   <div class="purpose_of_movement">
+                       <h5><b>Purpose Of Movement</b></h5>
+                       <p>{{$data['purposeOfMovement']}}</p>
+                   </div>
+               </div>
+            </div>
+        @endif
         <div id="locations_box">
             @foreach($locations as $index =>  $location)
                 <div class="location_inner_box">
