@@ -135,6 +135,45 @@ class TrackingConsole extends Controller
         return response()->json(['success' => true , 'data' => compact('data')]);
     }
 
+    public function fetchExtraTrackingInfo($transaction_id)
+    {
+        $fetchTransaction = \App\Models\Transaction::where('id',$transaction_id)
+                                        ->with('schedule','tenant','service','carhistory')
+                                        ->select('id','service_id','car_history_id',
+                                        'schedule_id','boat_trip_id','delivery_parcel_id',
+                                        'ferry_trip_id','tour_id','user_id','train_schedule_id')->first();
+
+
+        switch($fetchTransaction->service_id) {
+            case 1:
+                //bus booking
+                $data['allData']                 =  $fetchTransaction;
+                $data['BusPickup']               =  $fetchTransaction->schedule->pickup ?? null;
+                $data['BusDestination']          =  $fetchTransaction->schedule->destination ?? null;
+                $data['service']                 =  $fetchTransaction->service ?? null;
+                $data['bus']                     =  $fetchTransaction->schedule->bus ?? null;
+                $data['busOperatorCompanyName']  =  $fetchTransaction->schedule->bus->tenant->company_name ?? null;
+                $data['busDisplayName']          =  $fetchTransaction->schedule->bus->tenant->display_name ?? null;
+                $data['busDriverName']           =  $fetchTransaction->schedule->bus->driver->full_name ?? null;
+                $data['busDriverPhoneNumber']    =  $fetchTransaction->schedule->bus->driver->phone_number ?? null;
+                break;
+            case 6:
+                //car Hiring Details
+                $data['allData']          =  $fetchTransaction;
+                $data['carName']          = $fetchTransaction->carhistory->car->car_name ?? null;
+                $data['carRegistration']  = $fetchTransaction->carhistory->car->car_registration ?? null;
+                $data['carOperatorsName'] =  $fetchTransaction->carhistory->car->tenant->company_name ?? null;
+                $data['carOperatorsDisplayName'] =  $fetchTransaction->carhistory->car->tenant->display_name ?? null;
+                break;
+            default:
+                $data['allData']  =  $fetchTransaction;
+        }
+        
+        return response()->json(['success' => true , 'data' => compact('data')]);
+
+
+    }
+
 
 
     private function validateRequest($request)

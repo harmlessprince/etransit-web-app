@@ -161,6 +161,7 @@ Route::group(['prefix' => 'v1'], function() {
         Route::get('previous_tracking_session/{limit?}',[TrackingConsole::class , 'previousTrackingSessions']);
         Route::get('tracking_active_sessions/{limit?}',[TrackingConsole::class , 'activeSessionTracking']);
         Route::get('tracking/{tracker_id}/record/{limit?}',[TrackingConsole::class , 'TrackingRecord']);
+        Route::get('fetch-extra-tracking-info/{transaction_id}',[TrackingConsole::class , 'fetchExtraTrackingInfo']);
 
 
 
