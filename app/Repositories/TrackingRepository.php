@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Classes\GenerateAuthorizationOtp;
+use App\Classes\SmsGateWayTrigger;
 use App\Interfaces\TrackingInterface;
 use App\Mail\TrackingNotificationTrigger;
 use App\Models\Tracker;
@@ -175,10 +176,50 @@ class TrackingRepository implements TrackingInterface
                 $msg = "sent";
                 break;
             case('sms'):
-                $msg = 'send sms only';
+                $msg = '';
+                $trustee_name =  $findTrustee->full_name;
+                $tracked_user  =  $findUserInitiatedTracking->full_name;
+                $phone_number =  $findTrustee->phone_number;
+                if(session()->has('isSet_transaction_id'))
+                {
+                    $getTransactionId = session()->get('isSet_transaction_id');
+                    $url = env('APP_URL'). '/tracker/'.$tracker_id.'/user/'.$getTransactionId;
+                    $msg .= 'Hi ' .$trustee_name .', the user with the name '.  $tracked_user . ' wants you to track is journey'."\n";
+                    $msg .= "Link : " . $url . "\n";
+                    $msg .= "Access Code : " . $otp;
+                    $this->SendSms($phone_number,$msg);
+                }else{
+                    $url = env('APP_URL'). '/tracker/'.$tracker_id.'/user/';
+                    $msg .= 'Hi ' .$trustee_name .', the user with the name '.  $tracked_user . ' wants you to track is journey'."\n";
+                    $msg .= "Link : " . $url . "\n";
+                    $msg .= "Access Code : " . $otp;
+                    $this->SendSms($phone_number,$msg);
+                }
+
                 break;
             case('mixed'):
-                $msg = 'Send both sms and email';
+                $msg = '';
+                $trustee_name =  $findTrustee->full_name;
+                $tracked_user  =  $findUserInitiatedTracking->full_name;
+                $phone_number =  $findTrustee->phone_number;
+                if(session()->has('isSet_transaction_id'))
+                {
+                    $getTransactionId = session()->get('isSet_transaction_id');
+                    $url = env('APP_URL'). '/tracker/'.$tracker_id.'/user/'.$getTransactionId;
+                    $msg .= 'Hi ' .$trustee_name .', the user with the name '.  $tracked_user . ' wants you to track is journey'."\n";
+                    $msg .= "Link : " . $url . "\n";
+                    $msg .= "Access Code : " . $otp;
+                    $this->SendSms($phone_number,$msg);
+                }else{
+                    $url = env('APP_URL'). '/tracker/'.$tracker_id.'/user/';
+                    $msg .= 'Hi ' .$trustee_name .', the user with the name '.  $tracked_user . ' wants you to track is journey'."\n";
+                    $msg .= "Link : " . $url . "\n";
+                    $msg .= "Access Code : " . $otp;
+                    $this->SendSms($phone_number,$msg);
+                }
+                if(count($trackingRecord) <= 1){
+                    $this->triggerEmail($findTrustee,$otp,$findUserInitiatedTracking,$tracker_id);
+                }
                 break;
             default:
                 if(count($trackingRecord) <= 1){
@@ -214,8 +255,12 @@ class TrackingRepository implements TrackingInterface
 
 
             Mail::to($findTrustee->email)->send(new TrackingNotificationTrigger($maildata));
+    }
 
 
+    public function SendSms($phone_number , $message)
+    {
+        SmsGateWayTrigger::triggerSms($phone_number , $message);
     }
 
 }
