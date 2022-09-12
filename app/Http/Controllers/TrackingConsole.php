@@ -30,11 +30,16 @@ class TrackingConsole extends Controller
                                                 ->with('schedule','service')
                                                 ->select('service_id','schedule_id')->first();
 
-           $data['pickup']            =  $fetchTransaction->schedule->pickup->location;
-           $data['destination']       =  $fetchTransaction->schedule->destination->location;
-           $data['departureTime']     =  $fetchTransaction->schedule->departure_time;
-           $data['departureDate']     =  $fetchTransaction->schedule->departure_date;
-           $data['purposeOfMovement'] =   $trackedUser->purpose_of_movement;
+           if( $fetchTransaction->service_id == 1)
+           {
+               //bus booking tracking only
+               $data['pickup']            =  $fetchTransaction->schedule->pickup->location ;
+               $data['destination']       =  $fetchTransaction->schedule->destination->location;
+               $data['departureTime']     =  $fetchTransaction->schedule->departure_time;
+               $data['departureDate']     =  $fetchTransaction->schedule->departure_date;
+               $data['purposeOfMovement'] =  $trackedUser->purpose_of_movement;
+           }
+
        }
 
 
