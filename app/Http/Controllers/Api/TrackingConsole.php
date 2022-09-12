@@ -143,6 +143,11 @@ class TrackingConsole extends Controller
                                         'schedule_id','boat_trip_id','delivery_parcel_id',
                                         'ferry_trip_id','tour_id','user_id','train_schedule_id')->first();
 
+        if(!$fetchTransaction)
+        {
+            return response()->json(['success' => false , 'message' => 'Transaction not found']);
+        }
+
 
         switch($fetchTransaction->service_id) {
             case 1:
@@ -169,7 +174,7 @@ class TrackingConsole extends Controller
                 $data['allData']  =  $fetchTransaction;
         }
 
-        
+
         return response()->json(['success' => true , 'data' => compact('data')]);
 
 
