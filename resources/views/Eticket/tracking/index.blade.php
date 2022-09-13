@@ -48,7 +48,7 @@
                     <div style="display: flex;justify-content: center;">
                         <button class="btn btn-success btn-sm" type="submit" style="color:white;">Filter Tracking</button>
                         &nbsp;&nbsp;
-                        <a class="btn btn-danger btn-sm" href="{{url('admin/all/tracking')}}" style="color:white;">Reset Filter</a>
+                        <a class="btn btn-danger btn-sm" href="{{url('e-ticket/all/tracking')}}" style="color:white;">Reset Filter</a>
                     </div>
                 </form>
             </div>
