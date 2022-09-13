@@ -37,9 +37,8 @@ class AuthorizationConsole extends Controller
             return back();
         }
 
-        session()->put('authorization_pin' , $data['pin']);
-
-
+        session()->put('authorization_pin', $data['pin']);
+        
         return redirect('tracker/'.$tracker.'/user');
 
     }

@@ -17,6 +17,8 @@ use Illuminate\Support\Facades\Mail;
 
 class TrackingRepository implements TrackingInterface
 {
+
+
     public function trackUser($userId , $trackingDetails , $transaction_id)
     {
         DB::beginTransaction();
@@ -29,10 +31,9 @@ class TrackingRepository implements TrackingInterface
         if($transaction_id != null)
         {
                $trackingTransaction =  Transaction::where('id',$transaction_id)
-                                                    ->select('service_id','schedule_id','car_history_id','tour_id',
+                                                    ->select('service_id','schedule_id','car_history_id','tour_id','tenant_id',
                                                         'boat_trip_id','delivery_parcel_id','ferry_trip_id','train_schedule_id')->first();
 
-               session()->put(['isSet_transaction_id', $transaction_id]);
                if(!$trackingTransaction)
                {
                   return    $response = ['success' => false , 'message' =>  'Transaction could not be fetched'];
@@ -41,38 +42,47 @@ class TrackingRepository implements TrackingInterface
                 switch($trackingTransaction->service_id) {
                     case 1:
                         //bus service
-                        $tracker->service_id  =  $trackingTransaction->service_id;
-                        $tracker->schedule_id =  $trackingTransaction->schedule_id;
+                        $tracker->service_id      =  $trackingTransaction->service_id;
+                        $tracker->schedule_id     =  $trackingTransaction->schedule_id;
+                        $tracker->tenant_id       = $trackingTransaction->tenant_id;
+                        $tracker->transaction_id  =  $transaction_id;
                         break;
                     case 2:
                         //train service
                         $tracker->service_id        =  $trackingTransaction->service_id;
                         $tracker->train_schedule_id =  $trackingTransaction->train_schedule_id;
+                        $tracker->transaction_id    =  $transaction_id;
                         break;
                     case 3:
                         //ferry
-                        $tracker->service_id    =  $trackingTransaction->service_id;
-                        $tracker->ferry_trip_id =  $trackingTransaction->ferry_trip_id;
+                        $tracker->service_id      =  $trackingTransaction->service_id;
+                        $tracker->ferry_trip_id   =  $trackingTransaction->ferry_trip_id;
+                        $tracker->transaction_id  =  $transaction_id;
                         break;
                     case 6:
                         //car hire
-                        $tracker->service_id     =  $trackingTransaction->service_id;
-                        $tracker->car_history_id =  $trackingTransaction->car_history_id;
+                        $tracker->service_id      =  $trackingTransaction->service_id;
+                        $tracker->car_history_id  =  $trackingTransaction->car_history_id;
+                        $tracker->tenant_id       = $trackingTransaction->tenant_id;
+                        $tracker->transaction_id  =  $transaction_id;
                         break;
                     case 7:
                         //boat cruise
-                        $tracker->service_id   =  $trackingTransaction->service_id;
-                        $tracker->boat_trip_id =  $trackingTransaction->boat_trip_id;
+                        $tracker->service_id      =  $trackingTransaction->service_id;
+                        $tracker->boat_trip_id    =  $trackingTransaction->boat_trip_id;
+                        $tracker->transaction_id  =  $transaction_id;
                         break;
                     case 8:
                         //tour
-                        $tracker->service_id =  $trackingTransaction->service_id;
-                        $tracker->tour_id    =  $trackingTransaction->tour_id;
+                        $tracker->service_id      =  $trackingTransaction->service_id;
+                        $tracker->tour_id         =  $trackingTransaction->tour_id;
+                        $tracker->transaction_id  =  $transaction_id;
                         break;
                     case 9:
                         //parcel
                         $tracker->service_id           =  $trackingTransaction->service_id;
                         $tracker->delivery_parcel_id   =  $trackingTransaction->delivery_parcel_id;
+                        $tracker->transaction_id       =  $transaction_id;
                         break;
                     default:
                         return   $response = ['success' => false , 'message' =>  'An issue occurred with the transaction ID passed'];
@@ -164,6 +174,7 @@ class TrackingRepository implements TrackingInterface
         $findUserInitiatedTracking = $tracker->user;
         $otp = GenerateAuthorizationOtp::generate();
         $findTrustee->update(['code' => $otp]);
+        $transactionId =  $tracker->transaction_id;
 
 
 
@@ -171,7 +182,7 @@ class TrackingRepository implements TrackingInterface
             case('email'):
                 //only trigger email once
                 if(count($trackingRecord) <= 1){
-                   $this->triggerEmail($findTrustee,$otp,$findUserInitiatedTracking,$tracker_id);
+                   $this->triggerEmail($findTrustee,$otp,$findUserInitiatedTracking,$tracker_id,  $transactionId);
                 }
                 $msg = "sent";
                 break;
@@ -180,7 +191,7 @@ class TrackingRepository implements TrackingInterface
                 $trustee_name =  $findTrustee->full_name;
                 $tracked_user  =  $findUserInitiatedTracking->full_name;
                 $phone_number =  $findTrustee->phone_number;
-                if(session()->has('isSet_transaction_id'))
+                if($transactionId != null)
                 {
                     $getTransactionId = session()->get('isSet_transaction_id');
                     $url = env('APP_URL'). '/tracker/'.$tracker_id.'/user/'.$getTransactionId;
@@ -202,10 +213,10 @@ class TrackingRepository implements TrackingInterface
                 $trustee_name =  $findTrustee->full_name;
                 $tracked_user  =  $findUserInitiatedTracking->full_name;
                 $phone_number =  $findTrustee->phone_number;
-                if(session()->has('isSet_transaction_id'))
+                if($transactionId != null)
                 {
-                    $getTransactionId = session()->get('isSet_transaction_id');
-                    $url = env('APP_URL'). '/tracker/'.$tracker_id.'/user/'.$getTransactionId;
+//                    $getTransactionId = session()->get('isSet_transaction_id');
+                    $url = env('APP_URL'). '/tracker/'.$tracker_id.'/user/'.$transactionId;
                     $msg .= 'Hi ' .$trustee_name .', the user with the name '.  $tracked_user . ' wants you to track is journey'."\n";
                     $msg .= "Link : " . $url . "\n";
                     $msg .= "Access Code : " . $otp;
@@ -218,12 +229,12 @@ class TrackingRepository implements TrackingInterface
                     $this->SendSms($phone_number,$msg);
                 }
                 if(count($trackingRecord) <= 1){
-                    $this->triggerEmail($findTrustee,$otp,$findUserInitiatedTracking,$tracker_id);
+                    $this->triggerEmail($findTrustee,$otp,$findUserInitiatedTracking,$tracker_id ,$transactionId);
                 }
                 break;
             default:
                 if(count($trackingRecord) <= 1){
-                    $this->triggerEmail($findTrustee,$otp,$findUserInitiatedTracking,$tracker_id);
+                    $this->triggerEmail($findTrustee,$otp,$findUserInitiatedTracking,$tracker_id,$transactionId);
                 }
                 $msg = 'send just email.';
         }
@@ -232,14 +243,13 @@ class TrackingRepository implements TrackingInterface
 
     }
 
-    private function triggerEmail($findTrustee,$otp,$findUserInitiatedTracking,$tracker_id)
+    private function triggerEmail($findTrustee,$otp,$findUserInitiatedTracking,$tracker_id , $transactionId)
     {
 
-        if(session()->has('isSet_transaction_id'))
+        if($transactionId != null)
         {
-            $getTransactionId = session()->get('isSet_transaction_id');
             $maildata = [
-                'url' => env('APP_URL'). '/tracker/'.$tracker_id.'/user/'.$getTransactionId,
+                'url' => env('APP_URL'). '/tracker/'.$tracker_id.'/user/'.$transactionId,
                 'otp' => $otp,
                 'trustee_name'=>  $findTrustee->full_name,
                 'tracked_user' =>  $findUserInitiatedTracking->full_name,

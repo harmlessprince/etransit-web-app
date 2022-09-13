@@ -19,6 +19,8 @@ class CreateTrackersTable extends Migration
             $table->longText('purpose_of_movement')->nullable();
             $table->longText('destination_description')->nullable();
             $table->enum('status', ['active','inactive'])->default('inactive');
+            $table->unsignedBigInteger('tenant_id')->nullable();
+            $table->unsignedBigInteger('transaction_id')->nullable();
             $table->enum('tracking_type',['standalone','bus_booking','car_hiring','train_service','ferry_service','boat_service','tour_service','parcel_service']);
             $table->unsignedBigInteger('service_id')->nullable();
             $table->unsignedBigInteger('schedule_id')->nullable()->comment('bus tracking');
