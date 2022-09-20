@@ -392,7 +392,7 @@ class Car extends Controller
     public function carDetails($car_id)
     {
         $car = HiredCars::where('id',$car_id)->with('plans','cartype','carclass','car_images')->first();
-//dd($car);
+        //dd($car);
         return view('pages.car-hire.details', compact('car'));
     }
 
