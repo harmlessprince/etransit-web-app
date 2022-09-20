@@ -17,7 +17,7 @@ class CreateUserTrusteesTable extends Migration
             $table->id();
             $table->uuid('tracker_id');
             $table->string('full_name');
-            $table->string('email');
+            $table->string('email')->nullable();
             $table->string('phone_number');
             $table->string('code')->nullable()->comment('Four digit code to view the session');
             $table->timestamps();

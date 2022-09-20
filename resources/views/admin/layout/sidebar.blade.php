@@ -134,7 +134,13 @@
                                 <li><a href="{{url('admin/nysc/hubs')}}">Hubs</a></li>
                             </ul>
                         </li>
+                    <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="server"></i><span>Tracking Console</span></a>
+                        <ul class="nav-submenu menu-content">
+                            <li><a href="{{url('admin/all/tracking')}}">Tracking</a></li>
+                        </ul>
+                    </li>
                     </ul>
+
                 </div>
             <div class="right-arrow" id="right-arrow"><i data-feather="arrow-right"></i></div>
         </div>

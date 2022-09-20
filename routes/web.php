@@ -123,7 +123,7 @@ Route::get('nysc',[\App\Http\Controllers\Vehicle::class ,'NyscHome']);
 
 Route::get('authorization/page',[AuthorizationConsole::class , 'authorizeTrustee']);
 Route::post('send/authorization/request',[AuthorizationConsole::class ,'AcceptAuthorizationRequest']);
-Route::get('tracker/{tracker_id}/user',[\App\Http\Controllers\TrackingConsole::class , 'trackingPage'])->middleware('request_authorization_pin');
+Route::get('tracker/{tracker_id}/user/{transaction_id?}',[\App\Http\Controllers\TrackingConsole::class , 'trackingPage'])->middleware('request_authorization_pin');
 
 
 //check PDF
@@ -495,6 +495,9 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::get('all-services', [\App\Http\Controllers\ServiceManagent::class ,'allServices']);
         Route::post('activate-deactivate-service',[\App\Http\Controllers\ServiceManagent::class ,'activateOrDeactivateService']);
 
+        Route::get('all/tracking',[\App\Http\Controllers\TrackingConsole::class , 'allTracking']);
+        Route::get('view-tracking/{tracking_id}',[\App\Http\Controllers\TrackingConsole::class , 'viewEachTracking']);
+
 
     });
 });
@@ -678,6 +681,10 @@ Route::prefix('e-ticket')->name('e-ticket.')->group(function(){
         //transaction
         Route::get('transactions',[ManageTransaction::class , 'allTransactions']);
         Route::get('view-transaction/{transaction_id}',[ManageTransaction::class  ,'viewTransaction']);
+
+        //tracking console
+        Route::get('all/tracking',[\App\Http\Controllers\Eticket\TrackingConsole::class , 'allTracking']);
+        Route::get('view-tracking/{tracking_id}',[\App\Http\Controllers\Eticket\TrackingConsole::class , 'viewEachTracking']);
 
 
     });

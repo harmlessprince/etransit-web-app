@@ -19,6 +19,7 @@ class RequestForAuthorizationPin
      */
     public function handle(Request $request, Closure $next)
     {
+
        if(session()->has('authorization_pin'))
        {
            $trackingSession = session()->get('authorization_pin');
@@ -27,7 +28,7 @@ class RequestForAuthorizationPin
 
            if(!$userTrusteeCode)
            {
-               Alert::error('Oops ', 'Incorrect Token');
+               Alert::error('Oops ', 'Incorrect OTP');
                return back();
            }
 
