@@ -125,15 +125,15 @@
     </div>
 </section>
 <div class="container menudisplay menu" id="menumenudisplay" style="border-radius: 10px;">
-{{--    padding-right: 100px;padding-left: 100px;--}}
+ {{--    padding-right: 100px;padding-left: 100px;--}}
     <div class="row">
         <div class="col" style="box-shadow: 1px 0px 7px rgb(103,103,103);border-radius: 10px;">
             <div class="row divshow" style="background: #ffffff;border-radius: 10px;border-bottom-right-radius: 0px;border-bottom-left-radius: 0px;border-color: rgba(33,37,41,0);border-bottom: 1px solid rgb(227,228,230);">
                 <div class="col-3 col-sm-3 col-xs-3 carhover" id="flight_booking"  style="text-align: center;padding-top: 25px;padding-bottom: 12px;border-top-right-radius: 10px;">
                     <a href="{{url('car-hire')}}" target="_blank">
-                        <img class="img-fluid" src="{{asset('new-assets/img/Layer%201.png')}}">
+                        <img class="img-fluid" src="{{asset('new-assets\img\car-hire\car_menu_icon.png')}}">
                         <div class="divline"></div>
-                        <p ><strong>HIRE A VEHICLE</strong></p>
+                        <p ><strong>VEHICLE HIRE</strong></p>
                     </a>
 
                 </div>
@@ -162,15 +162,21 @@
                 </div>
             </div>
             <div class="row divshows" style="background: #ffffff;border-radius: 10px;border-bottom-right-radius: 0px;border-bottom-left-radius: 0px;border-color: rgba(33,37,41,0);border-bottom: 1px solid rgb(227,228,230);">
+                <div class="col-3 col-sm-3 col-xs-3" style="text-align: center;padding-top: 15px;padding-bottom: 15px;" >
+                    <a href="{{url('car-hire')}}" target="_blank">
+                        <i class="fa fa-car" style="font-size: 36px;color: #e16803;"></i>
+                    </a>
+                </div>
                 <div class="col-3 col-sm-3 col-xs-3" onclick="busnav()" style="text-align: center;border-right: 1px solid rgb(219,220,221);padding-top: 15px;padding-bottom: 15px;">
                     <a><i class="fa fa-bus" style="font-size: 36px;color: #e16803;"></i></a>
                 </div>
                 <div class="col-3 col-sm-3 col-xs-3" style="text-align: center;border-right: 1px solid rgb(219,220,221);padding-top: 15px;padding-bottom: 15px;" onclick="trainnav()">
                     <a ><i class="fa fa-train" style="font-size: 36px;color: #e16803;"></i></a>
                 </div>
+                <!--
                 <div class="col-3 col-sm-3 col-xs-3" onclick="cruisenav()"  style="text-align: center;border-right: 1px solid rgb(219,220,221);padding-top: 15px;padding-bottom: 15px;">
                     <a ><i class="icon ion-android-boat" style="font-size: 36px;color: #e16803;"></i></a>
-                </div>
+                </div> -->
                 <div class="col-3 col-sm-3 col-xs-3" style="text-align: center;padding-top: 15px;padding-bottom: 15px;" >
                     <a href="https://www.travelstart.com.ng/?affId=218470&utm_source=affiliate&utm_medium=218470" target="_blank">
                         <i class="material-icons" style="font-size: 36px;color: #e16803;">flight</i>
@@ -739,7 +745,7 @@
                                                         <p style="color: rgb(25,25,25);font-size: 14px;">&nbsp; &nbsp; &nbsp;&nbsp;<i class="fa fa-question" style="color: rgb(217,135,60);"></i>&nbsp;{{Ucfirst($car->transmission)}} &nbsp;
                                                         <i class="la la-automobile" style="color: rgb(217,135,60);"></i>&nbsp;{{$car->capacity}} Adult
                                                         <i class="fa fa-asterisk" style="color: rgb(207,115,48);"></i>&nbsp;
-                                                        Fuctional
+                                                        Functional
                                                     </p>
                                                 </div>
                                             </div>
