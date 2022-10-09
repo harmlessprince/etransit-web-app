@@ -93,16 +93,16 @@
 
     }
     .abouts_header_2_box{
-        grid-column: 2/;
+        grid-column: 2;
         display:grid;
         grid-template-rows: repeat(4,1fr);
     }
     .content{
-        grid-column: 3/;
+        grid-column: 3;
        margin-right:10px;
     }
     .about_img_2{
-        grid-column: 5/;
+        grid-column: 5;
     }
     .about_img_2 img{
         height:300px;

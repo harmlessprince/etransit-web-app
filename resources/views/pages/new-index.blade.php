@@ -37,7 +37,7 @@
 
     }
 
-    @@media only screen and (max-width: 700px){
+    @media only screen and (max-width: 700px){
         .mobile-copy{
             display: none;
         }
@@ -376,7 +376,7 @@
                 </p>
                 <a class="inline-flex items-center p-4 py-3 mt-8 text-white  rounded" style="background-color: #1f0844"
                     href="{{url('car-hire')}}">
-                    <span class="text-sm font-medium"> Book Now </span>
+                    <span class="text-sm font-medium"> Hire Now </span>
                 </a>
             </div>
         </div>

@@ -86,6 +86,7 @@
                     <li class="nav-item"><a class="nav-link" href="#" style="color: #06044e;">Hotel Booking</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{url('partners')}}" style="color: #06044e;">Become A Partner</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{url('parcel')}}" style="color: #06044e;">Send Parcel</a></li>
+                    
                 </ul>
             </div>
         </div>
