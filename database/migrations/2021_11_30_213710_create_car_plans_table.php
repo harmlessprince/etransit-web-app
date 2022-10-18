@@ -18,6 +18,7 @@ class CreateCarPlansTable extends Migration
             $table->enum('plan',['Daily Rentals','North Central','South West','South South','South East']);
             $table->double('amount');
             $table->double('extra_hour')->nullable();
+            $table->unsignedBigInteger('tenant_id');
             $table->unsignedBigInteger('car_id');
             $table->timestamps();
             $table->foreign('car_id')->references('id')->on('cars')->onDelete('cascade');

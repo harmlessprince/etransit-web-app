@@ -40,10 +40,40 @@
         display:flex;
         justify-content: space-between;
     }
+
+    .payment_options , .payment_button{
+        margin-left:30px;
+        margin-top:20px;
+    }
+    .payment_button{
+        background:#DC6513;
+        padding:10px;
+        color:white;
+        border:1px solid #DC6513;
+        width:250px;
+        border-radius:5px;
+        text-align:center;
+        cursor:pointer;
+    }
+    .payment_button:hover{
+        background:#021037;
+        border:1px solid #DC6513;
+
+    }
+    button, input[type="submit"], input[type="reset"] {
+        background: none;
+        color: inherit;
+        border: none;
+        padding: 0;
+        font: inherit;
+        cursor: pointer;
+        outline: inherit;
+    }
 </style>
 @section('content')
-    <div class="payment-box container">
-        <div class="payment">
+    <div class="payment-box container row col-md-12">
+        <div class="col-md-2"></div>
+        <div class="payment col-md-4">
             <h3>PAYMENT</h3>
             <p>Hire Our vehicles for your various trips and occasion </p>
             <h5>SELECT PAYMENT METHOD</h5>
@@ -85,7 +115,7 @@
                 <img src="{{asset('images/icons/visa.png')}}" width="70" height="50"/>
             </div>
         </div>
-        <div class="receipt-box">
+        <div class="receipt-box col-md-6">
            <div class="parcel_receipt_box">
              <div class="parcel_receipt_header">
                  <div class="parcel_header_summary">

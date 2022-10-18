@@ -27,6 +27,9 @@
     a{
         text-decoration: none !important;
     }
+    .card-body h5 {
+        color:green;
+    }
 </style>
 @section('content')
     <div class="container-fluid">
@@ -42,6 +45,20 @@
             </div>
         </div>
     </div>
+    @if($isEmptySeatAvailable)
+    <div class="row three-row-grid container-fluid">
+        <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <h6>Note : {{$seatCount}} Bus Schedule(s) Seat Tracker are yet to be set due to bulk import either set
+                        them on each schedule or do a global settings for all schedules here
+                    </h6>
+                    <a href="{{url('e-ticket/global-seat-tracker-settings')}}" class="btn btn-danger btn-sm">Set Empty Seat Tracker For all  {{$seatCount}}  Schedule(s)</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    @endif
     <!-- Container-fluid starts-->
     <div class="container-fluid" >
         <div class="card">
@@ -73,12 +90,19 @@
     <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
-
+    <script src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
     <script type="text/javascript">
         $(function () {
             $.noConflict();
 
             var table = $('.yajra-datatable').DataTable({
+                responsive: {
+                    details: {
+                        display: $.fn.dataTable.Responsive.display.childRowImmediate,
+                        type: 'none',
+                        target: ''
+                    }
+                },
                 processing: true,
                 serverSide: true,
                 ajax: "{{ route('e-ticket.fetch-scheduled-trip') }}",
@@ -98,6 +122,13 @@
                         orderable: true,
                         searchable: true
                     },
+
+                ],
+                columnDefs: [
+                    { responsivePriority: 1, targets: 1 },
+                    { responsivePriority: 2, targets: 2 },
+                    { responsivePriority: 3, targets: 3 },
+                    { responsivePriority: 4, targets: 4 }
 
                 ]
             });

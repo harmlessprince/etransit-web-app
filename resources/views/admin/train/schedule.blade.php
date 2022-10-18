@@ -194,13 +194,24 @@
                     <div class="car-box col-md-12">
                         <h3> Pick Route(s) </h3>
                         <div id="route-list">
-                            @foreach($trainRoutes as $route)
+                            @foreach($routeFare as $fare)
                                 <div class="form-group" >
-                                    <input type="checkbox" name="route[]" value="{{$route->id}}"/> {{$route->stop_name}}
+                                    <input type="checkbox" name="route[]" value="{{$fare->id}}"/> &nbsp; &nbsp; {{$fare->terminal->stop_name}} - {{$fare->destination_terminal->stop_name}}
+                                    ({{$fare->seatClass->class}}) - (&#8358; {{number_format($fare->amount_adult)}} -  &#8358; {{number_format($fare->amount_child)}} )
                                 </div>
                             @endforeach
                         </div>
                     </div>
+{{--                    <div class="car-box col-md-12">--}}
+{{--                        <h3> Pick Route(s) </h3>--}}
+{{--                        <div id="route-list">--}}
+{{--                            @foreach($trainRoutes as $route)--}}
+{{--                                <div class="form-group" >--}}
+{{--                                    <input type="checkbox" name="route[]" value="{{$route->id}}"/> {{$route->stop_name}}--}}
+{{--                                </div>--}}
+{{--                            @endforeach--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
                     <div class="col-md-4 coach-btn">
                         <button class="btn btn-success" >Schedule Trip</button>
                     </div>

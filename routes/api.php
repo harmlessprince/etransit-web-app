@@ -15,7 +15,9 @@ use App\Http\Controllers\Api\Profile;
 use App\Http\Controllers\Api\Service;
 use App\Http\Controllers\Api\SocialController;
 use App\Http\Controllers\Api\Tour;
+use App\Http\Controllers\Api\TrackingConsole;
 use App\Http\Controllers\Api\Train;
+use App\Http\Controllers\Api\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -54,6 +56,7 @@ Route::group(['prefix' => 'v1'], function() {
     //bookings
     Route::get('/book/{service}/service' , [Booking::class , 'bookingForService']);
     Route::post('/book/trip' , [Booking::class , 'bookTrip']);
+    Route::post('/bus/filter-bookings/' , [Booking::class , 'bookingFilterRequest'])->name('filter-bus');
 
     //car hiree endpoint
     Route::get('/car/types',[Car::class , 'CarType']);
@@ -83,13 +86,17 @@ Route::group(['prefix' => 'v1'], function() {
     Route::get('/train-bookings' , [Train::class , 'bookTrain']);
     Route::post('/check/train-schedule', [Train::class , 'checkSchedule']);
 
+
+    Route::post('record-active/tracking/{tracker_id}',[TrackingConsole::class,'recordActiveTracking']);
+
 //    Route::middleware('jwt.verify')->group( function () {
-    Route::group(['middleware' => ['jwt.verify' ,'must_verify']], function () {
+    Route::group(['middleware' => ['jwt.verify','is_banned','must_verify']], function () {
+
          //bus booking
-        Route::get('/select-seat/{schedule_id}' ,[Booking::class, 'selectSeat']);
+        Route::get('/select-seat/{schedule_id}/{trip_type}' ,[Booking::class, 'selectSeat']);
         Route::post('/seat/selector_tracker',[Booking::class , 'selectorTracker']);
         Route::post('/deselect-seat',[Booking::class , 'deselectSeat']);
-        Route::post('passenger/info/{schedule_id}',[Booking::class ,'bookTripForPassenger']);
+        Route::post('passenger/info/{schedule_id}/{trip_type}',[Booking::class ,'bookTripForPassenger']);
         // The route that the button calls to initialize payment
         Route::post('/pay', [Payment::class, 'initialize'])->name('pay');
         Route::post('/bus/handle-cash-payment' ,[Booking::class , 'handleBusCashPayment'])->name('bus.handle-pay-cash');
@@ -104,6 +111,7 @@ Route::group(['prefix' => 'v1'], function() {
         Route::get('/pick-car-plan/{plan_id}' , [Car::class , 'pickPlan']);
         Route::post('/book-date/{plan_id}' ,[Car::class,'bookADate']);
         Route::get('/car-hire/handle-cash-payment/{history_id}' ,[Car::class,'makeCashPayment']);
+        Route::get('/fetch-hired-car/state' ,[Car::class,'fetchCarState']);
 
         // boat cruise module
         Route::post('/boat-cruise/{trip_id}/payment-plan/{service_id}',[BoatCruise::class , 'addPayment']);
@@ -135,6 +143,26 @@ Route::group(['prefix' => 'v1'], function() {
         Route::get('/train-route/selector/{train_schedule_id}' , [Train::class , 'routeSelector']);
         Route::post('/train/add-passenger-details' , [Train::class , 'passengerDetails']);
         Route::post('/train/handle-cash-payment' , [Train::class , 'handleCashPayment']);
+
+        //fetch user transaction
+        Route::get('my-transactions' , [Transaction::class ,'userTransactions']);
+
+        //track user
+        Route::get('prefill_trustee_info/{transaction_id}',[TrackingConsole::class , 'prefillTrusteeInfo']);
+
+        Route::post('initiate-tracking/{transaction_id?}',[TrackingConsole::class , 'trackUser']);
+
+        Route::post('start-tracking',[TrackingConsole::class , 'initiateTracking']);
+
+        //end tracking
+        Route::get('end-active-tracking/{tracker_id}',[TrackingConsole::class ,'endActiveTrackingSession']);
+
+        //previous tracking session
+        Route::get('previous_tracking_session/{limit?}',[TrackingConsole::class , 'previousTrackingSessions']);
+        Route::get('tracking_active_sessions/{limit?}',[TrackingConsole::class , 'activeSessionTracking']);
+        Route::get('tracking/{tracker_id}/record/{limit?}',[TrackingConsole::class , 'TrackingRecord']);
+        Route::get('fetch-extra-tracking-info/{transaction_id}',[TrackingConsole::class , 'fetchExtraTrackingInfo']);
+
 
 
     });

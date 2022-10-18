@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Service extends Model
 {
     use HasFactory;
+    protected $guarded = ['id'];
 
     public function schedules()
     {
@@ -22,6 +23,11 @@ class Service extends Model
     public function transactions()
     {
         return $this->hasMany(Transaction::class);
+    }
+
+    public function tenants()
+    {
+        return $this->belongsToMany(Tenant::class ,'service_tenant');
     }
 
 }

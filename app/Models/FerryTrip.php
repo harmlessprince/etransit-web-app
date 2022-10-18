@@ -10,6 +10,16 @@ class FerryTrip extends Model
     use HasFactory;
     protected  $guarded = ['id'];
 
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'event_date' => 'datetime',
+    ];
+
+
 
     public function ferry()
     {
@@ -25,5 +35,10 @@ class FerryTrip extends Model
     public function pickup()
     {
         return $this->belongsTo(FerryLocation::class , 'ferry_pick_up_id');
+    }
+
+    public function ferry_type()
+    {
+        return $this->belongsTo(FerryType::class , 'ferry_type_id');
     }
 }

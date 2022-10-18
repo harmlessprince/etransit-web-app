@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Scopes\TenantScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -34,5 +35,32 @@ class Car extends Model
     {
         return $this->hasMany(CarImage::class);
     }
+
+    public function state()
+    {
+        return $this->belongsTo(Destination::class);
+    }
+
+    public function tenant()
+    {
+        return $this->belongsTo(Tenant::class);
+    }
+
+    public function carHistory()
+    {
+        return $this->HasMany(CarHistory::class);
+    }
+
+
+    /**
+     * The "booted" method of the model.
+     *
+     * @return void
+     */
+    protected static function booted()
+    {
+        static::addGlobalScope(new TenantScope);
+    }
+
 
 }

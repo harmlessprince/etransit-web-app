@@ -20,6 +20,9 @@ class Transaction extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function onsite_customer(){
+        return $this->belongsTo(OnsiteCustomer::class,'onsite_customer_id', 'id');
+    }
 
     public function carhistory()
     {

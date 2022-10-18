@@ -10,6 +10,8 @@ class Destination extends Model
 {
     use HasFactory;
 
+    protected $guarded = ['id'];
+
     public function schedules()
     {
         return $this->hasMany(Schedule::class);
@@ -19,5 +21,10 @@ class Destination extends Model
     {
         return $this->hasMany(Terminal::class);
     }
-
+    public function nyscHub(){
+        return $this->hasMany(NyscHub::class,'location_id','id');
+    }
+    public function nyscCamp(){
+        return $this->hasOne(NyscCamp::class);
+    }
 }

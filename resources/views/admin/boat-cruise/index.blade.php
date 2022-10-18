@@ -126,13 +126,8 @@
 
     <div class="container-fluid" >
         <div class="button-box" >
+\
             <div>
-                <a href="{{url('admin/cars/on-trip')}}">
-                    <button class="btn s add-terminal-button btn-sm" >Currently On Trip</button>
-                </a>
-            </div>
-            <div>
-                <a href="{{url('/admin/import-export-cars')}}" class="btn bulk-upload-button btn-sm"  style="margin-right:10px;">Bulk Import Boat</a>&nbsp;
 
                 <a href="{{url('admin/add/boat')}}">
                     <button class="btn s add-terminal-button btn-sm"  >Add Boat</button>
@@ -143,13 +138,6 @@
         </div>
         <div class="card">
             <div class="card-body">
-                <div style="display: flex; justify-content: flex-end; margin-bottom: 20px;">
-                    <div class="otn-group col-md-4" style="display: flex;" >
-                        <input type="text" name="search" placeholder="Search with Registration Number , Car Type or Model ..." id="search-box" class="form-control"/>
-                        <button class="btn btn-sm btn-primary">Search</button>
-                    </div>
-                </div>
-
                 <div class="vehicle-box">
                     @if(count($boats) > 0)
                         @foreach($boats as $boat)
@@ -158,7 +146,9 @@
                                     <small class="card-title"> {{strtoupper($boat->name)}}</small>
                                 </div>
                                 <div class="card-footer terminal-card" style="display: flex;justify-content: center;">
-                                    <a href="{{url('/admin/boat/'.$boat->id.'/history')}}" class="btn schedule-button">View</a>
+
+{{--                                    <a href="{{url('/admin/boat/'.$boat->id.'/history')}}" class="btn schedule-button">View</a>--}}
+                                    <a href="{{url('/admin/edit/'.$boat->id . '/boat')}}" class="btn schedule-button">Update</a>
                                     <a href="{{url('/admin/manage/boat-schedule/'.$boat->id)}}" class="btn schedule-button">Schedule </a>
                                 </div>
 

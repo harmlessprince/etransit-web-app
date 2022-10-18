@@ -18,4 +18,24 @@ class Ferry extends Model
     {
         return $this->hasMany(FerryTrip::class);
     }
+
+    public function images()
+    {
+        return $this->hasMany(FerryImage::class);
+    }
+
+    public function service()
+    {
+        return $this->belongsTo(Service::class);
+    }
+
+    public function pickup()
+    {
+        return $this->belongsTo(FerryLocation::class ,'ferry_pick_up_id','id');
+    }
+
+    public function destination()
+    {
+        return $this->belongsTo(FerryLocation::class ,'ferry_destination_id','id');
+    }
 }

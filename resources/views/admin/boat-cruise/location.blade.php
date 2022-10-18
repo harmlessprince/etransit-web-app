@@ -184,7 +184,9 @@
                                 <tr>
                                     <th scope="row">{{$index+1}}</th>
                                     <td>{{$location->destination}}</td>
-                                    <td>Edit Delete</td>
+                                    <td>
+                                        <a href="{{url('admin/edit/boat_location/'.$location->id)}}" class="btn btn-sm btn-success">Edit</a>
+                                    </td>
                                 </tr>
                             @endforeach
                             </tbody>
@@ -257,11 +259,11 @@
                     if(data.success)
                     {
                         displaySuccessMessage(data.message)
-
+                        setTimeout(function(){ location.reload(true); }, 3000);
                     }else{
-                        displayErrorMessage(response.message);
+                        displayErrorMessage(data.message);
                     }
-                    setTimeout(function(){location.reload(true);}, 3000);
+                    setTimeout(function(){ location.reload(true); }, 3000);
                 }
             });
 

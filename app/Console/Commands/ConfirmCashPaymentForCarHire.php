@@ -42,36 +42,37 @@ class ConfirmCashPaymentForCarHire extends Command
 
         DB::beginTransaction();
 
-        $transactions = \App\Models\Transaction::all();
+        $transactions = \App\Models\Transaction::where('service_id',6)->get();
 
-        foreach ($transactions as $transaction)
+        if(!is_null($transactions))
         {
-
-            $tarnsactiontime = new DateTime($transaction->created_at);
-            $currentTime = new DateTime(now());
-            $difference =  $tarnsactiontime->diff($currentTime);
-            $diffInMinutes = $difference->i;
-
-            if($diffInMinutes <= 30)
+            foreach ($transactions as $transaction)
             {
-               if( $transaction->status = 'Pending')
-               {
-                        // $transaction->save();
-                        if($transaction)
-                        {
-                            $transaction->carhistory->update([
-                                'payment_status' => 'Pending',
-                                'isConfirmed'   => 'False'
-        //                        'available_status' =>
-                            ]);
-                        }
+
+                $tarnsactiontime = new DateTime($transaction->created_at);
+                $currentTime = new DateTime(now());
+                $difference =  $tarnsactiontime->diff($currentTime);
+                $diffInMinutes = $difference->i;
+
+                if($diffInMinutes >= 30)
+                {
+                    if($transaction->status = 'Pending')
+                    {
+                        $transaction->carhistory->update([
+                            'payment_status' => 'Pending',
+                            'isConfirmed'   => 'False'
+                            //                        'available_status' =>
+                        ]);
+                        $this->info($transaction->carhistory);
                     }
-               }
+                }
 
-
-        }
+            }
 
         DB::commit();
-        $this->info('Booking status changed to unbooked successfully');
+        $this->info('worked');
+        }
+
+
     }
 }

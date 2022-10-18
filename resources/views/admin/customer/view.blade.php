@@ -133,6 +133,26 @@
             <div class="col-md-3">
                 <div class="card">
                     <div class="card-body user-info ">
+                        <h5>Total Transactions</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="card">
+                    <div class="card-body user-info ">
+                        <div>
+                       <h3> &#8358;  {{number_format($totalTransactions)}}</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid" >
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body user-info ">
                            <div>
                                <img src="{{asset('images/user/user.png')}}" alt="user-img"/>
                                <hr>
@@ -142,7 +162,16 @@
                                <hr>
                                <h6> {{$user->phone_number}}</h6>
                                <hr>
-                               <button class="btn btn-danger">Suspend user</button>
+                               @if($user->banned_status  == 0 )
+                               <a href="{{url('admin/suspend-user/'.$user->id)}}">
+                                   <button class="btn btn-danger">Suspend user</button>
+                               </a>
+                               @else
+                                   <a href="{{url('admin/activate-user/'.$user->id)}}">
+                                       <button class="btn btn-success">Activate user</button>
+                                   </a>
+                               @endif
+
                            </div>
                     </div>
                 </div>
@@ -156,7 +185,7 @@
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">Reference</th>
-                                    <th scope="col">Flutterwave Reference</th>
+{{--                                    <th scope="col">Flutterwave Reference</th>--}}
                                     <th scope="col">Transaction Type</th>
                                     <th scope="col">Status</th>
                                     <th scope="col">isConfirmed</th>
@@ -170,7 +199,7 @@
                                 <tr>
                                     <th scope="row">{{$index + 1}}</th>
                                     <td>{{$tranx->reference}}</td>
-                                    <td>{{$tranx->trx_ref == null ? 'Nill' : $tranx->trx_ref}}</td>
+{{--                                    <td>{{$tranx->trx_ref == null ? 'Nill' : $tranx->trx_ref}}</td>--}}
                                     <td>{{$tranx->transaction_type}}</td>
                                     <td>{{$tranx->status}}</td>
                                     <td>{{$tranx->isConfirmed}}</td>
@@ -180,7 +209,7 @@
                                 @endforeach
                                 </tbody>
                             </table>
-                            <button class="btn btn-success">View More</button>
+                            <a href="{{url('admin/view-customer-transaction/'. $user->id)}}" class="btn btn-success">View More</a>
                         </div>
                     </div>
                 </div>

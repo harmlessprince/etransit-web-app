@@ -163,7 +163,7 @@
 
             </div>
             <div>
-                <button class="btn s add-terminal-button btn-sm" >Bulk Upload</button>
+{{--                <button class="btn s add-terminal-button btn-sm" >Bulk Upload</button>--}}
                 <button class="btn s add-terminal-button btn-sm"  data-toggle="modal" data-target="#vehicleModal">Add State</button>
             </div>
         </div>

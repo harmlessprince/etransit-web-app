@@ -45,7 +45,8 @@ class VehicleExport implements FromCollection , WithHeadings, WithEvents
             'car_registration',
             'air_conditioning',
             'wheels',
-            'seater'
+            'seater',
+            'Operator Name'
         ];
     }
 

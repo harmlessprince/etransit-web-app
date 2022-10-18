@@ -20,13 +20,18 @@ class PasswordReset extends Controller
 
        $user = User::where('email', $data['email'])->first();
 
-       !$user ? abort(404): '' ;
-       
+//       !$user ? abort(404): '' ;
+       if(!$user)
+       {
+           return response()->json(['success' => false ,'message' => 'User with the email not found' ], 404);
+       }
+
+
        $FourDigitRandomNumber = mt_rand(11111,99999);
        $user->update(['reset_pin' => $FourDigitRandomNumber]);
        SendPasswordResetEmailNotification::dispatch($FourDigitRandomNumber , $user);
 
-       return response()->json(['success' => true ], 201);
+       return response()->json(['success' => true ,'message' =>'Password reset token sent successfully' ], 201);
     }
 
     public function resetPassword(Request $request)

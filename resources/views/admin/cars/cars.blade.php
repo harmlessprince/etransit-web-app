@@ -107,6 +107,16 @@
    margin-left:170%;
 
 }
+    .align-text{
+        text-align: center;
+    }
+    .three-row-grid{
+        display:flex;
+        justify-content: space-between;
+    }
+    a{
+        text-decoration: none !important;
+    }
 </style>
 @section('content')
     <div class="container-fluid">
@@ -158,111 +168,168 @@
     </div>
 
     <div class="container-fluid" >
-        <div class="button-box" >
-            <div>
-                <a href="{{url('admin/cars/on-trip')}}">
-                    <button class="btn s add-terminal-button btn-sm" >Currently On Trip</button>
-                </a>
-            </div>
-            <div>
-                <a href="{{url('/admin/import-export-cars')}}" class="btn bulk-upload-button btn-sm"  style="margin-right:10px;">Bulk Import Cars</a>&nbsp;
+{{--        <div class="button-box" >--}}
+{{--            <div>--}}
+{{--                <a href="{{url('admin/cars/on-trip')}}">--}}
+{{--                    <button class="btn s add-terminal-button btn-sm" >Currently On Trip</button>--}}
+{{--                </a>--}}
+{{--            </div>--}}
+{{--            <div>--}}
+{{--                <a href="{{url('/admin/import-export-cars')}}" class="btn bulk-upload-button btn-sm"  style="margin-right:10px;">Bulk Import Cars</a>&nbsp;--}}
 
-                <a href="{{url('admin/add/car-hire')}}">
-                    <button class="btn s add-terminal-button btn-sm"  >Add Cars</button>
-                </a>
+{{--                <a href="{{url('admin/add/car-hire')}}">--}}
+{{--                    <button class="btn s add-terminal-button btn-sm"  >Add Cars</button>--}}
+{{--                </a>--}}
 
 {{--                data-toggle="modal" data-target="#vehicleModal"--}}
+{{--            </div>--}}
+{{--        </div>--}}
+        <div class="row three-row-grid">
+            <div class="col-md-3 col-lg-3 col-xl-3 col-sm-3">
+                <a href="{{url('admin/off-trips-car')}}">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="align-text">
+                            <h1>{{$offTripCount}}</h1>
+                            <h6>Off Trip</h6>
+                        </div>
+                    </div>
+                </div>
+                </a>
+            </div>
+            <div class="col-md-3 col-lg-3 col-xl-3 col-sm-3">
+                <a href="{{url('admin/on-trips-car')}}">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="align-text">
+                                <h1>{{$onTripCount}}</h1>
+                                <h6>On Trip</h6>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3 col-lg-3 col-xl-3 col-sm-3">
+                <a href="">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="align-text">
+                            <h1>&#x20A6; {{number_format($transactions)}}</h1>
+                            <h6>Transactions</h6>
+                        </div>
+                    </div>
+                </div>
+                </a>
             </div>
         </div>
         <div class="card">
             <div class="card-body">
-                <div style="display: flex; justify-content: flex-end; margin-bottom: 20px;">
-                    <div class="otn-group col-md-4" style="display: flex;" >
-                        <input type="text" name="search" placeholder="Search with Registration Number , Car Type or Model ..." id="search-box" class="form-control"/>
-                        <button class="btn btn-sm btn-primary">Search</button>
-                    </div>
-                </div>
-
-                <div class="vehicle-box">
-                    @if(count($cars) > 0)
-                        @foreach($cars as $car)
-                            <div class="card text-white terminal-card mb-3" style="max-width: 18rem;">
-                                <div class="card-header terminal-card" style="display: flex;justify-content: center;" >
-                                    <h6>{{Ucfirst($car->car_name)}}</h6>
-
-                                </div>
-                                <div class="card-body" style="display: flex;justify-content: center;">
-                                    <h6 class="card-title"> {{strtoupper($car->car_registration)}}</h6>
-                                </div>
-                                <div class="card-footer terminal-card" style="display: flex;justify-content: center;">
-                                    <a href="{{url('/admin/car/'.$car->id.'/history')}}" class="btn schedule-button">View Car History</a>
-                                </div>
-                            </div>
-                        @endforeach
-                    @else
-                        <div class="no_data_img">
-                            <div class="not_found">
-                               <div>
-                                   <img src="{{asset('images/illustrations/empty_data.png')}}" width="400" height="300" alt="bus-image"/>
-                               </div>
-                            </div>
-                        </div>
-                    @endif
-                </div>
+                <table class="table table-bordered yajra-datatable">
+                    <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Car Name</th>
+                        <th>Car Registration</th>
+                        <th>Transmission</th>
+                        <th>Model</th>
+                        <th>Capacity</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
             </div>
         </div>
 
     </div>
 
+
+{{--    <script>--}}
+
+{{--        $.ajaxSetup({--}}
+{{--            headers: {--}}
+{{--                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')--}}
+{{--            }--}}
+{{--        });--}}
+
+{{--        $(".btn-submit").click(function(e){--}}
+{{--            e.preventDefault();--}}
+
+{{--            var car_class         = $("#car_class").val();--}}
+{{--            var car_type          = $("#car_type").val();--}}
+{{--            var daily_rentals     = $("input[name=daily_rentals]").val();--}}
+{{--            var capacity          = $("input[name=capacity]").val();--}}
+{{--            var extra_hour        = $("input[name=extra_hour]").val();--}}
+{{--            var sw_fare           = $("input[name=sw_region_fare]").val();--}}
+{{--            var ss_fare           = $("input[name=ss_region_fare]").val();--}}
+{{--            var se_fare           = $("input[name=se_region_fare]").val();--}}
+{{--            var nc_fare           = $("input[name=nc_region_fare]").val();--}}
+{{--            var description       = $("#description").val();--}}
+{{--            var car_registration  = $("input[name=car_registration]").val();--}}
+{{--            var car_brand         = $("input[name=car_brand]").val();--}}
+
+
+{{--            $("#send-btn").prop('disabled', true);--}}
+
+{{--            $.ajax({--}}
+{{--                type:'POST',--}}
+{{--                url: "/admin/store/car",--}}
+{{--                data:{"_token": "{{ csrf_token() }}",car_class, car_type,daily_rentals , extra_hour ,--}}
+{{--                    sw_fare , ss_fare , se_fare, nc_fare , capacity ,description,car_registration ,car_brand},--}}
+{{--                success:function(data){--}}
+{{--                    if(data.success)--}}
+{{--                    {--}}
+{{--                        displaySuccessMessage(data.message)--}}
+{{--                        setTimeout(function(){--}}
+{{--                            location.reload(true);--}}
+{{--                        }, 2000);--}}
+{{--                    }--}}
+{{--                }--}}
+{{--            });--}}
+
+{{--        });--}}
+
+{{--        function displaySuccessMessage(message) {--}}
+{{--            toastr.success(message, 'Success');--}}
+{{--        }--}}
+
+{{--    </script>--}}
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+
     <script type="text/javascript">
+        $(function () {
+            $.noConflict();
 
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-
-        $(".btn-submit").click(function(e){
-            e.preventDefault();
-
-            var car_class         = $("#car_class").val();
-            var car_type          = $("#car_type").val();
-            var daily_rentals     = $("input[name=daily_rentals]").val();
-            var capacity          = $("input[name=capacity]").val();
-            var extra_hour        = $("input[name=extra_hour]").val();
-            var sw_fare           = $("input[name=sw_region_fare]").val();
-            var ss_fare           = $("input[name=ss_region_fare]").val();
-            var se_fare           = $("input[name=se_region_fare]").val();
-            var nc_fare           = $("input[name=nc_region_fare]").val();
-            var description       = $("#description").val();
-            var car_registration  = $("input[name=car_registration]").val();
-            var car_brand         = $("input[name=car_brand]").val();
+            var table = $('.yajra-datatable').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: "{{ route('admin.fetch-all-cars') }}",
+                columns: [
+                    {data: 'DT_RowIndex', name: 'DT_RowIndex'},
+                    {data: 'car_name', name: 'car_name'},
+                    {data: 'car_registration', name: 'car_registration'},
+                    {data: 'transmission', name: 'transmission'},
+                    {data: 'model_year', name: 'model_year'},
+                    {data: 'capacity', name: 'capacity'},
 
 
-            $("#send-btn").prop('disabled', true);
-
-            $.ajax({
-                type:'POST',
-                url: "/admin/store/car",
-                data:{"_token": "{{ csrf_token() }}",car_class, car_type,daily_rentals , extra_hour ,
-                    sw_fare , ss_fare , se_fare, nc_fare , capacity ,description,car_registration ,car_brand},
-                success:function(data){
-                    if(data.success)
                     {
-                        displaySuccessMessage(data.message)
-                        setTimeout(function(){
-                            location.reload(true);
-                        }, 2000);
-                    }
-                }
+                        data: 'action',
+                        name: 'action',
+                        orderable: true,
+                        searchable: true
+                    },
+
+                ]
             });
 
         });
-
-        function displaySuccessMessage(message) {
-            toastr.success(message, 'Success');
-        }
-
     </script>
 
 @endsection

@@ -40,7 +40,7 @@
             e.preventDefault()
             let formData = new FormData();
             formData.append('excel_file', this.image);
-            axios.post('/admin/import/vehicle', formData, {
+            axios.post('/e-ticket/import/vehicle', formData, {
                         headers: { 'content-type': 'multipart/form-data' },
                             onUploadProgress: function( progressEvent ) {
                                 this.uploadPercentage = parseInt( Math.round( ( progressEvent.loaded / progressEvent.total ) * 100 ) );

@@ -1,0 +1,238 @@
+#carousel-t {
+  background-color: rgba(215,215,215,0);
+}
+
+#carousel-t .testimonial-content {
+  margin-top: 15px;
+}
+
+#carousel-t .carousel-control-next, .carousel-control-prev {
+  width: 13%;
+}
+
+#carousel-t .carousel-control-prev {
+  /*background: -webkit-linear-gradient(left, rgb(215,215,215) 70%,rgba(215,215,215,0) 100%);*/
+  /*background: linear-gradient(to right, rgb(215,215,215) 70%,rgba(215,215,215,0) 100%);*/
+  opacity: 1;
+}
+
+#carousel-t .carousel-control-next {
+  /*background: -webkit-linear-gradient(right, rgba(215,215,215) 70%,rgba(215,215,215,0) 100%);*/
+  /*background: linear-gradient(to left, rgb(215,215,215) 70%,rgba(215,215,215,0) 100%);*/
+  opacity: 1;
+}
+
+#carousel-t .carousel-indicators li {
+  box-sizing: content-box;
+  -ms-flex: 0 1 auto;
+  flex: 0 1 auto;
+  width: 10px;
+  height: 10px;
+  margin-right: 3px;
+  margin-left: 3px;
+  text-indent: -999px;
+  cursor: pointer;
+  background-color: #010000;
+  background-clip: padding-box;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  opacity: .2;
+  transition: opacity .6s ease;
+  border-radius: 90px;
+}
+
+#carousel-t .carousel-indicators .active {
+  opacity: .7;
+  background-color: #ffffff;
+  width: 35px;
+  border-radius: 40%;
+}
+
+#carousel-t .carousel-indicators {
+  position: relative;
+  padding-bottom: 0px;
+  margin-top: auto;
+  margin-top: -40px;
+}
+
+#carousel-t .signature {
+  font-size: 24px;
+  font-style: normal;
+  font-family: 'Roboto Condensed', Arial, Sans;
+  font-weight: 700;
+  margin: 0;
+}
+
+#carousel-t .date {
+  font-size: 14px;
+  font-style: italic;
+  margin-bottom: 10px;
+}
+
+#carousel-t p {
+  font-size: 18px;
+  font-family: 'Roboto Condensed', Arial, Sans;
+}
+
+#carousel-t .rating {
+  background-color: #2d80ff;
+  width: 56px;
+  display: block;
+  margin: 15px auto;
+  color: white;
+  border-radius: 25px;
+}
+
+@media (max-width: 576px) {
+  #overviewlayout {
+    margin-top: 70px;
+  }
+}
+
+@media (min-width: 768px) {
+  #overviewlayout {
+    margin-top: 270px;
+  }
+}
+
+@media (max-width: 576px) {
+  #view {
+    width: 170px;
+    margin-right: 0px;
+    margin-left: 0px;
+  }
+}
+
+@media (max-width: 576px) {
+  #widthrow {
+    padding: 10px;
+    flex: left;
+  }
+}
+
+@media (max-width: 576px) {
+  #optionline-1 {
+    margin-top: 30px;
+  }
+}
+
+.timeline-step {
+}
+
+@media (min-width: 768px) {
+  .timeline-steps .timeline-step:not(:last-child):after {
+    content: "";
+    display: block;
+    border-top: .25rem dotted #3b82f6;
+    width: 3.46rem;
+    position: absolute;
+    left: 7.5rem;
+    top: .3125rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .timeline-steps .timeline-step:not(:first-child):before {
+    content: "";
+    display: block;
+    border-top: .25rem dotted #3b82f6;
+    width: 3.8125rem;
+    /*position: absolute;*/
+    /*right: 7.5rem;*/
+    top: .3125rem;
+  }
+}
+
+.timeline-steps .timeline-content {
+  width: 10rem;
+  text-align: center;
+}
+
+.timeline-steps .timeline-content .inner-circle {
+  border-radius: 1.5rem;
+  height: 1rem;
+  width: 1rem;
+  display: block;
+  align-items: center;
+  justify-content: center;
+  background-color: #3b82f6;
+}
+
+.timeline-steps .timeline-content .inner-circle:before {
+  content: "";
+  background-color: #3b82f6;
+  display: block;
+  height: 3rem;
+  width: 3rem;
+  min-width: 3rem;
+  border-radius: 6.25rem;
+  opacity: .5;
+}
+
+ul.timeline {
+  list-style-type: none;
+  position: relative;
+}
+
+ul.timeline:before {
+  content: ' ';
+  /*background: #d4d9df;*/
+  border: dashed;
+  border-color: #294898;
+  border-width: thin;
+  border-width: 1px;
+  display: inline-block;
+  position: absolute;
+  left: 29px;
+  width: 2px;
+  height: 91%;
+  z-index: 400;
+}
+
+ul.timeline > li {
+  margin: 20px 0;
+  padding-left: 20px;
+}
+
+ul.timeline > .to:before {
+  content: ' ';
+  /*background: #f8a159;*/
+  display: inline-block;
+  position: absolute;
+  border-radius: 50%;
+  border: 3px solid #f8a159;
+  left: 22px;
+  width: 15px;
+  height: 15px;
+  z-index: 400;
+}
+
+ul.timeline > .from:before {
+  content: ' ';
+  background: #f8a159;
+  display: inline-block;
+  position: absolute;
+  border-radius: 50%;
+  border: 3px solid #f8a159;
+  left: 22px;
+  width: 15px;
+  height: 15px;
+  z-index: 400;
+}
+
+span {
+}
+
+#to {
+  position: absolute;
+}
+
+#basic-addon1 {
+  z-index: 2;
+}
+
+#removeradius {
+  border-radius: 0px;
+  -webkit-appearance: none;
+}
+

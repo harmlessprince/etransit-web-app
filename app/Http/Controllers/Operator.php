@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Mail\OperatorCredentials;
 use App\Mail\PasswordRecovery;
 use App\Models\Eticket;
+use App\Models\Service;
+use App\Models\ServiceTenant;
 use App\Models\Tenant;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Illuminate\Http\Request;
@@ -16,6 +18,8 @@ use DataTables;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\Models\Bus;
 use App\Models\Terminal;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class Operator extends Controller
 {
@@ -45,11 +49,32 @@ class Operator extends Controller
     public function viewOperator($id)
     {
         $tenant = Tenant::find($id);
-        $busCount = Bus::count();
+        $busCount = Bus::withoutGlobalScopes()->where('tenant_id',$tenant->id)->count();
         $terminalCount = Terminal::withoutGlobalScopes()->where('tenant_id',$tenant->id)->count();
+        $transactionSum = \App\Models\Transaction::withoutGlobalScopes()->where('tenant_id',$tenant->id)->pluck('amount')->sum();
 
+        $tenantServiceObject = new \stdClass();
 
-        return view('admin.operator.view-operator', compact('tenant','busCount','terminalCount'));
+        $services = Service::all();
+
+        foreach($services as $index => $service) {
+            if (count($tenant->services) > 0){
+                foreach ($tenant->services as $tenantService) {
+                    $tenantServiceObject->$index['service'] = $service->name;
+                    $tenantServiceObject->$index['id'] = $service->id;
+                    $tenantServiceObject->$index['status'] = ($tenantService->name == $service->name) ? 'yes' : 'no';
+                    if ($tenantService->name == $service->name) {
+                        break;
+                    }
+                }
+            }else{
+                $tenantServiceObject->$index['service'] = $service->name;
+                $tenantServiceObject->$index['id'] = $service->id;
+                $tenantServiceObject->$index['status'] =  'no';
+            }
+        }
+
+        return view('admin.operator.view-operator', compact('tenant','busCount','terminalCount','tenantServiceObject','transactionSum'));
     }
 
 
@@ -142,6 +167,8 @@ class Operator extends Controller
                 $eticket->password = Hash::make($password);
                 $eticket->tenant_id = $tenant->id;
                 $eticket->save();
+
+
             }
 
         $maildata = [
@@ -152,7 +179,19 @@ class Operator extends Controller
 
         ];
 
+        $role =  Role::create(['guard_name' => 'e-ticket','name' => 'Super Admin '.$tenant->display_name ,'tenant_id' => $tenant->id]);
+
+        $eticket->assignRole($role);
+
+        $permissions = Permission::where('guard_name' ,'e-ticket')->get();
+
+        foreach($permissions as $permission)
+        {
+            $role->givePermissionTo($permission);
+        }
+
         Mail::to($request->email)->send(new OperatorCredentials($maildata));
+
         DB::commit();
 
         Alert::success('Success ', 'Operator added successfully');
@@ -210,6 +249,25 @@ class Operator extends Controller
         Alert::success('Success ', 'Operator Edited successfully');
 
         return redirect('admin/manage/operators');
+
+    }
+
+    public function addServiceToOperator(Request $request)
+    {
+
+        if($request->checked == "checked")
+        {
+            $newserviceTenant = new ServiceTenant();
+            $newserviceTenant->service_id = $request->service_id;
+            $newserviceTenant->tenant_id  = $request->tenant_id;
+            $newserviceTenant->save();
+            return response()->json(['success' => true , 'message' => 'Service added to tenant successfully']);
+        }else{
+            $servicetenant = ServiceTenant::where('tenant_id', $request->tenant_id)->where('service_id', $request->service_id)->first();
+            $servicetenant->delete();
+            return response()->json(['success' => true , 'message' => 'Service  removed  successfully']);
+        }
+
 
     }
 }

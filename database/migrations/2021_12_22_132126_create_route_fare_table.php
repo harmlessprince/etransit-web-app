@@ -17,9 +17,12 @@ class CreateRouteFareTable extends Migration
             $table->id();
             $table->unsignedBigInteger('train_location_id');
             $table->unsignedBigInteger('train_stop_id');
+            $table->unsignedBigInteger('train_destination_id');
+            $table->unsignedBigInteger('train_terminal_destination_stop_id');
             $table->unsignedBigInteger('train_class_id');
             $table->double('amount_adult');
             $table->double('amount_child');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

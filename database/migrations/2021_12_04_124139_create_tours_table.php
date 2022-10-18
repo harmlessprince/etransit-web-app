@@ -20,10 +20,13 @@ class CreateToursTable extends Migration
             $table->date('tour_date');
             $table->time('tour_time');
             $table->string('duration');
+            $table->string('duration_options');
             $table->unsignedBigInteger('service_id');
             $table->longText('description');
             $table->double('amount_regular');
             $table->double('amount_standard');
+            $table->string('tour_type')->nullable();
+//            $table->unsignedBigInteger('tenant_id');
             $table->timestamps();
 
             $table->foreign('service_id')->references('id')->on('services')->onDelete('cascade');

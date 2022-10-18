@@ -21,7 +21,7 @@
                     <h3>{{$tenantCompanyName  ?? env('APP_NAME')}}</h3>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{url('e-ticket/dashboard')}}"><i data-feather="home"></i></a></li>
-                        <li class="breadcrumb-item">Update Bus</li>
+                        <li class="breadcrumb-item">Update Bus Driver</li>
                     </ol>
                 </div>
                 <div class="col-6">

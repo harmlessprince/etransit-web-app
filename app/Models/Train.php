@@ -14,6 +14,11 @@ class Train extends Model
         return $this->hasMany(TrainSeat::class );
     }
 
+    public function trainschedule()
+    {
+        return $this->belongsTo(TrainSchedule::class);
+    }
+
 
 
 

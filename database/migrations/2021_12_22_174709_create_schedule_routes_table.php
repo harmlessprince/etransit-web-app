@@ -16,7 +16,8 @@ class CreateScheduleRoutesTable extends Migration
         Schema::create('schedule_routes', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('train_schedule_id');
-            $table->unsignedBigInteger('train_stop_id');
+            $table->unsignedBigInteger('route_fare_id');
+//            $table->unsignedBigInteger('train_stop_id');
             $table->timestamps();
         });
     }

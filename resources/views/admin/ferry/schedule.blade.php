@@ -70,7 +70,7 @@
                     <h3>{{env('APP_NAME')}}</h3>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{url('/admin/')}}"><i data-feather="home"></i></a></li>
-                        <li class="breadcrumb-item">Schedule Ferry Event </li>
+                        <li class="breadcrumb-item">Schedule Ferry Event</li>
                     </ol>
                 </div>
             </div>
@@ -78,8 +78,9 @@
     </div>
     <div class="container-fluid">
         <div class="button-box" >
-            <a href="{{url('/admin/import-export-schedule')}}" class="btn bulk-upload-button btn-sm"  style="margin-right:10px;">Bulk Import Event</a>&nbsp;
-            <button class="btn s add-terminal-button btn-sm"  data-toggle="modal" data-target="#vehicleModal">View Schedule Event</button>
+{{--            <a href="{{url('/admin/import-export-schedule')}}" class="btn bulk-upload-button btn-sm"  style="margin-right:10px;">Bulk Import Event</a>&nbsp;--}}
+{{--            <button class="btn s add-terminal-button btn-sm"  data-toggle="modal" data-target="#vehicleModal">View Schedule Event</button>--}}
+            <a href="{{url('/admin/view-ferry-schedules/'.$ferry->id)}}" class="btn bulk-upload-button btn-sm"  style="margin-right:10px;">View Schedule Event</a>&nbsp;
         </div>
         <div class="card ">
             <div class="card-body">
@@ -144,7 +145,7 @@
 
                     <div class="form-group">
                         <label for="description">Description</label>
-                       <textarea class="form-control" id="description" cols="10" rows="10" ></textarea>
+                       <textarea class="ckeditor form-control" id="description" cols="10" rows="10" ></textarea>
                     </div>
 
                 </div>
@@ -193,7 +194,8 @@
                             var departureTime     = $("input[name=departure_time]").val();
                             var Tfare             = $("input[name=t_fare]").val();
                             var TfareChild        = $("input[name=t_fare_child]").val();
-                            var description       = $("#description").val();
+                            // var description       = $("#description").val();
+                            var description        = CKEDITOR.instances['description'].getData();
                             var pickUp            =  $("#pick_up").val();
                             var destination       = $("#destination").val();
                             var duration          = $("input[name=trip_duration]").val();
@@ -239,9 +241,12 @@
         function displayErrorMessage(message) {
             toastr.error(message, 'Error');
         }
-
-
-
+    </script>
+    <script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.ckeditor').ckeditor();
+        });
     </script>
 
 @endsection

@@ -111,38 +111,6 @@
                         <li class="breadcrumb-item">Add Tour</li>
                     </ol>
                 </div>
-{{--                <div class="col-6">--}}
-{{--                    <!-- Bookmark Start-->--}}
-{{--                    <div class="bookmark pull-right">--}}
-{{--                        <ul>--}}
-{{--                            <li><a href="#" data-container="body" data-toggle="popover" data-placement="top" title="" data-original-title="Chat"><i data-feather="message-square"></i></a></li>--}}
-{{--                            <li><a href="#" data-container="body" data-toggle="popover" data-placement="top" title="" data-original-title="Icons"><i data-feather="command"></i></a></li>--}}
-{{--                            <li><a href="#" data-container="body" data-toggle="popover" data-placement="top" title="" data-original-title="Learning"><i data-feather="layers"></i></a></li>--}}
-{{--                            <li><a href="#"><i class="bookmark-search" data-feather="star"></i></a>--}}
-{{--                                <form class="form-inline search-form" action="#" method="get">--}}
-{{--                                    <div class="form-group form-control-search">--}}
-{{--                                        <div class="Typeahead Typeahead--twitterUsers">--}}
-{{--                                            <div class="u-posRelative">--}}
-{{--                                                <input class="demo-input Typeahead-input form-control-plaintext w-100" type="text" placeholder="Search.." name="q" title="" autofocus>--}}
-{{--                                                <div class="spinner-border Typeahead-spinner" role="status"><span class="sr-only">Loading...</span></div>--}}
-{{--                                            </div>--}}
-{{--                                            <div class="Typeahead-menu"></div>--}}
-{{--                                            <script id="result-template" type="text/x-handlebars-template">--}}
-{{--                                                <div class="ProfileCard u-cf">--}}
-{{--                                                    <div class="ProfileCard-avatar"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-airplay m-0"><path d="M5 17H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1"></path><polygon points="12 15 17 21 7 21 12 15"></polygon></svg></div>--}}
-{{--                                                    <div class="ProfileCard-details">--}}
-{{--                                                        <div class="ProfileCard-realName">some name</div>--}}
-{{--                                                    </div>--}}
-{{--                                                </div>--}}
-{{--                                            </script>--}}
-{{--                                            <script id="empty-template" type="text/x-handlebars-template"><div class="EmptyMessage">Your search turned up 0 results. This most likely means the backend is down, yikes!</div></script>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                </form>--}}
-{{--                            </li>--}}
-{{--                        </ul>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
             </div>
         </div>
     </div>
@@ -196,10 +164,36 @@
                         </div>
 
                     </div>
+                    <div class="row">
+                        <div class="car-box col-md-6 col-sm-6 col-lg-6 col-xl-6">
+                            <div class="form-group">
+                                <label for="duration">Duration </label>
+                                <input type="number" name="duration" id="duration" class="form-control" value="{{ old('duration') }}" required  mon="0"/>
+                            </div>
+                        </div>
+                        <div class="car-box col-md-6 col-sm-6 col-lg-6 col-xl-6">
+                            <div class="form-group">
+                                <label for="duration_options">Select Duration in (Months/Weeks/Days/)</label>
+                                <select id="duration_options" name="duration_options" class="form-control">
+                                    <option value="">Select Options</option>
+                                    <option valuw="year">Year</option>
+                                    <option valuw="month">Month</option>
+                                    <option valuw="weeks">Weeks</option>
+                                    <option valuw="days">Days</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
                     <div class="car-box col-md-12">
                         <div class="form-group">
-                            <label for="duration">Duration (how long Gone e.g 4)</label>
-                            <input type="number" name="duration" id="duration" class="form-control" value="{{ old('duration') }}" required  mon="0"/>
+                            <label for="tour_type">Tour Type</label>
+                            <select class="form-control" name="tour_type" id="tour_type">
+                                <option value="">Select Tour Type</option>
+                                <option value="domestic">Domestic</option>
+                                <option value="international">International</option>
+
+                            </select>
+
                         </div>
                     </div>
                     <div class="car-box col-md-12">
@@ -234,7 +228,7 @@
                     </div>
                     <div class="form-group">
                         <label for="description">Description</label>
-                        <textarea class="form-control" name="description" id="description" rows="10" cols="20" required >{{old('description')}}</textarea>
+                        <textarea class="ckeditor form-control" name="description" id="description" rows="10" cols="20" required >{{old('description')}}</textarea>
                     </div>
                     <button class="sumbit_request" type="submit">Add Tour</button>
                 </form>
@@ -275,6 +269,13 @@
             });
         });
 
+    </script>
+
+    <script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.ckeditor').ckeditor();
+        });
     </script>
 
 @endsection

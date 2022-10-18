@@ -1,0 +1,27 @@
+.firstcurve {
+  position: absolute;
+  margin-top: -148px;
+  margin-left: 678px;
+}
+
+.secondcurve {
+  position: absolute;
+  margin-top: -12px;
+  margin-left: 678px;
+}
+
+.btn {
+}
+
+@media (max-width: 576px) {
+  .firstcurve {
+    display: none;
+  }
+}
+
+@media (max-width: 576px) {
+  secondcurve {
+    display: none;
+  }
+}
+

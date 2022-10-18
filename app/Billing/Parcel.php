@@ -7,6 +7,7 @@
 namespace App\Billing;
 
 use App\Classes\Reference;
+use App\Models\DeliveryParcel;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use App\Models\Transaction;
@@ -17,8 +18,9 @@ class Parcel
     public  static function handleParcelPayment($data)
     {
         DB::beginTransaction();
+        $reference = Reference::generateTrnxRef();
         $transactions = new Transaction();
-        $transactions->reference = Reference::generateTrnxRef();
+        $transactions->reference = $reference;
         $transactions->trx_ref = $data['data']['tx_ref'];
         $transactions->amount = (double) $data['data']['amount'];
 
@@ -33,10 +35,17 @@ class Parcel
         $data["email"] = $data['data']['meta']['user_email'];
         $data['name']  =  $data['data']['meta']['user_name'];
 
+
+        $findParcel = DeliveryParcel::where('id', $data['data']['meta']['delivery_parcel_id'])->with('city','delivery_city')->firstorfail();
+
         $maildata = [
-            'name' =>  $data['data']['meta']['user_name'],
-            'service' => 'Parcel delivery service',
-            'transaction' => $transactions
+            'name' =>   $data['data']['meta']['user_name'],
+            'service' => 'Parcel delivery Service',
+            'transaction' => $transactions,
+            'reference' => $reference,
+            'totalAmount' => $data['data']['amount'],
+            'delivery_city' => $findParcel->delivery_city->name,
+            'pickup_city' => $findParcel->city->name
         ];
 
         $email =  $data["email"];

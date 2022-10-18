@@ -27,7 +27,8 @@ class MustVerify
             {
                 return response()->json(['success' => false , 'message' => 'Please verify your email']);
             }else{
-                return redirect()->route('login')->with('error', 'Please verify your email');
+                toastr()->error('Please verify your email ');
+                return redirect('/')->with('error', 'Please verify your email');
             }
 
 

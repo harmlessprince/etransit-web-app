@@ -6,6 +6,7 @@ use App\Classes\VerificationToken;
 use App\Http\Controllers\Controller;
 use App\Mail\VerificationToken as VerificationTokenMail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
@@ -67,7 +68,7 @@ class AuthUser extends BaseController
                 //|regex:/(01)[0-9]{9}/',
             ]
         );
-
+        DB::beginTransaction();
         $verifyToken = VerificationToken::generate();
 
         $user = User::create([
@@ -85,7 +86,7 @@ class AuthUser extends BaseController
         ];
         Mail::to($request->get('email'))->send(new VerificationTokenMail($maildata));
         $token = JWTAUTH::fromUser($user);
-
+        DB::commit();
         return response()->json(compact('user','token'),201);
     }
 

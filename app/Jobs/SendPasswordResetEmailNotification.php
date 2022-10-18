@@ -12,8 +12,9 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Notification;
 
 
-class SendPasswordResetEmailNotification implements ShouldQueue
+class SendPasswordResetEmailNotification
 {
+//implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
     private $data;
     private $user;

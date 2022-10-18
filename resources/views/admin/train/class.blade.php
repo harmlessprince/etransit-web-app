@@ -147,7 +147,12 @@
                     <div class="car-box col-md-12">
                         <div class="form-group">
                             <label for="train_class">Train Class</label>
-                            <input type="text" name="train_class" id="train_class" class="form-control" value="{{ old('train_class') }}" placeholder="e.g Economy or First Class" required />
+                            <select name="train_class" id="train_class" class="form-control">
+                                <option value="First Class">First Class</option>
+                                <option value="Business Class">Business Class</option>
+                                <option value="Economy">Economy</option>
+                            </select>
+{{--                            <input type="text" name="train_class" id="train_class" class="form-control" value="{{ old('train_class') }}" placeholder="e.g Economy or First Class" required />--}}
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -171,7 +176,7 @@
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Class</th>
-                            <th scope="col">Action</th>
+{{--                            <th scope="col">Action</th>--}}
                         </tr>
                         </thead>
                         @foreach($trainClass as $index => $class)
@@ -179,7 +184,7 @@
                         <tr>
                             <th scope="row">{{$index + 1}}</th>
                             <td>{{$class->class}}</td>
-                            <td>Edit|Delete</td>
+{{--                            <td>Edit|Delete</td>--}}
                         </tr>
                         </tbody>
                         @endforeach
