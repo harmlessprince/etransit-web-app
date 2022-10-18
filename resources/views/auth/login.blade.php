@@ -61,12 +61,6 @@
                         <i class="fa fa-linkedin" style="color: rgb(255, 255, 255);padding-top: 5px;"></i>&nbsp; &nbsp; &nbsp;
                         <i class="fa fa-google-plus justify-content-center align-items-center align-content-center" style="padding-top: 5px;"></i>|&nbsp; hello@etransitafrica.com</p>
                 </div>
-                <div class="col-auto col-sm-auto" id="currency" style="text-align: center;">
-                    <div class="dropdown" id="reducebutton-1" style="padding-top: 6px;padding-bottom: 6px;">
-                        <button class="btn btn-light dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" id="reducebutton-2" type="button" style="color: rgb(255,255,255);background: rgb(52,63,95);border-style: none;border-color: rgba(255,255,255,0);font-size: 12px;">NGN&nbsp;&nbsp;</button>
-                        <div class="dropdown-menu dropdown-menu-start" id="reducebutton-3"><a class="dropdown-item" href="#">First Item</a><a class="dropdown-item" href="#">Second Item</a><a class="dropdown-item" href="#">Third Item</a></div>
-                    </div>
-                </div>
                 <div class="col-sm-2" id="countrydiv" style="padding-right: 0px;padding-left: 5px;">
                     <button class="btn btn-primary btn-lg text-start d-inline-flex" id="countrytext" type="button" style="margin: auto;width: 100%;color: var(--bs-white);margin-bottom: 2px;font-weight: 400;font-size: 14px;border-radius: 0px;background: rgba(247,247,247,0);border-style: none;border-color: rgba(255,255,255,0);padding-top: 12px;">
                         <img src="{{asset('login-assets/img/uk.svg')}}" style="max-width: 24px;margin-right: 12px;">English</button></div>
@@ -108,7 +102,7 @@
     <div class="container">
         <div class="row" style="margin-top: 5%;margin-bottom: 0%;">
             <div class="col justify-content-center signup-image">
-                <img src="{{ asset('login-assets/img/SignIn.jpg')}}" class="img-fluid">
+                <img src="{{ asset('login-assets/img/signin1.png')}}" class="img-fluid">
             </div>
             <div class="col d-flex d-sm-flex d-md-flex justify-content-center justify-content-sm-center justify-content-md-center" style="background: rgba(255,255,255,0);">
                 <div style="width: 350px;background: var(--bs-white);padding: 25px;padding-top: 30px;">
