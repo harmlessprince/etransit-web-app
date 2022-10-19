@@ -510,7 +510,6 @@
 
 
 
-
             function displayErrorMessage(message) {
                 toastr.error(message, 'Error');
             }

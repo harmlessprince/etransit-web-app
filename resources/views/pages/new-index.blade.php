@@ -474,7 +474,7 @@
                                     </div>
                                     @endforeach
                                 </div>
-                            </div><img class="w-100 d-block d-none" src="http://placeholdit.imgix.net/~text?txtsize=42&amp;txt=Carousel+Image&amp;w=1400&amp;h=600" alt="Slide Image">
+                            </div><img class="w-100 d-block d-none" src="https://placeholdit.imgix.net/~text?txtsize=42&amp;txt=Carousel+Image&amp;w=1400&amp;h=600" alt="Slide Image">
                         </div>
                         <div class="carousel-item">
                             <div class="container">
@@ -509,7 +509,7 @@
 
                                 </div>
                             </div>
-                            <img class="w-100 d-block d-none" src="http://placeholdit.imgix.net/~text?txtsize=42&amp;txt=Carousel+Image&amp;w=1400&amp;h=600" alt="Slide Image">
+                            <img class="w-100 d-block d-none" src="https://placeholdit.imgix.net/~text?txtsize=42&amp;txt=Carousel+Image&amp;w=1400&amp;h=600" alt="Slide Image">
                         </div>
                     </div>
                     <div><a class="carousel-control-prev" href="#carousel-2" role="button" data-bs-slide="prev"

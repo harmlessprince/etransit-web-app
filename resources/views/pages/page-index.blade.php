@@ -31,18 +31,6 @@
 
 </style>
 @section('content')
-{{--    <div class="container-case">--}}
-{{--        <div class="container-main">--}}
-{{--            <!-- <div class="hero-main">--}}
-{{--                <div class="text">--}}
-{{--                    <h4 class="subtext">Our 24 Hour’s Services</h4>--}}
-{{--                    <h2 class="maintext">EASY, SAFE AND CONVENIENT</h2>--}}
-{{--                    <p class="sub-text-min">EASY, SAFE AND CONVENIENT</p>--}}
-{{--                </div>--}}
-{{--            </div> -->--}}
-{{--        </div>--}}
-{{--    </div>--}}
-
 <div  class="container-fluid hero-bg ">
     <div class="hero-bg-section ">
         <div class="hero-bg-text">

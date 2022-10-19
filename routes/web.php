@@ -41,6 +41,7 @@ use App\Http\Controllers\Schedule;
 use App\Http\Controllers\Terminal;
 use App\Http\Controllers\Transaction;
 use App\Http\Controllers\Vehicle;
+use App\Http\Controllers\PagesController;
 
 
 
@@ -75,6 +76,9 @@ Route::post('/bus/bookings/' , [Booking::class , 'bookingRequest'])->name('bus.b
 Route::post('/bus/filter-bookings/{operator?}/{bus_type?}' , [Booking::class , 'bookingFilterRequest'])->name('filter-bus');
 
 Route::get('filter-cars/{seat_capacity?}/{class_type?}',[Car::class , 'carList']);
+
+Route::get('/about', [PagesController::class, 'about']);
+Route::get('/contact', [PagesController::class, 'contact']);
 
 //Auth::routes();
 

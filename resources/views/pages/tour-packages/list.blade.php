@@ -23,13 +23,12 @@
 {{--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" />--}}
 
 @section('content')
-<section style="height: 226px;background: url('{{ asset('new-assets/img/tp.png')}}')  center / cover no-repeat;">
+<section style="height: 226px;background: url('{{ asset('new-assets/img/tp.png')}}')  center/cover no-repeat;">
     <div class="d-flex d-sm-flex d-md-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center" style="height: 226px;background: rgba(11,8,8,0.73);">
         <div class="container d-md-flex justify-content-md-center align-items-md-center">
             <div class="row">
                 <div class="col-md-12">
                     <h1 style="color: var(--bs-white);text-align: center;"><strong>Tour Packages</strong></h1>
-{{--                    <p style="font-size: 20px;color: var(--bs-white);text-align: center;">Loren ipsum dolor</p>--}}
                 </div>
             </div>
         </div>
@@ -72,7 +71,7 @@
                 </div>
                 <div class="row" style="margin-bottom: 11px;">
                     <div class="col">
-                        <p style="margin-top: 4px;margin-bottom: 0px;font-size: 13px;"><strong>Tout Dates</strong></p>
+                        <p style="margin-top: 4px;margin-bottom: 0px;font-size: 13px;"><strong>Tour Dates</strong></p>
                     </div>
                 </div>
                 <hr>
@@ -107,7 +106,7 @@
                                     <div class="card-body text-start placeholder border rounded-0 d-md-flex align-items-start align-content-start search-container" style="height: 40px;padding-top: 5px;background: var(--bs-gray-100);border-radius: 7px;">
                                         <form class="d-flex align-items-center">
                                             <i class="fas fa-search d-none d-sm-block h4 text-body m-0" style="font-size: 15.704px;"></i>
-                                            <input class="form-control form-control-lg flex-shrink-1 form-control-borderless search-container" id="search" type="search" placeholder="Search Cruise" name="searchbar" style="height: 29px;padding-top: 0px;padding-bottom: 1px;min-height: 29px;font-size: 14px;background: var(--bs-gray-100);">
+                                            <input class="form-control form-control-lg flex-shrink-1 form-control-borderless search-container" id="search" type="search" placeholder="Search Tour" name="searchbar" style="height: 29px;padding-top: 0px;padding-bottom: 1px;min-height: 29px;font-size: 14px;background: var(--bs-gray-100);">
                                         </form>
                                     </div>
                                 </div>
@@ -135,7 +134,7 @@
                                     </div>
                                     <div class="align-items-center align-content-center card-footer">
                                         <ul class="list-unstyled text-center d-md-inline-flex m-auto d-md-inline in" id="rating-1" display="inline-block" gap="20px">
-{{--                                            <li style="font-size: 14px;color: #afafb0;"><i class="fa fa-star" style="color: var(--bs-yellow);"></i>&nbsp;4.7/5 Ratings&nbsp; &nbsp; &nbsp; &nbsp;</li>--}}
+                                           <li style="font-size: 14px;color: #afafb0;"><i class="fa fa-star" style="color: var(--bs-yellow);"></i>&nbsp;4.7/5 Ratings&nbsp; &nbsp; &nbsp; &nbsp;</li>
                                             <li class="justify-content-end" style="font-size: 14px;color: #afafb0;"><i class="icon ion-location" style="color: var(--bs-orange);"></i>&nbsp;{{$tour->location}}</li>
                                         </ul>
                                     </div>
@@ -149,7 +148,6 @@
         </div>
     </div>
 </section>
-
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.1/bootstrap3-typeahead.min.js">

@@ -75,7 +75,7 @@
                     <li class="nav-item">
                         <a class="nav-link active" href="{{url('/')}}" style="color: #06044e;">Home</a>
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="#about_us_section" style="color: #06044e;">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{'about'}}" style="color: #06044e;">About Us</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{url('tour-packages')}}" style="color: #06044e;">Tour Packages</a></li>
                     <li class="nav-item">
                         <a href="{{url('boat-cruise')}}" class="nav-link" style="color: #06044e;">Boat Cruise&nbsp;</a>
@@ -83,10 +83,9 @@
                     <li class="nav-item">
                         <a href="{{url('car-hire')}}" class="nav-link"  style="color: #06044e;">Hire A vehicle</a>
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="#" style="color: #06044e;">Hotel Booking</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{url('partners')}}" style="color: #06044e;">Become A Partner</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{url('parcel')}}" style="color: #06044e;">Send Parcel</a></li>
-                    
+                    <li class="nav-item"><a class="nav-link" href="{{('contact')}}" style="color: #06044e;">Contact Us</a></li>
                 </ul>
             </div>
         </div>
