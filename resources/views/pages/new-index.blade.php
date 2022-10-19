@@ -37,6 +37,26 @@
 
     }
 
+    .feature-header{
+        color: #e16803;
+        font-weight: bolder;
+    }
+
+    .feature-description{
+        color: #1f0844;
+        font-weight: bold;
+    }
+    .alternate-row{
+        background:#1f0844;
+        color: white;
+    }
+    .alternate-row .feature-description {
+        color: white;
+    }
+    .alternate-row > .feature-header {
+        color:#f1530f;
+    }
+
     @@media only screen and (max-width: 700px){
         .mobile-copy{
             display: none;
@@ -91,24 +111,32 @@
 
 @section('content')
 
-<section style="height: 400px;background: url(&quot;../new-assets/img/Rectangle%203.png&quot;) center / cover no-repeat; " >
+<section class="hero" style="height: 400px;background: url(&quot;../new-assets/img/Rectangle%203.png&quot;) center / cover no-repeat; " >
     <div class="d-flex d-sm-flex d-md-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center" style="height: 400px;background: rgba(11,8,8,0.73);">
         <div class="container d-md-flex justify-content-md-center align-items-md-center">
             <div class="row">
                 <div class="col-md-12">
-                    <p style="font-size: 20px;color: var(--bs-white);text-align: center;">Your 24/7 one-stop transportation and logistics service</p>
+                    <p style="font-size: 20px;color: var(--bs-white);text-align: center;">Your 24/7 one-stop transit and logistics service</p>
                     <h1 style="color: var(--bs-white);text-align: center;"><strong>EASY SAFE CONVENIENT</strong></h1>
-                  {{----}}  <p style="font-size: 20px;color: var(--bs-white);text-align: center;padding-right: 80px;padding-left: 80px;" class="mobile-copy">Hire a vehicle,send a parcel, book a bus,flight,boat cruise or ferry instantly at your fingertips. No queues. No delays.&nbsp;&nbsp;</p>
-                </div>
+                  {{--<p style="font-size: 20px;color: var(--bs-white);text-align: center;padding-right: 80px;padding-left: 80px;" class="mobile-copy">Hire a vehicle,send a parcel, book a bus,flight,boat cruise or ferry instantly at your fingertips. No queues. No delays.&nbsp;&nbsp;</p>
+                --}} </div>
             </div>
         </div>
     </div>
 </section>
 <div class="container menudisplay menu" id="menumenudisplay" style="border-radius: 10px;">
-{{--    padding-right: 100px;padding-left: 100px;--}}
+ {{--    padding-right: 100px;padding-left: 100px;--}}
     <div class="row">
         <div class="col" style="box-shadow: 1px 0px 7px rgb(103,103,103);border-radius: 10px;">
             <div class="row divshow" style="background: #ffffff;border-radius: 10px;border-bottom-right-radius: 0px;border-bottom-left-radius: 0px;border-color: rgba(33,37,41,0);border-bottom: 1px solid rgb(227,228,230);">
+                <div class="col-3 col-sm-3 col-xs-3 carhover" id="flight_booking"  style="text-align: center;padding-top: 25px;padding-bottom: 12px;border-top-right-radius: 10px;">
+                    <a href="{{url('car-hire')}}" target="_blank">
+                        <img class="img-fluid" src="{{asset('new-assets\img\car-hire\car_menu_icon.png')}}">
+                        <div class="divline"></div>
+                        <p ><strong>VEHICLE HIRE</strong></p>
+                    </a>
+
+                </div>
                 <div class="col-3 col-sm-3 col-xs-3 carhover" id="bus_booking"  onclick="busnav()" style="text-align: center;padding-top: 25px;padding-bottom: 12px;margin: 0px;border-right: 1px solid rgb(219,220,221);border-top-left-radius: 10px;">
                     <img class="img-fluid" src="{{asset('new-assets/img/Layer%201dr.png')}}">
                     <div class="divline"></div>
@@ -119,11 +147,11 @@
                     <div class="divline"></div>
                     <p ><strong>TRAIN TICKET&nbsp;</strong></p>
                 </div>
-                <div class="col-3 col-sm-3 col-xs-3 carhover" id="ferry_booking" onclick="cruisenav()" style="text-align: center;padding-top: 25px;padding-bottom: 12px;border-right: 1px solid rgb(219,220,221) ;">
+                {{--<div class="col-3 col-sm-3 col-xs-3 carhover" id="ferry_booking" onclick="cruisenav()" style="text-align: center;padding-top: 25px;padding-bottom: 12px;border-right: 1px solid rgb(219,220,221) ;">
                     <img class="img-fluid" src="{{asset('new-assets/img/10.svg')}}">
                     <div class="divline"></div>
                     <p ><strong>FERRY BOOKING</strong></p>
-                </div>
+                </div> --}}
                 <div class="col-3 col-sm-3 col-xs-3 carhover" id="flight_booking"  style="text-align: center;padding-top: 25px;padding-bottom: 12px;border-top-right-radius: 10px;">
                     <a href="https://www.travelstart.com.ng/?affId=218470&utm_source=affiliate&utm_medium=218470" target="_blank">
                         <img class="img-fluid" src="{{asset('new-assets/img/Layer%201.png')}}">
@@ -134,15 +162,21 @@
                 </div>
             </div>
             <div class="row divshows" style="background: #ffffff;border-radius: 10px;border-bottom-right-radius: 0px;border-bottom-left-radius: 0px;border-color: rgba(33,37,41,0);border-bottom: 1px solid rgb(227,228,230);">
+                <div class="col-3 col-sm-3 col-xs-3" style="text-align: center;padding-top: 15px;padding-bottom: 15px;" >
+                    <a href="{{url('car-hire')}}" target="_blank">
+                        <i class="fa fa-car" style="font-size: 36px;color: #e16803;"></i>
+                    </a>
+                </div>
                 <div class="col-3 col-sm-3 col-xs-3" onclick="busnav()" style="text-align: center;border-right: 1px solid rgb(219,220,221);padding-top: 15px;padding-bottom: 15px;">
                     <a><i class="fa fa-bus" style="font-size: 36px;color: #e16803;"></i></a>
                 </div>
                 <div class="col-3 col-sm-3 col-xs-3" style="text-align: center;border-right: 1px solid rgb(219,220,221);padding-top: 15px;padding-bottom: 15px;" onclick="trainnav()">
                     <a ><i class="fa fa-train" style="font-size: 36px;color: #e16803;"></i></a>
                 </div>
+                <!--
                 <div class="col-3 col-sm-3 col-xs-3" onclick="cruisenav()"  style="text-align: center;border-right: 1px solid rgb(219,220,221);padding-top: 15px;padding-bottom: 15px;">
                     <a ><i class="icon ion-android-boat" style="font-size: 36px;color: #e16803;"></i></a>
-                </div>
+                </div> -->
                 <div class="col-3 col-sm-3 col-xs-3" style="text-align: center;padding-top: 15px;padding-bottom: 15px;" >
                     <a href="https://www.travelstart.com.ng/?affId=218470&utm_source=affiliate&utm_medium=218470" target="_blank">
                         <i class="material-icons" style="font-size: 36px;color: #e16803;">flight</i>
@@ -357,9 +391,9 @@
         </div>
     </div>
 </div>
-<section id="vehicle_hire_cta" style="padding-top: 60px;">
+<section id="vehicle_hire_cta" style="padding-top: 60px; background-color: #e16803;">
     <div class="container-fluid">
-        <div class="row" style="background-color: #e16803;">
+        <div class="row" >
             <div class="col relative h-64 sm:h-80 lg:h-full lg:order-last ">
                 <img class=" inset-0 object-cover w-full h-full" src="{{asset("new-assets/img/car-hire/car-hire-show.png")}}"
                 alt="Vehicle for hire. Illustrative purposes only." />
@@ -382,42 +416,254 @@
         </div>
     </div>
 </section>
-<section style="padding-top: 60px;" id="about_us_section">
+<main>
+<!-- ======= About Section ======= -->
+<section id="about" class="about">
     <div class="container">
-        <div class="row">
-            <div class="col" style="padding-top: 12px;padding-bottom: 11px;">
-                <h1 style="text-align: center;"><strong>About US</strong>
 
-            </div>
+      <div class="row no-gutters">
+        <div class="content col-xl-5 d-flex align-items-stretch" data-aos="fade-right">
+          <div class="content">
+            <h3>What is Etransit?</h3>
+            <p>
+                Etransit Africa is a technology-focused transportation and related services company providing individuals
+                and corporate bodies with seamless and reliable luxury as well as day to day transport services powered by innovative technology.
+            </p>
+          </div>
         </div>
-        <div class="row">
-            <div class="col-sm-12 col-md-6">
-                <div class="row">
-                    <div class="col-4">
-                        <p style="margin-top: 20px;text-align: right;margin-bottom: 1px;padding-right: 24px;font-size: 14px;color: var(--bs-gray-600);">ABOUT</p>
-                        <p style="margin-top: 1px;text-align: right;font-size: 14px;color: var(--bs-gray-600);">E-TRANSIT</p>
-                        <p style="margin-top: 320px;text-align: right;margin-bottom: 1px;padding-right: 56px;font-size: 14px;"><strong>WHY</strong></p>
-                        <p style="margin-top: 1px;text-align: right;font-size: 14px;"><strong>CHOOSE US?</strong></p>
-                    </div>
-                    <div class="col-8" style="padding-right: 0px;padding-left: 0px;">
-                        <ul class="timeline" style="padding-left: 30px;margin-left: 9px;">
-                            <li class="tryluck"><a class="text-decoration-none" href="#">
-                                    <p class="text-decoration-none" style="font-size: 14px;color: var(--bs-gray-600);">Etransit Africa is an African-focused transpotation service company that exists to provide individuals and cooperate bodies with satisfactory transportation services on a timely and consistent basis</p>
-                                </a><a class="text-decoration-none" href="#">
-                                    <p class="text-decoration-none" style="color: var(--bs-gray-600);font-size: 14px;">The company stated operations in 2019 as an interstate transport company in Nigeria but projects to provide transportation services accross Africa. Our team of highly&nbsp; trained professionals are always working towards making each travel experience worth every penny&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</p>
-                                </a></li>
-                            <li style="margin-left: 0px;">SAVE MORE<a class="text-decoration-none" href="#">
-                                    <p class="text-decoration-none" style="color: var(--bs-gray-600);font-size: 14px;">Get the best affordable rates. Book your trips with us today<span class="d-block" style="font-size: 16px;color: rgb(0,3,6);margin-top: 10px;">RELIABLE</span><span>Don't get stuck with the rest, journey with best.</span><span class="d-block" style="font-size: 16px;color: rgb(0,2,3);margin-top: 10px;">GREAT FEEDBACK</span><span>Your safety and comfort is our numbr one priority</span></p>
-                                </a></li>
-                        </ul>
-                    </div>
-                </div>
+        <div class="col-xl-7 d-flex align-items-stretch" data-aos="fade-left">
+          <div class="icon-boxes d-flex flex-column justify-content-center">
+            <div class="row">
+              <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="100">
+                <i class="bx bx-receipt"></i>
+                <h4>Save More</h4>
+                <p>Enjoy value for your money. We have the best prices across transit, flights and vehicle hire bookings.</p>
+              </div>
+              <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="200">
+                <i class="bx bx-cube-alt"></i>
+                <h4>Reliable</h4>
+                <p>Say goodbye to delays and cancellations.
+                    With real-time tech-enabled monitoring and thousands of vehicles and routes at our diposal, we'll never leave you stranded.</p>
+              </div>
+              <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="300">
+                <i class="bx bx-images"></i>
+                <h4>Seamless</h4>
+                <p>Hire Vehicles,book bus,train or flight tickets, boat cruises and more with a few clicks via our web and mobile apps.</p>
+              </div>
+              <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="400">
+                <i class="bx bx-shield"></i>
+                <h4>Safe and Secure</h4>
+                <p>Our state of the art trip monitoring and tracking keep you safe when you use any of our services.</p>
+              </div>
             </div>
-            <div class="col-sm-12 col-md-6 d-md-flex justify-content-md-center align-items-md-center"><img class="img-fluid d-md-flex" src="new-assets/img/Rectangle%20653.svg"></div>
+          </div><!-- End .content-->
+        </div>
+      </div>
+
+    </div>
+  </section><!-- End About Section -->
+
+  <!-- ======= Clients Section =======
+  <section id="clients" class="clients">
+    <div class="container" data-aos="zoom-in">
+
+      <div class="row">
+
+        <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
+          <img src="{{asset('new-assets/img/client1%201.svg')}}" class="img-fluid" alt="">
+        </div>
+
+        <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
+          <img src="{{asset('new-assets/img/client2%201.svg')}}" class="img-fluid" alt="">
+        </div>
+
+        <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
+          <img src="{{asset('new-assets/img/client3%201.svg')}}" class="img-fluid" alt="">
+        </div>
+
+        <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
+          <img src="{{asset('new-assets/img/client4%201.svg')}}" class="img-fluid" alt="">
+        </div>
+
+      </div>
+
+    </div>
+  </section>End Clients Section -->
+
+  <!-- ======= Features Section ======= -->
+  <section id="features" class="features" data-aos="fade-up">
+    <div class="container">
+      <div class="row content">
+        <div class="col-md-5" data-aos="fade-right" data-aos-delay="100">
+          <img src="new-assets\img\assorted-vehicles.png" class="img-fluid h-100" alt="">
+        </div>
+        <div class="col-md-7 pt-4 feature" data-aos="fade-left" data-aos-delay="100">
+          <h3 class="feature-header">Your Reliable, Convenient Choice</h3>
+          <p class="fst-italic feature-description">
+              Access top notch transportation services with ease from the comfort your computer or mobile. Our excellent services such as vehicle hire, bus booking, flight booking, private jets, security
+          </p>
+          <ul>
+            <li><i class="bi bi-check-circle-fill"></i> More than 500 hubs and 3000 routes covered by our bus network</li>
+            <li><i class="bi bi-check-circle-fill"></i> Over 300 vehicles available for hire </li>
+            <li><i class="bi bi-check-circle-fill"></i> Train, Ferry Booking, Boat cruises, Flights and Private Jets also available.</li>
+          </ul>
+        </div>
+      </div>
+      <!--
+      <div class="row content">
+        <div class="col-md-5 order-1 order-md-2" data-aos="fade-left">
+          <img src="assets/img/features-4.png" class="img-fluid" alt="">
+        </div>
+        <div class="col-md-7 pt-5 order-2 order-md-1" data-aos="fade-right">
+          <h3>Quas et necessitatibus eaque impedit ipsum animi consequatur incidunt in</h3>
+          <p class="fst-italic">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+            magna aliqua.
+          </p>
+          <p>
+            Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+            velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+            culpa qui officia deserunt mollit anim id est laborum
+          </p>
+        </div>
+      </div>
+        -->
+
+    </div>
+    <div class="container-fluid alternate-row">
+        <div class="row content">
+            <div class="col-md-5 order-1 order-md-2" data-aos="fade-left">
+              <img src={{asset("new-assets\img\drivers.jpg")}} class="img-responsive" alt="">
+            </div>
+            <div class="col-md-7 pt-5 order-2 order-md-1 feature" data-aos="fade-right">
+              <h3 class="feature-header">Just Need A Driver for Your Car?</h3>
+              <p class="feature-description fst-italic">
+                With a few taps one of our professional-trained drivers could be at your doorstep.
+              </p>
+              <p>
+                We conduct extensive verification, background checks, screening and training to make sure our drivers are fit for the role.
+                Drivers can be hired hourly, daily, monthly or on special long term arrangements.
+              </p>
+            </div>
         </div>
     </div>
-</section>
-<section class="discounts" style="background: #1f0844;height: 200px;">
+    <div class="container">
+        <div class="row content">
+            <div class="col-md-5" data-aos="fade-right">
+              <img src="new-assets\img\safety icon.png" class="img-fluid" alt="">
+            </div>
+            <div class="col-md-7 pt-5 feature" data-aos="fade-left">
+              <h3 class="feature-header">Your Safety. Our Priority.</h3>
+              <p class="feature-description"> We go to great lengths to ensure our services are safe and secure. Our monitoring team is alert to any unforeseen circumstances and will contact the authorities at the siightest hint of concern. We deploy state-of-the art technology to guarantee you safety.</p>
+              <ul>
+                <li><i class="bi bi-check-circle-fill"></i> Share your location and trip progress with a trusted contact via our mobile apps.</li>
+                <li><i class="bi bi-check-circle-fill"></i> Active monitoring by our safety team.</li>
+                <li><i class="bi bi-check-circle-fill"></i> Travel insurance is standard on all services </li>
+              </ul>
+            </div>
+          </div>
+    </div>
+  </section><!-- End Features Section -->
+
+      <!-- ======= Services Section =======
+      <section id="services" class="services">
+        <div class="container" data-aos="fade-up">
+
+          <div class="section-title">
+            <h2>Services</h2>
+            <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="fade-up" data-aos-delay="100">
+              <div class="icon-box">
+                <div class="icon"><i class="bx bxl-dribbble"></i></div>
+                <h4 class="title"><a href="">Lorem Ipsum</a></h4>
+                <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="fade-up" data-aos-delay="200">
+              <div class="icon-box">
+                <div class="icon"><i class="bx bx-file"></i></div>
+                <h4 class="title"><a href="">Sed ut perspiciatis</a></h4>
+                <p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore</p>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="fade-up" data-aos-delay="300">
+              <div class="icon-box">
+                <div class="icon"><i class="bx bx-tachometer"></i></div>
+                <h4 class="title"><a href="">Magni Dolores</a></h4>
+                <p class="description">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia</p>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="fade-up" data-aos-delay="400">
+              <div class="icon-box">
+                <div class="icon"><i class="bx bx-layer"></i></div>
+                <h4 class="title"><a href="">Nemo Enim</a></h4>
+                <p class="description">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis</p>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </section> End Services Section -->
+    <!-- ======= Frequently Asked Questions Section ======= -->
+    <section id="faq" class="faq">
+        <div class="container" data-aos="fade-up">
+
+          <div class="section-title">
+            <h2>Frequently Asked Questions</h2>
+          </div>
+
+          <ul class="faq-list">
+
+            <li>
+              <div data-bs-toggle="collapse" class="collapsed question" href="#faq1">How do i get my tickets after booking a bus , train or ferry?<i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
+              <div id="faq1" class="collapse" data-bs-parent=".faq-list">
+                <p>
+                    You will receive a booking confirmation email containing your booking details i.e your booking reference number, seat number, vehicle plate number and fare price after completing a successful booking.A payment receipt will also be sent separately if you choose to pay online.
+                    You are to present your booking reference number at the departure terminal to receive your ticket(s) and be ushered to your seat. If you chose to pay later you are required to pay your fare at this point.
+                    </p>
+              </div>
+            </li>
+
+            <li>
+              <div data-bs-toggle="collapse" href="#faq2" class="collapsed question">At what time should i arrive at my departure terminal for a bus, train or ferry trip?<i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
+              <div id="faq2" class="collapse" data-bs-parent=".faq-list">
+                <p>
+                    You are expected to arrive at the departure terminal at least forty-five (45) minutes before the stated departure time.</p>
+              </div>
+            </li>
+
+            <li>
+              <div data-bs-toggle="collapse" href="#faq3" class="collapsed question">Who pays for fueling a rented vehicle? <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
+              <div id="faq3" class="collapse" data-bs-parent=".faq-list">
+                <p>
+                    We will provide you with a full tank when you receive your vehicle. Subsequent fuelling expenses will be covered by you?
+                </p>
+              </div>
+            </li>
+
+            <li>
+              <div data-bs-toggle="collapse" href="#faq4" class="collapsed question">Can I take a vehicle out of state?<i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
+              <div id="faq4" class="collapse" data-bs-parent=".faq-list">
+                <p>
+                    Yes you can, please note different rates apply depending on journey length. You will also need to provide suitable accommodation for your driver for overnight journeys.
+                </p>
+              </div>
+            </li>
+          </ul>
+          <a href="#" class="about-btn">Find Out More <i class="bx bx-chevron-right"></i></a>
+        </div>
+      </section><!-- End Frequently Asked Questions Section -->
+
+
+</main>
+<!--<section class="discounts" style="background: #1f0844;height: 200px;">
     <div class="container" style="height: 200px;padding-right: 0px;padding-left: 0px;margin-right: 0px;margin-left: 197px;">
         <div class="row" style="height: 200px;">
             <div class="col-3" style="height: 200px;">
@@ -433,7 +679,7 @@
             </div>
         </div>
     </div>
-</section>
+</section> -->>
 <section style="margin-top: 114px;">
     <div class="container">
         <div class="row">
@@ -499,7 +745,7 @@
                                                         <p style="color: rgb(25,25,25);font-size: 14px;">&nbsp; &nbsp; &nbsp;&nbsp;<i class="fa fa-question" style="color: rgb(217,135,60);"></i>&nbsp;{{Ucfirst($car->transmission)}} &nbsp;
                                                         <i class="la la-automobile" style="color: rgb(217,135,60);"></i>&nbsp;{{$car->capacity}} Adult
                                                         <i class="fa fa-asterisk" style="color: rgb(207,115,48);"></i>&nbsp;
-                                                        Fuctional
+                                                        Functional
                                                     </p>
                                                 </div>
                                             </div>
@@ -535,29 +781,6 @@
             <div class="col" style="text-align: center;"><img class="img-fluid" src="{{asset('new-assets/img/client2%201.png')}}"></div>
             <div class="col" style="text-align: center;"><img class="img-fluid" src="{{asset('new-assets/img/client3%201.svg')}}"></div>
             <div class="col" style="text-align: center;"><img class="img-fluid" src="{{asset('new-assets/img/client4%201.svg')}}"></div>
-        </div>
-    </div>
-
-
-    <!-- Trigger/Open The Modal -->
-{{--    <button id="myBtn">Open Modal</button>--}}
-
-    <!-- The Modal -->
-    <div id="myModal" class="modal">
-        <!-- Modal content -->
-        <div class="row">
-            <div class="col-md-3 col-xl-3 col-lg-3 col-xl-3 col-sm-3"></div>
-            <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
-
-                <div class="modal-content">
-                    <span class="close" onclick="closeModal()">&times;</span>
-                    <a href="{{env('APP_URl')}}/view-car-details/100 ">
-                       <img src="{{asset('images/jeep.jpg')}}" width="100%" height="100%" />
-                    </a>
-                </div>
-
-            </div>
-            <div class="col-md-3 col-xl-3 col-lg-3 col-xl-3 col-sm-3"></div>
         </div>
     </div>
 </section>

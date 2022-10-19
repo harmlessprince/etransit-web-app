@@ -7,7 +7,7 @@ use App\Models\Tenant;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Builder;
-
+use Illuminate\Support\Facades\Schema;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -32,6 +32,7 @@ class AppServiceProvider extends ServiceProvider
 //        if($this->app->environment('production')) {
 //            \URL::forceScheme('https');
 //        }
+        Schema::defaultStringLength(191);
         Builder::macro('whereLike', function(string $attribute, string $searchTerm) {
             return $this->orWhere($attribute, 'LIKE', "%{$searchTerm}%");
         });
