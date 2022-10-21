@@ -56,103 +56,12 @@
 </head>
 
 <body>
-    <section>
-        <div id="topnav" style="height: 49px;background: #343f5f;">
-            <div class="container">
-                <div class="row" style="height: 49px;">
-                    <div class="col-sm-auto col-md-7 col-lg-7 col-xl-7 col-xxl-7" id="topparagrahp" style="height: 49px;">
-                        <p id="faicon" style="text-align: center;color: var(--bs-white);margin-top: 9px;margin-left: 7px;width: 293.703px;margin-bottom: 22px;">
-                            <a href="https://web.facebook.com/etransitafrica" target="_blank">
-                                <i class="fa fa-facebook" style="color: rgb(255, 255, 255);padding-top: 5px;"></i>
-                            </a>
 
-                            <a href="https://twitter.com/etransitafrica" target="_blank">
-                                <i class="fa fa-twitter" style="color: rgb(255, 255, 255);padding-top: 5px;"></i>&nbsp;
-                            </a>
-                            <a href="https://www.instagram.com/etransitafrica/" target="_blank">
-                                <i class="fa fa-instagram justify-content-center align-items-center align-content-center" style="color: rgb(255, 255, 255);padding-top: 5px;"></i>
-                            </a>
-                            &nbsp; &nbsp; |&nbsp;
-                        hello@etransitafrica.com &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</p>
-                    </div>
-                    <div class="col-3 col-sm-auto" id="currency" style="text-align: center;">
-                        <div class="dropdown" id="reducebutton-1" style="padding-top: 6px;padding-bottom: 6px;">
-                            <button class="btn btn-light dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" id="reducebutton-2" type="button" style="color: rgb(255,255,255);background: rgb(52,63,95);border-style: none;border-color: rgba(255,255,255,0);font-size: 12px;">NGN&nbsp;&nbsp;</button>
-                            <!-- <div class="dropdown-menu dropdown-menu-start" id="reducebutton-3"><a class="dropdown-item" href="#">First Item</a><a class="dropdown-item" href="#">Second Item</a><a class="dropdown-item" href="#">Third Item</a></div> -->
-                        </div>
-                    </div>
-                    <div class="col-sm-auto" id="countrydiv" style="padding-right: 0px;padding-left: 5px;">
-                        <button class="btn btn-primary btn-lg text-start d-inline-flex" id="countrytext" type="button" style="margin: auto;width: 100%;color: var(--bs-white);margin-bottom: 2px;font-weight: 400;font-size: 14px;border-radius: 0px;background: rgba(247,247,247,0);border-style: none;border-color: rgba(255,255,255,0);padding-top: 12px;">
-                            <img src="{{asset('new-assets/img/uk.svg')}}" style="max-width: 24px;margin-right: 12px;">English</button>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
-        <section style="background: var(--bs-white);">
-            <nav class="navbar navbar-light navbar-expand-md">
-                <div class="container"><a class="navbar-brand" href="{{url('/')}}">
-                    <img src="{{asset('login-assets/img/logofull%201.png')}}"></a><button data-bs-toggle="offcanvas" data-bs-target="#offcanvas-1" class="navbar-toggler"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-                    <div class="collapse navbar-collapse" id="navcol-1" style="text-align: right;">
-                        <ul class="navbar-nav navbar-nav-scroll text-end d-md-flex ms-auto">
-                            <li class="nav-item"><a class="nav-link active" href="{{url('/')}}" style="color: #06044e;">Home</a></li>
-                            <li class="nav-item"><a class="nav-link" href="{{url('tour-packages')}}" style="color: #06044e;">Tour Packages</a></li>
-                            <li class="nav-item"><a class="nav-link" href="{{url('boat-cruise')}}" style="color: #06044e;">Boat Cruise</a></li>
-                            <li class="nav-item"><a class="nav-link" href="{{url('car-hire')}}" style="color: #06044e;">Hire A Vehicle</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#" style="color: #06044e;">Become A Partner<br></a></li>
-                            <li class="nav-item"><a class="nav-link" href="{{url('parcel')}}" style="color: #06044e;">Parcel</a></li>
-                            <li class="nav-item"><a class="nav-link" href="{{ ('contact')}}" style="color: #06044e;">Contact</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-        </section>
-        <section style="padding-right: 12px;padding-top: 0px;padding-left: 12px;">
-            <div class="container">
-                <div class="row" style="margin-top: 3%;margin-bottom: 0%;">
-                    <div class="col justify-content-center signup-image">
-                        <img src="{{ asset('login-assets/img/SignUp.jpg')}}" class="img-fluid">
-                    </div>
 
-                    <div class="col d-flex d-sm-flex d-md-flex justify-content-center justify-content-sm-center justify-content-md-center" style="background: rgba(255,255,255,0);">
-                        <div style="width: 350px;background: var(--bs-white);padding: 25px;padding-top: 30px;">
-                            <h5 style="text-align: center;">SIGN UP</h5>
-                            <p style="text-align: center;color: var(--bs-gray-500);">Already have an account?&nbsp;&nbsp;<a href="{{route('login')}}" style="color: rgb(231,113,15);">Log in</a>&nbsp;</p>
-                            <form action="{{ route('register') }}" method="POST">
-                                @csrf
-                                <div class="form-group">
-                                 <label class="form-label" style="margin-top: 0px;margin-bottom: 0px;">FULL NAME</label>
-                                 <input class="form-control form-control-sm @error('full_name')is-invalid @enderror" value="{{old('full_name')}}" type="text" name="full_name"
-                                 style="border-top-style: none;border-right-style: none;border-left-style: none;">
-                                 @error('full_name')
-                                 <span class="invalid-feedback" role="alert">
-                                     <strong>{{ $message }}</strong>
-                                 </span>
-                                 @enderror
-                             </div>
-                             <div class="form-group">
-                                 <label class="form-label" style="margin-top: 5px;margin-bottom: 0px;">ADDRESS</label>
-                                 <input class="form-control form-control-sm @error('address')is-invalid @enderror" name="address" value="{{old('address')}}" type="text" style="border-top-style: none;border-right-style: none;border-left-style: none;">
-                                 @error('address')
-                                 <span class="invalid-feedback" role="alert">
-                                     <strong>{{ $message }}</strong>
-                                 </span>
-                                 @enderror
-                             </div>
-                             <div class="form-group">
-                                <label class="form-label" style="margin-top: 5px;margin-bottom: 0px;">EMAIL</label>
-                                <input class="form-control form-control-sm @error('email') is-invalid @enderror" type="email" name="email" value="{{old('email')}}" style="border-top-style: none;border-right-style: none;border-left-style: none;">
-                                @error('email')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                              <label class="form-label" style="margin-top: 5px;margin-bottom: 0px;">PHONE NUMBER</label>
-                              <input class="form-control form-control-sm @error('phone_number') is-invalid @enderror" value="{{old('phone_number')}}" name="phone_number" type="text" style="border-top-style: none;border-right-style: none;border-left-style: none;">
-                              @error('phone_number')
-                              <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                             @enderror

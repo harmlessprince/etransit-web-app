@@ -7,7 +7,7 @@
             </div>
             <div class="col-sm-6 d-inline-flex d-md-flex align-items-md-center" id="divemail">
                 <form><input type="email" id="emailinput" placeholder="YOUR EMAIL" inputmode="email" style="background: rgb(238,238,238);border-top-style: none;border-right-style: none;border-left-style: none;height: 41px;width: 250px;"></form>
-                <button class="btn btn-primary" type="button" style="height: 31px;width: 113.5px;margin-left: -60px;padding-top: 3px;background: var(--bs-orange);border-top-style: none;">SUBSCRIBE</button>
+                <button class="btn btn-primary" type="button" style="haeight: 31px;width: 113.5px;margin-left: -60px;padding-top: 3px;background: var(--bs-orange);border-top-style: none;">SUBSCRIBE</button>
             </div>
         </div>
     </div>
@@ -21,7 +21,7 @@
                     <h5 class="d-md-flex" style="color: var(--bs-orange);margin-bottom: 26px;width: 181px;text-align: left;"><strong>NEED HELP?</strong></h5>
                     <ul class="list-unstyled">
                         <li class="text-start d-md-flex align-items-md-center" style="color: var(--bs-gray-100);text-align: center;"><strong>CALL US</strong></li>
-                        <li class="d-md-flex align-items-md-center" style="color: var(--bs-gray-100);font-size: 14px;">080 6430 4717</li>
+                        <li class="d-md-flex align-items-md-center" style="color: var(--bs-gray-100);font-size: 14px;">+234 704 327 4627</li>
                         <li class="text-start d-md-flex align-items-md-center" style="color: var(--bs-gray-100);text-align: center;margin-top: 37px;"><strong>EMAIL US</strong></li>
                         <li class="d-md-flex align-items-md-center" style="color: var(--bs-gray-100);font-size: 14px;">hello@etransitafrica.com</li>
                     </ul>
@@ -29,20 +29,19 @@
                 <div class="col flex-column">
                     <h5 style="color: var(--bs-orange);height: 26px;"><strong>COMPANY</strong></h5>
                     <ul class="list-unstyled">
-                        <li style="margin-bottom: 10px;"><a class="text-decoration-none" href="{{url('about')}}" style="color: var(--bs-gray-100) !important;">ABOUT US</a></li>
+
+                        <li style="margin-bottom: 10px;"><a class="text-decoration-none" href="#about" style="color: var(--bs-gray-100) !important;">ABOUT US</a></li>
+
                         <li style="margin-bottom: 10px;"><a class="text-decoration-none" href="#" style="color: var(--bs-gray-100) !important;">COMMUNITY BLOG</a></li>
                         <li style="margin-bottom: 10px;"><a class="text-decoration-none" href="#" style="margin-bottom: 10px;color: var(--bs-gray-100) !important;">REWARDS</a></li>
-                        <li style="margin-bottom: 10px;"><a class="text-decoration-none" href="#" style="color: var(--bs-gray-100) !important;">WORK WITH US</a></li>
-                        <li><a class="text-decoration-none" href="#" style="color: var(--bs-gray-100) !important;">MEET THE TEAM</a></li>
+                        <li style="margin-bottom: 10px;"><a class="text-decoration-none" href="{{url('partners')}}" style="color: var(--bs-gray-100) !important;">WORK WITH US</a></li>
+                        <li><a class="text-decoration-none" href="{{route('e-ticket.login-page')}}" style="color: var(--bs-gray-100) !important;">PARTNERS & E-TICKETING LOGIN</a></li>
                     </ul>
                 </div>
                 <div class="col">
                     <h5 style="color: var(--bs-orange);"><strong>SUPPORT</strong></h5>
                     <ul class="list-unstyled">
-                        <li style="margin-bottom: 10px;"><a class="text-decoration-none" href="{{url('login')}}" style="color: var(--bs-gray-100) !important;">ACCOUNT</a></li>
-                        <li style="margin-bottom: 10px;"><a class="text-decoration-none" href="#" style="color: var(--bs-gray-100) !important;">LEGAL</a></li>
-                        <li style="margin-bottom: 10px;"><a class="text-decoration-none" href="{{url('contact')}}" style="margin-bottom: 10px;color: var(--bs-gray-100)!important;">CONTACT</a></li>
-                        <li style="margin-bottom: 10px;"><a class="text-decoration-none" href="#" style="color: var(--bs-gray-100) !important;">AFFILIATE PROGRAM</a></li>
+
                         <li><a class="text-decoration-none" href="#" style="color: var(--bs-gray-100) !important;">PRIVACY POLICY</a></li>
                     </ul>
                 </div>
@@ -126,7 +125,7 @@
                     <button class="btn btn-primary" type="button" style="height: 30px;padding-top: 2px;background: #e7710f;">&nbsp; Log in&nbsp;&nbsp;</button>
                 </a>
                 <a href="{{url('/register')}}">
-                    <button class="btn btn-primary" type="button" style="height: 30px;padding-top: 2px;margin-left: 20px;border-color: var(--bs-orange);background:#e7710f;">&nbsp;Sign Up&nbsp;</button>
+
                 </a>
                 @endif
             </ul>
@@ -144,6 +143,15 @@
 <script src="{{asset('new-assets/js/Off-Canvas-Sidebar-Drawer-Navbar-1.js')}}"></script>
 <script src="https://unpkg.chttps://unpkg.com/@bootstrapstudio/bootstrap-better-nav/dist/bootstrap-better-nav.min.jsom/@bootstrapstudio/bootstrap-better-nav/dist/bootstrap-better-nav.min.js" type="module"></script>
 <script src="https://unpkg.com/@bootstrapstudio/bootstrap-better-nav/dist/bootstrap-better-nav.min.js" type="module"></script>
+<!-- Main Vendor JS Files -->
+<script src="{{asset("assets2/vendor/aos/aos.js")}}"></script>
+<script src="{{asset("assets2/vendor/glightbox/js/glightbox.min.js")}}"></script>
+<script src="{{asset("assets2/vendor/isotope-layout/isotope.pkgd.min.js")}}"></script>
+<script src="{{asset("assets2/vendor/swiper/swiper-bundle.min.js")}}"></script>
+
+
+<!-- Main JS File -->
+<script src="{{asset("assets2/js/main.js")}}"></script>
 {{--<script src="{{asset('new-assets/js/Ultimate-Testimonial-Slider-BS5.js')}}"></script>--}}
 <script type="text/javascript">
     $(document).ready(function(){

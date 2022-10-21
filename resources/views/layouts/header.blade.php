@@ -1,4 +1,4 @@
-<section>
+<header>
     <div id="topnav" style="height: 49px;background: #343f5f;">
         <div class="container">
             <div class="row" style="height: 49px;">
@@ -17,16 +17,7 @@
                             &nbsp; &nbsp; |&nbsp;
                         hello@etransitafrica.com &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</p>
                 </div>
-                <div class="col-3 col-sm-auto" id="currency" style="text-align: center;">
-                    <div class="" id="reducebutton-1" style="padding-top: 6px;padding-bottom: 6px;">
-                        <button class="btn btn-light" aria-expanded="false" data-bs-toggle="" id="reducebutton-2" type="button" style="color: rgb(255,255,255);background: rgb(52,63,95);border-style: none;border-color: rgba(255,255,255,0);font-size: 12px;">NGN&nbsp;&nbsp;</button>
-                        <!-- <div class="dropdown-menu dropdown-menu-start" id="reducebutton-3"><a class="dropdown-item" href="#">First Item</a><a class="dropdown-item" href="#">Second Item</a><a class="dropdown-item" href="#">Third Item</a></div> -->
-                    </div>
-                </div>
-                <div class="col-sm-auto" id="countrydiv" style="padding-right: 0px;padding-left: 5px;">
-                    <button class="btn btn-primary btn-lg text-start d-inline-flex" id="countrytext" type="button" style="margin: auto;width: 100%;color: var(--bs-white);margin-bottom: 2px;font-weight: 400;font-size: 14px;border-radius: 0px;background: rgba(247,247,247,0);border-style: none;border-color: rgba(255,255,255,0);padding-top: 12px;">
-                        <img src="{{asset('new-assets/img/uk.svg')}}" style="max-width: 24px;margin-right: 12px;">English</button>
-                </div>
+
 
                 <div class="col">
                     <div class="row ">
@@ -66,8 +57,8 @@
             </div>
         </div>
     </div>
-</section>
-<section>
+</header>
+<header>
     <nav class="navbar navbar-light navbar-expand-md">
         <div class="container"><a class="navbar-brand" href="{{url('/')}}"><img src="{{asset('new-assets/img/logofull%201.png')}}"></a><button data-bs-toggle="offcanvas" data-bs-target="#offcanvas-1" class="navbar-toggler"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navcol-1" style="text-align: right;">
@@ -84,10 +75,9 @@
                         <a href="{{url('car-hire')}}" class="nav-link"  style="color: #06044e;">Hire A vehicle</a>
                     </li>
                     <li class="nav-item"><a class="nav-link" href="{{url('partners')}}" style="color: #06044e;">Become A Partner</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{url('parcel')}}" style="color: #06044e;">Send Parcel</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{('contact')}}" style="color: #06044e;">Contact Us</a></li>
+
                 </ul>
             </div>
         </div>
     </nav>
-</section>
+</header>

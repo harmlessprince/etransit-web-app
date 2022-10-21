@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>{{env('APP_NAME')}} 's  E-Ticket </title>
+    <title>{{env('APP_NAME')}}- Partners and E-Ticketing Dashboard </title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -13,11 +13,11 @@
 
 </head>
 <body>
-<section class="ftco-section">
+<section class="ftco-section" style="background: url('{{ asset('/new-assets/img/footerimage.png')}}')">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-6 text-center mb-5">
-                <h2 class="heading-section">{{env('APP_NAME')}}'s  E-Ticket</h2>
+                <h2 class="heading-section" style="color: azure">Partners & e-Ticketing</h2>
             </div>
         </div>
         <div class="row justify-content-center">
