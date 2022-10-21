@@ -37,27 +37,7 @@
 
     }
 
-    .feature-header{
-        color: #e16803;
-        font-weight: bolder;
-    }
 
-    .feature-description{
-        color: #1f0844;
-        font-weight: bold;
-    }
-    .alternate-row{
-        background:#1f0844;
-        color: white;
-    }
-    .alternate-row .feature-description {
-        color: white;
-    }
-    .alternate-row > .feature-header {
-        color:#f1530f;
-    }
-
-    @@media only screen and (max-width: 700px){
         .mobile-copy{
             display: none;
         }
@@ -410,7 +390,7 @@
                 </p>
                 <a class="inline-flex items-center p-4 py-3 mt-8 text-white  rounded" style="background-color: #1f0844"
                     href="{{url('car-hire')}}">
-                    <span class="text-sm font-medium"> Book Now </span>
+                    <span class="text-sm font-medium"> Hire Now </span>
                 </a>
             </div>
         </div>
@@ -720,7 +700,7 @@
                                     </div>
                                     @endforeach
                                 </div>
-                            </div><img class="w-100 d-block d-none" src="http://placeholdit.imgix.net/~text?txtsize=42&amp;txt=Carousel+Image&amp;w=1400&amp;h=600" alt="Slide Image">
+                            </div><img class="w-100 d-block d-none" src="https://placeholdit.imgix.net/~text?txtsize=42&amp;txt=Carousel+Image&amp;w=1400&amp;h=600" alt="Slide Image">
                         </div>
                         <div class="carousel-item">
                             <div class="container">
@@ -755,7 +735,7 @@
 
                                 </div>
                             </div>
-                            <img class="w-100 d-block d-none" src="http://placeholdit.imgix.net/~text?txtsize=42&amp;txt=Carousel+Image&amp;w=1400&amp;h=600" alt="Slide Image">
+                            <img class="w-100 d-block d-none" src="https://placeholdit.imgix.net/~text?txtsize=42&amp;txt=Carousel+Image&amp;w=1400&amp;h=600" alt="Slide Image">
                         </div>
                     </div>
                     <div><a class="carousel-control-prev" href="#carousel-2" role="button" data-bs-slide="prev"

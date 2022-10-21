@@ -152,7 +152,6 @@
                 <div class="row">
                     <div class="col-md-12">
                         <h1 style="color: var(--bs-white);text-align: center;"><strong>Hire A Vehicle</strong></h1>
-                        {{--                    <p style="font-size: 20px;color: var(--bs-white);text-align: center;">Loren ipsum dolor</p>--}}
                     </div>
                 </div>
             </div>
@@ -265,8 +264,6 @@
                                     @endforeach
                                 </div>
                             </div>
-                            {{--                        <p style="font-weight: bold;text-align: left;margin-left: 20px;">SUV</p>--}}
-                        </div>
                         <div class="col" style="background: var(--bs-gray-200);border-right: 1px solid #bebebe;">
                             <div class="dropdown" style="border-style: none;background: rgba(238,238,238,0);">
                                 <button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="color: rgb(136,136,136);background: rgba(238,238,238,0);border-style: none;">Select class</button>
@@ -280,7 +277,6 @@
                                     @endforeach
                                 </div>
                             </div>
-                            {{--                        <p style="font-weight: bold;text-align: left;margin-left: 12px;">Executive</p>--}}
                         </div>
                         <div class="col" style="background: var(--bs-gray-200);">
 

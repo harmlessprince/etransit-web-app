@@ -109,6 +109,7 @@
         </div>
     </div>
 </section>
+
 <section style="background: var(--bs-white);">
     <nav class="navbar navbar-light navbar-expand-md">
         <div class="container"><a class="navbar-brand" href="{{url('/')}}">
