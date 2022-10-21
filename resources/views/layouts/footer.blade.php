@@ -29,7 +29,7 @@
                 <div class="col flex-column">
                     <h5 style="color: var(--bs-orange);height: 26px;"><strong>COMPANY</strong></h5>
                     <ul class="list-unstyled">
-                        <li style="margin-bottom: 10px;"><a class="text-decoration-none" href="#" style="color: var(--bs-gray-100) !important;">ABOUT US</a></li>
+                        <li style="margin-bottom: 10px;"><a class="text-decoration-none" href="{{url('about')}}" style="color: var(--bs-gray-100) !important;">ABOUT US</a></li>
                         <li style="margin-bottom: 10px;"><a class="text-decoration-none" href="#" style="color: var(--bs-gray-100) !important;">COMMUNITY BLOG</a></li>
                         <li style="margin-bottom: 10px;"><a class="text-decoration-none" href="#" style="margin-bottom: 10px;color: var(--bs-gray-100) !important;">REWARDS</a></li>
                         <li style="margin-bottom: 10px;"><a class="text-decoration-none" href="#" style="color: var(--bs-gray-100) !important;">WORK WITH US</a></li>
@@ -39,9 +39,9 @@
                 <div class="col">
                     <h5 style="color: var(--bs-orange);"><strong>SUPPORT</strong></h5>
                     <ul class="list-unstyled">
-                        <li style="margin-bottom: 10px;"><a class="text-decoration-none" href="#" style="color: var(--bs-gray-100) !important;">ACCOUNT</a></li>
+                        <li style="margin-bottom: 10px;"><a class="text-decoration-none" href="{{url('login')}}" style="color: var(--bs-gray-100) !important;">ACCOUNT</a></li>
                         <li style="margin-bottom: 10px;"><a class="text-decoration-none" href="#" style="color: var(--bs-gray-100) !important;">LEGAL</a></li>
-                        <li style="margin-bottom: 10px;"><a class="text-decoration-none" href="#" style="margin-bottom: 10px;color: var(--bs-gray-100)!important;">CONTACT</a></li>
+                        <li style="margin-bottom: 10px;"><a class="text-decoration-none" href="{{url('contact')}}" style="margin-bottom: 10px;color: var(--bs-gray-100)!important;">CONTACT</a></li>
                         <li style="margin-bottom: 10px;"><a class="text-decoration-none" href="#" style="color: var(--bs-gray-100) !important;">AFFILIATE PROGRAM</a></li>
                         <li><a class="text-decoration-none" href="#" style="color: var(--bs-gray-100) !important;">PRIVACY POLICY</a></li>
                     </ul>
@@ -82,12 +82,12 @@
             </div>
         </div>
     </footer>
-    <div class="whatsappBtn">
+    <!-- <div class="whatsappBtn">
 
         <a href="https://api.whatsapp.com/send?phone={!! config('WHATSAPP_NUMBER') !!}"  target="_blank">
             <img src="{{asset('images/whatsapp.png')}}" />
         </a>
-    </div>
+    </div> -->
 </section>
 <div class="offcanvas offcanvas-end" tabindex="-1" data-bs-scroll="true" data-bs-backdrop="false" id="offcanvas-1">
     <div class="offcanvas-header">
@@ -101,7 +101,7 @@
                     <a id="sidenav" class="text-decoration-none" href="{{url('/')}}" style="text-decoration: underline;font-weight: bold;">Home</a>
                 </li>
                 <li class="d-md-flex justify-content-md-start align-items-md-center" id="sidehover-2" style="height: 34px;">
-                    <a class="text-decoration-none" href="#about_us_section" style="font-weight: bold;">About Us</a>
+                    <a class="text-decoration-none" href="{{url('about')}}" style="font-weight: bold;">About Us</a>
                 </li>
                 <li class="d-md-flex justify-content-md-start align-items-md-center" id="sidehover-3" style="height: 34px;">
                     <a class="text-decoration-none" href="{{url('tour-packages')}}" style="font-weight: bold;">Tour Packages</a>
@@ -112,30 +112,31 @@
                 <li class="d-md-flex justify-content-md-start align-items-md-center text-decoration-none" id="sidehover-5" style="height: 34px;">
                     <a class="text-decoration-none" href="{{url('car-hire')}}"  style="font-weight: bold;">Hire A Vehicle</a>
                 </li>
-                <li id="sidehover-6" class="text-decoration-none" style="height: 34px;">
-                    <a class="text-decoration-none" href="#" style="font-weight: bold;">Hotel Booking</a>
-                </li>
                 <li class="d-md-flex justify-content-md-start align-items-md-center" id="sidehover-7" style="height: 34px;">
                     <a class="text-decoration-none" href="{{url('partners')}}" style="font-weight: bold;">Become A Partner</a>
                 </li>
                 <li class="d-md-flex justify-content-md-start align-items-md-center" id="sidehover-8" style="height: 34px;">
                     <a class="text-decoration-none" href="{{url('parcel')}}" style="font-weight: bold;">Send Parcel</a>
                 </li>
+                <li class="d-md-flex justify-content-md-start align-items-md-center" id="sidehover-8" style="height: 34px;">
+                    <a class="text-decoration-none" href="{{url('contact')}}" style="font-weight: bold;">Contact Us</a>
+                </li>
                 @if(!auth()->check())
                 <a href="{{url('/login')}}">
                     <button class="btn btn-primary" type="button" style="height: 30px;padding-top: 2px;background: #e7710f;">&nbsp; Log in&nbsp;&nbsp;</button>
                 </a>
                 <a href="{{url('/register')}}">
-                    <button class="btn btn-primary" type="button" style="height: 30px;padding-top: 2px;margin-left: 20px;border-color: var(--bs-orange);background: rgba(13,110,253,0);">&nbsp;Sign Up&nbsp;</button>
+                    <button class="btn btn-primary" type="button" style="height: 30px;padding-top: 2px;margin-left: 20px;border-color: var(--bs-orange);background:#e7710f;">&nbsp;Sign Up&nbsp;</button>
                 </a>
                 @endif
             </ul>
         </nav>
-        <p class="d-md-flex me-auto" id="faicon-1" style="text-align: left;color: #090b39;margin-top: 100px;margin-left: 0px;width: 293.703px;margin-bottom: 0px;background: var(--bs-body-bg);margin-right: auto;">&nbsp;<a href="#"><i class="fa fa-facebook d-md-flex align-items-md-end" style="padding-top: 5px;font-size: 25px;margin-right: 15px;"></i></a>
+        <p class="d-md-flex me-auto" id="faicon-1" style="text-align: left;color: #090b39; width: 293.703px;margin-bottom: 0px;background: var(--bs-body-bg);margin-right: auto;">&nbsp;<a href="#"><i class="fa fa-facebook d-md-flex align-items-md-end" style="padding-top: 5px;font-size: 25px;margin-right: 15px;"></i></a>
             <a href="#"><i class="fa fa-linkedin d-md-flex align-items-md-end" style="color: rgb(13,110,253);padding-top: 5px;font-size: 25px;margin-right: 15px;"></i></a>
             <a href="#"><i class="fa fa-google-plus d-md-flex justify-content-center align-items-center align-content-center" style="padding-top: 5px;font-size: 25px;"></i></a></p>
     </div>
 </div>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="{{asset('new-assets/owlcarousel/owl.carousel.min.js')}}"></script>
 <script src="{{asset('new-assets/bootstrap/js/bootstrap.min.js')}}"></script>

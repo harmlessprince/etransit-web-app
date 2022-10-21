@@ -13,7 +13,6 @@
             <div class="row">
                 <div class="col-md-12">
                     <h1 style="color: var(--bs-white);text-align: center;"><strong>Bus Booking&nbsp;</strong></h1>
-{{--                    <p style="font-size: 20px;color: var(--bs-white);text-align: center;">Loren ipsum dolor</p>--}}
                 </div>
             </div>
         </div>
@@ -38,11 +37,12 @@
                     </div>
                     <div class="col" style="text-align: right;">
                         <div class="dropdown" style="height: 24px;">
-                            <button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="color: #ed954d;background: var(--bs-white);border-color: rgba(249,249,249,0);height: 24px;padding-top: 1px;">Reset</button>
-                            <div class="dropdown-menu">
+                            <button class="btn btn-primary" aria-expanded="false" data-bs-toggle="" type="button" style="color: #ed954d;background: var(--bs-white);border-color: rgba(249,249,249,0);height: 24px;padding-top: 1px;">Reset</button>
+                           <!--  <div class="dropdown-menu">
                                 <a class="dropdown-item" href="#">First Item</a>
                                 <a class="dropdown-item" href="#">Second Item</a>
-                                <a class="dropdown-item" href="#">Third Item</a></div>
+                                <a class="dropdown-item" href="#">Third Item</a>
+                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -83,12 +83,12 @@
                     </div>
                     <div class="col" style="text-align: right;">
                         <div class="dropdown" style="height: 24px;">
-                            <button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="color: #ef954d;background: var(--bs-white);border-color: rgba(249,249,249,0);height: 24px;padding-top: 1px;">Reset</button>
-                            <div class="dropdown-menu">
+                            <button class="btn btn-primary" aria-expanded="false" data-bs-toggle="" type="button" style="color: #ef954d;background: var(--bs-white);border-color: rgba(249,249,249,0);height: 24px;padding-top: 1px;">Reset</button>
+                            <!-- <div class="dropdown-menu">
                                 <a class="dropdown-item" href="#">First Item</a>
                                 <a class="dropdown-item" href="#">Second Item</a>
                                 <a class="dropdown-item" href="#">Third Item</a>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -128,8 +128,8 @@
             <div class="col-sm-6 col-md-9" id="cruisedisplay" style="padding-left: 0px;padding-right: 0px;">
                 <div class="row" id="optionline-1" style="padding-left: 0px;padding-right: 0px;margin-top: 0px;margin-bottom: 15px;margin-left: 10px;margin-right: 0px;background: var(--bs-gray-200);">
                     <div class="col" style="background: var(--bs-gray-200);border-right: 1px none #bebebe;">
-                        <div class="dropdown" id="targetcenter-1" style="border-style: none;background: rgba(238,238,238,0);"><button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="color: rgb(136,136,136);background: rgba(238,238,238,0);border-style: none;">&nbsp;From</button>
-                            <div class="dropdown-menu"><a class="dropdown-item" href="#">First Item</a><a class="dropdown-item" href="#">Second Item</a><a class="dropdown-item" href="#">Third Item</a></div>
+                        <div class="dropdown" id="targetcenter-1" style="border-style: none;background: rgba(238,238,238,0);"><button class="btn btn-primary" aria-expanded="false" data-bs-toggle="" type="button" style="color: rgb(136,136,136);background: rgba(238,238,238,0);border-style: none;">&nbsp;From</button>
+                            <!-- <div class="dropdown-menu"><a class="dropdown-item" href="#">First Item</a><a class="dropdown-item" href="#">Second Item</a><a class="dropdown-item" href="#">Third Item</a></div> -->
                         </div>
                         <p style="font-weight: bold;text-align: center;">Lagos<span style="color: rgb(146,144,144);margin-left: 5px;">Ikeja</span></p>
                     </div>
@@ -140,30 +140,30 @@
                             </svg></p>
                     </div>
                     <div class="col" style="background: var(--bs-gray-200);border-right: 1px solid #bebebe;">
-                        <div class="dropdown" style="border-style: none;background: rgba(238,238,238,0);"><button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="color: rgb(136,136,136);background: rgba(238,238,238,0);border-style: none;">To&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</button>
-                            <div class="dropdown-menu"><a class="dropdown-item" href="#">First Item</a><a class="dropdown-item" href="#">Second Item</a><a class="dropdown-item" href="#">Third Item</a></div>
+                        <div class="dropdown" style="border-style: none;background: rgba(238,238,238,0);"><button class="btn btn-primary" aria-expanded="false" data-bs-toggle="" type="button" style="color: rgb(136,136,136);background: rgba(238,238,238,0);border-style: none;">To&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</button>
+                            <!-- <div class="dropdown-menu"><a class="dropdown-item" href="#">First Item</a><a class="dropdown-item" href="#">Second Item</a><a class="dropdown-item" href="#">Third Item</a></div> -->
                         </div>
                         <p style="font-weight: bold;text-align: center;">Abia<span style="color: rgb(146,144,144);margin-left: 5px;">Aba</span></p>
                     </div>
                     <div class="col" style="background: var(--bs-gray-200);">
-                        <div class="dropdown" style="border-style: none;background: rgba(238,238,238,0);"><button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="color: rgb(136,136,136);background: rgba(238,238,238,0);border-style: none;">Departure&nbsp;&nbsp;</button>
-                            <div class="dropdown-menu"><a class="dropdown-item" href="#">First Item</a><a class="dropdown-item" href="#">Second Item</a><a class="dropdown-item" href="#">Third Item</a></div>
+                        <div class="dropdown" style="border-style: none;background: rgba(238,238,238,0);"><button class="btn btn-primary" aria-expanded="false" data-bs-toggle="" type="button" style="color: rgb(136,136,136);background: rgba(238,238,238,0);border-style: none;">Departure&nbsp;&nbsp;</button>
+                            <!-- <div class="dropdown-menu"><a class="dropdown-item" href="#">First Item</a><a class="dropdown-item" href="#">Second Item</a><a class="dropdown-item" href="#">Third Item</a></div> -->
                         </div>
-                        <p style="font-weight: bold;text-align: left;margin-bottom: 0px;">&nbsp; &nbsp;June 28, 2021</p>
-                        <p style="color: rgb(121,122,122);">&nbsp; &nbsp;Tuesday</p>
+                        <p style="font-weight: bold;text-align:left; margin-bottom: 0px;">&nbsp; &nbsp;October</p>
+                        <p style="color: rgb(121,122,122); text-align:left;">&nbsp; &nbsp;Tuesday</p>
                     </div>
                     <div class="col" style="background: var(--bs-gray-200);">
-                        <div class="dropdown" id="targetcenter-3" style="border-style: none;background: rgba(238,238,238,0);text-align: center;"><button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="color: rgb(136,136,136);background: rgba(238,238,238,0);border-style: none;">Return&nbsp;&nbsp;</button>
-                            <div class="dropdown-menu"><a class="dropdown-item" href="#">First Item</a><a class="dropdown-item" href="#">Second Item</a><a class="dropdown-item" href="#">Third Item</a></div>
+                        <div class="" id="targetcenter-3" style="border-style: none;background: rgba(238,238,238,0);text-align: center;"><button class="btn btn-primary" aria-expanded="false" data-bs-toggle="" type="button" style="color: rgb(136,136,136);background: rgba(238,238,238,0);border-style: none;">Return&nbsp;&nbsp;</button>
+                            <!-- <div class="dropdown-menu"><a class="dropdown-item" href="#">First Item</a><a class="dropdown-item" href="#">Second Item</a><a class="dropdown-item" href="#">Third Item</a></div> -->
                         </div>
                         <p style="font-weight: bold;text-align: center;margin-bottom: 0px;">1</p>
                     </div>
                     <div class="col mx-auto" style="background: var(--bs-gray-200);">
-                        <div class="dropdown" style="border-style: none;background: rgba(238,238,238,0);"><button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="color: rgb(136,136,136);background: rgba(238,238,238,0);border-style: none;">Passenger and class</button>
-                            <div class="dropdown-menu"><a class="dropdown-item" href="#">First Item</a><a class="dropdown-item" href="#">Second Item</a><a class="dropdown-item" href="#">Third Item</a></div>
+                        <div class="" style="border-style: none;background: rgba(238,238,238,0);"><button class="btn btn-primary" aria-expanded="false" data-bs-toggle="" type="button" style="color: rgb(136,136,136);background: rgba(238,238,238,0);border-style: none;">Passenger and class</button>
+                            <!-- <div class="dropdown-menu"><a class="dropdown-item" href="#">First Item</a><a class="dropdown-item" href="#">Second Item</a><a class="dropdown-item" href="#">Third Item</a></div> -->
                         </div>
-                        <p style="font-weight: bold;text-align: left;margin-bottom: 0px;">&nbsp; &nbsp;1 Adult</p>
-                        <p style="color: rgb(121,122,122);">&nbsp; &nbsp;Business class</p>
+                        <p style="font-weight: bold;text-align: center;margin-bottom: 0px;">&nbsp; &nbsp;1 Adult</p>
+                        <p style="color: rgb(121,122,122); text-align: center;">&nbsp; &nbsp;Business class</p>
                     </div>
                 </div>
 
