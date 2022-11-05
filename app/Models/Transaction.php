@@ -20,6 +20,7 @@ class Transaction extends Model
     {
         return $this->belongsTo(User::class);
     }
+
     public function onsite_customer(){
         return $this->belongsTo(OnsiteCustomer::class,'onsite_customer_id', 'id');
     }
@@ -37,6 +38,11 @@ class Transaction extends Model
     public function tenant()
     {
         return $this->belongsTo(Tenant::class);
+    }
+
+    public function tracker()
+    {
+        return $this->hasMany(Tracker::class);
     }
 
 }
