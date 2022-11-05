@@ -32,6 +32,7 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
 Route::group(['prefix' => 'v1'], function() {
 
     Route::post('register', [AuthUser::class , 'register']);
@@ -147,6 +148,10 @@ Route::group(['prefix' => 'v1'], function() {
         //fetch user transaction
         Route::get('my-transactions' , [Transaction::class ,'userTransactions']);
 
+
+        //fetch user transaction
+        Route::get('next-of-kin/{tracking_id}' , [Transaction::class ,'nextOfKin']);
+
         //track user
         Route::get('prefill_trustee_info/{transaction_id}',[TrackingConsole::class , 'prefillTrusteeInfo']);
 
@@ -163,15 +168,7 @@ Route::group(['prefix' => 'v1'], function() {
         Route::get('tracking/{tracker_id}/record/{limit?}',[TrackingConsole::class , 'TrackingRecord']);
         Route::get('fetch-extra-tracking-info/{transaction_id}',[TrackingConsole::class , 'fetchExtraTrackingInfo']);
 
-
-
     });
-
-
-
-
-
-
 
     Route::get('search/bus', function(Illuminate\Http\Request $request){
         $keyword = $request->input('search_bus');

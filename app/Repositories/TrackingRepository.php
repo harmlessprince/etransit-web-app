@@ -141,6 +141,8 @@ class TrackingRepository implements TrackingInterface
         $recordTracking->longitude  = $locationDetails['longitude'];
         $recordTracking->latitude   = $locationDetails['latitude'];
         $recordTracking->location   = $locationDetails['location'];
+        $recordTracking->destination_longitude   = $locationDetails['destination_longitude'];
+        $recordTracking->destination_latitude   = $locationDetails['destination_latitude'];
         $recordTracking->notification_triger   = 'active';
         $recordTracking->save();
         DB::commit();
@@ -152,10 +154,16 @@ class TrackingRepository implements TrackingInterface
     {
         $tracker = Tracker::where('id',$tracker_id)->where('status','active')->first();
 
+
         if($tracker)
         {
+            $data = [
+                'start_time' => $tracker->created_at,
+                'end_time' => $tracker->updated_at,
+                'purpose_of_movement' => $tracker->purpose_of_movement
+            ];
             $tracker->update(['status' => 'inactive']);
-            $response = ['success' => true , 'message' =>  'You have ended this tracking session successfully'];
+            $response = ['success' => true , 'message' =>  'You have ended this tracking session successfully', 'data' => $data];
         }else{
             $response = ['success' => true , 'message' =>  'An issue occurred while trying to end your tracking session , please try again'];
         }

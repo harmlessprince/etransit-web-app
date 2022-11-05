@@ -46,8 +46,7 @@ class TrackingConsole extends Controller
 
     public function initiateTracking(Request $request)
     {
-      $data =  $this->validateRequest($request);;
-
+      $data =  $this->validateRequest($request);
       $startTracking =  $this->trackingRepository->initiateTracking(auth()->user()->id ,$data);
 
       if(!$startTracking['success'])
@@ -78,11 +77,11 @@ class TrackingConsole extends Controller
 
     public function endActiveTrackingSession($tracker_id)
     {
-        $endActiveTracking  =  $this->trackingRepository-> endActiveTrackingSession($tracker_id);
+        $endActiveTracking  =  $this->trackingRepository->endActiveTrackingSession($tracker_id);
 
         if($endActiveTracking)
         {
-            return response()->json(['success' => true , 'message' =>  $endActiveTracking['message']]);
+            return response()->json(['success' => true , 'message' =>  $endActiveTracking['message'], 'data' => $endActiveTracking['data'] ?? null]);
         }else{
             return response()->json(['success' => true , 'message' =>  $endActiveTracking['message']]);
         }
@@ -93,11 +92,16 @@ class TrackingConsole extends Controller
     {
         $user = auth()->user();
 
-        $findPreviousTrackingSession = Tracker::where('user_id',$user->id)
-                                                ->where('status','inactive')
-                                                ->simplepaginate($limit);
+        if($user){
+            $findPreviousTrackingSession = Tracker::where('user_id',$user->id)
+                ->where('status','inactive')
+                ->orderBy('created_at', 'DESC')
+                ->simplepaginate($limit);
 
-        return response()->json(['success' => true , 'data' => compact('findPreviousTrackingSession')]);
+            return response()->json(['success' => true , 'data' => compact('findPreviousTrackingSession')]);
+        }
+
+        return response()->json(['success' => false , 'message' => 'User not found']);
     }
 
     public function activeSessionTracking($limit=20)
@@ -106,6 +110,8 @@ class TrackingConsole extends Controller
 
         $findActiveTrackingSession = Tracker::where('user_id',$user->id)
             ->where('status','active')
+            ->orderBy('created_at', 'DESC')
+            ->with('tracking_details')
             ->simplepaginate($limit);
 
         return response()->json(['success' => true , 'data' => compact('findActiveTrackingSession')]);
@@ -187,7 +193,9 @@ class TrackingConsole extends Controller
       $data =  $request->validate([
                     'longitude' => 'required',
                     'latitude' => 'required',
-                    'location' => 'required'
+                    'location' => 'required',
+                    'destination_longitude' => 'required',
+                    'destination_latitude' => 'required',
               ]);
 
       return $data;
