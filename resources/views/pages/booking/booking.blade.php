@@ -131,7 +131,7 @@
                         <div class="dropdown" id="targetcenter-1" style="border-style: none;background: rgba(238,238,238,0);"><button class="btn btn-primary" aria-expanded="false" data-bs-toggle="" type="button" style="color: rgb(136,136,136);background: rgba(238,238,238,0);border-style: none;">&nbsp;From</button>
                             <!-- <div class="dropdown-menu"><a class="dropdown-item" href="#">First Item</a><a class="dropdown-item" href="#">Second Item</a><a class="dropdown-item" href="#">Third Item</a></div> -->
                         </div>
-                        <p style="font-weight: bold;text-align: center;">Lagos<span style="color: rgb(146,144,144);margin-left: 5px;">Ikeja</span></p>
+                        <p style="font-weight: bold;text-align: center;">{{ $pickUp->location }}</p>
                     </div>
                     <div class="col d-lg-flex justify-content-lg-center align-items-lg-center" style="background: var(--bs-gray-200);">
                         <p style="color: rgb(121,122,122);text-align: center;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" style="font-size: 33px;">
@@ -143,12 +143,15 @@
                         <div class="dropdown" style="border-style: none;background: rgba(238,238,238,0);"><button class="btn btn-primary" aria-expanded="false" data-bs-toggle="" type="button" style="color: rgb(136,136,136);background: rgba(238,238,238,0);border-style: none;">To&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</button>
                             <!-- <div class="dropdown-menu"><a class="dropdown-item" href="#">First Item</a><a class="dropdown-item" href="#">Second Item</a><a class="dropdown-item" href="#">Third Item</a></div> -->
                         </div>
-                        <p style="font-weight: bold;text-align: center;">Abia<span style="color: rgb(146,144,144);margin-left: 5px;">Aba</span></p>
+                        <p style="font-weight: bold;text-align: center;">{{ $destination->location }}</span></p>
                     </div>
                     <div class="col" style="background: var(--bs-gray-200);">
                         <div class="dropdown" style="border-style: none;background: rgba(238,238,238,0);"><button class="btn btn-primary" aria-expanded="false" data-bs-toggle="" type="button" style="color: rgb(136,136,136);background: rgba(238,238,238,0);border-style: none;">Departure&nbsp;&nbsp;</button>
                             <!-- <div class="dropdown-menu"><a class="dropdown-item" href="#">First Item</a><a class="dropdown-item" href="#">Second Item</a><a class="dropdown-item" href="#">Third Item</a></div> -->
                         </div>
+                        @php
+
+                        @endphp
                         <p style="font-weight: bold;text-align:left; margin-bottom: 0px;">&nbsp; &nbsp;October</p>
                         <p style="color: rgb(121,122,122); text-align:left;">&nbsp; &nbsp;Tuesday</p>
                     </div>

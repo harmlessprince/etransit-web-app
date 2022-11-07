@@ -194,8 +194,8 @@ class TrackingConsole extends Controller
                     'longitude' => 'required',
                     'latitude' => 'required',
                     'location' => 'required',
-                    'destination_longitude' => 'required',
-                    'destination_latitude' => 'required',
+                    'destination_longitude' => 'nullable',
+                    'destination_latitude' => 'nullable',
               ]);
 
       return $data;

@@ -77,8 +77,8 @@ Route::post('/bus/filter-bookings/{operator?}/{bus_type?}' , [Booking::class , '
 
 Route::get('filter-cars/{seat_capacity?}/{class_type?}',[Car::class , 'carList']);
 
-Route::get('/about', [PagesController::class, 'about']);
-Route::get('/contact', [PagesController::class, 'contact']);
+Route::get('about', [PagesController::class, 'about'])->name('about-us');
+Route::get('contact', [PagesController::class, 'contact']);
 
 //Auth::routes();
 
@@ -134,15 +134,16 @@ Route::get('tracker/{tracker_id}/user/{transaction_id?}',[\App\Http\Controllers\
 Route::get('check-pdf' , function(){
    return view('pdf.boat-cruise');
 });
+Route::get('view-car-details/{car_id}' , [Car::class , 'carDetails']);
 
 Route::group(['middleware' => ['auth','prevent-back-history','verified']], function() {
 
 
-    Route::get('profile/{user_id}',[UserProfile::class ,'myProfile']);
+    Route::get('profile/{user_id}',[UserProfile::class ,'myProfile'])->name('myProfile');
 
     Route::put('update-user-profile/{user_id}' ,[UserProfile::class ,'updateUserProfile']);
     Route::get('get-transactions' , [UserProfile::class , 'getMyTransactions']);
-    Route::get('view-user-transaction/{transaction_id}/' , [UserProfile::class , 'myTransactions']);
+    Route::get('view-user-transaction/{transaction_id}/' , [UserProfile::class , 'myTransactions'])->name('view-user-transaction');
 
     Route::get('/seat-picker/{schedule_id}/{trip_type}', [Booking::class, 'seatSelector']);
 
@@ -162,7 +163,7 @@ Route::group(['middleware' => ['auth','prevent-back-history','verified']], funct
     Route::get('/pick-date' ,[Car::class ,'pickDate']);
     Route::post('/plan/{plan_id}',[Car::class , 'proceedToPaymentPlan']);
     Route::get('car-hire/cash/payment/{history_id}/method',[Car::class , 'makePayment']);
-    Route::get('view-car-details/{car_id}' , [Car::class , 'carDetails']);
+
 
 
     //select payment plan for boat cruise

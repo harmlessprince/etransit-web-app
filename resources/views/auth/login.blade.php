@@ -113,7 +113,7 @@
             <div class="col d-flex d-sm-flex d-md-flex justify-content-center justify-content-sm-center justify-content-md-center" style="background: rgba(255,255,255,0);">
                 <div style="width: 350px;background: var(--bs-white);padding: 25px;padding-top: 30px;">
                     <h5 style="text-align: center;">LOG IN</h5>
-                    <p style="text-align: center;color: var(--bs-gray-500);">Dont have an account?&nbsp;&nbsp;<a href="{{route('register')}}" style="color: rgb(231,113,15);">Sign Up</a>&nbsp;</p>
+                    <p style="text-align: center;color: var(--bs-gray-500);">Don't have an account?&nbsp;&nbsp;<a href="{{route('register')}}" style="color: rgb(231,113,15);">Sign Up</a>&nbsp;</p>
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
                         <div class="form-group">
