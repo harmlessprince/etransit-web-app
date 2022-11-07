@@ -47,13 +47,13 @@
                 <hr>
                 <div class="row" style="margin-bottom: 11px;">
                     <div class="col">
-                        <p style="margin-top: 4px;margin-bottom: 0px;font-size: 13px;"><strong>Tour Type</strong></p>
+                        <p style="margin-top: 4px;margin-bottom: 0px;font-size: 13px;cursor: pointer;" onclick="collapse('tour-types')"><strong>Tour Type</strong></p>
                     </div>
                 </div>
                 <hr>
                 <form method="GET" action="{{url('tour-packages')}}">
                     @csrf
-                <div class="table-responsive">
+                <div class="table-responsive d-none d-md-block" id="tour-types">
                     <table class="table table-borderless">
                         <tbody>
                         @foreach($tour_types as $type)
@@ -71,11 +71,11 @@
                 </div>
                 <div class="row" style="margin-bottom: 11px;">
                     <div class="col">
-                        <p style="margin-top: 4px;margin-bottom: 0px;font-size: 13px;"><strong>Tour Dates</strong></p>
+                        <p style="margin-top: 4px;margin-bottom: 0px;font-size: 13px;cursor: pointer;" onclick="collapse('tour-dates')"><strong>Tour Dates</strong></p>
                     </div>
                 </div>
                 <hr>
-                <div class="table-responsive">
+                <div class="table-responsive d-none d-md-block" id="tour-dates">
                     <table class="table table-borderless">
                         <tbody>
                         @foreach($tours as $tour)
@@ -90,10 +90,11 @@
                         @endforeach
                         </tbody>
                     </table>
+
+                </div>
                     <div class="col" x-data="{ show: false }">
                         <button class="btn btn-primary" type="submit" style="font-size: 10px;background: rgba(13,110,253,0);color: var(--bs-gray-900);border-color: #010000;border-right-color: var(--bs-gray-900);" @click="showSomet()">Filter</button>
                     </div>
-                </div>
                 </form>
             </div>
             <div class="col-sm-6 col-md-9" id="cruisedisplay">
@@ -164,4 +165,16 @@
         }
     });
 </script>
+    <script>
+        function collapse(id){
+
+            const attr = $('#'+id).hasClass('d-none');
+
+            if (attr === false) {
+                $('#'+id).addClass('d-none');
+            }else{
+                $('#'+id).removeClass('d-none');
+            }
+        }
+    </script>
 @endsection

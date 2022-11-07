@@ -150,7 +150,9 @@ Route::group(['prefix' => 'v1'], function() {
 
 
         //fetch user transaction
-        Route::get('next-of-kin/{tracking_id}' , [Transaction::class ,'nextOfKin']);
+        Route::get('next-of-kin' , [Transaction::class ,'nextOfKin']);
+
+        Route::get('tracker/{tracking_id}' , [Transaction::class ,'getTracker']);
 
         //track user
         Route::get('prefill_trustee_info/{transaction_id}',[TrackingConsole::class , 'prefillTrusteeInfo']);

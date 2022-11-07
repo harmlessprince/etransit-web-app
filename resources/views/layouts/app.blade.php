@@ -56,6 +56,10 @@
 
     <!-- Template Main CSS File -->
     <link href="{{asset("assets2/css/style.css")}}" rel="stylesheet">
+    <!-- Add the slick-theme.css if you want default styling -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('new-assets/css/slick.css') }}"/>
+    <!-- Add the slick-theme.css if you want default styling -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('new-assets/css/slick-theme.css') }}"/>
 
 
 
@@ -143,6 +147,17 @@
     };
     var x = document.getElementsByTagName('script')[0];
     x.parentNode.insertBefore(s, x);
+</script>
+    <script type="text/javascript" src="{{ asset('new-assets/js/slick.min.js') }}"></script>
+<script>
+    function openPaymentHistory(){
+    var win = window.open("{{ route('myProfile', auth()->user()->id) }}", "");
+    win.showPayment();
+    window.opener.child_ready(win)
+        {
+        win.showPayment();
+    };
+    }
 </script>
 </body>
 </html>

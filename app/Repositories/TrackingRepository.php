@@ -141,8 +141,8 @@ class TrackingRepository implements TrackingInterface
         $recordTracking->longitude  = $locationDetails['longitude'];
         $recordTracking->latitude   = $locationDetails['latitude'];
         $recordTracking->location   = $locationDetails['location'];
-        $recordTracking->destination_longitude   = $locationDetails['destination_longitude'];
-        $recordTracking->destination_latitude   = $locationDetails['destination_latitude'];
+        $recordTracking->destination_longitude   = $locationDetails['destination_longitude'] ?? null;
+        $recordTracking->destination_latitude   = $locationDetails['destination_latitude'] ?? null;
         $recordTracking->notification_triger   = 'active';
         $recordTracking->save();
         DB::commit();

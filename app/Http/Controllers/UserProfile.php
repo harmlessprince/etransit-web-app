@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Service;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UserProfile extends Controller
@@ -19,9 +20,11 @@ class UserProfile extends Controller
     public function getMyTransactions(Request $request)
     {
         $results = \App\Models\Transaction::where('user_id', auth()->user()->id)->orderBy('id')->paginate(3);
+
         $transactions = '';
         if ($request->ajax()) {
             foreach ($results as $result) {
+                $route = route('view-user-transaction', $result->service_id);
                 $transactions.= '
                     <div class="col-md-4" style="padding-top: 5px;padding-left: 40px;padding-right: 40px;padding-bottom: 5px;">
                     <div class="row" style="border-radius: 10px;box-shadow: 1px 0px 10px rgb(231,232,232);padding: 15px;">
@@ -57,7 +60,7 @@ class UserProfile extends Controller
                                 <div class="col-6 d-md-flex justify-content-md-end" style="padding-left: 0px;border-bottom: 1px dashed rgb(208,208,208) ;">
                                     <p class="text-end" style="color: #163a5e;margin-top: 5px;margin-bottom: 5px;text-align: right;">
 
-                                        <a href="{{url(\'view-user-transaction/\'.$result->id)}}"
+                                        <a href='.$route.'
                                            class="view_transactions">
                                            View Details
                                         </a>
@@ -82,8 +85,9 @@ class UserProfile extends Controller
 
     }
 
-    public function myTransactions($user_id , $service_id)
+    public function myTransactions($service_id)
     {
+        $user_id = Auth::user()->id;
         $transactions = \App\Models\Transaction::where('service_id', $service_id)
                                     ->with('schedule','carhistory')->where('user_id',$user_id)
                                     ->orderby('created_at','desc')->simplePaginate(25);

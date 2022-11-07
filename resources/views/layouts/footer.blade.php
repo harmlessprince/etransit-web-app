@@ -21,16 +21,20 @@
                     <h5 class="d-md-flex" style="color: var(--bs-orange);margin-bottom: 26px;width: 181px;text-align: left;"><strong>NEED HELP?</strong></h5>
                     <ul class="list-unstyled">
                         <li class="text-start d-md-flex align-items-md-center" style="color: var(--bs-gray-100);text-align: center;"><strong>CALL US</strong></li>
-                        <li class="d-md-flex align-items-md-center" style="color: var(--bs-gray-100);font-size: 14px;">+234 704 327 4627</li>
+                        <li class="d-md-flex align-items-md-center" style="color: var(--bs-gray-100);font-size: 14px;">
+                            <a href="tel: +234 704 327 4627">
+                                +234 704 327 4627
+                            </a>
+                        </li>
                         <li class="text-start d-md-flex align-items-md-center" style="color: var(--bs-gray-100);text-align: center;margin-top: 37px;"><strong>EMAIL US</strong></li>
-                        <li class="d-md-flex align-items-md-center" style="color: var(--bs-gray-100);font-size: 14px;">hello@etransitafrica.com</li>
+                        <li class="d-md-flex align-items-md-center" style="color: var(--bs-gray-100);font-size: 14px;"><a href="mailto:hello@etransitafrica.com">hello@etransitafrica.com</a></li>
                     </ul>
                 </div>
                 <div class="col flex-column">
                     <h5 style="color: var(--bs-orange);height: 26px;"><strong>COMPANY</strong></h5>
                     <ul class="list-unstyled">
 
-                        <li style="margin-bottom: 10px;"><a class="text-decoration-none" href="#about" style="color: var(--bs-gray-100) !important;">ABOUT US</a></li>
+                        <li style="margin-bottom: 10px;"><a class="text-decoration-none" href="{{ route('about-us') }}" style="color: var(--bs-gray-100) !important;">ABOUT US</a></li>
 
                         <li style="margin-bottom: 10px;"><a class="text-decoration-none" href="#" style="color: var(--bs-gray-100) !important;">COMMUNITY BLOG</a></li>
                         <li style="margin-bottom: 10px;"><a class="text-decoration-none" href="#" style="margin-bottom: 10px;color: var(--bs-gray-100) !important;">REWARDS</a></li>

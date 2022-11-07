@@ -32,6 +32,8 @@ class Booking extends Controller
 
 
 
+
+
         $request->return_date != null ? $request->session()->put('return_date', $request->return_date) : $returnDate = null;
 
         //ensure the query does not return a data if the date the user picked has passed
@@ -59,6 +61,7 @@ class Booking extends Controller
                 ->where('destination_id',$request->destination_to)
                 ->where('seats_available' , '>=', $request->number_of_passengers)
                 ->with('terminal','bus','destination','pickup','service','tenant')->get();
+
 
         }elseif($request->trip_type ==  2)
         {
@@ -107,9 +110,11 @@ class Booking extends Controller
             return back();
         }
 
+
         //fetch destination and pick up
         $pickUp = \App\Models\Destination::where('id',$data['destination_from'])->select('location')->first();
         $destination = \App\Models\Destination::where('id',$data['destination_to'])->select('location')->first();
+
 
         //find the type of trip
          $tripType = \App\Models\TripType::where('id',$data['trip_type'])->select('type','id')->first();
@@ -119,7 +124,6 @@ class Booking extends Controller
          $service = \App\Models\Service::where('id',$data['service_id'])->select('name')->first();
 
          $tripTypeId = $data['trip_type'];
-
 
         return view('pages.booking.booking', compact('checkSchedule','data' ,'tripType',
             'service' ,'destination' ,'pickUp','tripTypeId','operators','busTypes'));
