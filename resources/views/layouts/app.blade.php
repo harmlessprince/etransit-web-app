@@ -149,6 +149,7 @@
     x.parentNode.insertBefore(s, x);
 </script>
     <script type="text/javascript" src="{{ asset('new-assets/js/slick.min.js') }}"></script>
+    @if(Auth::check())
 <script>
     function openPaymentHistory(){
     var win = window.open("{{ route('myProfile', auth()->user()->id) }}", "");
@@ -159,5 +160,6 @@
     };
     }
 </script>
+        @endif
 </body>
 </html>
