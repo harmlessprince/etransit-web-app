@@ -168,6 +168,7 @@
                        <h5><b>Purpose Of Movement</b></h5>
                        <p>{{$data['purposeOfMovement']}}</p>
                    </div>
+
                </div>
             </div>
         @endif
@@ -194,9 +195,9 @@
 
 <script type="text/javascript">
     function initMap() {
-        const myLatLng = { lat: 9.0820, lng: 8.6753 };
+        const myLatLng = { lat: {{ $data['latitude'] ??  19.2901}}, lng: {{ $data['longitude'] ?? 26.818 }} };
         const map = new google.maps.Map(document.getElementById("map"), {
-              zoom: 5,
+              zoom: 15,
               center: myLatLng,
         });
 

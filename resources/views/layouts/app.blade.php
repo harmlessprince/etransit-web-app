@@ -138,8 +138,8 @@
       "backgroundColor":"#0a5f54",
       "ctaText":"Start Chat",
       "borderRadius":"25",
-      "autoShow":true,
-      "phoneNumber":"2348064304717"
+      "autoShow":false,
+      "phoneNumber":"2347043274627"
   }
 };
     s.onload = function() {
@@ -158,6 +158,18 @@
         {
         win.showPayment();
     };
+    }
+</script>
+<script>
+    function collapse(id){
+
+        const attr = $('#'+id).hasClass('d-none');
+
+        if (attr === false) {
+            $('#'+id).addClass('d-none');
+        }else{
+            $('#'+id).removeClass('d-none');
+        }
     }
 </script>
         @endif

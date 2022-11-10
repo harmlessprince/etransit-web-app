@@ -16,10 +16,24 @@ class Transaction extends Controller
         $userID = auth()->user()->id;
 
         $fetchTransactions = Tranx::where('user_id','=' ,$userID)->orderBy('created_at', 'DESC')->with('service', 'tracker')->paginate(10);
-
+        $fetchTransactions = $this->redoTransaction($fetchTransactions);
         return response()->json(['success' => true , 'data' => compact('fetchTransactions')]);
     }
 
+    public function redoTransaction($transactions){
+        $newTransactions = array();
+        foreach ($transactions as $key => $transaction){
+
+                if(count($transaction->tracker) <= 0) {
+                    unset($transaction['tracker']);
+                    $transaction['tracker'] = null;
+                }
+
+            $newTransactions[] = $transaction;
+
+        }
+        return $newTransactions;
+    }
 
     public function nextOfKin(): \Illuminate\Http\JsonResponse
     {

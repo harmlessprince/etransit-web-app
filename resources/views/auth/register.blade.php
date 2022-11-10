@@ -41,6 +41,11 @@
             font-family: metropolis-regular , Sans-Serif;
         }
 
+        li > a{
+            color: black;
+            font-weight: normal !important;
+        }
+
         h1, h2,h3,h4,h5,h6{
             font-family: metropolis-semi-bold , Sans-Serif;
         }
@@ -111,7 +116,7 @@
     <div class="container">
         <div class="row" style="margin-top: 3%;margin-bottom: 0%;">
             <div class="col justify-content-center signup-image">
-                <img src="{{ asset('images/register.jpg')}}" class="img-fluid">
+                <img src="{{ asset('login-assets/img/signin1.png')}}" class="img-fluid">
             </div>
 
             <div class="col d-flex d-sm-flex d-md-flex justify-content-center justify-content-sm-center justify-content-md-center" style="background: rgba(255,255,255,0);">
@@ -243,8 +248,15 @@
                 <li class="d-md-flex justify-content-md-start align-items-md-center" id="sidehover-7" style="height: 34px;">
                     <a class="text-decoration-none" href="{{('contact')}}" style="font-weight: bold;">Contact</a></li>
             </ul>
-            <div class="col-12 d-lg-flex justify-content-lg-left align-items-lg-left" style="text-align: left;padding-top: 9px;padding-bottom: 9px;">
-                <a href="{{route('login')}}" class="btn btn-primary" type="button" style="height: 30px;padding-top: 2px;margin-left: 20px;border-color: var(--bs-orange);background: var(--bs-orange);color: var(--bs-white);">Log in</a></div>
+            <div class="col-12 d-lg-flex justify-content-lg-left align-items-lg-left" style="text-align:left;padding-top: 9px;padding-bottom: 9px;">
+                <a href="{{route('login')}}">
+                    <button class="btn btn-primary" type="button" style="height: 30px;padding-top: 2px;background: #e7710f;">&nbsp; Log In&nbsp;&nbsp;</button>
+                </a>
+
+                <a href="{{route('register')}}">
+                    <button class="btn btn-primary" type="button" style="height: 30px;padding-top: 2px;background: #e7710f;">&nbsp; Sign Up&nbsp;&nbsp;</button>
+                </a>
+            </div>
         </nav>
         <p class="d-md-flex me-auto" id="faicon-1" style="text-align: left;color: #090b39;margin-top: 100px;margin-left: 0px;width: 293.703px;margin-bottom: 0px;background: var(--bs-body-bg);margin-right: auto;">&nbsp;
             <a href="#">
