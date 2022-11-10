@@ -138,8 +138,8 @@
       "backgroundColor":"#0a5f54",
       "ctaText":"Start Chat",
       "borderRadius":"25",
-      "autoShow":true,
-      "phoneNumber":"2348064304717"
+      "autoShow":false,
+      "phoneNumber":"2347043274627"
   }
 };
     s.onload = function() {
@@ -149,6 +149,7 @@
     x.parentNode.insertBefore(s, x);
 </script>
     <script type="text/javascript" src="{{ asset('new-assets/js/slick.min.js') }}"></script>
+    @if(Auth::check())
 <script>
     function openPaymentHistory(){
     var win = window.open("{{ route('myProfile', auth()->user()->id) }}", "");
@@ -159,5 +160,18 @@
     };
     }
 </script>
+<script>
+    function collapse(id){
+
+        const attr = $('#'+id).hasClass('d-none');
+
+        if (attr === false) {
+            $('#'+id).addClass('d-none');
+        }else{
+            $('#'+id).removeClass('d-none');
+        }
+    }
+</script>
+        @endif
 </body>
 </html>

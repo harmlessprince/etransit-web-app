@@ -156,7 +156,15 @@
             <ul class="list-unstyled" id="offcanvaslink">
 
             </ul>
-            <div class="col-12 d-lg-flex justify-content-lg-center align-items-lg-center" style="text-align: center;padding-top: 9px;padding-bottom: 9px;"><button class="btn btn-primary" type="button" style="height: 30px;padding-top: 2px;margin-left: 20px;border-color: var(--bs-orange);background: rgba(13,110,253,0);color: rgb(231,113,15);">&nbsp;Sign Up&nbsp;</button></div>
+            <div class="col-12 d-lg-flex justify-content-lg-left align-items-lg-left" style="text-align:left;padding-top: 9px;padding-bottom: 9px;">
+                <a href="{{route('login')}}">
+                    <button class="btn btn-primary" type="button" style="height: 30px;padding-top: 2px;background: #e7710f;">&nbsp; Log In&nbsp;&nbsp;</button>
+                </a>
+
+                <a href="{{route('register')}}">
+                    <button class="btn btn-primary" type="button" style="height: 30px;padding-top: 2px;background: #e7710f;">&nbsp; Sign Up&nbsp;&nbsp;</button>
+                </a>
+            </div>
         </nav>
         <p class="d-md-flex me-auto" id="faicon-1" style="text-align: left;color: #090b39;margin-top: 100px;margin-left: 0px;width: 293.703px;margin-bottom: 0px;background: var(--bs-body-bg);margin-right: auto;">&nbsp;<a href="#"><i class="fa fa-facebook d-md-flex align-items-md-end" style="padding-top: 5px;font-size: 25px;margin-right: 15px;"></i></a><a href="#"><i class="fa fa-linkedin d-md-flex align-items-md-end" style="color: rgb(13,110,253);padding-top: 5px;font-size: 25px;margin-right: 15px;"></i></a><a href="#"><i class="fa fa-google-plus d-md-flex justify-content-center align-items-center align-content-center" style="padding-top: 5px;font-size: 25px;"></i></a></p>
     </div>

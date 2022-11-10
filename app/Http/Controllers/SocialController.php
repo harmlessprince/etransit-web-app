@@ -14,13 +14,13 @@ class SocialController extends Controller
 {
     public function redirect($provider)
     {
-        return Socialite::driver($provider)->redirect();
+        return Socialite::driver($provider)->setHttpClient(new \GuzzleHttp\Client(['verify' => false]))->redirect();
     }
 
-    public function Callback($provider){
+    public function Callback(){
 
-        $userSocial =   Socialite::driver($provider)->stateless()->user();
-        $users      =  User::where(['email' => $userSocial->getEmail()])->first();
+        $userSocial = Socialite::driver('google')->setHttpClient(new \GuzzleHttp\Client(['verify' => false]))->stateless()->user();
+        $users = User::where(['email' => $userSocial->getEmail()])->first();
 
         if($users){
             Auth::login($users);
@@ -33,8 +33,12 @@ class SocialController extends Controller
                 'password'          => Hash::make($userSocial->getEmail()),
                 'image'             => $userSocial->getAvatar(),
                 'provider_id'       => $userSocial->getId(),
-                'provider'          => $provider,
+                'provider'          => 'google',
             ]);
+
+            if($user){
+                Auth::login($user);
+            }
             return redirect('/');
         }
     }

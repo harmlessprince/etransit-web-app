@@ -270,11 +270,11 @@
 {{--                        </div>--}}
                         <hr>
                         <div class="row">
-                            <div class="col">
+                            <div class="col" style="cursor:pointer;" onclick="collapse('all-locations')">
                                 <p style="margin-top: 4px;margin-bottom: 0px;font-size: 13px;"><strong>Locations</strong></p>
                             </div>
                         </div>
-                        <div class="table-responsive">
+                        <div class="table-responsive d-none d-md-block mb-3" id="all-locations">
                             <table class="table table-borderless">
                                 <tbody>
                                 @foreach($states as $state)
@@ -418,3 +418,5 @@
         </div>
     </section>
 @endsection
+
+

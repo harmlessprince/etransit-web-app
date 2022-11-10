@@ -37,7 +37,7 @@
 <section style="margin: 20px;border-style: none;margin-bottom: 30px;">
     <div class="container">
         <div class="row">
-            <div class="col-sm-6 col-md-3 flex-grow-0 flex-shrink-1 flex-wrap" style="box-shadow: 1px 1px 6px 1px rgb(189,189,190);padding-top: 15px;padding-bottom: 15px;border-radius: 9px;min-height: 500px;max-height: 600px;">
+            <div class="col-sm-6 col-md-3 flex-grow-0 flex-shrink-1 flex-wrap" style="box-shadow: 1px 1px 6px 1px rgb(189,189,190);padding-top: 15px;padding-bottom: 15px;border-radius: 9px;min-height: auto;max-height: 600px;">
                 <div class="row">
                     <div class="col">
                         <p style="margin-bottom: 0PX;font-size: 14px;"><strong>FILTER SEARCH</strong></p>
@@ -122,15 +122,16 @@
                                <div class="card-group">
                                 <div class="card" style="margin: 10px;border-radius: 10px;margin-right: 10px;border-style: none;box-shadow: 1px 1px 10px 1px rgb(204,205,205);">
                                     <img class="img-fluid card-img-top w-100 d-block" style="border-top-left-radius: 7px;border-top-right-radius: 7px;" src="{{$tour->tourimages[0]->path}}">
-                                    <div class="card-img-overlay text-end" style="border-style: solid;color: rgba(33,37,41,0);">
-                                        <p style="color: var(--bs-white);font-size: 10px;margin-bottom: 1px;">
-                                            <strong>Starting from</strong>
-                                        </p>
-                                        <span style="color: var(--bs-white);"><strong> &#x20A6; {{number_format($tour->amount_regular)}}  -  &#x20A6; {{number_format($tour->amount_standard)}}</strong>
-                                        </span>
-                                    </div>
+{{--                                    <div class="card-img-overlay text-end" style="border-style: solid;color: rgba(33,37,41,0);">--}}
+{{--                                        <p style="color: var(--bs-white);font-size: 10px;margin-bottom: 1px;">--}}
+{{--                                            <strong>Starting from</strong>--}}
+{{--                                        </p>--}}
+
+{{--                                        </span>--}}
+{{--                                    </div>--}}
                                     <div class="card-body" style="padding-top: 0px;">
                                         <h6 class="card-title" style="margin-top: 10px;">{{$tour->name}}</h6>
+                                        <span style="color: red">Starting from <span style=""><strong> &#x20A6; {{number_format($tour->amount_regular)}}  -  &#x20A6; {{number_format($tour->amount_standard)}}</strong></span></span>
                                         <p style="color: rgb(175,175,176);font-size: 14px;"> {!! \Illuminate\Support\Str::limit($tour->description, $limit = 150, $end = '...') !!}  </p>
                                     </div>
                                     <div class="align-items-center align-content-center card-footer">

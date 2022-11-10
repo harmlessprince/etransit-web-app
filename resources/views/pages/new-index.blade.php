@@ -476,11 +476,11 @@
         <!-- ======= Features Section ======= -->
         <section id="features" class="features container" data-aos="fade-up">
             <div class="container">
-                <div class="row content">
+                <div class="row content mb-3">
                     <div class="col-md-5" data-aos="fade-right" data-aos-delay="100">
                         <img src="new-assets\img\assorted-vehicles.png" class="img-fluid h-100" alt="">
                     </div>
-                    <div class="col-md-7 pt-4 feature" data-aos="fade-left" data-aos-delay="100">
+                    <div class="col-md-6 offset-1 pt-4 feature" data-aos="fade-left" data-aos-delay="100">
                         <h3 class="feature-header">Your Reliable, Convenient Choice</h3>
                         <p class="fst-italic feature-description">
                             Access top notch transportation services with ease from the comfort your computer or mobile. Our excellent services such as vehicle hire, bus booking, flight booking, private jets, security
@@ -514,8 +514,8 @@
 
             </div>
             <div class="container-fluid alternate-row">
-                <div class="row content">
-                    <div class="col-md-5 order-1 order-md-2" data-aos="fade-left">
+                <div class="row content mb-3">
+                    <div class="col-md-4 offse-md-1 order-1 order-md-2" data-aos="fade-left">
                         <img src={{asset("new-assets\img\drivers.jpg")}} class="img-responsive" alt="">
                     </div>
                     <div class="col-md-7 pt-5 order-2 order-md-1 feature" data-aos="fade-right">
@@ -530,12 +530,12 @@
                     </div>
                 </div>
             </div>
-            <div class="container">
+            <div class="container mb-3">
                 <div class="row content">
                     <div class="col-md-5" data-aos="fade-right">
                         <img src="new-assets\img\safety icon.png" class="img-fluid" alt="">
                     </div>
-                    <div class="col-md-7 pt-5 feature" data-aos="fade-left">
+                    <div class="col-md-6 offset-1 pt-5 feature" data-aos="fade-left">
                         <h3 class="feature-header">Your Safety. Our Priority.</h3>
                         <p class="feature-description"> We go to great lengths to ensure our services are safe and secure. Our monitoring team is alert to any unforeseen circumstances and will contact the authorities at the siightest hint of concern. We deploy state-of-the art technology to guarantee you safety.</p>
                         <ul>

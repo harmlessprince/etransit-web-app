@@ -126,11 +126,12 @@
                 </li>
                 @if(!auth()->check())
                 <a href="{{url('/login')}}">
-                    <button class="btn btn-primary" type="button" style="height: 30px;padding-top: 2px;background: #e7710f;">&nbsp; Log in&nbsp;&nbsp;</button>
+                    <button class="btn btn-primary" type="button" style="height: 30px;padding-top: 2px;background: #e7710f;">&nbsp; Log In&nbsp;&nbsp;</button>
                 </a>
-                <a href="{{url('/register')}}">
 
-                </a>
+                    <a href="{{url('/register')}}">
+                        <button class="btn btn-primary" type="button" style="height: 30px;padding-top: 2px;background: #e7710f;">&nbsp; Sign Up&nbsp;&nbsp;</button>
+                    </a>
                 @endif
             </ul>
         </nav>
