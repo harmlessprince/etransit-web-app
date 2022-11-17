@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Eticket;
 
 use DataTables;
 use App\Classes\Invoice;
-use App\Mail\BusBooking;
+use App\Mail\AdminBooking;
 use App\Models\Schedule;
 use App\Models\Passenger;
 use App\Classes\Reference;

@@ -153,9 +153,9 @@
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6">
                                     <address class="text-right">
-                                        Brown Street Ikeja.<br>
-                                        Lagos Island ,Lagos<br>
-                                        +2348109474664
+                                        55 Ogunlana Drive<br>
+                                        Surulere, Lagos<br>
+                                        +2347043274627
                                     </address>
                                 </div>
                             </div>

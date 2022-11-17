@@ -8,9 +8,11 @@ namespace App\Billing;
 
 use App\Classes\Reference;
 use App\Models\CarHistory;
+use App\Notifications\AdminOtherBookings;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use App\Models\Transaction;
+use Illuminate\Support\Facades\Notification;
 use PDF;
 
 class CarHire
@@ -83,6 +85,8 @@ class CarHire
             $email = auth()->user()->email;
 
             Mail::to($email)->send(new \App\Mail\CarHire($maildata));
+            Notification::route('mail', env('ETRANSIT_ADMIN_EMAIL'))
+                ->notify(new AdminOtherBookings($maildata));
 
             DB::commit();
             return response()->json(['success' => true ,'message' => 'Payment made successfully']);

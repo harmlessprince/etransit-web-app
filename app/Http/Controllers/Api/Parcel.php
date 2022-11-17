@@ -11,10 +11,12 @@ use App\Models\Length;
 use App\Models\State;
 use App\Models\Weight;
 use App\Models\Width;
+use App\Notifications\AdminOtherBookings;
 use Illuminate\Http\Request;
 use App\Models\Parcel as ParcelPackage;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Notification;
 use PDF;
 
 class Parcel extends Controller
@@ -226,6 +228,8 @@ class Parcel extends Controller
         $email =  $data["email"];
 
         Mail::to($email)->send(new \App\Mail\Parcel($maildata));
+        Notification::route('mail', env('ETRANSIT_ADMIN_EMAIL'))
+            ->notify(new AdminOtherBookings($maildata));
         DB::commit();
 
     }

@@ -10,8 +10,10 @@ namespace App\Billing;
 
 use App\Classes\Reference;
 use App\Mail\FerryBookings;
+use App\Notifications\AdminBookingNotification;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Notification;
 use PDF;
 
 class FerryPayment
@@ -64,6 +66,8 @@ class FerryPayment
         $email = $data["email"];
 
         Mail::to($email)->send(new FerryBookings($maildata));
+        Notification::route('mail', env('ETRANSIT_ADMIN_EMAIL'))
+            ->notify(new AdminBookingNotification($maildata));
 
         if ($transactions) {
             //update the status of seat tracker to booked after payment from selected

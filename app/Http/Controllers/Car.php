@@ -41,6 +41,15 @@ class Car extends Controller
         return view('admin.cars.cars', compact('onTripCount','offTripCount','transactions'));
     }
 
+    public function deleteCar($id)
+    {
+        HiredCars::whereId($id)->update([
+            'deleted_at' => now()
+        ]);
+
+        return redirect(url('admin/manage/cars'));
+    }
+
     public function offTripCars()
     {
         return view('admin.cars.off-trip');
@@ -71,11 +80,13 @@ class Car extends Controller
     {
         if ($request->ajax()) {
             $data = HiredCars::withoutGlobalScopes()->orderby('id','desc')->with('carclass','cartype')->get();
+
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
                     $id = $row->id;
-                    $actionBtn = "<a href='/admin/view/car/$id'  class='edit btn btn-success btn-sm'>View</a>";
+                    $actionBtn = "<a href='/admin/view/car/$id'  class='edit btn btn-success btn-sm mr-3'>View</a>";
+                    $actionBtn .= "<a href='/admin/delete/car/$id'  class='edit btn btn-danger btn-sm'>Delete</a>";
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])
@@ -85,7 +96,7 @@ class Car extends Controller
     public function viewTenantCar($id)
     {
         $car = HiredCars::withoutGlobalScopes()->where('id',$id)->with('carclass','cartype','tenant','carHistory','plans')->first();
-//dd($car);
+
         return view('admin.cars.single-car',compact('car'));
     }
 

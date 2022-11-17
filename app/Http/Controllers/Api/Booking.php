@@ -6,12 +6,14 @@ use App\Classes\Reference;
 use App\Http\Controllers\Controller;
 use App\Mail\BusBooking;
 use App\Models\TripType;
+use App\Notifications\AdminBookingNotification;
 use Illuminate\Http\Request;
 use App\Models\Service;
 use App\Models\Schedule;
 use App\Models\Destination;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Notification;
 use PDF;
 
 class Booking extends Controller
@@ -509,11 +511,15 @@ class Booking extends Controller
             'childrenCount' => $attr['childrenCount'],
             'tripSchedule' => $tripSchedule,
             'totalAmount' => $attr['amount'],
+            'destination' =>  $tripSchedule->destination->location,
+            'pickup'=>  $tripSchedule->pickup->location
         ];
 
         $email =  $data["email"];
 
         Mail::to($email)->send(new BusBooking($maildata));
+        Notification::route('mail', env('ETRANSIT_ADMIN_EMAIL'))
+            ->notify(new AdminBookingNotification($maildata));
 
         return  response()->json(['success' => true , 'message' =>  'cash payment made successfully']);
     }
