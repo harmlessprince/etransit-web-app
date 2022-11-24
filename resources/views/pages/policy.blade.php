@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 <style>
-    p{
+    p, li{
         line-height: 30px;
         text-align: justify;
     }
@@ -18,65 +18,168 @@
             <div class="row no-gutters">
                 <div class="content col-xl-12 d-flex align-items-stretch" data-aos="fade-right">
                     <div class="content">
-                        <h3 class="text-black">Terms and Conditions</h3>
+                        <h3 class="text-black">Privacy Policy</h3>
                         <p class="text-justify">
-                            These General Terms and Conditions set out the terms and conditions applying to and governing the usage of the Etransit app – a one-stop technology platform for all transport and travel-related needs that connects users with various transportation and travel services to help them move around more efficiently.
-                            The term “us” or “we” refers to Etransit Technology a private limited company incorporated and registered under the laws of the federal republic of Nigeria with RC 1818432 and registered office address 55b ogunlana drive Surulere.
+                            This Privacy Policy describes Our policies and procedures on the collection, use and disclosure of Your information when You use the Service and tells You about Your privacy rights and how the law protects You.
                         </p>
-                        <p>In order to use Etransit app you must agree to the terms and conditions that are set out below:</p>
-                        <ol>
-                            <h5 class="mb-3"><li>Using the Etransit app</li></h5>
-                            <p>
-                                1.1 Etransit provides an information society service through Etransit app that enables mediation of the requests for transport services between the passengers, drivers, vehicle owners, bus owners and other related transport service and Etransit does not provide transport services. Transport services are provided by transporters under a contract (with you) for the carriage of passengers. Transporters provide transport services on an independent basis (either in person or via a company) as economic and professional service providers. Etransit is not responsible in any way for the fulfillment of the contract entered into between the passenger (you) and the transporter. Disputes arising from consumer rights, legal obligations, or from the law applicable to the provision of transport services will be resolved between the passengers and drivers. Data regarding the transporter and their transport service is available in the Etransit app and receipts for journeys are sent to the email address listed in the passenger’s profile.
-                            </p>
-                            <p>
-                                1.2 . The passenger (you) enters into a contract with the transporter for the provision of transport services via the Etransit app. Depending on the payment options supported for a given location of the journey, you can choose whether to pay the transporter for the transport service in cash or use Etransit in-App Payment. Charges will be inclusive of applicable taxes where required by law. Charges may include other applicable fees, tolls, and/or surcharges including a booking fees, municipal tolls, airport surcharges, or processing fees for split payments. If you wish, you may also choose to pay a Tip to the driver directly or via the use of Etransit in-App Payment.
-                            </p>
-                            <h5 class="mb-3"><li>Promotional Codes</li></h5>
-                            <p>
-                                2.1 Etransit may send you promotional codes on a per-promotion basis. Promotional code credit can be applied towards payment on completion of a ride or other features or benefits related to the service and/or a Third Party’s service and are subject to any additional terms that are established on a per promotional code basis. Expiration dates of promo codes will be reflected in-app once you have applied the promo code to your account.
-                            </p>
-                            <p>
-                                2.2, A promotional code credit only applies on a per-trip basis and cannot carry over to the next ride/ trip and therefore will be forfeited. Only one promotional code may be applied per trip.
-                            </p>
-                            <p>Etransit reserves the right to cancel any promotional code at any time for any reason.</p>
-                            <h5 class="mb-3"><li>Etransit in-App Payment</li></h5>
-                            <p>3.1 Depending on the payment options supported for the given location of the journey, You can pay for the transport services with a card, mobile carrier billing, or other payment and when available through Etransit App. By providing Etransit in-App Payment service, Etransit acts as a commercial agent for the providers of transport services. Every transporter has authorized Etransit as their commercial agent for the mediation of the conclusion of contracts between the driver and the passenger, including the power to accept payments from the passengers and to forward the payments to the driver. Your obligation to the provider of the transport service will be fulfilled when the payment order is given to transfer funds to Etransit bank account. You, as a passenger are responsible for ensuring that the payment takes place and ensuring that sufficient funds are available.</p>
-                            <p>3.2 When making payments by Etransit in-App Payment, Etransit receives your payments and forwards the money to the transporter. Etransit may ask for additional data from you to verify the payment methods.</p>
-                            <p>3.3 When making payments by Etransit in-App Payment for transport services, Etransit is not responsible for possible third-party payment costs (e.g mobile operators, bank fees). These service providers may charge you additional fees when processing payments in connection with the Etransit in-App Payment. Etransit is not responsible for any such fees and disclaims all liability in this regard. Your payment method may also be subject to additional terms and conditions imposed by the applicable third-party payment service provider; please review these terms and conditions before using your payment method.</p>
-                            <p> 3.4 Etransit will be responsible for the functioning of Etransit in-App Payment and provide support in resolving problems. The resolution of disputes related to Etransit in-App Payment also takes place through us. For payment support services please contact: hello@Etransitafrica.com Inquiries submitted by e-mail or Etransit App will receive a response within one business day. </p>
-                            <p>Etransit will resolve Etransit in-App Payment-related complaints and applications within two business days.</p>
-                            <h5 class="mb-3"><li>Ordering and canceling transport services</li></h5>
-                            <p>4.1 If you order a transport service and the transporter has agreed to undertake the work then the transport service is considered to be ordered.</p>
-                            <p>4.2 Cancelling an already ordered and paid transport may result in part or 100% of payment forfeiture.</p>
-                            <p>4.3 When the driver notifies the passenger about the arrival of the vehicle to its destination and the passenger or people for whom the transport was ordered do not arrive at the vehicle within the certain period as specified in the Etransit app, the request will be deemed canceled. Please note that Etransit is not responsible for such situations.</p>
-                            <p>4.4 Once the driver arrives and sends you a notification that he/she has arrived, your session has started.</p>
-                            <p>4.5 If you have requested transport services using the Etransit app and cause damage to the driver’s vehicle or its furnishing (among else, by blemishing or staining the vehicle or causing the vehicle to stink), you would be required to pay a penalty fee and required to pay for any damages. If you do not pay the penalty and/or compensate for the damage, Etransit may pursue the claims on behalf of the provider of the transport service.</p>
-                            <p>4.6 A day is regarded as 12 hours i.e. 6 am-6 pm. And any hour spent after 6 pm is regarded as overtime and liable to extra charges</p>
-                            <h5 class="mb-3"><li>License to use Etransit app</li></h5>
-                            <p>5.1 As long as you comply with these General Terms and Conditions, we agree to grant you a royalty-free, revocable, non-exclusive, right to access and use the Etransit app in accordance with these General Terms and Conditions, the Privacy Notice, and the applicable app-store terms. You may not transfer or sub-license this right to use the Etransit app. In the event that your trip on Etransit app is canceled, the corresponding non-exclusive license will also be canceled.</p>
-                            <h5 class="mb-3"><li>Liability</li></h5>
-                            <p>6.1 As the Etransit app is an information society service (a means of communication) between users and transporters, we cannot guarantee or take any responsibility for the quality or the absence of defects in the provision of transport services. As the usage of Etransit app for requesting transport services depends on the behavior of the drivers, Etransit does not guarantee that you will always have offers available for the provision of transport services.</p>
-                            <p>6.2 The consumer’s right to refund is not applied to Etransit app on all orders. Requesting a refund from the transport service does not withdraw you from the agreement in the course of which the provision of the transport service was ordered.</p>
-                            <p>6.3 The Etransit app is provided on an "as is" and “as available” basis. Etransit does not represent, warrant,, or guarantee that access to Etransit app will be uninterrupted or error-free. In case of any faults in the software, we will endeavor to correct them as soon as possible, but please keep in mind that the functioning of the app may be restricted due to occasional technical errors and we are not able to guarantee that the app will function at all times, for example, a public emergency may result in a service interruption.</p>
-                            <p>6.4 Etransit, its representatives, directors, and employees are not liable for any loss or damage that you may incur as a result of using Etransit app or relying on, the journey contracted for through the Etransit app, including but not limited to:</p>
-                            <p>6.4.1. any direct or indirect property damage or monetary loss;</p>
-                            <p>6.4.2. loss of business, contracts, contacts, goodwill, reputation, and any loss that may arise from interruption of the business;
-                            <p>6.4.3. loss or inaccuracy of data; and</p>
-                            <p>6.4.4. any other type of loss or damage.</p>
-                            <p>6.5 You will have the right to claim damages only if Etransit has deliberately violated the contract. Etransit will not be liable for the actions or inactions of the driver and will not be liable for damages that the driver causes to the passengers.</p>
-                            <p>6.6 You agree to fully indemnify and hold Etransit, their affiliate companies, representatives, employees, and directors harmless from any claims or losses (including liabilities, damages, costs, and expenses of any nature) that they suffer as a result of your use of the Etransit app (including the journeys you obtain through your use of the Etransit app).</p>
-                            <p>6.7 Etransit may immediately end your use of the Etransit app if you breach these General Terms and Conditions or if we consider it necessary to protect the integrity of Etransit or the safety of drivers.</p>
-                            <h5 class="mb-3"><li>Good practice using the Etransit app</li></h5>
-                            <p>7.1 Any issues with defects or quality of the transport services will be resolved in accordance with the rules and regulations of the transport service provider or the relevant public authority.</p>
-                            <p>7.2 We ask you to fill out a feedback form in the Etransit app. This enables us to offer suggestions to the drivers for improving the quality of their service.</p>
-                            <p>7.3 We expect that you use Etransit app in good faith and be respectful of the drivers who offer their services through Etransit app. Etransit retains the right to close your account if you have violated the terms set out in this General Terms and Conditions or if your activities are malicious, i.e. withholding payment for the provision of the transport service, fraud, being disrespectful towards the drivers, etc. In these cases, your Etransit app account may be revoked without prior notice.</p>
-                            <p>7.4 Etransit will make every effort to ensure that only transporters, who have integrity and are respectful of their profession and passengers, use the Etransit app. However, we are in no position to guarantee that every provider of transport services, located by the Etransit app, satisfies the aforementioned criteria at all times. If you experience objectionable transport service, please notify the company responsible for the service, a supervisory authority, or our customer support.</p>
-                            <h5 class="mb-3"><li>Amendments to the General Terms and Conditions</li></h5>
-                            <p>If any substantial amendments are made to the General Terms and Conditions, then you will be notified by e-mail or Etransit app notifications. If you continue using Etransit app, you will be deemed to accept the amendments.</p>
-                            <h5 class="mb-3"><li>Final Provisions</li></h5>
-                            <p>The General Terms and Conditions will be governed by and construed and enforced in accordance with the laws of the federal republic of Nigeria. If the respective dispute resulting from General Terms or Agreement could not be settled by the negotiations, then the dispute will be finally solved in a Nigerian court.</p>
-                        </ol>
+                        <p>We use Your Personal data to provide and improve the Service. By using the Service, You agree to the collection and use of information in accordance with this Privacy Policy. This Privacy Policy has been created with the help of the TermsFeed Privacy Policy Generator.</p>
+                        <h3 class="text-black">Interpretation and Definitions</h3>
+                        <h4 class="text-black">Interpretation</h4>
+                        <p>The words of which the initial letter is capitalized have meanings defined under the following conditions. The following definitions shall have the same meaning regardless of whether they appear in singular or in plural.</p>
+                        <h4 class="mb-2">Definitions</h4>
+                        <p>For the purposes of this Privacy Policy:</p>
+                        <ul class="mb-3">
+                            <li class="mb-3"><strong>Account</strong> means a unique account created for You to access our Service or parts of our Service.</li>
+                            <li class="mb-3"><strong>Affiliate</strong> means an entity that controls, is controlled by or is under common control with a party, where "control" means ownership of 50% or more of the shares, equity interest or other securities entitled to vote for election of directors or other managing authority.</li>
+                            <li class="mb-3"><strong>Application</strong> means the software program provided by the Company downloaded by You on any electronic device, named Etransit</li>
+                            <li class="mb-3"><strong>Company</strong> (referred to as either "the Company", "We", "Us" or "Our" in this Agreement) refers to Etransit Technologies, 55b ogunlana drive surulere.</li>
+                            <li class="mb-3"><strong>Cookies</strong> are small files that are placed on Your computer, mobile device or any other device by a website, containing the details of Your browsing history on that website among its many uses.</li>
+                            <li class="mb-3"><strong>Country</strong> refers to: Nigeria</li>
+                            <li class="mb-3"><strong>Device</strong> means any device that can access the Service such as a computer, a cellphone or a digital tablet.</li>
+                            <li class="mb-3"><strong>Personal Data</strong> is any information that relates to an identified or identifiable individual.</li>
+                            <li class="mb-3"><strong>Service</strong> refers to the Application or the Website or both</li>
+                            <li class="mb-3"><strong>Service Provider</strong> means any natural or legal person who processes the data on behalf of the Company. It refers to third-party companies or individuals employed by the Company to facilitate the Service, to provide the Service on behalf of the Company, to perform services related to the Service or to assist the Company in analyzing how the Service is used.</li>
+                            <li class="mb-3"><strong>Third-party Social Media Service</strong> refers to any website or any social network website through which a User can log in or create an account to use the Service.</li>
+                            <li class="mb-3"><strong>Usage Data</strong> refers to data collected automatically, either generated by the use of the Service or from the Service infrastructure itself (for example, the duration of a page visit).</li>
+                            <li class="mb-3"><strong>Website</strong> refers to Etransit, accessible from https://www.etransitafrica.com</li>
+                            <li class="mb-3"><strong>You</strong> means the individual accessing or using the Service, or the company, or other legal entity on behalf of which such individual is accessing or using the Service, as applicable.</li>
+                        </ul>
+                        <h3 class="text-black mb-3 mt-3">Collecting and Using Your Personal Data</h3>
+                        <h3 class="text-black mb-3">Types of Data Collected</h3>
+                        <h4>Personal Data</h4>
+                        <p>While using Our Service, We may ask You to provide Us with certain personally identifiable information that can be used to contact or identify You. Personally identifiable information may include, but is not limited to:</p>
+                        <ul>
+                            <li class="mb-3">Email address</li>
+                            <li class="mb-3">First name and last name</li>
+                            <li class="mb-3">Phone number</li>
+                            <li class="mb-3">Address, State, Province, ZIP/Postal code, City</li>
+                            <li class="mb-3">Usage Data</li>
+                        </ul>
+
+                        <h4>Usage Data</h4>
+                        <p>Usage Data is collected automatically when using the Service.</p>
+                        <p>Usage Data may include information such as Your Device's Internet Protocol address (e.g. IP address), browser type, browser version, the pages of our Service that You visit, the time and date of Your visit, the time spent on those pages, unique device identifiers and other diagnostic data.</p>
+                        <p>When You access the Service by or through a mobile device, We may collect certain information automatically, including, but not limited to, the type of mobile device You use, Your mobile device unique ID, the IP address of Your mobile device, Your mobile operating system, the type of mobile Internet browser You use, unique device identifiers and other diagnostic data.</p>
+                        <p>We may also collect information that Your browser sends whenever You visit our Service or when You access the Service by or through a mobile device.</p>
+
+                        <h4>Information from Third-Party Social Media Services</h4>
+                        <p>The Company allows You to create an account and log in to use the Service through the following Third-party Social Media Services:</p>
+                        <ul>
+                            <li>Google</li>
+                            <li>Facebook</li>
+                            <li>Twitter</li>
+                            <li>LinkedIn</li>
+                        </ul>
+                        <p>If You decide to register through or otherwise grant us access to a Third-Party Social Media Service, We may collect Personal data that is already associated with Your Third-Party Social Media Service's account, such as Your name, Your email address, Your activities or Your contact list associated with that account.</p>
+                        <p>You may also have the option of sharing additional information with the Company through Your Third-Party Social Media Service's account. If You choose to provide such information and Personal Data, during registration or otherwise, You are giving the Company permission to use, share, and store it in a manner consistent with this Privacy Policy.</p>
+                        <h4>Information Collected while Using the Application</h4>
+                        <p>While using Our Application, in order to provide features of Our Application, We may collect, with Your prior permission:</p>
+                        <ul>
+                            <li>
+                                Information regarding your location
+                            </li>
+                            <li>Information from your Device's phone book (contacts list)</li>
+
+                        </ul>
+                        <p>We use this information to provide features of Our Service, to improve and customize Our Service. The information may be uploaded to the Company's servers and/or a Service Provider's server or it may be simply stored on Your device.</p>
+                        <p>You can enable or disable access to this information at any time, through Your Device settings.</p>
+                        <h4>Tracking Technologies and Cookies</h4>
+                        <p>We use Cookies and similar tracking technologies to track the activity on Our Service and store certain information. Tracking technologies used are beacons, tags, and scripts to collect and track information and to improve and analyze Our Service. The technologies We use may include:</p>
+                        <ul>
+                            <li><strong>Cookies or Browser Cookies. </strong>A cookie is a small file placed on Your Device. You can instruct Your browser to refuse all Cookies or to indicate when a Cookie is being sent. However, if You do not accept Cookies, You may not be able to use some parts of our Service. Unless you have adjusted Your browser setting so that it will refuse Cookies, our Service may use Cookies.</li>
+
+                            <li><strong>Web Beacons.</strong> Certain sections of our Service and our emails may contain small electronic files known as web beacons (also referred to as clear gifs, pixel tags, and single-pixel gifs) that permit the Company, for example, to count users who have visited those pages or opened an email and for other related website statistics (for example, recording the popularity of a certain section and verifying system and server integrity).</li>
+
+                        </ul>
+                        <p>Cookies can be "Persistent" or "Session" Cookies. Persistent Cookies remain on Your personal computer or mobile device when You go offline, while Session Cookies are deleted as soon as You close Your web browser. You can learn more about cookies on TermsFeed website article.</p>
+                        <p>We use both Session and Persistent Cookies for the purposes set out below:</p>
+                        <ul>
+                            <li>
+                                <p><strong>Necessary / Essential Cookies</strong></p>
+                                <p>Type: Session Cookies</p>
+                                <p>Administered by: Us</p>
+                                <p>Purpose: These Cookies are essential to provide You with services available through the Website and to enable You to use some of its features. They help to authenticate users and prevent fraudulent use of user accounts. Without these Cookies, the services that You have asked for cannot be provided, and We only use these Cookies to provide You with those services.</p>
+
+                            </li>
+                            <li>
+                                <p><strong>Cookies Policy / Notice Acceptance Cookies</strong></p>
+                                <p>Type: Persistent Cookies</p>
+                                <p>Administered by: Us</p>
+                                <p>Purpose: These Cookies identify if users have accepted the use of cookies on the Website.</p>
+
+                            </li>
+                            <li>
+                                <p><strong>Functionality Cookies</strong></p>
+                                <p>Type: Persistent Cookies</p>
+                                <p>Administered by: Us</p>
+                                <p>Purpose: These Cookies allow us to remember choices You make when You use the Website, such as remembering your login details or language preference. The purpose of these Cookies is to provide You with a more personal experience and to avoid You having to re-enter your preferences every time You use the Website.</p>
+                            </li>
+                        </ul>
+                        <p>For more information about the cookies we use and your choices regarding cookies, please visit our Cookies Policy or the Cookies section of our Privacy Policy.</p>
+                        <h4>Use of Your Personal Data</h4>
+                        <p>The Company may use Personal Data for the following purposes:</p>
+                        <ul>
+                            <li class="mb-3"><strong>To provide and maintain our Service,</strong> including to monitor the usage of our Service.</li>
+                            <li class="mb-3"><strong>To manage Your Account:</strong> to manage Your registration as a user of the Service. The Personal Data You provide can give You access to different functionalities of the Service that are available to You as a registered user.</li>
+                            <li class="mb-3"><strong>For the performance of a contract:</strong> the development, compliance and undertaking of the purchase contract for the products, items or services You have purchased or of any other contract with Us through the Service.</li>
+                            <li class="mb-3"><strong>To contact You:</strong> To contact You by email, telephone calls, SMS, or other equivalent forms of electronic communication, such as a mobile application's push notifications regarding updates or informative communications related to the functionalities, products or contracted services, including the security updates, when necessary or reasonable for their implementation.</li>
+                            <li class="mb-3"><strong>To provide You</strong> with news, special offers and general information about other goods, services and events which we offer that are similar to those that you have already purchased or enquired about unless You have opted not to receive such information.</li>
+                            <li class="mb-3"><strong>To manage Your requests:</strong> To attend and manage Your requests to Us.</li>
+                            <li class="mb-3"><strong>For business transfers:</strong> We may use Your information to evaluate or conduct a merger, divestiture, restructuring, reorganization, dissolution, or other sale or transfer of some or all of Our assets, whether as a going concern or as part of bankruptcy, liquidation, or similar proceeding, in which Personal Data held by Us about our Service users is among the assets transferred.</li>
+                            <li class="mb-3"><strong>For other purposes:</strong> We may use Your information for other purposes, such as data analysis, identifying usage trends, determining the effectiveness of our promotional campaigns and to evaluate and improve our Service, products, services, marketing and your experience.</li>
+                            <p>We may share Your personal information in the following situations:</p>
+                            <li class="mb-3"><strong>With Service Providers:</strong> We may share Your personal information with Service Providers to monitor and analyze the use of our Service, to contact You.</li>
+                            <li class="mb-3"><strong>For business transfers:</strong> We may share or transfer Your personal information in connection with, or during negotiations of, any merger, sale of Company assets, financing, or acquisition of all or a portion of Our business to another company.</li>
+                            <li class="mb-3"><strong>With Affiliates:</strong> We may share Your information with Our affiliates, in which case we will require those affiliates to honor this Privacy Policy. Affiliates include Our parent company and any other subsidiaries, joint venture partners or other companies that We control or that are under common control with Us.</li>
+                            <li class="mb-3"><strong>With business partners:</strong> We may share Your information with Our business partners to offer You certain products, services or promotions.</li>
+                            <li class="mb-3"><strong>With other users:</strong> when You share personal information or otherwise interact in the public areas with other users, such information may be viewed by all users and may be publicly distributed outside. If You interact with other users or register through a Third-Party Social Media Service, Your contacts on the Third-Party Social Media Service may see Your name, profile, pictures and description of Your activity. Similarly, other users will be able to view descriptions of Your activity, communicate with You and view Your profile.</li>
+                            <li class="mb-3"><strong>With Your consent:</strong> We may disclose Your personal information for any other purpose with Your consent.</li>
+                        </ul>
+                        <h4 style="margin-top: 20px !important;">Retention of Your Personal Data</h4>
+                        <p>The Company will retain Your Personal Data only for as long as is necessary for the purposes set out in this Privacy Policy. We will retain and use Your Personal Data to the extent necessary to comply with our legal obligations (for example, if we are required to retain your data to comply with applicable laws), resolve disputes, and enforce our legal agreements and policies.</p>
+                        <p>The Company will also retain Usage Data for internal analysis purposes. Usage Data is generally retained for a shorter period of time, except when this data is used to strengthen the security or to improve the functionality of Our Service, or We are legally obligated to retain this data for longer time periods.</p>
+                        <h4>Transfer of Your Personal Data</h4>
+                        <p>Your information, including Personal Data, is processed at the Company's operating offices and in any other places where the parties involved in the processing are located. It means that this information may be transferred to — and maintained on — computers located outside of Your state, province, country or other governmental jurisdiction where the data protection laws may differ than those from Your jurisdiction.</p>
+                        <p>Your consent to this Privacy Policy followed by Your submission of such information represents Your agreement to that transfer.</p>
+                        <p>The Company will take all steps reasonably necessary to ensure that Your data is treated securely and in accordance with this Privacy Policy and no transfer of Your Personal Data will take place to an organization or a country unless there are adequate controls in place including the security of Your data and other personal information.</p>
+                        <h4>Delete Your Personal Data</h4>
+                        <p>You have the right to delete or request that We assist in deleting the Personal Data that We have collected about You.</p>
+                        <p>Our Service may give You the ability to delete certain information about You from within the Service.</p>
+                        <p>You may update, amend, or delete Your information at any time by signing in to Your Account, if you have one, and visiting the account settings section that allows you to manage Your personal information. You may also contact Us to request access to, correct, or delete any personal information that You have provided to Us.</p>
+                        <p>Please note, however, that We may need to retain certain information when we have a legal obligation or lawful basis to do so.</p>
+<h4>Disclosure of Your Personal Data</h4>
+                        <h5>Business Transactions</h5>
+                        <p>If the Company is involved in a merger, acquisition or asset sale, Your Personal Data may be transferred. We will provide notice before Your Personal Data is transferred and becomes subject to a different Privacy Policy.</p>
+                        <h5>Law enforcement</h5>
+                        <p>Under certain circumstances, the Company may be required to disclose Your Personal Data if required to do so by law or in response to valid requests by public authorities (e.g. a court or a government agency).</p>
+                        <h5>Other legal requirements</h5>
+                        <p>The Company may disclose Your Personal Data in the good faith belief that such action is necessary to:</p>
+                        <ul>
+                            <li>Comply with a legal obligation</li>
+                            <li>Protect and defend the rights or property of the Company</li>
+                            <li>Prevent or investigate possible wrongdoing in connection with the Service</li>
+                            <li>Protect the personal safety of Users of the Service or the public</li>
+                            <li>Protect against legal liability</li>
+                        </ul>
+                        <h4>Security of Your Personal Data</h4>
+                        <p>The security of Your Personal Data is important to Us, but remember that no method of transmission over the Internet, or method of electronic storage is 100% secure. While We strive to use commercially acceptable means to protect Your Personal Data, We cannot guarantee its absolute security.</p>
+                        <h4>Children's Privacy</h4>
+                        <p>Our Service does not address anyone under the age of 13. We do not knowingly collect personally identifiable information from anyone under the age of 13. If You are a parent or guardian and You are aware that Your child has provided Us with Personal Data, please contact Us. If We become aware that We have collected Personal Data from anyone under the age of 13 without verification of parental consent, We take steps to remove that information from Our servers.</p>
+                        <p>If We need to rely on consent as a legal basis for processing Your information and Your country requires consent from a parent, We may require Your parent's consent before We collect and use that information.</p>
+                        <h4>Links to Other Websites</h4>
+                        <p>Our Service may contain links to other websites that are not operated by Us. If You click on a third party link, You will be directed to that third party's site. We strongly advise You to review the Privacy Policy of every site You visit.</p>
+                        <p>We have no control over and assume no responsibility for the content, privacy policies or practices of any third party sites or services.</p>
+                        <h4>Changes to this Privacy Policy</h4>
+                        <p>We may update Our Privacy Policy from time to time. We will notify You of any changes by posting the new Privacy Policy on this page.</p>
+                        <p>We will let You know via email and/or a prominent notice on Our Service, prior to the change becoming effective and update the "Last updated" date at the top of this Privacy Policy.</p>
+                        <p>You are advised to review this Privacy Policy periodically for any changes. Changes to this Privacy Policy are effective when they are posted on this page.</p>
+                        <h4>Contact Us</h4>
+                        <p>If you have any questions about this Privacy Policy, You can contact us:</p>
+                        <ul>
+                            <li>By email: hello@etransitafrica.com</li>
+                            <li>By visiting this page on our website: https://www.etransitafrica.com/contact</li>
+                            <li>By phone number: +2347043274627</li>
+                        </ul>
                     </div>
                 </div>
 

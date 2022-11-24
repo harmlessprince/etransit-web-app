@@ -47,7 +47,9 @@ class TrackingConsole extends Controller
     public function initiateTracking(Request $request)
     {
       $data =  $this->validateRequest($request);
-      $startTracking =  $this->trackingRepository->initiateTracking(auth()->user()->id ,$data);
+      $params = $request->get('new');
+
+      $startTracking =  $this->trackingRepository->initiateTracking(auth()->user()->id ,$data, $params);
 
       if(!$startTracking['success'])
       {

@@ -13,8 +13,10 @@ use App\Models\CarClass;
 use App\Models\CarHistory;
 use App\Models\CarImage;
 use App\Models\CarType;
+use App\Notifications\AdminOtherBookings;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Notification;
 use PDF;
 use Illuminate\Http\Request;
 use App\Models\Car as HiredCars;
@@ -575,6 +577,8 @@ class Car extends Controller
         $email = auth()->user()->email;
 
         Mail::to($email)->send(new CarHire($maildata));
+        Notification::route('mail', env('ETRANSIT_ADMIN_EMAIL'))
+            ->notify(new AdminOtherBookings($maildata));
 
         toastr()->success('Cash Payment Made successfully');
 

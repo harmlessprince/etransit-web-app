@@ -27,6 +27,7 @@ class TrackingConsole extends Controller
        $data['departureDate'] = null;
        $data['latitude'] = $trackingRecord[0]['latitude'];
        $data['longitude'] = $trackingRecord[0]['longitude'];
+       $data['location'] = $trackingRecord[0]['location'];
 
        if($transactionId != null)
        {

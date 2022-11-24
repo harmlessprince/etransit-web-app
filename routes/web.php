@@ -79,6 +79,7 @@ Route::get('filter-cars/{seat_capacity?}/{class_type?}',[Car::class , 'carList']
 
 Route::get('about', [PagesController::class, 'about'])->name('about-us');
 Route::get('policy', [PagesController::class, 'policy'])->name('policy');
+Route::get('terms', [PagesController::class, 'terms'])->name('terms');
 Route::get('contact', [PagesController::class, 'contact']);
 
 //Auth::routes();

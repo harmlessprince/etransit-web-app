@@ -104,7 +104,7 @@ class TrackingRepository implements TrackingInterface
     }
 
 
-    public function initiateTracking($user_id , $locationDetails)
+    public function initiateTracking($user_id , $locationDetails, $params)
     {
         // TODO: Implement initiateTracking() method.
         // Look for latest Active Tracker
@@ -120,10 +120,16 @@ class TrackingRepository implements TrackingInterface
             DB::beginTransaction();
             $findAnyUserLastTracking->update(['status'=>'active']);
             $this->recordActiveTrackingSession($findAnyUserLastTracking->id , $locationDetails);
-            $this->notificationTrigger($findAnyUserLastTracking->id);
+            if(!$params){
+                $this->notificationTrigger($findAnyUserLastTracking->id);
+            }
             DB::commit();
 
-            $response = ['success' => true , 'message' =>  'User Tracking started successfully'];
+            $response = ['success' => true , 'message' =>  'User Tracking updated successfully'];
+
+            if(!$params){
+                $response = ['success' => true , 'message' =>  'User Tracking started successfully'];
+            }
         }else{
             $response = ['success' => false , 'message' =>  'You have not initiated any active tracking'];
         }

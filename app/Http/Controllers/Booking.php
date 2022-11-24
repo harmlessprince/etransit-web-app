@@ -86,7 +86,6 @@ class Booking extends Controller
                 ->with('terminal','bus','destination','pickup','service','tenant')->get();
         }
 
-
         $operators  = \App\Models\Tenant::inRandomOrder()
                                                 ->limit(10)
                                                 ->get();
@@ -640,6 +639,7 @@ class Booking extends Controller
         Mail::to($email)->send(new BusBooking($maildata));
         Notification::route('mail', env('ETRANSIT_ADMIN_EMAIL'))
             ->notify(new AdminBookingNotification($maildata));
+
         toastr()->success('Success !! cash payment made successfully');
         return  redirect('/');
     }

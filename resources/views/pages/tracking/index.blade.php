@@ -197,7 +197,7 @@
     function initMap() {
         const myLatLng = { lat: {{ $data['latitude'] ??  19.2901}}, lng: {{ $data['longitude'] ?? 26.818 }} };
         const map = new google.maps.Map(document.getElementById("map"), {
-              zoom: 15,
+              zoom: 12,
               center: myLatLng,
         });
 
@@ -205,29 +205,31 @@
 
         var infowindow = new google.maps.InfoWindow();
 
-        var marker, i;
 
-        for (i = 0; i < locations.length; i++) {
+        // for (i = 0; i < locations.length; i++) {
             marker = new google.maps.Marker({
-                position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+                position: new google.maps.LatLng({{ $data['latitude'] ??  19.2901}}, {{ $data['longitude'] ?? 26.818 }}),
                 map: map
             });
 
             google.maps.event.addListener(marker, 'click', (function(marker, i) {
                 return function() {
-                    infowindow.setContent(locations[i][0]);
+                    infowindow.setContent('{{ $data['location'] ??  'No location'}}');
                     infowindow.open(map, marker);
                 }
-            })(marker, i));
+            })(marker));
 
-        }
+        // }
+
+
+
     }
 
     window.initMap = initMap;
 </script>
 
 <script type="text/javascript"
-        src="https://maps.google.com/maps/api/js?key={{ env('GOOGLE_MAP_KEY') }}&callback=initMap" ></script>
+        src="https://maps.google.com/maps/api/js?key={{ env('GOOGLE_MAP_KEYS') }}&callback=initMap" ></script>
 <script>
     setInterval(function () {
         location.reload();

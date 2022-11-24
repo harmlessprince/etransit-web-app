@@ -46,6 +46,7 @@
                     <h5 style="color: var(--bs-orange);"><strong>SUPPORT</strong></h5>
                     <ul class="list-unstyled">
 
+                        <li><a class="text-decoration-none" href="{{ route('terms') }}" style="color: var(--bs-gray-100) !important;">TERMS & CONDITIONS</a></li>
                         <li><a class="text-decoration-none" href="{{ route('policy') }}" style="color: var(--bs-gray-100) !important;">PRIVACY POLICY</a></li>
                     </ul>
                 </div>
