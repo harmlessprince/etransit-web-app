@@ -6,7 +6,7 @@ interface TrackingInterface
 {
     public function trackUser($user , $trackingDetails , $transaction_id);
 
-    public function initiateTracking($user_id, $locationDetails);
+    public function initiateTracking($user_id, $locationDetails, $params);
 
     public function recordActiveTrackingSession($tracker_id , $locationDetails);
 

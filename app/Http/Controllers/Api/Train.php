@@ -11,10 +11,12 @@ use App\Models\TrainLocation;
 use App\Models\TrainSchedule;
 use App\Models\TrainSeatTracker;
 use App\Models\TripType;
+use App\Notifications\AdminOtherBookings;
 use Illuminate\Http\Request;
 use App\Models\Train as TrainTicket;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Notification;
 use PDF;
 
 class Train extends Controller
@@ -588,6 +590,8 @@ class Train extends Controller
         $email =  $data["email"];
 
         Mail::to($email)->send(new \App\Mail\TrainTicket($maildata));
+        Notification::route('mail', env('ETRANSIT_ADMIN_EMAIL'))
+            ->notify(new AdminOtherBookings($maildata));
 
         DB::commit();
 

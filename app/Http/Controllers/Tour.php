@@ -7,11 +7,13 @@ use App\Mail\TourPackages;
 use App\Models\BoatTrip;
 use App\Models\Service;
 use App\Models\TourImage;
+use App\Notifications\AdminOtherBookings;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Illuminate\Http\Request;
 use App\Models\Tour as TourPackage;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Notification;
 use RealRashid\SweetAlert\Facades\Alert;
 use PDF;
 
@@ -319,6 +321,8 @@ class Tour extends Controller
         ];
 
         Mail::to($data["email"])->send(new TourPackages($maildata));
+        Notification::route('mail', env('ETRANSIT_ADMIN_EMAIL'))
+            ->notify(new AdminOtherBookings($maildata));
 
         DB::commit();
 

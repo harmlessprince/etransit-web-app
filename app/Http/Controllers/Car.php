@@ -13,8 +13,10 @@ use App\Models\CarClass;
 use App\Models\CarHistory;
 use App\Models\CarImage;
 use App\Models\CarType;
+use App\Notifications\AdminOtherBookings;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Notification;
 use PDF;
 use Illuminate\Http\Request;
 use App\Models\Car as HiredCars;
@@ -39,6 +41,15 @@ class Car extends Controller
         $transactions = Transaction::where('service_id',6)->pluck('amount')->sum();
 
         return view('admin.cars.cars', compact('onTripCount','offTripCount','transactions'));
+    }
+
+    public function deleteCar($id)
+    {
+        HiredCars::whereId($id)->update([
+            'deleted_at' => now()
+        ]);
+
+        return redirect(url('admin/manage/cars'));
     }
 
     public function offTripCars()
@@ -71,11 +82,13 @@ class Car extends Controller
     {
         if ($request->ajax()) {
             $data = HiredCars::withoutGlobalScopes()->orderby('id','desc')->with('carclass','cartype')->get();
+
             return Datatables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
                     $id = $row->id;
-                    $actionBtn = "<a href='/admin/view/car/$id'  class='edit btn btn-success btn-sm'>View</a>";
+                    $actionBtn = "<a href='/admin/view/car/$id'  class='edit btn btn-success btn-sm mr-3'>View</a>";
+                    $actionBtn .= "<a href='/admin/delete/car/$id'  class='edit btn btn-danger btn-sm'>Delete</a>";
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])
@@ -85,7 +98,7 @@ class Car extends Controller
     public function viewTenantCar($id)
     {
         $car = HiredCars::withoutGlobalScopes()->where('id',$id)->with('carclass','cartype','tenant','carHistory','plans')->first();
-//dd($car);
+
         return view('admin.cars.single-car',compact('car'));
     }
 
@@ -564,6 +577,8 @@ class Car extends Controller
         $email = auth()->user()->email;
 
         Mail::to($email)->send(new CarHire($maildata));
+        Notification::route('mail', env('ETRANSIT_ADMIN_EMAIL'))
+            ->notify(new AdminOtherBookings($maildata));
 
         toastr()->success('Cash Payment Made successfully');
 

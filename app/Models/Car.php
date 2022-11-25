@@ -62,5 +62,10 @@ class Car extends Model
         static::addGlobalScope(new TenantScope);
     }
 
+    public function newQuery($excludeDeleted = true) {
+        return parent::newQuery($excludeDeleted)
+            ->whereNull('deleted_at');
+    }
+
 
 }

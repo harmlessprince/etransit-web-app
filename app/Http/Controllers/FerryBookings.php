@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Classes\Reference;
 use App\Models\FerryLocation;
 use App\Models\FerryTrip;
+use App\Notifications\AdminBookingNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Notification;
 
 class FerryBookings extends Controller
 {
@@ -349,6 +351,8 @@ class FerryBookings extends Controller
         $email = $data["email"];
 
         Mail::to($email)->send(new \App\Mail\FerryBookings($maildata));
+        Notification::route('mail', env('ETRANSIT_ADMIN_EMAIL'))
+            ->notify(new AdminBookingNotification($maildata));
 
         if ($transactions) {
             //update the status of seat tracker to booked after payment from selected

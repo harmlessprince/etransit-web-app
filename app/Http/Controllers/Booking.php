@@ -7,9 +7,11 @@ use App\Classes\Reference;
 use App\Mail\BusBooking;
 use App\Models\Schedule;
 use App\Models\SeatTracker;
+use App\Notifications\AdminBookingNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Notification;
 use PDF;
 
 class Booking extends Controller
@@ -83,7 +85,6 @@ class Booking extends Controller
                 ->where('seats_available' , '>=', $request->number_of_passengers)
                 ->with('terminal','bus','destination','pickup','service','tenant')->get();
         }
-
 
         $operators  = \App\Models\Tenant::inRandomOrder()
                                                 ->limit(10)
@@ -636,6 +637,8 @@ class Booking extends Controller
         Invoice::record(auth()->user()->id , $transactions->id , $tripType ,$tripSchedule->return_date);
 
         Mail::to($email)->send(new BusBooking($maildata));
+        Notification::route('mail', env('ETRANSIT_ADMIN_EMAIL'))
+            ->notify(new AdminBookingNotification($maildata));
 
         toastr()->success('Success !! cash payment made successfully');
         return  redirect('/');

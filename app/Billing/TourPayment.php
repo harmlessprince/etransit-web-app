@@ -9,9 +9,11 @@ namespace App\Billing;
 use App\Classes\Reference;
 use App\Mail\TourPackages;
 use App\Models\Tour as TourPackage;
+use App\Notifications\AdminOtherBookings;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use App\Models\Transaction;
+use Illuminate\Support\Facades\Notification;
 use PDF;
 
 class TourPayment
@@ -55,6 +57,8 @@ class TourPayment
 
 
         Mail::to($data["email"])->send(new TourPackages($maildata));
+        Notification::route('mail', env('ETRANSIT_ADMIN_EMAIL'))
+            ->notify(new AdminOtherBookings($maildata));
 
         DB::commit();
         return response()->json(['success' => true, 'message' => 'Payment made successfully']);

@@ -10,10 +10,12 @@ namespace App\Billing;
 
 use App\Classes\Reference;
 use App\Mail\BoatCruiseBooking;
-use App\Mail\BusBooking;
+use App\Mail\AdminBooking;
 use App\Models\BoatTrip;
+use App\Notifications\AdminOtherBookings;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Notification;
 use PDF;
 
 class BoatCruise
@@ -57,6 +59,8 @@ class BoatCruise
         $email =   $data["email"];
 
         Mail::to($email)->send(new BoatCruiseBooking($maildata));
+        Notification::route('mail', env('ETRANSIT_ADMIN_EMAIL'))
+            ->notify(new AdminOtherBookings($maildata));
 
         DB::commit();
 

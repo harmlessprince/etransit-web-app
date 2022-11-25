@@ -5,11 +5,13 @@ namespace App\Http\Controllers\Api;
 use App\Classes\Reference;
 use App\Http\Controllers\Controller;
 use App\Mail\TourPackages;
+use App\Notifications\AdminOtherBookings;
 use Illuminate\Http\Request;
 use App\Models\Tour as TourPackage;
 use App\Models\Service;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Notification;
 use PDF;
 
 class Tour extends Controller
@@ -122,6 +124,8 @@ class Tour extends Controller
         ];
 
         Mail::to($data["email"])->send(new TourPackages($maildata));
+        Notification::route('mail', env('ETRANSIT_ADMIN_EMAIL'))
+            ->notify(new AdminOtherBookings($maildata));
 
         DB::commit();
 

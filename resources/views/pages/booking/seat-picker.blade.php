@@ -229,11 +229,11 @@
                                             <div class="col-md-12"><label class="col-form-label" style="font-size: 14px;color: var(--bs-gray-500);">AGE GROUP</label></div>
                                             <div class="col-md-12 d-inline-flex" style="padding-right: 0px;padding-left: 5px;">
                                                 <div class="form-check d-inline-flex" style="margin-left: 1px;">
-                                                    <input class="form-check-input" name="passenger_option[]"  value="adult" type="checkbox" id="formCheck-1">
+                                                    <input class="form-check-input check" name="passenger_option[]"  value="adult" type="checkbox" id="formCheck-1">
                                                     <label class="form-check-label" for="formCheck-1" style="font-size: 14px;">&nbsp;Adult</label>
                                                 </div>
                                                 <div class="form-check d-inline-flex" style="margin-left: 18px;">
-                                                    <input class="form-check-input" name="passenger_option[]"  value="children" type="checkbox" id="formCheck-2" >
+                                                    <input class="form-check-input check" name="passenger_option[]"  value="children" type="checkbox" id="formCheck-2" >
                                                     <label class="form-check-label" for="formCheck-2" style="font-size: 14px;">&nbsp; Child</label>
                                                 </div>
                                             </div>
@@ -296,6 +296,13 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" defer></script>
 
+<script>
+    $(document).ready(function(){
+        $('.check').click(function() {
+            $('.check').not(this).prop('checked', false);
+        });
+    });
+</script>
     <script>
         $.ajaxSetup({
             headers: {

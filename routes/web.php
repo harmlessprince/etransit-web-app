@@ -78,6 +78,8 @@ Route::post('/bus/filter-bookings/{operator?}/{bus_type?}' , [Booking::class , '
 Route::get('filter-cars/{seat_capacity?}/{class_type?}',[Car::class , 'carList']);
 
 Route::get('about', [PagesController::class, 'about'])->name('about-us');
+Route::get('policy', [PagesController::class, 'policy'])->name('policy');
+Route::get('terms', [PagesController::class, 'terms'])->name('terms');
 Route::get('contact', [PagesController::class, 'contact']);
 
 //Auth::routes();
@@ -297,6 +299,7 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::get('manage/car-type' , [Car::class , 'carType']);
         Route::post('add/car-type' , [Car::class , 'saveCarType']);
         Route::get('view/car/{id}',[Car::class , 'viewTenantCar']);
+        Route::get('delete/car/{id}',[Car::class , 'deleteCar']);
 
 
         Route::get('add/car-hire',[Car::class ,'addCar']);
@@ -306,6 +309,7 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::get('/car/details/{carhistory_id}', [Car::class , 'tripDetails']);
 
 
+        Route::get('fetch-all-cars',[Car::class ,'fetchAllTenantCars'])->name('fetch-all-cars');
         Route::get('fetch-all-cars',[Car::class ,'fetchAllTenantCars'])->name('fetch-all-cars');
 
         Route::get('off-trips-car' ,[Car::class , 'offTripCars']);
