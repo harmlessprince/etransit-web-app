@@ -51,12 +51,11 @@
         </div>
 
     </div>
-
     <script type="text/javascript">
         function initMap() {
-            const myLatLng = { lat: 9.0820, lng: 8.6753 };
+            const myLatLng = { lat: {{ $data['latitude'] ??  19.2901}}, lng: {{ $data['longitude'] ?? 26.818 }} };
             const map = new google.maps.Map(document.getElementById("map"), {
-                zoom: 5,
+                zoom: 12,
                 center: myLatLng,
             });
 
@@ -64,22 +63,17 @@
 
             var infowindow = new google.maps.InfoWindow();
 
-            var marker, i;
+            marker = new google.maps.Marker({
+                position: new google.maps.LatLng({{ $data['latitude'] ??  19.2901}}, {{ $data['longitude'] ?? 26.818 }}),
+                map: map
+            });
 
-            for (i = 0; i < locations.length; i++) {
-                marker = new google.maps.Marker({
-                    position: new google.maps.LatLng(locations[i][1], locations[i][2]),
-                    map: map
-                });
-
-                google.maps.event.addListener(marker, 'click', (function(marker, i) {
-                    return function() {
-                        infowindow.setContent(locations[i][0]);
-                        infowindow.open(map, marker);
-                    }
-                })(marker, i));
-
-            }
+            google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                return function() {
+                    infowindow.setContent('{{ $data['location'] ??  'No location'}}');
+                    infowindow.open(map, marker);
+                }
+            })(marker));
         }
 
         window.initMap = initMap;

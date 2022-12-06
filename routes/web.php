@@ -451,6 +451,8 @@ Route::prefix('admin')->name('admin.')->group(function(){
 
         //manage customer
         Route::get('/customers',[Customer::class , 'customerIndex']);
+        Route::get('/add/customer', [Customer::class, 'addCustomer']);
+        Route::post('/store-customer', [Customer::class, 'storeCustomer']);
         Route::get('/customer/list', [Customer::class , 'customers'])->name('customers.list');
         Route::get('/customer/{customer_id}', [Customer::class , 'getCustomer']);
         Route::get('suspend-user/{customer_id}' , [Customer::class , 'suspendUser']);
