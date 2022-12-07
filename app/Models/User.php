@@ -10,6 +10,9 @@ use Laravel\Sanctum\HasApiTokens;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 
+/**
+ * @method static create(array $validated)
+ */
 class User extends Authenticatable  implements JWTSubject , MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -24,7 +27,7 @@ class User extends Authenticatable  implements JWTSubject , MustVerifyEmail
         'email',
         'password',
         'address',
-        // 'username',
+         'username',
         'phone_number',
         'reset_pin',
         'verification_token',

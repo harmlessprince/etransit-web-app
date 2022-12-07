@@ -86,6 +86,7 @@ class Booking extends Controller
                 ->with('terminal','bus','destination','pickup','service','tenant')->get();
         }
 
+
         $operators  = \App\Models\Tenant::inRandomOrder()
                                                 ->limit(10)
                                                 ->get();
@@ -93,15 +94,6 @@ class Booking extends Controller
         $busTypes = \App\Models\BusType::inRandomOrder()
                                                 ->limit(10)
                                                 ->get();
-//        dd( $busTypes );
-
-
-//        $checkSchedule =  Schedule::where('departure_date', $data['departure_date'])
-//                                            ->where('pickup_id', $data['destination_from'])
-//                                            ->where('destination_id',$data['destination_to'])
-//                                            ->where('seats_available' , '>=', $data['number_of_passengers'])
-//                                            ->with('terminal','bus','destination','pickup','service')->get();
-
 
          //check if the departure date has not already passed
         if($request->departure_date < now()->format('Y-m-d'))

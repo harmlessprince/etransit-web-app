@@ -120,7 +120,14 @@
                         <li class="breadcrumb-item">Manage Customer</li>
                     </ol>
                 </div>
+                <div class="col-6">
+                    <div class="float-end pull-right">
+                        <a href="{{url('admin/add/customer')}}" class="btn btn-success marginTop">Add Customer</a>
+                    </div>
+                </div>
+
             </div>
+
         </div>
     </div>
 
