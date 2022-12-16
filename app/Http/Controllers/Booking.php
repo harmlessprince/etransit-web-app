@@ -92,11 +92,7 @@ class Booking extends Controller
 //        dd( $busTypes );
 
 
-//        $checkSchedule =  Schedule::where('departure_date', $data['departure_date'])
-//                                            ->where('pickup_id', $data['destination_from'])
-//                                            ->where('destination_id',$data['destination_to'])
-//                                            ->where('seats_available' , '>=', $data['number_of_passengers'])
-//                                            ->with('terminal','bus','destination','pickup','service')->get();
+        $checkSchedule =  Schedule::with('terminal','bus','destination','pickup','service')->get();
 
 
          //check if the departure date has not already passed

@@ -49,6 +49,9 @@
                                     @csrf
                                 </form>
                             </ul>
+                            @if(session('user-proxy-id'))
+                            <a class="btn btn-danger text-white font-weight-bold" href="{{ route('impersonate-exit') }}">STOP IMPERSONATION</a>
+                            @endif
                         </div>
                         @endif
                     </div>

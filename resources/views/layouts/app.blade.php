@@ -44,7 +44,7 @@
     <link rel="stylesheet" href="{{asset('new-assets/css/Ultimate-Testimonial-Slider-BS5.css')}}">
     <link rel="stylesheet" href="{{asset("new-assets/owlcarousel/assets/owl.carousel.min.css")}}">
     <link rel="stylesheet" href="{{asset("new-assets/owlcarousel/assets/owl.theme.default.min.css")}}">
-{{--    <link href="{{asset('css/style.css')}}" rel="stylesheet"/>--}}
+    {{--    <link href="{{asset('css/style.css')}}" rel="stylesheet"/>--}}
     <link href="{{asset('css/font.css')}}" rel="stylesheet"/>
 
     <!-- Vendor CSS Files -->
@@ -56,6 +56,10 @@
 
     <!-- Template Main CSS File -->
     <link href="{{asset("assets2/css/style.css")}}" rel="stylesheet">
+    <!-- Add the slick-theme.css if you want default styling -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('new-assets/css/slick.css') }}"/>
+    <!-- Add the slick-theme.css if you want default styling -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('new-assets/css/slick-theme.css') }}"/>
 
 
 
@@ -86,9 +90,9 @@
     </style>
 
 
-{{--    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.css">--}}
-{{--    @stack('css')--}}
-{{--    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">--}}
+    {{--    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.css">--}}
+    {{--    @stack('css')--}}
+    {{--    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">--}}
     <!-- CSRF Token -->
 
 
@@ -101,48 +105,73 @@
 
 </head>
 <body onload="busnav()">
-    <div>
-        <div >
+<div>
+    <div >
         @include('layouts.header')
-            @yield('content')
+        @yield('content')
         @include('layouts.footer')
-        </div>
     </div>
-    <script>
+</div>
+<script>
     var url = 'https://wati-integration-service.clare.ai/ShopifyWidget/shopifyWidget.js?83488';
     var s = document.createElement('script');
     s.type = 'text/javascript';
     s.async = true;
     s.src = url;
     var options = {
-  "enabled":true,
-  "chatButtonSetting":{
-      "backgroundColor":"#4dc247",
-      "ctaText":"",
-      "borderRadius":"25",
-      "marginLeft":"0",
-      "marginBottom":"50",
-      "marginRight":"50",
-      "position":"right"
-  },
-  "brandSetting":{
-      "brandName":"ETRANSIT",
-      "brandSubTitle":"Typically replies within a day",
-      "brandImg":"https://dynamic.brandcrowd.com/asset/merch/113e4f98-cc0b-424f-a8a1-52faa6d46410/signage.png?v=4&text=&w=400",
-      "welcomeText":"Hi there!\nWelcome to Etransit Support",
-      "messageText":"Hello, I have a question about Etransit",
-      "backgroundColor":"#0a5f54",
-      "ctaText":"Start Chat",
-      "borderRadius":"25",
-      "autoShow":true,
-      "phoneNumber":"2348064304717"
-  }
-};
+        "enabled":true,
+        "chatButtonSetting":{
+            "backgroundColor":"#4dc247",
+            "ctaText":"",
+            "borderRadius":"25",
+            "marginLeft":"0",
+            "marginBottom":"50",
+            "marginRight":"50",
+            "position":"right"
+        },
+        "brandSetting":{
+            "brandName":"ETRANSIT",
+            "brandSubTitle":"Typically replies within a day",
+            "brandImg":"https://dynamic.brandcrowd.com/asset/merch/113e4f98-cc0b-424f-a8a1-52faa6d46410/signage.png?v=4&text=&w=400",
+            "welcomeText":"Hi there!\nWelcome to Etransit Support",
+            "messageText":"Hello, I have a question about Etransit",
+            "backgroundColor":"#0a5f54",
+            "ctaText":"Start Chat",
+            "borderRadius":"25",
+            "autoShow":false,
+            "phoneNumber":"2347043274627"
+        }
+    };
     s.onload = function() {
         CreateWhatsappChatWidget(options);
     };
     var x = document.getElementsByTagName('script')[0];
     x.parentNode.insertBefore(s, x);
 </script>
+<script type="text/javascript" src="{{ asset('new-assets/js/slick.min.js') }}"></script>
+@if(Auth::check())
+    <script>
+        function openPaymentHistory(){
+            var win = window.open("{{ route('myProfile', auth()->user()->id) }}", "");
+            win.showPayment();
+            window.opener.child_ready(win)
+            {
+                win.showPayment();
+            };
+        }
+    </script>
+    <script>
+        function collapse(id){
+
+            const attr = $('#'+id).hasClass('d-none');
+
+            if (attr === false) {
+                $('#'+id).addClass('d-none');
+            }else{
+                $('#'+id).removeClass('d-none');
+            }
+        }
+    </script>
+@endif
 </body>
 </html>

@@ -30,7 +30,7 @@
                     <h5 style="color: var(--bs-orange);height: 26px;"><strong>COMPANY</strong></h5>
                     <ul class="list-unstyled">
 
-                        <li style="margin-bottom: 10px;"><a class="text-decoration-none" href="#about" style="color: var(--bs-gray-100) !important;">ABOUT US</a></li>
+                        <li style="margin-bottom: 10px;"><a class="text-decoration-none" href="{{ route('about-us') }}" style="color: var(--bs-gray-100) !important;">ABOUT US</a></li>
 
                         <li style="margin-bottom: 10px;"><a class="text-decoration-none" href="#" style="color: var(--bs-gray-100) !important;">COMMUNITY BLOG</a></li>
                         <li style="margin-bottom: 10px;"><a class="text-decoration-none" href="#" style="margin-bottom: 10px;color: var(--bs-gray-100) !important;">REWARDS</a></li>

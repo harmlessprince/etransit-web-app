@@ -209,6 +209,7 @@
                                 @endforeach
                                 </tbody>
                             </table>
+{{--                            <a href="{{ route('impersonate', [$user->id, 'true']) }}" class="btn btn-primary">Impersonate</a>--}}
                             <a href="{{url('admin/view-customer-transaction/'. $user->id)}}" class="btn btn-success">View More</a>
                         </div>
                     </div>

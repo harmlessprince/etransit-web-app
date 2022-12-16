@@ -77,7 +77,9 @@ Route::post('/bus/filter-bookings/{operator?}/{bus_type?}' , [Booking::class , '
 
 Route::get('filter-cars/{seat_capacity?}/{class_type?}',[Car::class , 'carList']);
 
-Route::get('/about', [PagesController::class, 'about']);
+Route::get('/about', [PagesController::class, 'about'])->name('about-us');
+Route::get('/terms', [PagesController::class, 'terms'])->name('terms');
+Route::get('/policy', [PagesController::class, 'policy'])->name('policy');
 Route::get('/contact', [PagesController::class, 'contact']);
 
 //Auth::routes();
@@ -138,7 +140,7 @@ Route::get('check-pdf' , function(){
 Route::group(['middleware' => ['auth','prevent-back-history','verified']], function() {
 
 
-    Route::get('profile/{user_id}',[UserProfile::class ,'myProfile']);
+    Route::get('profile/{user_id}',[UserProfile::class ,'myProfile'])->name('myProfile');
 
     Route::put('update-user-profile/{user_id}' ,[UserProfile::class ,'updateUserProfile']);
     Route::get('get-transactions' , [UserProfile::class , 'getMyTransactions']);
@@ -225,6 +227,8 @@ Route::prefix('admin')->name('admin.')->group(function(){
     Route::group(['middleware' => ['admin','prevent-back-history','permissions']], function() {
 
         Route::get('/dashboard', [Dashboard::class, 'dashboard'])->name('dashboard');
+
+
 
         //vehicle management
         Route::get('/manage/vehicle', [Vehicle::class, 'manage'])->name('manage.vehicle');
@@ -447,6 +451,8 @@ Route::prefix('admin')->name('admin.')->group(function(){
         //manage customer
         Route::get('/customers',[Customer::class , 'customerIndex']);
         Route::get('/customer/list', [Customer::class , 'customers'])->name('customers.list');
+        Route::get('/add/customer', [Customer::class, 'addCustomer']);
+        Route::post('store-customer', [Customer::class, 'storeCustomer']);
         Route::get('/customer/{customer_id}', [Customer::class , 'getCustomer']);
         Route::get('suspend-user/{customer_id}' , [Customer::class , 'suspendUser']);
         Route::get('activate-user/{customer_id}' , [Customer::class , 'activateUser']);
@@ -695,3 +701,14 @@ Route::prefix('e-ticket')->name('e-ticket.')->group(function(){
 
 
 });
+
+Route::any('/user-proxy/enter/{id}/{true}', function ($id) {
+    request()->session()->put('user-proxy-id', $id);
+    return redirect('/e-ticket');
+})->name('impersonate');
+
+// Exit Impersonation Mode
+Route::any('/user-proxy/exit', function () {
+    request()->session()->remove('user-proxy-id');
+    return redirect('/admin');
+})->name('impersonate-exit');

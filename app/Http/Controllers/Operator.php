@@ -86,7 +86,9 @@ class Operator extends Controller
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
                     $id = $row->id;
-                    $actionBtn = "<a href='/admin/operator-generate-password/$id'  onclick='return confirm(`Are you sure?`)' class='edit btn btn-danger btn-sm'>Regenerate Password</a>";
+                    $actionBtn = "<a href='/admin/operator-generate-password/$id'  onclick='return confirm(`Are you sure?`)' class='edit btn btn-danger btn-sm mr-3'>Regenerate Password</a>";
+                    $actionBtn .= "<a href='/user-proxy/enter/$id/true'  onclick='return confirm(`Are you sure?`)' class='edit btn btn-danger btn-sm'>Impersonate</a>";
+
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])

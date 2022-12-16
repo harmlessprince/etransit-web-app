@@ -198,7 +198,7 @@
                         <div class="col">
                             <h5>PASSANGER DETAILS
                             <div class="add_more_passeneger_icon">
-                                <button id="buttonID"> <img src="{{asset('images/icons/add_user_2.png')}}"  width="20" height="20" /> Add More Passenger</button>
+                                <button onclick="buttonClick()"> <img src="{{asset('images/icons/add_user_2.png')}}"  width="20" height="20" /> Add More Passenger</button>
                             </div>
                         </h5>
                         </div>
@@ -297,6 +297,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" defer></script>
 
     <script>
+        $(".document")
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -353,9 +354,18 @@
             });
 
 
-        $('#buttonID').click(function(e){
-            e.preventDefault();
-            $('.passenger_details_form_input').append(` <div class="row">
+
+        function buttonClick(x){
+            x++;
+            alert(x)
+            event.preventDefault();
+            $('.passenger_details_form_input').append(` <div class="row set`+x+`">
+<div class="row">
+                                    <div class="col" style="margin-top: 44px;">
+                                        <h6 class="float-start w-50">PASSENGER # `+x+` DETAILS</h6>
+<a class="float-end btn btn-danger">Remove</a>
+                                    </div>
+                                </div>
                                     <div class="col" style="margin-top: 28px;">
                                 <label class="form-label" style="font-size: 14px;color: var(--bs-gray-500);">FULL NAME</label>
                                 <input class="form-control" name="full_name[]" type="text" style="border-top-style: none;border-right-style: none;border-left-style: none;border-radius: 0px;border-top-left-radius: 0px;border-top-right-radius: 0px;border-bottom-right-radius: 0px;border-bottom-left-radius: 1px;background: rgba(255,255,255,0);"></div>
@@ -390,7 +400,13 @@
                                     <div><input type="text" name="next_of_kin_number[]" class="form-control" type="text" style="border-top-style: none;border-right-style: none;border-left-style: none;border-radius: 0px;border-top-left-radius: 0px;border-top-right-radius: 0px;border-bottom-right-radius: 0px;border-bottom-left-radius: 1px;background: rgba(255,255,255,0);"/></div>
                                 </div>
                             </div>`);
-        });
+        }
+        // $('#buttonID').click(function(e){
+        //
+        //     x++;
+        //
+        //
+        // });
 
         function displayErrorMessage(message) {
             toastr.error(message, 'Error');
