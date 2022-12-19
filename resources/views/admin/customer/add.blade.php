@@ -56,7 +56,7 @@
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="inputEmail4">Username</label>
-                                    <input type="text" class="form-control" required name="username" id="inputEmail4">
+                                    <input type="text" class="form-control" name="username" id="inputEmail4">
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="inputPassword4">Email</label>

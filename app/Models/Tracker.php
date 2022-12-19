@@ -16,4 +16,9 @@ class Tracker extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function tracking_details()
+    {
+        return $this->hasOne(TrackingRecord::class);
+    }
 }

@@ -17,9 +17,9 @@ class SocialController extends Controller
         return Socialite::driver($provider)->redirect();
     }
 
-    public function Callback($provider){
+    public function Callback(){
 
-        $userSocial =   Socialite::driver($provider)->stateless()->user();
+        $userSocial =   Socialite::driver('google')->user();
         $users      =  User::where(['email' => $userSocial->getEmail()])->first();
 
         if($users){
@@ -27,14 +27,16 @@ class SocialController extends Controller
             return redirect('/');
         }else{
             $user = User::create([
-                'full_name'         => $userSocial->getName(),
+                'full_name'         => $userSocial->getEmail(),
                 'email_verified_at'  => Carbon::now(),
                 'email'             => $userSocial->getEmail(),
                 'password'          => Hash::make($userSocial->getEmail()),
                 'image'             => $userSocial->getAvatar(),
                 'provider_id'       => $userSocial->getId(),
-                'provider'          => $provider,
+                'provider'          => 'google',
             ]);
+            
+            Auth::login($user);
             return redirect('/');
         }
     }

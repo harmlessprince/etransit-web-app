@@ -6,6 +6,11 @@
         grid-template-columns: repeat(3 , 1fr);
         column-gap: 50px;
     }
+    @media only screen and (max-width: 600px) {
+        .plan_container {
+            grid-template-columns: repeat(1 , 1fr);
+        }
+    }
     .plan_box
     {
         background:#FE6700;

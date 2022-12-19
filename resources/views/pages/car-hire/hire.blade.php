@@ -174,59 +174,107 @@
                             <div class="col">
                                 <p style="margin-top: 4px;margin-bottom: 0px;font-size: 13px;"><strong>Vehicle type</strong></p>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col">
-                                <div class="table-responsive">
-                                    <table class="table table-borderless">
-                                        <tbody>
-                                        @foreach($catType as $type)
-                                            <tr>
-                                                <td>
-                                                    <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-8">
-                                                        <input class="form-check-input" type="checkbox" name="car_types[]" value="{{$type->id}}" id="formCheck-2">
-                                                    </div>
-                                                </td>
-                                                <td style="text-align: right;color: #000;">{{Ucfirst($type->name)}}</td>
-                                            </tr>
+                                <div class="dropdown" id="targetcenter-1" style="border-style: none;background: rgba(238,238,238,0);">
+                                    <button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="color: rgb(136,136,136);background: rgba(238,238,238,0);border-style: none;">&nbsp;Select vehicle type&nbsp;</button>
+                                    <div class="dropdown-menu">
+                                        @foreach($carTypes as $type)
+                                            <form action="{{url('car-hire')}}">
+                                                @csrf
+                                                <input value="{{$type->id}}" type="hidden" name="class_type">
+                                                <button class="dropdown-item btn" type="submit">{{$type->name}}</button>
+                                            </form>
                                         @endforeach
-                                        </tbody>
-                                    </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div class="row" style="margin-bottom: 11px;">
                             <div class="col">
-                                <p style="margin-top: 4px;margin-bottom: 0px;font-size: 13px;"><strong>Transmission</strong></p>
+                                <p style="margin-top: 4px;margin-bottom: 0px;font-size: 13px;"><strong>Class</strong></p>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col">
-                                <div class="table-responsive">
-                                    <table class="table table-borderless">
-                                        <tbody>
-                                        @foreach($transmission as $trans)
-                                            <tr>
-                                                <td>
-                                                    <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-8">
-                                                        <input class="form-check-input" type="checkbox" name="transmissions[]" value="{{$trans}}" id="formCheck-2">
-                                                    </div>
-                                                </td>
-                                                <td style="text-align: right;color: #000;">{{Ucfirst($trans)}}</td>
-                                            </tr>
+                                <div class="dropdown" style="border-style: none;background: rgba(238,238,238,0);">
+                                    <button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="color: rgb(136,136,136);background: rgba(238,238,238,0);border-style: none;">Select class</button>
+                                    <div class="dropdown-menu">
+                                        @foreach($carClasses as $classType)
+                                            <form action="{{url('car-hire')}}">
+                                                @csrf
+                                                <input value="{{$classType->id}}" type="hidden" name="class_class">
+                                                <button class="dropdown-item btn" type="submit">{{$classType->name}}</button>
+                                            </form>
                                         @endforeach
-                                        </tbody>
-                                    </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                        <div class="row" style="margin-bottom: 11px;">
+                            <div class="col">
+                                <p style="margin-top: 4px;margin-bottom: 0px;font-size: 13px;"><strong>Capacity</strong></p>
+                            </div>
+                            <div class="col">
+                                <div class="dropdown" id="targetcenter-3" style="border-style: none;background: rgba(238,238,238,0);text-align: center;">
+                                    <button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="color: rgb(136,136,136);background: rgba(238,238,238,0);border-style: none;text-align: left;">Seat Capacity</button>
+                                    <div class="dropdown-menu">
+                                        @for($i = 1 ; $i <= 10 ; $i++)
+                                            <form action="{{url('car-hire')}}">
+                                                @csrf
+                                                <input value="{{$i}}" type="hidden" name="seat_capacity">
+                                                <button class="dropdown-item btn" type="submit">{{$i}}</button>
+                                            </form>
+                                        @endfor
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row" style="margin-bottom: 11px;">
+                            <div class="col">
+                                <p style="margin-top: 4px;margin-bottom: 0px;font-size: 13px;"><strong>Transmission</strong></p>
+                            </div>
+                            <div class="col">
+                                <div class="dropdown" id="targetcenter-3" style="border-style: none;background: rgba(238,238,238,0);text-align: center;">
+                                    <button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="color: rgb(136,136,136);background: rgba(238,238,238,0);border-style: none;text-align: left;">Select Transmission</button>
+                                    <div class="dropdown-menu">
+                                        @foreach($transmission as $trans)
+                                            <form action="{{url('car-hire')}}">
+                                                @csrf
+                                                <input value="{{$trans}}" type="hidden" name="seat_capacity">
+                                                <button class="dropdown-item btn" type="submit">{{$i}}</button>
+                                            </form>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+{{--                        <div class="row">--}}
+{{--                            <div class="col">--}}
+{{--                                <div class="table-responsive">--}}
+{{--                                    <table class="table table-borderless">--}}
+{{--                                        <tbody>--}}
+{{--                                        @foreach($transmission as $trans)--}}
+{{--                                            <tr>--}}
+{{--                                                <td>--}}
+{{--                                                    <div class="form-check"><input class="form-check-input" type="checkbox" id="formCheck-8">--}}
+{{--                                                        <input class="form-check-input" type="checkbox" name="transmissions[]" value="{{$trans}}" id="formCheck-2">--}}
+{{--                                                    </div>--}}
+{{--                                                </td>--}}
+{{--                                                <td style="text-align: right;color: #000;">{{Ucfirst($trans)}}</td>--}}
+{{--                                            </tr>--}}
+{{--                                        @endforeach--}}
+{{--                                        </tbody>--}}
+{{--                                    </table>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
                         <hr>
                         <div class="row">
-                            <div class="col">
+                            <div class="col" style="cursor:pointer;" onclick="collapse('all-locations')">
                                 <p style="margin-top: 4px;margin-bottom: 0px;font-size: 13px;"><strong>Locations</strong></p>
                             </div>
                         </div>
-                        <div class="table-responsive">
+                        <div class="table-responsive d-none d-md-block mb-3" id="all-locations">
                             <table class="table table-borderless">
                                 <tbody>
                                 @foreach($states as $state)
@@ -250,48 +298,15 @@
                 </div>
 
                 <div class="col-sm-6 col-md-9 " id="cruisedisplay" style="padding-left: 0px;padding-right: 0px;">
-                    <div class="row" id="optionline-1" style="padding-left: 0px;padding-right: 0px;margin-top: 0px;margin-bottom: 15px;margin-left: 10px;margin-right: 0px;background: var(--bs-gray-200);">
-                        <div class="col" style="background: var(--bs-gray-200);border-right: 1px none #bebebe;">
-                            <div class="dropdown" id="targetcenter-1" style="border-style: none;background: rgba(238,238,238,0);">
-                                <button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="color: rgb(136,136,136);background: rgba(238,238,238,0);border-style: none;">&nbsp;Select vehicle type&nbsp;</button>
-                                <div class="dropdown-menu">
-                                    @foreach($carTypes as $type)
-                                        <form action="{{url('car-hire')}}">
-                                            @csrf
-                                            <input value="{{$type->id}}" type="hidden" name="class_type">
-                                            <button class="dropdown-item btn" type="submit">{{$type->name}}</button>
-                                        </form>
-                                    @endforeach
-                                </div>
-                            </div>
-                        <div class="col" style="background: var(--bs-gray-200);border-right: 1px solid #bebebe;">
-                            <div class="dropdown" style="border-style: none;background: rgba(238,238,238,0);">
-                                <button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="color: rgb(136,136,136);background: rgba(238,238,238,0);border-style: none;">Select class</button>
-                                <div class="dropdown-menu">
-                                    @foreach($carClasses as $classType)
-                                        <form action="{{url('car-hire')}}">
-                                            @csrf
-                                            <input value="{{$classType->id}}" type="hidden" name="class_class">
-                                            <button class="dropdown-item btn" type="submit">{{$classType->name}}</button>
-                                        </form>
-                                    @endforeach
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col" style="background: var(--bs-gray-200);">
+                    <div class="row" id="optionline-1" style="background: var(--bs-gray-200);">
+{{--                        <div class="col-3" style="background: var(--bs-gray-200);border-right: 1px none #bebebe;">--}}
 
-                            <div class="dropdown" id="targetcenter-3" style="border-style: none;background: rgba(238,238,238,0);text-align: center;">
-                                <button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="color: rgb(136,136,136);background: rgba(238,238,238,0);border-style: none;text-align: left;">Seat Capacity</button>
-                                <div class="dropdown-menu">
-                                    @for($i = 1 ; $i <= 10 ; $i++)
-                                        <form action="{{url('car-hire')}}">
-                                            @csrf
-                                            <input value="{{$i}}" type="hidden" name="seat_capacity">
-                                            <button class="dropdown-item btn" type="submit">{{$i}}</button>
-                                        </form>
-                                    @endfor
-                                </div>
-                            </div>
+                        <div class="col-3" style="background: var(--bs-gray-200);border-right: 1px solid #bebebe;">
+
+                        </div>
+                        <div class="col-3" style="background: var(--bs-gray-200);">
+
+
                             {{--                        <p style="font-weight: bold;text-align: left;margin-bottom: 0px;margin-left: 0px;padding-left: 35px;">Daily</p>--}}
                         </div>
                         {{-- <div class="col mx-auto" style="background: var(--bs-gray-200);">
@@ -306,7 +321,7 @@
                     @if(count($cars) >  0)
                         @foreach($cars as $car)
                             <div class="row" style="padding: 3px;">
-                                <div class="col" id="autopadding" style="padding: 20px;padding-top: 36px;padding-left: 38px;">
+                                <div class="col" id="autopadding" style="padding-left: 38px;">
                                     <div class="row" style="border-radius: 7px;box-shadow: 2px 1px 5px 1px rgb(226,226,227);padding: 17px;background: #ffffff;">
                                         <div class="col-sm-12 col-md-4 d-md-flex d-lg-flex justify-content-md-center justify-content-lg-center align-items-lg-center car_box">
                                             <img src="{{$car->car_images[0]->path}}" width="200" height="200">
@@ -403,3 +418,5 @@
         </div>
     </section>
 @endsection
+
+

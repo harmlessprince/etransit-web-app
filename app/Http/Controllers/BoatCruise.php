@@ -9,10 +9,12 @@ use App\Models\BoatImage;
 use App\Models\BoatTrip;
 use App\Models\CruiseDestination;
 use App\Models\Service;
+use App\Notifications\AdminOtherBookings;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Notification;
 use RealRashid\SweetAlert\Facades\Alert;
 use PDF;
 
@@ -395,6 +397,8 @@ class BoatCruise extends Controller
         $email = auth()->user()->email;
 
         Mail::to($email)->send(new BoatCruiseBooking($maildata));
+        Notification::route('mail', env('ETRANSIT_ADMIN_EMAIL'))
+            ->notify(new AdminOtherBookings($maildata));
 
         DB::commit();
 

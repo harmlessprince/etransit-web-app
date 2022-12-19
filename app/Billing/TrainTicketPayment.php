@@ -11,8 +11,10 @@ namespace App\Billing;
 use App\Classes\Reference;
 use App\Models\TrainSchedule;
 use App\Models\TrainSeatTracker;
+use App\Notifications\AdminOtherBookings;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Notification;
 use PDF;
 
 class TrainTicketPayment
@@ -86,6 +88,8 @@ class TrainTicketPayment
 
 
             Mail::to($data['email'] )->send(new \App\Mail\TrainTicket($maildata));
+        Notification::route('mail', env('ETRANSIT_ADMIN_EMAIL'))
+            ->notify(new AdminOtherBookings($maildata));
 
             DB::commit();
             return response()->json(['success' => true, 'message' => 'Payment made successfully']);

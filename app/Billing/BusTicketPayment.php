@@ -10,8 +10,10 @@ namespace App\Billing;
 
 use App\Classes\Reference;
 use App\Mail\BusBooking;
+use App\Notifications\AdminBookingNotification;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Notification;
 use PDF;
 
 class BusTicketPayment
@@ -111,6 +113,9 @@ class BusTicketPayment
                 $email = $data['data']['meta']['user_email'];
 
                 Mail::to($email)->send(new BusBooking($maildata));
+                Notification::route('mail', env('ETRANSIT_ADMIN_EMAIL'))
+                    ->notify(new AdminBookingNotification($maildata));
+
             }
             DB::commit();
             return response()->json(['success' => true, 'message' => 'Payment made successfully']);

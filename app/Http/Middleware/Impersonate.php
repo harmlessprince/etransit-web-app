@@ -2,7 +2,6 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\Eticket;
 use App\Models\User;
 use Closure;
 use Illuminate\Http\Request;
@@ -24,8 +23,8 @@ class Impersonate
             if (!$id) {
                 return $next($request);
             }
-            $user = Eticket::query()->findOrFail($id);
-            Auth::guard('e-ticket')->login($user);
+            $user = User::query()->findOrFail($id);
+            Auth::setUser($user);
 
         return $next($request);
     }

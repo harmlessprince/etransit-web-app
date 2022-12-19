@@ -78,56 +78,55 @@
             <div class="col-sm-6 col-md-9" id="cruisedisplay" style="padding-left: 0px;padding-right: 0px;">
                 <div class="row" id="optionline-1" style="padding-left: 0px;padding-right: 0px;margin-top: 0px;margin-bottom: 15px;margin-left: 0px;margin-right: 0px;">
                     <div class="col" style="background: #eeeeee;border-right: 1px solid #bebebe ;">
-                        <div class="dropdown" id="targetcenter-1" style="border-style: none;background: #eeeeee;"><button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="color: rgb(136,136,136);background: rgb(238,238,238);border-style: none;">&nbsp;Location&nbsp;&nbsp;</button>
-                            <div class="dropdown-menu"><a class="dropdown-item" href="#">First Item</a><a class="dropdown-item" href="#">Second Item</a><a class="dropdown-item" href="#">Third Item</a></div>
+                        <div class="dropdown" id="targetcenter-1" style="border-style: none;background: #eeeeee;"><button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="color: rgb(136,136,136);background: rgb(238,238,238);border-style: none;" disabled>&nbsp;Location&nbsp;&nbsp;</button>
                         </div>
                         <p style="font-weight: bold;text-align: center;">Lagos<span style="color: rgb(146,144,144);margin-left: 5px;">Ikeja</span></p>
                     </div>
                     <div class="col" style="background: #eeeeee;">
-                        <div class="dropdown" style="border-style: none;background: #eeeeee;"><button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="color: rgb(136,136,136);background: rgb(238,238,238);border-style: none;"><i class="fa fa-calendar-o"></i>&nbsp; Check in</button>
+                        <div class="dropdown" style="border-style: none;background: #eeeeee;"><button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="color: rgb(136,136,136);background: rgb(238,238,238);border-style: none;" disabled><i class="fa fa-calendar-o"></i>&nbsp; Check in</button>
                             <div class="dropdown-menu"><a class="dropdown-item" href="#">First Item</a><a class="dropdown-item" href="#">Second Item</a><a class="dropdown-item" href="#">Third Item</a></div>
                         </div>
                         <p style="font-weight: bold;text-align: left;margin-bottom: 0px;">&nbsp; &nbsp;June 28, 2021</p>
                         <p style="color: rgb(121,122,122);">&nbsp; &nbsp;Tuesday</p>
                     </div>
                     <div class="col" style="background: #eeeeee;border-right: 1px solid #bebebe ;">
-                        <div class="dropdown" style="border-style: none;background: #eeeeee;"><button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="color: rgb(136,136,136);background: rgb(238,238,238);border-style: none;"><i class="fa fa-calendar-o"></i>&nbsp; Checkout</button>
+                        <div class="dropdown" style="border-style: none;background: #eeeeee;"><button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="color: rgb(136,136,136);background: rgb(238,238,238);border-style: none;" disabled><i class="fa fa-calendar-o"></i>&nbsp; Checkout</button>
                             <div class="dropdown-menu"><a class="dropdown-item" href="#">First Item</a><a class="dropdown-item" href="#">Second Item</a><a class="dropdown-item" href="#">Third Item</a></div>
                         </div>
                         <p style="font-weight: bold;text-align: left;margin-bottom: 0px;">&nbsp; &nbsp;June 28, 2021</p>
                         <p style="color: rgb(121,122,122);">&nbsp; &nbsp;Tuesday</p>
                     </div>
                     <div class="col" style="background: #eeeeee;">
-                        <div class="dropdown" id="targetcenter-2" style="border-style: none;background: #eeeeee;text-align: center;"><button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="color: rgb(136,136,136);background: rgb(238,238,238);border-style: none;">No. of Adult</button>
+                        <div class="dropdown" id="targetcenter-2" style="border-style: none;background: #eeeeee;text-align: center;"><button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="color: rgb(136,136,136);background: rgb(238,238,238);border-style: none;" disabled>No. of Adult</button>
                             <div class="dropdown-menu"><a class="dropdown-item" href="#">First Item</a><a class="dropdown-item" href="#">Second Item</a><a class="dropdown-item" href="#">Third Item</a></div>
                         </div>
                         <p style="font-weight: bold;text-align: center;margin-bottom: 0px;">4</p>
                     </div>
                     <div class="col" style="background: #eeeeee;">
-                        <div class="dropdown" id="targetcenter-3" style="border-style: none;background: #eeeeee;text-align: center;"><button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="color: rgb(136,136,136);background: rgb(238,238,238);border-style: none;">No. of Chidren</button>
+                        <div class="dropdown" id="targetcenter-3" style="border-style: none;background: #eeeeee;text-align: center;"><button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="color: rgb(136,136,136);background: rgb(238,238,238);border-style: none;" disabled>No. of Chidren</button>
                             <div class="dropdown-menu"><a class="dropdown-item" href="#">First Item</a><a class="dropdown-item" href="#">Second Item</a><a class="dropdown-item" href="#">Third Item</a></div>
                         </div>
                         <p style="font-weight: bold;text-align: center;margin-bottom: 0px;">1</p>
                     </div>
                     <div class="col mx-auto" style="background: #eeeeee;">
-                        <div class="dropdown" id="targetcenter-4" style="border-style: none;background: #eeeeee;text-align: center;"><button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="color: rgb(136,136,136);background: rgb(238,238,238);border-style: none;">Room</button>
+                        <div class="dropdown" id="targetcenter-4" style="border-style: none;background: #eeeeee;text-align: center;"><button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" style="color: rgb(136,136,136);background: rgb(238,238,238);border-style: none;" disabled>Room</button>
                             <div class="dropdown-menu"><a class="dropdown-item" href="#">First Item</a><a class="dropdown-item" href="#">Second Item</a><a class="dropdown-item" href="#">Third Item</a></div>
                         </div>
                         <p style="font-weight: bold;text-align: center;margin-bottom: 0px;">1</p>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col" style="width: 388px;height: 189.031px;">
+                <div class="justify-content-center align-content-center">
+                    <div class="col">
                         <div class="carousel slide" data-bs-ride="carousel" data-bs-interval="10000" id="carousel-t" style="min-height: 0px;margin-top: 0px;padding: 22px;">
                             <div class="carousel-inner" style="border-right-style: none;">
                                 @foreach($tour->tourimages as $index => $img)
-                                <div class="carousel-item @if($index == 0)active @endif" style="border-radius: 30px;border-style: none;border-right-style: none;margin-right: 0px;background: url(&quot;assets/img/Rectangle%202.1.png&quot;) center / cover no-repeat;"><img class="img-fluid w-100 d-block" src="{{$img->path}}" style="border-radius: 30px;border-style: none;border-right-style: none;"></div>
+                                    <div class="carousel-item @if($index == 0)active @endif" style="border-radius: 30px;border-style: none;border-right-style: none;margin-right: 0px;background: url(&quot;assets/img/Rectangle%202.1.png&quot;) center / cover no-repeat;"><img class="img-fluid w-100 d-block" src="{{$img->path}}" style="border-radius: 30px;border-style: none;border-right-style: none;"></div>
                                 @endforeach
                             </div>
                             <div><a class="carousel-control-prev" href="#carousel-t" role="button" data-bs-slide="prev" style="margin-left: 60px;"><span class="carousel-control-prev-icon"></span><span class="visually-hidden">Previous</span></a><a class="carousel-control-next" href="#carousel-t" role="button" data-bs-slide="next" style="margin-right: 60px;"><span class="carousel-control-next-icon"></span><span class="visually-hidden">Next</span></a></div>
                             <ol class="carousel-indicators">
                                 @foreach($tour->tourimages as $index => $img)
-                                <li data-bs-target="#carousel-t" data-bs-slide-to="{{$index}}" class="active"></li>
+                                    <li data-bs-target="#carousel-t" data-bs-slide-to="{{$index}}" class="active"></li>
                                 @endforeach
                             </ol>
                         </div>
@@ -180,7 +179,7 @@
                                     <tr>
                                         <td>
                                             <div class="form-check">
-                                                <input class="form-check-input radioInput" type="radio" value="{{$tour->amount_regular}}" name="amount"  id="formCheck-5">
+                                                <input class="form-check-input radioInput" required type="radio" value="{{$tour->amount_regular}}" name="amount"  id="formCheck-5">
                                                 <label class="form-check-label" for="formCheck-5">Regular</label>
                                             </div>
                                         </td>
@@ -189,7 +188,7 @@
                                     <tr>
                                         <td>
                                             <div class="form-check">
-                                                <input class="form-check-input tradioInput" type="radio" value="{{$tour->amount_standard}}" name="amount" id="formCheck-6">
+                                                <input class="form-check-input tradioInput" required type="radio" value="{{$tour->amount_standard}}" name="amount" id="formCheck-6">
                                                 <label class="form-check-label" for="formCheck-6">Standard</label>
                                             </div>
                                         </td>
@@ -267,11 +266,12 @@
                     </div>
                 </div>
                 <div class="row" style="margin-top: 20px;">
-                    <div class="col" style="text-align: center;"><button class="btn btn-primary" type="submit" form="payment_plan" style="background: rgb(52,63,95);width: 253.969px;"><strong>CONTINUE TO PAYMENT</strong></button></div>
+                    <div class="col" style="text-align: center;"><button class="btn btn-primary" type="submit" form="payment_plan" style="background: rgb(52,63,95);width: 253.969px;" onclick="submitForm()"><strong>CONTINUE TO PAYMENT</strong></button></div>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
 
 @endsection

@@ -11,7 +11,7 @@
     </div>
 </footer>
 {{--<script src="{{ asset('js/app.js') }}" defer></script>--}}
-<script async="" defer="" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGCQvcXUsXwCdYArPXo72dLZ31WS3WQRw&amp;callback=initMap"></script>
+
 
 <!-- latest jquery-->
 {{--<script src="{{asset('assets/js/jquery-3.5.1.min.js')}}"></script>--}}

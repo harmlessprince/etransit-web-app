@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Etransit Login</title>
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/login-assets/img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/login-assets/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/login-assets/img/favicon-16x16.png">
+    <link rel="manifest" href="/login-assets/img/site.webmanifest">
     <link rel="stylesheet" href="{{asset('login-assets/bootstrap/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface&amp;display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Arsenal&amp;display=swap">
@@ -32,16 +36,20 @@
     <link rel="stylesheet" href="{{asset('loginassets/csss/Tricky-Grid---2-Column-on-Desktop--Tablet-Flip-Order-of-12-Column-rows-on-Mobile.css')}}">
     <link rel="stylesheet" href="{{asset('login-assets/csss/Ultimate-Testimonial-Slider-BS5.css')}}">
     <style>
-       body {
-            background-image: url("{{asset('login-assets/img/signin.jpg')}}");
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            background-size: cover;
+        body {
             font-family: metropolis-regular , Sans-Serif;
         }
 
         h1, h2,h3,h4,h5,h6{
             font-family: metropolis-semi-bold , Sans-Serif;
+        }
+        .google_btn{
+            text-decoration: none !important;
+        }
+        @media only screen and (max-width: 600px) {
+            .signup-image {
+                display: none;
+            }
         }
     </style>
 </head>
@@ -53,30 +61,26 @@
             <div class="row" style="height: 49px;">
                 <div class="col-sm-auto col-md-7 col-lg-7 col-xl-7 col-xxl-7" id="topparagrahp" style="height: 49px;">
                     <p id="faicon" style="text-align: center;color: var(--bs-white);margin-top: 9px;margin-left: 7px;width: 293.703px;margin-bottom: 22px;">
-                        <i class="fa fa-facebook" style="padding-top: 5px;"></i>&nbsp; &nbsp;&nbsp;
-                        <i class="fa fa-linkedin" style="color: rgb(255, 255, 255);padding-top: 5px;"></i>&nbsp; &nbsp; &nbsp;
-                        <i class="fa fa-google-plus justify-content-center align-items-center align-content-center" style="padding-top: 5px;"></i>|&nbsp; hello@etransitafrica.com</p>
+                        <a href="https://web.facebook.com/etransitafrica" target="_blank">
+                            <i class="fa fa-facebook" style="color: rgb(255, 255, 255);padding-top: 5px;"></i>
+                        </a>
+
+                        <a href="https://twitter.com/etransitafrica" target="_blank">
+                            <i class="fa fa-twitter" style="color: rgb(255, 255, 255);padding-top: 5px;"></i>&nbsp;
+                        </a>
+                        <a href="https://www.instagram.com/etransitafrica/" target="_blank">
+                            <i class="fa fa-instagram justify-content-center align-items-center align-content-center" style="color: rgb(255, 255, 255);padding-top: 5px;"></i>
+                        </a>
+                        &nbsp; &nbsp; |&nbsp;
+                        hello@etransitafrica.com &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</p>
                 </div>
-                <div class="col-auto col-sm-auto" id="currency" style="text-align: center;">
-                    <div class="dropdown" id="reducebutton-1" style="padding-top: 6px;padding-bottom: 6px;">
-                        <button class="btn btn-light dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" id="reducebutton-2" type="button" style="color: rgb(255,255,255);background: rgb(52,63,95);border-style: none;border-color: rgba(255,255,255,0);font-size: 12px;">NGN&nbsp;&nbsp;</button>
-                        <div class="dropdown-menu dropdown-menu-start" id="reducebutton-3"><a class="dropdown-item" href="#">First Item</a><a class="dropdown-item" href="#">Second Item</a><a class="dropdown-item" href="#">Third Item</a></div>
-                    </div>
-                </div>
-                <div class="col-sm-2" id="countrydiv" style="padding-right: 0px;padding-left: 5px;">
-                    <button class="btn btn-primary btn-lg text-start d-inline-flex" id="countrytext" type="button" style="margin: auto;width: 100%;color: var(--bs-white);margin-bottom: 2px;font-weight: 400;font-size: 14px;border-radius: 0px;background: rgba(247,247,247,0);border-style: none;border-color: rgba(255,255,255,0);padding-top: 12px;">
-                        <img src="{{asset('login-assets/img/uk.svg')}}" style="max-width: 24px;margin-right: 12px;">English</button></div>
-                <div class="col">
-                    <div class="row">
-                        <div class="col-12 d-lg-flex justify-content-lg-center align-items-lg-center" id="websignupdiv" style="text-align: center;padding-top: 9px;padding-bottom: 9px;">
-                            <a href="{{route('register')}}" class="btn btn-primary"  style="height: 30px;padding-top: 2px;margin-left: 20px;border-color: var(--bs-orange);background: rgba(13,110,253,0);">&nbsp;Sign Up&nbsp;</a></div>
-                        <div class="col-12 justify-content-lg-center align-items-lg-center" style="text-align: center; display: none;">
-                            <img class="rounded-circle img-fluid" width="40" height="40" src="{{asset('login-assets/img/Testimonial%20male%20white.svg')}}" style="border: 2px solid var(--bs-white) ;">
-                            <span style="color: var(--bs-white);margin-left: 20px;"><strong>Nick Doe</strong></span></div>
-                    </div>
-                </div>
+                <button class="btn btn-primary btn-lg text-start d-inline-flex" id="countrytext" type="button" style="margin: auto;width: 100%;color: var(--bs-white);margin-bottom: 2px;font-weight: 400;font-size: 14px;border-radius: 0px;background: rgba(247,247,247,0);border-style: none;border-color: rgba(255,255,255,0);padding-top: 12px;">
+                    <img src="{{asset('new-assets/img/uk.svg')}}" style="max-width: 24px;margin-right: 12px;">English</button>
             </div>
         </div>
+    </div>
+    </div>
+    </div>
     </div>
 </section>
 <section style="background: var(--bs-white);">
@@ -88,13 +92,13 @@
             </button>
             <div class="collapse navbar-collapse" id="navcol-1" style="text-align: right;">
                 <ul class="navbar-nav navbar-nav-scroll text-end d-md-flex ms-auto">
-{{--                    <li class="nav-item"><a class="nav-link active" href="{{url('/')}}" style="color: #06044e;">Home</a></li>--}}
-{{--                    <li class="nav-item"><a class="nav-link" href="{{url('tour-packages')}}" style="color: #06044e;">Tour Packages</a></li>--}}
-{{--                    <li class="nav-item"><a class="nav-link" href="{{url('boat-cruise')}}" style="color: #06044e;">Boat Cruise</a></li>--}}
-{{--                    <li class="nav-item"><a class="nav-link" href="{{url('car-hire')}}" style="color: #06044e;">Hire A Vehicle</a></li>--}}
-{{--                    <li class="nav-item"><a class="nav-link" href="{{url('partners')}}" style="color: #06044e;">Become A Partner<br></a></li>--}}
-{{--                    <li class="nav-item"><a class="nav-link" href="{{url('parcel')}}" style="color: #06044e;">Parcel</a></li>--}}
-{{--                    <li class="nav-item"></li>--}}
+                    <li class="nav-item"><a class="nav-link active" href="{{url('/')}}" style="color: #06044e;">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{url('tour-packages')}}" style="color: #06044e;">Tour Packages</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{url('boat-cruise')}}" style="color: #06044e;">Boat Cruise</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{url('car-hire')}}" style="color: #06044e;">Hire A Vehicle</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{url('partners')}}" style="color: #06044e;">Become A Partner<br></a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{url('parcel')}}" style="color: #06044e;">Parcel</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ ('contact')}}" style="color: #06044e;">Contact</a></li>
                 </ul>
             </div>
         </div>
@@ -103,41 +107,40 @@
 <section style="padding-right: 12px;padding-top: 0px;padding-left: 12px;">
     <div class="container">
         <div class="row" style="margin-top: 5%;margin-bottom: 0%;">
+            <div class="col justify-content-center signup-image">
+                <img src="{{ asset('login-assets/img/signin1.png')}}" class="img-fluid">
+            </div>
             <div class="col d-flex d-sm-flex d-md-flex justify-content-center justify-content-sm-center justify-content-md-center" style="background: rgba(255,255,255,0);">
-                <div style="background: var(--bs-white);padding: 25px;padding-top: 30px;">
-                        @if (session('status'))
-                            <div class="alert alert-success" role="alert">
-                                {{ session('status') }}
+                <div style="width: 350px;background: var(--bs-white);padding: 25px;padding-top: 30px;">
+                    <h5 style="text-align: center;">Reset your password</h5>
+                    <p style="text-align: center;color: var(--bs-gray-500);">Remember your password?&nbsp;&nbsp;<a href="{{route('login')}}" style="color: rgb(231,113,15);">Sign In</a>&nbsp;</p>
+                    <form method="POST" action="{{ route('password.email') }}">
+                        @csrf
+
+                        <div class="form-group row">
+                            <div>
+                                <label for="email" class="col-md-12 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
                             </div>
-                        @endif
 
-                        <form method="POST" action="{{ route('password.email') }}">
-                            @csrf
+                            <div class="col-md-12">
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
-                            <div class="form-group row">
-                                <div>
-                                    <label for="email" class="col-md-12 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-                                </div>
-
-                                <div class="col-md-12">
-                                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-
-                                    @error('email')
-                                        <span class="invalid-feedback" role="alert">
+                                @error('email')
+                                <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
-                                    @enderror
-                                </div>
+                                @enderror
                             </div>
-                            <br>
-                            <div class="form-group row mb-0">
-                                <div class="col-md-12">
-                                    <button type="submit" class="btn btn-primary">
-                                        {{ __('Send Password Reset Link') }}
-                                    </button>
-                                </div>
+                        </div>
+                        <br>
+                        <div class="form-group row mb-0">
+                            <div class="col-md-12">
+                                <button type="submit" class="btn btn-primary">
+                                    {{ __('Send Password Reset Link') }}
+                                </button>
                             </div>
-                        </form>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -165,8 +168,22 @@
                 <li class="d-md-flex justify-content-md-start align-items-md-center" id="sidehover-7" style="height: 34px;">
                     <a class="text-decoration-none" href="{{url('parcel')}}" style="font-weight: bold;">Parcel</a>
                 </li>
+                <li class="d-md-flex justify-content-md-start align-items-md-center" id="sidehover-7" style="height: 34px;">
+                    <a class="text-decoration-none" href="{{url('contact')}}" style="font-weight: bold;">Contact</a>
+                </li>
             </ul>
-            <div class="col-12 d-lg-flex justify-content-lg-center align-items-lg-center" style="text-align: center;padding-top: 9px;padding-bottom: 9px;"><button class="btn btn-primary" type="button" style="height: 30px;padding-top: 2px;margin-left: 20px;border-color: var(--bs-orange);background: rgba(13,110,253,0);color: rgb(231,113,15);">&nbsp;Sign Up&nbsp;</button></div>
+            <div class="col-12 d-lg-flex justify-content-lg-left align-items-lg-left" style="text-align:left;padding-top: 9px;padding-bottom: 9px;">
+
+                <a href="{{route('register')}}">
+                    <a href="{{route('login')}}">
+                        <button class="btn btn-primary" type="button" style="height: 30px;padding-top: 2px;background: #e7710f;">&nbsp; Log In&nbsp;&nbsp;</button>
+                    </a>
+
+                    <a href="{{route('register')}}">
+                        <button class="btn btn-primary" type="button" style="height: 30px;padding-top: 2px;background: #e7710f;">&nbsp; Sign Up&nbsp;&nbsp;</button>
+                    </a>
+                </a>
+            </div>
         </nav>
         <p class="d-md-flex me-auto" id="faicon-1" style="text-align: left;color: #090b39;margin-top: 100px;margin-left: 0px;width: 293.703px;margin-bottom: 0px;background: var(--bs-body-bg);margin-right: auto;">&nbsp;<a href="#"><i class="fa fa-facebook d-md-flex align-items-md-end" style="padding-top: 5px;font-size: 25px;margin-right: 15px;"></i></a><a href="#"><i class="fa fa-linkedin d-md-flex align-items-md-end" style="color: rgb(13,110,253);padding-top: 5px;font-size: 25px;margin-right: 15px;"></i></a><a href="#"><i class="fa fa-google-plus d-md-flex justify-content-center align-items-center align-content-center" style="padding-top: 5px;font-size: 25px;"></i></a></p>
     </div>

@@ -192,6 +192,7 @@ return [
       //  Barryvdh\Snappy\ServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
         App\Providers\RepositoryTrackingServiceProvider::class,
+
     ],
 
     /*

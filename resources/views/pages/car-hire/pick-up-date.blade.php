@@ -121,12 +121,12 @@
 
                    <div class="form-group">
                        <label for="date">Pick Up Date</label>
-                       <input type="date" name="date" id="date" class="form-control" required/>
+                       <input type="date" name="date" id="date" class="form-control" min="{{ date('Y-m-d') }}" required/>
                    </div>
                    <br>
                    <div class="form-group">
                        <label for="time">Pick Up Time</label>
-                       <input type="time" name="time" id="time" class="form-control" required/>
+                       <input type="time" name="time" id="time" class="form-control" min="{{ date('G:i') }}" required/>
                    </div>
                    <br>
                    <div class="form-group">

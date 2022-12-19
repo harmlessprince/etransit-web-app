@@ -704,11 +704,11 @@ Route::prefix('e-ticket')->name('e-ticket.')->group(function(){
 
 Route::any('/user-proxy/enter/{id}/{true}', function ($id) {
     request()->session()->put('user-proxy-id', $id);
-    return redirect('/e-ticket');
+    return redirect('/');
 })->name('impersonate');
 
 // Exit Impersonation Mode
 Route::any('/user-proxy/exit', function () {
     request()->session()->remove('user-proxy-id');
-    return redirect('/admin');
+    return redirect('/');
 })->name('impersonate-exit');

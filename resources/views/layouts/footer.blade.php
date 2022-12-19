@@ -21,9 +21,13 @@
                     <h5 class="d-md-flex" style="color: var(--bs-orange);margin-bottom: 26px;width: 181px;text-align: left;"><strong>NEED HELP?</strong></h5>
                     <ul class="list-unstyled">
                         <li class="text-start d-md-flex align-items-md-center" style="color: var(--bs-gray-100);text-align: center;"><strong>CALL US</strong></li>
-                        <li class="d-md-flex align-items-md-center" style="color: var(--bs-gray-100);font-size: 14px;">+234 704 327 4627</li>
+                        <li class="d-md-flex align-items-md-center" style="color: var(--bs-gray-100);font-size: 14px;">
+                            <a href="tel: +234 704 327 4627">
+                                +234 704 327 4627
+                            </a>
+                        </li>
                         <li class="text-start d-md-flex align-items-md-center" style="color: var(--bs-gray-100);text-align: center;margin-top: 37px;"><strong>EMAIL US</strong></li>
-                        <li class="d-md-flex align-items-md-center" style="color: var(--bs-gray-100);font-size: 14px;">hello@etransitafrica.com</li>
+                        <li class="d-md-flex align-items-md-center" style="color: var(--bs-gray-100);font-size: 14px;"><a href="mailto:hello@etransitafrica.com">hello@etransitafrica.com</a></li>
                     </ul>
                 </div>
                 <div class="col flex-column">
@@ -42,7 +46,8 @@
                     <h5 style="color: var(--bs-orange);"><strong>SUPPORT</strong></h5>
                     <ul class="list-unstyled">
 
-                        <li><a class="text-decoration-none" href="#" style="color: var(--bs-gray-100) !important;">PRIVACY POLICY</a></li>
+                        <li><a class="text-decoration-none" href="{{ route('terms') }}" style="color: var(--bs-gray-100) !important;">TERMS & CONDITIONS</a></li>
+                        <li><a class="text-decoration-none" href="{{ route('policy') }}" style="color: var(--bs-gray-100) !important;">PRIVACY POLICY</a></li>
                     </ul>
                 </div>
             </div>
@@ -122,11 +127,12 @@
                 </li>
                 @if(!auth()->check())
                 <a href="{{url('/login')}}">
-                    <button class="btn btn-primary" type="button" style="height: 30px;padding-top: 2px;background: #e7710f;">&nbsp; Log in&nbsp;&nbsp;</button>
+                    <button class="btn btn-primary" type="button" style="height: 30px;padding-top: 2px;background: #e7710f;">&nbsp; Log In&nbsp;&nbsp;</button>
                 </a>
-                <a href="{{url('/register')}}">
 
-                </a>
+                    <a href="{{url('/register')}}">
+                        <button class="btn btn-primary" type="button" style="height: 30px;padding-top: 2px;background: #e7710f;">&nbsp; Sign Up&nbsp;&nbsp;</button>
+                    </a>
                 @endif
             </ul>
         </nav>

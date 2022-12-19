@@ -104,7 +104,7 @@ class TrackingRepository implements TrackingInterface
     }
 
 
-    public function initiateTracking($user_id , $locationDetails)
+    public function initiateTracking($user_id , $locationDetails, $params)
     {
         // TODO: Implement initiateTracking() method.
         // Look for latest Active Tracker
@@ -120,10 +120,16 @@ class TrackingRepository implements TrackingInterface
             DB::beginTransaction();
             $findAnyUserLastTracking->update(['status'=>'active']);
             $this->recordActiveTrackingSession($findAnyUserLastTracking->id , $locationDetails);
-            $this->notificationTrigger($findAnyUserLastTracking->id);
+            if(!$params){
+                $this->notificationTrigger($findAnyUserLastTracking->id);
+            }
             DB::commit();
 
-            $response = ['success' => true , 'message' =>  'User Tracking started successfully'];
+            $response = ['success' => true , 'message' =>  'User Tracking updated successfully'];
+
+            if(!$params){
+                $response = ['success' => true , 'message' =>  'User Tracking started successfully'];
+            }
         }else{
             $response = ['success' => false , 'message' =>  'You have not initiated any active tracking'];
         }
@@ -141,6 +147,8 @@ class TrackingRepository implements TrackingInterface
         $recordTracking->longitude  = $locationDetails['longitude'];
         $recordTracking->latitude   = $locationDetails['latitude'];
         $recordTracking->location   = $locationDetails['location'];
+        $recordTracking->destination_longitude   = $locationDetails['destination_longitude'] ?? null;
+        $recordTracking->destination_latitude   = $locationDetails['destination_latitude'] ?? null;
         $recordTracking->notification_triger   = 'active';
         $recordTracking->save();
         DB::commit();
@@ -152,10 +160,16 @@ class TrackingRepository implements TrackingInterface
     {
         $tracker = Tracker::where('id',$tracker_id)->where('status','active')->first();
 
+
         if($tracker)
         {
+            $data = [
+                'start_time' => $tracker->created_at,
+                'end_time' => $tracker->updated_at,
+                'purpose_of_movement' => $tracker->purpose_of_movement
+            ];
             $tracker->update(['status' => 'inactive']);
-            $response = ['success' => true , 'message' =>  'You have ended this tracking session successfully'];
+            $response = ['success' => true , 'message' =>  'You have ended this tracking session successfully', 'data' => $data];
         }else{
             $response = ['success' => true , 'message' =>  'An issue occurred while trying to end your tracking session , please try again'];
         }

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Classes\Invoice;
 use App\Classes\Reference;
 use App\Mail\BoatCruiseBooking;
-use App\Mail\BusBooking;
+use App\Mail\AdminBooking;
 use App\Mail\CarHire;
 use App\Mail\TourPackages;
 use App\Models\BoatTrip;
@@ -15,9 +15,11 @@ use App\Models\Tour as TourPackage;
 use App\Models\TrainSchedule;
 use App\Models\TrainSeatTracker;
 use App\Models\User;
+use App\Notifications\AdminBookingNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Notification;
 use KingFlamez\Rave\Facades\Rave as Flutterwave;
 use PDF;
 
@@ -329,7 +331,9 @@ class Payment extends Controller
 
             Invoice::record($data['data']['meta']['user_id'] , $transactions->id , $tripType ,$tripSchedule->return_date);
 
-            Mail::to($email)->send(new BusBooking($maildata));
+            Mail::to($email)->send(new AdminBooking($maildata));
+            Notification::route('mail', env('ETRANSIT_ADMIN_EMAIL'))
+                ->notify(new AdminBookingNotification($maildata));
 
         }
     }

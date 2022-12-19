@@ -198,7 +198,7 @@
                         <div class="col">
                             <h5>PASSANGER DETAILS
                             <div class="add_more_passeneger_icon">
-                                <button onclick="buttonClick()"> <img src="{{asset('images/icons/add_user_2.png')}}"  width="20" height="20" /> Add More Passenger</button>
+                                <button id="buttonID"> <img src="{{asset('images/icons/add_user_2.png')}}"  width="20" height="20" /> Add More Passenger</button>
                             </div>
                         </h5>
                         </div>
@@ -229,11 +229,11 @@
                                             <div class="col-md-12"><label class="col-form-label" style="font-size: 14px;color: var(--bs-gray-500);">AGE GROUP</label></div>
                                             <div class="col-md-12 d-inline-flex" style="padding-right: 0px;padding-left: 5px;">
                                                 <div class="form-check d-inline-flex" style="margin-left: 1px;">
-                                                    <input class="form-check-input" name="passenger_option[]"  value="adult" type="checkbox" id="formCheck-1">
+                                                    <input class="form-check-input check" name="passenger_option[]"  value="adult" type="checkbox" id="formCheck-1">
                                                     <label class="form-check-label" for="formCheck-1" style="font-size: 14px;">&nbsp;Adult</label>
                                                 </div>
                                                 <div class="form-check d-inline-flex" style="margin-left: 18px;">
-                                                    <input class="form-check-input" name="passenger_option[]"  value="children" type="checkbox" id="formCheck-2" >
+                                                    <input class="form-check-input check" name="passenger_option[]"  value="children" type="checkbox" id="formCheck-2" >
                                                     <label class="form-check-label" for="formCheck-2" style="font-size: 14px;">&nbsp; Child</label>
                                                 </div>
                                             </div>
@@ -296,8 +296,14 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" defer></script>
 
+<script>
+    $(document).ready(function(){
+        $('.check').click(function() {
+            $('.check').not(this).prop('checked', false);
+        });
+    });
+</script>
     <script>
-        $(".document")
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -354,18 +360,9 @@
             });
 
 
-
-        function buttonClick(x){
-            x++;
-            alert(x)
-            event.preventDefault();
-            $('.passenger_details_form_input').append(` <div class="row set`+x+`">
-<div class="row">
-                                    <div class="col" style="margin-top: 44px;">
-                                        <h6 class="float-start w-50">PASSENGER # `+x+` DETAILS</h6>
-<a class="float-end btn btn-danger">Remove</a>
-                                    </div>
-                                </div>
+        $('#buttonID').click(function(e){
+            e.preventDefault();
+            $('.passenger_details_form_input').append(` <div class="row">
                                     <div class="col" style="margin-top: 28px;">
                                 <label class="form-label" style="font-size: 14px;color: var(--bs-gray-500);">FULL NAME</label>
                                 <input class="form-control" name="full_name[]" type="text" style="border-top-style: none;border-right-style: none;border-left-style: none;border-radius: 0px;border-top-left-radius: 0px;border-top-right-radius: 0px;border-bottom-right-radius: 0px;border-bottom-left-radius: 1px;background: rgba(255,255,255,0);"></div>
@@ -400,13 +397,7 @@
                                     <div><input type="text" name="next_of_kin_number[]" class="form-control" type="text" style="border-top-style: none;border-right-style: none;border-left-style: none;border-radius: 0px;border-top-left-radius: 0px;border-top-right-radius: 0px;border-bottom-right-radius: 0px;border-bottom-left-radius: 1px;background: rgba(255,255,255,0);"/></div>
                                 </div>
                             </div>`);
-        }
-        // $('#buttonID').click(function(e){
-        //
-        //     x++;
-        //
-        //
-        // });
+        });
 
         function displayErrorMessage(message) {
             toastr.error(message, 'Error');

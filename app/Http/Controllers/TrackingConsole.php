@@ -25,6 +25,9 @@ class TrackingConsole extends Controller
        $data['destination'] = null;
        $data['departureTime'] = null;
        $data['departureDate'] = null;
+       $data['latitude'] = $trackingRecord[0]['latitude'];
+       $data['longitude'] = $trackingRecord[0]['longitude'];
+       $data['location'] = $trackingRecord[0]['location'];
 
        if($transactionId != null)
        {
@@ -123,15 +126,16 @@ class TrackingConsole extends Controller
         $records = TrackingRecord::where('tracker_id',$tracking_id)->orderBy('created_at','desc')->get();
         $nextOfKin = UserTrustee::where('tracker_id',$tracking_id)->first();
         $tracker = Tracker::where('id',$tracking_id)->first();
-
+        $data['latitude'] = $records[0]['latitude'];
+        $data['longitude'] = $records[0]['longitude'];
+        $data['location'] = $records[0]['location'];
         foreach($records as $location)
         {
             $locations[]  =[$location->location,$location->latitude,$location->longitude ,$location->created_at->format('d F Y'), $location->created_at->format('H:i:s')];
         }
 
-//        dd( $records);
 
-        return view('admin.tracking.view-tracking',compact('nextOfKin','records','tracking_id','locations','tracker'));
+        return view('admin.tracking.view-tracking',compact('nextOfKin','records','tracking_id','locations','tracker', 'data'));
     }
 
 }
