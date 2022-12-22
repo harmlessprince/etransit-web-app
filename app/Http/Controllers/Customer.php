@@ -29,41 +29,29 @@ class Customer extends Controller
             'email' => 'required|email|unique:users',
             'address' => 'required',
             'phone_number' => 'required|numeric',
-            'nin' => 'required',
-            'username' => 'required|unique:users'
+            'nin' => 'sometimes'
         ]);
 
-            $rand = $this->generatePassword();
-            $validated['password'] = Hash::make($rand);
-            $validated['nin'] = Hash::make($validated['nin']);
+        $validated['password'] = Hash::make(123456);
+        $validated['email_verified_at'] = now();
 
-            if(User::create($validated)){
-                Notification::route('mail', $validated['email'])
-                    ->notify(new CustomerWelcomeNotification($validated, $rand));
+        $validated['nin'] = Hash::make($validated['nin']);
 
-                $success = 'Customer created successfully';
-                return redirect(url('admin/customers'))->with(compact('success'));
-            }else{
-                $error = 'Unable to create Customer';
-                return redirect(url('admin/customers'))->with(compact('error'));
-            }
+        if(User::create($validated)){
+            Notification::route('mail', $validated['email'])
+                ->notify(new CustomerWelcomeNotification($validated, 123456));
 
-
-
-
-
-    }
-
-    public function generatePassword()
-    {
-        $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
-        $pass = array();
-        $alphaLength = strlen($alphabet) - 1;
-        for ($i = 0; $i < 12; $i++) {
-            $n = rand(0, $alphaLength);
-            $pass[] = $alphabet[$n];
+            $success = 'Customer created successfully';
+            return redirect(url('admin/customers'))->with(compact('success'));
+        }else{
+            $error = 'Unable to create Customer';
+            return redirect(url('admin/customers'))->with(compact('error'));
         }
-        return implode($pass);
+
+
+
+
+
     }
 
     public function customers(Request $request)
@@ -100,7 +88,7 @@ class Customer extends Controller
 
     public function suspendUser($customer_id)
     {
-       $user = User::where('id',$customer_id)->first();
+        $user = User::where('id',$customer_id)->first();
 
         $user->update(['banned_status' => 1]);
 

@@ -43,6 +43,9 @@ class RegisterController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
+        if(session('user-proxy-id')){
+            request()->session()->remove('user-proxy-id');
+        }
     }
 
     /**

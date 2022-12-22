@@ -11,6 +11,7 @@ class Service extends Controller
     public function services()
     {
       $services  =  ETransitService::where('status','active')->get();
+      
 
       return response()->json(['success' => true , 'data' => compact('services')]);
     }

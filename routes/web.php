@@ -77,10 +77,10 @@ Route::post('/bus/filter-bookings/{operator?}/{bus_type?}' , [Booking::class , '
 
 Route::get('filter-cars/{seat_capacity?}/{class_type?}',[Car::class , 'carList']);
 
-Route::get('about', [PagesController::class, 'about'])->name('about-us');
-Route::get('policy', [PagesController::class, 'policy'])->name('policy');
-Route::get('terms', [PagesController::class, 'terms'])->name('terms');
-Route::get('contact', [PagesController::class, 'contact']);
+Route::get('/about', [PagesController::class, 'about'])->name('about-us');
+Route::get('/terms', [PagesController::class, 'terms'])->name('terms');
+Route::get('/policy', [PagesController::class, 'policy'])->name('policy');
+Route::get('/contact', [PagesController::class, 'contact']);
 
 //Auth::routes();
 
@@ -102,7 +102,7 @@ Route::get('parcel' , [ParcelMgt::class , 'parcel']);
 Route::get('/pick-up-city/{state_id}', [ParcelMgt::class ,'fetchCities']);
 
 Route::get('login/{provider}', [SocialController::class ,'redirect']);
-Route::get('/callback',[SocialController::class ,'Callback']);
+Route::get('login/{provider}/callback',[SocialController::class ,'Callback']);
 
 //ferry post
 Route::match(array('GET','POST'),'/ferry/bookings' , [FerryBookings::class ,'bookFerry']);
@@ -136,7 +136,6 @@ Route::get('tracker/{tracker_id}/user/{transaction_id?}',[\App\Http\Controllers\
 Route::get('check-pdf' , function(){
    return view('pdf.boat-cruise');
 });
-Route::get('view-car-details/{car_id}' , [Car::class , 'carDetails']);
 
 Route::group(['middleware' => ['auth','prevent-back-history','verified']], function() {
 
@@ -145,7 +144,7 @@ Route::group(['middleware' => ['auth','prevent-back-history','verified']], funct
 
     Route::put('update-user-profile/{user_id}' ,[UserProfile::class ,'updateUserProfile']);
     Route::get('get-transactions' , [UserProfile::class , 'getMyTransactions']);
-    Route::get('view-user-transaction/{transaction_id}/' , [UserProfile::class , 'myTransactions'])->name('view-user-transaction');
+    Route::get('view-user-transaction/{transaction_id}/' , [UserProfile::class , 'myTransactions']);
 
     Route::get('/seat-picker/{schedule_id}/{trip_type}', [Booking::class, 'seatSelector']);
 
@@ -165,7 +164,7 @@ Route::group(['middleware' => ['auth','prevent-back-history','verified']], funct
     Route::get('/pick-date' ,[Car::class ,'pickDate']);
     Route::post('/plan/{plan_id}',[Car::class , 'proceedToPaymentPlan']);
     Route::get('car-hire/cash/payment/{history_id}/method',[Car::class , 'makePayment']);
-
+    Route::get('view-car-details/{car_id}' , [Car::class , 'carDetails']);
 
 
     //select payment plan for boat cruise
@@ -228,6 +227,8 @@ Route::prefix('admin')->name('admin.')->group(function(){
     Route::group(['middleware' => ['admin','prevent-back-history','permissions']], function() {
 
         Route::get('/dashboard', [Dashboard::class, 'dashboard'])->name('dashboard');
+
+
 
         //vehicle management
         Route::get('/manage/vehicle', [Vehicle::class, 'manage'])->name('manage.vehicle');
@@ -299,7 +300,6 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::get('manage/car-type' , [Car::class , 'carType']);
         Route::post('add/car-type' , [Car::class , 'saveCarType']);
         Route::get('view/car/{id}',[Car::class , 'viewTenantCar']);
-        Route::get('delete/car/{id}',[Car::class , 'deleteCar']);
 
 
         Route::get('add/car-hire',[Car::class ,'addCar']);
@@ -309,7 +309,6 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::get('/car/details/{carhistory_id}', [Car::class , 'tripDetails']);
 
 
-        Route::get('fetch-all-cars',[Car::class ,'fetchAllTenantCars'])->name('fetch-all-cars');
         Route::get('fetch-all-cars',[Car::class ,'fetchAllTenantCars'])->name('fetch-all-cars');
 
         Route::get('off-trips-car' ,[Car::class , 'offTripCars']);
@@ -451,9 +450,9 @@ Route::prefix('admin')->name('admin.')->group(function(){
 
         //manage customer
         Route::get('/customers',[Customer::class , 'customerIndex']);
-        Route::get('/add/customer', [Customer::class, 'addCustomer']);
-        Route::post('/store-customer', [Customer::class, 'storeCustomer']);
         Route::get('/customer/list', [Customer::class , 'customers'])->name('customers.list');
+        Route::get('/add/customer', [Customer::class, 'addCustomer']);
+        Route::post('store-customer', [Customer::class, 'storeCustomer']);
         Route::get('/customer/{customer_id}', [Customer::class , 'getCustomer']);
         Route::get('suspend-user/{customer_id}' , [Customer::class , 'suspendUser']);
         Route::get('activate-user/{customer_id}' , [Customer::class , 'activateUser']);
@@ -702,3 +701,14 @@ Route::prefix('e-ticket')->name('e-ticket.')->group(function(){
 
 
 });
+
+Route::any('/user-proxy/enter/{id}/{true}', function ($id) {
+    request()->session()->put('user-proxy-id', $id);
+    return redirect('/');
+})->name('impersonate');
+
+// Exit Impersonation Mode
+Route::any('/user-proxy/exit', function () {
+    request()->session()->remove('user-proxy-id');
+    return redirect('/');
+})->name('impersonate-exit');

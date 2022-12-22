@@ -14,20 +14,20 @@ class SocialController extends Controller
 {
     public function redirect($provider)
     {
-        return Socialite::driver($provider)->setHttpClient(new \GuzzleHttp\Client(['verify' => false]))->redirect();
+        return Socialite::driver($provider)->redirect();
     }
 
     public function Callback(){
 
-        $userSocial = Socialite::driver('google')->setHttpClient(new \GuzzleHttp\Client(['verify' => false]))->stateless()->user();
-        $users = User::where(['email' => $userSocial->getEmail()])->first();
+        $userSocial =   Socialite::driver('google')->user();
+        $users      =  User::where(['email' => $userSocial->getEmail()])->first();
 
         if($users){
             Auth::login($users);
             return redirect('/');
         }else{
             $user = User::create([
-                'full_name'         => $userSocial->getName(),
+                'full_name'         => $userSocial->getEmail(),
                 'email_verified_at'  => Carbon::now(),
                 'email'             => $userSocial->getEmail(),
                 'password'          => Hash::make($userSocial->getEmail()),
@@ -35,10 +35,8 @@ class SocialController extends Controller
                 'provider_id'       => $userSocial->getId(),
                 'provider'          => 'google',
             ]);
-
-            if($user){
-                Auth::login($user);
-            }
+            
+            Auth::login($user);
             return redirect('/');
         }
     }

@@ -39,7 +39,7 @@ class Transaction extends Controller
     {
         $userID = auth()->user()->id;
 
-        $passenger = Passenger::whereUserId($userID)->first();
+        $passenger = Passenger::whereUserId($userID)->orderBy('id', 'DESC')->first();
         if($passenger){
             $nextOfKin = [
               'full_name' => $passenger->next_of_kin_name,

@@ -205,6 +205,7 @@
 
         var infowindow = new google.maps.InfoWindow();
 
+
             marker = new google.maps.Marker({
                 position: new google.maps.LatLng({{ $data['latitude'] ??  19.2901}}, {{ $data['longitude'] ?? 26.818 }}),
                 map: map
@@ -216,6 +217,8 @@
                     infowindow.open(map, marker);
                 }
             })(marker));
+
+        // }
     }
 
     window.initMap = initMap;

@@ -41,6 +41,9 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
 //        $this->middleware('guest:admin')->except('logout');
+        if(session('user-proxy-id')){
+            request()->session()->remove('user-proxy-id');
+        }
     }
 
 

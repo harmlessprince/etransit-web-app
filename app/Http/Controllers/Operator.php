@@ -101,7 +101,7 @@ class Operator extends Controller
 
             $operator = Eticket::withoutGlobalScopes()->where('id',$id)->first();
             $userEmail = $operator->email;
-            $password  =   Str::random(8);
+            $password  =   123456;
 
             $maildata = [
                 'name' =>  $operator->full_name,

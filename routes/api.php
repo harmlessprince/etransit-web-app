@@ -91,6 +91,7 @@ Route::group(['prefix' => 'v1'], function() {
     Route::post('record-active/tracking/{tracker_id}',[TrackingConsole::class,'recordActiveTracking']);
 
 //    Route::middleware('jwt.verify')->group( function () {
+    Route::post('delete/user/{id}', [AuthUser::class, 'deleteUser']);
     Route::group(['middleware' => ['jwt.verify','is_banned','must_verify']], function () {
 
          //bus booking
