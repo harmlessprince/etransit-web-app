@@ -240,6 +240,7 @@ class Car extends Controller
 
         Mail::to($email)->send(new CarHire($maildata));
 
+
         return response()->json(['success' => true , 'message' => 'Cash Payment Made successfully ,if proof of fund is not confirmed within 30minutes this car will be available to other users to book']);
     }
 

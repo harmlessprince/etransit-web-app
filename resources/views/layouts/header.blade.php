@@ -38,7 +38,7 @@
                             <ul style="background: #343f5f;" class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
                                 <li><a class="dropdown-item"  href="{{url('profile/'. auth()->user()->id)}}">Profile</a></li>
                                 <li><a class="dropdown-item" onclick="showStatus()" href="#">Trip Status</a></li>
-                                <li><a class="dropdown-item" onclick="showPayment()" href="#">Payment History</a></li>
+                                <li><a class="dropdown-item" onclick="openPaymentHistory()" href="#">Payment History</a></li>
                                 <li><hr class="dropdown-divider"></li>
 
                                 <a href="{{ url('/logout') }}"  onclick="event.preventDefault();
@@ -69,7 +69,7 @@
                     <li class="nav-item">
                         <a class="nav-link active" href="{{url('/')}}" style="color: #06044e;">Home</a>
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="{{'about'}}" style="color: #06044e;">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('about-us') }}" style="color: #06044e;">About Us</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{url('tour-packages')}}" style="color: #06044e;">Tour Packages</a></li>
                     <li class="nav-item">
                         <a href="{{url('boat-cruise')}}" class="nav-link" style="color: #06044e;">Boat Cruise&nbsp;</a>

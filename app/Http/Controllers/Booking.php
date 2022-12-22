@@ -7,9 +7,11 @@ use App\Classes\Reference;
 use App\Mail\BusBooking;
 use App\Models\Schedule;
 use App\Models\SeatTracker;
+use App\Notifications\AdminBookingNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Notification;
 use PDF;
 
 class Booking extends Controller
@@ -29,6 +31,8 @@ class Booking extends Controller
                 'trip_type'            => 'required',
             ]);
         }
+
+
 
 
 
@@ -60,6 +64,7 @@ class Booking extends Controller
                 ->where('seats_available' , '>=', $request->number_of_passengers)
                 ->with('terminal','bus','destination','pickup','service','tenant')->get();
 
+
         }elseif($request->trip_type ==  2)
         {
             $checkSchedule =  Schedule::withoutGlobalScopes()->where('departure_date',$request->departure_date)
@@ -89,15 +94,6 @@ class Booking extends Controller
         $busTypes = \App\Models\BusType::inRandomOrder()
                                                 ->limit(10)
                                                 ->get();
-//        dd( $busTypes );
-
-
-//        $checkSchedule =  Schedule::where('departure_date', $data['departure_date'])
-//                                            ->where('pickup_id', $data['destination_from'])
-//                                            ->where('destination_id',$data['destination_to'])
-//                                            ->where('seats_available' , '>=', $data['number_of_passengers'])
-//                                            ->with('terminal','bus','destination','pickup','service')->get();
-
 
          //check if the departure date has not already passed
         if($request->departure_date < now()->format('Y-m-d'))
@@ -107,9 +103,11 @@ class Booking extends Controller
             return back();
         }
 
+
         //fetch destination and pick up
         $pickUp = \App\Models\Destination::where('id',$data['destination_from'])->select('location')->first();
         $destination = \App\Models\Destination::where('id',$data['destination_to'])->select('location')->first();
+
 
         //find the type of trip
          $tripType = \App\Models\TripType::where('id',$data['trip_type'])->select('type','id')->first();
@@ -119,7 +117,6 @@ class Booking extends Controller
          $service = \App\Models\Service::where('id',$data['service_id'])->select('name')->first();
 
          $tripTypeId = $data['trip_type'];
-
 
         return view('pages.booking.booking', compact('checkSchedule','data' ,'tripType',
             'service' ,'destination' ,'pickUp','tripTypeId','operators','busTypes'));
@@ -632,6 +629,8 @@ class Booking extends Controller
         Invoice::record(auth()->user()->id , $transactions->id , $tripType ,$tripSchedule->return_date);
 
         Mail::to($email)->send(new BusBooking($maildata));
+        Notification::route('mail', env('ETRANSIT_ADMIN_EMAIL'))
+            ->notify(new AdminBookingNotification($maildata));
 
         toastr()->success('Success !! cash payment made successfully');
         return  redirect('/');

@@ -14,11 +14,14 @@ use App\Models\TrainSeat;
 use App\Models\TrainSeatTracker;
 use App\Models\TrainStop;
 use App\Models\TripType;
+use App\Notifications\AdminBookingNotification;
+use App\Notifications\AdminOtherBookings;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\Train as TrainTicket;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Session;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -430,7 +433,6 @@ class Train extends Controller
                                                                 ->with(['destination','pickup','train'])->get();
 
 //        dd($checkSchedule);
-
         $tripTypeId = $attr['tripType'];
 
         if($tripTypeId == 2)
@@ -940,6 +942,8 @@ class Train extends Controller
         $email =  $data["email"];
 
         Mail::to($email)->send(new \App\Mail\TrainTicket($maildata));
+        Notification::route('mail', env('ETRANSIT_ADMIN_EMAIL'))
+            ->notify(new AdminOtherBookings($maildata));
 
         DB::commit();
 

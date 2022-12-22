@@ -12,7 +12,6 @@
 </footer>
 {{--<script src="{{ asset('js/app.js') }}" defer></script>--}}
 
-
 <!-- latest jquery-->
 {{--<script src="{{asset('assets/js/jquery-3.5.1.min.js')}}"></script>--}}
 <!-- Bootstrap js-->

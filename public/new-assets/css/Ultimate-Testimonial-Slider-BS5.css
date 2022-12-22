@@ -85,13 +85,11 @@
 
 @media (max-width: 576px) {
   #overviewlayout {
-    margin-top: 70px;
   }
 }
 
 @media (min-width: 768px) {
   #overviewlayout {
-    margin-top: 270px;
   }
 }
 
