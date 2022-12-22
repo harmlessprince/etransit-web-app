@@ -467,7 +467,6 @@
                                     <div class="invoice-details">
                                         <address>
                                             {{$data['name']}}<br>
-                                            {{--                                            150-600 Church Street, Florida, USA--}}
                                         </address>
                                     </div>
                                 </div>

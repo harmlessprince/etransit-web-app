@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Classes\VerificationToken;
 use App\Http\Controllers\Controller;
 use App\Mail\VerificationToken as VerificationTokenMail;
+use App\Models\DeletedUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -114,6 +115,37 @@ class AuthUser extends BaseController
         }
 
         return response()->json(compact('user'));
+    }
+
+
+    public function deleteUser($id)
+    {
+        $user = User::find($id);
+        if(!$user){
+            return response()->json([
+                'status' => false,
+                'message' => 'User Not Found'
+            ], 404);
+        }
+
+        $data = [
+            'user_id' => $user->id,
+            'user_details'  => json_encode($user, JSON_FORCE_OBJECT)
+        ];
+
+        if(User::destroy($id) && DeletedUser::create($data)){
+            return response()->json([
+                'status' => true,
+                'message' => 'User Successfully Deleted',
+                'data' => $data
+            ]);
+        }
+
+        return response()->json([
+            'status' => false,
+            'message' => 'Unable to delete User',
+        ], 403);
+
     }
 
 }

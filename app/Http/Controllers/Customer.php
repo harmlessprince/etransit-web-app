@@ -33,6 +33,7 @@ class Customer extends Controller
         ]);
 
         $validated['password'] = Hash::make(123456);
+        $validated['email_verified_at'] = now();
 
         $validated['nin'] = Hash::make($validated['nin']);
 
