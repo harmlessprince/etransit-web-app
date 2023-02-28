@@ -267,11 +267,10 @@ class CarHireMgt extends Controller
     }
 
 
-    public function viewCar($car_id)
+    public function viewCar(int $car_id)
     {
 
         $car = HiredCars::where('id', $car_id)->with('carclass','cartype')->first();
-//        dd($car );
 
         $carHistories = CarHistory::where('car_id', $car_id)->pluck('id');
 

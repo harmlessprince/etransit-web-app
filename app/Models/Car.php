@@ -9,7 +9,8 @@ use Illuminate\Database\Eloquent\Model;
 class Car extends Model
 {
     use HasFactory;
-    protected $guarded = ['id'];
+    // protected $guarded = ['id'];
+    protected $fillable = ['car_name'];
 
     public function plans()
     {
@@ -57,10 +58,10 @@ class Car extends Model
      *
      * @return void
      */
-    protected static function booted()
-    {
-        static::addGlobalScope(new TenantScope);
-    }
+    // protected static function booted()
+    // {
+    //     static::addGlobalScope(new TenantScope);
+    // }
 
     public function newQuery($excludeDeleted = true) {
         return parent::newQuery($excludeDeleted)

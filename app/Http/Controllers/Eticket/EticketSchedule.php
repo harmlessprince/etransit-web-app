@@ -122,8 +122,9 @@ class EticketSchedule extends Controller
            }
         }
         $seatCount = count( $emptySeatCount);
+        $data = EventSchedule::with(['pickup','destination','bus','terminal'])->latest()->paginate(100);
 
-        return view('Eticket.bus.all-schedule-trip', compact('seatCount','isEmptySeatAvailable'));
+        return view('Eticket.bus.all-schedule-trip', compact('seatCount','isEmptySeatAvailable','data'));
     }
 
     public function fetchAllSchedules(Request $request)
