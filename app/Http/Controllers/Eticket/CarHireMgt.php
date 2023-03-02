@@ -195,15 +195,15 @@ class CarHireMgt extends Controller
         $updateCar = HiredCars::where('id', $car_id)->first();
 
         $updateCar->update([
-            'car_name'         => $data['car_brand'],
-            'car_class_id'     => $data['car_class'],
-            'car_type_id'      => $data['car_type'],
-            'description'      => $data['description'],
-            'capacity'         => $data['capacity'],
-            'car_registration' => $data['car_registration'],
-            'model_year'       => $data['model_year'],
-            'transmission'     => $data['transmission'],
-            'state_id'         => $data['operating_state'],
+            'car_name'         => $request['car_brand'],
+            'car_class_id'     => $request['car_class'],
+            'car_type_id'      => $request['car_type'],
+            'description'      => $request['description'],
+            'capacity'         => $request['capacity'],
+            'car_registration' => $request['car_registration'],
+            'model_year'       => $request['model_year'],
+            'transmission'     => $request['transmission'],
+            'state_id'         => $request['operating_state'],
             'self_drive'       => !is_null($request->self_drive) == "on" ? 'active' : 'inactive',
         ]);
 

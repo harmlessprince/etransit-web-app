@@ -154,6 +154,14 @@ class EticketSchedule extends Controller
         return view('Eticket.bus.view-schedule', compact('findSchedule', 'seatTracker'));
     }
 
+    public function deleteEachSchedule($schedule_id)
+    {
+        $findSchedule = EventSchedule::where('id', $schedule_id)->first();
+        $findSchedule->delete();
+        // $seatTracker = SeatTracker::where('schedule_id',$schedule_id)->get();
+        return redirect()->to('/e-ticket/all-scheduled-trip');
+    }
+
     public function generateSeatTrackerForScheduleWithEmptySeat($schedule_id)
     {
 

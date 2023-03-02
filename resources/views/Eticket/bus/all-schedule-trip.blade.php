@@ -90,6 +90,7 @@
                             <td>{{$dt->seats_available}}</td>
                             <td>
                                 <a href='/e-ticket/view-each-schedule/{{$dt->id}}' class='delete btn btn-primary btn-sm'>View</a>
+                                <a href='/e-ticket/delete-each-schedule/{{$dt->id}}' class='delete btn btn-danger btn-sm'>Delete</a>
                             </td>
                         </tr>
                         @endforeach
