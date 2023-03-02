@@ -10,7 +10,7 @@ class Car extends Model
 {
     use HasFactory;
     // protected $guarded = ['id'];
-    protected $fillable = ['car_name'];
+    protected $fillable = ['car_name', 'car_class_id', 'car_type_id', 'description', 'capacity', 'car_registration', 'model_year', 'transmission', 'state_id', 'self_drive'];
 
     public function plans()
     {

@@ -133,8 +133,14 @@
                         <hr>
                         <h6>Phone Number : {{$findSchedule->bus->driver->phone_number}} </h6>
                         <hr>
-                        @else
-                            <h3>No Driver Assigned yet to this Trip.    <a href="{{url('e-ticket/assign-driver/'.$findSchedule->bus->id)}}" class="btn btn-danger">Assign Driver</a></h3>
+                        @else                            
+                            <h3>No Driver Assigned yet to this Trip.  
+                                @if($findSchedule->bus)  
+                                <a href="{{url('e-ticket/assign-driver/'.$findSchedule->bus->id)}}" class="btn btn-danger">Assign Driver</a>
+                                @else
+                                --
+                                @endif
+                            </h3>
                         @endif
                     </div>
                 </div>
@@ -161,11 +167,11 @@
                         <hr>
                         <h6>Seats Available :{{$findSchedule->seats_available}} </h6>
                         <hr>
-                        <h6>Bus Registration : {{$findSchedule->bus->bus_registration}}</h6>
+                        <h6>Bus Registration : {{$findSchedule->bus ? $findSchedule->bus->bus_registration : " "}}</h6>
                         <hr>
-                        <h6>Bus Model : {{$findSchedule->bus->bus_model}}</h6>
+                        <h6>Bus Model : {{$findSchedule->bus ? $findSchedule->bus->bus_model : " "}}</h6>
                         <hr>
-                        <h6>Bus Type : {{$findSchedule->bus->bus_type}}</h6>
+                        <h6>Bus Type : {{$findSchedule->bus ? $findSchedule->bus->bus_type : " "}}</h6>
                         <hr>
                         <h6>Trip Status : {{Ucfirst($findSchedule->trip_status)}}</h6>
                         <hr>

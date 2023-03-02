@@ -180,36 +180,40 @@ class CarHireMgt extends Controller
     public function updateCarInformation(Request $request , $car_id)
     {
 
-        $data  = request()->validate([
-            'car_type' => 'required|integer',
-            'car_class' => 'required|integer',
-            'description'=> 'required',
-            'capacity' => 'required',
-            'car_brand' => 'required',
-            'car_registration' => 'required',
-            'transmission' => 'required|string',
-            'model_year' => 'required',
-            'operating_state' => 'required|integer'
-        ]);
+        try{
+            $data  = request()->validate([
+                'car_type' => 'required|integer',
+                'car_class' => 'required|integer',
+                'description'=> 'required',
+                'capacity' => 'required',
+                'car_brand' => 'required',
+                'car_registration' => 'required',
+                'transmission' => 'required|string',
+                'model_year' => 'required',
+                'operating_state' => 'required|integer'
+            ]);
 
-        $updateCar = HiredCars::where('id', $car_id)->first();
+            $updateCar = HiredCars::where('id', $car_id)->first();
 
-        $updateCar->update([
-            'car_name'         => $request['car_brand'],
-            'car_class_id'     => $request['car_class'],
-            'car_type_id'      => $request['car_type'],
-            'description'      => $request['description'],
-            'capacity'         => $request['capacity'],
-            'car_registration' => $request['car_registration'],
-            'model_year'       => $request['model_year'],
-            'transmission'     => $request['transmission'],
-            'state_id'         => $request['operating_state'],
-            'self_drive'       => !is_null($request->self_drive) == "on" ? 'active' : 'inactive',
-        ]);
+            $updateCar->update([
+                'car_name'         => $request['car_brand'],
+                'car_class_id'     => $request->car_class,
+                'car_type_id'      => $request->car_type,
+                'description'      => $request->description,
+                'capacity'         => $request->capacity,
+                'car_registration' => $request->car_registration,
+                'model_year'       => $request->model_year,
+                'transmission'     => $request->transmission,
+                'state_id'         => $request->operating_state,
+                'self_drive'       => !is_null($request->self_drive) == "on" ? 'active' : 'inactive',
+            ]);
 
-        Alert::success('Success ', 'Car updated successfully');
+            Alert::success('Success ', 'Car updated successfully');
 
-        return  redirect('e-ticket/car-hire');
+            return  redirect('e-ticket/car-hire');
+        } catch(\Exception $e) {
+            dd($e->getMessage(), $e->getLine());
+        }
     }
 
 

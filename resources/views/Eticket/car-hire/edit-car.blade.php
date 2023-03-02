@@ -170,7 +170,7 @@
                         <label for="description">Description</label>
                         <textarea class="ckeditor form-control" name="description" id="description" rows="10" cols="20" required>{{ $editCar->description }}</textarea>
                     </div>
-                          <button class="sumbit_request btn btn-success" type="submit">Add Car</button>
+                          <button class="sumbit_request btn btn-success" type="submit">Update Car</button>
                     </div>
                 </form>
             </div>
