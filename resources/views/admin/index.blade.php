@@ -266,13 +266,13 @@
                             @foreach($schedules as $index => $schedule)
                             <tr>
                                 <th scope="row">{{$index + 1}}</th>
-                                <td>{{$schedule->terminal->terminal_name}}</td>
-                                <td>{{$schedule->pickup->location}}</td>
-                                <td>{{$schedule->destination->location}}</td>
+                                <td>{{$schedule->terminal?$schedule->terminal->terminal_name:'--'}}</td>
+                                <td>{{$schedule->pickup?$schedule->pickup->location:'--'}}</td>
+                                <td>{{$schedule->destination?$schedule->destination->location:'--'}}</td>
                                 <td>{{number_format($schedule->fare_adult)}}</td>
                                 <td>{{$schedule->departure_date->format('d F Y')}}</td>
-                                <td>{{$schedule->bus->bus_registration}}</td>
-                                <td>{{$schedule->bus->tenant->display_name}}</td>
+                                <td>{{$schedule->bus?$schedule->bus->bus_registration:'--'}}</td>
+                                <td>{{$schedule->bus?$schedule->bus->tenant->display_name:'--'}}</td>
                             </tr>
                             @endforeach
 

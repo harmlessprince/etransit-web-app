@@ -28,6 +28,11 @@ class Partner extends Controller
     {
         return view('pages.partners.partner');
     }
+
+    public function driverPartnerPage(){
+        return view('pages.partners.driver');
+    }
+    
     public function partners()
     {
         return view('admin.partner.all');
@@ -172,9 +177,7 @@ class Partner extends Controller
         return redirect('admin/manage/operators');
     }
 
-    public function driverPartnerPage(){
-        return view('pages.partners.driver');
-    }
+   
     public function newDrivers(){
         return view('admin.partner.drivers');
     }

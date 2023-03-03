@@ -122,8 +122,9 @@ class EticketSchedule extends Controller
            }
         }
         $seatCount = count( $emptySeatCount);
+        $data = EventSchedule::with(['pickup','destination','bus','terminal'])->latest()->paginate(100);
 
-        return view('Eticket.bus.all-schedule-trip', compact('seatCount','isEmptySeatAvailable'));
+        return view('Eticket.bus.all-schedule-trip', compact('seatCount','isEmptySeatAvailable','data'));
     }
 
     public function fetchAllSchedules(Request $request)
@@ -151,6 +152,14 @@ class EticketSchedule extends Controller
         $seatTracker = SeatTracker::where('schedule_id',$schedule_id)->get();
 
         return view('Eticket.bus.view-schedule', compact('findSchedule', 'seatTracker'));
+    }
+
+    public function deleteEachSchedule($schedule_id)
+    {
+        $findSchedule = EventSchedule::where('id', $schedule_id)->first();
+        $findSchedule->delete();
+        // $seatTracker = SeatTracker::where('schedule_id',$schedule_id)->get();
+        return redirect()->to('/e-ticket/all-scheduled-trip');
     }
 
     public function generateSeatTrackerForScheduleWithEmptySeat($schedule_id)

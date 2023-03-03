@@ -39,7 +39,7 @@ class ManageBus extends Controller
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
                     $id = $row->id;
-                    $actionBtn = "<a href='/e-ticket/edit-tenant-bus/$id'  class='edit btn btn-success btn-sm'>Edit</a> <a href='/e-ticket/view-tenant-bus/$id' class='delete btn btn-primary btn-sm'>View</a>";
+                    $actionBtn = "<a href='/e-ticket/edit-tenant-bus/$id'  class='edit btn btn-success btn-sm'>Edit</a> <a href='/e-ticket/view-tenant-bus/$id' class='delete btn btn-primary btn-sm'>View</a> <a href='/e-ticket/delete-tenant-bus/$id' class='delete btn btn-danger btn-sm'>Delete</a>";
 
                     return $actionBtn;
                 })
@@ -171,6 +171,14 @@ class ManageBus extends Controller
         $bus = Bus::with('driver')->find($bus_id);
 
         return view('Eticket.bus.edit-bus' , compact('bus'));
+    }
+
+    public function deleteBus($bus_id)
+    {
+        $bus = Bus::findOrFail($bus_id);
+        $bus->delete();
+
+        return redirect()->to('/e-ticket/buses');
     }
 
 

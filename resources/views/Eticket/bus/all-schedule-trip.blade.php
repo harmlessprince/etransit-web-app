@@ -78,8 +78,29 @@
                     </tr>
                     </thead>
                     <tbody>
-                    </tbody>
+                        @foreach($data as $dt)
+                        <tr>
+                            <td>{{$loop->index+1}}</td>
+                            <td>{{$dt->pickup ? $dt->pickup->location : '--'}}</td>
+                            <td>{{$dt->destination ? $dt->destination->location : '--'}}</td>
+                            <td>{{$dt->bus ? $dt->bus->bus_registration : '--'}}</td>
+                            <td>{{$dt->terminal ? $dt->terminal->terminal_name : '--'}}</td>
+                            <td>{{$dt->fare_adult}}</td>
+                            <td>{{$dt->fare_children}}</td>
+                            <td>{{$dt->seats_available}}</td>
+                            <td>
+                                <a href='/e-ticket/view-each-schedule/{{$dt->id}}' class='delete btn btn-primary btn-sm'>View</a>
+                                <a href='/e-ticket/delete-each-schedule/{{$dt->id}}' class='delete btn btn-danger btn-sm'>Delete</a>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>                    
                 </table>
+                <div class="row" style="width: 400px">
+                    <div class="col-md-12">
+                        {{$data->links('vendor.pagination.default')}}
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -91,7 +112,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
-    <script type="text/javascript">
+    <!-- <script type="text/javascript">
         $(function () {
             $.noConflict();
 
@@ -134,5 +155,5 @@
             });
 
         });
-    </script>
+    </script> -->
 @endsection

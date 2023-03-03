@@ -235,6 +235,7 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::get('/manage/tenant-bus' , [Vehicle::class , 'tenantBus'])->name('manage.bus');
         Route::get('manage/fetch-all-buses' , [Vehicle::class , 'fetchAllTenantBus'])->name('manage-fetch-all-buses');
         Route::get('manage/view-tenant-bus/{bus_id}' , [Vehicle::class , 'viewTenantBus'])->name('view.bus');
+        Route::get('manage/delete-tenant-bus/{bus_id}' , [Vehicle::class , 'deleteTenantBus'])->name('delete.bus');
         Route::get('view-bus/{bus_id}' , [Vehicle::class , 'busSchedule'])->name('bus.schedules');
         Route::get('view-bus-schedule/{bus_id}' , [Vehicle::class , 'busScheduleFetch'])->name('view-bus-schedule');
         Route::get('view-bus-schedule-page/{schedule_id}' , [Vehicle::class , 'viewBusSchedulePage']);
@@ -251,6 +252,7 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::post('store-bus-location' ,[Vehicle::class , 'storeBusLocation']);
         Route::get('fetch-all-bus-location' ,[Vehicle::class , 'fetchBusLocation'])->name('fetch_bus_location');
         Route::get('update/bus-location/{location_id}', [Vehicle::class , 'updateBusLocation']);
+        Route::get('delete/bus-location/{location_id}', [Vehicle::class , 'deleteBusLocation']);
         Route::put('edit-bus-location/{location_id}' , [Vehicle::class , 'editVehicleLocation']);
 
 
@@ -542,6 +544,7 @@ Route::prefix('e-ticket')->name('e-ticket.')->group(function(){
 
 
         Route::get('edit-tenant-bus/{bus_id}',[ManageBus::class , 'editBus'])->name('edit-tenant-bus');
+        Route::get('delete-tenant-bus/{bus_id}',[ManageBus::class , 'deleteBus'])->name('delete-tenant-bus');
         Route::put('update-tenant-bus/{bus_id}', [ManageBus::class , 'updateBus']);
         Route::get('add-new-tenant-bus', [ManageBus::class , 'addNewBus']);
         Route::post('post-new-tenant-bus', [ManageBus::class , 'createTenantBus']);
@@ -580,6 +583,8 @@ Route::prefix('e-ticket')->name('e-ticket.')->group(function(){
         Route::post('store-location',[EticketLocation::class , 'storeLocation']);
         Route::get('fetch-tenant-locations', [EticketLocation::class ,'fetchLocation'])->name('fetch-tenant-locations');
         Route::get('view-tenant-location/{location_id}', [EticketLocation::class , 'viewLocation']);
+        Route::get('delete-tenant-location/{location_id}', [EticketLocation::class , 'deleteLocation']);
+
 
 
         //schedule trip for buses
@@ -589,6 +594,7 @@ Route::prefix('e-ticket')->name('e-ticket.')->group(function(){
         Route::get('all-scheduled-trip',[EticketSchedule::class , 'allScheduledTrip']);
         Route::get('fetch-scheduled-trip', [EticketSchedule::class, 'fetchAllSchedules'])->name('fetch-scheduled-trip');
         Route::get('view-each-schedule/{schedule_id}' , [EticketSchedule::class , 'viewEachSchedule']);
+        Route::get('delete-each-schedule/{schedule_id}' , [EticketSchedule::class , 'deleteEachSchedule']);
         Route::get('view-bus-each-schedule/{bus_id}', [EticketSchedule::class , 'viewBusSchedule']);
         Route::get('view-bus-schedules/{bus_id}', [EticketSchedule::class , 'viewEachBusSchedule'])->name('view-bus-schedules');
         Route::post('update-schedule-status/{schedule_id}',[EticketSchedule::class , 'updateScheduleStatus']);

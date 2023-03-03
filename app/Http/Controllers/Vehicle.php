@@ -46,7 +46,7 @@ class Vehicle extends Controller
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
                     $id = $row->id;
-                    $actionBtn = "<a href='/admin/manage/view-tenant-bus/$id'  class='edit btn btn-success btn-sm'>View</a>";
+                    $actionBtn = "<a href='/admin/manage/view-tenant-bus/$id'  class='edit btn btn-success btn-sm'>View</a> <a href='/admin/manage/delete-tenant-bus/$id'  class='edit btn btn-danger btn-sm'>Delete</a>";
 //                    <a href='/admin/edit-bus/$id'  class='edit btn btn-success btn-sm'>Edit</a>
                     return $actionBtn;
                 })
@@ -62,6 +62,14 @@ class Vehicle extends Controller
 
         return  view('admin.vehicle.view-bus', compact('findBus'));
     }
+    public function deleteTenantBus($bus_id)
+    {
+        $findBus = Bus::where('id', $bus_id)->first();
+        $findBus->delete();
+
+        return redirect()->to('/admin/manage/tenant-bus');
+    }
+
 
     public function editBus($bus_id)
     {
@@ -307,7 +315,7 @@ class Vehicle extends Controller
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
                     $id = $row->id;
-                    $actionBtn = "<a href='/admin/update/bus-location/$id'  class='edit btn btn-success btn-sm'>Edit</a>";
+                    $actionBtn = "<a href='/admin/update/bus-location/$id'  class='edit btn btn-success btn-sm'>Edit</a> <a href='/admin/delete/bus-location/$id'  class='edit btn btn-Danger btn-sm'>Delete</a>";
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])
@@ -320,6 +328,14 @@ class Vehicle extends Controller
         $location = Destination::where('id' , $location_id)->first();
 
         return view('admin.vehicle.edit-bus-destination' , compact('location'));
+    }
+
+    public function deleteBusLocation($location_id)
+    {
+        $location = Destination::where('id' , $location_id)->first();
+        $location->delete();
+
+        return redirect()->to('/admin/manage/bus-destination');
     }
 
     public function editVehicleLocation(Request $request ,$location_id)
