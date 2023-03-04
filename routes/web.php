@@ -42,6 +42,7 @@ use App\Http\Controllers\Terminal;
 use App\Http\Controllers\Transaction;
 use App\Http\Controllers\Vehicle;
 use App\Http\Controllers\PagesController;
+use App\Http\Controllers\NewsletterController;
 
 
 
@@ -81,6 +82,9 @@ Route::get('/about', [PagesController::class, 'about'])->name('about-us');
 Route::get('/terms', [PagesController::class, 'terms'])->name('terms');
 Route::get('/policy', [PagesController::class, 'policy'])->name('policy');
 Route::get('/contact', [PagesController::class, 'contact']);
+
+//post subscribser email
+Route::post('/add_subscriber_email', [NewsletterController::class, 'addSubscriber']);
 
 //Auth::routes();
 
