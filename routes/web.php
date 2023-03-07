@@ -106,7 +106,8 @@ Route::get('parcel' , [ParcelMgt::class , 'parcel']);
 Route::get('/pick-up-city/{state_id}', [ParcelMgt::class ,'fetchCities']);
 
 Route::get('login/{provider}', [SocialController::class ,'redirect']);
-Route::get('login/{provider}/callback',[SocialController::class ,'Callback']);
+Route::get('login/{provider}/callback',[SocialController::class ,'socialCallback']);
+Route::get('callback',[SocialController::class ,'googleCallback']);
 
 //ferry post
 Route::match(array('GET','POST'),'/ferry/bookings' , [FerryBookings::class ,'bookFerry']);

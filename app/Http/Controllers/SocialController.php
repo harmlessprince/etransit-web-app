@@ -17,7 +17,31 @@ class SocialController extends Controller
         return Socialite::driver($provider)->redirect();
     }
 
-    public function Callback(){
+    public function socialCallback($provider){
+
+        $userSocial =   Socialite::driver($provider)->user();
+        $users      =  User::where(['email' => $userSocial->getEmail()])->first();
+
+        if($users){
+            Auth::login($users);
+            return redirect('/');
+        }else{
+            $user = User::create([
+                'full_name'         => $userSocial->getEmail(),
+                'email_verified_at'  => Carbon::now(),
+                'email'             => $userSocial->getEmail(),
+                'password'          => Hash::make($userSocial->getEmail()),
+                'image'             => $userSocial->getAvatar(),
+                'provider_id'       => $userSocial->getId(),
+                'provider'          => 'google',
+            ]);
+            
+            Auth::login($user);
+            return redirect('/');
+        }
+    }
+
+    public function googleCallback(){
 
         $userSocial =   Socialite::driver('google')->user();
         $users      =  User::where(['email' => $userSocial->getEmail()])->first();
