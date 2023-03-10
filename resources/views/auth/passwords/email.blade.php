@@ -35,6 +35,7 @@
     <link rel="stylesheet" href="{{asset('login-assets/csss/Timeline-Steps.css')}}">
     <link rel="stylesheet" href="{{asset('loginassets/csss/Tricky-Grid---2-Column-on-Desktop--Tablet-Flip-Order-of-12-Column-rows-on-Mobile.css')}}">
     <link rel="stylesheet" href="{{asset('login-assets/csss/Ultimate-Testimonial-Slider-BS5.css')}}">
+    <link href="{{asset("assets2/css/toastr.min.css")}}" rel="stylesheet">
     <style>
         body {
             font-family: metropolis-regular , Sans-Serif;
@@ -52,9 +53,33 @@
             }
         }
     </style>
+
+<style>
+        #pageloader
+        {
+        background: rgba( 255, 255, 255, 0.8 );
+        display: none;
+        height: 100%;
+        position: fixed;
+        width: 100%;
+        z-index: 9999;
+        }
+
+        #pageloader img
+        {
+        left: 50%;
+        margin-left: -32px;
+        margin-top: -32px;
+        position: absolute;
+        top: 50%;
+        }
+    </style>
 </head>
 
 <body>
+    <div id="pageloader">
+        <img src="http://cdnjs.cloudflare.com/ajax/libs/semantic-ui/0.16.1/images/loader-large.gif" alt="processing..." />
+     </div>
 <section>
     <div id="topnav" style="height: 49px;background: #343f5f;">
         <div class="container">
@@ -114,7 +139,7 @@
                 <div style="width: 350px;background: var(--bs-white);padding: 25px;padding-top: 30px;">
                     <h5 style="text-align: center;">Reset your password</h5>
                     <p style="text-align: center;color: var(--bs-gray-500);">Remember your password?&nbsp;&nbsp;<a href="{{route('login')}}" style="color: rgb(231,113,15);">Sign In</a>&nbsp;</p>
-                    <form method="POST" action="{{ route('password.email') }}">
+                    <form id="reset-form">
                         @csrf
 
                         <div class="form-group row">
@@ -135,10 +160,11 @@
                         <br>
                         <div class="form-group row mb-0">
                             <div class="col-md-12">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-primary reset_butt">
                                     {{ __('Send Password Reset Link') }}
                                 </button>
                             </div>
+
                         </div>
                     </form>
                 </div>
@@ -188,6 +214,8 @@
         <p class="d-md-flex me-auto" id="faicon-1" style="text-align: left;color: #090b39;margin-top: 100px;margin-left: 0px;width: 293.703px;margin-bottom: 0px;background: var(--bs-body-bg);margin-right: auto;">&nbsp;<a href="#"><i class="fa fa-facebook d-md-flex align-items-md-end" style="padding-top: 5px;font-size: 25px;margin-right: 15px;"></i></a><a href="#"><i class="fa fa-linkedin d-md-flex align-items-md-end" style="color: rgb(13,110,253);padding-top: 5px;font-size: 25px;margin-right: 15px;"></i></a><a href="#"><i class="fa fa-google-plus d-md-flex justify-content-center align-items-center align-content-center" style="padding-top: 5px;font-size: 25px;"></i></a></p>
     </div>
 </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="{{asset('login-assets/bootstrap/js/bootstrap.min.js')}}"></script>
 <script src="{{asset('login-assets/js/login-full-page-bs4.js')}}"></script>
 <script src="{{asset('login-assets/js/Off-Canvas-Sidebar-Drawer-Navbar.js')}}"></script>
@@ -196,6 +224,40 @@
 <script src="https://unpkg.chttps://unpkg.com/@bootstrapstudio/bootstrap-better-nav/dist/bootstrap-better-nav.min.jsom/@bootstrapstudio/bootstrap-better-nav/dist/bootstrap-better-nav.min.js" type="module"></script>
 <script src="https://unpkg.com/@bootstrapstudio/bootstrap-better-nav/dist/bootstrap-better-nav.min.js" type="module"></script>
 <script src="{{asset('login-assets/js/Ultimate-Testimonial-Slider-BS5.js')}}"></script>
+<script src="{{asset("assets2/js/toastr.min.js")}}"></script>
+<script>
+    $('.reset_butt').click(function(e){
+        e.preventDefault();
+        $("#pageloader").fadeIn();
+
+        var form = $("#reset-form")[0];
+        var _data = new FormData(form);
+        $.ajax({
+            url: "{{ url('api/v1/forgot-password') }}",
+            data: _data,
+            enctype: 'multipart/form-data',
+            processData: false,
+            contentType:false,
+            type: 'POST',
+            success: function(data){
+                if(data.responseJSON.success == true){
+                    toastr.success(data.responseJSON.message);
+                    $("#reset-form")[0].reset();
+                    // window.setTimeout(function(){location.reload();},3000);
+                    $("#pageloader").hide();
+                } else{
+                    toastr.error(data.responseJSON.message);
+                    $("#pageloader").hide();
+                }
+            },
+            error: function(result){
+                toastr.error(result.responseJSON.message);
+                $("#pageloader").hide();
+            }
+        });
+        return false;
+    });
+</script>
 </body>
 
 </html>

@@ -535,6 +535,9 @@ Route::prefix('e-ticket')->name('e-ticket.')->group(function(){
     Route::get('import-export-schedule', [EticketSchedule::class, 'importExportViewSchedule']);
     Route::get('export/schedule', [EticketSchedule::class, 'exportSchedule'])->name('export.schedule');
     Route::post('import/e-ticket/schedule', [EticketSchedule::class, 'importSchedule']);
+    Route::post('import/driver', [Driver::class, 'importDriver']);
+    Route::get('export/driver', [Driver::class, 'exportDriver']);
+
     //->name('import.schedule');
 
 
@@ -569,7 +572,7 @@ Route::prefix('e-ticket')->name('e-ticket.')->group(function(){
         Route::get('fetch-tenant-drivers',[Driver::class , 'fetchDrivers'])->name('fetch-tenant-drivers');
         Route::get('edit-tenant-driver/{driver_id}', [Driver::class , 'editDriver']);
         Route::put('update-driver/{driver_id}',[Driver::class , 'updateDriver']);
-
+        Route::get('drivers/bulk-upload', [Driver::class , 'getBulkUploadPage']);
         //e-ticket terminal
         Route::get('terminals', [EticketTerminal::class , 'allTerminals']);
         Route::get('add-terminal', [EticketTerminal::class , 'addTerminal']);
@@ -650,6 +653,7 @@ Route::prefix('e-ticket')->name('e-ticket.')->group(function(){
 
         Route::get('edit-car-plan/{car_id}',[CarHireMgt::class ,'editCarPlan'])->name('edit-car-plan');
         Route::put('update-car-plan/{car_id}',[CarHireMgt::class ,'updateCarPlan'])->name('update-car-plan');
+        Route::get('remove-driver-from-car/{driver_id}/{car_id}',[CarHireMgt::class , 'removeDriverFromCar']);
 
         //view car
         Route::get('view-car/{car_id}' ,[CarHireMgt::class , 'viewCar'])->name('view-car');
@@ -657,6 +661,9 @@ Route::prefix('e-ticket')->name('e-ticket.')->group(function(){
         Route::get('view-tenant-car-history/{car_id}' ,[CarHireMgt::class , 'viewCarHistories'])->name('view-all-car-history');
 
         Route::get('view-history/{car_history_id}' , [CarHireMgt::class , 'viewCarHistory'])->name('view-history');
+
+        Route::get('/assign-car-driver/{car_id}', [CarHireMgt::class, 'viewAssignDriver']);
+        Route::post('/assign-driver-car/{car_id}', [CarHireMgt::class, 'assignCarDriver']);
 
         Route::get('confirm-drop-off/{car_history_id}', [CarHireMgt::class , 'confirmDropOff'])->name('confirm-drop-off');
 

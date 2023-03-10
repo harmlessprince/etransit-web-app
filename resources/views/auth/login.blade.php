@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width">
     <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no"> -->
     <title>Etransit Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
     <link rel="apple-touch-icon" sizes="180x180" href="/login-assets/img/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/login-assets/img/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/login-assets/img/favicon-16x16.png">
@@ -136,7 +137,8 @@
                         </div>
                         <div class="form-group">
                             <label class="form-label" style="margin-top: 20px;margin-bottom: 0px;">Password</label>
-                            <input class="form-control  @error('password')is-invalid @enderror" type="password" name="password" style="border-top-left-radius: 0px;border-top-right-radius: 0px;border-bottom-right-radius: 0px;border-bottom-left-radius: 0px;border-top-style: none;border-right-style: none;border-left-style: none;">
+                            <input class="form-control  @error('password')is-invalid @enderror" type="password" name="password" id="id_password" style="border-top-left-radius: 0px;border-top-right-radius: 0px;border-bottom-right-radius: 0px;border-bottom-left-radius: 0px;border-top-style: none;border-right-style: none;border-left-style: none;">
+                            <i class="far fa-eye" id="togglePassword" style="float: right; position: relative; z-index: 2; margin-top: -25px; cursor: pointer;"></i>
                             @error('password')
                             <span class="invalid-feedback" role="alert">
                                <strong>{{ $message }}</strong>
@@ -212,6 +214,18 @@
         </p>
     </div>
 </div>
+<script>
+    const togglePassword = document.querySelector('#togglePassword');
+  const password = document.querySelector('#id_password');
+
+  togglePassword.addEventListener('click', function (e) {
+    // toggle the type attribute
+    const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+    password.setAttribute('type', type);
+    // toggle the eye slash icon
+    this.classList.toggle('fa-eye-slash');
+});
+</script>
 <script src="{{asset('login-assets/bootstrap/js/bootstrap.min.js')}}"></script>
 <script src="{{asset('login-assets/js/login-full-page-bs4.js')}}"></script>
 <script src="{{asset('login-assets/js/Off-Canvas-Sidebar-Drawer-Navbar.j')}}s"></script>

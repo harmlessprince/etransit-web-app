@@ -37,7 +37,7 @@
                     <h3>{{env('APP_NAME')}}</h3>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href=""><i data-feather="home"></i></a></li>
-                        <li class="breadcrumb-item">Drivers Import/ Export with Excel File</li>
+                        <li class="breadcrumb-item">Event Schedule Import/ Export with Excel File</li>
                     </ol>
                 </div>
                 {{--                <div class="col-6">--}}
@@ -78,7 +78,7 @@
     </div>
     <div class="container-fluid">
         <div class="button-box" >
-            <a href="{{url('/e-ticket/export/schedule')}}" class="btn btn-success btn-sm"  style="margin-right:10px;">Download Excel File</a>&nbsp;
+            <a href="{{url('/e-ticket/export/driver')}}" class="btn btn-success btn-sm"  style="margin-right:10px;">Download Excel File</a>&nbsp;
         </div>
         @if($errors->any())
             <div class="alert alert-danger">
@@ -95,7 +95,7 @@
                 <div id="app">
 {{--                    <bus-schedules-upload></bus-schedules-upload>--}}
                     <div class="file-upload">
-                        <form action="{{url('e-ticket/import/e-ticket/schedule')}}"  method="POST" enctype="multipart/form-data">
+                        <form action="{{url('e-ticket/import/driver')}}"  method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group" >
                                 <div class="image-button">

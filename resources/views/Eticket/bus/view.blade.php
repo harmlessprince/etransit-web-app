@@ -128,6 +128,7 @@
                         <h6>Contact : {{$findBus->driver->phone_number}}</h6>
                         <hr>
                         <a href="{{url('e-ticket/remove-driver-from-bus/'.$findBus->driver->id .'/'. $findBus->id)}}" class="btn btn-danger">Remove Driver From Bus</a>
+                        <a href="{{url('e-ticket/edit-tenant-driver/'.$findBus->driver->id)}}" class="btn btn-primary">Edit Driver Info</a>
                         <hr>
                         @else
                             <div class="assign_driver">

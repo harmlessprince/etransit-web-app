@@ -7,6 +7,7 @@ use App\Models\Car as HiredCars;
 use App\Models\CarClass;
 use App\Models\CarHistory;
 use App\Models\CarImage;
+use App\Models\Driver;
 use App\Models\CarPlan;
 use App\Models\CarType;
 use App\Models\Transaction;
@@ -238,25 +239,25 @@ class CarHireMgt extends Controller
         ]);
 
         DB::beginTransaction();
-        if(isset($data['sw_region_fare'])){
+        // if(isset($data['sw_region_fare'])){
             $updateSWRental  = CarPlan::where('car_id',$car_id)->where('plan' ,'South West')->first();
             $updateSWRental->update(['amount' => $data['South_West']]);
-        }
+        // }
 
-        if(isset($data['ss_region_fare'])){
+        // if(isset($data['ss_region_fare'])){
             $updateSSRental  = CarPlan::where('car_id',$car_id)->where('plan' ,'South South')->first();
             $updateSSRental->update(['amount' => $data['South_South']]);
-        }
+        // }
 
-        if(isset($data['se_region_fare'])){
+        // if(isset($data['se_region_fare'])){
             $updateSERental  = CarPlan::where('car_id',$car_id)->where('plan' ,'South East')->first();
             $updateSERental->update(['amount' => $data['South_East']]);
-        }
+        // }
 
-        if(isset($data['nc_region_fare'])){
+        // if(isset($data['nc_region_fare'])){
             $updateNCRental  = CarPlan::where('car_id',$car_id)->where('plan' ,'North Central')->first();
             $updateNCRental->update(['amount' => $data['North_Central']]);
-        }
+        // }
         $updateDailyRental  = CarPlan::where('car_id',$car_id)->where('plan' ,'Daily Rentals')->first();
         $updateDailyRental->update(['amount' => $data['Daily_Rentals']]);
 
@@ -274,7 +275,7 @@ class CarHireMgt extends Controller
     public function viewCar(int $car_id)
     {
 
-        $car = HiredCars::where('id', $car_id)->with('carclass','cartype')->first();
+        $car = HiredCars::where('id', $car_id)->with('carclass','cartype','driver')->first();
 
         $carHistories = CarHistory::where('car_id', $car_id)->pluck('id');
 
@@ -287,6 +288,64 @@ class CarHireMgt extends Controller
         $carHistories = CarHistory::where('car_id',$car_id)->count();
 
         return view('Eticket.car-hire.view-car' , compact('car','carPlans','carHistories', 'transactionSum'));
+    }
+
+    public function viewAssignDriver($car_id) {
+        $car = HiredCars::find($car_id);
+        return view('Eticket.car-hire.assign-driver', compact('car'));
+    }
+
+    public function assignCarDriver(Request $request , $car_id)
+    {
+        request()->validate([
+            'driver_phone_number' => 'required'
+        ]);
+
+        $findBus = HiredCars::find($car_id);
+
+        if(!$findBus)
+        {
+            Alert::error('Error', 'No car found');
+            return back();
+        }
+
+
+        $findDriver = Driver::where('tenant_id', session()->get('tenant_id'))->where('phone_number', $request->driver_phone_number)->first();
+
+        if(!$findDriver)
+        {
+            Alert::error('Error', 'No driver driver found with that number in your organization');
+            return back();
+        }
+
+        $findBus->update([
+            'driver_id'=>$findDriver->id
+        ]);
+
+        Alert::success('Success ', 'Driver assigned to car successfully');
+
+        return redirect('e-ticket/view-car/'.$car_id);
+
+    }
+    public function removeDriverFromCar($driver_id , $car_id)
+    {
+        $findDriver = Driver::find($driver_id);
+
+        if(!$findDriver)
+        {
+            Alert::error('Error', 'No driver found with that number in your organization');
+            return back();
+        }
+
+        $findCar = HiredCars::find($car_id);
+
+        $findCar->update([
+            'driver_id' => null
+        ]);
+
+        Alert::success('Success ', 'Driver removed from car successfully');
+
+        return redirect('e-ticket/view-car/'.$car_id);
     }
 
     public function viewCarHistories($car_id)

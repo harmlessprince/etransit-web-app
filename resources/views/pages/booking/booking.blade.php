@@ -15,6 +15,12 @@
    .drp-dwn-cont-bus-booking tr {
     display: block;
    }
+   .drp-dwn-btn-bus-booking:hover {
+    background-color: #343f5f;
+    color: white;
+    border-radius: 10px;
+    padding-top: 2px;
+   }
    .dropdown-bus-booking {
  
   display: inline-block;
@@ -44,7 +50,7 @@
                     </div>
                     <div class="col-md-auto"><a class="text-decoration-none" href="#" style="color: #ed954d;">Clear all</a></div>
                 </div>
-                <hr>
+   <hr>
                 <form action="{{url('/bus/filter-bookings')}}" method="POST">
                     @csrf 
                 <div class="drp-dwn-cont-bus-booking" id="myDropdown">        

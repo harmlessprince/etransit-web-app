@@ -111,6 +111,8 @@
                         <h6>Extra Hour : {{$carPlans[0]->extra_hour}}</h6>
                         <hr>
                         <h6>Self Drive : {{ $car->self_drive == "active" ? 'True' : 'False'}}</h6>
+                        <hr>
+                        <h6>Driver : {{ $car->driver? $car->driver->full_name:''}}</h6>
 
                     </div>
                 </div>
@@ -125,6 +127,32 @@
                         <hr>
                         @endforeach
 
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
+                <div class="card">
+                    <div class="card-body">
+
+                        <h4>Driver Information</h4>
+                        <br>
+                        @if(isset($car->driver))
+                        <h6>Name : {{$car->driver->full_name}}</h6>
+                        <hr>
+                        <h6>Address : {{$car->driver->address}}</h6>
+                        <hr>
+                        <h6>Contact : {{$car->driver->phone_number}}</h6>
+                        <hr>
+                        <a href="{{url('e-ticket/remove-driver-from-car/'.$car->driver->id .'/'. $car->id)}}" class="btn btn-danger">Remove Driver From Car</a>
+                        <a href="{{url('e-ticket/edit-tenant-driver/'.$car->driver->id)}}" class="btn btn-primary">Edit Driver Info</a>
+                        <hr>
+                        @else
+                            <div class="assign_driver">
+                              <div>
+                                  <a href="{{url('e-ticket/assign-car-driver/'.$car->id)}}" class="btn btn-danger">Assign Driver</a>
+                              </div>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>

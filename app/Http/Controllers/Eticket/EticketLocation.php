@@ -23,12 +23,13 @@ class EticketLocation extends Controller
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
                     $id = $row->id;
-                    $actionBtn = "<a href='/e-ticket/view-tenant-location/$id' class='delete btn btn-primary btn-sm'>View</a> <a href='/e-ticket/delete-tenant-location/$id' class='delete btn btn-danger btn-sm'>Delete</a>";
+                    $actionBtn = "<a href='/e-ticket/view-tenant-location/$id' class='delete btn btn-primary btn-sm'>View</a> <a href='#' class='delete btn btn-danger btn-sm' onclick='deleteItem($id)'>Delete</a> ";
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])
                 ->make(true);
         }
+        return $row;
     }
 
     public function addLocation()
