@@ -16,6 +16,10 @@ class Driver extends Model
     {
         return $this->hasOne(Bus::class);
     }
+    public function car()
+    {
+        return $this->hasOne(Car::class);
+    }
 
 
     /**

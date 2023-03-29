@@ -10,6 +10,7 @@ class CarPlan extends Model
     use HasFactory;
     protected $table = 'car_plans';
     protected $guarded = ['id'];
+    protected $fillable = ['plan', 'amount'];
 
     public function car()
     {

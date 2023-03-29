@@ -10,7 +10,7 @@ class Car extends Model
 {
     use HasFactory;
     // protected $guarded = ['id'];
-    protected $fillable = ['car_name', 'car_class_id', 'car_type_id', 'description', 'capacity', 'car_registration', 'model_year', 'transmission', 'state_id', 'self_drive'];
+    protected $fillable = ['car_name', 'car_class_id', 'car_type_id', 'description', 'capacity', 'car_registration', 'model_year', 'transmission', 'state_id', 'self_drive','driver_id'];
 
     public function plans()
     {
@@ -50,6 +50,10 @@ class Car extends Model
     public function carHistory()
     {
         return $this->HasMany(CarHistory::class);
+    }
+    public function driver()
+    {
+        return $this->belongsTo(Driver::class, 'driver_id');
     }
 
 

@@ -3,6 +3,14 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+
+    <meta property='og:title' content='Etransit Africa'/>
+    <meta property='og:image' content="{{asset('new-assets/img/logofull%201.png')}}"/>
+    <meta property='og:description' content='Etransit Africa is a technology-focused transportation and related services company providing individuals and corporate bodies with seamless and reliable luxury as well as day to day transport services powered by innovative technology'/>
+    <meta property='og:url' content='http://127.0.0.1:8000/'/>
+    <meta property='og:image:width' content='1200' />
+    <meta property='og:image:height' content='627' />
+
     <title>{{env('APP_NAME')}}</title>
 
     <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
@@ -60,6 +68,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('new-assets/css/slick.css') }}"/>
     <!-- Add the slick-theme.css if you want default styling -->
     <link rel="stylesheet" type="text/css" href="{{ asset('new-assets/css/slick-theme.css') }}"/>
+    <link href="{{asset("assets2/css/toastr.min.css")}}" rel="stylesheet">
 
 
 
@@ -89,6 +98,27 @@
         }
     </style>
 
+<style>
+        #pageloader
+        {
+        background: rgba( 255, 255, 255, 0.8 );
+        display: none;
+        height: 100%;
+        position: fixed;
+        width: 100%;
+        z-index: 9999;
+        }
+
+        #pageloader img
+        {
+        left: 50%;
+        margin-left: -32px;
+        margin-top: -32px;
+        position: absolute;
+        top: 50%;
+        }
+    </style>
+
 
 {{--    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.css">--}}
 {{--    @stack('css')--}}
@@ -100,11 +130,16 @@
     <link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" defer></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    
 
     @toastr_css
 
 </head>
 <body onload="busnav()">
+    <div id="pageloader">
+        <img src="http://cdnjs.cloudflare.com/ajax/libs/semantic-ui/0.16.1/images/loader-large.gif" alt="processing..." />
+     </div>
     <div>
         <div >
         @include('layouts.header')

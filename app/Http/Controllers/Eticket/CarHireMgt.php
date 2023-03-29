@@ -7,6 +7,7 @@ use App\Models\Car as HiredCars;
 use App\Models\CarClass;
 use App\Models\CarHistory;
 use App\Models\CarImage;
+use App\Models\Driver;
 use App\Models\CarPlan;
 use App\Models\CarType;
 use App\Models\Transaction;
@@ -238,25 +239,25 @@ class CarHireMgt extends Controller
         ]);
 
         DB::beginTransaction();
-        if(isset($data['sw_region_fare'])){
+        // if(isset($data['sw_region_fare'])){
             $updateSWRental  = CarPlan::where('car_id',$car_id)->where('plan' ,'South West')->first();
             $updateSWRental->update(['amount' => $data['South_West']]);
-        }
+        // }
 
-        if(isset($data['ss_region_fare'])){
+        // if(isset($data['ss_region_fare'])){
             $updateSSRental  = CarPlan::where('car_id',$car_id)->where('plan' ,'South South')->first();
             $updateSSRental->update(['amount' => $data['South_South']]);
-        }
+        // }
 
-        if(isset($data['se_region_fare'])){
+        // if(isset($data['se_region_fare'])){
             $updateSERental  = CarPlan::where('car_id',$car_id)->where('plan' ,'South East')->first();
             $updateSERental->update(['amount' => $data['South_East']]);
-        }
+        // }
 
-        if(isset($data['nc_region_fare'])){
+        // if(isset($data['nc_region_fare'])){
             $updateNCRental  = CarPlan::where('car_id',$car_id)->where('plan' ,'North Central')->first();
             $updateNCRental->update(['amount' => $data['North_Central']]);
-        }
+        // }
         $updateDailyRental  = CarPlan::where('car_id',$car_id)->where('plan' ,'Daily Rentals')->first();
         $updateDailyRental->update(['amount' => $data['Daily_Rentals']]);
 
@@ -274,7 +275,7 @@ class CarHireMgt extends Controller
     public function viewCar(int $car_id)
     {
 
-        $car = HiredCars::where('id', $car_id)->with('carclass','cartype')->first();
+        $car = HiredCars::where('id', $car_id)->with('carclass','cartype','driver')->first();
 
         $carHistories = CarHistory::where('car_id', $car_id)->pluck('id');
 
@@ -287,6 +288,64 @@ class CarHireMgt extends Controller
         $carHistories = CarHistory::where('car_id',$car_id)->count();
 
         return view('Eticket.car-hire.view-car' , compact('car','carPlans','carHistories', 'transactionSum'));
+    }
+
+    public function viewAssignDriver($car_id) {
+        $car = HiredCars::find($car_id);
+        return view('Eticket.car-hire.assign-driver', compact('car'));
+    }
+
+    public function assignCarDriver(Request $request , $car_id)
+    {
+        request()->validate([
+            'driver_phone_number' => 'required'
+        ]);
+
+        $findBus = HiredCars::find($car_id);
+
+        if(!$findBus)
+        {
+            Alert::error('Error', 'No car found');
+            return back();
+        }
+
+
+        $findDriver = Driver::where('tenant_id', session()->get('tenant_id'))->where('phone_number', $request->driver_phone_number)->first();
+
+        if(!$findDriver)
+        {
+            Alert::error('Error', 'No driver driver found with that number in your organization');
+            return back();
+        }
+
+        $findBus->update([
+            'driver_id'=>$findDriver->id
+        ]);
+
+        Alert::success('Success ', 'Driver assigned to car successfully');
+
+        return redirect('e-ticket/view-car/'.$car_id);
+
+    }
+    public function removeDriverFromCar($driver_id , $car_id)
+    {
+        $findDriver = Driver::find($driver_id);
+
+        if(!$findDriver)
+        {
+            Alert::error('Error', 'No driver found with that number in your organization');
+            return back();
+        }
+
+        $findCar = HiredCars::find($car_id);
+
+        $findCar->update([
+            'driver_id' => null
+        ]);
+
+        Alert::success('Success ', 'Driver removed from car successfully');
+
+        return redirect('e-ticket/view-car/'.$car_id);
     }
 
     public function viewCarHistories($car_id)
@@ -400,7 +459,7 @@ class CarHireMgt extends Controller
 
         $car->update(['car_availability' => 1]);
 
-        Alert::success('Success ', 'The action you performed is successful');
+        Alert::success('Success ', 'The action you performed was successful');
         return back();
     }
 
@@ -410,7 +469,7 @@ class CarHireMgt extends Controller
 
         $car->update(['car_availability' => 0]);
 
-        Alert::success('Success ', 'The action you performed is successful');
+        Alert::success('Success ', 'The action you performed was successful');
 
         return back();
     }
@@ -461,5 +520,107 @@ class CarHireMgt extends Controller
         Alert::success('Success ', 'Car Image update was  successful');
         return back();
     }
+    public function scheduleCar($car_id)
+    {
+        $car = HiredCars::find($car_id);
 
+        if(!$car)
+        {
+            Alert::error('Error ', 'Unable to fetch car');
+            return back();
+        }
+
+        $locations = Destination::all();
+        $terminals = Terminal::all();
+
+        return view('Eticket.car-hire.schedule-trip', compact('car','locations','terminals'));
+    }
+
+    public function addCarSchedule()
+    {
+        
+   //         request()->validate([
+   //             'departureTime'=> 'required',
+   //             'Tfare'        => 'required',
+   //             'TfareChild'   => 'required',
+   //             'pickup'       => 'required',
+   //             'terminal'     => 'required',
+   //             'destination'  => 'required',
+   //         ]);
+
+   //         $service = \App\Models\Terminal::where('id',$request['terminal'])->with('service')->first();
+   //         $numberOfSeats = \App\Models\Car::where('id',$request['carId'])->select('capacity')->first();
+
+   //         $serviceID = $service->id;
+   //         try {
+   //             DB::beginTransaction();
+   //             $scheduleEvent = new EventSchedule();
+   //             $scheduleEvent->terminal_id         = (int)$request['terminal'];
+   //             $scheduleEvent->service_id          = 1;
+   //             $scheduleEvent->bus_id              = (int) $request['busId'];
+   //             $scheduleEvent->pickup_id           = (int) $request['pickUp'];
+  //             $scheduleEvent->destination_id      = (int) $request['destination'];
+  //             $scheduleEvent->fare_adult          = $request['Tfare'];
+   //             $scheduleEvent->fare_children       = $request['TfareChild'];
+  //             $scheduleEvent->departure_date      = $request['eventDate'];
+  //             $scheduleEvent->departure_time      = $request['departureTime'];
+  //             $scheduleEvent->return_date         = $request['returnDate'] ?? null;
+   //             $scheduleEvent->seats_available     = $numberOfSeats->seater ;
+  //             $scheduleEvent->return_uuid_tracker = ReturnUUIDTracker::generate();
+  //             $scheduleEvent->tenant_id           = session()->get('tenant_id');
+   //             $scheduleEvent->save();
+
+   //             $seatCount = (int) $numberOfSeats->seater;
+   //             for($i = 0 ; $i < $seatCount ; $i++)
+  //             {
+  //                 $seatTracker = new \App\Models\SeatTracker();
+  //                 $seatTracker->schedule_id = $scheduleEvent->id;
+  //                 $seatTracker->bus_id      = (int) $request['busId'];
+   //                 $seatTracker->seat_position = $i + 1;
+   //                 $seatTracker->save();
+  //             }
+
+
+  //             if($scheduleEvent && !is_null($request['returnDate']))
+  //             {
+   //                 $scheduleReturnTripEvent = new EventSchedule();
+  //                 $scheduleReturnTripEvent->terminal_id         = (int)$request['terminal'];
+  //                 $scheduleReturnTripEvent->service_id          = 1;
+  //                 $scheduleReturnTripEvent->bus_id              = (int) $request['busId'];
+  //                 $scheduleReturnTripEvent->pickup_id           = (int) $request['destination'];
+   //                 $scheduleReturnTripEvent->destination_id      = (int) $request['pickUp'];
+  //                 $scheduleReturnTripEvent->fare_adult          = $request['Tfare'];
+  //                 $scheduleReturnTripEvent->fare_children       = $request['TfareChild'];
+  //                 $scheduleReturnTripEvent->departure_date      = $request['returnDate'] ;
+  //                 $scheduleReturnTripEvent->departure_time      = $request['departureTime'];
+   //                 $scheduleReturnTripEvent->return_date         = $request['eventDate'];
+  //                 $scheduleReturnTripEvent->seats_available     = $numberOfSeats->seater ;
+  //                 $scheduleReturnTripEvent->return_uuid_tracker =  $scheduleEvent->return_uuid_tracker;
+   //                 $scheduleReturnTripEvent->isReturn            =  1;
+  //                 $scheduleReturnTripEvent->tenant_id           = session()->get('tenant_id');
+   //                 $scheduleReturnTripEvent->save();
+
+   //                 $seatCount = (int) $numberOfSeats->seater;
+   //                 for($i = 0 ; $i < $seatCount ; $i++)
+  //                 {
+    //                     $seatTracker = new \App\Models\SeatTracker();
+   //                     $seatTracker->schedule_id = $scheduleReturnTripEvent->id;
+   //                     $seatTracker->bus_id      = (int) $request['busId'];
+   //                     $seatTracker->seat_position = $i + 1;
+  //                     $seatTracker->save();
+  //                 }
+  //             }
+
+
+
+  //             DB::commit();
+   //             return response()->json(['success' => true , 'message' => 'Trip has been scheduled successfully']);
+  //         } catch (\Exception $e) {
+   //             DB::rollback();
+   // //            Log::info($e->getMessage());
+
+   //             return response()->json(['success' => false , 'message' =>  'Trip could not be scheduled .Try again']);
+
+    //         }
+    }
 }

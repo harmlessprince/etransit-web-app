@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;
 use RealRashid\SweetAlert\Facades\Alert;
+use DataTables;
 use PDF;
 
 class BoatCruise extends Controller
@@ -275,6 +276,7 @@ class BoatCruise extends Controller
                 $boatTrip->cruise_destination_id    = $request->destination;
                 $boatTrip->boat_id                  = $request->boatID;
                 $boatTrip->duration                 = $request->duration;
+                $boatTrip->tenant_id                = session()->get('tenant_id');
                 $boatTrip->save();
             DB::commit();
             return response()->json(['success' => true , 'message' => 'Boat Cruise Event has been scheduled successfully']);
@@ -428,6 +430,228 @@ class BoatCruise extends Controller
         return back();
 
     }
+    public function allBoats() 
+    {
+        // $service = Service::where('id', 7)->firstorfail();
+        $boatCount = Boat::count();
+        $boatCruiseCount = BoatTrip::count();
+        $boats = Boat::where('tenant_id', session()->get('tenant_id'))->get();
 
+        return view('Eticket.boat.all-boats', compact('boatCount', 'boatCruiseCount', 'boats'));
+    }
 
+    public function addNewBoat()
+    {
+        return view('Eticket.boat.add-new-boat');
+    }
+    public function postNewBoat(Request $request)
+    {
+        request()->validate([
+            'name' => 'required',
+            'description' => 'required',
+        ]);
+
+        DB::beginTransaction();
+
+        $newBoat = new Boat;
+        $newBoat->name = $request->name;
+        $newBoat->location ? $newBoat->location = $request->location : '';
+        $newBoat->description = $request->description;
+        $request->paths ? $newBoat->paths = $request->paths : ' ';
+        $newBoat->service_id = 7;
+        $newBoat->tenant_id = session()->get('tenant_id');
+        $newBoat->save();
+
+        $images = array();
+
+        if(!$request->file('images'))
+        {
+            Alert::error('Warning ', 'Please Upload boat images');
+
+            return back();
+        }
+
+        if($files = $request->file('images')){
+
+            foreach($files as  $file){
+                $request->validate([
+                    'images' => 'required|array',
+                    'images.*' => '|mimes:jpg,jpeg,png|max:4048',
+                ]);
+                $name = $file->getClientOriginalName();
+                $uploadedFileUrl = Cloudinary::upload($file->getRealPath())->getSecurePath();
+                $boatImage = new BoatImage();
+                $boatImage->boat_id = $newBoat->id;
+                $boatImage->path = $uploadedFileUrl;
+                $boatImage->save();
+            }
+
+        }
+
+        DB::commit();
+
+        Alert::success('Success ', 'Boat added successfully');
+        return redirect('e-ticket/boats');
+    }
+    public function allBoatTrips()
+    {
+        $service = Service::where('id', 7)->firstorfail();
+        $boatCruises = BoatTrip::with('boat', 'cruiselocation')->where('tenant_id', session()->get('tenant_id'))->get();
+        return view('Eticket.boat.all-boat-cruise-trips', compact('service', 'boatCruises'));
+    }
+   
+    public function cruiseDestinations()
+    {
+        $destinations = CruiseDestination::all(); 
+        return view('Eticket.boat.cruise-destinations', compact('destinations'));
+    }
+    public function viewBoat($boat_id)
+    {
+        $id = $boat_id;
+        $boat = Boat::where('id', $id)->where('tenant_id', session()->get('tenant_id'))->firstOrFail();
+        $boat_images = BoatImage::where('boat_id', $id)->get();
+        if($boat->tenant_id = session()->get('tenant_id')){
+        return view('Eticket.boat.view-boat', compact('boat', 'boat_images'));
+        }
+    }
+    public function eticketEditBoat($boat_id)
+    {
+        $id = $boat_id;
+        $boat = Boat::where('id', $id)->where('tenant_id', session()->get('tenant_id'))->firstOrFail();
+        $boat_images = BoatImage::where('boat_id', $id)->get();
+        if($boat->tenant_id = session()->get('tenant_id')){
+        return view('Eticket.boat.edit-boat', compact('boat', 'boat_images'));
+        }
+    }
+    public function eticketUpdateBoat(Request $request, $boat_id)
+    {
+        $data  = request()->validate([
+            'name' => 'required',
+            'location' => 'required',
+            'description'=> 'required',
+        ]);
+
+        DB::beginTransaction();
+
+        $updatedBoat = Boat::where('id', $boat_id)->where('tenant_id', session()->get('tenant_id'))->firstOrFail();
+        $updatedBoat->update([
+            'name' => $request->name,
+            'location' => $request->location,
+            'description' => $request->description,
+            'paths' => $request->paths,
+            'service_id' => 7,
+            'tenant_id' => session()->get('tenant_id')
+        ]);
+
+        $images = array();
+        if($files = $request->file('images')){
+
+            foreach($files as  $file){
+                $request->validate([
+                    'images' => 'required|array',
+                    'images.*' => '|mimes:jpg,jpeg,png|max:4048',
+                ]);
+                $name = $file->getClientOriginalName();
+                $uploadedFileUrl = Cloudinary::upload($file->getRealPath())->getSecurePath();
+                $boatImage = new BoatImage();
+                $boatImage->boat_id = $newBoat->id;
+                $boatImage->path = $uploadedFileUrl;
+                $boatImage->save();
+            }
+
+        }
+        DB::commit();
+
+        Alert::success('Success ', 'Boat updated successfully');
+
+        return  redirect('e-ticket/view-boat/'.$boat_id);
+
+    }
+    public function scheduleBoatTrip($boat_id)
+    {
+        $id = $boat_id;
+        $boat = Boat::where('id', $id)->where('tenant_id', session()->get('tenant_id'))->firstOrFail();
+        $locations = CruiseDestination::all();
+        return view('Eticket.boat.schedule-boat-trip', compact('boat', 'locations'));
+    }
+    public function saveCruiseDestination(Request $request)
+    {
+        request()->validate([
+            'destination' => 'required',
+        ]);
+        $newDestination = CruiseDestination::firstOrCreate(['destination' => $request->destination]);
+        Alert::success('Success ', 'Destination saved successfully');
+        return  redirect('e-ticket/boats/cruise-destinations/');
+    }
+    public function deleteCruiseDestination($id)
+    {
+        $destination = CruiseDestination::find($id);
+        $destination->delete();
+        Alert::success('Success ', 'Destination successfully deleted');
+        return  redirect('e-ticket/boats/cruise-destinations/');
+
+    }
+    public function updateCruiseDestination(Request $request, $id)
+    {
+        request()->validate([
+            'destination' => 'required',
+        ]);
+        $destination = CruiseDestination::findOrFail($id);
+        $destination->destination = $request->destination;
+        $destination->save();
+
+        Alert::success('Success ', 'Destination updated!');
+        return  redirect('e-ticket/boats/cruise-destinations/');
+    }
+    public function eticketDeleteBoat($id)
+    {
+        $boat = Boat::where('id', $id)->where('tenant_id', session()->get('tenant_id'))->firstOrFail();
+          $boat->delete();
+          Alert::success('Success ', 'Boat successfully deleted');
+        
+        return  redirect('e-ticket/boats/');
+    }
+    public function deleteBoatTrip($id)
+    {
+        $boatTrip = BoatTrip::where('id', $id)->where('tenant_id', session()->get('tenant_id'))->firstOrFail();
+        $boatTrip->delete();
+        Alert::success('Success ', 'Boat cruise successfully deleted');
+        
+        return  redirect('e-ticket/all-boat-trips/');
+    }
+    public function editBoatTrip($id)
+    {
+        $locations = CruiseDestination::all();
+        $boatTrip = BoatTrip::where('id', $id)->where('tenant_id', session()->get('tenant_id'))->with(['cruiselocation', 'boat'])->firstOrFail();
+
+        return view('Eticket.boat.edit-boat-cruise', compact('boatTrip', 'locations'));       
+    }
+
+    public function updateBoatSchedule(Request $request, $id)
+    {
+
+            request()->validate([
+                'cruise_name'  => 'required',
+                'amount_max'   => 'required',
+                'amount_min'   => 'required',
+                'description'  => 'required',
+                'duration'     => 'required',
+            ]);
+
+            $boatTrip = BoatTrip::where('id', $id)->where('tenant_id', session()->get('tenant_id'))->firstOrFail();;
+                $boatTrip->cruise_name              = $request->cruise_name;
+                $boatTrip->min_amount               = $request->amount_min;
+                $boatTrip->max_amount               = $request->amount_max;
+                $boatTrip->description              = $request->description;
+                $boatTrip->duration                 = $request->duration;
+                $boatTrip->boat_id                  = $request->boat_id;
+                $boatTrip->tenant_id                = session()->get('tenant_id');
+                if($request->time) {$boatTrip->departure_time = $request->time;}
+                if($request->departure_date) {$boatTrip->departure_date = $request->departure_date;}
+                if($request->destination) {$boatTrip->cruise_destination_id = $request->destination;}
+                $boatTrip->save();
+
+            Alert::success('Success ', 'Boat cruise successfully updated');
+            return  redirect('e-ticket/all-boat-trips/');        
+    }
 }

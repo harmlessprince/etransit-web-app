@@ -126,6 +126,27 @@
             </div>
         </div>
     </div>
+    <!-- Modal -->
+<div class="modal fade" id="deleteItemModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">DELETE BUS?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <P>Do you really want to delete this bus?</P>
+    
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+        <a id="delete_url"><button type="button" class="btn btn-danger">Delete</button></a>
+      </div>
+    </div>
+  </div>
+</div>
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
@@ -175,5 +196,13 @@
             });
 
         });
+
+
+        function deleteItem(id){
+            console.log('------------',id);
+            $('#edit_id').val(id)
+            $('#delete_url').attr('href', "{{url('e-ticket/delete-tenant-bus')}}/"+id)
+            $('#deleteItemModal').modal('show')
+        }
     </script>
 @endsection

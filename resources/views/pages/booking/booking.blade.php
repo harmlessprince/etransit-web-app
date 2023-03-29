@@ -4,6 +4,27 @@
        display: flex;
        justify-content: center;
    }
+   .show {
+       display: block;
+   }
+   .drp-dwn-cont-bus-booking {
+    display: none;
+    position: absolute;
+    z-index: 1;
+   }
+   .drp-dwn-cont-bus-booking tr {
+    display: block;
+   }
+   .drp-dwn-btn-bus-booking:hover {
+    background-color: #343f5f;
+    color: white;
+    border-radius: 10px;
+    padding-top: 2px;
+   }
+   .dropdown-bus-booking {
+ 
+  display: inline-block;
+}
 </style>
 
 @section('content')
@@ -21,16 +42,18 @@
 <section style="margin: 20px;border-style: none;margin-bottom: 30px;">
     <div class="container">
         <div class="row">
-            <div class="col-sm-6 col-md-3 flex-grow-0 flex-shrink-1 flex-wrap" style="box-shadow: 1px 1px 6px 1px rgb(228,228,230);padding-top: 15px;padding-bottom: 15px;border-radius: 9px;min-height: 500px;max-height: 900px;margin-bottom: 10px;height: 850px;background: #ffffff;">
+            <div class="col-sm-6 col-md-3 flex-grow-0 flex-shrink-1 flex-wrap" style="box-shadow: 1px 1px 6px 1px rgb(228,228,230);padding-top: 15px;padding-bottom: 15px;border-radius: 9px;min-height: 500px;max-height: 900px;height: 850px;margin-bottom: 10px;background: #ffffff;">
+               <div class="dropdown-bus-booking">
                 <div class="row">
-                    <div class="col">
+                    <div class="col drp-dwn-btn-bus-booking">
                         <p style="margin-bottom: 0PX;font-size: 14px;"><strong>FILTER SEARCH</strong></p>
                     </div>
                     <div class="col-md-auto"><a class="text-decoration-none" href="#" style="color: #ed954d;">Clear all</a></div>
                 </div>
-                <hr>
+   <hr>
                 <form action="{{url('/bus/filter-bookings')}}" method="POST">
-                    @csrf
+                    @csrf 
+                <div class="drp-dwn-cont-bus-booking" id="myDropdown">        
                 <div class="row" style="margin-bottom: 11px;">
                     <div class="col">
                         <p style="margin-top: 4px;margin-bottom: 0px;font-size: 13px;"><strong>Operators</strong></p>
@@ -122,7 +145,9 @@
                 <div class="col" x-data="{ show: false }">
                     <button class="btn btn-primary" type="submit" style="font-size: 10px;background: rgba(13,110,253,0);color: var(--bs-gray-900);border-color: #010000;border-right-color: var(--bs-gray-900);" @click="showSomet()">Filter</button>
                 </div>
+                </div>
                 </form>
+                </div>
             </div>
 
             <div class="col-sm-6 col-md-9" id="cruisedisplay" style="padding-left: 0px;padding-right: 0px;">
@@ -230,6 +255,14 @@
     </div>
 </section>
 
+<script>
+    $(document).ready(function(){
+        $(".drp-dwn-btn-bus-booking").click(function(){
+            $("#myDropdown").slideToggle(500);
+        })
+    })
+
+</script>
 
 {{--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>--}}
 {{--<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>--}}

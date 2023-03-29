@@ -85,5 +85,6 @@ class Kernel extends HttpKernel
         'is_banned' =>   \App\Http\Middleware\CheckBanned::class,
         'tenant_permissions' => \App\Http\Middleware\EticketPermissionMiddleware::class,
         'request_authorization_pin' =>  \App\Http\Middleware\RequestForAuthorizationPin::class,
+        'impersonate' => \App\Http\Middleware\Impersonate::class,
     ];
 }

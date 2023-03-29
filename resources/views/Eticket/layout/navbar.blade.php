@@ -1,3 +1,19 @@
+<style>
+        .settings-dropdown{
+           display: none;
+           padding-left:25px;
+           color: #007bdd;
+        }
+        .profile-dropdown:hover .settings-dropdown {
+            display: block;
+        }
+        .settings-dropdown li a:hover {
+            text-decoration: none;
+            color: #6f42c1;
+        }
+</style>
+
+
 <div class="page-main-header">
     <div class="main-header-right row m-0">
         <form class="form-inline search-full" action="#" method="get">
@@ -62,7 +78,18 @@
                         </div>
                     </div>
                     <ul class="profile-dropdown onhover-show-div">
-                        <li><i data-feather="settings"></i><span>Settings</span></li>
+                        <li class="settings-btn"><i data-feather="settings"></i><span>Settings</span>
+                            <div class="settings-dropdown">
+                                <ul>
+                                    <li><a href="{{url('/e-ticket/user-profile')}}">Edit Profile</a></li>
+                                    <hr>
+                                    <li class="mode">Appearance</li>
+                                    <hr>
+                                    <li><a href="{{url('/e-ticket/change-password')}}">Change Password</a></li>
+                                    <hr>
+                                </ul>
+                            </div>                                        
+                        </li>
                         <li><i data-feather="log-in"> </i><span>
                         <a href="{{ route('e-ticket.logout') }}"
                            onclick="event.preventDefault();

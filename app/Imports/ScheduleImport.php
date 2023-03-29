@@ -52,12 +52,12 @@ class ScheduleImport implements ToModel ,WithStartRow , WithBatchInserts , WithC
 
        return  new Schedule([
             'terminal_id'        => $row['terminal_id'],
-            'service_id'         => $row['service_id'],
             'bus_id'             => $row['bus_id'],
             'pickup_id'          => $row['pickup_id'],
             'destination_id'     => $row['destination_id'],
             'fare_adult'         => $row[5],
-            'fare_children'      => $row[6],
+                       'service_id'         => $row['service_id'],
+ 'fare_children'      => $row[6],
             'departure_date'     => $formattedDate,
             'departure_time'     => $row[8],
             'tenant_id'          =>  $row['tenant_id'],

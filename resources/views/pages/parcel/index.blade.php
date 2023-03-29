@@ -5,6 +5,7 @@
     display:grid;
     grid-template-columns: repeat(12 , 1fr);
 }
+
 .parcel_info_box{
     grid-column: 1/7;
     padding:50px;
@@ -91,6 +92,34 @@ label{
 .document_class{
     color:red;
 }
+@media (max-width: 800px) {
+    .parcel_box {
+        display: flex;
+        flex-direction: column;
+    }
+}
+@media (max-width: 600px) {
+    .pick_up_box, .dimension_2 {
+        display: flex;
+        flex-direction: column;
+    }
+}
+@media (max-width: 900px) {
+    .document, .parcel {
+        margin: 5px;
+        padding: 15px;
+    }
+}
+@media (max-width: 400px) {
+    .document, .parcel {
+        margin: 1px;
+        padding: 1px;
+    }
+    .parcel_info_box {
+        margin-left: 25px
+    }
+}
+
 
 </style>
 
@@ -102,7 +131,7 @@ label{
 @section('content')
     <form action="{{url('send-parcel-info')}}" method="POST">
         @csrf
-    <div class="parcel_box">
+        <div class="parcel_box">
             <div class="parcel_info_box">
                 <div >
                     <h4>Pickup</h4>

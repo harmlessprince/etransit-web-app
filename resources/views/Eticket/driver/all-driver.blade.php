@@ -49,7 +49,7 @@
             <div class="col-md-12 col-xl-12 col-lg-12 col-sm-12">
                 <div class="add_bus_btn">
                     <div class="space-left">
-                        <button class="btn btn-success">Bulk Upload</button>
+                        <a href="{{url('e-ticket/drivers/bulk-upload')}}" class="btn btn-success">Bulk Upload</a>
                     </div>
                     <div class="space-left">
                         <a href="{{url('e-ticket/create-driver')}}" class="btn btn-success">Add Driver(s)</a>

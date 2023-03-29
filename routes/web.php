@@ -42,6 +42,8 @@ use App\Http\Controllers\Terminal;
 use App\Http\Controllers\Transaction;
 use App\Http\Controllers\Vehicle;
 use App\Http\Controllers\PagesController;
+use App\Http\Controllers\NewsletterController;
+use App\Http\Controllers\PostAjaxController;
 
 
 
@@ -82,6 +84,9 @@ Route::get('/terms', [PagesController::class, 'terms'])->name('terms');
 Route::get('/policy', [PagesController::class, 'policy'])->name('policy');
 Route::get('/contact', [PagesController::class, 'contact']);
 
+//post subscribser email
+Route::post('/add_subscriber_email', [NewsletterController::class, 'addSubscriber']);
+
 //Auth::routes();
 
 Route::get('/car-hire/{seat_capacity?}/{class_type?}', [Car::class , 'carList']);
@@ -102,7 +107,8 @@ Route::get('parcel' , [ParcelMgt::class , 'parcel']);
 Route::get('/pick-up-city/{state_id}', [ParcelMgt::class ,'fetchCities']);
 
 Route::get('login/{provider}', [SocialController::class ,'redirect']);
-Route::get('login/{provider}/callback',[SocialController::class ,'Callback']);
+Route::get('login/{provider}/callback',[SocialController::class ,'socialCallback']);
+Route::get('callback',[SocialController::class, 'callback']);
 
 //ferry post
 Route::match(array('GET','POST'),'/ferry/bookings' , [FerryBookings::class ,'bookFerry']);
@@ -137,7 +143,7 @@ Route::get('check-pdf' , function(){
    return view('pdf.boat-cruise');
 });
 
-Route::group(['middleware' => ['auth','prevent-back-history','verified']], function() {
+Route::group(['middleware' => ['impersonate','prevent-back-history','verified']], function() {
 
 
     Route::get('profile/{user_id}',[UserProfile::class ,'myProfile'])->name('myProfile');
@@ -224,18 +230,26 @@ Route::prefix('admin')->name('admin.')->group(function(){
     Route::get('export/schedule', [Schedule::class, 'exportSchedule'])->name('export.schedule');
     Route::post('import/schedule', [Schedule::class, 'importSchedule'])->name('import.schedule');
 
+    //impersonate user
+    Route::any('/user-proxy/enter/{id}/{true}', function ($id) {
+        request()->session()->put('user-proxy-id', $id);
+        return redirect('/');
+    })->name('impersonate');
+
+
     Route::group(['middleware' => ['admin','prevent-back-history','permissions']], function() {
 
-        Route::get('/dashboard', [Dashboard::class, 'dashboard'])->name('dashboard');
-
-
+        Route::get('/dashboard', [Dashboard::class, 'dashboard'])->name('dashboard');  
+        //view password change requests
+        Route::get('/view-password-change-requests', [Operator::class, 'viewPasswordChangeRequests']); 
+        Route::post('/approve-password-change', [Operator::class, 'approvePasswordChange'])->name('approvePasswordChange');
 
         //vehicle management
         Route::get('/manage/vehicle', [Vehicle::class, 'manage'])->name('manage.vehicle');
         Route::get('/manage/tenant-bus' , [Vehicle::class , 'tenantBus'])->name('manage.bus');
         Route::get('manage/fetch-all-buses' , [Vehicle::class , 'fetchAllTenantBus'])->name('manage-fetch-all-buses');
         Route::get('manage/view-tenant-bus/{bus_id}' , [Vehicle::class , 'viewTenantBus'])->name('view.bus');
-        Route::get('manage/delete-tenant-bus/{bus_id}' , [Vehicle::class , 'deleteTenantBus'])->name('delete.bus');
+        Route::get('manage/delete-tenant-bus/{bus_id}' , [Vehicle::class , 'deleteTenantBus'])->name('admin.delete-bus');
         Route::get('view-bus/{bus_id}' , [Vehicle::class , 'busSchedule'])->name('bus.schedules');
         Route::get('view-bus-schedule/{bus_id}' , [Vehicle::class , 'busScheduleFetch'])->name('view-bus-schedule');
         Route::get('view-bus-schedule-page/{schedule_id}' , [Vehicle::class , 'viewBusSchedulePage']);
@@ -510,7 +524,6 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::get('all/tracking',[\App\Http\Controllers\TrackingConsole::class , 'allTracking']);
         Route::get('view-tracking/{tracking_id}',[\App\Http\Controllers\TrackingConsole::class , 'viewEachTracking']);
 
-
     });
 });
 
@@ -530,12 +543,19 @@ Route::prefix('e-ticket')->name('e-ticket.')->group(function(){
     Route::get('import-export-schedule', [EticketSchedule::class, 'importExportViewSchedule']);
     Route::get('export/schedule', [EticketSchedule::class, 'exportSchedule'])->name('export.schedule');
     Route::post('import/e-ticket/schedule', [EticketSchedule::class, 'importSchedule']);
+    Route::post('import/driver', [Driver::class, 'importDriver']);
+    Route::get('export/driver', [Driver::class, 'exportDriver']);
+
     //->name('import.schedule');
 
 
     Route::group(['middleware' => ['e-ticket','prevent-back-history','check-if-session-is-set','tenant_permissions']], function() {
 
         Route::get('/dashboard' , [AuthLogin::class , 'dashboard'])->name('dashboard');
+        Route::get('/user-profile', [AuthLogin::class , 'viewUserProfile']);
+        Route::put('update-user-profile/{id}', [AuthLogin::class , 'updateUserProfile']);
+        Route::get('/change-password', [AuthLogin::class , 'changePassword']);
+        Route::put('/change-password/{id}', [AuthLogin::class , 'sendPasswordChangeRequest']);
 
         //manage bus
         Route::get('/buses' , [ManageBus::class , 'allBuses'])->name('fetch-buses');
@@ -564,7 +584,7 @@ Route::prefix('e-ticket')->name('e-ticket.')->group(function(){
         Route::get('fetch-tenant-drivers',[Driver::class , 'fetchDrivers'])->name('fetch-tenant-drivers');
         Route::get('edit-tenant-driver/{driver_id}', [Driver::class , 'editDriver']);
         Route::put('update-driver/{driver_id}',[Driver::class , 'updateDriver']);
-
+        Route::get('drivers/bulk-upload', [Driver::class , 'getBulkUploadPage']);
         //e-ticket terminal
         Route::get('terminals', [EticketTerminal::class , 'allTerminals']);
         Route::get('add-terminal', [EticketTerminal::class , 'addTerminal']);
@@ -645,13 +665,19 @@ Route::prefix('e-ticket')->name('e-ticket.')->group(function(){
 
         Route::get('edit-car-plan/{car_id}',[CarHireMgt::class ,'editCarPlan'])->name('edit-car-plan');
         Route::put('update-car-plan/{car_id}',[CarHireMgt::class ,'updateCarPlan'])->name('update-car-plan');
+        Route::get('remove-driver-from-car/{driver_id}/{car_id}',[CarHireMgt::class , 'removeDriverFromCar']);
 
         //view car
         Route::get('view-car/{car_id}' ,[CarHireMgt::class , 'viewCar'])->name('view-car');
+        Route::get('car-schedule/{car_id}' ,[CarHireMgt::class , 'scheduleCar'])->name('schedule-car');
+        Route::post('add-car-schedule' , [CarHireMgt::class , 'addCarSchedule']);
 
         Route::get('view-tenant-car-history/{car_id}' ,[CarHireMgt::class , 'viewCarHistories'])->name('view-all-car-history');
 
         Route::get('view-history/{car_history_id}' , [CarHireMgt::class , 'viewCarHistory'])->name('view-history');
+
+        Route::get('/assign-car-driver/{car_id}', [CarHireMgt::class, 'viewAssignDriver']);
+        Route::post('/assign-driver-car/{car_id}', [CarHireMgt::class, 'assignCarDriver']);
 
         Route::get('confirm-drop-off/{car_history_id}', [CarHireMgt::class , 'confirmDropOff'])->name('confirm-drop-off');
 
@@ -681,6 +707,9 @@ Route::prefix('e-ticket')->name('e-ticket.')->group(function(){
         Route::post('store-tour',[TourPackage::class ,'storeTour'])->name('store-tours');
 
         Route::get('view-tour/{tour_id}',[TourPackage::class , 'viewTour'])->name('view-tour');
+        Route::get('edit-tour/{tour_id}',[TourPackage::class , 'editTour'])->name('edit-tour');
+        Route::delete('delete-tour/{tour_id}',[TourPackage::class , 'deleteTour']);
+        Route::put('update-tour/{tour_id}', [TourPackage::class , 'updateTour']);
 
 
         //manage roles
@@ -702,16 +731,38 @@ Route::prefix('e-ticket')->name('e-ticket.')->group(function(){
         Route::get('all/tracking',[\App\Http\Controllers\Eticket\TrackingConsole::class , 'allTracking']);
         Route::get('view-tracking/{tracking_id}',[\App\Http\Controllers\Eticket\TrackingConsole::class , 'viewEachTracking']);
 
+        //manage boats and boat cruises
+        Route::get('boats',[BoatCruise::class , 'allBoats']);
+        // Route::get('fetch-all-boats', [BoatCruise::class , 'fetchAllBoats'])->name('fetchAllBoats');
+        Route::get('add-new-boat', [BoatCruise::class , 'addNewBoat']);
+        Route::post('post-new-boat', [BoatCruise::class , 'postNewBoat']);
+        Route::get('all-boat-trips', [BoatCruise::class , 'allBoatTrips']);
+        Route::get('delete-boat-trip/{id}', [BoatCruise::class , 'deleteBoatTrip']);
+        Route::get('edit-boat-trip/{id}', [BoatCruise::class , 'editBoatTrip']);
+        Route::put('update-boat-trip/{id}', [BoatCruise::class , 'updateBoatSchedule']);
+        Route::get('fetch-boat-trips', [BoatCruise::class , 'fetchBoatTrips'])->name('fetchBoatTrips');
+        Route::get('boats/cruise-destinations', [BoatCruise::class , 'cruiseDestinations']);
+        Route::get('view-boat/{boat_id}', [BoatCruise::class , 'viewBoat']);
+        Route::get('delete-boat/{boat_id}', [BoatCruise::class , 'eticketDeleteBoat']);
+        Route::get('edit-boat/{boat_id}', [BoatCruise::class , 'eticketEditBoat']);
+        Route::post('update-boat/{boat_id}', [BoatCruise::class , 'eticketUpdateBoat']);
+        Route::get('schedule-boat-trip/{boat_id}', [BoatCruise::class , 'scheduleBoatTrip']);
+        Route::post('post-scheduled-trip', [BoatCruise::class , 'addBoatSchedule']);
+        Route::post('boats/cruise-destinations/save', [BoatCruise::class , 'saveCruiseDestination']);
+        Route::get('boats/cruise-destination/delete/{id}', [BoatCruise::class , 'deleteCruiseDestination']);
+        Route::post('boats/cruise-destination/update/{id}', [BoatCruise::class , 'updateCruiseDestination']);
 
     });
 
 
 });
 
+//impersonate user
 Route::any('/user-proxy/enter/{id}/{true}', function ($id) {
     request()->session()->put('user-proxy-id', $id);
     return redirect('/');
 })->name('impersonate');
+ 
 
 // Exit Impersonation Mode
 Route::any('/user-proxy/exit', function () {

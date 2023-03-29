@@ -6,8 +6,8 @@
                 <p class="text-center">THOUGHTFUL THOUGHT TO YOU INBOX</p>
             </div>
             <div class="col-sm-6 d-inline-flex d-md-flex align-items-md-center" id="divemail">
-                <form><input type="email" id="emailinput" placeholder="YOUR EMAIL" inputmode="email" style="background: rgb(238,238,238);border-top-style: none;border-right-style: none;border-left-style: none;height: 41px;width: 250px;"></form>
-                <button class="btn btn-primary" type="button" style="haeight: 31px;width: 113.5px;margin-left: -60px;padding-top: 3px;background: var(--bs-orange);border-top-style: none;">SUBSCRIBE</button>
+                <form id="subscribe-form"> @csrf <input type="email" name="email" id="emailinput" placeholder="YOUR EMAIL" inputmode="email" style="background: rgb(238,238,238);border-top-style: none;border-right-style: none;border-left-style: none;height: 41px;width: 250px;"></form>
+                <button class="btn btn-primary subscr_butt" type="submit" style="haeight: 31px;width: 113.5px;margin-left: -60px;padding-top: 3px;background: var(--bs-orange);border-top-style: none;">SUBSCRIBE</button>
             </div>
         </div>
     </div>
@@ -154,6 +154,41 @@
 <script src="{{asset("assets2/vendor/glightbox/js/glightbox.min.js")}}"></script>
 <script src="{{asset("assets2/vendor/isotope-layout/isotope.pkgd.min.js")}}"></script>
 <script src="{{asset("assets2/vendor/swiper/swiper-bundle.min.js")}}"></script>
+<script src="{{asset("assets2/js/toastr.min.js")}}"></script>
+
+<script>
+    $('.subscr_butt').click(function(e){
+        e.preventDefault();
+        $("#pageloader").fadeIn();
+
+        var form = $("#subscribe-form")[0];
+        var _data = new FormData(form);
+        $.ajax({
+            url: '{{url("/add_subscriber_email")}}',
+            data: _data,
+            enctype: 'multipart/form-data',
+            processData: false,
+            contentType:false,
+            type: 'POST',
+            success: function(data){
+                if(data.status == "success"){
+                    toastr.success(data.message);
+                    $("#subscribe-form")[0].reset();
+                    // window.setTimeout(function(){location.reload();},3000);
+                    $("#pageloader").hide();
+                    } else{
+                        toastr.error(data.message);
+                        $("#pageloader").hide();
+                    }
+            },
+            error: function(result){
+                toastr.error('Check Your Network Connection !!!','Network Error');
+                $("#pageloader").hide();
+            }
+        });
+        return false;
+    });
+</script>
 
 
 <!-- Main JS File -->

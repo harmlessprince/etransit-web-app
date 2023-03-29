@@ -26,11 +26,11 @@ class Partner extends Controller
 
     public function partnerPage()
     {
-        return view('pages.partners.partner');
+        return view('pages.partners.partner_driver');
     }
 
     public function driverPartnerPage(){
-        return view('pages.partners.driver');
+        return view('pages.partners.partner_driver');
     }
     
     public function partners()

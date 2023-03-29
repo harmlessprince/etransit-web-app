@@ -169,6 +169,31 @@
                 </div>
             </div>
         </div>
+        <div>
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter">
+                    Delete Tour
+            </button>
+        </div>
 
     </div>
+    <!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Do you really want to delete tour?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+        <a href="/eticket/delete-tour/{{$tour->id}}" class="btn btn-danger">Delete</a>
+      </div>
+    </div>
+  </div>
+</div>
 @endsection
