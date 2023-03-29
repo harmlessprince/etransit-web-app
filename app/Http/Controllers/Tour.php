@@ -21,7 +21,6 @@ class Tour extends Controller
 {
     public function tourPackageList()
     {
-//return request();
         $service = Service::where('id', 8)->firstorfail();
         $tours  = TourPackage::with('tourimages')->paginate(20);
         $tour_types = ['international', 'domestic'];
@@ -325,11 +324,12 @@ class Tour extends Controller
             ->notify(new AdminOtherBookings($maildata));
 
         DB::commit();
-
-
-
-
-
+    }
+    public function allTours()
+    {
+        $service = Service::where('id', 8)->firstorfail();
+        $tours = TourPackage::all();
+        return view('eticket.tour.all-tour', compact('tours', 'service'));
     }
 
 

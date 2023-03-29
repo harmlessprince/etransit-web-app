@@ -70,6 +70,7 @@
             </div>
         </div>
         <div style="display:flex; justify-content: flex-end;">
+            <div><a href="{{url('e-ticket/car-schedule/'.$car->id)}}" class="btn btn-success">Schedule Trip</a> &nbsp; &nbsp;</div>
             @if($car->car_availability == 0)
             <a href="{{url('e-ticket/toggle-car-availability/'.$car->id)}}"
 

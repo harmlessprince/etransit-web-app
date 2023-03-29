@@ -90,7 +90,7 @@
                             <td>{{$dt->seats_available}}</td>
                             <td>
                                 <a href='/e-ticket/view-each-schedule/{{$dt->id}}' class='delete btn btn-primary btn-sm'>View</a>
-                                <a href='/e-ticket/delete-each-schedule/{{$dt->id}}' class='delete btn btn-danger btn-sm'>Delete</a>
+                                <a href='#' class='delete btn btn-danger btn-sm' onclick='deleteItem({{$dt->id}})'>Delete</a>
                             </td>
                         </tr>
                         @endforeach
@@ -104,6 +104,27 @@
             </div>
         </div>
     </div>
+    <!-- Modal -->
+<div class="modal fade" id="deleteItemModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">DELETE SCHEDULED TRIP?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <P>Do you really want to delete this scheduled trip?</P>
+    
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+        <a id="delete_url"><button type="button" class="btn btn-danger">Delete</button></a>
+      </div>
+    </div>
+  </div>
+</div>
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
@@ -112,6 +133,14 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
+    <script>
+         function deleteItem(id){
+            // console.log('------------',id);
+            $('#edit_id').val(id)
+            $('#delete_url').attr('href', "{{url('e-ticket/delete-each-schedule')}}/"+id)
+            $('#deleteItemModal').modal('show')
+        }
+    </script>
     <!-- <script type="text/javascript">
         $(function () {
             $.noConflict();

@@ -1,3 +1,18 @@
+<style>
+        .settings-dropdown{
+           display: none;
+           padding-left:25px;
+           color: #007bdd;
+        }
+        .profile-dropdown:hover .settings-dropdown {
+            display: block;
+        }
+        .settings-dropdown li a:hover {
+            text-decoration: none;
+            color: #6f42c1;
+        }
+</style>
+
 <div class="page-main-header">
     <div class="main-header-right row m-0">
         <form class="form-inline search-full" action="#" method="get">
@@ -66,7 +81,16 @@
 {{--                        <li><i data-feather="user"></i><span>Account </span></li>--}}
 {{--                        <li><i data-feather="mail"></i><span>Inbox</span></li>--}}
 {{--                        <li><i data-feather="file-text"></i><span>Taskboard</span></li>--}}
-                        <li><i data-feather="settings"></i><span>Settings</span></li>
+                        <li><i data-feather="settings"></i><span>Settings</span>
+                           <div class="settings-dropdown">
+                                <ul>
+                                    <li class="mode">Appearance</li>
+                                    <hr>
+                                    <li><a href="{{url('/admin/view-password-change-requests')}}">View Password Change Requests</a></li>
+                                    <hr>
+                                </ul>
+                            </div>                        
+                        </li>
                         <li><i data-feather="log-in"> </i><span>
                         <a href="{{ route('admin.logout') }}"
                            onclick="event.preventDefault();

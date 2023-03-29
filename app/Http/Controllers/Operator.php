@@ -6,6 +6,7 @@ use App\Mail\OperatorCredentials;
 use App\Mail\PasswordRecovery;
 use App\Models\Eticket;
 use App\Models\Service;
+use App\Models\EticketPasswordRequest;
 use App\Models\ServiceTenant;
 use App\Models\Tenant;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
@@ -269,5 +270,42 @@ class Operator extends Controller
         }
 
 
+    }
+
+    public function viewPasswordChangeRequests()
+    {
+        $passwordRequests = EticketPasswordrequest::with('eticket.tenant')->get();
+
+        return view('admin.view-password-change-requests', compact('passwordRequests'));
+    }
+
+    public function approvePasswordChange(Request $request)
+    {
+        $requestPassword = EticketPasswordrequest::find($request->passwordRequestId);
+        $eticketUser = Eticket::where('id', $requestPassword->eticket_id)->first();
+        if(!$requestPassword)
+        {
+            return response()->json(['status'=> 'failed'  , 'message' => 'Request not found']);
+        }
+
+        if($request->checked == 'checked')
+        {
+            $requestPassword->update(['admin_approval' => 1]);
+
+            $eticketUser->password =$requestPassword->new_password;
+            $eticketUser->save();
+
+            $data =[
+                'name' => $eticketUser->full_name,
+                'email' =>  $eticketUser->email,
+            ];
+
+            Mail::to($eticketUser->email)->send(new PasswordApprovalEmail($data));
+
+            return response()->json(['status' => 'success' , 'message' => 'operation successful']);
+        }else{
+            // $requestPassword->update(['admin_approval' => 0]);
+            return response()->json(['status' => 'success'  , 'message' => 'Already approved']);
+        }
     }
 }

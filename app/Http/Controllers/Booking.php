@@ -218,7 +218,7 @@ class Booking extends Controller
 
         DB::beginTransaction();
 
-      $seat = \App\Models\SeatTracker::where('id' ,$data['seat_id'])->first();
+      $seat = \App\Models\SeatTracker::where('id',$data['seat_id'])->first();
 
        if($seat->booked_status != 2)
        {

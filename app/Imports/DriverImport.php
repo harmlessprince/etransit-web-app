@@ -6,7 +6,7 @@ use App\Models\Driver;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithStartRow;
 
-class DriverImport implements ToModel
+class DriverImport implements ToModel, WithStartRow
 {
     /**
      * @return int
@@ -24,9 +24,9 @@ class DriverImport implements ToModel
     {
 
         return new Driver([
-            'full_name' => $row[1],
-            'address' => $row[2],
-            'phone_number' => $row[3],
+            'full_name' => $row['full_name'],
+            'address' => $row['address'],
+            'phone_number' => $row['phone_number'],
             'tenant_id' => session()->get('tenant_id'),
         ]);    
     }

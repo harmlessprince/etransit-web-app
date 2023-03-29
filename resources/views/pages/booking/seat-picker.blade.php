@@ -278,7 +278,9 @@
                                        @if($seat->booked_status == 0)     class="available seat_selector btn seat_picker_new"
                                        @elseif($seat->booked_status == 1) class="seat_selector available_indicator btn seat_picker_new"
                                        @elseif($seat->booked_status == 2) class="booked seat_selector btn seat_picker_new"  @endif
-                                      style="width:43.25px;">{{$seat->seat_position}}</a></div>
+                                      style="width:43.25px;">{{$seat->seat_position}}
+                                    </a>
+                                </div>
                             </div>
                         </div>
                        @endforeach

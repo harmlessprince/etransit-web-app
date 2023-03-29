@@ -29,7 +29,7 @@ class EticketLocation extends Controller
                 ->rawColumns(['action'])
                 ->make(true);
         }
-        return $row;
+        // return $row;
     }
 
     public function addLocation()

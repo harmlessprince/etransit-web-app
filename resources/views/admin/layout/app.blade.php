@@ -2,6 +2,9 @@
 <html lang="en">
 @include('admin.layout.header')
 <body>
+    <div id="pageloader">
+        <img src="http://cdnjs.cloudflare.com/ajax/libs/semantic-ui/0.16.1/images/loader-large.gif" alt="processing..." />
+     </div>
 <!-- tap on top starts-->
 <div class="tap-top"><i data-feather="chevrons-up"></i></div>
 <!-- tap on tap ends-->

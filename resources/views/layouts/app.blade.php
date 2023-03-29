@@ -3,6 +3,14 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+
+    <meta property='og:title' content='Etransit Africa'/>
+    <meta property='og:image' content="{{asset('new-assets/img/logofull%201.png')}}"/>
+    <meta property='og:description' content='Etransit Africa is a technology-focused transportation and related services company providing individuals and corporate bodies with seamless and reliable luxury as well as day to day transport services powered by innovative technology'/>
+    <meta property='og:url' content='http://127.0.0.1:8000/'/>
+    <meta property='og:image:width' content='1200' />
+    <meta property='og:image:height' content='627' />
+
     <title>{{env('APP_NAME')}}</title>
 
     <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
@@ -123,6 +131,7 @@
     <link href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" defer></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    
 
     @toastr_css
 

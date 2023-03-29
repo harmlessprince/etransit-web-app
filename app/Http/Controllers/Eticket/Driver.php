@@ -48,7 +48,7 @@ class Driver extends Controller
             'excel_file' => 'required|file|mimes:xls,xlsx,csv'
         ]);
         
-         Excel::import(new DriverImport, request()->file('excel_file'));
+         Excel::import(new DriverImport, $request->excel_file);
          Alert::success('Success', 'Data imported successfully');
         return back();
     }

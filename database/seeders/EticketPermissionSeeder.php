@@ -62,6 +62,7 @@ class EticketPermissionSeeder extends Seeder
         Permission::updateOrCreate(['guard_name' => 'e-ticket','name' => 'e-ticket.add-new-role']);
         Permission::updateOrCreate(['guard_name' => 'e-ticket','name' => 'e-ticket.store-new-role']);
         Permission::updateOrCreate(['guard_name' => 'e-ticket','name' => 'e-ticket.delete-tenant-bus']);
+        Permission::updateOrCreate(['guard_name' => 'e-ticket','name' => 'e-ticket.edit-tour']);
 
 
     }

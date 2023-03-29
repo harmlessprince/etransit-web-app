@@ -67,7 +67,7 @@
                 </a>
             </div>
             <div class="col-md-3 col-lg-3 col-xl-3 col-sm-3">
-                <a href="{{url('admin/view-bus/'.$findBus->id)}}">
+                <a href="{{url('admin/view-bus/'.$findBus?->id)}}">
                     <div class="card">
                         <div class="card-body">
                             <div class="align-text">
@@ -87,7 +87,7 @@
 {{--                        <a href="{{url('e-ticket/schedule/'.$findBus->id)}}" class="btn btn-success">Schedule Trip</a>--}}
 {{--                    </div>--}}
                     <div class="schedules">
-                        <a href="{{url('admin/view-bus/'.$findBus->id)}}" class="btn btn-success">Check {{$findBus->bus_registration}} Schedule(s)</a>
+                        <a href="{{url('admin/view-bus/'.$findBus?->id)}}" class="btn btn-success">Check {{$findBus?->bus_registration}} Schedule(s)</a>
                     </div>
                 </div>
             </div>
@@ -98,25 +98,25 @@
                     <div class="card-body">
                         <h4>Operator Information</h4>
                         <br>
-                        <h6>Operator Name : {{$findBus->tenant->company_name}}</h6>
+                        <h6>Operator Name : {{$findBus?->tenant->company_name}}</h6>
                         <hr>
-                        <h6>Operator Display Name : {{$findBus->tenant->display_name}}</h6>
+                        <h6>Operator Display Name : {{$findBus?->tenant->display_name}}</h6>
                         <hr>
                         <h4>Bus Information</h4>
                         <br>
-                        <h6>Bus Type : {{$findBus->bus_type}}</h6>
+                        <h6>Bus Type : {{$findBus?->bus_type}}</h6>
                         <hr>
-                        <h6>Bus Model : {{$findBus->bus_model}}</h6>
+                        <h6>Bus Model : {{$findBus?->bus_model}}</h6>
                         <hr>
-                        <h6>Bus Registration : {{$findBus->bus_registration}}</h6>
+                        <h6>Bus Registration : {{$findBus?->bus_registration}}</h6>
                         <hr>
-                        <h6>Bus Wheels : {{$findBus->wheels}}</h6>
+                        <h6>Bus Wheels : {{$findBus?->wheels}}</h6>
                         <hr>
-                        <h6>Bus Passenger Seat : {{$findBus->seater}}</h6>
+                        <h6>Bus Passenger Seat : {{$findBus?->seater}}</h6>
                         <hr>
-                        <h6>Air Conditioning : @if($findBus->air_conditioning == 1 ) <span class="func"> Functional</span> @else <span class="not_func">Not Functional</span> @endif</h6>
+                        <h6>Air Conditioning : @if($findBus?->air_conditioning == 1 ) <span class="func"> Functional</span> @else <span class="not_func">Not Functional</span> @endif</h6>
                         <hr>
-                        <h6>Bus Created date : {{$findBus->created_at->format('Y-m-d')}}</h6>
+                        <h6>Bus Created date : {{$findBus?->created_at->format('Y-m-d')}}</h6>
                     </div>
                 </div>
             </div>

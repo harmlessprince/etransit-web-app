@@ -10,6 +10,20 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <link rel="stylesheet" href="{{asset('admin-asset/css/style.css')}}">
+    <style>
+        .field-icon {
+  float: right;
+  margin-left: -25px;
+  margin-top: -25px;
+  position: relative;
+  z-index: 2;
+}
+
+.container{
+  padding-top:50px;
+  margin: auto;
+}
+    </style>
 
 </head>
 <body>
@@ -39,7 +53,8 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <input type="password" class="form-control rounded-left @error('password')is-invalid @enderror" placeholder="Password" name="password"/>
+                            <input type="password" class="form-control rounded-left @error('password')is-invalid @enderror" placeholder="Password" name="password" id="myInput"/>
+                            <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
                             @error('password')
                             <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -60,6 +75,19 @@
 <script src="{{asset('admin-asset/js/popper.js')}}"></script>
 <script src="{{asset('admin-asset/js/bootstrap.min.js')}}"></script>
 <script src="{{asset('admin-asset/js/main.js')}}"></script>
+<script>
+    $(".toggle-password").click(function() {
+
+$(this).toggleClass("fa-eye fa-eye-slash");
+// var input = $($(this).attr("toggle"));
+var x = document.getElementById("myInput");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+});
+</script>
 
 </body>
 </html>

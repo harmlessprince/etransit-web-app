@@ -5,8 +5,11 @@ namespace App\Http\Controllers\Eticket;
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
 use App\Models\Eticket;
+use App\Models\Tenant;
 use App\Models\Transaction;
+use App\Models\EticketPasswordRequest;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -58,6 +61,7 @@ class AuthLogin extends Controller
 
             return redirect()->intended('e-ticket/dashboard');
         }
+        // Alert::error('Error', 'Wrong credentials!');
         return back()->withInput($request->only('email', 'remember'));
     }
 
@@ -101,4 +105,55 @@ class AuthLogin extends Controller
     {
         return Auth::guard('e-ticket');
     }
+    public function viewUserProfile()
+    {
+        $userId = Auth::guard('e-ticket')->user()->id;
+        $tenantId = session()->get('tenant_id');
+        $user = Eticket::where('id', $userId)->first();
+        $tenant = Tenant::where('id', $tenantId)->first();
+        return view('Eticket.auth.view-profile', compact('user', 'tenant'));
+    }
+    public function updateUserProfile(Request $request, $id)
+    {
+        $user = Eticket::where('id', $id)->first();
+        if ($request->full_name) $user->full_name = $request->full_name;
+        if ($request->email) $user->email = $request->email;
+        $user->save();
+        Alert::success('success', 'Your profile information has been successfully updated');
+
+        return  redirect('e-ticket/user-profile');
+    }
+    public function changePassword()
+    {
+        $userId = Auth::guard('e-ticket')->user()->id;
+        $user = Eticket::where('id', $userId)->first();
+
+        return view('Eticket.auth.change-password', compact('user'));
+    }
+    public function sendPasswordChangeRequest(Request $request, $id)
+    {
+        $eticket = Eticket::where('id', $id)->first();
+        $request->validate([
+            'current_password' => 'required',
+            'new_password' => 'required',
+            'reenter_password' => 'required',
+            // 'reenter_password' === 'new_password',
+        ]);
+        $hashedPassword = $eticket->password;
+        $currentPassword = $request->current_password;
+
+        if (Hash::check($currentPassword, $hashedPassword)) {
+            $eticketPaswordRequest = EticketPasswordRequest::firstOrNew(['eticket_id' => $id]);
+            $eticketPaswordRequest->new_password = Hash::make($request->new_password);
+            $eticketPaswordRequest->admin_approval = false;
+            $eticketPaswordRequest->save();
+            Alert::success('success', 'A Password change request has been sent to the admin, pending their approval!');
+            return redirect('e-ticket/dashboard');
+
+        } else {
+            Alert::error('Error', 'Something went wrong!');
+            return redirect('e-ticket/dashboard');
+        }
+    }
+    
 }

@@ -45,6 +45,10 @@ class Eticket extends Authenticatable
     {
         return $this->belongsTo(Tenant::class);
     }
+    public function eticketpasswordrequest()
+    {
+        return $this->hasOne(EticketPasswordRequest::class);
+    }
 
     /**
      * The "booted" method of the model.

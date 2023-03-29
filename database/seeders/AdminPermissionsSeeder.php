@@ -38,6 +38,7 @@ class AdminPermissionsSeeder extends Seeder
         Permission::create(['guard_name' => 'admin','name' => 'admin.fetch-driver-applications']);
         Permission::create(['guard_name' => 'admin','name' => 'admin.fetch-drivers']);
         Permission::create(['guard_name' => 'admin','name' => 'admin.set-drivers-rate']);
+        Permission::create(['guard_name' => 'admin','name' => 'admin.delete-bus']);
 
 
 

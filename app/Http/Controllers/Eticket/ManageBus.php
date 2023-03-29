@@ -39,7 +39,7 @@ class ManageBus extends Controller
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
                     $id = $row->id;
-                    $actionBtn = "<a href='/e-ticket/edit-tenant-bus/$id'  class='edit btn btn-success btn-sm'>Edit</a> <a href='/e-ticket/view-tenant-bus/$id' class='delete btn btn-primary btn-sm'>View</a> <a href='/e-ticket/delete-tenant-bus/$id' class='delete btn btn-danger btn-sm'>Delete</a>";
+                    $actionBtn = "<a href='/e-ticket/edit-tenant-bus/$id'  class='edit btn btn-success btn-sm'>Edit</a> <a href='/e-ticket/view-tenant-bus/$id' class='delete btn btn-primary btn-sm'>View</a> <a href='#' class='delete btn btn-danger btn-sm' onclick='deleteItem($id)'>Delete</a>";
 
                     return $actionBtn;
                 })

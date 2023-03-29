@@ -29,7 +29,7 @@
                         }
                     @endphp
 
-                    @if(in_array('1',$serviceArray))
+                    @if(in_array('1',$serviceArray) && $service->status=='active')
                     <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"></i><span>Bus Management</span></a>
                         <ul class="nav-submenu menu-content">
                             <li><a href="{{url('/e-ticket/buses')}}">Manage Buses</a></li>
@@ -41,23 +41,64 @@
                     </li>
                     @endif
 
-                    @if(in_array('6',$serviceArray))
+                    @if(in_array('6',$serviceArray) && $service->status=='active')
                         <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"></i><span>Car Management</span></a>
                             <ul class="nav-submenu menu-content">
                                 <li><a href="{{url('/e-ticket/car-hire')}}">Manage Car</a></li>
                             </ul>
                         </li>
                     @endif
-                    @if(in_array('10',$serviceArray))
+
+                    @if(in_array('7',$serviceArray) && $service->status=='active')
+                        <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"></i><span>Boat Management</span></a>
+                            <ul class="nav-submenu menu-content">
+                                <li><a href="{{url('/e-ticket/boats')}}">Manage Boats</a></li>
+                                <li><a href="{{url('/e-ticket/boats/cruise-destinations')}}">Cruise Destinations</a></li>
+                            </ul>
+                        </li>
+                    @endif
+
+                    @if(in_array('8',$serviceArray) && $service->status=='active')
+                        <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"></i><span>Tour Management</span></a>
+                            <ul class="nav-submenu menu-content">
+                                <li><a href="{{url('/e-ticket/tour-packages')}}">Manage Tour</a></li>
+                            </ul>
+                        </li>
+                    @endif
+
+                    <!-- @if(in_array('2',$serviceArray) && $service->status=='active')
+                        <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"></i><span>Train Management</span></a>
+                            <ul class="nav-submenu menu-content">
+                                <li><a href="{{url('/e-ticket/car-hire')}}">Manage Train</a></li>
+                                <li><a href="{{url('/e-ticket/car-hire')}}">Manage Class</a></li>
+                                <li><a href="{{url('/e-ticket/car-hire')}}">Manage Location</a></li>
+                                <li><a href="{{url('/e-ticket/car-hire')}}">Manage Route Fare</a></li>
+
+                            </ul>
+                        </li>
+                    @endif
+
+                    @if(in_array('3',$serviceArray) && $service->status=='active')
+                        <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"></i><span>Ferry Management</span></a>
+                            <ul class="nav-submenu menu-content">
+                                <li><a href="{{url('/e-ticket/car-hire')}}">Add Ferry</a></li>
+                                <li><a href="{{url('/e-ticket/car-hire')}}">Manage Types</a></li>
+                                <li><a href="{{url('/e-ticket/car-hire')}}">Manage Location</a></li>
+                            </ul>
+                        </li>
+                    @endif -->
+
+                    @if(in_array('10',$serviceArray) && $service->status=='active')
                         @php
-                            $driver_id = \App\Models\PartnerDriver::where('tenant_id',session()->get('tenant_id'))->first()->id;
+                            $driver = \App\Models\PartnerDriver::where('tenant_id',session()->get('tenant_id'))->first();
                         @endphp
                         <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"></i><span>Driver Management</span></a>
                             <ul class="nav-submenu menu-content">
-                                <li><a href="{{route('e-ticket.partner-driver-view-profile', $driver_id)}}">My Profile</a></li>
+                                <li><a href="{{url('/e-ticket/drivers')}}">My Profile</a></li>
                             </ul>
                         </li>
                    @endif
+
                     <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"></i><span>Transaction</span></a>
                         <ul class="nav-submenu menu-content">
                             <li><a href="{{url('/e-ticket/transactions')}}">Manage Transactions</a></li>

@@ -46,7 +46,7 @@ class Vehicle extends Controller
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
                     $id = $row->id;
-                    $actionBtn = "<a href='/admin/manage/view-tenant-bus/$id'  class='edit btn btn-success btn-sm'>View</a> <a href='/admin/manage/delete-tenant-bus/$id'  class='edit btn btn-danger btn-sm'>Delete</a>";
+                    $actionBtn = "<a href='/admin/manage/view-tenant-bus/$id'  class='edit btn btn-success btn-sm'>View</a> <a href='#' onclick='deleteItem($id)' class='edit btn btn-danger btn-sm'>Delete</a>";
 //                    <a href='/admin/edit-bus/$id'  class='edit btn btn-success btn-sm'>Edit</a>
                     return $actionBtn;
                 })
@@ -315,7 +315,7 @@ class Vehicle extends Controller
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
                     $id = $row->id;
-                    $actionBtn = "<a href='/admin/update/bus-location/$id'  class='edit btn btn-success btn-sm'>Edit</a> <a href='/admin/delete/bus-location/$id'  class='edit btn btn-Danger btn-sm'>Delete</a>";
+                    $actionBtn = "<a href='/admin/update/bus-location/$id'  class='edit btn btn-success btn-sm'>Edit</a> <a href='#' onclick='deleteItem($id)' class='edit btn btn-Danger btn-sm'>Delete</a>";
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])
