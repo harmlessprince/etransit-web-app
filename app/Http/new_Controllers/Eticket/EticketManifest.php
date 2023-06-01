@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Eticket;
+namespace App\Http\new_Controllers\Eticket;
 
 use DataTables;
 use App\Classes\Invoice;

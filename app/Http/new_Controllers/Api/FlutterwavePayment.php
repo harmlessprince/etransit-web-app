@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\new_Controllers\Api;
 
 use App\Billing\BusTicketPayment;
 use App\Billing\CarHire;

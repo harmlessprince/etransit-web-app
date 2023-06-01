@@ -1,6 +1,5 @@
 <?php
-
-namespace App\Http\Controllers;
+namespace App\Http\new_Controllers;
 
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;

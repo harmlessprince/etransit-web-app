@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\new_Controllers\Auth;
 
 use App\Models\User;
 use App\Classes\VerificationToken;

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\new_Controllers;
 
 use App\Models\FerryLocation;
 use App\Models\FerryType;

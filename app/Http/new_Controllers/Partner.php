@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\new_Controllers;
 
 use App\Mail\BecomePartners;
 use App\Mail\OperatorCredentials;

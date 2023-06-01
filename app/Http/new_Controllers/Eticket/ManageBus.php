@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Eticket;
+namespace App\Http\new_Controllers\Eticket;
 
 use App\Exports\VehicleExport;
 use App\Http\Controllers\Controller;

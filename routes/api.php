@@ -1,14 +1,14 @@
 <?php
 
-use App\Http\Controllers\Api\AuthUser;
-use App\Http\Controllers\Api\BoatCruise;
+use App\Http\new_Controllers\Api\AuthUser;
+use App\Http\new_Controllers\Api\BoatCruise;
 use App\Http\Controllers\Api\Booking;
 use App\Http\Controllers\Api\Car;
 use App\Http\Controllers\Api\EmailVerify;
 use App\Http\Controllers\Api\Ferry;
 use App\Http\Controllers\Api\FlutterwavePayment;
 use App\Http\Controllers\Api\Parcel;
-use App\Http\Controllers\Api\Partner;
+use App\Http\new_Controllers\Api\Partner;
 use App\Http\Controllers\Api\PasswordReset;
 use App\Http\Controllers\Api\Payment;
 use App\Http\Controllers\Api\Profile;

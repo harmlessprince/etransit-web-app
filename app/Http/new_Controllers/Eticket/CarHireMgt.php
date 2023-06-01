@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Eticket;
+namespace App\Http\new_Controllers\Eticket;
 
 use App\Http\Controllers\Controller;
 use App\Models\Car as HiredCars;
