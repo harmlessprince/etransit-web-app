@@ -10,7 +10,27 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Schedule extends Model
 {
     use HasFactory, SoftDeletes;
+
     protected $guarded = ['id'];
+
+    protected $fillable = [
+        'terminal_id',
+        'tenant_id',
+        'service_id',
+        'bus_id',
+        'pickup_id',
+        'destination_id',
+        'fare_adult',
+        'fare_children',
+        'departure_date',
+        'return_date',
+        'departure_time',
+        'return_time',
+        'return_uuid_tracker',
+        'isReturn',
+        'trip_status',
+        'seats_available',
+    ];
 
     /**
      * The attributes that should be cast.
@@ -34,18 +54,18 @@ class Schedule extends Model
 
     public function destination()
     {
-        return $this->belongsTo(Destination::class);
+        return $this->belongsTo(Destination::class, 'destination_id', 'id');
     }
 
     public function pickup()
     {
-        return $this->belongsTo(Destination::class ,'pickup_id');
-//        return $this->belongsTo(Pickup::class);
+        return $this->belongsTo(Destination::class, 'pickup_id', 'id');
+//        return $this->belongsTo(Pickup::class, 'pickup_id', 'id');
     }
 
     public function service()
     {
-        return $this->belongsTo(Service::class , 'service_id');
+        return $this->belongsTo(Service::class, 'service_id');
     }
 
     public function seatTracker()
@@ -69,9 +89,9 @@ class Schedule extends Model
      *
      * @return void
      */
-   protected static function booted()
-   {
-       static::addGlobalScope(new TenantScope);
-   }
+    protected static function booted()
+    {
+        static::addGlobalScope(new TenantScope);
+    }
 
 }

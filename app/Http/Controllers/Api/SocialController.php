@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Socialite\Facades\Socialite;
-use JWTAuth;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class SocialController extends Controller
 {
@@ -18,7 +18,7 @@ class SocialController extends Controller
         return Socialite::driver($provider)->redirect();
     }
 
-    public function Callback($provider){
+    public function callback($provider){
 
         $userSocial =   Socialite::driver($provider)->stateless()->user();
         $users      =  User::where(['email' => $userSocial->getEmail()])->first();

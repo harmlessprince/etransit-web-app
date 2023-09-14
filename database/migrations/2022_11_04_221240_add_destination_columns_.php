@@ -14,8 +14,12 @@ class AddDestinationColumns extends Migration
     public function up()
     {
         Schema::table('tracking_records', function (Blueprint $table) {
-            $table->string('destination_longitude')->nullable();
-            $table->string('destination_latitude')->nullable();
+            if (!Schema::hasColumn('tracking_records', 'destination_longitude')) {
+                $table->string('destination_longitude')->nullable();
+            }
+            if (!Schema::hasColumn('tracking_records', 'destination_latitude')) {
+                $table->string('destination_latitude')->nullable();
+            }
         });
     }
 

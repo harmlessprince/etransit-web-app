@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\Payment;
 use App\Http\new_Controllers\Api\AuthUser;
 use App\Http\new_Controllers\Api\BoatCruise;
 use App\Http\Controllers\Api\Booking;
@@ -10,7 +11,6 @@ use App\Http\Controllers\Api\FlutterwavePayment;
 use App\Http\Controllers\Api\Parcel;
 use App\Http\new_Controllers\Api\Partner;
 use App\Http\Controllers\Api\PasswordReset;
-use App\Http\Controllers\Api\Payment;
 use App\Http\Controllers\Api\Profile;
 use App\Http\Controllers\Api\Service;
 use App\Http\Controllers\Api\SocialController;
@@ -43,8 +43,8 @@ Route::group(['prefix' => 'v1'], function() {
     Route::post('resend-verify-token',[EmailVerify::class , 'resendEmailVerifyToken']);
 
     Route::get('login/{provider}', [SocialController::class ,'redirect']);
-    Route::get('login/{provider}/callback',[SocialController::class ,'Callback']);
-    //accept token for google auth
+    Route::get('login/{provider}/callback',[SocialController::class ,'callback']);
+    //accept token for Google auth
     Route::post('accept-token-google-signup',[SocialController::class , 'acceptToken']);
 
 //    store partners

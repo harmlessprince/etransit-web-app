@@ -1,50 +1,56 @@
 @extends('layouts.app')
 <style>
 
-    #ferry_form , #train_form{
-        display:none;
+    #ferry_form, #train_form {
+        display: none;
     }
+
     /*#one_way_trip{*/
     /*    background: rgb(52,63,95);*/
     /*}*/
-    #return_trip{
-        background: rgb(200,200,200);
+    #return_trip {
+        background: rgb(200, 200, 200);
     }
-    #return_date_box{
-        display:none;
-    }
-    body{
-        width:100%;
-    }
-    #ferry_return_date{
+
+    #return_date_box {
         display: none;
     }
+
+    body {
+        width: 100%;
+    }
+
+    #ferry_return_date {
+        display: none;
+    }
+
     a, a:hover, a:focus, a:active {
         text-decoration: none !important;
         color: inherit !important;
     }
-    #train_return_date{
+
+    #train_return_date {
         display: none;
     }
-    #one_way_train_trip{
+
+    #one_way_train_trip {
         background: #343f5f;
-        color:#fff;
-        padding:10px;
-    }
-    #return_train_trip{
-        color:#eee;
-        padding:10px;
-
+        color: #fff;
+        padding: 10px;
     }
 
+    #return_train_trip {
+        color: #eee;
+        padding: 10px;
 
-    .mobile-copy{
+    }
+
+
+    .mobile-copy {
         display: none;
     }
+
     }
-
-
-
 
 
     /* The Modal (background) */
@@ -58,8 +64,8 @@
         width: 100%; /* Full width */
         height: 100%; /* Full height */
         overflow: auto; /* Enable scroll if needed */
-        background-color: rgb(0,0,0); /* Fallback color */
-        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        background-color: rgb(0, 0, 0); /* Fallback color */
+        background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
     }
 
     /* Modal Content */
@@ -91,13 +97,18 @@
 
 @section('content')
 
-    <section class="hero" style="height: 400px;background: url(&quot;../new-assets/img/Rectangle%203.png&quot;) center / cover no-repeat; " >
-        <div class="d-flex d-sm-flex d-md-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center" style="height: 400px;background: rgba(11,8,8,0.73);">
+    <section class="hero"
+             style="height: 400px;background: url(&quot;../new-assets/img/Rectangle%203.png&quot;) center / cover no-repeat; ">
+        <div
+            class="d-flex d-sm-flex d-md-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center"
+            style="height: 400px;background: rgba(11,8,8,0.73);">
             <div class="container d-md-flex justify-content-md-center align-items-md-center">
                 <div class="row">
                     <div class="col-md-12">
-                        <p style="font-size: 20px;color: var(--bs-white);text-align: center;">Your 24/7 one-stop transit and logistics service</p>
-                        <h1 style="color: var(--bs-white);text-align: center;"><strong>EASY SAFE CONVENIENT</strong></h1>
+                        <p style="font-size: 20px;color: var(--bs-white);text-align: center;">Your 24/7 one-stop transit
+                            and logistics service</p>
+                        <h1 style="color: var(--bs-white);text-align: center;"><strong>EASY SAFE CONVENIENT</strong>
+                        </h1>
                         {{--<p style="font-size: 20px;color: var(--bs-white);text-align: center;padding-right: 80px;padding-left: 80px;" class="mobile-copy">Hire a vehicle,send a parcel, book a bus,flight,boat cruise or ferry instantly at your fingertips. No queues. No delays.&nbsp;&nbsp;</p>
                       --}} </div>
                 </div>
@@ -108,57 +119,71 @@
         {{--    padding-right: 100px;padding-left: 100px;--}}
         <div class="row">
             <div class="col" style="box-shadow: 1px 0px 7px rgb(103,103,103);border-radius: 10px;">
-                <div class="row divshow" style="background: #ffffff;border-radius: 10px;border-bottom-right-radius: 0px;border-bottom-left-radius: 0px;border-color: rgba(33,37,41,0);border-bottom: 1px solid rgb(227,228,230);">
-                    <div class="col-3 col-sm-3 col-xs-3 carhover" id="flight_booking"  style="text-align: center;padding-top: 25px;padding-bottom: 12px;border-top-right-radius: 10px;">
-                        <a href="{{url('car-hire')}}" target="_blank">
+                <div class="row divshow"
+                     style="background: #ffffff;border-radius: 10px;border-bottom-right-radius: 0px;border-bottom-left-radius: 0px;border-color: rgba(33,37,41,0);border-bottom: 1px solid rgb(227,228,230);">
+                    <div class="col-3 col-sm-3 col-xs-3 carhover" id="flight_booking"
+                         style="text-align: center;padding-top: 25px;padding-bottom: 12px;border-top-right-radius: 10px;">
+                        <a href="{{url('car-hire')}}">
                             <img class="img-fluid" src="{{asset('new-assets\img\car-hire\car_menu_icon.png')}}">
                             <div class="divline"></div>
-                            <p ><strong>VEHICLE HIRE</strong></p>
+                            <p><strong>VEHICLE HIRE</strong></p>
                         </a>
 
                     </div>
-                    <div class="col-3 col-sm-3 col-xs-3 carhover" id="bus_booking"  onclick="busnav()" style="text-align: center;padding-top: 25px;padding-bottom: 12px;margin: 0px;border-right: 1px solid rgb(219,220,221);border-top-left-radius: 10px;">
+                    <div class="col-3 col-sm-3 col-xs-3 carhover" id="bus_booking" onclick="busnav()"
+                         style="text-align: center;padding-top: 25px;padding-bottom: 12px;margin: 0px;border-right: 1px solid rgb(219,220,221);border-top-left-radius: 10px;">
                         <img class="img-fluid" src="{{asset('new-assets/img/Layer%201dr.png')}}">
                         <div class="divline"></div>
-                        <p ><strong>BUS BOOKING</strong></p>
+                        <p><strong>BUS BOOKING</strong></p>
                     </div>
-                    <div class="col-3 col-sm-3 col-xs-3 carhover" id="train_booking" onclick="trainnav()" style="text-align: center;padding-top: 12px;padding-bottom: 12px;border-right: 1px solid rgb(219,220,221) ;">
-                        <img class="img-fluid" src="{{asset('new-assets/img/2003.i602.001_railway_station_set_flat-11%20[Converted]%201.svg')}}">
+                    <div class="col-3 col-sm-3 col-xs-3 carhover" id="train_booking" onclick="trainnav()"
+                         style="text-align: center;padding-top: 12px;padding-bottom: 12px;border-right: 1px solid rgb(219,220,221) ;">
+                        <img class="img-fluid"
+                             src="{{asset('new-assets/img/2003.i602.001_railway_station_set_flat-11%20[Converted]%201.svg')}}">
                         <div class="divline"></div>
-                        <p ><strong>TRAIN TICKET&nbsp;</strong></p>
+                        <p><strong>TRAIN TICKET&nbsp;</strong></p>
                     </div>
                     {{--<div class="col-3 col-sm-3 col-xs-3 carhover" id="ferry_booking" onclick="cruisenav()" style="text-align: center;padding-top: 25px;padding-bottom: 12px;border-right: 1px solid rgb(219,220,221) ;">
                         <img class="img-fluid" src="{{asset('new-assets/img/10.svg')}}">
                         <div class="divline"></div>
                         <p ><strong>FERRY BOOKING</strong></p>
                     </div> --}}
-                    <div class="col-3 col-sm-3 col-xs-3 carhover" id="flight_booking"  style="text-align: center;padding-top: 25px;padding-bottom: 12px;border-top-right-radius: 10px;">
-                        <a href="https://www.travelstart.com.ng/?affId=218470&utm_source=affiliate&utm_medium=218470" target="_blank">
+                    <div class="col-3 col-sm-3 col-xs-3 carhover" id="flight_booking"
+                         style="text-align: center;padding-top: 25px;padding-bottom: 12px;border-top-right-radius: 10px;">
+                        <a href="https://www.travelstart.com.ng/?affId=218470&utm_source=affiliate&utm_medium=218470"
+                           target="_blank">
                             <img class="img-fluid" src="{{asset('new-assets/img/Layer%201.png')}}">
                             <div class="divline"></div>
-                            <p ><strong>FLIGHT BOOKING</strong></p>
+                            <p><strong>FLIGHT BOOKING</strong></p>
                         </a>
 
                     </div>
                 </div>
-                <div class="row divshows" style="background: #ffffff;border-radius: 10px;border-bottom-right-radius: 0px;border-bottom-left-radius: 0px;border-color: rgba(33,37,41,0);border-bottom: 1px solid rgb(227,228,230);">
-                    <div class="col-3 col-sm-3 col-xs-3" style="text-align: center;padding-top: 15px;padding-bottom: 15px;" >
+                <div class="row divshows"
+                     style="background: #ffffff;border-radius: 10px;border-bottom-right-radius: 0px;border-bottom-left-radius: 0px;border-color: rgba(33,37,41,0);border-bottom: 1px solid rgb(227,228,230);">
+                    <div class="col-3 col-sm-3 col-xs-3"
+                         style="text-align: center;padding-top: 15px;padding-bottom: 15px;">
                         <a href="{{url('car-hire')}}" target="_blank">
                             <i class="fa fa-car" style="font-size: 36px;color: #e16803;"></i>
                         </a>
                     </div>
-                    <div class="col-3 col-sm-3 col-xs-3" onclick="busnav()" style="text-align: center;border-right: 1px solid rgb(219,220,221);padding-top: 15px;padding-bottom: 15px;">
+                    <div class="col-3 col-sm-3 col-xs-3" onclick="busnav()"
+                         style="text-align: center;border-right: 1px solid rgb(219,220,221);padding-top: 15px;padding-bottom: 15px;">
                         <a><i class="fa fa-bus" style="font-size: 36px;color: #e16803;"></i></a>
                     </div>
-                    <div class="col-3 col-sm-3 col-xs-3" style="text-align: center;border-right: 1px solid rgb(219,220,221);padding-top: 15px;padding-bottom: 15px;" onclick="trainnav()">
-                        <a ><i class="fa fa-train" style="font-size: 36px;color: #e16803;"></i></a>
+                    <div class="col-3 col-sm-3 col-xs-3"
+                         style="text-align: center;border-right: 1px solid rgb(219,220,221);padding-top: 15px;padding-bottom: 15px;"
+                         onclick="trainnav()">
+                        <a><i class="fa fa-train" style="font-size: 36px;color: #e16803;"></i></a>
                     </div>
                     <!--
                     <div class="col-3 col-sm-3 col-xs-3" onclick="cruisenav()"  style="text-align: center;border-right: 1px solid rgb(219,220,221);padding-top: 15px;padding-bottom: 15px;">
                         <a ><i class="icon ion-android-boat" style="font-size: 36px;color: #e16803;"></i></a>
                     </div> -->
-                    <div class="col-3 col-sm-3 col-xs-3" style="text-align: center;padding-top: 15px;padding-bottom: 15px;" >
-                        <a href="https://www.travelstart.com.ng/?affId=218470&utm_source=affiliate&utm_medium=218470" target="_blank">
+                    <div class="col-3 col-sm-3 col-xs-3"
+                         style="text-align: center;padding-top: 15px;padding-bottom: 15px;">
+                        <a href="https://www.travelstart.com.ng/?affId=218470&utm_source=affiliate&utm_medium=218470"
+                           target="_blank">
                             <i class="material-icons" style="font-size: 36px;color: #e16803;">flight</i>
                         </a>
                     </div>
@@ -166,28 +191,45 @@
                 <div id="bus_form">
                     <form method="POST" action="{{url('/bus/bookings')}}">
                         @csrf
-                        <div class="row" style="background: #ffffff;padding-top: 20px;padding-bottom: 20px;border-style: none;border-bottom: 1px none rgb(217,218,220) ;">
+                        <div class="row"
+                             style="background: #ffffff;padding-top: 20px;padding-bottom: 20px;border-style: none;border-bottom: 1px none rgb(217,218,220) ;">
                             <div class="col">
-                                <button class="" type="button" id="one_way_trip" onclick="oneWayTrip()" style="margin-right: 5px;margin-left: 5px;width: 160px;border-style: none; border-bottom-style: none; padding:10px;">One way</button>
-                                <button class="getspace" id="return_trip" type="button" onclick="ReturnTrip()" style="margin-right: 5px;margin-left: 5px;width: 160px; border-style: none;border-bottom-style: none; padding:10px;">Round Trip</button>
+                                <button class="" type="button" id="one_way_trip" onclick="oneWayTrip()"
+                                        style="margin-right: 5px;margin-left: 5px;width: 160px;border-style: none; border-bottom-style: none; padding:10px;">
+                                    One way
+                                </button>
+                                <button class="getspace" id="return_trip" type="button" onclick="ReturnTrip()"
+                                        style="margin-right: 5px;margin-left: 5px;width: 160px; border-style: none;border-bottom-style: none; padding:10px;">
+                                    Round Trip
+                                </button>
                             </div>
-                            <input type="hidden" name="service_id"  value="{{$busService->id}}" />
-                            <input type="hidden" name="trip_type" id="trip_type" class="one-way-trip-input" id="trip-form" value="" />
+                            <input type="hidden" name="service_id" value="{{$busService->id}}"/>
+                            <input type="hidden" name="trip_type" id="trip_type" class="one-way-trip-input"
+                                   id="trip-form" value=""/>
                         </div>
                         <div class="row">
                             <div class="col">
-                                <div class="row d-flex" style="background: #ffffff;border-style: none;border-bottom: 1px none rgb(217,218,220) ;">
+                                <div class="row d-flex"
+                                     style="background: #ffffff;border-style: none;border-bottom: 1px none rgb(217,218,220) ;">
                                     <div class="col-sm-6 col-md-4" style="padding-top: 10px;">
-                                        <label class="form-label" style="font-size: 14px;"><strong>DEPARTURE DATE</strong></label>
-                                        <input class="form-control" id="datemob" type="date" name="departure_date" min="{{ date('Y-m-d') }}" style="border-style: none;border-right-style: solid;border-radius: 0px;">
+                                        <label class="form-label" style="font-size: 14px;"><strong>DEPARTURE
+                                                DATE</strong></label>
+                                        <input class="form-control" id="datemob" type="date" name="departure_date"
+                                               min="{{ date('Y-m-d') }}"
+                                               style="border-style: none;border-right-style: solid;border-radius: 0px;">
                                     </div>
                                     <div class="col-sm-6 col-md-4" id="return_date_box" style="padding-top: 10px;">
                                         <label class="form-label" style="font-size: 14px;"><strong>RETURN DATE</strong></label>
-                                        <input class="form-control" id="datemob2" name="return_date"   type="date" min="{{ date('Y-m-d') }}" style="border-style: none;border-right-style: solid;border-radius: 0px;">
+                                        <input class="form-control" id="datemob2" name="return_date" type="date"
+                                               min="{{ date('Y-m-d') }}"
+                                               style="border-style: none;border-right-style: solid;border-radius: 0px;">
                                     </div>
-                                    <div class="col-sm-6 col-md-4 getalign" style="padding-top: 10px;text-align: center;">
+                                    <div class="col-sm-6 col-md-4 getalign"
+                                         style="padding-top: 10px;text-align: center;">
                                         <label class="form-label" style="font-size: 14px;">NO. OF PERSON</label>
-                                        <select class="form-select" style="text-align: center;border-style: none;border-bottom-style: solid;border-radius: 0px;" name="number_of_passengers" required>
+                                        <select class="form-select"
+                                                style="text-align: center;border-style: none;border-bottom-style: solid;border-radius: 0px;"
+                                                name="number_of_passengers" required>
                                             <option value="1">1</option>
                                             <option value="2">2</option>
                                             <option value="3">3</option>
@@ -206,19 +248,31 @@
                                             <strong>LOCATION</strong>
                                         </label>
                                         <span class="d-block" style="font-size: 9px;color: rgb(146,150,154);">TRAVELING FROM</span>
-                                        <select class="form-select" name="destination_from"  style="border-style: none;border-right-style: solid;border-radius: 0px;">
+                                        <select class="form-select" name="destination_from"
+                                                style="border-style: none;border-right-style: solid;border-radius: 0px;">
                                             @foreach($locations as $location)
-                                                <option value="{{$location->id}}" selected="">{{$location->location}}</option>
+                                                <option value="{{$location->id}}"
+                                                        selected="">{{$location->location}}</option>
                                             @endforeach
                                         </select></div>
                                     <div class="col-sm-6 col-md-4">
-                                        <span class="d-block" id="spanposition" style="font-size: 9px;color: rgb(146,150,154);">TRAVELING TO</span>
-                                        <select name="destination_to"  class="form-select" style="border-style: none;border-right-style: solid;border-radius: 0px;">
+                                        <span class="d-block" id="spanposition"
+                                              style="font-size: 9px;color: rgb(146,150,154);">TRAVELING TO</span>
+                                        <select name="destination_to" class="form-select"
+                                                style="border-style: none;border-right-style: solid;border-radius: 0px;">
                                             @foreach($locations as $location)
-                                                <option value="{{$location->id}}" selected="">{{$location->location}}</option>
+                                                <option value="{{$location->id}}"
+                                                        selected="">{{$location->location}}</option>
                                             @endforeach
                                         </select></div>
-                                    <div class="col-sm-12 col-md-4 d-lg-flex justify-content-lg-center align-items-lg-end" style="text-align: center;padding-right: 5px;padding-left: 4px;"><button class="btn btn-primary" type="submit" style="margin-right: 5px;margin-left: 5px;width: auto;background: rgb(52,63,95);border-style: none;border-bottom-style: none;padding-right: 50px;padding-left: 50px;">PROCEED</button></div>
+                                    <div
+                                        class="col-sm-12 col-md-4 d-lg-flex justify-content-lg-center align-items-lg-end"
+                                        style="text-align: center;padding-right: 5px;padding-left: 4px;">
+                                        <button class="btn btn-primary" type="submit"
+                                                style="margin-right: 5px;margin-left: 5px;width: auto;background: rgb(52,63,95);border-style: none;border-bottom-style: none;padding-right: 50px;padding-left: 50px;">
+                                            PROCEED
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -227,32 +281,47 @@
                 <div id="train_form">
                     <form method="POST" action="{{url('/train/bookings')}}">
                         @csrf
-                        <input type="hidden" name="tripType" id="train_trip_type"  value="" />
-                        <div class="row" style="background: #ffffff;padding-top: 20px;padding-bottom: 20px;border-style: none;border-bottom: 1px none rgb(217,218,220) ;">
+                        <input type="hidden" name="tripType" id="train_trip_type" value=""/>
+                        <div class="row"
+                             style="background: #ffffff;padding-top: 20px;padding-bottom: 20px;border-style: none;border-bottom: 1px none rgb(217,218,220) ;">
                             <div class="col">
 
-                                <button class="" type="button" id="one_way_train_trip" style="margin-right: 5px;margin-left: 5px;width: 160px;border-style: none;" onclick="oneWayTrainTrip()">One way</button>
-                                <button class="" id="return_train_trip" type="button" style="margin-right: 5px;margin-left: 5px;width: 160px;background: rgb(200,200,200);border-style: none;border-bottom-style: none;" onclick="ReturnTrainTrip()">Round Trip</button>
+                                <button class="" type="button" id="one_way_train_trip"
+                                        style="margin-right: 5px;margin-left: 5px;width: 160px;border-style: none;"
+                                        onclick="oneWayTrainTrip()">One way
+                                </button>
+                                <button class="" id="return_train_trip" type="button"
+                                        style="margin-right: 5px;margin-left: 5px;width: 160px;background: rgb(200,200,200);border-style: none;border-bottom-style: none;"
+                                        onclick="ReturnTrainTrip()">Round Trip
+                                </button>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col">
-                                <div class="row d-flex" style="background: #ffffff;border-style: none;border-bottom: 1px none rgb(217,218,220) ;">
+                                <div class="row d-flex"
+                                     style="background: #ffffff;border-style: none;border-bottom: 1px none rgb(217,218,220) ;">
                                     <div class="col-sm-6 col-md-4" style="padding-top: 10px;">
                                         <label class="form-label" style="font-size: 14px;">
                                             <strong>DEPARTURE DATE</strong>
                                         </label>
-                                        <input class="form-control" id="datemob" name="departure_date" type="date" min="{{ date('Y-m-d') }}" style="border-style: none;border-right-style: solid;border-radius: 0px;">
+                                        <input class="form-control" id="datemob" name="departure_date" type="date"
+                                               min="{{ date('Y-m-d') }}"
+                                               style="border-style: none;border-right-style: solid;border-radius: 0px;">
                                     </div>
                                     <div class="col-sm-6 col-md-4" style="padding-top: 10px;">
                                         <label class="form-label" style="font-size: 14px;">
                                             <strong>RETURN DATE</strong>
                                         </label>
-                                        <input class="form-control" id="train_return_date" name="return_date"  type="date" min="{{ date('Y-m-d') }}" style="border-style: none;border-right-style: solid;border-radius: 0px;">
+                                        <input class="form-control" id="train_return_date" name="return_date"
+                                               type="date" min="{{ date('Y-m-d') }}"
+                                               style="border-style: none;border-right-style: solid;border-radius: 0px;">
                                     </div>
-                                    <div class="col-sm-4 col-md-4 getalign" style="padding-top: 10px;text-align: center;">
+                                    <div class="col-sm-4 col-md-4 getalign"
+                                         style="padding-top: 10px;text-align: center;">
                                         <label class="form-label" style="font-size: 14px;">NO. OF PERSON</label>
-                                        <select class="form-select" style="text-align: center;border-style: none;border-bottom-style: solid;border-radius: 0px;" name="passenger">
+                                        <select class="form-select"
+                                                style="text-align: center;border-style: none;border-bottom-style: solid;border-radius: 0px;"
+                                                name="passenger">
                                             <option value="1" selected="">1</option>
                                             <option value="2">2</option>
                                             <option value="3">3</option>
@@ -266,24 +335,39 @@
                                         </select></div>
                                 </div>
                                 <div class="row" style="margin-bottom: 10px;">
-                                    <div class="col-sm-6 col-md-4 createspace"><label class="form-label d-block" style="margin-bottom: 8px;font-size: 14px;">
+                                    <div class="col-sm-6 col-md-4 createspace"><label class="form-label d-block"
+                                                                                      style="margin-bottom: 8px;font-size: 14px;">
                                             <strong>LOCATION</strong></label>
                                         <span class="d-block" style="font-size: 9px;color: rgb(146,150,154);">TRAVELING FROM</span>
-                                        <select class="form-select" style="border-style: none;border-right-style: solid;border-radius: 0px;" name="destination_from">
+                                        <select class="form-select"
+                                                style="border-style: none;border-right-style: solid;border-radius: 0px;"
+                                                name="destination_from">
                                             @foreach($train_locations as $train_location)
-                                                <option value="{{$train_location->id}}" selected="">{{$train_location->locations_state}}</option>
+                                                <option value="{{$train_location->id}}"
+                                                        selected="">{{$train_location->locations_state}}</option>
                                             @endforeach
                                         </select>
                                     </div>
                                     <div class="col-sm-6 col-md-4">
-                                        <span class="d-block" id="spanposition" style="font-size: 9px;color: rgb(146,150,154);">TRAVELING TO</span>
-                                        <select class="form-select" style="border-style: none;border-right-style: solid;border-radius: 0px;" name="destination_to">
+                                        <span class="d-block" id="spanposition"
+                                              style="font-size: 9px;color: rgb(146,150,154);">TRAVELING TO</span>
+                                        <select class="form-select"
+                                                style="border-style: none;border-right-style: solid;border-radius: 0px;"
+                                                name="destination_to">
                                             @foreach($train_locations as $train_location)
-                                                <option value="{{$train_location->id}}" selected="">{{$train_location->locations_state}}</option>
+                                                <option value="{{$train_location->id}}"
+                                                        selected="">{{$train_location->locations_state}}</option>
                                             @endforeach
                                         </select>
                                     </div>
-                                    <div class="col-sm-12 col-md-4 d-lg-flex justify-content-lg-center align-items-lg-end" style="text-align: center;padding-right: 5px;padding-left: 4px;"><button class="btn btn-primary" type="submit" style="margin-right: 5px;margin-left: 5px;width: auto;background: rgb(52,63,95);border-style: none;border-bottom-style: none;padding-right: 50px;padding-left: 50px;">PROCEED</button></div>
+                                    <div
+                                        class="col-sm-12 col-md-4 d-lg-flex justify-content-lg-center align-items-lg-end"
+                                        style="text-align: center;padding-right: 5px;padding-left: 4px;">
+                                        <button class="btn btn-primary" type="submit"
+                                                style="margin-right: 5px;margin-left: 5px;width: auto;background: rgb(52,63,95);border-style: none;border-bottom-style: none;padding-right: 50px;padding-left: 50px;">
+                                            PROCEED
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -292,37 +376,53 @@
                 <div id="ferry_form">
                     <form method="POST" action="{{url('/ferry/bookings')}}">
                         @csrf
-                        <div class="row" style="background: #ffffff;padding-top: 20px;padding-bottom: 20px;border-style: none;border-bottom: 1px none rgb(217,218,220) ;">
+                        <div class="row"
+                             style="background: #ffffff;padding-top: 20px;padding-bottom: 20px;border-style: none;border-bottom: 1px none rgb(217,218,220) ;">
                             <div class="col">
                                 {{--                            <button class="btn btn-primary" type="button" style="margin-right: 5px;margin-left: 5px;width: 160px;background: rgb(52,63,95);border-style: none;border-bottom-style: none;">One way</button>--}}
                                 {{--                            <button class="btn btn-primary .getspace" type="button" style="margin-right: 5px;margin-left: 5px;width: 160px;background: rgb(200,200,200);border-style: none;border-bottom-style: none;">Round Trip</button>--}}
                                 <div class="col">
-                                    <button class="" type="button" id="one_way_ferry_trip" onclick="oneWayFerryTrip()" style="margin-right: 5px;margin-left: 5px;width: 160px;border-style: none; border-bottom-style: none; padding:10px;">One way</button>
-                                    <button class="getspace" id="return_ferry_trip" type="button" onclick="ReturnFerryTrip()" style="margin-right: 5px;margin-left: 5px;width: 160px; border-style: none;border-bottom-style: none; padding:10px;">Round Trip</button>
+                                    <button class="" type="button" id="one_way_ferry_trip" onclick="oneWayFerryTrip()"
+                                            style="margin-right: 5px;margin-left: 5px;width: 160px;border-style: none; border-bottom-style: none; padding:10px;">
+                                        One way
+                                    </button>
+                                    <button class="getspace" id="return_ferry_trip" type="button"
+                                            onclick="ReturnFerryTrip()"
+                                            style="margin-right: 5px;margin-left: 5px;width: 160px; border-style: none;border-bottom-style: none; padding:10px;">
+                                        Round Trip
+                                    </button>
                                 </div>
-                                <input type="hidden" name="service_id"  value="{{$FerryService->id}}" />
-                                <input type="hidden" name="ferry_trip_type_id" id="ferry_trip_type" class="one-way-trip-input"  value="" />
+                                <input type="hidden" name="service_id" value="{{$FerryService->id}}"/>
+                                <input type="hidden" name="ferry_trip_type_id" id="ferry_trip_type"
+                                       class="one-way-trip-input" value=""/>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col">
-                                <div class="row d-flex" style="background: #ffffff;border-style: none;border-bottom: 1px none rgb(217,218,220) ;">
+                                <div class="row d-flex"
+                                     style="background: #ffffff;border-style: none;border-bottom: 1px none rgb(217,218,220) ;">
                                     <div class="col-sm-3 col-md-3" style="padding-top: 10px;">
                                         <label class="form-label" style="font-size: 14px;">
                                             <strong>DEPARTURE DATE</strong>
                                         </label>
-                                        <input class="form-control" id="datemob" name="departure_date" type="date" min="{{ date('Y-m-d') }}" style="border-style: none;border-right-style: solid;border-radius: 0px;">
+                                        <input class="form-control" id="datemob" name="departure_date" type="date"
+                                               min="{{ date('Y-m-d') }}"
+                                               style="border-style: none;border-right-style: solid;border-radius: 0px;">
                                     </div>
                                     <div class="col-sm-3 col-md-3" style="padding-top: 10px;" id="ferry_return_date">
                                         <label class="form-label" style="font-size: 14px;">
                                             <strong>RETURN DATE</strong>
                                         </label>
-                                        <input class="form-control" id="datemob" name="return_date" type="date" min="{{ date('Y-m-d') }}" style="border-style: none;border-right-style: solid;border-radius: 0px;">
+                                        <input class="form-control" id="datemob" name="return_date" type="date"
+                                               min="{{ date('Y-m-d') }}"
+                                               style="border-style: none;border-right-style: solid;border-radius: 0px;">
                                     </div>
 
-                                    <div class="col-sm-3 col-md-3 getalign" style="padding-top: 10px;text-align: center;">
+                                    <div class="col-sm-3 col-md-3 getalign"
+                                         style="padding-top: 10px;text-align: center;">
                                         <label class="form-label" style="font-size: 14px;">NO. OF PERSON</label>
-                                        <select class="form-select" name="number_of_passengers" style="text-align: center;border-style: none;border-bottom-style: solid;border-radius: 0px;">
+                                        <select class="form-select" name="number_of_passengers"
+                                                style="text-align: center;border-style: none;border-bottom-style: solid;border-radius: 0px;">
                                             <option value="1">1</option>
                                             <option value="2">2</option>
                                             <option value="3">3</option>
@@ -335,8 +435,12 @@
                                             <option value="10">10</option>
                                         </select>
                                     </div>
-                                    <div class="col-sm-3 col-md-3 getalign" style="padding-top: 10px;text-align: center;"><label class="form-label" style="font-size: 14px;">Ferry Types</label>
-                                        <select class="form-select" name="ferry_type" style="text-align: center;border-style: none;border-bottom-style: solid;border-radius: 0px;">
+                                    <div class="col-sm-3 col-md-3 getalign"
+                                         style="padding-top: 10px;text-align: center;"><label class="form-label"
+                                                                                              style="font-size: 14px;">Ferry
+                                            Types</label>
+                                        <select class="form-select" name="ferry_type"
+                                                style="text-align: center;border-style: none;border-bottom-style: solid;border-radius: 0px;">
                                             @foreach($ferryTypes  as $type)
                                                 <option value="{{$type->id}}">{{Ucfirst($type->name)}}</option>
                                             @endforeach
@@ -344,24 +448,35 @@
                                     </div>
                                 </div>
                                 <div class="row" style="margin-bottom: 10px;">
-                                    <div class="col-sm-6 col-md-4 createspace"><label class="form-label d-block" style="margin-bottom: 8px;font-size: 14px;">
-                                            <strong>LOCATION</strong></label><span class="d-block" style="font-size: 9px;color: rgb(146,150,154);">TRAVELING FROM</span>
-                                        <select class="form-select" name="destination_from" style="border-style: none;border-right-style: solid;border-radius: 0px;">
+                                    <div class="col-sm-6 col-md-4 createspace"><label class="form-label d-block"
+                                                                                      style="margin-bottom: 8px;font-size: 14px;">
+                                            <strong>LOCATION</strong></label><span class="d-block"
+                                                                                   style="font-size: 9px;color: rgb(146,150,154);">TRAVELING FROM</span>
+                                        <select class="form-select" name="destination_from"
+                                                style="border-style: none;border-right-style: solid;border-radius: 0px;">
                                             @foreach($ferryLocations as $floc)
                                                 <option value="{{$floc->id}}">{{$floc->locations}}</option>
                                             @endforeach
                                         </select>
                                     </div>
                                     <div class="col-sm-6 col-md-4">
-                                        <span class="d-block" id="spanposition" style="font-size: 9px;color: rgb(146,150,154);">TRAVELING TO</span>
-                                        <select class="form-select" name="destination_to" style="border-style: none;border-right-style: solid;border-radius: 0px;">
+                                        <span class="d-block" id="spanposition"
+                                              style="font-size: 9px;color: rgb(146,150,154);">TRAVELING TO</span>
+                                        <select class="form-select" name="destination_to"
+                                                style="border-style: none;border-right-style: solid;border-radius: 0px;">
                                             @foreach($ferryLocations as $floc)
                                                 <option value="{{$floc->id}}">{{$floc->locations}}</option>
                                             @endforeach
                                         </select>
                                     </div>
-                                    <div class="col-sm-12 col-md-4 d-lg-flex justify-content-lg-center align-items-lg-end" style="text-align: center;padding-right: 5px;padding-left: 4px;">
-                                        <button class="btn btn-primary" type="submit" style="margin-right: 5px;margin-left: 5px;width: auto;background: rgb(52,63,95);border-style: none;border-bottom-style: none;padding-right: 50px;padding-left: 50px;">PROCEED</button></div>
+                                    <div
+                                        class="col-sm-12 col-md-4 d-lg-flex justify-content-lg-center align-items-lg-end"
+                                        style="text-align: center;padding-right: 5px;padding-left: 4px;">
+                                        <button class="btn btn-primary" type="submit"
+                                                style="margin-right: 5px;margin-left: 5px;width: auto;background: rgb(52,63,95);border-style: none;border-bottom-style: none;padding-right: 50px;padding-left: 50px;">
+                                            PROCEED
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -373,25 +488,30 @@
     </div>
     <section id="vehicle_hire_cta" style="padding-top: 60px; background-color: #e16803;">
         <div class="container-fluid">
-            <div class="row" >
+            <div class="row">
                 <div class="col relative h-64 sm:h-80 lg:h-full lg:order-last ">
-                    <img class=" inset-0 object-cover w-full h-full" src="{{asset("new-assets/img/car-hire/car-hire-show.png")}}"
-                         alt="Vehicle for hire. Illustrative purposes only." />
+                    <img class=" inset-0 object-cover w-full h-full"
+                         src="{{asset("new-assets/img/car-hire/car-hire-show.png")}}"
+                         alt="Vehicle for hire. Illustrative purposes only."/>
                 </div>
                 <div class="col p-lg-5 p-4">
-                    <h2 class="fs-2 font-weight-bold fs-sm-1 text-white">Move in style with <em>Premium</em> vehicles</h2>
+                    <h2 class="fs-2 font-weight-bold fs-sm-1 text-white">Move in style with <em>Premium</em> vehicles
+                    </h2>
 
                     <p class="mt-4 text-gray-600 text-white">
-                        Hire a vehicle that matches your style anywhere you are. Our executive-grade SUV's and car are available at your fingertips.
+                        Hire a vehicle that matches your style anywhere you are. Our executive-grade SUV's and car are
+                        available at your fingertips.
                         <br>
 
                     </p>
                     <p class="mb-4">
-                        <span class="fs-6"><i class="fas fa-user" style="color: #1f0844"></i> Chaffeur included<small>*</small></span>
+                        <span class="fs-6"><i class="fas fa-user"
+                                              style="color: #1f0844"></i> Chaffeur included<small>*</small></span>
                         <br>
-                        <span class="fs-6" ><i class="fas fa-gas-pump" style="color: #1f0844"></i> Complimentary full tank<small>*</small></span>
+                        <span class="fs-6"><i class="fas fa-gas-pump" style="color: #1f0844"></i> Complimentary full tank<small>*</small></span>
                     </p>
-                    <a class="inline-flex items-center p-4 py-3 mt-8 text-white  rounded" style="background-color: #1f0844"
+                    <a class="inline-flex items-center p-4 py-3 mt-8 text-white  rounded"
+                       style="background-color: #1f0844"
                        href="{{url('car-hire')}}">
                         <span class="text-sm font-medium"> Hire Now </span>
                     </a>
@@ -409,8 +529,10 @@
                         <div class="content">
                             <h3>What is Etransit?</h3>
                             <p>
-                                Etransit Africa is a technology-focused transportation and related services company providing individuals
-                                and corporate bodies with seamless and reliable luxury as well as day to day transport services powered by innovative technology.
+                                Etransit Africa is a technology-focused transportation and related services company
+                                providing individuals
+                                and corporate bodies with seamless and reliable luxury as well as day to day transport
+                                services powered by innovative technology.
                             </p>
                         </div>
                     </div>
@@ -420,23 +542,27 @@
                                 <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="100">
                                     <i class="bx bx-receipt"></i>
                                     <h4>Save More</h4>
-                                    <p>Enjoy value for your money. We have the best prices across transit, flights and vehicle hire bookings.</p>
+                                    <p>Enjoy value for your money. We have the best prices across transit, flights and
+                                        vehicle hire bookings.</p>
                                 </div>
                                 <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="200">
                                     <i class="bx bx-cube-alt"></i>
                                     <h4>Reliable</h4>
                                     <p>Say goodbye to delays and cancellations.
-                                        With real-time tech-enabled monitoring and thousands of vehicles and routes at our diposal, we'll never leave you stranded.</p>
+                                        With real-time tech-enabled monitoring and thousands of vehicles and routes at
+                                        our diposal, we'll never leave you stranded.</p>
                                 </div>
                                 <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="300">
                                     <i class="bx bx-images"></i>
                                     <h4>Seamless</h4>
-                                    <p>Hire Vehicles,book bus,train or flight tickets, boat cruises and more with a few clicks via our web and mobile apps.</p>
+                                    <p>Hire Vehicles,book bus,train or flight tickets, boat cruises and more with a few
+                                        clicks via our web and mobile apps.</p>
                                 </div>
                                 <div class="col-md-6 icon-box" data-aos="fade-up" data-aos-delay="400">
                                     <i class="bx bx-shield"></i>
                                     <h4>Safe and Secure</h4>
-                                    <p>Our state of the art trip monitoring and tracking keep you safe when you use any of our services.</p>
+                                    <p>Our state of the art trip monitoring and tracking keep you safe when you use any
+                                        of our services.</p>
                                 </div>
                             </div>
                         </div><!-- End .content-->
@@ -483,12 +609,18 @@
                     <div class="col-md-6 offset-1 pt-4 feature" data-aos="fade-left" data-aos-delay="100">
                         <h3 class="feature-header">Your Reliable, Convenient Choice</h3>
                         <p class="fst-italic feature-description">
-                            Access top notch transportation services with ease from the comfort your computer or mobile. Our excellent services such as vehicle hire, bus booking, flight booking, private jets, security
+                            Access top notch transportation services with ease from the comfort your computer or mobile.
+                            Our excellent services such as vehicle hire, bus booking, flight booking, private jets,
+                            security
                         </p>
                         <ul>
-                            <li><i class="bi bi-check-circle-fill"></i> More than 500 hubs and 3000 routes covered by our bus network</li>
-                            <li><i class="bi bi-check-circle-fill"></i> Over 300 vehicles available for hire </li>
-                            <li><i class="bi bi-check-circle-fill"></i> Train, Ferry Booking, Boat cruises, Flights and Private Jets also available.</li>
+                            <li><i class="bi bi-check-circle-fill"></i> More than 500 hubs and 3000 routes covered by
+                                our bus network
+                            </li>
+                            <li><i class="bi bi-check-circle-fill"></i> Over 300 vehicles available for hire</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Train, Ferry Booking, Boat cruises, Flights and
+                                Private Jets also available.
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -524,7 +656,8 @@
                             With a few taps one of our professional-trained drivers could be at your doorstep.
                         </p>
                         <p>
-                            We conduct extensive verification, background checks, screening and training to make sure our drivers are fit for the role.
+                            We conduct extensive verification, background checks, screening and training to make sure
+                            our drivers are fit for the role.
                             Drivers can be hired hourly, daily, monthly or on special long term arrangements.
                         </p>
                     </div>
@@ -537,11 +670,17 @@
                     </div>
                     <div class="col-md-6 offset-1 pt-5 feature" data-aos="fade-left">
                         <h3 class="feature-header">Your Safety. Our Priority.</h3>
-                        <p class="feature-description"> We go to great lengths to ensure our services are safe and secure. Our monitoring team is alert to any unforeseen circumstances and will contact the authorities at the siightest hint of concern. We deploy state-of-the art technology to guarantee you safety.</p>
+                        <p class="feature-description"> We go to great lengths to ensure our services are safe and
+                            secure. Our monitoring team is alert to any unforeseen circumstances and will contact the
+                            authorities at the siightest hint of concern. We deploy state-of-the art technology to
+                            guarantee you safety.</p>
                         <ul>
-                            <li><i class="bi bi-check-circle-fill"></i> Share your location and trip progress with a trusted contact via our mobile apps.</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Share your location and trip progress with a
+                                trusted contact via our mobile apps.
+                            </li>
                             <li><i class="bi bi-check-circle-fill"></i> Active monitoring by our safety team.</li>
-                            <li><i class="bi bi-check-circle-fill"></i> Travel insurance is standard on all services </li>
+                            <li><i class="bi bi-check-circle-fill"></i> Travel insurance is standard on all services
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -605,37 +744,54 @@
                 <ul class="faq-list">
 
                     <li>
-                        <div data-bs-toggle="collapse" class="collapsed question" href="#faq1">How do i get my tickets after booking a bus , train or ferry?<i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
+                        <div data-bs-toggle="collapse" class="collapsed question" href="#faq1">How do i get my tickets
+                            after booking a bus , train or ferry?<i class="bi bi-chevron-down icon-show"></i><i
+                                class="bi bi-chevron-up icon-close"></i></div>
                         <div id="faq1" class="collapse" data-bs-parent=".faq-list">
                             <p>
-                                You will receive a booking confirmation email containing your booking details i.e your booking reference number, seat number, vehicle plate number and fare price after completing a successful booking.A payment receipt will also be sent separately if you choose to pay online.
-                                You are to present your booking reference number at the departure terminal to receive your ticket(s) and be ushered to your seat. If you chose to pay later you are required to pay your fare at this point.
+                                You will receive a booking confirmation email containing your booking details i.e your
+                                booking reference number, seat number, vehicle plate number and fare price after
+                                completing a successful booking.A payment receipt will also be sent separately if you
+                                choose to pay online.
+                                You are to present your booking reference number at the departure terminal to receive
+                                your ticket(s) and be ushered to your seat. If you chose to pay later you are required
+                                to pay your fare at this point.
                             </p>
                         </div>
                     </li>
 
                     <li>
-                        <div data-bs-toggle="collapse" href="#faq2" class="collapsed question">At what time should i arrive at my departure terminal for a bus, train or ferry trip?<i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
+                        <div data-bs-toggle="collapse" href="#faq2" class="collapsed question">At what time should i
+                            arrive at my departure terminal for a bus, train or ferry trip?<i
+                                class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i>
+                        </div>
                         <div id="faq2" class="collapse" data-bs-parent=".faq-list">
                             <p>
-                                You are expected to arrive at the departure terminal at least forty-five (45) minutes before the stated departure time.</p>
+                                You are expected to arrive at the departure terminal at least forty-five (45) minutes
+                                before the stated departure time.</p>
                         </div>
                     </li>
 
                     <li>
-                        <div data-bs-toggle="collapse" href="#faq3" class="collapsed question">Who pays for fueling a rented vehicle? <i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
+                        <div data-bs-toggle="collapse" href="#faq3" class="collapsed question">Who pays for fueling a
+                            rented vehicle? <i class="bi bi-chevron-down icon-show"></i><i
+                                class="bi bi-chevron-up icon-close"></i></div>
                         <div id="faq3" class="collapse" data-bs-parent=".faq-list">
                             <p>
-                                We will provide you with a full tank when you receive your vehicle. Subsequent fuelling expenses will be covered by you?
+                                We will provide you with a full tank when you receive your vehicle. Subsequent fuelling
+                                expenses will be covered by you?
                             </p>
                         </div>
                     </li>
 
                     <li>
-                        <div data-bs-toggle="collapse" href="#faq4" class="collapsed question">Can I take a vehicle out of state?<i class="bi bi-chevron-down icon-show"></i><i class="bi bi-chevron-up icon-close"></i></div>
+                        <div data-bs-toggle="collapse" href="#faq4" class="collapsed question">Can I take a vehicle out
+                            of state?<i class="bi bi-chevron-down icon-show"></i><i
+                                class="bi bi-chevron-up icon-close"></i></div>
                         <div id="faq4" class="collapse" data-bs-parent=".faq-list">
                             <p>
-                                Yes you can, please note different rates apply depending on journey length. You will also need to provide suitable accommodation for your driver for overnight journeys.
+                                Yes you can, please note different rates apply depending on journey length. You will
+                                also need to provide suitable accommodation for your driver for overnight journeys.
                             </p>
                         </div>
                     </li>
@@ -674,98 +830,110 @@
 
 
             <div class="row" style="margin-top: 30px;">
-{{--                <div class="col">--}}
-{{--                    <div class="carousel slide" data-bs-ride="carousel" id="carousel-2">--}}
-{{--                        <div class="carousel-inner">--}}
-{{--                            <div class="carousel-item active">--}}
-{{--                                <div class="container">--}}
-{{--                                    <div class="row product-list">--}}
+                {{--                <div class="col">--}}
+                {{--                    <div class="carousel slide" data-bs-ride="carousel" id="carousel-2">--}}
+                {{--                        <div class="carousel-inner">--}}
+                {{--                            <div class="carousel-item active">--}}
+                {{--                                <div class="container">--}}
+                {{--                                    <div class="row product-list">--}}
 
-{{--                                    </div>--}}
+                {{--                                    </div>--}}
 
-{{--                                </div><img class="w-100 d-block d-none" src="https://placeholdit.imgix.net/~text?txtsize=42&amp;txt=Carousel+Image&amp;w=1400&amp;h=600" alt="Slide Image">--}}
-{{--                            </div>--}}
-{{--                            <div class="carousel-item">--}}
-{{--                                <div class="container">--}}
-{{--                                    <div class="row product-list">--}}
+                {{--                                </div><img class="w-100 d-block d-none" src="https://placeholdit.imgix.net/~text?txtsize=42&amp;txt=Carousel+Image&amp;w=1400&amp;h=600" alt="Slide Image">--}}
+                {{--                            </div>--}}
+                {{--                            <div class="carousel-item">--}}
+                {{--                                <div class="container">--}}
+                {{--                                    <div class="row product-list">--}}
 
-{{--                                        @foreach($cars_selection2 as $index  => $car)--}}
+                {{--                                        @foreach($cars_selection2 as $index  => $car)--}}
 
-{{--                                            <div class="col-sm-3 col-md-3 col-lg-3 product-item">--}}
-{{--                                                <div class="product-container" style="padding: 10px;padding-top: 5px;padding-bottom: 5px;border-radius: 10px;box-shadow: 1px 1px 7px rgb(162,164,167);">--}}
-{{--                                                    <div class="row">--}}
-{{--                                                        <div class="col-md-12">--}}
-{{--                                                            <a class="product-image" style="margin-bottom:-10px;" href="{{'view-car-details/'. $car->id}}">--}}
-{{--                                                                <img class="rounded img-fluid"--}}
-{{--                                                                     style="border: 6px none rgb(220,219,219) ;" src="{{$car->car_images[0]->path}}"></a>--}}
-{{--                                                        </div>--}}
-{{--                                                    </div>--}}
-{{--                                                    <div class="row">--}}
-{{--                                                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 text-start" style="width: 252px;padding-right: 0px;padding-left: 0px;font-size: 20px;text-align: left;">--}}
-{{--                                                            <h2 class="text-nowrap fw-normal text-start" style="text-align: left;padding-left: 20px;">--}}
-{{--                                                                <a class="fw-normal text-start" style="color: rgb(8,1,1);font-size: 17px;font-family: Abel, sans-serif;margin-left: -2px;" href="#">{{$car->car_name}}<br></a></h2>--}}
-{{--                                                            <p style="color: rgb(25,25,25);font-size: 14px;">&nbsp; &nbsp; &nbsp;&nbsp;--}}
-{{--                                                            <p style="color: rgb(25,25,25);font-size: 14px;">&nbsp; &nbsp; &nbsp;&nbsp;<i class="fa fa-question" style="color: rgb(217,135,60);"></i>&nbsp;{{Ucfirst($car->transmission)}} &nbsp;--}}
-{{--                                                                <i class="la la-automobile" style="color: rgb(217,135,60);"></i>&nbsp;{{$car->capacity}} Adult--}}
-{{--                                                                <i class="fa fa-asterisk" style="color: rgb(207,115,48);"></i>&nbsp;--}}
-{{--                                                                Functional--}}
-{{--                                                            </p>--}}
-{{--                                                        </div>--}}
-{{--                                                    </div>--}}
-{{--                                                </div>--}}
-{{--                                            </div>--}}
-{{--                                        @endforeach--}}
+                {{--                                            <div class="col-sm-3 col-md-3 col-lg-3 product-item">--}}
+                {{--                                                <div class="product-container" style="padding: 10px;padding-top: 5px;padding-bottom: 5px;border-radius: 10px;box-shadow: 1px 1px 7px rgb(162,164,167);">--}}
+                {{--                                                    <div class="row">--}}
+                {{--                                                        <div class="col-md-12">--}}
+                {{--                                                            <a class="product-image" style="margin-bottom:-10px;" href="{{'view-car-details/'. $car->id}}">--}}
+                {{--                                                                <img class="rounded img-fluid"--}}
+                {{--                                                                     style="border: 6px none rgb(220,219,219) ;" src="{{$car->car_images[0]->path}}"></a>--}}
+                {{--                                                        </div>--}}
+                {{--                                                    </div>--}}
+                {{--                                                    <div class="row">--}}
+                {{--                                                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 text-start" style="width: 252px;padding-right: 0px;padding-left: 0px;font-size: 20px;text-align: left;">--}}
+                {{--                                                            <h2 class="text-nowrap fw-normal text-start" style="text-align: left;padding-left: 20px;">--}}
+                {{--                                                                <a class="fw-normal text-start" style="color: rgb(8,1,1);font-size: 17px;font-family: Abel, sans-serif;margin-left: -2px;" href="#">{{$car->car_name}}<br></a></h2>--}}
+                {{--                                                            <p style="color: rgb(25,25,25);font-size: 14px;">&nbsp; &nbsp; &nbsp;&nbsp;--}}
+                {{--                                                            <p style="color: rgb(25,25,25);font-size: 14px;">&nbsp; &nbsp; &nbsp;&nbsp;<i class="fa fa-question" style="color: rgb(217,135,60);"></i>&nbsp;{{Ucfirst($car->transmission)}} &nbsp;--}}
+                {{--                                                                <i class="la la-automobile" style="color: rgb(217,135,60);"></i>&nbsp;{{$car->capacity}} Adult--}}
+                {{--                                                                <i class="fa fa-asterisk" style="color: rgb(207,115,48);"></i>&nbsp;--}}
+                {{--                                                                Functional--}}
+                {{--                                                            </p>--}}
+                {{--                                                        </div>--}}
+                {{--                                                    </div>--}}
+                {{--                                                </div>--}}
+                {{--                                            </div>--}}
+                {{--                                        @endforeach--}}
 
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                                <img class="w-100 d-block d-none" src="https://placeholdit.imgix.net/~text?txtsize=42&amp;txt=Carousel+Image&amp;w=1400&amp;h=600" alt="Slide Image">--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                        <div><a class="carousel-control-prev" href="#carousel-2" role="button" data-bs-slide="prev"--}}
-{{--                                style="background-image:url(&quot;0&quot;);"><span class="carousel-control-prev-icon"></span><span--}}
-{{--                                    class="visually-hidden">Previous</span></a>--}}
-{{--                            <a class="carousel-control-next" href="#carousel-2" role="button" data-bs-slide="next"--}}
-{{--                               style="background-image:url(&quot;o&quot;);"><span class="carousel-control-next-icon"></span><span--}}
-{{--                                    class="visually-hidden">Next</span></a>--}}
-{{--                        </div><ol class="carousel-indicators">--}}
-{{--                            <li data-bs-target="#carousel-2" data-bs-slide-to="0" class="active"></li>--}}
-{{--                            <li data-bs-target="#carousel-2" data-bs-slide-to="1"></li>--}}
-{{--                        </ol>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
+                {{--                                    </div>--}}
+                {{--                                </div>--}}
+                {{--                                <img class="w-100 d-block d-none" src="https://placeholdit.imgix.net/~text?txtsize=42&amp;txt=Carousel+Image&amp;w=1400&amp;h=600" alt="Slide Image">--}}
+                {{--                            </div>--}}
+                {{--                        </div>--}}
+                {{--                        <div><a class="carousel-control-prev" href="#carousel-2" role="button" data-bs-slide="prev"--}}
+                {{--                                style="background-image:url(&quot;0&quot;);"><span class="carousel-control-prev-icon"></span><span--}}
+                {{--                                    class="visually-hidden">Previous</span></a>--}}
+                {{--                            <a class="carousel-control-next" href="#carousel-2" role="button" data-bs-slide="next"--}}
+                {{--                               style="background-image:url(&quot;o&quot;);"><span class="carousel-control-next-icon"></span><span--}}
+                {{--                                    class="visually-hidden">Next</span></a>--}}
+                {{--                        </div><ol class="carousel-indicators">--}}
+                {{--                            <li data-bs-target="#carousel-2" data-bs-slide-to="0" class="active"></li>--}}
+                {{--                            <li data-bs-target="#carousel-2" data-bs-slide-to="1"></li>--}}
+                {{--                        </ol>--}}
+                {{--                    </div>--}}
+                {{--                </div>--}}
                 {{--            <div class="container">--}}
 
 
                 {{--                </div>--}}
 
                 {{--            </div>--}}
-                                <div class="row product-list">
-                <div class="multiple-items" data-slick='{"slidesToShow": 4, "slidesToScroll": 4}'>
-                    @foreach($cars as $index  => $car)
-                        <div class="col-sm-3 col-md-3 col-lg-3 product-item">
-                            <div class="product-container" style="box-shadow: 1px 1px 7px rgb(162,164,167);padding: 10px;padding-top: 5px;padding-bottom: 5px;border-radius: 10px;">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <a class="product-image" style="margin-bottom:-10px;" href="{{'view-car-details/'. $car->id}}">
-                                            <img class="rounded img-fluid" style="border: 6px none rgb(220,219,219) ;"
-                                                 src="{{$car->car_images[0]->path}}">
-                                        </a>
+                <div class="row product-list">
+                    <div class="multiple-items" data-slick='{"slidesToShow": 4, "slidesToScroll": 4}'>
+                        @foreach($cars as $index  => $car)
+                            <div class="col-sm-3 col-md-3 col-lg-3 product-item">
+                                <div class="product-container"
+                                     style="box-shadow: 1px 1px 7px rgb(162,164,167);padding: 10px;padding-top: 5px;padding-bottom: 5px;border-radius: 10px;">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <a class="product-image" style="margin-bottom:-10px;"
+                                               href="{{'view-car-details/'. $car->id}}">
+                                                <img class="rounded img-fluid"
+                                                     style="border: 6px none rgb(220,219,219) ;"
+                                                     src="{{$car->car_images[0]->path}}">
+                                            </a>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-12 col-sm-12 col-md-12 col-lg-12" style="width:252px;padding-right:0px;padding-left:0px;font-size:3px;">
-                                        <h2 class="text-nowrap fw-normal text-start" style="text-align: left;padding-left: 20px;">
-                                            <a class="fw-normal text-start" style="color: rgb(8,1,1);font-size: 17px;font-family: Abel, sans-serif;margin-left: -2px;" href="#">{{$car->car_name}}<br></a></h2>
-                                        <p style="color: rgb(25,25,25);font-size: 14px;">&nbsp; &nbsp; &nbsp;&nbsp;<i class="fa fa-question" style="color: rgb(217,135,60);"></i>&nbsp;{{Ucfirst($car->transmission)}} &nbsp;
-                                            <i class="la la-automobile" style="color: rgb(217,135,60);"></i>&nbsp;{{$car->capacity}} Adult&nbsp;
-                                            <i class="fa fa-asterisk" style="color: rgb(207,115,48);"></i>&nbsp; Fuctional</p>
+                                    <div class="row">
+                                        <div class="col-12 col-sm-12 col-md-12 col-lg-12"
+                                             style="width:252px;padding-right:0px;padding-left:0px;font-size:3px;">
+                                            <h2 class="text-nowrap fw-normal text-start"
+                                                style="text-align: left;padding-left: 20px;">
+                                                <a class="fw-normal text-start"
+                                                   style="color: rgb(8,1,1);font-size: 17px;font-family: Abel, sans-serif;margin-left: -2px;"
+                                                   href="#">{{$car->car_name}}<br></a></h2>
+                                            <p style="color: rgb(25,25,25);font-size: 14px;">&nbsp; &nbsp;
+                                                &nbsp;&nbsp;<i class="fa fa-question"
+                                                               style="color: rgb(217,135,60);"></i>&nbsp;{{Ucfirst($car->transmission)}}
+                                                &nbsp;
+                                                <i class="la la-automobile"
+                                                   style="color: rgb(217,135,60);"></i>&nbsp;{{$car->capacity}} Adult&nbsp;
+                                                <i class="fa fa-asterisk" style="color: rgb(207,115,48);"></i>&nbsp;
+                                                Fuctional</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    @endforeach
+                        @endforeach
+                    </div>
                 </div>
-                                </div>
             </div>
 
             <div class="container-fluid">
@@ -774,14 +942,18 @@
                         <div id="news-slider" class="owl-carousel">
                             <div class="post-slide">
                                 <div class="post-img">
-                                    <img src="https://images.unsplash.com/photo-1596265371388-43edbaadab94?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=301&ixid=eyJhcHBfaWQiOjF9&ixlib=rb-1.2.1&q=80&w=501" alt="">
+                                    <img
+                                        src="https://images.unsplash.com/photo-1596265371388-43edbaadab94?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=301&ixid=eyJhcHBfaWQiOjF9&ixlib=rb-1.2.1&q=80&w=501"
+                                        alt="">
                                     <a href="#" class="over-layer"><i class="fa fa-link"></i></a>
                                 </div>
                                 <div class="post-content">
                                     <h3 class="post-title">
                                         <a href="#">Lorem ipsum dolor sit amet.</a>
                                     </h3>
-                                    <p class="post-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam consectetur cumque dolorum, ex incidunt ipsa laudantium necessitatibus neque quae tempora......</p>
+                                    <p class="post-description">Lorem ipsum dolor sit amet, consectetur adipisicing
+                                        elit. Aperiam consectetur cumque dolorum, ex incidunt ipsa laudantium
+                                        necessitatibus neque quae tempora......</p>
                                     <span class="post-date"><i class="fa fa-clock-o"></i>Out 27, 2019</span>
                                     <a href="#" class="read-more">read more</a>
                                 </div>
@@ -789,14 +961,18 @@
 
                             <div class="post-slide">
                                 <div class="post-img">
-                                    <img src="https://images.unsplash.com/photo-1533227268428-f9ed0900fb3b?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=303&ixid=eyJhcHBfaWQiOjF9&ixlib=rb-1.2.1&q=80&w=503" alt="">
+                                    <img
+                                        src="https://images.unsplash.com/photo-1533227268428-f9ed0900fb3b?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=303&ixid=eyJhcHBfaWQiOjF9&ixlib=rb-1.2.1&q=80&w=503"
+                                        alt="">
                                     <a href="#" class="over-layer"><i class="fa fa-link"></i></a>
                                 </div>
                                 <div class="post-content">
                                     <h3 class="post-title">
                                         <a href="#">Lorem ipsum dolor sit amet.</a>
                                     </h3>
-                                    <p class="post-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam consectetur cumque dolorum, ex incidunt ipsa laudantium necessitatibus neque quae tempora......</p>
+                                    <p class="post-description">Lorem ipsum dolor sit amet, consectetur adipisicing
+                                        elit. Aperiam consectetur cumque dolorum, ex incidunt ipsa laudantium
+                                        necessitatibus neque quae tempora......</p>
                                     <span class="post-date"><i class="fa fa-clock-o"></i>Out 27, 2019</span>
                                     <a href="#" class="read-more">read more</a>
                                 </div>
@@ -804,14 +980,18 @@
 
                             <div class="post-slide">
                                 <div class="post-img">
-                                    <img src="https://images.unsplash.com/photo-1564979268369-42032c5ca998?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=300&ixid=eyJhcHBfaWQiOjF9&ixlib=rb-1.2.1&q=80&w=500" alt="">
+                                    <img
+                                        src="https://images.unsplash.com/photo-1564979268369-42032c5ca998?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=300&ixid=eyJhcHBfaWQiOjF9&ixlib=rb-1.2.1&q=80&w=500"
+                                        alt="">
                                     <a href="#" class="over-layer"><i class="fa fa-link"></i></a>
                                 </div>
                                 <div class="post-content">
                                     <h3 class="post-title">
                                         <a href="#">Lorem ipsum dolor sit amet.</a>
                                     </h3>
-                                    <p class="post-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam consectetur cumque dolorum, ex incidunt ipsa laudantium necessitatibus neque quae tempora......</p>
+                                    <p class="post-description">Lorem ipsum dolor sit amet, consectetur adipisicing
+                                        elit. Aperiam consectetur cumque dolorum, ex incidunt ipsa laudantium
+                                        necessitatibus neque quae tempora......</p>
                                     <span class="post-date"><i class="fa fa-clock-o"></i>Out 27, 2019</span>
                                     <a href="#" class="read-more">read more</a>
                                 </div>
@@ -819,14 +999,18 @@
 
                             <div class="post-slide">
                                 <div class="post-img">
-                                    <img src="https://images.unsplash.com/photo-1576659531892-0f4991fca82b?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=301&ixid=eyJhcHBfaWQiOjF9&ixlib=rb-1.2.1&q=80&w=501" alt="">
+                                    <img
+                                        src="https://images.unsplash.com/photo-1576659531892-0f4991fca82b?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=301&ixid=eyJhcHBfaWQiOjF9&ixlib=rb-1.2.1&q=80&w=501"
+                                        alt="">
                                     <a href="#" class="over-layer"><i class="fa fa-link"></i></a>
                                 </div>
                                 <div class="post-content">
                                     <h3 class="post-title">
                                         <a href="#">Lorem ipsum dolor sit amet.</a>
                                     </h3>
-                                    <p class="post-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam consectetur cumque dolorum, ex incidunt ipsa laudantium necessitatibus neque quae tempora......</p>
+                                    <p class="post-description">Lorem ipsum dolor sit amet, consectetur adipisicing
+                                        elit. Aperiam consectetur cumque dolorum, ex incidunt ipsa laudantium
+                                        necessitatibus neque quae tempora......</p>
                                     <span class="post-date"><i class="fa fa-clock-o"></i>Out 27, 2019</span>
                                     <a href="#" class="read-more">read more</a>
                                 </div>
@@ -834,14 +1018,18 @@
 
                             <div class="post-slide">
                                 <div class="post-img">
-                                    <img src="https://images.unsplash.com/photo-1586083702768-190ae093d34d?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=305&ixid=eyJhcHBfaWQiOjF9&ixlib=rb-1.2.1&q=80&w=505" alt="">
+                                    <img
+                                        src="https://images.unsplash.com/photo-1586083702768-190ae093d34d?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=305&ixid=eyJhcHBfaWQiOjF9&ixlib=rb-1.2.1&q=80&w=505"
+                                        alt="">
                                     <a href="#" class="over-layer"><i class="fa fa-link"></i></a>
                                 </div>
                                 <div class="post-content">
                                     <h3 class="post-title">
                                         <a href="#">Lorem ipsum dolor sit amet.</a>
                                     </h3>
-                                    <p class="post-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam consectetur cumque dolorum, ex incidunt ipsa laudantium necessitatibus neque quae tempora......</p>
+                                    <p class="post-description">Lorem ipsum dolor sit amet, consectetur adipisicing
+                                        elit. Aperiam consectetur cumque dolorum, ex incidunt ipsa laudantium
+                                        necessitatibus neque quae tempora......</p>
                                     <span class="post-date"><i class="fa fa-clock-o"></i>Out 27, 2019</span>
                                     <a href="#" class="read-more">read more</a>
                                 </div>
@@ -849,14 +1037,18 @@
 
                             <div class="post-slide">
                                 <div class="post-img">
-                                    <img src="https://images.unsplash.com/photo-1484656551321-a1161420a2a0?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=306&ixid=eyJhcHBfaWQiOjF9&ixlib=rb-1.2.1&q=80&w=506" alt="">
+                                    <img
+                                        src="https://images.unsplash.com/photo-1484656551321-a1161420a2a0?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=306&ixid=eyJhcHBfaWQiOjF9&ixlib=rb-1.2.1&q=80&w=506"
+                                        alt="">
                                     <a href="#" class="over-layer"><i class="fa fa-link"></i></a>
                                 </div>
                                 <div class="post-content">
                                     <h3 class="post-title">
                                         <a href="#">Lorem ipsum dolor sit amet.</a>
                                     </h3>
-                                    <p class="post-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam consectetur cumque dolorum, ex incidunt ipsa laudantium necessitatibus neque quae tempora......</p>
+                                    <p class="post-description">Lorem ipsum dolor sit amet, consectetur adipisicing
+                                        elit. Aperiam consectetur cumque dolorum, ex incidunt ipsa laudantium
+                                        necessitatibus neque quae tempora......</p>
                                     <span class="post-date"><i class="fa fa-clock-o"></i>Out 27, 2019</span>
                                     <a href="#" class="read-more">read more</a>
                                 </div>
@@ -872,10 +1064,18 @@
                 </div>
             </div>
             <div class="row" style="padding-right: 60px;padding-left: 60px;">
-                <div class="col" style="text-align: center;"><img class="img-fluid" src="{{asset('new-assets/img/client1%201.svg')}}"></div>
-                <div class="col" style="text-align: center;"><img class="img-fluid" src="{{asset('new-assets/img/client2%201.png')}}"></div>
-                <div class="col" style="text-align: center;"><img class="img-fluid" src="{{asset('new-assets/img/client3%201.svg')}}"></div>
-                <div class="col" style="text-align: center;"><img class="img-fluid" src="{{asset('new-assets/img/client4%201.svg')}}"></div>
+                <div class="col" style="text-align: center;"><img class="img-fluid"
+                                                                  src="{{asset('new-assets/img/client1%201.svg')}}">
+                </div>
+                <div class="col" style="text-align: center;"><img class="img-fluid"
+                                                                  src="{{asset('new-assets/img/client2%201.png')}}">
+                </div>
+                <div class="col" style="text-align: center;"><img class="img-fluid"
+                                                                  src="{{asset('new-assets/img/client3%201.svg')}}">
+                </div>
+                <div class="col" style="text-align: center;"><img class="img-fluid"
+                                                                  src="{{asset('new-assets/img/client4%201.svg')}}">
+                </div>
             </div>
         </div>
     </section>
@@ -931,59 +1131,64 @@
         var span = document.getElementsByClassName("close")[0];
 
         addEventListener('load', (event) => {
-            setInterval(function() {
+            setInterval(function () {
                 counter++;
                 (counter < 3) ? modal.style.display = "block" : modal.style.display = "none";
             }, 10000);
         });
 
-        window.onclick = function(event) {
+        window.onclick = function (event) {
             if (event.target == modal) {
                 modal.style.display = "none";
             }
         }
-        closeModal = () =>
-        {
-            span.onclick = function() {
+        closeModal = () => {
+            span.onclick = function () {
                 modal.style.display = "none";
             }
         }
     </script>
     <script>
         let doc, htm, bod, nav, M, I, mobile, S, Q;
-        addEventListener('load', ()=>{
-            doc = document; htm = doc.documentElement; bod = doc.body; nav = navigator; M = tag=>doc.createElement(tag); I = id=>doc.getElementById(id);
+        addEventListener('load', () => {
+            doc = document;
+            htm = doc.documentElement;
+            bod = doc.body;
+            nav = navigator;
+            M = tag => doc.createElement(tag);
+            I = id => doc.getElementById(id);
             mobile = nav.userAgent.match(/Mobi/i) ? true : false;
-            S = (selector, within)=>{
+            S = (selector, within) => {
                 var w = within || doc;
                 return w.querySelector(selector);
             }
-            Q = (selector, within)=>{
+            Q = (selector, within) => {
                 var w = within || doc;
                 return w.querySelectorAll(selector);
             }
 // tiny library above - magic below
-            const date = I('datemob'), minDate = new Date('{{ date('Y-m-d') }}'), millisecondOverMaxDate = new Date('4/1/2030');
+            const date = I('datemob'), minDate = new Date('{{ date('Y-m-d') }}'),
+                millisecondOverMaxDate = new Date('4/1/2030');
             const date2 = I('datemob2');
-            date.onchange = function(){
-                const a = this.value.split('-'), s = a.shift(), d = new Date(a.join('/')+'/'+s), t = d.getTime(), y = d.getFullYear();
+            date.onchange = function () {
+                const a = this.value.split('-'), s = a.shift(), d = new Date(a.join('/') + '/' + s), t = d.getTime(),
+                    y = d.getFullYear();
                 console.clear(); // remove consoles on deployment
-                if(t >= minDate && t < millisecondOverMaxDate){
+                if (t >= minDate && t < millisecondOverMaxDate) {
                     console.log('within range');
-                }
-                else{
+                } else {
                     console.log('out of range');
                     this.value = '';
                 }
             }
 
-            date2.onchange = function(){
-                const a = this.value.split('-'), s = a.shift(), d = new Date(a.join('/')+'/'+s), t = d.getTime(), y = ;
+            date2.onchange = function () {
+                const a = this.value.split('-'), s = a.shift(), d = new Date(a.join('/') + '/' + s), t = d.getTime(),
+                    y =;
                 console.clear(); // remove consoles on deployment
-                if(t >= minDate && t < millisecondOverMaxDate){
+                if (t >= minDate && t < millisecondOverMaxDate) {
                     console.log('within range');
-                }
-                else{
+                } else {
                     console.log('out of range');
                     this.value = '';
                 }

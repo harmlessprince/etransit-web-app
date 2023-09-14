@@ -239,9 +239,9 @@ Route::prefix('admin')->name('admin.')->group(function(){
 
     Route::group(['middleware' => ['admin','prevent-back-history','permissions']], function() {
 
-        Route::get('/dashboard', [Dashboard::class, 'dashboard'])->name('dashboard');  
+        Route::get('/dashboard', [Dashboard::class, 'dashboard'])->name('dashboard');
         //view password change requests
-        Route::get('/view-password-change-requests', [Operator::class, 'viewPasswordChangeRequests']); 
+        Route::get('/view-password-change-requests', [Operator::class, 'viewPasswordChangeRequests']);
         Route::post('/approve-password-change', [Operator::class, 'approvePasswordChange'])->name('approvePasswordChange');
 
         //vehicle management
@@ -762,7 +762,7 @@ Route::any('/user-proxy/enter/{id}/{true}', function ($id) {
     request()->session()->put('user-proxy-id', $id);
     return redirect('/');
 })->name('impersonate');
- 
+
 
 // Exit Impersonation Mode
 Route::any('/user-proxy/exit', function () {
