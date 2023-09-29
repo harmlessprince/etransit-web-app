@@ -50,6 +50,9 @@ class AuthLogin extends Controller
 //          return view('Eticket.Auth.authenticate',compact('user'));
 //    }
 
+    /**
+     * @throws ValidationException
+     */
     public function loginTenant(Request $request)
     {
         request()->validate([
