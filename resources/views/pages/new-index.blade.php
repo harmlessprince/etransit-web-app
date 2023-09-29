@@ -121,6 +121,12 @@
             <div class="col" style="box-shadow: 1px 0px 7px rgb(103,103,103);border-radius: 10px;">
                 <div class="row divshow"
                      style="background: #ffffff;border-radius: 10px;border-bottom-right-radius: 0px;border-bottom-left-radius: 0px;border-color: rgba(33,37,41,0);border-bottom: 1px solid rgb(227,228,230);">
+                    <div class="col-3 col-sm-3 col-xs-3 carhover" id="bus_booking" onclick="busnav()"
+                         style="text-align: center;padding-top: 25px;padding-bottom: 12px;margin: 0px;border-right: 1px solid rgb(219,220,221);border-top-left-radius: 10px;">
+                        <img class="img-fluid" src="{{asset('new-assets/img/Layer%201dr.png')}}">
+                        <div class="divline"></div>
+                        <p><strong>CO-TRAVELLER</strong></p>
+                    </div>
                     <div class="col-3 col-sm-3 col-xs-3 carhover" id="flight_booking"
                          style="text-align: center;padding-top: 25px;padding-bottom: 12px;border-top-right-radius: 10px;">
                         <a href="{{url('car-hire')}}">
@@ -129,12 +135,6 @@
                             <p><strong>VEHICLE HIRE</strong></p>
                         </a>
 
-                    </div>
-                    <div class="col-3 col-sm-3 col-xs-3 carhover" id="bus_booking" onclick="busnav()"
-                         style="text-align: center;padding-top: 25px;padding-bottom: 12px;margin: 0px;border-right: 1px solid rgb(219,220,221);border-top-left-radius: 10px;">
-                        <img class="img-fluid" src="{{asset('new-assets/img/Layer%201dr.png')}}">
-                        <div class="divline"></div>
-                        <p><strong>BUS BOOKING</strong></p>
                     </div>
                     <div class="col-3 col-sm-3 col-xs-3 carhover" id="train_booking" onclick="trainnav()"
                          style="text-align: center;padding-top: 12px;padding-bottom: 12px;border-right: 1px solid rgb(219,220,221) ;">
@@ -161,15 +161,15 @@
                 </div>
                 <div class="row divshows"
                      style="background: #ffffff;border-radius: 10px;border-bottom-right-radius: 0px;border-bottom-left-radius: 0px;border-color: rgba(33,37,41,0);border-bottom: 1px solid rgb(227,228,230);">
+                    <div class="col-3 col-sm-3 col-xs-3" onclick="busnav()"
+                         style="text-align: center;border-right: 1px solid rgb(219,220,221);padding-top: 15px;padding-bottom: 15px;">
+                        <a><i class="fa fa-bus" style="font-size: 36px;color: #e16803;"></i></a>
+                    </div>
                     <div class="col-3 col-sm-3 col-xs-3"
                          style="text-align: center;padding-top: 15px;padding-bottom: 15px;">
                         <a href="{{url('car-hire')}}" target="_blank">
                             <i class="fa fa-car" style="font-size: 36px;color: #e16803;"></i>
                         </a>
-                    </div>
-                    <div class="col-3 col-sm-3 col-xs-3" onclick="busnav()"
-                         style="text-align: center;border-right: 1px solid rgb(219,220,221);padding-top: 15px;padding-bottom: 15px;">
-                        <a><i class="fa fa-bus" style="font-size: 36px;color: #e16803;"></i></a>
                     </div>
                     <div class="col-3 col-sm-3 col-xs-3"
                          style="text-align: center;border-right: 1px solid rgb(219,220,221);padding-top: 15px;padding-bottom: 15px;"
@@ -482,7 +482,6 @@
                         </div>
                     </form>
                 </div>
-
             </div>
         </div>
     </div>
@@ -506,7 +505,7 @@
                     </p>
                     <p class="mb-4">
                         <span class="fs-6"><i class="fas fa-user"
-                                              style="color: #1f0844"></i> Chaffeur included<small>*</small></span>
+                                              style="color: #1f0844"></i> Chauffeur included<small>*</small></span>
                         <br>
                         <span class="fs-6"><i class="fas fa-gas-pump" style="color: #1f0844"></i> Complimentary full tank<small>*</small></span>
                     </p>
@@ -610,7 +609,7 @@
                         <h3 class="feature-header">Your Reliable, Convenient Choice</h3>
                         <p class="fst-italic feature-description">
                             Access top notch transportation services with ease from the comfort your computer or mobile.
-                            Our excellent services such as vehicle hire, bus booking, flight booking, private jets,
+                            Our excellent services such as vehicle hire, co-traveller, flight booking, private jets,
                             security
                         </p>
                         <ul>

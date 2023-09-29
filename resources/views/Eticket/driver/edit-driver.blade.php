@@ -1,16 +1,17 @@
 @extends('Eticket.layout.app')
 <style>
-    input{
-        border:0 !important;
-        border-bottom: 1px solid gray ! important;
+    input {
+        border: 0 !important;
+        border-bottom: 1px solid rgb(128, 128, 128) ! important;
 
     }
 
-    input:focus{
-        outline:none !important;
+    input:focus {
+        outline: none !important;
     }
-    .optional_notes{
-        color:red;
+
+    .optional_notes {
+        color: red;
     }
 </style>
 @section('content')
@@ -20,7 +21,8 @@
                 <div class="col-6">
                     <h3>{{$tenantCompanyName  ?? env('APP_NAME')}}</h3>
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{url('e-ticket/dashboard')}}"><i data-feather="home"></i></a></li>
+                        <li class="breadcrumb-item"><a href="{{url('e-ticket/dashboard')}}"><i data-feather="home"></i></a>
+                        </li>
                         <li class="breadcrumb-item">Update Bus Driver</li>
                     </ol>
                 </div>
@@ -31,7 +33,7 @@
         </div>
     </div>
     <!-- Container-fluid starts-->
-    <div class="container-fluid" >
+    <div class="container-fluid">
         @if($errors->any())
             <div class="alert alert-danger">
                 <p><strong>Opps Something went wrong</strong></p>
@@ -52,15 +54,29 @@
                             @method('put')
                             <div class="form-group">
                                 <label for="full_name">Full Name</label>
-                                <input type="text" class="form-control" name="full_name" value="{{$driver->full_name}}" id="full_name"/>
+                                <input type="text" class="form-control" name="full_name" value="{{$driver->full_name}}"
+                                       id="full_name"/>
                             </div>
                             <div class="form-group">
                                 <label for="phone_number">Phone Number</label>
-                                <input type="text" class="form-control" name="phone_number" value="{{$driver->phone_number}}" id="phone_number"/>
+                                <input type="text" class="form-control" name="phone_number"
+                                       value="{{$driver->phone_number}}" id="phone_number"/>
                             </div>
                             <div class="form-group">
                                 <label for="address">Address</label>
-                                <input type="text" class="form-control" name="address" value="{{$driver->address}}" id="address"/>
+                                <input type="text" class="form-control" name="address" value="{{$driver->address}}"
+                                       id="address" required/>
+
+                                <div class="form-group">
+                                    <label for="nin">NIN</label>
+                                    <input type="text" class="form-control" name="nin"
+                                           value="{{$driver->nin}}" id="nin" required/>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="license">Upload driver's license</label>
+                                    <input type="file" class="form-control" name="license" id="license"/>
+                                </div>
                             </div>
                             <div class="submit_button">
                                 <button class="btn btn-success">Update Driver</button>

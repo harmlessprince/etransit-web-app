@@ -37,35 +37,39 @@
                                    class="btn btn-danger btn-sm">Generate All Seat</a>
 
                             </h4>
-                            <div class="container table-responsive">
-                                <table class="table yajra-datatable">
-                                    <thead class="thead-light">
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">Pick Up</th>
-                                        <th scope="col">Destination</th>
-                                        <th scope="col">Number Plate</th>
-                                        <th scope="col">Number Of Seat(s)</th>
-                                        <th scope="col">Action</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    @foreach($emptySeatSchedules as $index => $schedule)
+                            <div class="container">
+                                <div class="table-responsive">
+                                    <table class="table yajra-datatable">
+                                        <thead class="thead-light">
                                         <tr>
-                                            <th scope="row">{{$index + 1}}</th>
-                                            <td>{{ $schedule->pickup?$schedule->pickup->location:null }}</td>
-                                            <td>{{ $schedule->destination?$schedule->destination->location:null }}</td>
-                                            <td>{{ $schedule->bus->bus_registration }}</td>
-                                            <td>{{ $schedule->seats_available }}</td>
-                                            <td>
-                                                <a href="{{url('e-ticket/generate-schedule-empty-seat/'.$schedule->id)}}"
-                                                   onclick="confirm('Are you sure you want to generate seat for this schedule?')"
-                                                   class="btn btn-danger btn-sm">Generate Seat</a>
-                                            </td>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Pick Up</th>
+                                            <th scope="col">Destination</th>
+                                            <th scope="col">Number Plate</th>
+                                            <th scope="col">Number Of Seat(s)</th>
+                                            <th scope="col">Action</th>
                                         </tr>
-                                    @endforeach
-                                    </tbody>
-                                </table>
+                                        </thead>
+                                        <tbody>
+                                        @foreach($emptySeatSchedules as $index => $schedule)
+                                            <tr>
+                                                <th scope="row">{{$index + 1}}</th>
+                                                <td>{{ $schedule->pickup?$schedule->pickup->location:"Not available" }}</td>
+                                                <td>{{ $schedule->destination?$schedule->destination->location:'Not available' }}</td>
+                                                <td>{{ $schedule->bus->bus_registration }}</td>
+                                                <td>{{ $schedule->seats_available }}</td>
+                                                <td>
+                                                    <a href="{{url('e-ticket/generate-schedule-empty-seat/'.$schedule->id)}}"
+                                                       onclick="confirm('Are you sure you want to generate seat for this schedule?')"
+                                                       class="btn btn-danger btn-sm">Generate Seat</a>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                        </tbody>
+                                    </table>
+
+                                    {!! $emptySeatSchedules->links() !!}
+                                </div>
                             </div>
                         @else
                             <h4>Oops Nothing to see here ..</h4>

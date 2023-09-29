@@ -1,16 +1,17 @@
 @extends('Eticket.layout.app')
 <style>
-    input{
-        border:0 !important;
-        border-bottom: 1px solid gray ! important;
+    input {
+        border: 0 !important;
+        border-bottom: 1px solid rgb(128, 128, 128) ! important;
 
     }
 
-    input:focus{
-        outline:none !important;
+    input:focus {
+        outline: none !important;
     }
-    .optional_notes{
-        color:red;
+
+    .optional_notes {
+        color: red;
     }
 </style>
 @section('content')
@@ -20,7 +21,8 @@
                 <div class="col-6">
                     <h3>{{$tenantCompanyName ?? env('APP_NAME')}}</h3>
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{url('e-ticket/dashboard')}}"><i data-feather="home"></i></a></li>
+                        <li class="breadcrumb-item"><a href="{{url('e-ticket/dashboard')}}"><i data-feather="home"></i></a>
+                        </li>
                         <li class="breadcrumb-item">Create Staff</li>
                     </ol>
                 </div>
@@ -31,7 +33,7 @@
         </div>
     </div>
     <!-- Container-fluid starts-->
-    <div class="container-fluid" >
+    <div class="container-fluid">
         @if($errors->any())
             <div class="alert alert-danger">
                 <p><strong>Opps Something went wrong</strong></p>
@@ -43,9 +45,9 @@
             </div>
         @endif
         @if(is_null($staff->termination_date))
-        <div style="display: flex; justify-content: flex-end;">
-            <a href="{{url('e-ticket/assign-role/'.$staff->id)}}" class="btn btn-success">Assign Role</a>
-        </div>
+            <div style="display: flex; justify-content: flex-end;">
+                <a href="{{url('e-ticket/assign-role/'.$staff->id)}}" class="btn btn-success">Assign Role</a>
+            </div>
         @endif
         <br>
         <div class="row">
@@ -54,7 +56,7 @@
 
                 <div class="card">
                     <div class="card-body">
-                       <h5>Staff Information</h5>
+                        <h5>Staff Information</h5>
                         <hr>
                         <h6>Full Name: {{$staff->full_name}}</h6>
                         <hr>
@@ -67,10 +69,14 @@
                         <h6>Employment Date : {{$staff->employment_date->format('Y-M-d')}}</h6>
                         <hr>
                         @if(!is_null($staff->termination_date))
-                        <h6>Termination Date : {{$staff->termination_date->format('Y-M-d')}}</h6>
-                            <a href="{{url('e-ticket/enable/'.$staff->id.'/appointment')}}" onclick="confirm('Do you wish to re-enable staff appointment ?');" class="btn btn-success">Re-Enable Staff Appointment</a>
+                            <h6>Termination Date : {{$staff->termination_date->format('Y-M-d')}}</h6>
+                            <a href="{{url('e-ticket/enable/'.$staff->id.'/appointment')}}"
+                               onclick="confirm('Do you wish to re-enable staff appointment ?');"
+                               class="btn btn-success">Re-Enable Staff Appointment</a>
                         @else
-                            <a href="{{url('e-ticket/terminate/'.$staff->id.'/appointment')}}" onclick="confirm('Do you wish to terminate staff appointment ?');" class="btn btn-danger">Terminate Staff Appointment</a>
+                            <a href="{{url('e-ticket/terminate/'.$staff->id.'/appointment')}}"
+                               onclick="confirm('Do you wish to terminate staff appointment ?');"
+                               class="btn btn-danger">Terminate Staff Appointment</a>
                         @endif
                     </div>
                 </div>

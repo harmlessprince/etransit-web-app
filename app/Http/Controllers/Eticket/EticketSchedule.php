@@ -10,6 +10,7 @@ use App\Models\Bus;
 use App\Models\Schedule as EventSchedule;
 use App\Models\SeatTracker;
 use App\Models\Terminal;
+use App\Rules\TwentyFourHourRule;
 use DataTables;
 use Exception;
 use Illuminate\Http\Request;
@@ -22,8 +23,8 @@ class EticketSchedule extends Controller
     public function addEticketSchedule(Request $request)
     {
 
-        request()->validate([
-            'departureTime' => 'required',
+        $request->validate([
+            'departureTime' => ['required', new TwentyFourHourRule()],
             'Tfare' => 'required',
             'TfareChild' => 'required'
         ]);
@@ -113,7 +114,7 @@ class EticketSchedule extends Controller
                 $seatTracker = SeatTracker::where('schedule_id', $sch->id)->get();
                 if (count($seatTracker) < 1) {
                     $isEmptySeatAvailable = true;
-                    array_push($emptySeatCount, $i);
+                    $emptySeatCount[] = $i;
                 }
             }
         }

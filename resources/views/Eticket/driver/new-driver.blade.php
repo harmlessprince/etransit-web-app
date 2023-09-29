@@ -1,16 +1,17 @@
 @extends('Eticket.layout.app')
 <style>
-    input{
-        border:0 !important;
-        border-bottom: 1px solid gray ! important;
+    input {
+        border: 0 !important;
+        border-bottom: 1px solid rgb(128, 128, 128) ! important;
 
     }
 
-    input:focus{
-        outline:none !important;
+    input:focus {
+        outline: none !important;
     }
-    .optional_notes{
-        color:red;
+
+    .optional_notes {
+        color: red;
     }
 </style>
 @section('content')
@@ -20,7 +21,8 @@
                 <div class="col-6">
                     <h3>{{$tenantCompanyName  ?? env('APP_NAME')}}</h3>
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{url('e-ticket/dashboard')}}"><i data-feather="home"></i></a></li>
+                        <li class="breadcrumb-item"><a href="{{url('e-ticket/dashboard')}}"><i data-feather="home"></i></a>
+                        </li>
                         <li class="breadcrumb-item">Create Bus</li>
                     </ol>
                 </div>
@@ -31,7 +33,7 @@
         </div>
     </div>
     <!-- Container-fluid starts-->
-    <div class="container-fluid" >
+    <div class="container-fluid">
         @if($errors->any())
             <div class="alert alert-danger">
                 <p><strong>Opps Something went wrong</strong></p>
@@ -51,15 +53,29 @@
                             @csrf
                             <div class="form-group">
                                 <label for="full_name">Full Name</label>
-                                <input type="text" class="form-control" name="full_name" value="{{old('full_name')}}" id="full_name"/>
+                                <input type="text" class="form-control" name="full_name" value="{{old('full_name')}}"
+                                       id="full_name"/>
                             </div>
                             <div class="form-group">
                                 <label for="phone_number">Phone Number</label>
-                                <input type="text" class="form-control" name="phone_number" value="{{old('phone_number')}}" id="phone_number"/>
+                                <input type="text" class="form-control" name="phone_number"
+                                       value="{{old('phone_number')}}" id="phone_number"/>
                             </div>
                             <div class="form-group">
                                 <label for="address">Address</label>
-                                <input type="text" class="form-control" name="address" value="{{old('address')}}" id="address"/>
+                                <input type="text" class="form-control" name="address" value="{{old('address')}}"
+                                       id="address"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="nin">NIN</label>
+                                <input type="text" class="form-control" name="nin" value="{{old('nin')}}"
+                                       id="nin"/>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="license">Upload driver's license</label>
+                                <input type="file" class="form-control" name="license"
+                                       value="{{old('license')}}" id="license" required/>
                             </div>
                             <div class="submit_button">
                                 <button class="btn btn-success">Create Driver</button>

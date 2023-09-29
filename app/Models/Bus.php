@@ -10,7 +10,28 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Bus extends Model
 {
     use HasFactory, SoftDeletes;
+
     protected $guarded = ['id'];
+    protected $fillable = [
+        'bus_type',
+        'bus_model',
+        'tenant_id',
+        'driver_id',
+        'service_id',
+        'bus_registration',
+        'air_conditioning',
+        'wheels',
+        'seater',
+        'bus_year',
+        'bus_colour',
+        'bus_available_seats',
+        'bus_pictures',
+        'bus_proof_of_ownership',
+    ];
+
+    protected $appends = [
+        'bus_unavailable_seats',
+    ];
 
     public function schedules()
     {
@@ -35,6 +56,11 @@ class Bus extends Model
     protected static function booted()
     {
         static::addGlobalScope(new TenantScope);
+    }
+
+    public function getBusUnavailableSeatsAttribute()
+    {
+        return (int)$this->seater - (int)$this->bus_available_seats;
     }
 
 

@@ -1,16 +1,17 @@
 @extends('Eticket.layout.app')
 <style>
-    input{
-        border:0 !important;
-        border-bottom: 1px solid gray ! important;
+    input {
+        border: 0 !important;
+        border-bottom: 1px solid rgb(128, 128, 128) ! important;
 
     }
 
-    input:focus{
-        outline:none !important;
+    input:focus {
+        outline: none !important;
     }
-    .optional_notes{
-        color:red;
+
+    .optional_notes {
+        color: red;
     }
 </style>
 @section('content')
@@ -20,7 +21,8 @@
                 <div class="col-6">
                     <h3>{{$tenantCompanyName ?? env('APP_NAME')}}</h3>
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{url('e-ticket/dashboard')}}"><i data-feather="home"></i></a></li>
+                        <li class="breadcrumb-item"><a href="{{url('e-ticket/dashboard')}}"><i data-feather="home"></i></a>
+                        </li>
                         <li class="breadcrumb-item">Create Staff</li>
                     </ol>
                 </div>
@@ -31,7 +33,7 @@
         </div>
     </div>
     <!-- Container-fluid starts-->
-    <div class="container-fluid" >
+    <div class="container-fluid">
         @if($errors->any())
             <div class="alert alert-danger">
                 <p><strong>Opps Something went wrong</strong></p>
@@ -51,21 +53,23 @@
                             @csrf
                             <div class="form-group">
                                 <label for="full_name">Full Name</label>
-                                <input type="text" class="form-control" name="full_name" value="{{$staff->full_name}}" id="full_name" readonly/>
+                                <input type="text" class="form-control" name="full_name" value="{{$staff->full_name}}"
+                                       id="full_name" readonly/>
                             </div>
                             <div class="form-group">
                                 <label for="email">Email</label>
-                                <input type="email" class="form-control" name="email" value="{{$staff->email}}" id="email" readonly/>
+                                <input type="email" class="form-control" name="email" value="{{$staff->email}}"
+                                       id="email" readonly/>
                             </div>
 
                             <div class="form-group">
-                                <label for="role" >Assign Role</label>
-                               <select name="role" class="form-control" id="role">
-                                   <option value="">Assign Role</option>
-                                   @foreach($roles as $role)
-                                   <option value="{{$role->id}}">{{$role->name}}</option>
-                                   @endforeach
-                               </select>
+                                <label for="role">Assign Role</label>
+                                <select name="role" class="form-control" id="role">
+                                    <option value="">Assign Role</option>
+                                    @foreach($roles as $role)
+                                        <option value="{{$role->id}}">{{$role->name}}</option>
+                                    @endforeach
+                                </select>
                             </div>
 
                             <div class="submit_button">

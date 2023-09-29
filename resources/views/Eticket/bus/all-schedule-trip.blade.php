@@ -2,7 +2,7 @@
 <style>
     input {
         border: 0 !important;
-        border-bottom: 1px solid gray ! important;
+        border-bottom: 1px solid rgb(128, 128, 128) ! important;
 
     }
 

@@ -1,23 +1,28 @@
 @extends('admin.layout.app')
 <style>
-    input{
-        border:0 !important;
-        border-bottom: 1px solid gray ! important;
+    input {
+        border: 0 !important;
+        border-bottom: 1px solid rgb(128, 128, 128) ! important;
 
     }
-a{
-    text-decoration: none !important;
-}
-    input:focus{
-        outline:none !important;
+
+    a {
+        text-decoration: none !important;
     }
-    .align-text{
+
+    input:focus {
+        outline: none !important;
+    }
+
+    .align-text {
         text-align: center;
     }
-    .three-row-grid{
-       display:flex;
+
+    .three-row-grid {
+        display: flex;
         justify-content: space-between;
-      }
+    }
+
     .switch {
         position: relative;
         display: inline-block;
@@ -79,15 +84,18 @@ a{
     .slider.round:before {
         border-radius: 50%;
     }
-    .service_name{
+
+    .service_name {
         font-size: 25px;
 
     }
-    .switch_box{
+
+    .switch_box {
         display: flex;
     }
-    .pad-card{
-        padding:20px
+
+    .pad-card {
+        padding: 20px
     }
 </style>
 @section('content')
@@ -98,7 +106,8 @@ a{
                 <div class="col-6">
                     <h3>{{env('APP_NAME')}}</h3>
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{url('/admin/manage/operators')}}"><i data-feather="home"></i></a></li>
+                        <li class="breadcrumb-item"><a href="{{url('/admin/manage/operators')}}"><i
+                                    data-feather="home"></i></a></li>
                         <li class="breadcrumb-item">Create Operator</li>
                     </ol>
                 </div>
@@ -106,18 +115,18 @@ a{
         </div>
     </div>
 
-    <div class="container-fluid" >
+    <div class="container-fluid">
         <div class="row three-row-grid">
             <div class="col-md-3 col-lg-3 col-xl-3 col-sm-3">
                 <a href="">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="align-text">
-                            <h1>{{$busCount}}</h1>
-                            <h6>Bus(es)</h6>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="align-text">
+                                <h1>{{$busCount}}</h1>
+                                <h6>Bus(es)</h6>
+                            </div>
                         </div>
                     </div>
-                </div>
                 </a>
             </div>
             <div class="col-md-3 col-lg-3 col-xl-3 col-sm-3">
@@ -157,7 +166,7 @@ a{
                         <hr>
                         <h6>Phone Number : {{$tenant->phone_number}}</h6>
                         <hr>
-                        <h6>Logo Status:  {{isset($tenant->image_url) ? 'Available' : 'Not Available'}} </h6>
+                        <h6>Logo Status: {{isset($tenant->image_url) ? 'Available' : 'Not Available'}} </h6>
                         <hr>
                     </div>
                 </div>
@@ -171,12 +180,13 @@ a{
                             <div class="switch_box">
                                 <div>
                                     <label class="switch">
-                                        <input type="checkbox" class="services" value="{{$service['id']}}"  @if( $service['status'] == 'yes' ) checked  @endif>
+                                        <input type="checkbox" class="services" value="{{$service['id']}}"
+                                               @if( $service['status'] == 'yes' ) checked @endif>
                                         <span class="slider round"></span>
                                     </label>
                                 </div>
                                 <div>
-                                &nbsp; &nbsp;  <span class="service_name"> {{$service['service']}} </span>
+                                    &nbsp; &nbsp; <span class="service_name"> {{$service['service']}} </span>
                                 </div>
                             </div>
                             <br>
@@ -217,36 +227,36 @@ a{
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-        $(".services").change(function(e){
+        $(".services").change(function (e) {
             e.preventDefault();
 
-            var ischecked= $(this).is(':checked');
+            var ischecked = $(this).is(':checked');
 
             var service_id = $(this).val();
             var tenant_id = {{$tenant->id}}
-                console.log(tenant_id)
+            console.log(tenant_id)
             console.log(service_id)
 
-            if(ischecked)
-            {
+            if (ischecked) {
                 var checked = "checked"
-            }else{
+            } else {
                 var checked = "unchecked"
             }
 
             $.ajax({
-                type:'POST',
+                type: 'POST',
                 url: "/admin/add-service-to-tenant",
-                data:{"_token": "{{ csrf_token() }}",service_id , checked , tenant_id},
-                success:function(data){
+                data: {"_token": "{{ csrf_token() }}", service_id, checked, tenant_id},
+                success: function (data) {
 
-                    if(data.success)
-                    {
+                    if (data.success) {
                         displaySuccessMessage(data.message)
-                    }else{
+                    } else {
                         displayErrorMessage(data.message);
                     }
-                    setTimeout(function(){location.reload(true);}, 3000);
+                    setTimeout(function () {
+                        location.reload(true);
+                    }, 3000);
                 }
             });
 
@@ -255,6 +265,7 @@ a{
         function displaySuccessMessage(message) {
             toastr.success(message, 'Success');
         }
+
         function displayErrorMessage(message) {
             toastr.error(message, 'Error');
         }
@@ -285,7 +296,5 @@ a{
             console.log(data)
         });
     </script>
-
-
 
 @endsection

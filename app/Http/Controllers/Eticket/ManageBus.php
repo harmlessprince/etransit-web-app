@@ -8,14 +8,15 @@ use App\Imports\VehicleImport;
 use App\Models\Bus;
 use App\Models\BusType;
 use App\Models\Destination;
+use App\Models\Driver;
 use App\Models\Schedule;
-use App\Models\Tenant;
 use App\Models\Terminal;
-use Illuminate\Http\Request;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use DataTables;
+use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Facades\Excel;
 use RealRashid\SweetAlert\Facades\Alert;
-use App\Models\Driver;
 
 class ManageBus extends Controller
 {
@@ -26,8 +27,7 @@ class ManageBus extends Controller
         $schedule = Schedule::count();
 
 
-
-        return view('Eticket.bus.index' , compact('busCount','terminalCount','schedule'));
+        return view('Eticket.bus.index', compact('busCount', 'terminalCount', 'schedule'));
     }
 
 
@@ -37,7 +37,7 @@ class ManageBus extends Controller
             $data = Bus::latest()->get();
             return Datatables::of($data)
                 ->addIndexColumn()
-                ->addColumn('action', function($row){
+                ->addColumn('action', function ($row) {
                     $id = $row->id;
                     $actionBtn = "<a href='/e-ticket/edit-tenant-bus/$id'  class='edit btn btn-success btn-sm'>Edit</a> <a href='/e-ticket/view-tenant-bus/$id' class='delete btn btn-primary btn-sm'>View</a> <a href='#' class='delete btn btn-danger btn-sm' onclick='deleteItem($id)'>Delete</a>";
 
@@ -51,39 +51,61 @@ class ManageBus extends Controller
 
     public function viewBus($bus_id)
     {
-        $findBus = Bus::where('tenant_id',session()->get('tenant_id'))->where('id', $bus_id)->with('driver','schedules')->first();
+        $findBus = Bus::where('tenant_id', session()->get('tenant_id'))->where('id', $bus_id)->with('driver', 'schedules')->first();
 
-        return view('Eticket.bus.view',compact('findBus'));
+        return view('Eticket.bus.view', compact('findBus'));
     }
 
 
     public function addNewBus()
     {
         $busTypes = BusType::all();
-        return view('Eticket.bus.new' , compact('busTypes'));
+        return view('Eticket.bus.new', compact('busTypes'));
     }
 
     public function createTenantBus(Request $request)
     {
 
-       $this->validateBuRequest($request);
+        $this->validateBusRequest($request);
 
-       //service ID 1 == Bus Booking
+
+        $files = $request->file('bus_pictures');
+        foreach ($files as $file) {
+            $uploadedFileUrl = Cloudinary::upload($file->getRealPath())->getSecurePath();
+            $bus_pictures[] = $uploadedFileUrl;
+        }
+        $bus_pictures = json_encode($bus_pictures);
+
+
+        $files = $request->file('bus_proof_of_ownership');
+        foreach ($files as $file) {
+            $uploadedFileUrl = Cloudinary::upload($file->getRealPath())->getSecurePath();
+            $bus_proof_of_ownership[] = $uploadedFileUrl;
+        }
+        $bus_proof_of_ownership = json_encode($bus_proof_of_ownership);
+
+
+        //service ID 1 == Bus Booking
         //the value should change if there are changes to the way the service is arranged
-       $newBus = new Bus;
-       $newBus->bus_model = $request->bus_model;
-       $newBus->bus_type = $request->bus_type;
-       $newBus->bus_registration = $request->bus_registration;
-       $newBus->wheels = $request->wheels;
-       $newBus->tenant_id = session()->get('tenant_id');
-       $newBus->seater = $request->seater;
-       $newBus->service_id = 1;
-       $newBus->air_conditioning  = $request->air_conditioning == 'on' ? 1 : 0 ;
-       $newBus->save();
+        $newBus = new Bus;
+        $newBus->bus_model = $request->bus_model;
+        $newBus->bus_type = $request->bus_type;
+        $newBus->bus_registration = $request->bus_registration;
+        $newBus->wheels = $request->wheels;
+        $newBus->tenant_id = session()->get('tenant_id');
+        $newBus->seater = $request->seater;
+        $newBus->bus_available_seats = $request->bus_available_seats;
+        $newBus->bus_year = $request->bus_year;
+        $newBus->bus_proof_of_ownership = $bus_proof_of_ownership;
+        $newBus->bus_pictures = $bus_pictures;
+        $newBus->bus_colour = $request->bus_colour;
+        $newBus->service_id = 1;
+        $newBus->air_conditioning = $request->air_conditioning == 'on' ? 1 : 0;
+        $newBus->save();
 
         Alert::success('Success ', 'Bus added successfully');
 
-       return redirect('e-ticket/buses');
+        return redirect('e-ticket/buses');
     }
 
     public function assignDriver($bus_id)
@@ -93,7 +115,7 @@ class ManageBus extends Controller
         return view('Eticket.bus.assign-driver', compact('bus'));
     }
 
-    public function assignDriverToBus(Request $request , $bus_id)
+    public function assignDriverToBus(Request $request, $bus_id)
     {
         request()->validate([
             'driver_phone_number' => 'required'
@@ -101,8 +123,7 @@ class ManageBus extends Controller
 
         $findBus = Bus::find($bus_id);
 
-        if(!$findBus)
-        {
+        if (!$findBus) {
             Alert::error('Error', 'No bus found');
             return back();
         }
@@ -110,29 +131,27 @@ class ManageBus extends Controller
 
         $findDriver = Driver::where('tenant_id', session()->get('tenant_id'))->where('phone_number', $request->driver_phone_number)->first();
 
-        if(!$findDriver)
-        {
+        if (!$findDriver) {
             Alert::error('Error', 'No driver driver found with that number in your organization');
             return back();
         }
 
         $findBus->update([
-            'driver_id'=>$findDriver->id
+            'driver_id' => $findDriver->id
         ]);
 
         Alert::success('Success ', 'Driver assigned to bus successfully');
 
-        return redirect('e-ticket/view-tenant-bus/'.$bus_id);
+        return redirect('e-ticket/view-tenant-bus/' . $bus_id);
 
     }
 
 
-    public function removeDriverFromBus($driver_id , $bus_id)
+    public function removeDriverFromBus($driver_id, $bus_id)
     {
         $findDriver = Driver::find($driver_id);
 
-        if(!$findDriver)
-        {
+        if (!$findDriver) {
             Alert::error('Error', 'No driver driver found with that number in your organization');
             return back();
         }
@@ -145,7 +164,7 @@ class ManageBus extends Controller
 
         Alert::success('Success ', 'Driver removed from bus successfully');
 
-        return redirect('e-ticket/view-tenant-bus/'.$bus_id);
+        return redirect('e-ticket/view-tenant-bus/' . $bus_id);
     }
 
 
@@ -153,8 +172,7 @@ class ManageBus extends Controller
     {
         $bus = Bus::find($bus_id);
 
-        if(!$bus)
-        {
+        if (!$bus) {
             Alert::error('Error ', 'Unable to fetch bus');
             return back();
         }
@@ -162,7 +180,7 @@ class ManageBus extends Controller
         $locations = Destination::all();
         $terminals = Terminal::all();
 
-        return view('Eticket.bus.schedule-event', compact('bus','locations','terminals'));
+        return view('Eticket.bus.schedule-event', compact('bus', 'locations', 'terminals'));
 
     }
 
@@ -170,7 +188,7 @@ class ManageBus extends Controller
     {
         $bus = Bus::with('driver')->find($bus_id);
 
-        return view('Eticket.bus.edit-bus' , compact('bus'));
+        return view('Eticket.bus.edit-bus', compact('bus'));
     }
 
     public function deleteBus($bus_id)
@@ -182,20 +200,46 @@ class ManageBus extends Controller
     }
 
 
-    public function updateBus(Request $request , $bus_id)
+    public function updateBus(Request $request, $bus_id)
     {
-//        $this->validateBuRequest($request);
-        $bus = Bus::find($bus_id);
-        $bus->update([
+//        $this->validateBusRequest($request);
+
+        $data = [
             'bus_model' => $request->bus_model,
             'bus_type' => $request->bus_type,
             'bus_registration' => $request->bus_registration,
             'wheels' => $request->wheels,
             'tenant_id' => session()->get('tenant_id'),
             'seater' => $request->seater,
+            'bus_available_seats' => $request->bus_available_seats,
+            'bus_year' => $request->bus_year,
+            'bus_colour' => $request->bus_colour,
             'service_id' => 1,
-            'air_conditioning' =>  $request->air_conditioning == 'on' ? 1 : 0 ,
-        ]);
+            'air_conditioning' => $request->air_conditioning == 'on' ? 1 : 0,
+        ];
+
+        if ($files = $request->file('bus_pictures')) {
+            foreach ($files as $file) {
+                $uploadedFileUrl = Cloudinary::upload($file->getRealPath())->getSecurePath();
+                $bus_pictures[] = $uploadedFileUrl;
+            }
+            $bus_pictures = json_encode($bus_pictures);
+            $data['bus_pictures'] = $bus_pictures;
+        }
+
+
+        if ($files = $request->file('bus_proof_of_ownership')) {
+            foreach ($files as $file) {
+                $uploadedFileUrl = Cloudinary::upload($file->getRealPath())->getSecurePath();
+                $bus_proof_of_ownership[] = $uploadedFileUrl;
+            }
+            $bus_proof_of_ownership = json_encode($bus_proof_of_ownership);
+            $data['bus_proof_of_ownership'] = $bus_proof_of_ownership;
+        }
+
+
+        $bus = Bus::find($bus_id);
+        $bus->update($data);
 
 
         Alert::success('Success ', 'Bus updated successfully');
@@ -223,23 +267,23 @@ class ManageBus extends Controller
         $vehicle->save();
 
         toastr()->success('Data saved successfully');
-        return response()->json(['success' => true , 'message' => 'Vehicle saved successfully']);
+        return response()->json(['success' => true, 'message' => 'Vehicle saved successfully']);
 
     }
 
     /**
-     * @return \Illuminate\Support\Collection
+     * @return Collection
      */
     public function exportVehicle()
     {
-        $vehicles = Bus::select(["id", "bus_type", "bus_model", "bus_registration" , "air_conditioning" , "wheels","seater"])->get();
+        $vehicles = Bus::select(["id", "bus_type", "bus_model", "bus_registration", "air_conditioning", "wheels", "seater"])->get();
 
         return Excel::download(new VehicleExport($vehicles), 'bus.xlsx');
 
     }
 
     /**
-     * @return \Illuminate\Support\Collection
+     * @return Collection
      */
     public function importVehicle(Request $request)
     {
@@ -248,23 +292,27 @@ class ManageBus extends Controller
             'excel_file' => 'required|file|mimes:xls,xlsx,csv'
         ]);
 
-        Excel::import(new VehicleImport,request()->file('excel_file'));
+        Excel::import(new VehicleImport, request()->file('excel_file'));
         toastr()->success('Data saved successfully');
         return response()->json(['message' => 'uploaded successfully'], 200);
     }
 
 
-
-    private function validateBuRequest($request)
+    private function validateBusRequest($request)
     {
-          $request->validate([
-                'bus_model' => 'required',
-                'bus_type' => 'required',
-                'bus_registration' => 'required|unique:buses',
-                'wheels' => 'required',
-                'seater'=> 'required',
-                'driver_phone_number' => 'sometimes'
-            ]);
+        $request->validate([
+            'bus_model' => 'required',
+            'bus_type' => 'required',
+            'bus_registration' => 'required|unique:buses',
+            'wheels' => 'required',
+            'seater' => 'required',
+            'driver_phone_number' => 'sometimes',
+            'bus_year' => 'required|date_format:Y',
+            'bus_colour' => 'required|string',
+            'bus_available_seats' => 'required|numeric|lte:seater',
+            'bus_pictures' => 'required|file|mimes:jpeg,png,jpg,gif',
+            'bus_proof_of_ownership' => 'required|file',
+        ]);
     }
 
 }

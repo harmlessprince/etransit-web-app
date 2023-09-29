@@ -6,7 +6,7 @@
     var tranx = <?php echo $transactions; ?>;
 
 
-    google.charts.load('current', {'packages':['corechart']});
+    google.charts.load('current', {'packages': ['corechart']});
 
     google.charts.setOnLoadCallback(drawChart);
 
@@ -20,7 +20,7 @@
 
             curveType: 'function',
 
-            legend: { position: 'bottom' }
+            legend: {position: 'bottom'}
 
         };
 
@@ -60,9 +60,10 @@
                                     <div class="media-body">
                                         <p>
                                             <span class="f-w-500 font-roboto">Total Transaction</span>
-                                            <span class="font-primary f-w-700 ml-2">Bus Booking</span>
+                                            <span class="font-primary f-w-700 ml-2">Co-Traveller</span>
                                         </p>
-                                        <h4 class="f-w-500 mb-0 f-26">&#8358;<span class="counter">{{$busBookingTransaction}}</span></h4>
+                                        <h4 class="f-w-500 mb-0 f-26">&#8358;<span
+                                                class="counter">{{$busBookingTransaction}}</span></h4>
                                     </div>
                                 </div>
                             </div>
@@ -78,7 +79,8 @@
                                             <span class="f-w-500 font-roboto">Total Transaction</span>
                                             <span class="font-primary f-w-700 ml-2">Train Booking</span>
                                         </p>
-                                        <h4 class="f-w-500 mb-0 f-26">&#8358;<span class="counter">{{$trainBookingTransaction}}</span></h4>
+                                        <h4 class="f-w-500 mb-0 f-26">&#8358;<span
+                                                class="counter">{{$trainBookingTransaction}}</span></h4>
                                     </div>
                                 </div>
                             </div>
@@ -95,7 +97,8 @@
                                     <span class="f-w-500 font-roboto">Total Transaction</span>
                                     <span class="font-primary f-w-700 ml-2">Ferry Booking</span>
                                 </p>
-                                <h4 class="f-w-500 mb-0 f-26">&#8358;<span class="counter">{{$ferryBookingTransaction}}</span></h4>
+                                <h4 class="f-w-500 mb-0 f-26">&#8358;<span
+                                        class="counter">{{$ferryBookingTransaction}}</span></h4>
                             </div>
                         </div>
                     </div>
@@ -114,7 +117,8 @@
                                             <span class="f-w-500 font-roboto">Total Transaction</span>
                                             <span class="font-primary f-w-700 ml-2">Car Hire</span>
                                         </p>
-                                        <h4 class="f-w-500 mb-0 f-26">&#8358;<span class="counter">{{$carHireBookingTransaction}}</span></h4>
+                                        <h4 class="f-w-500 mb-0 f-26">&#8358;<span
+                                                class="counter">{{$carHireBookingTransaction}}</span></h4>
                                     </div>
                                 </div>
                             </div>
@@ -130,7 +134,8 @@
                                             <span class="f-w-500 font-roboto">Total Transaction</span>
                                             <span class="font-primary f-w-700 ml-2">Boat Cruise</span>
                                         </p>
-                                        <h4 class="f-w-500 mb-0 f-26">&#8358;<span class="counter">{{$boatCruiseBookingTransaction}}</span></h4>
+                                        <h4 class="f-w-500 mb-0 f-26">&#8358;<span
+                                                class="counter">{{$boatCruiseBookingTransaction}}</span></h4>
                                     </div>
                                 </div>
                             </div>
@@ -147,7 +152,8 @@
                                     <span class="f-w-500 font-roboto">Total Transaction</span>
                                     <span class="font-primary f-w-700 ml-2">Parcel</span>
                                 </p>
-                                <h4 class="f-w-500 mb-0 f-26">&#8358;<span class="counter">{{$parcelBookingTransaction}}</span></h4>
+                                <h4 class="f-w-500 mb-0 f-26">&#8358;<span
+                                        class="counter">{{$parcelBookingTransaction}}</span></h4>
                             </div>
                         </div>
                     </div>
@@ -162,7 +168,8 @@
                                     <span class="f-w-500 font-roboto">Total Transaction</span>
                                     <span class="font-primary f-w-700 ml-2">Tour Packages</span>
                                 </p>
-                                <h4 class="f-w-500 mb-0 f-26">&#8358;<span class="counter">{{$tourBookingTransaction}}</span></h4>
+                                <h4 class="f-w-500 mb-0 f-26">&#8358;<span
+                                        class="counter">{{$tourBookingTransaction}}</span></h4>
                             </div>
                         </div>
                     </div>
@@ -177,7 +184,8 @@
                                     <span class="f-w-500 font-roboto">Total Transaction</span>
                                     <span class="font-primary f-w-700 ml-2">All Packages</span>
                                 </p>
-                                <h4 class="f-w-500 mb-0 f-26">&#8358;<span class="counter">{{$allTransactions}}</span></h4>
+                                <h4 class="f-w-500 mb-0 f-26">&#8358;<span class="counter">{{$allTransactions}}</span>
+                                </h4>
                             </div>
                         </div>
                     </div>
@@ -214,7 +222,8 @@
                                         <p>
                                             <span class="f-w-500 font-roboto">Total Schedule(s)</span>
                                         </p>
-                                        <h4 class="f-w-500 mb-0 f-26"><span class="counter">{{$schedulesCount}}</span></h4>
+                                        <h4 class="f-w-500 mb-0 f-26"><span class="counter">{{$schedulesCount}}</span>
+                                        </h4>
                                     </div>
                                 </div>
                             </div>
@@ -264,16 +273,16 @@
                             </thead>
                             <tbody>
                             @foreach($schedules as $index => $schedule)
-                            <tr>
-                                <th scope="row">{{$index + 1}}</th>
-                                <td>{{$schedule->terminal?$schedule->terminal->terminal_name:'--'}}</td>
-                                <td>{{$schedule->pickup?$schedule->pickup->location:'--'}}</td>
-                                <td>{{$schedule->destination?$schedule->destination->location:'--'}}</td>
-                                <td>{{number_format($schedule->fare_adult)}}</td>
-                                <td>{{$schedule->departure_date->format('d F Y')}}</td>
-                                <td>{{$schedule->bus?$schedule->bus->bus_registration:'--'}}</td>
-                                <td>{{$schedule->bus?$schedule->bus->tenant->display_name:'--'}}</td>
-                            </tr>
+                                <tr>
+                                    <th scope="row">{{$index + 1}}</th>
+                                    <td>{{$schedule->terminal?$schedule->terminal->terminal_name:'--'}}</td>
+                                    <td>{{$schedule->pickup?$schedule->pickup->location:'--'}}</td>
+                                    <td>{{$schedule->destination?$schedule->destination->location:'--'}}</td>
+                                    <td>{{number_format($schedule->fare_adult)}}</td>
+                                    <td>{{$schedule->departure_date->format('d F Y')}}</td>
+                                    <td>{{$schedule->bus?$schedule->bus->bus_registration:'--'}}</td>
+                                    <td>{{$schedule->bus?$schedule->bus->tenant->display_name:'--'}}</td>
+                                </tr>
                             @endforeach
 
                             </tbody>
@@ -292,5 +301,5 @@
             </div>
         </div>
     </div>
-<hr>
+    <hr>
 @endsection

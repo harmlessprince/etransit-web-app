@@ -1,16 +1,17 @@
 @extends('admin.layout.app')
 <style>
-    input{
-        border:0 !important;
-        border-bottom: 1px solid gray ! important;
+    input {
+        border: 0 !important;
+        border-bottom: 1px solid rgb(128, 128, 128) ! important;
 
     }
 
-    input:focus{
-        outline:none !important;
+    input:focus {
+        outline: none !important;
     }
-    .optional_notes{
-        color:red;
+
+    .optional_notes {
+        color: red;
     }
 </style>
 @section('content')
@@ -20,7 +21,8 @@
                 <div class="col-6">
                     <h3>{{env('APP_NAME')}}</h3>
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{url('e-ticket/dashboard')}}"><i data-feather="home"></i></a></li>
+                        <li class="breadcrumb-item"><a href="{{url('e-ticket/dashboard')}}"><i data-feather="home"></i></a>
+                        </li>
                         <li class="breadcrumb-item">Update Train Terminal</li>
                     </ol>
                 </div>
@@ -31,7 +33,7 @@
         </div>
     </div>
     <!-- Container-fluid starts-->
-    <div class="container-fluid" >
+    <div class="container-fluid">
         @if($errors->any())
             <div class="alert alert-danger">
                 <p><strong>Opps Something went wrong</strong></p>
@@ -53,7 +55,8 @@
                             <div class="form-group">
                                 <label for="state">State</label>
                                 <select id="state" class="form-control" name="state">
-                                    <option value="{{$trainStop->state->id}}">{{$trainStop->state->locations_state}}</option>
+                                    <option
+                                        value="{{$trainStop->state->id}}">{{$trainStop->state->locations_state}}</option>
                                     @foreach($locations as $location)
                                         <option value="{{$location->id}}">{{$location->locations_state}}</option>
                                     @endforeach
@@ -61,7 +64,8 @@
                             </div>
                             <div class="form-group">
                                 <label for="terminal">Location</label>
-                                <input type="text" class="form-control" name="terminal" value="{{$trainStop->stop_name}}"  id="terminal"/>
+                                <input type="text" class="form-control" name="terminal"
+                                       value="{{$trainStop->stop_name}}" id="terminal"/>
                             </div>
                             <div class="submit_button">
                                 <button class="btn btn-success">Submit</button>

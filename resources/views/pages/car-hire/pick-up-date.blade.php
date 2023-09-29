@@ -226,7 +226,29 @@
         </div>
     </div>
 
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCl3OQUTqcOTP55fo2Z089F6IThkJIyako&libraries=places,geometry&callback=initAutocomplete"
+        defer></script>
+
     <script type="text/javascript">
+
+        const pickup_address = document.getElementById("pickup_address");
+        autocompletePickup = new google.maps.places.Autocomplete(pickup_address, options);
+        autocompletePickup.addListener("place_changed", onPickupCustomerAddressChange)
+
+        function onPickupCustomerAddressChange() {
+            const place = autocompletePickup.getPlace();
+
+            source.address = place.formatted_address;
+            source.latitude = place.geometry.location.lat();
+            source.longitude = place.geometry.location.lng();
+            source.name = place.name;
+            source.id = place.place_id;
+            const setPickupAddressEvent = new CustomEvent('set-pickup-address-event', {
+                detail: source.address
+            });
+        }
+
         function validate() {
             if (document.getElementById('self_drive').checked) {
                 document.getElementById('self_drive_msg').style.display = "block";

@@ -1,18 +1,20 @@
 @extends('Eticket.layout.app')
 <style>
-    input{
-        border:0 !important;
-        border-bottom: 1px solid gray ! important;
+    input {
+        border: 0 !important;
+        border-bottom: 1px solid rgb(128, 128, 128) ! important;
 
     }
 
-    input:focus{
-        outline:none !important;
+    input:focus {
+        outline: none !important;
     }
-    .optional_notes{
-        color:red;
+
+    .optional_notes {
+        color: red;
     }
-    .add_camp_btn{
+
+    .add_camp_btn {
         display: flex;
         justify-content: flex-end;
         margin-bottom: 8px;
@@ -25,7 +27,8 @@
                 <div class="col-6">
                     <h3>{{env('APP_NAME')}}</h3>
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{url('admin/dashboard')}}"><i data-feather="home"></i></a></li>
+                        <li class="breadcrumb-item"><a href="{{url('admin/dashboard')}}"><i data-feather="home"></i></a>
+                        </li>
                         <li class="breadcrumb-item">NYSC Hubs</li>
                     </ol>
                 </div>
@@ -36,7 +39,7 @@
         </div>
     </div>
     <!-- Container-fluid starts-->
-    <div class="container-fluid" >
+    <div class="container-fluid">
         @if($errors->any())
             <div class="alert alert-danger">
                 <p><strong>Opps Something went wrong</strong></p>
@@ -49,11 +52,11 @@
         @endif
         <div class="row">
             <div class="col-md-12 col-xl-12 col-lg-12 col-sm-12">
-               <div class="add_camp_btn">
-                   <div class="space-left">
-                       <a class="btn btn-success" data-toggle="modal" data-target="#add-hub-modal">Add NYSC Hub</a>
-                   </div>
-               </div>
+                <div class="add_camp_btn">
+                    <div class="space-left">
+                        <a class="btn btn-success" data-toggle="modal" data-target="#add-hub-modal">Add NYSC Hub</a>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="card">
@@ -68,18 +71,18 @@
                     </tr>
                     </thead>
                     <tbody>
-                        @foreach ( $hubs as $hub )
+                    @foreach ( $hubs as $hub )
                         <tr>
                             <td>{{$hub->id}}</td>
                             <td>{{$hub->location->location}}</td>
-                            <td><a href="{{url("/admin/update/bus-location/$hub->location_id")}}" class="btn btn-success">Edit</a></td>
+                            <td><a href="{{url("/admin/update/bus-location/$hub->location_id")}}"
+                                   class="btn btn-success">Edit</a></td>
                         </tr>
-                        @endforeach
+                    @endforeach
                     </tbody>
                 </table>
             </div>
         </div>
-
 
 
     </div>
@@ -100,20 +103,21 @@
                                 <div class="form-group">
                                     <label for="location">Select Hub Location </label>
                                     <select id="location" class="form-control" size="5" aria-label="Select Hub Location"
-                                        name="location_id">
+                                            name="location_id">
                                         <option selected>Pick Location</option>
                                         @foreach ($locations as $location )
-                                        <option value="{{$location->id}}">{{$location->location}}</option>
+                                            <option value="{{$location->id}}">{{$location->location}}</option>
                                         @endforeach
                                     </select>
                                     <div class="form-group">
                                         <label for="terminal_name">Terminal Name</label>
-                                        <input type="text" class="form-control" name="terminal_name" id="terminal_name" />
+                                        <input type="text" class="form-control" name="terminal_name"
+                                               id="terminal_name"/>
                                     </div>
                                     <div class="form-group">
                                         <label for="terminal_address">Terminal Address</label>
                                         <input type="text" class="form-control" name="terminal_address"
-                                            id="terminal_address" />
+                                               id="terminal_address"/>
                                     </div>
                                 </div>
                                 <div class="submit_button">

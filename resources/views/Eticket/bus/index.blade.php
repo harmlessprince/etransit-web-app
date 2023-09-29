@@ -1,30 +1,35 @@
 @extends('Eticket.layout.app')
 <style>
-    input{
-        border:0 !important;
-        border-bottom: 1px solid gray ! important;
+    input {
+        border: 0 !important;
+        border-bottom: 1px solid rgb(128, 128, 128) ! important;
 
     }
 
-    input:focus{
-        outline:none !important;
+    input:focus {
+        outline: none !important;
     }
-    .align-text{
+
+    .align-text {
         text-align: center;
     }
-    .three-row-grid{
-        display:flex;
+
+    .three-row-grid {
+        display: flex;
         justify-content: space-between;
     }
-    .add_bus_btn{
+
+    .add_bus_btn {
         display: flex;
         justify-content: flex-end;
     }
-    .space-left{
+
+    .space-left {
         margin-left: 10px;
-        margin-bottom:10px;
+        margin-bottom: 10px;
     }
-    a{
+
+    a {
         text-decoration: none !important;
     }
 </style>
@@ -35,7 +40,8 @@
                 <div class="col-6">
                     <h3>{{$tenantCompanyName  ?? env('APP_NAME')}}</h3>
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{url('e-ticket/dashboard')}}"><i data-feather="home"></i></a></li>
+                        <li class="breadcrumb-item"><a href="{{url('e-ticket/dashboard')}}"><i data-feather="home"></i></a>
+                        </li>
                         <li class="breadcrumb-item">Bus</li>
                     </ol>
                 </div>
@@ -43,7 +49,7 @@
         </div>
     </div>
     <!-- Container-fluid starts-->
-    <div class="container-fluid" >
+    <div class="container-fluid">
         <div class="row three-row-grid">
             <div class="col-md-3 col-lg-3 col-xl-3 col-sm-3">
                 <div class="card">
@@ -57,26 +63,26 @@
             </div>
             <div class="col-md-3 col-lg-3 col-xl-3 col-sm-3">
                 <a href="{{url('e-ticket/terminals')}}">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="align-text">
-                            <h1>{{$terminalCount}}</h1>
-                            <h6>Terminal(s)</h6>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="align-text">
+                                <h1>{{$terminalCount}}</h1>
+                                <h6>Terminal(s)</h6>
+                            </div>
                         </div>
                     </div>
-                </div>
                 </a>
             </div>
             <div class="col-md-3 col-lg-3 col-xl-3 col-sm-3">
                 <a href="{{url('e-ticket/all-scheduled-trip')}}">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="align-text">
-                            <h1>{{$schedule}}</h1>
-                            <h6>Total Scheduled Trips</h6>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="align-text">
+                                <h1>{{$schedule}}</h1>
+                                <h6>Total Scheduled Trips</h6>
+                            </div>
                         </div>
                     </div>
-                </div>
                 </a>
             </div>
             <div class="col-md-3 col-lg-3 col-xl-3 col-sm-3">
@@ -93,17 +99,18 @@
 
         <div class="row">
             <div class="col-md-12 col-xl-12 col-lg-12 col-sm-12">
-               <div class="add_bus_btn">
-                   <div class="space-left">
-                       <a href="{{url('e-ticket/import-export-schedule')}}" class="btn btn-success">Bulk Upload Schedules</a>
-                   </div>
-                   <div class="space-left">
-                       <a href="{{url('e-ticket/add-new-tenant-bus')}}" class="btn btn-success">Add Bus(es)</a>
-                   </div>
-                   <div class="space-left">
-                       <a href="{{url('e-ticket/all-scheduled-trip')}}" class="btn btn-success">Scheduled Trips</a>
-                   </div>
-               </div>
+                <div class="add_bus_btn">
+                    <div class="space-left">
+                        <a href="{{url('e-ticket/import-export-schedule')}}" class="btn btn-success">Bulk Upload
+                            Schedules</a>
+                    </div>
+                    <div class="space-left">
+                        <a href="{{url('e-ticket/add-new-tenant-bus')}}" class="btn btn-success">Add Bus(es)</a>
+                    </div>
+                    <div class="space-left">
+                        <a href="{{url('e-ticket/all-scheduled-trip')}}" class="btn btn-success">Scheduled Trips</a>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="card">
@@ -127,26 +134,29 @@
         </div>
     </div>
     <!-- Modal -->
-<div class="modal fade" id="deleteItemModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">DELETE BUS?</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <P>Do you really want to delete this bus?</P>
-    
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-        <a id="delete_url"><button type="button" class="btn btn-danger">Delete</button></a>
-      </div>
+    <div class="modal fade" id="deleteItemModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">DELETE BUS?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <P>Do you really want to delete this bus?</P>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                    <a id="delete_url">
+                        <button type="button" class="btn btn-danger">Delete</button>
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
@@ -188,9 +198,9 @@
 
                 ],
                 columnDefs: [
-                    { responsivePriority: 1, targets: 1 },
-                    { responsivePriority: 2, targets: 2 },
-                    { responsivePriority: 3, targets: 3 }
+                    {responsivePriority: 1, targets: 1},
+                    {responsivePriority: 2, targets: 2},
+                    {responsivePriority: 3, targets: 3}
 
                 ]
             });
@@ -198,10 +208,10 @@
         });
 
 
-        function deleteItem(id){
-            console.log('------------',id);
+        function deleteItem(id) {
+            console.log('------------', id);
             $('#edit_id').val(id)
-            $('#delete_url').attr('href', "{{url('e-ticket/delete-tenant-bus')}}/"+id)
+            $('#delete_url').attr('href', "{{url('e-ticket/delete-tenant-bus')}}/" + id)
             $('#deleteItemModal').modal('show')
         }
     </script>

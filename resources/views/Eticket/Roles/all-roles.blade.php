@@ -1,28 +1,32 @@
 @extends('Eticket.layout.app')
 <style>
-    input{
-        border:0 !important;
-        border-bottom: 1px solid gray ! important;
+    input {
+        border: 0 !important;
+        border-bottom: 1px solid rgb(128, 128, 128) ! important;
 
     }
 
-    input:focus{
-        outline:none !important;
+    input:focus {
+        outline: none !important;
     }
-    .align-text{
+
+    .align-text {
         text-align: center;
     }
-    .three-row-grid{
-        display:flex;
+
+    .three-row-grid {
+        display: flex;
         justify-content: space-between;
     }
-    .add_bus_btn{
+
+    .add_bus_btn {
         display: flex;
         justify-content: flex-end;
     }
-    .space-left{
+
+    .space-left {
         margin-left: 10px;
-        margin-bottom:10px;
+        margin-bottom: 10px;
     }
 </style>
 @section('content')
@@ -32,7 +36,8 @@
                 <div class="col-6">
                     <h3>{{$tenantCompanyName ?? env('APP_NAME')}}</h3>
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{url('e-ticket/locations')}}"><i data-feather="home"></i></a></li>
+                        <li class="breadcrumb-item"><a href="{{url('e-ticket/locations')}}"><i data-feather="home"></i></a>
+                        </li>
                         <li class="breadcrumb-item">All Roles</li>
                     </ol>
                 </div>
@@ -41,7 +46,7 @@
     </div>
     <!-- Container-fluid starts-->
 
-    <div class="container-fluid" >
+    <div class="container-fluid">
         <div style="display: flex;justify-content: flex-end;">
             <div>
                 <a href="{{url('e-ticket/add-new-role')}}" class="btn btn-success">Add New Role</a>

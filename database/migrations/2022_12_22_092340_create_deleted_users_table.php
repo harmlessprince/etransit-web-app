@@ -13,12 +13,14 @@ class CreateDeletedUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('deleted_users', function (Blueprint $table) {
-            $table->id();
-            $table->string('user_id');
-            $table->json('user_details');
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('deleted_users')) {
+            Schema::create('deleted_users', function (Blueprint $table) {
+                $table->id();
+                $table->string('user_id');
+                $table->json('user_details');
+                $table->timestamps();
+            });
+        }
     }
 
     /**

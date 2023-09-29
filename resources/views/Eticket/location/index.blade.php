@@ -1,28 +1,32 @@
 @extends('Eticket.layout.app')
 <style>
-    input{
-        border:0 !important;
-        border-bottom: 1px solid gray ! important;
+    input {
+        border: 0 !important;
+        border-bottom: 1px solid rgb(128, 128, 128) ! important;
 
     }
 
-    input:focus{
-        outline:none !important;
+    input:focus {
+        outline: none !important;
     }
-    .align-text{
+
+    .align-text {
         text-align: center;
     }
-    .three-row-grid{
-        display:flex;
+
+    .three-row-grid {
+        display: flex;
         justify-content: space-between;
     }
-    .add_bus_btn{
+
+    .add_bus_btn {
         display: flex;
         justify-content: flex-end;
     }
-    .space-left{
+
+    .space-left {
         margin-left: 10px;
-        margin-bottom:10px;
+        margin-bottom: 10px;
     }
 </style>
 @section('content')
@@ -32,7 +36,8 @@
                 <div class="col-6">
                     <h3>{{$tenantCompanyName ?? env('APP_NAME')}}</h3>
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{url('e-ticket/locations')}}"><i data-feather="home"></i></a></li>
+                        <li class="breadcrumb-item"><a href="{{url('e-ticket/locations')}}"><i data-feather="home"></i></a>
+                        </li>
                         <li class="breadcrumb-item">Locations</li>
                     </ol>
                 </div>
@@ -40,7 +45,7 @@
         </div>
     </div>
     <!-- Container-fluid starts-->
-    <div class="container-fluid" >
+    <div class="container-fluid">
         <div class="card">
             <div class="card-body">
                 <table class="table table-bordered yajra-datatable">
@@ -58,31 +63,34 @@
         </div>
     </div>
     <!-- Button trigger modal -->
-<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-  Launch demo modal
-</button> -->
+    <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+      Launch demo modal
+    </button> -->
 
-<!-- Modal -->
-<div class="modal fade" id="deleteItemModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">DELETE LOCATION?</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <P>Do you really want to delete this location?</P>
-    
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-        <a id="delete_url"><button type="button" class="btn btn-danger">Delete</button></a>
-      </div>
+    <!-- Modal -->
+    <div class="modal fade" id="deleteItemModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">DELETE LOCATION?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <P>Do you really want to delete this location?</P>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                    <a id="delete_url">
+                        <button type="button" class="btn btn-danger">Delete</button>
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
@@ -118,18 +126,18 @@
 
                 ],
                 columnDefs: [
-                    { responsivePriority: 1, targets: 1 },
-                    { responsivePriority: 2, targets: 2 }
+                    {responsivePriority: 1, targets: 1},
+                    {responsivePriority: 2, targets: 2}
                 ]
             });
 
         });
 
 
-        function deleteItem(id){
-            console.log('------------',id);
+        function deleteItem(id) {
+            console.log('------------', id);
             $('#edit_id').val(id)
-            $('#delete_url').attr('href', "{{url('e-ticket/delete-tenant-location')}}/"+id)
+            $('#delete_url').attr('href', "{{url('e-ticket/delete-tenant-location')}}/" + id)
             $('#deleteItemModal').modal('show')
         }
     </script>

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddDeletedAtToCars extends Migration
+class AddLicenseToDriversTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class AddDeletedAtToCars extends Migration
      */
     public function up()
     {
-        if (!Schema::hasColumn('cars', 'deleted_at')) {
-            Schema::table('cars', function (Blueprint $table) {
-                $table->timestamp('deleted_at')->nullable();
-            });
-        }
+        Schema::table('drivers', function (Blueprint $table) {
+            $table->string('nin');
+            $table->text('license');
+        });
     }
 
     /**
@@ -27,8 +26,9 @@ class AddDeletedAtToCars extends Migration
      */
     public function down()
     {
-        Schema::table('cars', function (Blueprint $table) {
-            //
+        Schema::table('drivers', function (Blueprint $table) {
+            $table->dropColumn('nin');
+            $table->dropColumn('license');
         });
     }
 }

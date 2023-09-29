@@ -6,7 +6,7 @@
     var tranx = <?php echo $transactions; ?>;
 
 
-    google.charts.load('current', {'packages':['corechart']});
+    google.charts.load('current', {'packages': ['corechart']});
 
     google.charts.setOnLoadCallback(drawChart);
 
@@ -20,7 +20,7 @@
 
             curveType: 'function',
 
-            legend: { position: 'bottom' }
+            legend: {position: 'bottom'}
 
         };
 
@@ -60,7 +60,8 @@
                                 <div class="media">
                                     <div class="media-body">
                                         <p><span class="f-w-500 font-roboto">Total ( Car Hire Transaction )</span></p>
-                                        <h4 class="f-w-500 mb-0 f-26">&#8358;<span class="counter">{{$carHireTransaction}}</span></h4>
+                                        <h4 class="f-w-500 mb-0 f-26">&#8358;<span
+                                                class="counter">{{$carHireTransaction}}</span></h4>
                                     </div>
                                 </div>
                             </div>
@@ -72,8 +73,10 @@
                             <div class="card-header card-no-border">
                                 <div class="media">
                                     <div class="media-body">
-                                        <p><span class="f-w-500 font-roboto">Total (Bus Booking Transaction )</span></p>
-                                         <h4 class="f-w-500 mb-0 f-26">&#8358;<span class="counter">{{$busBookingTransaction}}</span></h4>
+                                        <p><span class="f-w-500 font-roboto">Total (Co-Traveller Transaction )</span>
+                                        </p>
+                                        <h4 class="f-w-500 mb-0 f-26">&#8358;<span
+                                                class="counter">{{$busBookingTransaction}}</span></h4>
                                     </div>
                                 </div>
                             </div>
@@ -85,7 +88,8 @@
                                 <div class="media">
                                     <div class="media-body">
                                         <p><span class="f-w-500 font-roboto">Total Transactions ( Today ) </span></p>
-                                        <h4 class="f-w-500 mb-0 f-26">&#8358;<span class="counter">{{$todayTransaction}}</span></h4>
+                                        <h4 class="f-w-500 mb-0 f-26">&#8358;<span
+                                                class="counter">{{$todayTransaction}}</span></h4>
                                     </div>
                                 </div>
                             </div>
@@ -97,7 +101,8 @@
                                 <div class="media">
                                     <div class="media-body">
                                         <p><span class="f-w-500 font-roboto">Total Transactions ( All Time ) </span></p>
-                                        <h4 class="f-w-500 mb-0 f-26">&#8358;<span class="counter">{{$totalTransaction}}</span></h4>
+                                        <h4 class="f-w-500 mb-0 f-26">&#8358;<span
+                                                class="counter">{{$totalTransaction}}</span></h4>
                                     </div>
                                 </div>
                             </div>

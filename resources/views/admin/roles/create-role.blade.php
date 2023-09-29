@@ -1,13 +1,13 @@
 @extends('admin.layout.app')
 <style>
-    input{
-        border:0 !important;
-        border-bottom: 1px solid gray ! important;
+    input {
+        border: 0 !important;
+        border-bottom: 1px solid rgb(128, 128, 128) ! important;
 
     }
 
-    input:focus{
-        outline:none !important;
+    input:focus {
+        outline: none !important;
     }
 </style>
 @section('content')
@@ -18,7 +18,8 @@
                 <div class="col-6">
                     <h3>{{env('APP_NAME')}}</h3>
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{url('/admin/dashboard')}}"><i data-feather="home"></i></a></li>
+                        <li class="breadcrumb-item"><a href="{{url('/admin/dashboard')}}"><i
+                                    data-feather="home"></i></a></li>
                         <li class="breadcrumb-item">Create Role</li>
                     </ol>
                 </div>
@@ -26,7 +27,7 @@
         </div>
     </div>
 
-    <div class="container-fluid" >
+    <div class="container-fluid">
         @if($errors->any())
             <div class="alert alert-danger">
                 <p><strong>Opps Something went wrong</strong></p>
@@ -42,14 +43,14 @@
             <div class="col-md-7 col-lg-7 col-xl-7 col-sm-7">
                 <div class="card">
                     <div class="card-body">
-                        <form method="POST" action="{{url('admin/store-role')}}" >
+                        <form method="POST" action="{{url('admin/store-role')}}">
                             @csrf
                             <hr>
                             <h5>Create Role</h5>
                             <hr>
                             <div class="form-group">
                                 <label for="role">Role Name</label>
-                                <input type="text" name="role" id="role" value="{{old('role')}}" class="form-control" />
+                                <input type="text" name="role" id="role" value="{{old('role')}}" class="form-control"/>
                             </div>
 
                             <button class="btn btn-success">Create Role</button>
@@ -61,7 +62,5 @@
         </div>
 
     </div>
-
-
 
 @endsection
