@@ -49,7 +49,7 @@
             <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
                 <div class="card">
                     <div class="card-body">
-                        <form action="{{url('e-ticket/new-driver/')}}" method="post">
+                        <form action="{{url('e-ticket/new-driver/')}}" method="post" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
                                 <label for="full_name">Full Name</label>

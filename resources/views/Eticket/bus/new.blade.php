@@ -49,7 +49,8 @@
             <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
                 <div class="card">
                     <div class="card-body">
-                        <form action="{{url('e-ticket/post-new-tenant-bus')}}" method="post">
+                        <form action="{{url('e-ticket/post-new-tenant-bus')}}" method="post"
+                              enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
                                 <label for="bus_model">Bus Model</label>

@@ -49,7 +49,8 @@
             <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
                 <div class="card">
                     <div class="card-body">
-                        <form action="{{url('e-ticket/update-driver/'.$driver->id)}}" method="post">
+                        <form action="{{url('e-ticket/update-driver/'.$driver->id)}}" method="post"
+                              enctype="multipart/form-data">
                             @csrf
                             @method('put')
                             <div class="form-group">

@@ -88,10 +88,9 @@ class Driver extends Controller
         $newDriver->nin = $request->nin;
         $newDriver->license = $license;
         $newDriver->tenant_id = session()->get('tenant_id');
+        $newDriver->save();
 
         Alert::success('Success ', 'Driver added successfully');
-
-        $newDriver->save();
 
         return redirect('e-ticket/drivers');
     }
