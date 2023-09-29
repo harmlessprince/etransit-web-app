@@ -12,17 +12,17 @@
     <link rel="stylesheet" href="{{asset('admin-asset/css/style.css')}}">
     <style>
         .field-icon {
-  float: right;
-  margin-left: -25px;
-  margin-top: -25px;
-  position: relative;
-  z-index: 2;
-}
+            float: right;
+            margin-left: -25px;
+            margin-top: -25px;
+            position: relative;
+            z-index: 2;
+        }
 
-.container{
-  padding-top:50px;
-  margin: auto;
-}
+        .container {
+            padding-top: 50px;
+            margin: auto;
+        }
     </style>
 
 </head>
@@ -41,28 +41,32 @@
                         <span class="fa fa-user-o"></span>
                     </div>
                     <h3 class="text-center mb-4">Sign In</h3>
-                    <form action="{{route('e-ticket.login')}}"  method="POST" class="login-form">
+                    <form action="{{route('e-ticket.login')}}" method="POST" class="login-form">
                         @csrf
                         <input type="hidden" name="type" value="admin">
                         <div class="form-group">
-                            <input type="text" class="form-control rounded-left @error('email')is-invalid @enderror" placeholder="Email" name="email" >
+                            <input type="text" class="form-control rounded-left @error('email')is-invalid @enderror"
+                                   placeholder="Email" name="email">
                             @error('email')
                             <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
+                                    <strong>{{ $errors->get('email') }}</strong>
                                 </span>
                             @enderror
                         </div>
                         <div class="form-group">
-                            <input type="password" class="form-control rounded-left @error('password')is-invalid @enderror" placeholder="Password" name="password" id="myInput"/>
+                            <input type="password"
+                                   class="form-control rounded-left @error('password')is-invalid @enderror"
+                                   placeholder="Password" name="password" id="myInput"/>
                             <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
                             @error('password')
                             <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
+                                    <strong>{{ $errors->get('password') }}</strong>
                                 </span>
                             @enderror
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="form-control btn btn-primary rounded submit px-3">Login</button>
+                            <button type="submit" class="form-control btn btn-primary rounded submit px-3">Login
+                            </button>
                         </div>
                     </form>
                 </div>
@@ -76,17 +80,17 @@
 <script src="{{asset('admin-asset/js/bootstrap.min.js')}}"></script>
 <script src="{{asset('admin-asset/js/main.js')}}"></script>
 <script>
-    $(".toggle-password").click(function() {
+    $(".toggle-password").click(function () {
 
-$(this).toggleClass("fa-eye fa-eye-slash");
+        $(this).toggleClass("fa-eye fa-eye-slash");
 // var input = $($(this).attr("toggle"));
-var x = document.getElementById("myInput");
-  if (x.type === "password") {
-    x.type = "text";
-  } else {
-    x.type = "password";
-  }
-});
+        var x = document.getElementById("myInput");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    });
 </script>
 
 </body>

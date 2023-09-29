@@ -72,7 +72,7 @@ class Driver extends Controller
             'full_name' => 'required',
             'phone_number' => 'required|unique:drivers',
             'address' => 'required',
-            'nin' => 'nin',
+            'nin' => 'required',
             'license' => 'required',
         ]);
 
