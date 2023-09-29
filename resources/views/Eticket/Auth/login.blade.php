@@ -49,7 +49,7 @@
                                    placeholder="Email" name="email">
                             @error('email')
                             <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->get('email') }}</strong>
+                                    <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
                         </div>
@@ -60,7 +60,7 @@
                             <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
                             @error('password')
                             <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->get('password') }}</strong>
+                                    <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
                         </div>
