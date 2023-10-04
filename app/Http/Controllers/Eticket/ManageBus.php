@@ -4,22 +4,37 @@ namespace App\Http\Controllers\Eticket;
 
 use App\Exports\VehicleExport;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ScheduleCreateRequest;
 use App\Imports\VehicleImport;
 use App\Models\Bus;
 use App\Models\BusType;
 use App\Models\Destination;
 use App\Models\Driver;
 use App\Models\Schedule;
+use App\Models\Service;
 use App\Models\Terminal;
+use Carbon\Carbon;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use DataTables;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Collection;
+use Illuminate\Validation\ValidationException;
 use Maatwebsite\Excel\Facades\Excel;
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\NotFoundExceptionInterface;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class ManageBus extends Controller
 {
+    /**
+     * @return Application|Factory|View
+     */
     public function allBuses()
     {
         $busCount = Bus::count();
@@ -31,6 +46,10 @@ class ManageBus extends Controller
     }
 
 
+    /**
+     * @param Request $request
+     * @return void
+     */
     public function fetchOBuses(Request $request)
     {
         if ($request->ajax()) {
@@ -49,6 +68,12 @@ class ManageBus extends Controller
     }
 
 
+    /**
+     * @param $bus_id
+     * @return Application|Factory|View
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
+     */
     public function viewBus($bus_id)
     {
         $findBus = Bus::where('tenant_id', session()->get('tenant_id'))->where('id', $bus_id)->with('driver', 'schedules')->first();
@@ -57,12 +82,21 @@ class ManageBus extends Controller
     }
 
 
+    /**
+     * @return Application|Factory|View
+     */
     public function addNewBus()
     {
         $busTypes = BusType::all();
         return view('Eticket.bus.new', compact('busTypes'));
     }
 
+    /**
+     * @param Request $request
+     * @return Application|RedirectResponse|Redirector
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
+     */
     public function createTenantBus(Request $request)
     {
 
@@ -108,6 +142,63 @@ class ManageBus extends Controller
         return redirect('e-ticket/buses');
     }
 
+    /**
+     * @return Application|Factory|View
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
+     */
+    public function addScheduleView()
+    {
+        $pickups = $destinations = Destination::select('id', 'location')->get();
+        $tenant_id = session()->get('tenant_id');
+        $buses = Bus::where('tenant_id', $tenant_id)->select('id', 'bus_registration')->get();
+        $terminals = Terminal::where('tenant_id', $tenant_id)->get();
+        $services = Service::where('status', 'active')->get();
+
+        return view('Eticket.bus.add-bus-schedule', compact('services', 'terminals', 'pickups', 'destinations', 'buses'));
+    }
+
+    /**
+     * @param ScheduleCreateRequest $request
+     * @return RedirectResponse
+     * @throws ValidationException
+     */
+    public function postScheduleView(ScheduleCreateRequest $request)
+    {
+
+        //validate departure date and time
+        $departureTime = Carbon::parse("$request->departure_date $request->departure_time");
+        if ($departureTime->diffInHours(Carbon::now()) <= 24) {
+            throw  ValidationException::withMessages([
+                'departure' => 'Departure time should be greater than 24 hours from now!',
+            ]);
+        }
+
+        $s = $request->departure_date;
+        $date = strtotime($s);
+        $formattedDate = date('Y-m-d', $date);
+        $schedule = new Schedule();
+
+        $schedule->terminal_id = $request->terminal_id;
+        $schedule->bus_id = $request->bus_id;
+        $schedule->pickup_id = $request->pickup_id;
+        $schedule->destination_id = $request->destination_id;
+        $schedule->fare_adult = $request->adult_tfare;
+        $schedule->service_id = $request->service_id;
+        $schedule->fare_children = $request->child_tfare;
+        $schedule->departure_date = $formattedDate;
+        $schedule->departure_time = $request->departure_time;
+        $schedule->tenant_id = $request->tenant_id;
+        $schedule->seats_available = $request->number_of_seats;
+        $schedule->save();
+
+        return redirect()->route('add-schedule-view');
+    }
+
+    /**
+     * @param $bus_id
+     * @return Application|Factory|View
+     */
     public function assignDriver($bus_id)
     {
         $bus = Bus::find($bus_id);
@@ -115,6 +206,13 @@ class ManageBus extends Controller
         return view('Eticket.bus.assign-driver', compact('bus'));
     }
 
+    /**
+     * @param Request $request
+     * @param $bus_id
+     * @return Application|RedirectResponse|Redirector
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
+     */
     public function assignDriverToBus(Request $request, $bus_id)
     {
         request()->validate([
@@ -147,6 +245,11 @@ class ManageBus extends Controller
     }
 
 
+    /**
+     * @param $driver_id
+     * @param $bus_id
+     * @return Application|RedirectResponse|Redirector
+     */
     public function removeDriverFromBus($driver_id, $bus_id)
     {
         $findDriver = Driver::find($driver_id);
@@ -168,6 +271,10 @@ class ManageBus extends Controller
     }
 
 
+    /**
+     * @param $bus_id
+     * @return Application|Factory|View|RedirectResponse
+     */
     public function scheduleTrip($bus_id)
     {
         $bus = Bus::find($bus_id);
@@ -184,6 +291,10 @@ class ManageBus extends Controller
 
     }
 
+    /**
+     * @param $bus_id
+     * @return Application|Factory|View
+     */
     public function editBus($bus_id)
     {
         $bus = Bus::with('driver')->find($bus_id);
@@ -191,6 +302,10 @@ class ManageBus extends Controller
         return view('Eticket.bus.edit-bus', compact('bus'));
     }
 
+    /**
+     * @param $bus_id
+     * @return RedirectResponse
+     */
     public function deleteBus($bus_id)
     {
         $bus = Bus::findOrFail($bus_id);
@@ -200,6 +315,13 @@ class ManageBus extends Controller
     }
 
 
+    /**
+     * @param Request $request
+     * @param $bus_id
+     * @return Application|RedirectResponse|Redirector
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
+     */
     public function updateBus(Request $request, $bus_id)
     {
 //        $this->validateBusRequest($request);
@@ -248,11 +370,20 @@ class ManageBus extends Controller
     }
 
 
+    /**
+     * @return Application|Factory|View
+     */
     public function importExportView()
     {
         return view('Eticket.bus.import-bus');
     }
 
+    /**
+     * @param Request $data
+     * @return JsonResponse
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
+     */
     public function addVehicle(Request $data)
     {
 
@@ -298,6 +429,10 @@ class ManageBus extends Controller
     }
 
 
+    /**
+     * @param $request
+     * @return void
+     */
     private function validateBusRequest($request)
     {
         $request->validate([
