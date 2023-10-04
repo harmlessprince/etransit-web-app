@@ -1,7 +1,7 @@
 <header class="main-nav">
     <div class="logo-wrapper"><a href="{{url('/admin/dashboard')}}">
             <img class="img-fluid for-light" src="{{asset('/images/logo/et-logo.png')}}" alt="">
-            <img class="img-fluid for-dark"  src="{{asset('/images/logo/et-logo.png')}}"  alt=""></a>
+            <img class="img-fluid for-dark" src="{{asset('/images/logo/et-logo.png')}}" alt=""></a>
         <div class="back-btn"><i class="fa fa-angle-left"></i></div>
         <div class="toggle-sidebar"><i class="status_toggle middle" data-feather="grid" id="sidebar-toggle"> </i>
         </div>
@@ -29,14 +29,14 @@
                             <h6>Dashboard</h6>
                         </div>
                     </li>
-                    <li ><a class="nav-link" href="{{route('admin.dashboard')}}"><i data-feather="home"></i><span>Dashboard</span></a>
+                    <li><a class="nav-link" href="{{route('admin.dashboard')}}"><i data-feather="home"></i><span>Dashboard</span></a>
 
                     </li>
 
-                    <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"></i><span>Bus Management</span></a>
+                    <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"></i><span>Co-traveller</span></a>
                         <ul class="nav-submenu menu-content">
-{{--                            <li><a href="{{url('/admin/manage/vehicle')}}">Manage Buses</a></li>--}}
-                            <li><a href="{{url('/admin/manage/tenant-bus')}}">Manage Buses</a></li>
+                            {{--                            <li><a href="{{url('/admin/manage/vehicle')}}">Manage Co-travellers</a></li>--}}
+                            <li><a href="{{url('/admin/manage/tenant-bus')}}">Manage Co-travellers</a></li>
                             <li><a href="{{url('/admin/manage/bus-type')}}">Buses Type</a></li>
                             <li><a href="{{url('/admin/manage/bus-destination')}}">Bus Locations</a></li>
                             <li><a href="{{url('/admin/manage/bus-terminals')}}">Manage Bus Terminals</a></li>
@@ -69,7 +69,8 @@
                             <li><a href="{{url('/admin/manage/height')}}">Manage Height</a></li>
                             <li><a href="{{url('/admin/manage/length')}}">Manage Length</a></li>
                             <li><a href="{{url('/admin/manage/width')}}">Manage Width</a></li>
-                            <li><a href="{{url('/admin/manage/parcel/delivery/request')}}">View Parcel Delivery Request</a></li>
+                            <li><a href="{{url('/admin/manage/parcel/delivery/request')}}">View Parcel Delivery
+                                    Request</a></li>
                         </ul>
                     </li>
                     <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"></i><span>Ferry Management</span></a>
@@ -119,29 +120,29 @@
                         </ul>
                     </li>
                     <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="file-text"></i><span>Roles</span></a>
-                            <ul class="nav-submenu menu-content">
-                                <li><a class="" href="{{url('admin/roles')}}">All Roles</a> </li>
-                            </ul>
-                        </li>
+                        <ul class="nav-submenu menu-content">
+                            <li><a class="" href="{{url('admin/roles')}}">All Roles</a></li>
+                        </ul>
+                    </li>
                     <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="server"></i><span>Permissions</span></a>
-                            <ul class="nav-submenu menu-content">
-                                <li><a  href="{{url('admin/permissions')}}">All Permissions</a></li>
-                            </ul>
-                        </li>
+                        <ul class="nav-submenu menu-content">
+                            <li><a href="{{url('admin/permissions')}}">All Permissions</a></li>
+                        </ul>
+                    </li>
                     <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="server"></i><span>NYSC Trips</span></a>
-                            <ul class="nav-submenu menu-content">
-                                <li><a href="{{url('admin/nysc/locations')}}">Camps</a></li>
-                                <li><a href="{{url('admin/nysc/hubs')}}">Hubs</a></li>
-                            </ul>
-                        </li>
+                        <ul class="nav-submenu menu-content">
+                            <li><a href="{{url('admin/nysc/locations')}}">Camps</a></li>
+                            <li><a href="{{url('admin/nysc/hubs')}}">Hubs</a></li>
+                        </ul>
+                    </li>
                     <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="server"></i><span>Tracking Console</span></a>
                         <ul class="nav-submenu menu-content">
                             <li><a href="{{url('admin/all/tracking')}}">Tracking</a></li>
                         </ul>
                     </li>
-                    </ul>
+                </ul>
 
-                </div>
+            </div>
             <div class="right-arrow" id="right-arrow"><i data-feather="arrow-right"></i></div>
         </div>
     </nav>

@@ -23,7 +23,7 @@
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{url('e-ticket/dashboard')}}"><i data-feather="home"></i></a>
                         </li>
-                        <li class="breadcrumb-item">Create Bus</li>
+                        <li class="breadcrumb-item">Schedule Bus</li>
                     </ol>
                 </div>
                 <div class="col-6">
@@ -71,6 +71,14 @@
                                 <select class="form-control" name="terminal_id" id="terminal_id" required>
                                     @foreach($terminals as $terminal)
                                         <option value="{{ $terminal->id }}">{{ $terminal->terminal_name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="service_id">Service </label>
+                                <select class="form-control" name="service_id" id="service_id" required>
+                                    @foreach($services as $service)
+                                        <option value="{{ $service->id }}">{{ $service->name }}</option>
                                     @endforeach
                                 </select>
                             </div>

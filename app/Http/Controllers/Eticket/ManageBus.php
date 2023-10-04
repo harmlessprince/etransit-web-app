@@ -188,7 +188,7 @@ class ManageBus extends Controller
         $schedule->fare_children = $request->child_tfare;
         $schedule->departure_date = $formattedDate;
         $schedule->departure_time = $request->departure_time;
-        $schedule->tenant_id = $request->tenant_id;
+        $schedule->tenant_id = session()->get('tenant_id');
         $schedule->seats_available = $request->number_of_seats;
         $schedule->save();
 
