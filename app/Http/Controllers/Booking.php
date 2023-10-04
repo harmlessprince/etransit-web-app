@@ -38,7 +38,9 @@ class Booking extends Controller
         }
 
 
-        $request->return_date != null ? $request->session()->put('return_date', $request->return_date) : $returnDate = null;
+        if ($request->return_date != null) {
+            $request->session()->put('return_date', $request->return_date);
+        }
 
         //ensure the query does not return a data if the date the user picked has passed
         //to avoid booking a ride that has already passed or left

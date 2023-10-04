@@ -215,7 +215,7 @@
                                                 <a href="{{url('view-ferry-seats/'.$schedule->id . '/'. $tripType)}}">
                                                     <button class="btn btn-primary" type="button"
                                                             style="color: rgb(255,255,255);background: rgb(52,63,95);height: 29px;padding-top: 1px;width: 125.766px;">
-                                                        view vehicle
+                                                        View Vehicle
                                                     </button>
                                                 </a>
                                             </div>

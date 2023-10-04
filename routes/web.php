@@ -477,6 +477,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('create-new-operator', [Operator::class, 'createOperator']);
         Route::post('store-operator', [Operator::class, 'storeOperator']);
         Route::get('fetch-tenants', [Operator::class, 'fetchOperators'])->name('fetch-tenants');
+        Route::get('delete-operator/{id}', [Operator::class, 'deleteOperator']);
         Route::get('view-operator/{id}', [Operator::class, 'viewOperator']);
         Route::get('operator/{operator_id}', [Operator::class, 'editOperator']);
         Route::put('update-operator/{operator_id}', [Operator::class, 'updateOperator']);

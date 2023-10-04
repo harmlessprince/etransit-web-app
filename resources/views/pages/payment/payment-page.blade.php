@@ -27,18 +27,9 @@
         cursor: pointer;
     }
 
-    #cash_payment_option {
-        margin-top: 20px;
-        display: none;
-    }
-
     .cash_payment {
         color: #fff;
 
-    }
-
-    #online_payment {
-        display: none;
     }
 
     .payment_options, .payment_button {
@@ -90,17 +81,11 @@
                         </div>
                         <div class="col-12" style="padding-right: 0px;padding-left: 0px;margin-top: 40px;">
                             <p style="padding-left: 27px;">SELECT PAYMENT METHOD</p>
-                            <div>
-                                <select class="select_payment" id="select_payment_option" onchange="changeFunc();">
-                                    <option value="0">Choose Payment Option</option>
-                                    <option value="1">Online Payment</option>
-                                    <option value="2">Cash Payment</option>
-                                </select>
+                            <div class="payment_button" id="credpal_payment">
+                                <button onclick="payWithCredPal()" type="button">Pay With CredPal</button>
                             </div>
 
-
                             <div class="payment_button" id="online_payment">
-                                <button onclick="payWithCredPal()" type="button">Pay With CredPal</button>
                                 <form method="POST" action="{{ route('pay') }}" id="paymentForm">
                                     {{ csrf_field() }}
 
@@ -302,27 +287,6 @@
     ]);
     @endphp
     <script type="text/javascript">
-
-        function changeFunc() {
-            var selectBox = document.getElementById("select_payment_option");
-            var selectedValue = selectBox.options[selectBox.selectedIndex].value;
-            var onlinePaymentOption = document.getElementById("online_payment");
-            var payWithCash = document.getElementById("cash_payment_option");
-
-
-            if (selectedValue == 1) {
-                onlinePaymentOption.style.display = 'block';
-                payWithCash.style.display = 'none'
-
-            } else if (selectedValue == 2) {
-                onlinePaymentOption.style.display = 'none';
-                payWithCash.style.display = 'block'
-
-            } else {
-                onlinePaymentOption.style.display = 'none';
-                payWithCash.style.display = 'none'
-            }
-        }
 
         const payWithCredPal = () => {
             const checkout = new Checkout({

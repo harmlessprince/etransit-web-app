@@ -2,20 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use DataTables;
-use App\Models\Bus;
-use App\Models\BusType;
-use App\Models\NyscHub;
-use App\Models\NyscCamp;
-use App\Models\Schedule;
-use App\Models\Terminal;
 use App\Classes\NyscRepo;
-use App\Models\Destination;
-use App\Models\SeatTracker;
-use App\Models\Transaction;
-use Illuminate\Http\Request;
 use App\Exports\VehicleExport;
 use App\Imports\VehicleImport;
+use App\Models\Bus;
+use App\Models\BusType;
+use App\Models\Destination;
+use App\Models\NyscCamp;
+use App\Models\NyscHub;
+use App\Models\Schedule;
+use App\Models\SeatTracker;
+use App\Models\Service;
+use App\Models\Terminal;
+use App\Models\Transaction;
+use DataTables;
+use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -24,18 +26,20 @@ class Vehicle extends Controller
 {
     public function manage()
     {
-        $vehicles = \App\Models\Bus::withoutGlobalScopes()->orderby('id','desc')->get();
+        $vehicles = Bus::withoutGlobalScopes()->orderby('id', 'desc')->get();
 
-        return view('admin.vehicle.manage' , compact('vehicles'));
+        return view('admin.vehicle.manage', compact('vehicles'));
     }
 
     public function tenantBus()
     {
-        $terminalCount  = Terminal::withoutGlobalScopes()->count();
-        $busesCount     = Bus::withoutGlobalScopes()->count();
+        $terminalCount = Terminal::withoutGlobalScopes()->count();
+        $busesCount = Bus::withoutGlobalScopes()->count();
         $transactionsCount = Transaction::pluck('amount')->sum();
-
-        return view('admin.vehicle.manage-tenant-bus' , compact('terminalCount','busesCount','transactionsCount'));
+        $records = Bus::with('tenant')
+            ->latest()
+            ->paginate(20);
+        return view('admin.vehicle.manage-tenant-bus', compact('terminalCount', 'busesCount', 'transactionsCount', 'records'));
     }
 
     public function fetchAllTenantBus(Request $request)
@@ -44,7 +48,7 @@ class Vehicle extends Controller
             $data = Bus::withoutGlobalScopes()->with('tenant')->latest()->get();
             return Datatables::of($data)
                 ->addIndexColumn()
-                ->addColumn('action', function($row){
+                ->addColumn('action', function ($row) {
                     $id = $row->id;
                     $actionBtn = "<a href='/admin/manage/view-tenant-bus/$id'  class='edit btn btn-success btn-sm'>View</a> <a href='#' onclick='deleteItem($id)' class='edit btn btn-danger btn-sm'>Delete</a>";
 //                    <a href='/admin/edit-bus/$id'  class='edit btn btn-success btn-sm'>Edit</a>
@@ -58,10 +62,11 @@ class Vehicle extends Controller
 
     public function viewTenantBus($bus_id)
     {
-        $findBus = Bus::with('driver', 'schedules','tenant')->where('id',$bus_id)->first();
+        $findBus = Bus::with('driver', 'schedules', 'tenant')->where('id', $bus_id)->first();
 
-        return  view('admin.vehicle.view-bus', compact('findBus'));
+        return view('admin.vehicle.view-bus', compact('findBus'));
     }
+
     public function deleteTenantBus($bus_id)
     {
         $findBus = Bus::where('id', $bus_id)->first();
@@ -73,22 +78,22 @@ class Vehicle extends Controller
 
     public function editBus($bus_id)
     {
-        $bus  = Bus::withoutGlobalScopes()->find($bus_id);
+        $bus = Bus::find($bus_id);
 
-        return view('admin.vehicle.edit-bus',compact('bus'));
+        return view('admin.vehicle.edit-bus', compact('bus'));
     }
 
-    public function updateBus(Request $request , $bus_id)
+    public function updateBus(Request $request, $bus_id)
     {
         $request->validate([
             'bus_model' => 'required',
             'bus_type' => 'required',
             'bus_registration' => 'required',
             'wheels' => 'required',
-            'seater'=> 'required'
+            'seater' => 'required'
         ]);
 
-       $bus = Bus::withoutGlobalScopes()->where('id',$bus_id)->first();
+        $bus = Bus::withoutGlobalScopes()->where('id', $bus_id)->first();
 
         $bus->update([
             'bus_model' => $request->bus_model,
@@ -98,7 +103,7 @@ class Vehicle extends Controller
             'tenant_id' => session()->get('tenant_id'),
             'seater' => $request->seater,
             'service_id' => 1,
-            'air_conditioning' =>  $request->air_conditioning == 'on' ? 1 : 0 ,
+            'air_conditioning' => $request->air_conditioning == 'on' ? 1 : 0,
         ]);
 
 
@@ -109,18 +114,18 @@ class Vehicle extends Controller
 
     public function busSchedule($bus_id)
     {
-        $bus = Bus::where('id',$bus_id)->first();
+        $bus = Bus::where('id', $bus_id)->first();
 
         return view('admin.vehicle.each-bus-schedule', compact('bus'));
     }
 
-    public function busScheduleFetch(Request $request , $bus_id)
+    public function busScheduleFetch(Request $request, $bus_id)
     {
         if ($request->ajax()) {
-            $data = Schedule::withoutGlobalScopes()->where('bus_id',$bus_id)->with('pickup','destination','bus','terminal')->latest()->get();
+            $data = Schedule::withoutGlobalScopes()->where('bus_id', $bus_id)->with('pickup', 'destination', 'bus', 'terminal')->latest()->get();
             return Datatables::of($data)
                 ->addIndexColumn()
-                ->addColumn('action', function($row){
+                ->addColumn('action', function ($row) {
                     $id = $row->id;
                     $actionBtn = "<a href='/admin/view-bus-schedule-page/$id'  class='edit btn btn-success btn-sm'>View</a>";
                     return $actionBtn;
@@ -132,10 +137,10 @@ class Vehicle extends Controller
 
     public function viewBusSchedulePage($schedule_id)
     {
-        $findSchedule = Schedule::where('id',$schedule_id)->first();
-        $seatTracker = SeatTracker::where('schedule_id',$schedule_id)->get();
+        $findSchedule = Schedule::where('id', $schedule_id)->first();
+        $seatTracker = SeatTracker::where('schedule_id', $schedule_id)->get();
 
-        return view('admin.vehicle.schedule-single-page', compact('findSchedule','seatTracker'));
+        return view('admin.vehicle.schedule-single-page', compact('findSchedule', 'seatTracker'));
     }
 
     public function importExportView()
@@ -156,23 +161,23 @@ class Vehicle extends Controller
         $vehicle->save();
 
         toastr()->success('Data saved successfully');
-       return response()->json(['success' => true , 'message' => 'Vehicle saved successfully']);
+        return response()->json(['success' => true, 'message' => 'Vehicle saved successfully']);
 
     }
 
     /**
-     * @return \Illuminate\Support\Collection
+     * @return Collection
      */
     public function exportVehicle()
     {
-        $vehicles = Bus::select(["id", "car_type", "car_model", "car_registration" , "air_conditioning" , "wheels","seater"])->get();
+        $vehicles = Bus::select(["id", "car_type", "car_model", "car_registration", "air_conditioning", "wheels", "seater"])->get();
 
         return Excel::download(new VehicleExport($vehicles), 'vehicle.xlsx');
 
     }
 
     /**
-     * @return \Illuminate\Support\Collection
+     * @return Collection
      */
     public function importVehicle(Request $request)
     {
@@ -181,7 +186,7 @@ class Vehicle extends Controller
             'excel_file' => 'required|file|mimes:xls,xlsx,csv'
         ]);
 
-        Excel::import(new VehicleImport,request()->file('excel_file'));
+        Excel::import(new VehicleImport, request()->file('excel_file'));
         toastr()->success('Data saved successfully');
         return response()->json(['message' => 'uploaded successfully'], 200);
     }
@@ -216,7 +221,7 @@ class Vehicle extends Controller
             $data = BusType::latest()->get();
             return Datatables::of($data)
                 ->addIndexColumn()
-                ->addColumn('action', function($row){
+                ->addColumn('action', function ($row) {
                     $id = $row->id;
                     $actionBtn = "<a href='/admin/update/bus-type/$id'  class='edit btn btn-success btn-sm'>Edit</a>";
                     return $actionBtn;
@@ -226,14 +231,14 @@ class Vehicle extends Controller
         }
     }
 
-    public function EditBusType(Request $request , $bus_type_id)
+    public function EditBusType(Request $request, $bus_type_id)
     {
         $busType = BusType::where('id', $bus_type_id)->first();
 
-        return view('admin.vehicle.edit-bus-type' , compact('busType'));
+        return view('admin.vehicle.edit-bus-type', compact('busType'));
     }
 
-    public function updateBusType(Request $request ,$bus_type_id)
+    public function updateBusType(Request $request, $bus_type_id)
     {
         $request->validate(['bus_type' => 'required']);
 
@@ -266,11 +271,14 @@ class Vehicle extends Controller
         return redirect('admin/manage/bus-destination');
     }
 
-    public function addNyscCamp(){
+    public function addNyscCamp()
+    {
         $camps = NyscCamp::with('location')->get();
-        return view('admin.vehicle.add-nysc-camp',compact('camps'));
+        return view('admin.vehicle.add-nysc-camp', compact('camps'));
     }
-    public function storeNyscCamp(Request $request){
+
+    public function storeNyscCamp(Request $request)
+    {
         $request->validate(
             [
                 'name' => 'required|string|unique:destinations,location',
@@ -279,9 +287,9 @@ class Vehicle extends Controller
         );
         DB::beginTransaction();
         $loc = new Destination();
-        $loc->location = 'NYSC Camp: '.$request->name;
+        $loc->location = 'NYSC Camp: ' . $request->name;
         $loc->save();
-        if($loc){
+        if ($loc) {
             NyscCamp::create([
                 'location_id' => $loc->id
             ]);
@@ -289,22 +297,25 @@ class Vehicle extends Controller
         DB::commit();
         return redirect('admin/nysc/locations');
     }
-    public function addNyscHub(){
+
+    public function addNyscHub()
+    {
         $hubs = NyscHub::with('location')->get();
         $locations = Destination::whereDoesntHave('nyscHub')->get();
-        return view('admin.vehicle.add-nysc-hub', compact('hubs','locations'));
+        return view('admin.vehicle.add-nysc-hub', compact('hubs', 'locations'));
     }
-    public function storeNyscHub(Request $request){
-       $checkLocation = NyscHub::where('location_id',$request->location_id)->count();
-       if($checkLocation<1){
+
+    public function storeNyscHub(Request $request)
+    {
+        $checkLocation = NyscHub::where('location_id', $request->location_id)->count();
+        if ($checkLocation < 1) {
             NyscRepo::addHub($request->location_id);
             Alert::success('Success', 'Hub added successfully');
-       }
-       else{
-           Alert::error('Error', 'Hub already exists for this location');
+        } else {
+            Alert::error('Error', 'Hub already exists for this location');
 
-       }
-       return redirect('admin/nysc/hubs');
+        }
+        return redirect('admin/nysc/hubs');
     }
 
     public function fetchBusLocation(Request $request)
@@ -313,7 +324,7 @@ class Vehicle extends Controller
             $data = Destination::latest()->get();
             return Datatables::of($data)
                 ->addIndexColumn()
-                ->addColumn('action', function($row){
+                ->addColumn('action', function ($row) {
                     $id = $row->id;
                     $actionBtn = "<a href='/admin/update/bus-location/$id'  class='edit btn btn-success btn-sm'>Edit</a> <a href='#' onclick='deleteItem($id)' class='edit btn btn-Danger btn-sm'>Delete</a>";
                     return $actionBtn;
@@ -325,24 +336,24 @@ class Vehicle extends Controller
 
     public function updateBusLocation($location_id)
     {
-        $location = Destination::where('id' , $location_id)->first();
+        $location = Destination::where('id', $location_id)->first();
 
-        return view('admin.vehicle.edit-bus-destination' , compact('location'));
+        return view('admin.vehicle.edit-bus-destination', compact('location'));
     }
 
     public function deleteBusLocation($location_id)
     {
-        $location = Destination::where('id' , $location_id)->first();
+        $location = Destination::where('id', $location_id)->first();
         $location->delete();
 
         return redirect()->to('/admin/manage/bus-destination');
     }
 
-    public function editVehicleLocation(Request $request ,$location_id)
+    public function editVehicleLocation(Request $request, $location_id)
     {
         $request->validate(['location' => 'required']);
 
-        $location = Destination::where('id' , $location_id)->first();
+        $location = Destination::where('id', $location_id)->first();
 
         $location->update(['location' => $request->location]);
 
@@ -353,19 +364,14 @@ class Vehicle extends Controller
 
     }
 
-    public function nyscHome(){
+    public function nyscHome()
+    {
         $camps = NyscCamp::with('location')->get();
         $hubs = NyscHub::with('location')->get();
-        $busService = \App\Models\Service::where('id' , 1)->first();
+        $busService = Service::where('id', 1)->first();
 
-        return view('pages.nysc.home',compact('camps','hubs','busService'));
+        return view('pages.nysc.home', compact('camps', 'hubs', 'busService'));
     }
-
-
-
-
-
-
 
 
 }
