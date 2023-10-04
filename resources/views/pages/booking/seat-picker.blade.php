@@ -313,29 +313,31 @@
                                         class="form-check-label" for="formCheck-9">Available</label></div>
                             </div>
                         </div>
-                        <div class="row"
-                             style="margin-top: 53px;padding: 24px;box-shadow: 1px 1px 6px rgb(231,231,231);border-left-width: 1px;border-radius: 20px;width: 252px;margin-left: 13px;">
-                            @foreach($fetchSeats as $seat)
-                                <div class="col-4">
-                                    <div class="row">
-                                        <div class="col-4 d-md-flex justify-content-md-center align-items-md-center"
-                                             style="margin-top: 10px;margin-bottom: 10px;"></div>
-                                        <div class="col-4 d-md-flex justify-content-md-center align-items-md-center"
-                                             style="margin-top: 10px;margin-bottom: 10px;"></div>
-                                        <div class="col-4 d-md-flex justify-content-md-center align-items-md-center"
-                                             style="margin-top: 10px;margin-bottom: 10px;">
-                                            <a href="{{$seat->id}}"
-                                               @if($seat->booked_status == 0)     class="available seat_selector btn seat_picker_new"
-                                               @elseif($seat->booked_status == 1) class="seat_selector available_indicator btn seat_picker_new"
-                                               @elseif($seat->booked_status == 2) class="booked seat_selector btn seat_picker_new"
-                                               @endif
-                                               style="width:43.25px;">{{$seat->seat_position}}
-                                            </a>
+                        @if($fetchSeats->count()>0)
+                            <div class="row"
+                                 style="margin-top: 53px;padding: 24px;box-shadow: 1px 1px 6px rgb(231,231,231);border-left-width: 1px;border-radius: 20px;width: 252px;margin-left: 13px;">
+                                @foreach($fetchSeats as $seat)
+                                    <div class="col-4">
+                                        <div class="row">
+                                            <div class="col-4 d-md-flex justify-content-md-center align-items-md-center"
+                                                 style="margin-top: 10px;margin-bottom: 10px;"></div>
+                                            <div class="col-4 d-md-flex justify-content-md-center align-items-md-center"
+                                                 style="margin-top: 10px;margin-bottom: 10px;"></div>
+                                            <div class="col-4 d-md-flex justify-content-md-center align-items-md-center"
+                                                 style="margin-top: 10px;margin-bottom: 10px;">
+                                                <a href="{{$seat->id}}"
+                                                   @if($seat->booked_status == 0)     class="available seat_selector btn seat_picker_new"
+                                                   @elseif($seat->booked_status == 1) class="seat_selector available_indicator btn seat_picker_new"
+                                                   @elseif($seat->booked_status == 2) class="booked seat_selector btn seat_picker_new"
+                                                   @endif
+                                                   style="width:43.25px;">{{$seat->seat_position}}
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            @endforeach
-                        </div>
+                                @endforeach
+                            </div>
+                        @endif
                     </div>
                 </div>
                 <div class="row">
