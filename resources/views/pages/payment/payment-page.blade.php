@@ -288,11 +288,11 @@
     @endphp
     <script type="text/javascript">
 
-        const payWithCredPal = () => {
+        function payWithCredPal() {
             const checkout = new Checkout({
                 key: 'Your Key', // Your Key
                 amount: {{ $totalFare }},
-                product: {{  $properties }},
+                product: {{ $properties }},
                 onClose: () => console.log('Widget closed'),
                 onLoad: () => console.log('Widget loaded successfully'),
                 onError: (error) => console.log(error),
@@ -304,9 +304,9 @@
             checkout.setup();
 
             return checkout.open();
-        };
+        }
 
-        const success = (data) => console.log(data); // callback function
+        // const success = (data) => console.log(data); // callback function
 
     </script>
 @endsection
