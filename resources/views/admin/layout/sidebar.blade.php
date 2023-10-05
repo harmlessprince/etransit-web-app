@@ -40,6 +40,7 @@
                             <li><a href="{{url('/admin/manage/bus-type')}}">Buses Type</a></li>
                             <li><a href="{{url('/admin/manage/bus-destination')}}">Bus Locations</a></li>
                             <li><a href="{{url('/admin/manage/bus-terminals')}}">Manage Bus Terminals</a></li>
+                            <li><a href="{{url('/admin/manage/schedules')}}">Manage Schedules</a></li>
                         </ul>
                     </li>
                     <li class="dropdown"><a class="nav-link menu-title" href="#"><i data-feather="box"></i><span>Tour Management</span></a>

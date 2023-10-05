@@ -12,6 +12,7 @@ use App\Models\Destination;
 use App\Models\Driver;
 use App\Models\Schedule;
 use App\Models\Service;
+use App\Models\Tenant;
 use App\Models\Terminal;
 use Carbon\Carbon;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
@@ -29,6 +30,9 @@ use Maatwebsite\Excel\Facades\Excel;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\NotFoundExceptionInterface;
 use RealRashid\SweetAlert\Facades\Alert;
+use function app;
+use function compact;
+use function view;
 
 class ManageBus extends Controller
 {
@@ -88,6 +92,11 @@ class ManageBus extends Controller
     public function addNewBus()
     {
         $busTypes = BusType::all();
+        $authGuard = app('auth')->guard('admin');
+        if ($authGuard->user()) {
+            $tenants = Tenant::get(['id', 'company_name']);
+            return view('admin.bus.new', compact('tenants', 'busTypes'));
+        }
         return view('Eticket.bus.new', compact('busTypes'));
     }
 
@@ -126,7 +135,7 @@ class ManageBus extends Controller
         $newBus->bus_type = $request->bus_type;
         $newBus->bus_registration = $request->bus_registration;
         $newBus->wheels = $request->wheels;
-        $newBus->tenant_id = session()->get('tenant_id');
+        $newBus->tenant_id = $request->tenant_id ?? session()->get('tenant_id');
         $newBus->seater = $request->seater;
         $newBus->bus_available_seats = $request->bus_available_seats;
         $newBus->bus_year = $request->bus_year;
@@ -155,6 +164,11 @@ class ManageBus extends Controller
         $terminals = Terminal::where('tenant_id', $tenant_id)->get();
         $services = Service::where('status', 'active')->get();
 
+        $authGuard = app('auth')->guard('admin');
+        if ($authGuard->user()) {
+            $tenants = Tenant::get(['id', 'company_name']);
+            return view('admin.vehicle.add-bus-schedule', compact('tenants', 'services', 'terminals', 'pickups', 'destinations', 'buses'));
+        }
         return view('Eticket.bus.add-bus-schedule', compact('services', 'terminals', 'pickups', 'destinations', 'buses'));
     }
 
@@ -188,7 +202,7 @@ class ManageBus extends Controller
         $schedule->fare_children = $request->child_tfare;
         $schedule->departure_date = $formattedDate;
         $schedule->departure_time = $request->departure_time;
-        $schedule->tenant_id = session()->get('tenant_id');
+        $schedule->tenant_id = $request->tenant_id ?? session()->get('tenant_id');
         $schedule->seats_available = $request->number_of_seats;
         $schedule->save();
 
@@ -447,6 +461,7 @@ class ManageBus extends Controller
             'bus_available_seats' => 'required|numeric|lte:seater',
             'bus_pictures' => 'required|file|mimes:jpeg,png,jpg,gif',
             'bus_proof_of_ownership' => 'required|file',
+            'tenant_id' => 'sometimes|exists:tenants,id',
         ]);
     }
 

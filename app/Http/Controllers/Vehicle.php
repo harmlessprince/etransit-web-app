@@ -21,6 +21,8 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 use RealRashid\SweetAlert\Facades\Alert;
+use function compact;
+use function view;
 
 class Vehicle extends Controller
 {
@@ -67,6 +69,14 @@ class Vehicle extends Controller
         return view('admin.vehicle.view-bus', compact('findBus'));
     }
 
+    public function viewSchedule($schedule_id)
+    {
+        $findSchedule = Schedule::with('terminal', 'bus', 'destination', 'pickup', 'service', 'seatTracker', 'transactions', 'tenant')
+            ->find($schedule_id);
+
+        return view('admin.vehicle.schedule-single-page', compact('findSchedule'));
+    }
+
     public function deleteTenantBus($bus_id)
     {
         $findBus = Bus::where('id', $bus_id)->first();
@@ -75,10 +85,24 @@ class Vehicle extends Controller
         return redirect()->to('/admin/manage/tenant-bus');
     }
 
+    public function deleteSchedule($schedule_id)
+    {
+        $findBus = Schedule::find($schedule_id);
+        $findBus->delete();
+
+        return redirect()->to('/admin/manage/schedules');
+    }
 
     public function editBus($bus_id)
     {
         $bus = Bus::find($bus_id);
+
+        return view('admin.vehicle.edit-bus', compact('bus'));
+    }
+
+    public function editSchedule($schedule_id)
+    {
+        $bus = Schedule::find($schedule_id);
 
         return view('admin.vehicle.edit-bus', compact('bus'));
     }
@@ -373,5 +397,11 @@ class Vehicle extends Controller
         return view('pages.nysc.home', compact('camps', 'hubs', 'busService'));
     }
 
+
+    public function manageSchedule(Request $request)
+    {
+        $records = Schedule::latest()->paginate(20);
+        return view('admin.vehicle.manage-schedules', compact('records'));
+    }
 
 }

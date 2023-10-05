@@ -245,16 +245,28 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/view-password-change-requests', [Operator::class, 'viewPasswordChangeRequests']);
         Route::post('/approve-password-change', [Operator::class, 'approvePasswordChange'])->name('approvePasswordChange');
 
+
+        Route::get('/add-schedule', [ManageBus::class, 'addScheduleView']);
+        Route::post('/add-schedule', [ManageBus::class, 'postScheduleView']);
+        Route::get('import-export-schedule', [EticketSchedule::class, 'importExportViewSchedule']);
+        Route::get('add-new-tenant-bus', [ManageBus::class, 'addNewBus']);
+        Route::post('post-new-tenant-bus', [ManageBus::class, 'createTenantBus']);
+
+
         //vehicle management
         Route::get('/manage/vehicle', [Vehicle::class, 'manage'])->name('manage.vehicle');
         Route::get('/manage/tenant-bus', [Vehicle::class, 'tenantBus'])->name('manage.bus');
+        Route::get('/manage/schedules', [Vehicle::class, 'manageSchedule']);
         Route::get('manage/fetch-all-buses', [Vehicle::class, 'fetchAllTenantBus'])->name('manage-fetch-all-buses');
         Route::get('manage/view-tenant-bus/{bus_id}', [Vehicle::class, 'viewTenantBus'])->name('view.bus');
+        Route::get('manage/view-schedule/{schedule_id}', [Vehicle::class, 'viewSchedule']);
         Route::get('manage/delete-tenant-bus/{bus_id}', [Vehicle::class, 'deleteTenantBus'])->name('admin.delete-bus');
+        Route::get('manage/delete-schedule/{schedule_id}', [Vehicle::class, 'deleteSchedule']);
         Route::get('view-bus/{bus_id}', [Vehicle::class, 'busSchedule'])->name('bus.schedules');
         Route::get('view-bus-schedule/{bus_id}', [Vehicle::class, 'busScheduleFetch'])->name('view-bus-schedule');
         Route::get('view-bus-schedule-page/{schedule_id}', [Vehicle::class, 'viewBusSchedulePage']);
         Route::get('edit-bus/{bus_id}', [Vehicle::class, 'editBus']);
+        Route::get('edit-schedule/{schedule_id}', [Vehicle::class, 'editSchedule']);
         Route::put('update-bus/{bus_id}', [Vehicle::class, 'updateBus']);
         Route::get('manage/bus-type', [Vehicle::class, 'allBusTypes']);
         Route::get('add/bus-type', [Vehicle::class, 'addBusType']);

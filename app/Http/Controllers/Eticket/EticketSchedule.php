@@ -17,6 +17,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 use RealRashid\SweetAlert\Facades\Alert;
+use function app;
+use function compact;
+use function view;
 
 class EticketSchedule extends Controller
 {
@@ -207,6 +210,10 @@ class EticketSchedule extends Controller
 
     public function importExportViewSchedule()
     {
+        $authGuard = app('auth')->guard('admin');
+        if ($authGuard->user()) {
+            return view('admin.schedule.import');
+        }
         return view('Eticket.schedule.import');
     }
 
