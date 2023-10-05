@@ -290,7 +290,7 @@
 
         function payWithCredPal() {
             const checkout = new Checkout({
-                key: 'Your Key', // Your Key
+                key: 'ad5ba355-d8e4-4e57-844b-6572d2442880', // Your Key
                 amount: {{ $totalFare }},
                 product: {{ $properties }},
                 onClose: function () {
