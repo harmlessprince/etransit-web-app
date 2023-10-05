@@ -276,15 +276,15 @@
 
     @php
         $properties=json_encode([
-    "name"=>auth()->user()->full_name,
-    "email"=>auth()->user()->email,
-    "phone"=>auth()->user()->phone_number,
-    "service"=>$fetchScheduleDetails->service->name,
-    "service_id"=>$fetchScheduleDetails->service->id,
-    "schedule_id"=>$fetchScheduleDetails->id,
-    "childrenCount"=>$childrenCount,
-    "adultCount=>$adultCount,
-    ]);
+            "name"=>auth()->user()->full_name,
+            "email"=>auth()->user()->email,
+            "phone"=>auth()->user()->phone_number,
+            "service"=>$fetchScheduleDetails->service->name,
+            "service_id"=>$fetchScheduleDetails->service->id,
+            "schedule_id"=>$fetchScheduleDetails->id,
+            "childrenCount"=>$childrenCount,
+            "adultCount"=>$adultCount,
+        ]);
     @endphp
     <script type="text/javascript">
 

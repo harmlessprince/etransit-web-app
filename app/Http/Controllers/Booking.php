@@ -464,6 +464,7 @@ class Booking extends Controller
             $returnDate = null;
         }
 
+
         return view('pages.payment.payment-page',
             compact('childrenCount', 'fetchScheduleDetails', 'adultCount',
                 'childrenCount', 'totalFare', 'selectedSeat', 'returnDate'));
