@@ -103,7 +103,7 @@
                                     <input type="hidden" name="schedule_id" value="{{$fetchScheduleDetails->id}}"/>
                                     <input type="hidden" name="childrenCount" value="{{$childrenCount}}"/>
                                     <input type="hidden" name="adultCount" value="{{$adultCount}}"/>
-                                    <input type="submit" value="Buy Ticket"/>
+                                    <input type="submit" value="Pay With Flutterwave"/>
                                 </form>
                             </div>
                             <div class="payment_button" id="cash_payment_option">

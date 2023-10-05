@@ -13,6 +13,7 @@ use App\Models\NyscHub;
 use App\Models\Schedule;
 use App\Models\SeatTracker;
 use App\Models\Service;
+use App\Models\Tenant;
 use App\Models\Terminal;
 use App\Models\Transaction;
 use DataTables;
@@ -73,8 +74,9 @@ class Vehicle extends Controller
     {
         $findSchedule = Schedule::with('terminal', 'bus', 'destination', 'pickup', 'service', 'seatTracker', 'transactions', 'tenant')
             ->find($schedule_id);
+        $seatTracker = SeatTracker::where('schedule_id', $schedule_id)->get();
 
-        return view('admin.vehicle.schedule-single-page', compact('findSchedule'));
+        return view('admin.vehicle.schedule-single-page', compact('findSchedule', 'seatTracker'));
     }
 
     public function deleteTenantBus($bus_id)
@@ -102,9 +104,41 @@ class Vehicle extends Controller
 
     public function editSchedule($schedule_id)
     {
-        $bus = Schedule::find($schedule_id);
+        $schedule = Schedule::find($schedule_id);
+        $tenants = Tenant::get();
+        $buses = Bus::get();
+        $terminals = Terminal::get();
+        $services = Service::get();
+        $pickups = Destination::get();
+        $destinations = Destination::get();
+        return view('admin.vehicle.edit-schedule', compact('destinations', 'pickups', 'services', 'terminals', 'schedule', 'tenants', 'buses'));
+    }
 
-        return view('admin.vehicle.edit-bus', compact('bus'));
+    public function updateSchedule(Request $request, $schedule_id)
+    {
+        $request->validate([
+            'terminal_id' => 'required',
+            'tenant_id' => 'required',
+            'service_id' => 'required',
+            'bus_id' => 'required',
+            'pickup_id' => 'required',
+            'destination_id' => 'required',
+            'fare_adult' => 'required',
+            'fare_children' => 'required',
+            'departure_date' => 'required',
+            'return_date' => 'required',
+            'departure_time' => 'required',
+            'return_time' => 'required',
+        ]);
+
+        $schedule = Schedule::first($schedule_id);
+
+        $schedule->update($request->all());
+
+
+        Alert::success('Success ', 'Schedule updated successfully');
+
+        return redirect('admin/manage/schedules');
     }
 
     public function updateBus(Request $request, $bus_id)

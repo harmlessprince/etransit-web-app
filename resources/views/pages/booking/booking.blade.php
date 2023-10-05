@@ -312,10 +312,16 @@
                                         <div class="col text-center">
                                             <p class="text-center">Adult&nbsp;&nbsp;<span style="color: rgb(52,63,95);"><strong>&#x20A6; {{number_format($schedule->fare_adult)}}</strong></span>&nbsp;
                                             </p>
-                                            <a href="{{url('seat-picker/'.$schedule->id. '/'.$tripTypeId)}}">
+                                            <a href="{{url('view-vehicle/'.$schedule->bus->id)}}">
                                                 <button class="btn btn-primary" type="button"
                                                         style="color: rgb(255,255,255);background: rgb(52,63,95);height: 29px;padding-top: 1px;width: 125.766px;">
                                                     View Vehicle
+                                                </button>
+                                            </a>
+                                            <a href="{{url('seat-picker/'.$schedule->id. '/'.$tripTypeId)}}">
+                                                <button class="btn btn-success" type="button"
+                                                        style="color: rgb(255,255,255);background: rgb(52,63,95);height: 29px;padding-top: 1px;width: 125.766px;">
+                                                    Book
                                                 </button>
                                             </a>
                                         </div>

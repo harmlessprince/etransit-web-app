@@ -76,6 +76,7 @@ Route::get('test/pdf', function () {
 // The callback url after a payment
 Route::get('/rave/callback', [Payment::class, 'callback'])->name('callback');
 Route::post('/bus/bookings/', [Booking::class, 'bookingRequest'])->name('bus.booking');
+Route::get('view-vehicle/{bus_id}', [ManageBus::class, 'viewBus']);
 Route::post('/bus/filter-bookings/{operator?}/{bus_type?}', [Booking::class, 'bookingFilterRequest'])->name('filter-bus');
 
 Route::get('filter-cars/{seat_capacity?}/{class_type?}', [Car::class, 'carList']);
@@ -267,6 +268,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('view-bus-schedule-page/{schedule_id}', [Vehicle::class, 'viewBusSchedulePage']);
         Route::get('edit-bus/{bus_id}', [Vehicle::class, 'editBus']);
         Route::get('edit-schedule/{schedule_id}', [Vehicle::class, 'editSchedule']);
+        Route::put('update-schedule/{schedule_id}', [Vehicle::class, 'updateSchedule']);
         Route::put('update-bus/{bus_id}', [Vehicle::class, 'updateBus']);
         Route::get('manage/bus-type', [Vehicle::class, 'allBusTypes']);
         Route::get('add/bus-type', [Vehicle::class, 'addBusType']);

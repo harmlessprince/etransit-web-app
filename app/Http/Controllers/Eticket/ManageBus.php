@@ -32,6 +32,7 @@ use Psr\Container\NotFoundExceptionInterface;
 use RealRashid\SweetAlert\Facades\Alert;
 use function app;
 use function compact;
+use function session;
 use function view;
 
 class ManageBus extends Controller
@@ -81,7 +82,12 @@ class ManageBus extends Controller
     public function viewBus($bus_id)
     {
         $findBus = Bus::where('tenant_id', session()->get('tenant_id'))->where('id', $bus_id)->with('driver', 'schedules')->first();
+        $authGuard = auth()->guard('e-ticket');
 
+        if ($authGuard->user()) {
+            $findBus = Bus::find($bus_id)->with('driver', 'schedules')->first();
+            return view('pages.booking.view-bus', compact('findBus'));
+        }
         return view('Eticket.bus.view', compact('findBus'));
     }
 
