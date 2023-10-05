@@ -291,8 +291,8 @@
         function payWithCredPal() {
             const checkout = new Checkout({
                 key: 'Your Key', // Your Key
-                amount: totalFare,
-                product: properties,
+                amount: {{ $totalFare }},
+                product: {{ $properties }},
                 onClose: function () {
                     console.log('Widget closed');
                 },
