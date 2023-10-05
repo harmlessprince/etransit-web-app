@@ -291,12 +291,18 @@
         function payWithCredPal() {
             const checkout = new Checkout({
                 key: 'Your Key', // Your Key
-                amount: {{ $totalFare }},
-                product: {{ $properties }},
-                onClose: () => console.log('Widget closed'),
-                onLoad: () => console.log('Widget loaded successfully'),
-                onError: (error) => console.log(error),
-                onSuccess: (data) => {
+                amount: totalFare,
+                product: properties,
+                onClose: function () {
+                    console.log('Widget closed');
+                },
+                onLoad: function () {
+                    console.log('Widget loaded successfully');
+                },
+                onError: function (error) {
+                    console.log(error);
+                },
+                onSuccess: function (data) {
                     success(data);
                     checkout.close();
                 },
@@ -306,7 +312,10 @@
             return checkout.open();
         }
 
-        // const success = (data) => console.log(data); // callback function
+        function success(data) {
+            console.log(data); // callback function
+        }
+
 
     </script>
 @endsection
