@@ -33,6 +33,7 @@ class Bus extends Model
         'bus_unavailable_seats',
     ];
 
+
     public function schedules()
     {
         return $this->hasMany(Schedule::class);

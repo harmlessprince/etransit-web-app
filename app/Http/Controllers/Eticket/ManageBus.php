@@ -388,8 +388,7 @@ class ManageBus extends Controller
             }
         }
 
-
-        $bus = Bus::find($bus_id);
+        $bus = Bus::findOrFail($bus_id);
         $bus->update($data);
 
 
