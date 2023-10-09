@@ -91,6 +91,7 @@ class Schedule extends Model
      */
     protected static function booted()
     {
+        parent::boot();
         static::addGlobalScope(new TenantScope);
     }
 

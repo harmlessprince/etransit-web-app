@@ -60,13 +60,12 @@ class Booking extends Controller
 //                                                 ->with('terminal','bus','destination','pickup','service')->get();
 ////
         if ($request->trip_type == 1) {
-            $checkSchedule = Schedule::withoutGlobalScopes()->where('departure_date', $request->departure_date)
+            $checkSchedule = Schedule::query()->withoutGlobalScopes()->where('departure_date', $request->departure_date)
                 //  ->whereDate('departure_date','>=', $data['departure_date'])
                 ->where('pickup_id', $request->destination_from)
                 ->where('destination_id', $request->destination_to)
                 ->where('seats_available', '>=', $request->number_of_passengers)
-                ->with('terminal', 'bus', 'destination', 'pickup', 'service', 'tenant')->get();
-
+                ->with(['terminal' => fn($query) => $query->withoutGlobalScopes(), 'bus' => fn($query) => $query->withoutGlobalScopes(), 'destination', 'pickup', 'service', 'tenant'])->get();
 
         } elseif ($request->trip_type == 2) {
             $checkSchedule = Schedule::withoutGlobalScopes()->where('departure_date', $request->departure_date)
@@ -74,7 +73,7 @@ class Booking extends Controller
                 ->where('destination_id', $request->destination_to)
                 ->where('seats_available', '>=', $request->number_of_passengers)
                 ->where('pickup_id', $request->destination_from)
-                ->with('terminal', 'bus', 'destination', 'pickup', 'service', 'tenant')->get();
+                ->with(['terminal' => fn($query) => $query->withoutGlobalScopes(), 'bus' => fn($query) => $query->withoutGlobalScopes(), 'destination', 'pickup', 'service', 'tenant'])->get();
         }
 
         if (!is_null(request()->bus_operator) && $request->trip_type == 1) {
@@ -84,8 +83,10 @@ class Booking extends Controller
                 ->where('pickup_id', $request->destination_from)
                 ->where('destination_id', $request->destination_to)
                 ->where('seats_available', '>=', $request->number_of_passengers)
-                ->with('terminal', 'bus', 'destination', 'pickup', 'service', 'tenant')->get();
+                ->with(['terminal' => fn($query) => $query->withoutGlobalScopes(), 'bus' => fn($query) => $query->withoutGlobalScopes(), 'destination', 'pickup', 'service', 'tenant'])->get();
         }
+
+
 
 
         $operators = Tenant::inRandomOrder()

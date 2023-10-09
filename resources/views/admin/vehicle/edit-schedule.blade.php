@@ -116,32 +116,32 @@
                             </div>
                             <div class="form-group">
                                 <label for="adult_tfare">Adult Tfare</label>
-                                <input type="text" class="form-control" name="adult_tfare"
+                                <input type="text" class="form-control" name="fare_adult"
                                        value="{{old('adult_tfare',$schedule->fare_adult)}}"
                                        id="adult_tfare" required/>
                             </div>
                             <div class="form-group">
                                 <label for="child_tfare">Child Tfare</label>
-                                <input type="text" class="form-control" name="child_tfare"
+                                <input type="text" class="form-control" name="fare_children"
                                        value="{{old('child_tfare',$schedule->fare_children)}}"
                                        id="child_tfare" required/>
                             </div>
                             <div class="form-group">
                                 <label for="departure_date">Departure Date</label>
                                 <input type="date" class="form-control" name="departure_date"
-                                       value="{{old('departure_date',$schedule->departure_date)}}" id="departure_date"
+                                       value="{{old('departure_date',$schedule->departure_date->format('Y-m-d'))}}" id="departure_date"
                                        required/>
                             </div>
                             <div class="form-group">
                                 <label for="departure_time">Departure Time</label>
                                 <input type="time" class="form-control" name="departure_time"
-                                       value="{{old('departure_time',$schedule->departure_time)}}" id="departure_time"
+                                       value="{{old('departure_time',optional($schedule->departure_time)->format('Y-m-d'))}}" id="departure_time"
                                        required/>
                             </div>
                             <div class="form-group">
                                 <label for="return_date">Return Date</label>
                                 <input type="date" class="form-control" name="return_date"
-                                       value="{{old('return_date',$schedule->return_date)}}" id="return_date"
+                                       value="{{old('return_date',optional($schedule->return_date)->format('Y-m-d'))}}" id="return_date"
                                 />
                             </div>
                             <div class="form-group">
@@ -151,7 +151,7 @@
                                 />
                             </div>
                             <div class="submit_button">
-                                <button class="btn btn-success">Create Schedule</button>
+                                <button class="btn btn-success">Update Schedule</button>
                             </div>
                         </form>
                     </div>

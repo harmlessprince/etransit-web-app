@@ -137,13 +137,13 @@
                             <div class="form-group">
                                 <label for="return_date">Return Date</label>
                                 <input type="date" class="form-control" name="return_date"
-                                       value="{{old('return_date',$schedule->return_date)}}" id="return_date"
+                                       value="{{old('return_date')}}" id="return_date"
                                 />
                             </div>
                             <div class="form-group">
                                 <label for="return_time">Return Time</label>
                                 <input type="time" class="form-control" name="return_time"
-                                       value="{{old('return_time',$schedule->return_time)}}" id="return_time"
+                                       value="{{old('return_time')}}" id="return_time"
                                 />
                             </div>
                             <div class="submit_button">

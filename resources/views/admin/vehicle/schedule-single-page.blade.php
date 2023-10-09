@@ -144,11 +144,11 @@
                     <div class="card-body">
                         <h4>Schedule Information</h4>
                         <br>
-                        <h6>PickUp City: {{$findSchedule->pickup->location}}</h6>
+                        <h6>PickUp City: {{$findSchedule->pickup->location ?? 'N/A'}}</h6>
                         <hr>
-                        <h6>Destination City : {{$findSchedule->destination->location}}</h6>
+                        <h6>Destination City : {{$findSchedule->destination->location ?? 'N/A'}}</h6>
                         <hr>
-                        <h6>Departure Date : {{$findSchedule->departure_date->format('Y-M-d')}}</h6>
+                        <h6>Departure Date : {{$findSchedule->departure_date->format('Y-M-d') ?? 'N/A'}}</h6>
                         <hr>
                         <h6>Departure Time : {{$findSchedule->departure_time}}</h6>
                         @if(!is_null($findSchedule->return_date))

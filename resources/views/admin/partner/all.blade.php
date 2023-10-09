@@ -37,6 +37,7 @@
                             <th>Phone Number</th>
                             <th>Action</th>
                         </tr>
+<<<<<<< HEAD
                         </thead>
                         <tbody>
                         @foreach($records as $record)
@@ -58,6 +59,13 @@
                     <div>
                         {{ $records->links('vendor.pagination.default') }}
                     </div>
+=======
+                    @endforeach
+                    </tbody>
+                </table>
+                <div>
+                    {{$records->links('vendor.pagination.default')}}
+>>>>>>> 7fc1251 (fixed all partner and operator page)
                 </div>
             </div>
         @endif
