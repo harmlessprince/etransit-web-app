@@ -67,7 +67,6 @@ class Booking extends Controller
                 ->where('seats_available', '>=', $request->number_of_passengers)
                 ->with('terminal', 'bus', 'destination', 'pickup', 'service', 'tenant')->get();
 
-
         } elseif ($request->trip_type == 2) {
             $checkSchedule = Schedule::withoutGlobalScopes()->where('departure_date', $request->departure_date)
                 ->where('return_date', $request->return_date)
@@ -104,7 +103,7 @@ class Booking extends Controller
 
             return back();
         }
-
+        
 
         //fetch destination and pick up
         $pickUp = Destination::where('id', $data['destination_from'])->select('location')->first();
