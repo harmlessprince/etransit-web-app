@@ -41,6 +41,22 @@
         text-decoration: none !important;
     }
 </style>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<style>
+    .mySlides {
+        display: none
+    }
+
+    .w3-left, .w3-right, .w3-badge {
+        cursor: pointer
+    }
+
+    .w3-badge {
+        height: 13px;
+        width: 13px;
+        padding: 0
+    }
+</style>
 @section('content')
     <div class="container-fluid">
         <div class="page-header">
@@ -104,17 +120,24 @@
             <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
                 <div class="card">
                     <div class="card-body">
-
-                        <h4>Driver Information</h4>
+                        <h4>Bus Information</h4>
                         <br>
-                        @if(isset($findBus->driver))
-                            <h6>Name : {{$findBus->driver->full_name}}</h6>
-                            <hr>
-                            <h6>Address : {{$findBus->driver->address}}</h6>
-                            <hr>
-                            <h6>Contact : {{$findBus->driver->phone_number}}</h6>
+                        @isset($findBus->bus_pictures)
+                            <div class="w3-content w3-display-container" style="max-width:800px">
+                                @foreach($findBus->bus_pictures as $picture)
+                                    <img class="mySlides" src="{{ $picture }}" alt="" style="width:100%;">
+                                @endforeach
 
-                        @endif
+                                <div class="w3-row-padding w3-section">
+                                    @foreach($findBus->bus_pictures as $key=>$picture)
+                                        <div class="w3-col s4">
+                                            <img class="demo w3-opacity" src="{{ $picture }}" alt=""
+                                                 style="width:100%;" onclick="currentDiv({{ $key+1 }})">
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        @endisset
                     </div>
                 </div>
             </div>
@@ -127,5 +150,31 @@
     <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+    <script>
+        function currentDiv(n) {
+            showDivs(n);
+        }
+
+        function showDivs(n) {
+            let slideIndex;
+            let i;
+            let x = document.getElementsByClassName("mySlides");
+            let dots = document.getElementsByClassName("demo");
+            if (n > x.length) {
+                slideIndex = 1
+            }
+            if (n < 1) {
+                slideIndex = x.length
+            }
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" w3-opacity-off", "");
+            }
+            x[slideIndex - 1].style.display = "block";
+            dots[slideIndex - 1].className += " w3-opacity-off";
+        }
+    </script>
 
 @endsection

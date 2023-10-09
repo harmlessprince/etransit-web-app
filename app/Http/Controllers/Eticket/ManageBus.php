@@ -76,19 +76,16 @@ class ManageBus extends Controller
     /**
      * @param $bus_id
      * @return Application|Factory|View
-     * @throws ContainerExceptionInterface
-     * @throws NotFoundExceptionInterface
      */
     public function viewBus($bus_id)
     {
-        $findBus = Bus::where('tenant_id', session()->get('tenant_id'))->where('id', $bus_id)->with('driver', 'schedules')->first();
         $authGuard = auth()->guard('e-ticket');
+        $findBus = Bus::with('driver', 'schedules')->withoutGlobalScopes()->find($bus_id)->first();
 
         if ($authGuard->user()) {
-            $findBus = Bus::find($bus_id)->with('driver', 'schedules')->first();
-            return view('pages.booking.view-bus', compact('findBus'));
+            return view('Eticket.bus.view', compact('findBus'));
         }
-        return view('Eticket.bus.view', compact('findBus'));
+        return view('pages.booking.view-bus', compact('findBus'));
     }
 
 
