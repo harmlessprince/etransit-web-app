@@ -87,6 +87,8 @@ class Booking extends Controller
                 ->with('terminal', 'bus', 'destination', 'pickup', 'service', 'tenant')->get();
         }
 
+        dd($checkSchedule);
+
 
         $operators = Tenant::inRandomOrder()
             ->limit(10)
