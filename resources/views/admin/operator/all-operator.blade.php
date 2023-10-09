@@ -60,7 +60,7 @@
                     </tbody>
                 </table>
                 <div>
-                    {{ {{$records->links('vendor.pagination.default')}} }}
+                    {{ $records->links('vendor.pagination.default') }}
                 </div>
             </div>
         </div>

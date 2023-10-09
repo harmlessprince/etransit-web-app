@@ -24,41 +24,43 @@
 
             <br><br>
         </div>
-        <div class="card">
-            <div class="card-body table-responsive">
-                <table class="table table-bordered">
-                    <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>Full Name</th>
-                        <th>Company's Name</th>
-                        <th>Email</th>
-                        <th>Phone Number</th>
-                        <th>Action</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @foreach($records as $record)
+        @if($records)
+            <div class="card">
+                <div class="card-body table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
                         <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td>{{ $record->full_name }}</td>
-                            <td>{{ $record->company_name }}</td>
-                            <td>{{ $record->email }}</td>
-                            <td>{{ $record->phone_number }}</td>
-                            <td>
-                                <a href='/admin/view-partners/{{ $record->id }}'
-                                   class='edit btn btn-success btn-sm'>View</a>
-
-                            </td>
+                            <th>No</th>
+                            <th>Full Name</th>
+                            <th>Company's Name</th>
+                            <th>Email</th>
+                            <th>Phone Number</th>
+                            <th>Action</th>
                         </tr>
-                    @endforeach
-                    </tbody>
-                </table>
-                <div>
-                    {{ {{$records->links('vendor.pagination.default')}} }}
+                        </thead>
+                        <tbody>
+                        @foreach($records as $record)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $record->full_name }}</td>
+                                <td>{{ $record->company_name }}</td>
+                                <td>{{ $record->email }}</td>
+                                <td>{{ $record->phone_number }}</td>
+                                <td>
+                                    <a href='/admin/view-partners/{{ $record->id }}'
+                                       class='edit btn btn-success btn-sm'>View</a>
+
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                    <div>
+                        {{ $records->links('vendor.pagination.default') }}
+                    </div>
                 </div>
             </div>
-        </div>
+        @endif
 
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>

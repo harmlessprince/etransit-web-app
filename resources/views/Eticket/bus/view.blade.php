@@ -1,35 +1,42 @@
 @extends('Eticket.layout.app')
 <style>
-    .func{
+    .func {
         background: green;
-        color:white;
-        padding:4px;
+        color: white;
+        padding: 4px;
         border-radius: 5px;
     }
-    .not_func{
+
+    .not_func {
         background: red;
-        color:white;
-        padding:4px;
+        color: white;
+        padding: 4px;
         border-radius: 5px;
     }
-    .align-text{
+
+    .align-text {
         text-align: center;
     }
-    .three-row-grid{
-        display:flex;
+
+    .three-row-grid {
+        display: flex;
         justify-content: space-between;
     }
-    .bus_event{
+
+    .bus_event {
         display: flex;
         justify-content: flex-end;
     }
-    .schedule_trip , .schedules, .assign_drivers{
+
+    .schedule_trip, .schedules, .assign_drivers {
         margin-left: 10px;
     }
-    .assign_driver{
+
+    .assign_driver {
         display: flex;
         justify-content: center;
     }
+
     a:hover {
         text-decoration: none !important;
     }
@@ -41,7 +48,8 @@
                 <div class="col-6">
                     <h3>{{$tenantCompanyName  ?? env('APP_NAME')}}</h3>
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{url('e-ticket/buses')}}"><i data-feather="home"></i></a></li>
+                        <li class="breadcrumb-item"><a href="{{url('e-ticket/buses')}}"><i data-feather="home"></i></a>
+                        </li>
                         <li class="breadcrumb-item">Buses</li>
                     </ol>
                 </div>
@@ -52,30 +60,30 @@
         </div>
     </div>
     <!-- Container-fluid starts-->
-    <div class="container-fluid" >
+    <div class="container-fluid">
         <div class="row three-row-grid">
             <div class="col-md-3 col-lg-3 col-xl-3 col-sm-3">
                 <a href="">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="align-text">
-                            <h1>{{!is_null($findBus->driver) ? 1 : 0}}</h1>
-                            <h6>Driver</h6>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="align-text">
+                                <h1>{{!is_null($findBus->driver) ? 1 : 0}}</h1>
+                                <h6>Driver</h6>
+                            </div>
                         </div>
                     </div>
-                </div>
                 </a>
             </div>
             <div class="col-md-3 col-lg-3 col-xl-3 col-sm-3">
                 <a href="{{url('e-ticket/view-bus-each-schedule/'.$findBus->id)}}">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="align-text">
-                            <h1>{{count($findBus->schedules)}}</h1>
-                            <h6>Schedules</h6>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="align-text">
+                                <h1>{{count($findBus->schedules)}}</h1>
+                                <h6>Schedules</h6>
+                            </div>
                         </div>
                     </div>
-                </div>
                 </a>
             </div>
         </div>
@@ -87,7 +95,8 @@
                         <a href="{{url('e-ticket/schedule/'.$findBus->id)}}" class="btn btn-success">Schedule Trip</a>
                     </div>
                     <div class="schedules">
-                        <a href="{{url('e-ticket/view-bus-each-schedule/'.$findBus->id)}}" class="btn btn-success">Check Schedule(s)</a>
+                        <a href="{{url('e-ticket/view-bus-each-schedule/'.$findBus->id)}}" class="btn btn-success">Check
+                            Schedule(s)</a>
                     </div>
                 </div>
             </div>
@@ -108,7 +117,11 @@
                         <hr>
                         <h6>Bus Passenger Seat : {{$findBus->seater}}</h6>
                         <hr>
-                        <h6>Air Conditioning : @if($findBus->air_conditioning == 1 ) <span class="func"> Functional</span> @else <span class="not_func">Not Functional</span> @endif</h6>
+                        <h6>Air Conditioning : @if($findBus->air_conditioning == 1 )
+                                <span class="func"> Functional</span>
+                            @else
+                                <span class="not_func">Not Functional</span>
+                            @endif</h6>
                         <hr>
                         <h6>Bus Created date : {{$findBus->created_at->format('Y-m-d')}}</h6>
                     </div>
@@ -120,21 +133,24 @@
 
                         <h4>Driver Information</h4>
                         <br>
-                        @if(isset($findBus->driver))
-                        <h6>Name : {{$findBus->driver->full_name}}</h6>
-                        <hr>
-                        <h6>Address : {{$findBus->driver->address}}</h6>
-                        <hr>
-                        <h6>Contact : {{$findBus->driver->phone_number}}</h6>
-                        <hr>
-                        <a href="{{url('e-ticket/remove-driver-from-bus/'.$findBus->driver->id .'/'. $findBus->id)}}" class="btn btn-danger">Remove Driver From Bus</a>
-                        <a href="{{url('e-ticket/edit-tenant-driver/'.$findBus->driver->id)}}" class="btn btn-primary">Edit Driver Info</a>
-                        <hr>
+                        @if($findBus->driver)
+                            <h6>Name : {{$findBus->driver->full_name}}</h6>
+                            <hr>
+                            <h6>Address : {{$findBus->driver->address}}</h6>
+                            <hr>
+                            <h6>Contact : {{$findBus->driver->phone_number}}</h6>
+                            <hr>
+                            <a href="{{url('e-ticket/remove-driver-from-bus/'.$findBus->driver->id .'/'. $findBus->id)}}"
+                               class="btn btn-danger">Remove Driver From Bus</a>
+                            <a href="{{url('e-ticket/edit-tenant-driver/'.$findBus->driver->id)}}"
+                               class="btn btn-primary">Edit Driver Info</a>
+                            <hr>
                         @else
                             <div class="assign_driver">
-                              <div>
-                                  <a href="{{url('e-ticket/assign-driver/'.$findBus->id)}}" class="btn btn-danger">Assign Driver</a>
-                              </div>
+                                <div>
+                                    <a href="{{url('e-ticket/assign-driver/'.$findBus->id)}}" class="btn btn-danger">Assign
+                                        Driver</a>
+                                </div>
                             </div>
                         @endif
                     </div>

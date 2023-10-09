@@ -2,12 +2,27 @@
 
 namespace Database\Seeders;
 
+use App\Imports\DataImport;
 use Illuminate\Database\Seeder;
 use Maatwebsite\Excel\Facades\Excel;
-use App\Imports\DataImport;
 
 
-class ScheduleData {
+class ScheduleSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        Excel::import(new DataImport, storage_path('app/data.xlsx'));
+        //$collection = Excel::toCollection(new DataImport, 'app/data.xlsx');
+    }
+}
+
+class ScheduleData
+{
 
     public $operator;
     public $terminal;
@@ -29,18 +44,4 @@ class ScheduleData {
     public $bus_type;
 
 
-}
-
-class ScheduleSeeder extends Seeder
-{
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
-    public function run()
-    {
-        Excel::import(new DataImport, storage_path('app/data.xlsx'));
-        //$collection = Excel::toCollection(new DataImport, 'app/data.xlsx');
-    }
 }
