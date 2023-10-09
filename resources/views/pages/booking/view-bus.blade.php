@@ -120,7 +120,7 @@
             <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
                 <div class="card">
                     <div class="card-body">
-                        <h4>Bus Information</h4>
+                        <h4>Bus Images</h4>
                         <br>
                         @isset($findBus->bus_pictures)
                             <div class="w3-content w3-display-container" style="max-width:800px">
