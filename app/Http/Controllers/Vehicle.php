@@ -120,18 +120,18 @@ class Vehicle extends Controller
     public function updateSchedule(Request $request, $schedule_id)
     {
         $request->validate([
-            'terminal_id' => 'required',
-            'tenant_id' => 'required',
-            'service_id' => 'required',
-            'bus_id' => 'required',
-            'pickup_id' => 'required',
-            'destination_id' => 'required',
-            'fare_adult' => 'required',
-            'fare_children' => 'required',
-            'departure_date' => 'required',
-            'return_date' => 'required',
-            'departure_time' => 'required',
-            'return_time' => 'required',
+            'terminal_id' => 'sometimes',
+            'tenant_id' => 'sometimes',
+            'service_id' => 'sometimes',
+            'bus_id' => 'sometimes',
+            'pickup_id' => 'sometimes',
+            'destination_id' => 'sometimes',
+            'fare_adult' => 'sometimes',
+            'fare_children' => 'sometimes',
+            'departure_date' => 'sometimes',
+            'return_date' => 'nullable',
+            'departure_time' => 'nullable',
+            'return_time' => 'nullable',
         ]);
 
         $schedule = Schedule::query()->withoutGlobalScopes()->findOrFail($schedule_id);
