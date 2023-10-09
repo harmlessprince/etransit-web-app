@@ -129,10 +129,10 @@
                                 @endforeach
 
                                 <div class="w3-row-padding w3-section">
-                                    @foreach($findBus->bus_pictures as $key=>$picture)
+                                    @foreach($findBus->bus_pictures as $picture)
                                         <div class="w3-col s4">
                                             <img class="demo w3-opacity" src="{{ $picture }}" alt=""
-                                                 style="width:100%;" onclick="currentDiv({{ $key+1 }})">
+                                                 style="width:100%;" onclick="currentDiv({{ $loop->iteration }})">
                                         </div>
                                     @endforeach
                                 </div>
