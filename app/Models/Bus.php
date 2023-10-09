@@ -68,5 +68,13 @@ class Bus extends Model
         return (int)$this->seater - (int)$this->bus_available_seats;
     }
 
+    public function getBusPicturesAttribute($value)
+    {
+        return json_decode($value, true);
+    }
 
+    public function getBusProofOfOwnershipAttribute($value)
+    {
+        return json_decode($value, true);
+    }
 }
