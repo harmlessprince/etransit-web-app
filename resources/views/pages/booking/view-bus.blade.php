@@ -58,14 +58,11 @@
     }
 </style>
 @section('content')
-    <div class="container-fluid">
+    <div class="container mb-4 mt-5">
         <div class="page-header">
             <div class="row">
                 <div class="col-6">
-                    <h3>{{$tenantCompanyName  ?? env('APP_NAME')}}</h3>
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item">Vehicle</li>
-                    </ol>
+                    <h3>Vehicle Details</h3>
                 </div>
                 <div class="col-6">
 
@@ -74,23 +71,7 @@
         </div>
     </div>
     <!-- Container-fluid starts-->
-    <div class="container-fluid">
-        <div class="row three-row-grid">
-            <div class="col-md-3 col-lg-3 col-xl-3 col-sm-3">
-                <a href="">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="align-text">
-                                <h1>{{!is_null($findBus->driver) ? 1 : 0}}</h1>
-                                <h6>Driver</h6>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
-        </div>
-
-
+    <div class="container">
         <div class="row">
             <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
                 <div class="card">
@@ -105,7 +86,7 @@
                         <hr>
                         <h6>Bus Wheels : {{$findBus->wheels}}</h6>
                         <hr>
-                        <h6>Bus Passenger Seat : {{$findBus->seater}}</h6>
+                        <h6>Bus Passenger Seat : {{$findBus->seater}} (Seater)</h6>
                         <hr>
                         <h6>Air Conditioning : @if($findBus->air_conditioning == 1 )
                                 <span class="func"> Functional</span>
@@ -120,7 +101,7 @@
             <div class="col-md-6 col-sm-6 col-lg-6 col-xl-6">
                 <div class="card">
                     <div class="card-body">
-                        <h4>Bus Information</h4>
+                        <h4>Bus Pictures</h4>
                         <br>
                         @isset($findBus->bus_pictures)
                             <div class="w3-content w3-display-container" style="max-width:800px">
@@ -138,6 +119,9 @@
                                 </div>
                             </div>
                         @endisset
+                        @if(!$findBus->bus_pictures)
+                            <h2>No Picture Available</h2>
+                        @endif
                     </div>
                 </div>
             </div>

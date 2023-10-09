@@ -97,7 +97,7 @@ class Vehicle extends Controller
 
     public function editBus($bus_id)
     {
-        $bus = Bus::find($bus_id);
+        $bus = Bus::findOrFail($bus_id);
 
         return view('admin.vehicle.edit-bus', compact('bus'));
     }

@@ -111,12 +111,12 @@
                             </div>
                             <div class="form-group">
                                 <label for="bus_pictures">Upload Vehicle Pictures</label>
-                                <input type="file" multiple class="form-control" name="bus_pictures"
+                                <input type="file" multiple class="form-control" name="bus_pictures[]"
                                        value="{{old('bus_pictures')}}" id="bus_pictures"/>
                             </div>
                             <div class="form-group">
-                                <label for="bus_proof_of_ownership">Upload Vehicle Pictures</label>>
-                                <input type="file" multiple class="form-control" name="bus_proof_of_ownership"
+                                <label for="bus_proof_of_ownership">Upload Proof Of Ownership Pictures</label>
+                                <input type="file" multiple class="form-control" name="bus_proof_of_ownership[]"
                                        value="{{old('bus_proof_of_ownership')}}" id="bus_proof_of_ownership"/>
                             </div>
                             <div class="submit_button">
