@@ -65,14 +65,14 @@ class Vehicle extends Controller
 
     public function viewTenantBus($bus_id)
     {
-        $findBus = Bus::with('driver', 'schedules', 'tenant')->where('id', $bus_id)->first();
+        $findBus = Bus::query()->with('driver', 'schedules', 'tenant')->where('id', $bus_id)->first();
 
         return view('admin.vehicle.view-bus', compact('findBus'));
     }
 
     public function viewSchedule($schedule_id)
     {
-        $findSchedule = Schedule::with('terminal', 'bus', 'destination', 'pickup', 'service', 'seatTracker', 'transactions', 'tenant')
+        $findSchedule = Schedule::query()->withoutGlobalScopes()->with(['terminal' =>  fn($query) => $query->withoutGlobalScopes(), 'bus' =>  fn($query) => $query->withoutGlobalScopes(), 'destination', 'pickup', 'service', 'seatTracker', 'transactions', 'tenant'])
             ->find($schedule_id);
         $seatTracker = SeatTracker::where('schedule_id', $schedule_id)->get();
 
@@ -104,13 +104,16 @@ class Vehicle extends Controller
 
     public function editSchedule($schedule_id)
     {
-        $schedule = Schedule::find($schedule_id);
+        $schedule = Schedule::query()->withoutGlobalScopes()->findOrFail($schedule_id);
+
         $tenants = Tenant::get();
-        $buses = Bus::get();
+        $buses = Bus::query()->withoutGlobalScopes()->get();
         $terminals = Terminal::get();
         $services = Service::get();
         $pickups = Destination::get();
         $destinations = Destination::get();
+
+//        dd($schedule);
         return view('admin.vehicle.edit-schedule', compact('destinations', 'pickups', 'services', 'terminals', 'schedule', 'tenants', 'buses'));
     }
 
@@ -131,7 +134,7 @@ class Vehicle extends Controller
             'return_time' => 'required',
         ]);
 
-        $schedule = Schedule::first($schedule_id);
+        $schedule = Schedule::query()->withoutGlobalScopes()->findOrFail($schedule_id);
 
         $schedule->update($request->all());
 
@@ -434,7 +437,7 @@ class Vehicle extends Controller
 
     public function manageSchedule(Request $request)
     {
-        $records = Schedule::latest()->paginate(20);
+        $records = Schedule::query()->withoutGlobalScopes()->latest()->with(['terminal' => fn($query) => $query->withoutGlobalScopes(), 'bus' => fn($query) => $query->withoutGlobalScopes()])->paginate(20);
         return view('admin.vehicle.manage-schedules', compact('records'));
     }
 
