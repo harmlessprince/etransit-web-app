@@ -33,9 +33,6 @@ class Bus extends Model
         'bus_unavailable_seats',
     ];
 
-    protected $casts = [
-        'bus_pictures' => 'array'
-    ];
 
     public function schedules()
     {
