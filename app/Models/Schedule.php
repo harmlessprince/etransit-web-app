@@ -49,7 +49,7 @@ class Schedule extends Model
 
     public function bus()
     {
-        return $this->belongsTo(Bus::class, 'bus_id', 'id');
+        return $this->belongsTo(Bus::class);
     }
 
     public function destination()
@@ -91,6 +91,7 @@ class Schedule extends Model
      */
     protected static function booted()
     {
+        parent::boot();
         static::addGlobalScope(new TenantScope);
     }
 

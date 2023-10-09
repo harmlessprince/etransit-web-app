@@ -81,14 +81,17 @@ class ManageBus extends Controller
      */
     public function viewBus($bus_id)
     {
-        $findBus = Bus::where('tenant_id', session()->get('tenant_id'))->where('id', $bus_id)->with('driver', 'schedules')->first();
+
         $authGuard = auth()->guard('e-ticket');
+        Bus::findOrfail($bus_id);
 
         if ($authGuard->user()) {
-            $findBus = Bus::find($bus_id)->with('driver', 'schedules')->first();
-            return view('pages.booking.view-bus', compact('findBus'));
+            $findBus = Bus::find($bus_id)->with(['driver', 'schedules'])->first();
+            return view('Eticket.bus.view', compact('findBus'));
         }
-        return view('Eticket.bus.view', compact('findBus'));
+        $findBus = Bus::query()->withoutGlobalScopes()->where('id', $bus_id)->with(['driver' => fn($query) => $query->withoutGlobalScopes(), 'schedules'])->first();
+        return view('pages.booking.view-bus', compact('findBus'));
+
     }
 
 
@@ -361,22 +364,28 @@ class ManageBus extends Controller
         ];
 
         if ($files = $request->file('bus_pictures')) {
+            $bus_pictures = [];
             foreach ($files as $file) {
                 $uploadedFileUrl = Cloudinary::upload($file->getRealPath())->getSecurePath();
                 $bus_pictures[] = $uploadedFileUrl;
             }
-            $bus_pictures = json_encode($bus_pictures);
-            $data['bus_pictures'] = $bus_pictures;
+            if (count($bus_pictures) > 0) {
+                $bus_pictures = json_encode($bus_pictures);
+                $data['bus_pictures'] = $bus_pictures;
+            }
         }
 
 
         if ($files = $request->file('bus_proof_of_ownership')) {
+            $bus_proof_of_ownership = [];
             foreach ($files as $file) {
                 $uploadedFileUrl = Cloudinary::upload($file->getRealPath())->getSecurePath();
                 $bus_proof_of_ownership[] = $uploadedFileUrl;
             }
-            $bus_proof_of_ownership = json_encode($bus_proof_of_ownership);
-            $data['bus_proof_of_ownership'] = $bus_proof_of_ownership;
+            if (count($bus_proof_of_ownership) > 0) {
+                $bus_proof_of_ownership = json_encode($bus_proof_of_ownership);
+                $data['bus_proof_of_ownership'] = $bus_proof_of_ownership;
+            }
         }
 
 
