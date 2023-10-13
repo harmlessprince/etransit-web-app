@@ -1,8 +1,4 @@
 @extends('layouts.app')
-<script
-    type="text/javascript"
-    src="https://corporate-loans.s3.amazonaws.com/minifiedJS/index.js"
-></script>
 <style>
     /*.round_trip{*/
     /*    display:grid;*/
@@ -64,6 +60,7 @@
         outline: inherit;
     }
 </style>
+<script type="text/javascript" src="https://corporate-loans.s3.amazonaws.com/minifiedJS/index.js"></script>
 @section('content')
     <section style="padding-left: 0px;background: var(--bs-gray-100);">
         <div class="container">
@@ -81,8 +78,8 @@
                         </div>
                         <div class="col-12" style="padding-right: 0px;padding-left: 0px;margin-top: 40px;">
                             <p style="padding-left: 27px;">SELECT PAYMENT METHOD</p>
-                            <div class="payment_button" id="credpal_payment">
-                                <button onclick="payWithCredPal()" type="button">Pay With CredPal</button>
+                            <div class="payment_button">
+                                <button id="credpal_payment" type="button">Pay With CredPal</button>
                             </div>
 
                             <div class="payment_button" id="online_payment">
@@ -274,25 +271,32 @@
         </div>
     </section>
 
-    @php
-        $properties=json_encode([
-            "name"=>auth()->user()->full_name,
-            "email"=>auth()->user()->email,
-            "phone"=>auth()->user()->phone_number,
-            "service"=>$fetchScheduleDetails->service->name,
-            "service_id"=>$fetchScheduleDetails->service->id,
-            "schedule_id"=>$fetchScheduleDetails->id,
-            "childrenCount"=>$childrenCount,
-            "adultCount"=>$adultCount,
-        ]);
-    @endphp
-    <script type="text/javascript">
+    <?php
+    $properties = json_encode([
+        "name" => auth()->user()->full_name,
+        "email" => auth()->user()->email,
+        "phone" => auth()->user()->phone_number,
+        "service" => $fetchScheduleDetails->service->name,
+        "service_id" => $fetchScheduleDetails->service->id,
+        "schedule_id" => $fetchScheduleDetails->id,
+        "childrenCount" => $childrenCount,
+        "adultCount" => $adultCount,
+    ], JSON_THROW_ON_ERROR);
+    ?>
+    <script>
+        const button = document.getElementById('credpal_payment');
+
+        button.addEventListener('click', function () {
+            payWithCredPal();
+        });
+
 
         function payWithCredPal() {
+            let val = <?php echo $properties; ?>;
             const checkout = new Checkout({
                 key: 'ad5ba355-d8e4-4e57-844b-6572d2442880', // Your Key
                 amount: {{ $totalFare }},
-                product: {{ $properties }},
+                product: val,
                 onClose: function () {
                     console.log('Widget closed');
                 },
@@ -308,7 +312,6 @@
                 },
             });
             checkout.setup();
-
             return checkout.open();
         }
 

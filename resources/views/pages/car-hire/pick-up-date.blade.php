@@ -128,24 +128,28 @@
 
                         <div class="form-group">
                             <label for="date">Pick Up Date</label>
-                            <input type="date" name="date" id="date" class="form-control" min="{{ date('Y-m-d') }}"
+                            <input type="date" name="date" id="date" class="form-control" value="{{ old('date') }}"
                                    required/>
                         </div>
                         <br>
                         <div class="form-group">
                             <label for="time">Pick Up Time</label>
-                            <input type="time" name="time" id="time" class="form-control" min="{{ date('G:i') }}"
+                            <input type="time" name="time" id="time" class="form-control" value="{{ old('time') }}"
                                    required/>
                         </div>
                         <br>
                         <div class="form-group">
                             <label for="days">Number of Days</label>
-                            <input type="number" name="days" id="days" class="form-control" required/>
+                            <input type="number" name="days" id="days" class="form-control" value="{{ old('days') }}"
+                                   required/>
                         </div>
                         <br>
                         <div class="form-group">
                             <label for="pickup_address">Pickup Address</label>
-                            <input type="text" name="pickup_address" id="pickup_address" class="form-control" required/>
+                            <input type="text" autocomplete name="pickup_address" id="pickup_address"
+                                   value="{{ old('pickup_address') }}"
+                                   class="form-control" required/>
+                            <div id="autocompleteResults"></div>
                         </div>
                         <br>
 
@@ -189,74 +193,82 @@
                 </div>
             </div>
 
-            <div class="car_hire_info">
+            <div class="car_hire_info" style="text-align: left;">
 
-                <div class="car_info">
-                    <img src="{{asset('images/icons/plan_options.png')}}" alt="plan-icon"/>
-                    <small>Rental Plan :{{$findPaymentOption->plan}}</small>
-                </div>
-                {{--            <div class="car_info">--}}
-                {{--                <img src="{{asset('images/icons/plan_options.png')}}" alt="plan-icon"/>--}}
-                {{--                <small>Class :{{$findPaymentOption->car->car_class}}</small>--}}
-                {{--            </div>--}}
-                <div class="car_info">
-                    <img src="{{asset('images/icons/plan_options.png')}}" alt="plan-icon"/>
-                    <small>Rental Fare :&#8358; {{$findPaymentOption->amount}}</small>
-                </div>
+                <ul class="list-unstyled" style="margin-left:2em;">
+                    <li>
+                        <div class="car_info">
+                            <img src="{{asset('images/icons/plan_options.png')}}" alt="plan-icon"/>
+                            <small>Rental Plan :{{ $findPaymentOption->plan }}</small>
+                        </div>
+                    </li>
 
-                @if(!empty($findPaymentOption->extra_hour))
-                    <div class="car_info">
-                        <img src="{{asset('images/icons/plan_options.png')}}" alt="plan-icon"/>
-                        <small>Extra Hour : &#8358; {{$findPaymentOption->extra_hour}} <sup>Per Hour</sup></small>
-                    </div>
-                @endif
-                {{--            <div class="car_info">--}}
-                {{--                <img src="{{asset('images/icons/plan_options.png')}}" alt="plan-icon"/>--}}
-                {{--                <small>Type :{{$findPaymentOption->car->car_type}}</small>--}}
-                {{--            </div>--}}
-
-                @if(!empty($findPaymentOption->extra_hour))
-                    <div class="car_info">
-                        <img src="{{asset('images/icons/plan_options.png')}}" alt="plan-icon"/>
-                        <small>Rental is for a period of 12 hours</small>
-                    </div>
-                @endif
-
+                    {{--                    <li>--}}
+                    {{--            <div class="car_info">--}}
+                    {{--                <img src="{{asset('images/icons/plan_options.png')}}" alt="plan-icon"/>--}}
+                    {{--                <small>Class :{{$findPaymentOption->car->car_class}}</small>--}}
+                    {{--            </div>--}}
+                    {{--                    </li>--}}
+                    <li>
+                        <div class="car_info">
+                            <img src="{{asset('images/icons/plan_options.png')}}" alt="plan-icon"/>
+                            <small>Rental Fare :&#8358; {{ number_format($findPaymentOption->amount,2) }}</small>
+                        </div>
+                    </li>
+                    @if(!empty($findPaymentOption->extra_hour))
+                        <li>
+                            <div class="car_info">
+                                <img src="{{asset('images/icons/plan_options.png')}}" alt="plan-icon"/>
+                                <small>Extra Hour : &#8358; {{ number_format($findPaymentOption->extra_hour,2) }} <sup>Per
+                                        Hour</sup></small>
+                            </div>
+                        </li>
+                    @endif
+                    {{--                    <li>--}}
+                    {{--            <div class="car_info">--}}
+                    {{--                <img src="{{asset('images/icons/plan_options.png')}}" alt="plan-icon"/>--}}
+                    {{--                <small>Type :{{$findPaymentOption->car->car_type}}</small>--}}
+                    {{--            </div>--}}
+                    {{--                    </li>               --}}
+                    @if(!empty($findPaymentOption->extra_hour))
+                        <li>
+                            <div class="car_info">
+                                <img src="{{asset('images/icons/plan_options.png')}}" alt="plan-icon"/>
+                                <small>Rental is for a period of 12 hours</small>
+                            </div>
+                        </li>
+                    @endif
+                </ul>
             </div>
         </div>
     </div>
 
     <script
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCl3OQUTqcOTP55fo2Z089F6IThkJIyako&libraries=places,geometry&callback=initAutocomplete"
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCl3OQUTqcOTP55fo2Z089F6IThkJIyako&libraries=places&callback=initMap"
         defer></script>
 
     <script type="text/javascript">
 
-        const pickup_address = document.getElementById("pickup_address");
-        autocompletePickup = new google.maps.places.Autocomplete(pickup_address, options);
-        autocompletePickup.addListener("place_changed", onPickupCustomerAddressChange)
+        // Initialize the PlacesService
+        const placesService = new google.maps.places.PlacesService(document.createElement('div'));
 
-        function onPickupCustomerAddressChange() {
-            const place = autocompletePickup.getPlace();
+        // Initialize the autocomplete object
+        const autocomplete = new google.maps.places.Autocomplete(
+            document.getElementById('pickup_address')
+        );
 
-            source.address = place.formatted_address;
-            source.latitude = place.geometry.location.lat();
-            source.longitude = place.geometry.location.lng();
-            source.name = place.name;
-            source.id = place.place_id;
-            const setPickupAddressEvent = new CustomEvent('set-pickup-address-event', {
-                detail: source.address
-            });
-        }
+        console.log(autocomplete);
 
-        function validate() {
-            if (document.getElementById('self_drive').checked) {
-                document.getElementById('self_drive_msg').style.display = "block";
-                document.getElementById('self_drive_msg').style.transition = "all .3s;";
-            } else {
-                document.getElementById('self_drive_msg').style.display = "none";
-                document.getElementById('self_drive_msg').style.transition = "all .3s;";
-            }
-        }
+
+        // Event listener for place selection
+        autocomplete.addListener('place_changed', function () {
+            const place = autocomplete.getPlace();
+            const address = place.formatted_address;
+            // Do something with the selected address
+            console.log('Selected address: ' + address);
+        });
+
+        // You can customize the autocomplete options
+        autocomplete.setTypes(['geocode']);
     </script>
 @endsection

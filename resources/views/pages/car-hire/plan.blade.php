@@ -121,27 +121,36 @@
                         </small>
                     </div>
                     <div class="plan_price">
-                        <h2><sup>&#8358; </sup> {{number_format($car->plans[$i]->amount)}}</h2>
+                        <h2><sup>&#8358; </sup> {{number_format($car->plans[$i]->amount,2)}}</h2>
                     </div>
-                    <div class="plans_options">
-                        <div>
-                            <img src="{{asset('images/icons/plan_options_white.png')}}" alt="plan-icon"/>
-                            <small>{{Ucfirst($car->carclass->name)}}</small>
-                        </div>
-                        @if(!empty($car->plans[$i]->extra_hour))
-                            <div>
-                                <img src="{{asset('images/icons/plan_options_white.png')}}" alt="plan-icon"/>
-                                <small>Extra Hour Charge
-                                    :<sup>&#8358; </sup> {{number_format($car->plans[$i]->extra_hour)}} per hour</small>
-                            </div>
-                        @endif
-                        @if($car->plans[$i]->plan == "Daily Rentals")
-                            <div>
-                                <img src="{{asset('images/icons/plan_options_white.png')}}" alt="plan-icon"/>
-                                <small>Operating State
-                                    : {{ Ucfirst($car->state?$car->state->location:"Not available") }} </small>
-                            </div>
-                        @endif
+                    <div class="" style="font-size: 15px; color:white;">
+                        <ul class="list-unstyled">
+                            <li>
+                                <div>
+                                    <img src="{{asset('images/icons/plan_options_white.png')}}" alt="plan-icon"/>
+                                    <b>{{Ucfirst($car->carclass->name)}}</b>
+                                </div>
+                            </li>
+                            @if(!empty($car->plans[$i]->extra_hour))
+                                <li>
+                                    <div>
+                                        <img src="{{asset('images/icons/plan_options_white.png')}}" alt="plan-icon"/>
+                                        <b>Extra Hour Charge
+                                            :<sup>&#8358; </sup> {{number_format($car->plans[$i]->extra_hour,2)}} per
+                                            hour</b>
+                                    </div>
+                                </li>
+                            @endif
+                            @if($car->plans[$i]->plan == "Daily Rentals")
+                                <li>
+                                    <div>
+                                        <img src="{{asset('images/icons/plan_options_white.png')}}" alt="plan-icon"/>
+                                        <small>Operating State
+                                            : {{ Ucfirst($car->state?$car->state->location:"Not available") }} </small>
+                                    </div>
+                                </li>
+                            @endif
+                        </ul>
                     </div>
                     <div class="payment_box">
                         <a href="{{url('/select/plan/'. $car->plans[$i]->id)}}">
