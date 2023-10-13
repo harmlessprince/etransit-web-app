@@ -133,9 +133,9 @@
                         <hr>
                         <h6>Phone Number : {{$findSchedule->bus->driver->phone_number}} </h6>
                         <hr>
-                        @else                            
-                            <h3>No Driver Assigned yet to this Trip.  
-                                @if($findSchedule->bus)  
+                        @else
+                            <h3>No Driver Assigned yet to this Trip.
+                                @if($findSchedule->bus)
                                 <a href="{{url('e-ticket/assign-driver/'.$findSchedule->bus->id)}}" class="btn btn-danger">Assign Driver</a>
                                 @else
                                 --
@@ -153,6 +153,10 @@
                     <div class="card-body">
                         <h4>Schedule Information</h4>
                         <br>
+                        <h6>PickUp Address: {{$findSchedule->pick_up_address }}</h6>
+                        <hr>
+                        <h6>Drop Offs: {{implode(",",$findSchedule->routes ?? ["N/A"]) ?? "N/A"}}</h6>
+                        <hr>
                         <h6>PickUp City: {{$findSchedule->pickup ? $findSchedule->pickup->location : "--" }}</h6>
                         <hr>
                         <h6>Destination City : {{$findSchedule->destination ? $findSchedule->destination->location : "--"}}</h6>

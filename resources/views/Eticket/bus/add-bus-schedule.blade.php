@@ -67,13 +67,19 @@
                                        id="seats_available" required min="1"/>
                             </div>
                             <div class="form-group">
-                                <label for="terminal_id">Terminal </label>
-                                <select class="form-control" name="terminal_id" id="terminal_id" required>
-                                    @foreach($terminals as $terminal)
-                                        <option value="{{ $terminal->id }}">{{ $terminal->terminal_name }}</option>
-                                    @endforeach
-                                </select>
+                                <label for="pick_up_address">Pick Up Address</label>
+                                <input type="text" class="form-control" name="pick_up_address"
+                                       value="{{old('pick_up_address')}}"
+                                       id="pick_up_address" required/>
                             </div>
+{{--                            <div class="form-group">--}}
+{{--                                <label for="terminal_id">Terminal </label>--}}
+{{--                                <select class="form-control" name="terminal_id" id="terminal_id" required>--}}
+{{--                                    @foreach($terminals as $terminal)--}}
+{{--                                        <option value="{{ $terminal->id }}">{{ $terminal->terminal_name }}</option>--}}
+{{--                                    @endforeach--}}
+{{--                                </select>--}}
+{{--                            </div>--}}
 {{--                            <div class="form-group">--}}
 {{--                                <label for="service_id">Service </label>--}}
 {{--                                <select class="form-control" name="service_id" id="service_id" required>--}}
@@ -99,7 +105,7 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="routes">Routes (Add routes seperated by comma and pick up location in bracket)</label>
+                                <label for="routes">Drop Offs (Add drop offs seperated by comma)</label>
                                 <input type="text" class="form-control" name="routes"
                                        value="{{old('routes')}}"
                                        id="routes" required placeholder="lagos(Iyanapaja),ibadan(iwo road)"/>
@@ -116,13 +122,6 @@
                                        value="{{old('fare_children')}}"
                                        id="fare_children" min="1" required/>
                             </div>
-                            <div class="form-group">
-                                <label for="bus_available_seats">Number of available seats</label>
-                                <input type="number" class="form-control" name="bus_available_seats"
-                                       value="{{old('bus_available_seats')}}"
-                                       id="bus_available_seats" min="1" required/>
-                            </div>
-
                             <div class="form-group">
                                 <label for="departure_date">Departure Date</label>
                                 <input type="date" class="form-control" name="departure_date"
