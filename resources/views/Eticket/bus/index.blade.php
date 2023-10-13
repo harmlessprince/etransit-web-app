@@ -108,7 +108,7 @@
                             Schedules</a>
                     </div>
                     <div class="space-left">
-                        <a href="{{url('e-ticket/add-new-tenant-bus')}}" class="btn btn-success">Add Bus(es)</a>
+                        <a href="{{url('e-ticket/add-new-tenant-bus')}}" class="btn btn-success">Add Vehicle</a>
                     </div>
                     <div class="space-left">
                         <a href="{{url('e-ticket/all-scheduled-trip')}}" class="btn btn-success">Scheduled Trips</a>

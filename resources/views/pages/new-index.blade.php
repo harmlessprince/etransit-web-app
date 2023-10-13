@@ -194,18 +194,18 @@
                         <div class="row"
                              style="background: #ffffff;padding-top: 20px;padding-bottom: 20px;border-style: none;border-bottom: 1px none rgb(217,218,220) ;">
                             <div class="col">
-                                <button class="" type="button" id="one_way_trip" onclick="oneWayTrip()"
-                                        style="margin-right: 5px;margin-left: 5px;width: 160px;border-style: none; border-bottom-style: none; padding:10px;">
-                                    One way
-                                </button>
-                                <button class="getspace" id="return_trip" type="button" onclick="ReturnTrip()"
-                                        style="margin-right: 5px;margin-left: 5px;width: 160px; border-style: none;border-bottom-style: none; padding:10px;">
-                                    Round Trip
-                                </button>
+{{--                                <button class="" type="button" id="one_way_trip" onclick="oneWayTrip()"--}}
+{{--                                        style="margin-right: 5px;margin-left: 5px;width: 160px;border-style: none; border-bottom-style: none; padding:10px;">--}}
+{{--                                    One way--}}
+{{--                                </button>--}}
+{{--                                <button class="getspace" id="return_trip" type="button" onclick="ReturnTrip()"--}}
+{{--                                        style="margin-right: 5px;margin-left: 5px;width: 160px; border-style: none;border-bottom-style: none; padding:10px;">--}}
+{{--                                    Round Trip--}}
+{{--                                </button>--}}
                             </div>
                             <input type="hidden" name="service_id" value="{{$busService->id}}"/>
                             <input type="hidden" name="trip_type" id="trip_type" class="one-way-trip-input"
-                                   id="trip-form" value=""/>
+                                   id="trip-form" value="1"/>
                         </div>
                         <div class="row">
                             <div class="col">
