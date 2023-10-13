@@ -97,6 +97,12 @@ class ManageBus extends Controller
 
     }
 
+    public function ViewSchedule($bus_id, $schedule_id)
+    {
+        $schedule = Schedule::query()->with('bus', 'bus.driver')->where('id', $schedule_id)->where('bus_id', $bus_id)->first();
+        return view('pages.booking.view-vehicle', compact('schedule'));
+    }
+
 
     /**
      * @return Application|Factory|View

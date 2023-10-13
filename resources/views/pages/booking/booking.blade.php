@@ -268,7 +268,7 @@
                                         <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
                                             <img src="{{asset('new-assets/img/pngaaa%201.png')}}"></div>
                                         <div class="col align-self-center">
-                                            <h5 class="text-start">{{$schedule->terminal->terminal_name ?? null}}</h5>
+                                            <small class="text-start">{{$schedule->pick_up_address ?? null}}</small>
                                             <p class="text-start" style="font-size: 17px;">
                                                 <span>{{$schedule->pickup->location ?? null}} </span><span>&nbsp;&nbsp;<svg
                                                         xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
@@ -312,14 +312,14 @@
                                         <div class="col text-center">
                                             <p class="text-center">Adult&nbsp;&nbsp;<span style="color: rgb(52,63,95);"><strong>&#x20A6; {{number_format($schedule->fare_adult)}}</strong></span>&nbsp;
                                             </p>
-                                            <a href="{{url('view-vehicle/'.$schedule->bus->id)}}">
+                                            <a href="{{url('view-schedule/'. $schedule->bus->id . "/" . $schedule->id)}}" >
                                                 <button class="btn btn-primary" type="button"
                                                         style="color: rgb(255,255,255);background: rgb(52,63,95);height: 29px;padding-top: 1px;width: 125.766px;">
                                                     View Vehicle
                                                 </button>
                                             </a>
                                             <a href="{{url('seat-picker/'.$schedule->id. '/'.$tripTypeId)}}">
-                                                <button class="btn btn-success" type="button"
+                                                <button class="btn btn-success mt-1" type="button"
                                                         style="color: rgb(255,255,255);background: rgb(52,63,95);height: 29px;padding-top: 1px;width: 125.766px;">
                                                     Book
                                                 </button>

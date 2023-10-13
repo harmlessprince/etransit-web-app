@@ -77,6 +77,7 @@ Route::get('test/pdf', function () {
 Route::get('/rave/callback', [Payment::class, 'callback'])->name('callback');
 Route::post('/bus/bookings/', [Booking::class, 'bookingRequest'])->name('bus.booking');
 Route::get('view-vehicle/{bus_id}', [ManageBus::class, 'viewBus']);
+Route::get('view-schedule/{bus_id}/{schedule_id}', [ManageBus::class, 'ViewSchedule']);
 Route::post('/bus/filter-bookings/{operator?}/{bus_type?}', [Booking::class, 'bookingFilterRequest'])->name('filter-bus');
 
 Route::get('filter-cars/{seat_capacity?}/{class_type?}', [Car::class, 'carList']);
