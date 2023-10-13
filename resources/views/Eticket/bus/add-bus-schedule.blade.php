@@ -61,10 +61,10 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="number_of_seats">Number of Seats Available</label>
-                                <input type="text" class="form-control" name="number_of_seats"
-                                       value="{{old('number_of_seats')}}"
-                                       id="number_of_seats" required/>
+                                <label for="seats_available">Number of Seats Available</label>
+                                <input type="number" class="form-control" name="seats_available"
+                                       value="{{old('seats_available')}}"
+                                       id="seats_available" required min="1"/>
                             </div>
                             <div class="form-group">
                                 <label for="terminal_id">Terminal </label>
@@ -74,14 +74,14 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="form-group">
-                                <label for="service_id">Service </label>
-                                <select class="form-control" name="service_id" id="service_id" required>
-                                    @foreach($services as $service)
-                                        <option value="{{ $service->id }}">{{ $service->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
+{{--                            <div class="form-group">--}}
+{{--                                <label for="service_id">Service </label>--}}
+{{--                                <select class="form-control" name="service_id" id="service_id" required>--}}
+{{--                                    @foreach($services as $service)--}}
+{{--                                        <option value="{{ $service->id }}">{{ $service->name }}</option>--}}
+{{--                                    @endforeach--}}
+{{--                                </select>--}}
+{{--                            </div>--}}
                             <div class="form-group">
                                 <label for="pickup_id">Pickup </label>
                                 <select class="form-control" name="pickup_id" id="pickup_id" required>
@@ -99,23 +99,30 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="adult_tfare">Adult Tfare</label>
-                                <input type="text" class="form-control" name="adult_tfare"
-                                       value="{{old('adult_tfare')}}"
-                                       id="adult_tfare" required/>
+                                <label for="routes">Routes (Add routes seperated by comma and pick up location in bracket)</label>
+                                <input type="text" class="form-control" name="routes"
+                                       value="{{old('routes')}}"
+                                       id="routes" required placeholder="lagos(Iyanapaja),ibadan(iwo road)"/>
                             </div>
                             <div class="form-group">
-                                <label for="child_tfare">Child Tfare</label>
-                                <input type="text" class="form-control" name="child_tfare"
-                                       value="{{old('child_tfare')}}"
-                                       id="child_tfare" required/>
+                                <label for="fare_adult">Adult Tfare</label>
+                                <input type="number" class="form-control" name="fare_adult"
+                                       value="{{old('fare_adult')}}"
+                                       id="fare_adult" min="1" required/>
+                            </div>
+                            <div class="form-group">
+                                <label for="fare_children">Child Tfare</label>
+                                <input type="number" class="form-control" name="fare_children"
+                                       value="{{old('fare_children')}}"
+                                       id="fare_children" min="1" required/>
                             </div>
                             <div class="form-group">
                                 <label for="bus_available_seats">Number of available seats</label>
-                                <input type="text" class="form-control" name="bus_available_seats"
+                                <input type="number" class="form-control" name="bus_available_seats"
                                        value="{{old('bus_available_seats')}}"
-                                       id="bus_available_seats" required/>
+                                       id="bus_available_seats" min="1" required/>
                             </div>
+
                             <div class="form-group">
                                 <label for="departure_date">Departure Date</label>
                                 <input type="date" class="form-control" name="departure_date"
@@ -127,7 +134,7 @@
                                        value="{{old('departure_time')}}" id="departure_time" required/>
                             </div>
                             <div class="submit_button">
-                                <button class="btn btn-success">Create Bus</button>
+                                <button class="btn btn-success">Create Schedule</button>
                             </div>
                         </form>
                     </div>

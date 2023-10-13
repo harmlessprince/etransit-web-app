@@ -40,6 +40,7 @@ class Schedule extends Model
     protected $casts = [
         'departure_date' => 'datetime:Y-m-d',
         'return_date' => 'datetime:Y-m-d',
+        "routes" => 'array'
     ];
 
     public function terminal()
@@ -68,6 +69,10 @@ class Schedule extends Model
         return $this->belongsTo(Service::class, 'service_id');
     }
 
+    public function seatTrackers()
+    {
+        return $this->hasMany(SeatTracker::class);
+    }
     public function seatTracker()
     {
         return $this->belongsTo(SeatTracker::class);

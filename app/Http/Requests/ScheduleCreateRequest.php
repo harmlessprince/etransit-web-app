@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rules\RequiredIf;
 
 class ScheduleCreateRequest extends FormRequest
 {
@@ -23,6 +25,8 @@ class ScheduleCreateRequest extends FormRequest
      */
     public function rules()
     {
+        $isEticketUser = Auth::guard('e-ticket')->user();
+
         return [
             'terminal_id' => 'required',
             'bus_id' => 'required',
@@ -33,7 +37,7 @@ class ScheduleCreateRequest extends FormRequest
             'fare_children' => 'required',
             'departure_date' => 'required',
             'departure_time' => 'required',
-            'tenant_id' => 'required',
+            'tenant_id' => [new RequiredIf(!!$isEticketUser == false)],
             'seats_available' => 'required',
         ];
     }

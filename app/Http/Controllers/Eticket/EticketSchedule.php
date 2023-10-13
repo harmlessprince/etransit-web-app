@@ -107,21 +107,27 @@ class EticketSchedule extends Controller
 
     public function allScheduledTrip()
     {
-        $findSchedule = EventSchedule::where('tenant_id', session()->get('tenant_id'))->with(['pickup', 'destination', 'bus', 'terminal'])->get();
+
+//        $findSchedule = EventSchedule::where('tenant_id', session()->get('tenant_id'))->with(['pickup', 'seatTracker','destination', 'bus', 'terminal'])->get();
         $isEmptySeatAvailable = false;
+        $numberOfEmptySeats = EventSchedule::where('tenant_id', session()->get('tenant_id'))
+            ->doesntHave('seatTrackers')
+            ->count();
 
-
-        $emptySeatCount = [];
-        foreach ($findSchedule->chunk(30) as $index => $schedule) {
-            foreach ($schedule as $i => $sch) {
-                $seatTracker = SeatTracker::where('schedule_id', $sch->id)->get();
-                if (count($seatTracker) < 1) {
-                    $isEmptySeatAvailable = true;
-                    $emptySeatCount[] = $i;
-                }
-            }
+//        $emptySeatCount = [];
+//        foreach ($findSchedule->chunk(30) as $index => $schedule) {
+//            foreach ($schedule as $i => $sch) {
+//                $seatTracker = SeatTracker::where('schedule_id', $sch->id)->get();
+//                if (count($seatTracker) < 1) {
+//                    $isEmptySeatAvailable = true;
+//                    $emptySeatCount[] = $i;
+//                }
+//            }
+//        }
+        $seatCount = $numberOfEmptySeats;
+        if ($seatCount > 0){
+            $isEmptySeatAvailable = true;
         }
-        $seatCount = count($emptySeatCount);
         $data = EventSchedule::with(['pickup', 'destination', 'bus', 'terminal'])->latest()->paginate(100);
 
         return view('Eticket.bus.all-schedule-trip', compact('seatCount', 'isEmptySeatAvailable', 'data'));

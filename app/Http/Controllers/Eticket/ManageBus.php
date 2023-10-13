@@ -171,14 +171,13 @@ class ManageBus extends Controller
         $tenant_id = session()->get('tenant_id');
         $buses = Bus::where('tenant_id', $tenant_id)->select('id', 'bus_registration')->get();
         $terminals = Terminal::where('tenant_id', $tenant_id)->get();
-        $services = Service::where('status', 'active')->get();
 
         $authGuard = app('auth')->guard('admin');
         if ($authGuard->user()) {
             $tenants = Tenant::get(['id', 'company_name']);
             return view('admin.vehicle.add-bus-schedule', compact('tenants', 'services', 'terminals', 'pickups', 'destinations', 'buses'));
         }
-        return view('Eticket.bus.add-bus-schedule', compact('services', 'terminals', 'pickups', 'destinations', 'buses'));
+        return view('Eticket.bus.add-bus-schedule', compact( 'terminals', 'pickups', 'destinations', 'buses'));
     }
 
     /**
@@ -189,12 +188,17 @@ class ManageBus extends Controller
     public function postScheduleView(ScheduleCreateRequest $request)
     {
 
+        $service = Service::where('status', 'active')->where('name', "Bus Booking")->first();
         //validate departure date and time
         $departureTime = Carbon::parse("$request->departure_date $request->departure_time");
         if ($departureTime->diffInHours(Carbon::now()) <= 24) {
             throw  ValidationException::withMessages([
                 'departure' => 'Departure time should be greater than 24 hours from now!',
             ]);
+        }
+        $routes = [];
+        if ($request->input('routes')){
+            $routes = explode(",", trim($request->input("routes")));
         }
 
         $s = $request->departure_date;
@@ -206,16 +210,17 @@ class ManageBus extends Controller
         $schedule->bus_id = $request->bus_id;
         $schedule->pickup_id = $request->pickup_id;
         $schedule->destination_id = $request->destination_id;
-        $schedule->fare_adult = $request->adult_tfare;
-        $schedule->service_id = $request->service_id;
-        $schedule->fare_children = $request->child_tfare;
+        $schedule->fare_adult = $request->fare_adult;
+        $schedule->service_id = $service->id;
+        $schedule->fare_children = $request->fare_children;
         $schedule->departure_date = $formattedDate;
         $schedule->departure_time = $request->departure_time;
-        $schedule->tenant_id = $request->tenant_id ?? session()->get('tenant_id');
-        $schedule->seats_available = $request->number_of_seats;
+        $schedule->tenant_id = $request->tenant_id ?? auth()->guard('e-ticket')->user()->tenant->id;
+        $schedule->seats_available = $request->seats_available;
+        $schedule->routes = $routes;
         $schedule->save();
-
-        return redirect()->route('add-schedule-view');
+        \alert("Schedule Added", "Schedule Added Successfully");
+        return redirect()->route('e-ticket.add-schedule-view');
     }
 
     /**
