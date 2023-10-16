@@ -328,7 +328,7 @@ class Payment extends Controller
 
             Invoice::record($data['data']['meta']['user_id'], $transactions->id, $tripType, $tripSchedule->return_date);
 
-            Mail::to($email)->send(new AdminBooking($maildata));
+//            Mail::to($email)->send(new AdminBooking($maildata));
             Notification::route('mail', env('ETRANSIT_ADMIN_EMAIL'))
                 ->notify(new AdminBookingNotification($maildata));
 

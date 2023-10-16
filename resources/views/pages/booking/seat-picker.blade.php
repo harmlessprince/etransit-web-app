@@ -288,57 +288,57 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-6" id="secondtab"
-                         style="padding: 50px;padding-top: 50px;padding-bottom: 50px;background: #ffffff;text-align: center;margin-top: 0px;padding-left: 90px;padding-right: 30px;">
-                        <div class="row">
-                            <div class="col-md-12" style="text-align: left;padding-left: 5px;">
-                                <p style="font-weight: bold;">Choose Seats&nbsp;<i class="material-icons"
-                                                                                   style="margin-top: 2px;padding-top: 3px;color: rgb(42,66,136);">airline_seat_recline_extra</i>
-                                </p>
-                            </div>
-                            <div class="col-md-12 d-inline-flex flex-row">
-                                <div class="form-check" style="padding-left: 15px;"><input class="form-check-input"
-                                                                                           type="checkbox"
-                                                                                           id="formCheck-7"
-                                                                                           style="color: rgb(52,63,95);background: rgb(52,63,95);"><label
-                                        class="form-check-label" for="formCheck-7">Selected</label></div>
-                                <div class="form-check" style="padding-left: 40px;"><input class="form-check-input"
-                                                                                           type="checkbox"
-                                                                                           id="formCheck-8"
-                                                                                           style="background: var(--bs-gray-400);"><label
-                                        class="form-check-label" for="formCheck-8">Booked</label></div>
-                                <div class="form-check" style="padding-left: 40px;"><input class="form-check-input"
-                                                                                           type="checkbox"
-                                                                                           id="formCheck-9"><label
-                                        class="form-check-label" for="formCheck-9">Available</label></div>
-                            </div>
-                        </div>
-                        @if($fetchSeats->count()>0)
-                            <div class="row"
-                                 style="margin-top: 53px;padding: 24px;box-shadow: 1px 1px 6px rgb(231,231,231);border-left-width: 1px;border-radius: 20px;width: 252px;margin-left: 13px;">
-                                @foreach($fetchSeats as $seat)
-                                    <div class="col-4">
-                                        <div class="row">
-                                            <div class="col-4 d-md-flex justify-content-md-center align-items-md-center"
-                                                 style="margin-top: 10px;margin-bottom: 10px;"></div>
-                                            <div class="col-4 d-md-flex justify-content-md-center align-items-md-center"
-                                                 style="margin-top: 10px;margin-bottom: 10px;"></div>
-                                            <div class="col-4 d-md-flex justify-content-md-center align-items-md-center"
-                                                 style="margin-top: 10px;margin-bottom: 10px;">
-                                                <a href="{{$seat->id}}"
-                                                   @if($seat->booked_status == 0)     class="available seat_selector btn seat_picker_new"
-                                                   @elseif($seat->booked_status == 1) class="seat_selector available_indicator btn seat_picker_new"
-                                                   @elseif($seat->booked_status == 2) class="booked seat_selector btn seat_picker_new"
-                                                   @endif
-                                                   style="width:43.25px;">{{$seat->seat_position}}
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                @endforeach
-                            </div>
-                        @endif
-                    </div>
+{{--                    <div class="col-sm-6" id="secondtab"--}}
+{{--                         style="padding: 50px;padding-top: 50px;padding-bottom: 50px;background: #ffffff;text-align: center;margin-top: 0px;padding-left: 90px;padding-right: 30px;">--}}
+{{--                        <div class="row">--}}
+{{--                            <div class="col-md-12" style="text-align: left;padding-left: 5px;">--}}
+{{--                                <p style="font-weight: bold;">Choose Seats&nbsp;<i class="material-icons"--}}
+{{--                                                                                   style="margin-top: 2px;padding-top: 3px;color: rgb(42,66,136);">airline_seat_recline_extra</i>--}}
+{{--                                </p>--}}
+{{--                            </div>--}}
+{{--                            <div class="col-md-12 d-inline-flex flex-row">--}}
+{{--                                <div class="form-check" style="padding-left: 15px;"><input class="form-check-input"--}}
+{{--                                                                                           type="checkbox"--}}
+{{--                                                                                           id="formCheck-7"--}}
+{{--                                                                                           style="color: rgb(52,63,95);background: rgb(52,63,95);"><label--}}
+{{--                                        class="form-check-label" for="formCheck-7">Selected</label></div>--}}
+{{--                                <div class="form-check" style="padding-left: 40px;"><input class="form-check-input"--}}
+{{--                                                                                           type="checkbox"--}}
+{{--                                                                                           id="formCheck-8"--}}
+{{--                                                                                           style="background: var(--bs-gray-400);"><label--}}
+{{--                                        class="form-check-label" for="formCheck-8">Booked</label></div>--}}
+{{--                                <div class="form-check" style="padding-left: 40px;"><input class="form-check-input"--}}
+{{--                                                                                           type="checkbox"--}}
+{{--                                                                                           id="formCheck-9"><label--}}
+{{--                                        class="form-check-label" for="formCheck-9">Available</label></div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                        @if($fetchSeats->count()>0)--}}
+{{--                            <div class="row"--}}
+{{--                                 style="margin-top: 53px;padding: 24px;box-shadow: 1px 1px 6px rgb(231,231,231);border-left-width: 1px;border-radius: 20px;width: 252px;margin-left: 13px;">--}}
+{{--                                @foreach($fetchSeats as $seat)--}}
+{{--                                    <div class="col-4">--}}
+{{--                                        <div class="row">--}}
+{{--                                            <div class="col-4 d-md-flex justify-content-md-center align-items-md-center"--}}
+{{--                                                 style="margin-top: 10px;margin-bottom: 10px;"></div>--}}
+{{--                                            <div class="col-4 d-md-flex justify-content-md-center align-items-md-center"--}}
+{{--                                                 style="margin-top: 10px;margin-bottom: 10px;"></div>--}}
+{{--                                            <div class="col-4 d-md-flex justify-content-md-center align-items-md-center"--}}
+{{--                                                 style="margin-top: 10px;margin-bottom: 10px;">--}}
+{{--                                                <a href="{{$seat->id}}"--}}
+{{--                                                   @if($seat->booked_status == 0)     class="available seat_selector btn seat_picker_new"--}}
+{{--                                                   @elseif($seat->booked_status == 1) class="seat_selector available_indicator btn seat_picker_new"--}}
+{{--                                                   @elseif($seat->booked_status == 2) class="booked seat_selector btn seat_picker_new"--}}
+{{--                                                   @endif--}}
+{{--                                                   style="width:43.25px;">{{$seat->seat_position}}--}}
+{{--                                                </a>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                @endforeach--}}
+{{--                            </div>--}}
+{{--                        @endif--}}
+{{--                    </div>--}}
                 </div>
                 <div class="row">
                     <div

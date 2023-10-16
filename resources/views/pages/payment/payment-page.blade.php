@@ -133,22 +133,22 @@
                 </div>
                 <div class="col-sm-6" id="secondtab"
                      style="padding: 50px;padding-top: 50px;padding-bottom: 50px;background: #ffffff;text-align: center;">
-                    <div class="row"
-                         style="margin-top: 0px;padding: 24px;box-shadow: 1px 1px 6px rgb(231,231,231);border-left-width: 1px;border-radius: 10px;width: 285px;margin-left: 13px;padding-left: 0px;padding-right: 0px;padding-top: 11px;background: #f8f9fa;padding-bottom: 0px;">
-                        <div class="col-12">
-                            <div class="row">
-                                <div class="col-2" style="text-align: left;padding-left: 5px;padding-right: 5px;"><i
-                                        class="fas fa-bus"
-                                        style="border-radius: 20px;color: rgb(255,255,255);background: #f8a159;border: 10px solid #f8a159 ;"></i>
-                                </div>
-                                <div class="col" style="text-align: left;"><span class="d-block"
-                                                                                 style="color: rgb(52,63,95);font-size: 14px;">
-                                    <strong>{{strtoupper($fetchScheduleDetails->terminal->terminal_name)}}</strong></span>
-                                    <span class="d-block"
-                                          style="color: var(--bs-gray);font-size: 14px;">{{$fetchScheduleDetails->bus->car_type}}</span>
-                                </div>
-                            </div>
-                        </div>
+{{--                    <div class="row"--}}
+{{--                         style="margin-top: 0px;padding: 24px;box-shadow: 1px 1px 6px rgb(231,231,231);border-left-width: 1px;border-radius: 10px;width: 285px;margin-left: 13px;padding-left: 0px;padding-right: 0px;padding-top: 11px;background: #f8f9fa;padding-bottom: 0px;">--}}
+{{--                        <div class="col-12">--}}
+{{--                            <div class="row">--}}
+{{--                                <div class="col-2" style="text-align: left;padding-left: 5px;padding-right: 5px;"><i--}}
+{{--                                        class="fas fa-bus"--}}
+{{--                                        style="border-radius: 20px;color: rgb(255,255,255);background: #f8a159;border: 10px solid #f8a159 ;"></i>--}}
+{{--                                </div>--}}
+{{--                                <div class="col" style="text-align: left;"><span class="d-block"--}}
+{{--                                                                                 style="color: rgb(52,63,95);font-size: 14px;">--}}
+{{--                                    <strong>{{strtoupper($fetchScheduleDetails->terminal->terminal_name)}}</strong></span>--}}
+{{--                                    <span class="d-block"--}}
+{{--                                          style="color: var(--bs-gray);font-size: 14px;">{{$fetchScheduleDetails->bus->car_type}}</span>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
                         <div class="col-12" style="padding-left: 0px;">
                             <ul class="timeline" style="border-color: rgb(248,161,89);margin-left: -4.7031px;">
                                 <li class="from">
