@@ -87,8 +87,6 @@ class Booking extends Controller
         }
 
 
-
-
         $operators = Tenant::inRandomOrder()
             ->limit(10)
             ->get();
@@ -316,23 +314,20 @@ class Booking extends Controller
         }
 
         //find if the seats selected matches the number of passengers listed
-        $selectedSeat = SeatTracker::where('schedule_id', $schedule_id)
-            ->where('user_id', auth()->user()->id)
-            ->where('booked_status', 1)->get();
-
-        if ((int)$trip_type == 2) {
-            $checkSchedule = Schedule::find($schedule_id);
-
-
-            $scheduleReturnApp = Schedule::where('return_uuid_tracker', $checkSchedule->return_uuid_tracker)->where('isReturn', '=', 1)->first();
-
-
-            if ($scheduleReturnApp) {
-                $selectedSeatForReturnTrip = SeatTracker::where('schedule_id', $scheduleReturnApp->id)
-                    ->where('user_id', auth()->user()->id)
-                    ->where('booked_status', 1)->get();
-            }
-        }
+//        $selectedSeat = SeatTracker::where('schedule_id', $schedule_id)->where('booked_status', 1)->get();
+//        if ((int)$trip_type == 2) {
+//            $checkSchedule = Schedule::find($schedule_id);
+//
+//
+//            $scheduleReturnApp = Schedule::where('return_uuid_tracker', $checkSchedule->return_uuid_tracker)->where('isReturn', '=', 1)->first();
+//
+//
+//            if ($scheduleReturnApp) {
+//                $selectedSeatForReturnTrip = SeatTracker::where('schedule_id', $scheduleReturnApp->id)
+//                    ->where('user_id', auth()->user()->id)
+//                    ->where('booked_status', 1)->get();
+//            }
+//        }
 
 
         $passenger_options = $request['passenger_option'];
@@ -340,21 +335,15 @@ class Booking extends Controller
 
         if (is_null($passenger_options)) {
 
-            foreach ($selectedSeat as $unbookedseat) {
-                $unbookedseat->update([
-                    'booked_status' => 0,
-                    'user_id' => null
-                ]);
-            }
 
-            if ((int)$trip_type == 2) {
-                foreach ($selectedSeatForReturnTrip as $unbookedReturnTripSeat) {
-                    $unbookedReturnTripSeat->update([
-                        'booked_status' => 0,
-                        'user_id' => null
-                    ]);
-                }
-            }
+//            if ((int)$trip_type == 2) {
+//                foreach ($selectedSeatForReturnTrip as $unbookedReturnTripSeat) {
+//                    $unbookedReturnTripSeat->update([
+//                        'booked_status' => 0,
+//                        'user_id' => null
+//                    ]);
+//                }
+//            }
 
             toastr()->error('Please select passenger age range option');
             return back();
@@ -366,45 +355,46 @@ class Booking extends Controller
 
         $fetchScheduleDetails = Schedule::where('id', $schedule_id)->with('service', 'bus', 'destination', 'pickup', 'terminal')->first();
 
-        if ($passengerCount != count($selectedSeat)) {
-
-            foreach ($selectedSeat as $unbookedseat) {
-                $unbookedseat->update([
-                    'booked_status' => 0,
-                    'user_id' => null
-                ]);
-            }
-
-            if ((int)$trip_type == 2) {
-                foreach ($selectedSeatForReturnTrip as $unbookedReturnTripSeat) {
-                    $unbookedReturnTripSeat->update([
-                        'booked_status' => 0,
-                        'user_id' => null
-                    ]);
-                }
-            }
-
-            toastr()->error('Number of seats selected must match the passenger count');
-            return back();
-        }
+//        if ($passengerCount != count($selectedSeat)) {
+//        if ($passengerCount) {
+//
+////            foreach ($selectedSeat as $unbookedseat) {
+////                $unbookedseat->update([
+////                    'booked_status' => 0,
+////                    'user_id' => null
+////                ]);
+////            }
+//
+////            if ((int)$trip_type == 2) {
+////                foreach ($selectedSeatForReturnTrip as $unbookedReturnTripSeat) {
+////                    $unbookedReturnTripSeat->update([
+////                        'booked_status' => 0,
+////                        'user_id' => null
+////                    ]);
+////                }
+////            }
+//
+//            toastr()->error('Number of seats selected must match the passenger count');
+//            return back();
+//        }
 
         if ($passengerCount != $passengerOptionCount) {
 
-            foreach ($selectedSeat as $unbookedseat) {
-                $unbookedseat->update([
-                    'booked_status' => 0,
-                    'user_id' => null
-                ]);
-            }
+//            foreach ($selectedSeat as $unbookedseat) {
+//                $unbookedseat->update([
+//                    'booked_status' => 0,
+//                    'user_id' => null
+//                ]);
+//            }
 
-            if ((int)$trip_type == 2) {
-                foreach ($selectedSeatForReturnTrip as $unbookedReturnTripSeat) {
-                    $unbookedReturnTripSeat->update([
-                        'booked_status' => 0,
-                        'user_id' => null
-                    ]);
-                }
-            }
+//            if ((int)$trip_type == 2) {
+//                foreach ($selectedSeatForReturnTrip as $unbookedReturnTripSeat) {
+//                    $unbookedReturnTripSeat->update([
+//                        'booked_status' => 0,
+//                        'user_id' => null
+//                    ]);
+//                }
+//            }
             toastr()->error('Please ensure the gender option is not more than the number of passenger intended for booking');
             return back();
         } else {
@@ -434,24 +424,24 @@ class Booking extends Controller
             $createPassenger->next_of_kin_name = $request->next_of_kin_name[$i];
             $createPassenger->next_of_kin_number = $request->next_of_kin_number[$i];
             $createPassenger->user_id = auth()->user()->id;
-            $createPassenger->seat_tracker_id = $selectedSeat[$i]->id;
+            $createPassenger->seat_tracker_id = 20000;
             $createPassenger->save();
         }
 
-        if ((int)$trip_type == 2) {
-            for ($i = 0; $i < $passengerOptionCount; $i++) {
-                $createPassenger = new Passenger();
-                $createPassenger->full_name = $request->full_name[$i];
-                $createPassenger->gender = $request->gender[$i];
-                $createPassenger->passenger_age_range = $request->passenger_option[$i];
-                $createPassenger->schedule_id = $scheduleReturnApp->id;
-                $createPassenger->next_of_kin_name = $request->next_of_kin_name[$i];
-                $createPassenger->next_of_kin_number = $request->next_of_kin_number[$i];
-                $createPassenger->user_id = auth()->user()->id;
-                $createPassenger->seat_tracker_id = $selectedSeatForReturnTrip[$i]->id;
-                $createPassenger->save();
-            }
-        }
+//        if ((int)$trip_type == 2) {
+//            for ($i = 0; $i < $passengerOptionCount; $i++) {
+//                $createPassenger = new Passenger();
+//                $createPassenger->full_name = $request->full_name[$i];
+//                $createPassenger->gender = $request->gender[$i];
+//                $createPassenger->passenger_age_range = $request->passenger_option[$i];
+//                $createPassenger->schedule_id = $scheduleReturnApp->id;
+//                $createPassenger->next_of_kin_name = $request->next_of_kin_name[$i];
+//                $createPassenger->next_of_kin_number = $request->next_of_kin_number[$i];
+//                $createPassenger->user_id = auth()->user()->id;
+//                $createPassenger->seat_tracker_id = $selectedSeatForReturnTrip[$i]->id;
+//                $createPassenger->save();
+//            }
+//        }
 
         $returnDate = request()->session()->get('return_date');
         $tripType = request()->session()->get('tripType');
@@ -468,7 +458,7 @@ class Booking extends Controller
 
         return view('pages.payment.payment-page',
             compact('childrenCount', 'fetchScheduleDetails', 'adultCount',
-                'childrenCount', 'totalFare', 'selectedSeat', 'returnDate'));
+                'childrenCount', 'totalFare', 'returnDate'));
 
     }
 

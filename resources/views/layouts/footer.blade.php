@@ -227,6 +227,7 @@
         document.getElementById("train_booking").style.backgroundColor = "#fff";
         document.getElementById("ferry_booking").style.backgroundColor = "#fff";
         document.getElementById("flight_booking").style.backgroundColor = "#fff";
+        document.getElementById("vehicle_booking").style.backgroundColor = "#fff";
 
         document.getElementById("one_way_trip").style.backgroundColor = "#343f5f";
         document.getElementById("one_way_trip").style.color = "#fff";
@@ -338,6 +339,7 @@
         document.getElementById("ferry_form").style.display = "none";
 
         document.getElementById("bus_booking").style.backgroundColor = "#fff";
+        document.getElementById("vehicle_booking").style.backgroundColor = "#fff";
         document.getElementById("ferry_booking").style.backgroundColor = "#fff";
         document.getElementById("flight_booking").style.backgroundColor = "#fff";
 

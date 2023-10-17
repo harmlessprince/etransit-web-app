@@ -122,12 +122,12 @@
                 <div class="row divshow"
                      style="background: #ffffff;border-radius: 10px;border-bottom-right-radius: 0px;border-bottom-left-radius: 0px;border-color: rgba(33,37,41,0);border-bottom: 1px solid rgb(227,228,230);">
                     <div class="col-3 col-sm-3 col-xs-3 carhover" id="bus_booking" onclick="busnav()"
-                         style="text-align: center;padding-top: 25px;padding-bottom: 12px;margin: 0px;border-right: 1px solid rgb(219,220,221);border-top-left-radius: 10px;">
+                         style="text-align: center;padding-top: 25px;padding-bottom: 12px;margin: 0;border-right: 1px solid rgb(219,220,221);border-top-left-radius: 10px;">
                         <img class="img-fluid" src="{{asset('new-assets/img/Layer%201dr.png')}}">
                         <div class="divline"></div>
                         <p><strong>CO-TRAVELLER</strong></p>
                     </div>
-                    <div class="col-3 col-sm-3 col-xs-3 carhover" id="flight_booking"
+                    <div class="col-3 col-sm-3 col-xs-3 carhover" id="vehicle_booking"
                          style="text-align: center;padding-top: 25px;padding-bottom: 12px;border-top-right-radius: 10px;">
                         <a href="{{url('car-hire')}}">
                             <img class="img-fluid" src="{{asset('new-assets\img\car-hire\car_menu_icon.png')}}">
@@ -136,8 +136,9 @@
                         </a>
 
                     </div>
+
                     <div class="col-3 col-sm-3 col-xs-3 carhover" id="train_booking" onclick="trainnav()"
-                         style="text-align: center;padding-top: 12px;padding-bottom: 12px;border-right: 1px solid rgb(219,220,221) ;">
+                         style="text-align: center;padding-top: 12px;padding-bottom: 12px;border-right: 1px solid rgb(219,220,221) ; border-top-left-radius: 10px;">
                         <img class="img-fluid"
                              src="{{asset('new-assets/img/2003.i602.001_railway_station_set_flat-11%20[Converted]%201.svg')}}">
                         <div class="divline"></div>
@@ -1182,8 +1183,7 @@
             }
 
             date2.onchange = function () {
-                const a = this.value.split('-'), s = a.shift(), d = new Date(a.join('/') + '/' + s), t = d.getTime(),
-                    y =;
+                const a = this.value.split('-'), s = a.shift(), d = new Date(a.join('/') + '/' + s), t = d.getTime();
                 console.clear(); // remove consoles on deployment
                 if (t >= minDate && t < millisecondOverMaxDate) {
                     console.log('within range');

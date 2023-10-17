@@ -247,13 +247,13 @@
                             <h6 style="border-bottom-width: 1px;border-bottom-style: dashed;padding-top: 10px;padding-bottom: 10px;color: rgb(52,63,95);">
                                 <strong>Total: &#x20A6; {{number_format($totalFare)}}</strong></h6>
                         </div>
-                        <div class="col-6" style="padding-left: 0px;background: var(--bs-white);">
-                            <h6 class="text-center"
-                                style="border-bottom-width: 1px;border-bottom-style: dashed;padding-top: 10px;padding-bottom: 10px;color: rgb(52,63,95);">
-                                <strong>Seat No: @foreach($selectedSeat as $seat)
-                                        {{$seat->seat_position}} ,
-                                    @endforeach</strong></h6>
-                        </div>
+{{--                        <div class="col-6" style="padding-left: 0px;background: var(--bs-white);">--}}
+{{--                            <h6 class="text-center"--}}
+{{--                                style="border-bottom-width: 1px;border-bottom-style: dashed;padding-top: 10px;padding-bottom: 10px;color: rgb(52,63,95);">--}}
+{{--                                <strong>Seat No: @foreach($selectedSeat as $seat)--}}
+{{--                                        {{$seat->seat_position}} ,--}}
+{{--                                    @endforeach</strong></h6>--}}
+{{--                        </div>--}}
                         <div class="col-12"
                              style="background: var(--bs-white);border-bottom-right-radius: 10px;border-bottom-left-radius: 10px;">
                             <img class="img-fluid d-inline" src="{{asset('new-assets/img/barcode%201.png')}}"

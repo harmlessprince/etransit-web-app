@@ -265,8 +265,9 @@
                                      style="padding: 20px;padding-top: 36px;padding-left: 38px;">
                                     <div class="row"
                                          style="border-radius: 7px;box-shadow: 2px 1px 5px 1px rgb(226,226,227);padding: 17px;background: #ffffff;">
-                                        <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">
-                                            <img src="{{asset('new-assets/img/pngaaa%201.png')}}"></div>
+{{--                                        <div class="col d-lg-flex justify-content-lg-center align-items-lg-center">--}}
+{{--                                            <img src="{{asset('new-assets/img/pngaaa%201.png')}}">--}}
+{{--                                        </div>--}}
                                         <div class="col align-self-center">
                                             <small class="text-start">{{$schedule->pick_up_address ?? null}}</small>
                                             <p class="text-start" style="font-size: 17px;">
@@ -299,16 +300,16 @@
                                                         style="font-size: 33px;color: var(--bs-orange);">airline_seat_recline_extra</i>&nbsp;&nbsp;</span>
                                                 <span>{{$schedule->seats_available}}</span></p>
                                         </div>
-                                        <div class="col">
-                                            <h5 class="text-start">Operator</h5>
-                                            <p class="text-start"
-                                               style="font-size: 17px;">@if(!is_null($schedule->tenant->image_url))
-                                                    <span>&nbsp;
-                                        <img src="{{$schedule->tenant->image_url}}" alt="company-logo" width="25px"
-                                             height="25px"/>&nbsp;&nbsp;</span>
-                                                @endif
-                                                <span>{{$schedule->tenant->display_name}}</span></p>
-                                        </div>
+{{--                                        <div class="col">--}}
+{{--                                            <h5 class="text-start">Operator</h5>--}}
+{{--                                            <p class="text-start"--}}
+{{--                                               style="font-size: 17px;">@if(!is_null($schedule->tenant->image_url))--}}
+{{--                                                    <span>&nbsp;--}}
+{{--                                        <img src="{{$schedule->tenant->image_url}}" alt="company-logo" width="25px"--}}
+{{--                                             height="25px"/>&nbsp;&nbsp;</span>--}}
+{{--                                                @endif--}}
+{{--                                                <span>{{$schedule->tenant->display_name}}</span></p>--}}
+{{--                                        </div>--}}
                                         <div class="col text-center">
                                             <p class="text-center">Adult&nbsp;&nbsp;<span style="color: rgb(52,63,95);"><strong>&#x20A6; {{number_format($schedule->fare_adult)}}</strong></span>&nbsp;
                                             </p>
