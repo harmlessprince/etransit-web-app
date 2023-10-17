@@ -149,28 +149,28 @@
 {{--                                </div>--}}
 {{--                            </div>--}}
 {{--                        </div>--}}
-                        <div class="col-12" style="padding-left: 0px;">
-                            <ul class="timeline" style="border-color: rgb(248,161,89);margin-left: -4.7031px;">
-                                <li class="from">
-                                    <span class="d-block"
-                                          style="font-size: 12px;color: var(--bs-gray-500);text-align: left;">From</span>
-                                    <span class="d-block"
-                                          style="margin-bottom: 3px;text-align: left;">{{$fetchScheduleDetails->pickup->location ?? null}}</span>
-                                    <span class="d-block" id="to"
-                                          style="font-size: 12px;color: var(--bs-gray-500);margin-top: 4px;">To</span>
-                                </li>
-                                <li class="to"><span class="d-block"
-                                                     style="margin-top: 0px;padding-top: 0px;text-align: left;">{{$fetchScheduleDetails->destination->location}}&nbsp;</span>
-                                </li>
-                            </ul>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor"
-                                 viewBox="0 0 16 16" class="bi bi-arrow-down-up" id="directing"
-                                 style="font-size: 23px;">
-                                <path fill-rule="evenodd"
-                                      d="M11.5 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L11 2.707V14.5a.5.5 0 0 0 .5.5zm-7-14a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L4 13.293V1.5a.5.5 0 0 1 .5-.5z"></path>
-                            </svg>
-                            <hr id="linecut" style="width: 259px;">
-                        </div>
+{{--                        <div class="col-12" style="padding-left: 0px;">--}}
+{{--                            <ul class="timeline" style="border-color: rgb(248,161,89);margin-left: -4.7031px;">--}}
+{{--                                <li class="from">--}}
+{{--                                    <span class="d-block"--}}
+{{--                                          style="font-size: 12px;color: var(--bs-gray-500);text-align: left;">From</span>--}}
+{{--                                    <span class="d-block"--}}
+{{--                                          style="margin-bottom: 3px;text-align: left;">{{$fetchScheduleDetails->pickup->location ?? null}}</span>--}}
+{{--                                    <span class="d-block" id="to"--}}
+{{--                                          style="font-size: 12px;color: var(--bs-gray-500);margin-top: 4px;">To</span>--}}
+{{--                                </li>--}}
+{{--                                <li class="to"><span class="d-block"--}}
+{{--                                                     style="margin-top: 0px;padding-top: 0px;text-align: left;">{{$fetchScheduleDetails->destination->location}}&nbsp;</span>--}}
+{{--                                </li>--}}
+{{--                            </ul>--}}
+{{--                            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor"--}}
+{{--                                 viewBox="0 0 16 16" class="bi bi-arrow-down-up" id="directing"--}}
+{{--                                 style="font-size: 23px;">--}}
+{{--                                <path fill-rule="evenodd"--}}
+{{--                                      d="M11.5 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L11 2.707V14.5a.5.5 0 0 0 .5.5zm-7-14a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L4 13.293V1.5a.5.5 0 0 1 .5-.5z"></path>--}}
+{{--                            </svg>--}}
+{{--                            <hr id="linecut" style="width: 259px;">--}}
+{{--                        </div>--}}
                         <div class="col-12"
                              style="border-top-left-radius: 16px;border-top-right-radius: 20px;background: var(--bs-white);box-shadow: 1px 0px 8px rgb(227,227,228);">
                             <div class="table-responsive fs-6"
@@ -178,14 +178,14 @@
                                 <table class="table table-borderless">
                                     <tbody>
                                     <tr>
-                                        <td style="font-size: 12px;color: var(--bs-gray-600);text-align: left;"><strong>Terminal</strong>
+                                        <td style="font-size: 12px;color: var(--bs-gray-600);text-align: left;"><strong>Pick Up State</strong>
                                         </td>
                                         <td style="font-size: 12px;color: var(--bs-gray-600);"><strong>Address</strong>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td style="color: var(--bs-gray-600);font-size: 12px;text-align: left;"> {{strtoupper($fetchScheduleDetails->terminal->terminal_name)}}</td>
-                                        <td style="color: var(--bs-gray-600);font-size: 12px;"> {{strtoupper($fetchScheduleDetails->terminal->terminal_address)}}</td>
+                                        <td style="color: var(--bs-gray-600);font-size: 12px;text-align: left;"> {{strtoupper($fetchScheduleDetails->pickup->location)}}</td>
+                                        <td style="color: var(--bs-gray-600);font-size: 12px;"> {{strtoupper($fetchScheduleDetails->pick_up_address ?? "N/A")}}</td>
                                     </tr>
                                     <tr>
                                         <td style="font-size: 12px;color: var(--bs-gray-600);text-align: left;"><strong>DATE</strong>
