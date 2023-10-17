@@ -225,16 +225,16 @@
         document.getElementById("ferry_form").style.display = "none";
 
         document.getElementById("train_booking").style.backgroundColor = "#fff";
-        document.getElementById("ferry_booking").style.backgroundColor = "#fff";
+        // document.getElementById("ferry_booking").style.backgroundColor = "#fff";
         document.getElementById("flight_booking").style.backgroundColor = "#fff";
         document.getElementById("vehicle_booking").style.backgroundColor = "#fff";
 
-        document.getElementById("one_way_trip").style.backgroundColor = "#343f5f";
-        document.getElementById("one_way_trip").style.color = "#fff";
+        // document.getElementById("one_way_trip").style.backgroundColor = "#343f5f";
+        // document.getElementById("one_way_trip").style.color = "#fff";
 
-        document.getElementById("return_date_box").style.display = "none";
+        // document.getElementById("return_date_box").style.display = "none";
 
-        document.getElementById("return_trip").style.backgroundColor = "rgb(200,200,200)";
+        // document.getElementById("return_trip").style.backgroundColor = "rgb(200,200,200)";
 
         document.getElementById('trip_type').value = 1;
 
@@ -340,7 +340,7 @@
 
         document.getElementById("bus_booking").style.backgroundColor = "#fff";
         document.getElementById("vehicle_booking").style.backgroundColor = "#fff";
-        document.getElementById("ferry_booking").style.backgroundColor = "#fff";
+        // document.getElementById("ferry_booking").style.backgroundColor = "#fff";
         document.getElementById("flight_booking").style.backgroundColor = "#fff";
 
         document.getElementById('train_trip_type').value = 1;
@@ -366,7 +366,7 @@
         document.getElementById("flight_booking").style.borderColor = "#dc6513";
         document.getElementById("bus_booking").style.backgroundColor = "#fff";
         document.getElementById("train_booking").style.backgroundColor = "#fff";
-        document.getElementById("ferry_booking").style.backgroundColor = "#fff";
+        // document.getElementById("ferry_booking").style.backgroundColor = "#fff";
     }
 
     function displayErrorMessage(message) {
