@@ -17,6 +17,8 @@ return [
 
     'whatsapp_number' => env('WHATSAPP_NUMBER','2347043274627'),
 
+    'etransit_admin_email' => env('ETRANSIT_ADMIN_EMAIL','hello@etransitafrica.com'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Environment

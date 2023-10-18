@@ -7,6 +7,7 @@ use App\Classes\Reference;
 use App\Mail\AdminBooking;
 use App\Mail\BoatCruiseBooking;
 use App\Mail\CarHire;
+use App\Mail\CoTravellerBookingConfirmationMail;
 use App\Mail\TourPackages;
 use App\Mail\TrainTicket;
 use App\Models\BoatTrip;
@@ -328,7 +329,15 @@ class Payment extends Controller
 
             Invoice::record($data['data']['meta']['user_id'], $transactions->id, $tripType, $tripSchedule->return_date);
 
-//            Mail::to($email)->send(new AdminBooking($maildata));
+            $transaction = $transactions->load('schedule', 'schedule.bus');
+            /** @var $schedule \App\Models\Schedule */
+            $schedule = $transaction->schedule;
+            /** @var $vehicle \App\Models\Bus */
+            $vehicle = $schedule->bus ?? null;
+            /** @var $driver \App\Models\Driver */
+            $driver = $vehicle->driver ?? null;
+            $user = request()->user();
+            Mail::to($email)->send(new CoTravellerBookingConfirmationMail($user, $driver, $transaction, $schedule, $vehicle));
             Notification::route('mail', env('ETRANSIT_ADMIN_EMAIL'))
                 ->notify(new AdminBookingNotification($maildata));
 

@@ -30,7 +30,8 @@ class Driver extends Controller
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
                     $id = $row->id;
-                    $actionBtn = "<a href='/e-ticket/edit-tenant-driver/$id'  class='edit btn btn-success btn-sm'>Edit</a>";
+                    $actionBtn = "<a href='/e-ticket/edit-tenant-driver/$id'  class='edit btn btn-success btn-sm mr-1'>Edit</a>";
+                    $actionBtn = $actionBtn . "<a href='/e-ticket/show-driver/$id'  class='btn btn-info btn-sm'>View</a>";
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])
@@ -69,16 +70,33 @@ class Driver extends Controller
     public function storeDriver(Request $request)
     {
         request()->validate([
-            'full_name' => 'required',
-            'phone_number' => 'required|unique:drivers',
-            'address' => 'required',
-            'nin' => 'required',
-            'license' => 'required',
+            'full_name' => ['required', 'string', 'max:200'],
+            'phone_number' => ['required', 'unique:drivers'],
+            'address' => ['required', 'string', 'max:200'],
+            'nin' => ['required', 'string'],
+            'license' => ['required', 'image', 'max:200'],
+            'guarantor_name' => ['required', 'string', 'max:200'],
+            'guarantor_phone_number' => ['required', 'string', 'max:200'],
+            'guarantor_picture' => ['required', 'image', 'max:200'],
+            'picture' => ['required', 'image', 'max:200'],
         ]);
+        if ($request->hasFile('license')) {
+            $file = $request->file('license');
+            $uploadedFileUrl = Cloudinary::upload($file->getRealPath())->getSecurePath();
+            $license = $uploadedFileUrl;
+        }
 
-        $file = $request->file('license');
-        $uploadedFileUrl = Cloudinary::upload($file->getRealPath())->getSecurePath();
-        $license = $uploadedFileUrl;
+        if ($request->hasFile('guarantor_picture')) {
+            $file = $request->file('guarantor_picture');
+            $uploadedFileUrl = Cloudinary::upload($file->getRealPath())->getSecurePath();
+            $guarantor_picture = $uploadedFileUrl;
+        }
+
+        if ($request->hasFile('picture')) {
+            $file = $request->file('picture');
+            $uploadedFileUrl = Cloudinary::upload($file->getRealPath())->getSecurePath();
+            $picture = $uploadedFileUrl;
+        }
 
 
         $newDriver = new TenantDriver;
@@ -86,7 +104,11 @@ class Driver extends Controller
         $newDriver->phone_number = $request->phone_number;
         $newDriver->address = $request->address;
         $newDriver->nin = $request->nin;
-        $newDriver->license = $license;
+        $newDriver->license = $license ?? null;
+        $newDriver->picture = $picture ?? null;
+        $newDriver->guarantor_name = $request->input('guarantor_name') ?? null;
+        $newDriver->guarantor_phone_number = $request->input('guarantor_phone_number') ?? null;
+        $newDriver->guarantor_picture = $guarantor_picture ?? null;
         $newDriver->tenant_id = session()->get('tenant_id');
         $newDriver->save();
 
@@ -100,6 +122,12 @@ class Driver extends Controller
         $driver = TenantDriver::find($driver_id);
 
         return view('Eticket.driver.edit-driver', compact('driver'));
+    }
+
+    public function showDriver($driver_id)
+    {
+        $driver = TenantDriver::find($driver_id);
+        return view('Eticket.driver.show-driver', compact('driver'));
     }
 
     public function updateDriver(Request $request, $driver_id)

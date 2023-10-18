@@ -596,6 +596,7 @@ Route::prefix('e-ticket')->name('e-ticket.')->group(function () {
         Route::get('drivers', [Driver::class, 'drivers']);
         Route::get('create-driver', [Driver::class, 'createDriver']);
         Route::post('new-driver', [Driver::class, 'storeDriver']);
+        Route::get('show-driver/{driver_id}', [Driver::class, 'showDriver']);
         Route::get('fetch-tenant-drivers', [Driver::class, 'fetchDrivers'])->name('fetch-tenant-drivers');
         Route::get('edit-tenant-driver/{driver_id}', [Driver::class, 'editDriver']);
         Route::put('update-driver/{driver_id}', [Driver::class, 'updateDriver']);

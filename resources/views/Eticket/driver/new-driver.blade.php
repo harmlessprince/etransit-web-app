@@ -71,11 +71,30 @@
                                 <input type="text" class="form-control" name="nin" value="{{old('nin')}}"
                                        id="nin"/>
                             </div>
-
+                            <div class="form-group">
+                                <label for="guarantor_name">Guarantor Name</label>
+                                <input type="text" class="form-control" name="guarantor_name" value="{{old('guarantor_name')}}"
+                                       id="guarantor_name"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="guarantor_phone_number">Guarantor Phone Number</label>
+                                <input type="text" class="form-control" name="guarantor_phone_number" value="{{old('guarantor_phone_number')}}"
+                                       id="guarantor_phone_number"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="guarantor_picture">Upload Guarantor's Picture</label>
+                                <input type="file" class="form-control" name="guarantor_picture"
+                                       value="{{old('guarantor_picture')}}" id="guarantor_picture" required/>
+                            </div>
                             <div class="form-group">
                                 <label for="license">Upload driver's license</label>
                                 <input type="file" class="form-control" name="license"
                                        value="{{old('license')}}" id="license" required/>
+                            </div>
+                            <div class="form-group">
+                                <label for="picture">Upload driver's Picture</label>
+                                <input type="file" class="form-control" name="picture"
+                                       value="{{old('picture')}}" id="picture" required/>
                             </div>
                             <div class="submit_button">
                                 <button class="btn btn-success">Create Driver</button>
