@@ -337,7 +337,8 @@ class Payment extends Controller
             /** @var $driver \App\Models\Driver */
             $driver = $vehicle->driver ?? null;
             $user = request()->user();
-            Mail::to($email)->send(new CoTravellerBookingConfirmationMail($user, $driver, $transaction, $schedule, $vehicle));
+            Mail::to($email)
+                ->send(new CoTravellerBookingConfirmationMail($user, $driver, $transaction, $schedule, $vehicle));
             Notification::route('mail', env('ETRANSIT_ADMIN_EMAIL'))
                 ->notify(new AdminBookingNotification($maildata));
 

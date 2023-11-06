@@ -71,6 +71,16 @@ Route::get('test/pdf', function () {
     // return view('pdf.test-pdf');
 });
 
+Route::get('test/email', function () {
+    $driver = \App\Models\Driver::query()->where('picture', '<>', null)->first();
+    $schedule = \App\Models\Schedule::query()->first();
+    $bus = \App\Models\Bus::query()->first();
+    $user = \App\Models\User::query()->first();
+    $transaction = \App\Models\Transaction::query()->first();
+    return new \App\Mail\CoTravellerBookingConfirmationMail($user, $driver, $transaction, $schedule, $bus);
+    // return view('pdf.test-pdf');
+});
+
 //Route::get('/login',[Login::class , 'login']);
 //Route::get('/register',[Login::class, 'register']);
 // The callback url after a payment
