@@ -21,22 +21,22 @@
 {{--    - License Plate Number: {{$bus->bus_registration}}--}}
 
 
-{{--    **Additional Notes:**--}}
+{{--**Additional Notes:**--}}
 
-{{--    - Please be ready a few minutes before the meeting time to ensure a timely departure.--}}
-{{--    - If you have any specific requirements or special requests, please let us know in advance.--}}
+{{--- Please be ready a few minutes before the meeting time to ensure a timely departure.--}}
+{{--- If you have any specific requirements or special requests, please let us know in advance.--}}
 
-{{--    If you have any questions, need to make changes, or wish to contact the driver, please don't hesitate to reach out to our customer support team at {{config('app.etransit_admin_email')}} or {{config('app.whatsapp_number')}}.--}}
+{{--If you have any questions, need to make changes, or wish to contact the driver, please don't hesitate to reach out to our customer support team at {{config('app.etransit_admin_email')}} or {{config('app.whatsapp_number')}}.--}}
 
-{{--    Thank you for choosing **{{config('app.name')}}** for your transportation needs. We look forward to providing you with a safe and comfortable journey.--}}
+{{--Thank you for choosing **{{config('app.name')}}** for your transportation needs. We look forward to providing you with a safe and comfortable journey.--}}
 
-{{--    Safe travels!--}}
+{{--Safe travels!--}}
 
 {{--    Warm regards,--}}
 {{--    Thanks,--}}
 {{--    {{ config('app.name') }}--}}
 {{--@endcomponent--}}
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -52,7 +52,7 @@
         }
 
         .email-container {
-            max-width: 600px;
+            max-width: 750px;
             margin: 0 auto;
             background-color: #fff;
             border: 1px solid #ddd;
@@ -130,6 +130,23 @@
             <p>Vehicle Model: {{$bus->bus_model}}</p>
             <p>Vehicle Color: {{$bus->bus_color ?? "N/A"}}</p>
             <p>License Plate Number: {{$bus->bus_registration}}</p>
+        </div>
+        <div class="note">
+            <h2>Note</h2>
+            <p> Please be ready a few minutes before the meeting time to ensure a timely departure.</p>
+            <p> If you have any specific requirements or special requests, please let us know in advance.</p>
+
+            <p>If you have any questions, need to make changes, or wish to contact the driver, please don't hesitate to
+            reach out to our customer support team at <b>{{config('app.etransit_admin_email')}}</b>
+                or <b>{{config('app.whatsapp_number')}}</b></p>
+
+            <p>Thank you for choosing<b> {{config('app.name')}}</b> for your transportation needs. We look forward to
+                providing you with a safe and comfortable journey. <br> Safe travels!</p>
+
+        </div>
+        <div class="salutation">
+            <p>Warm regards,
+            <br>{{ config('app.name') }}</br>
         </div>
     </div>
     <div class="email-footer">
